@@ -11,10 +11,9 @@ export default function About() {
 
           <p className="mb-8 leading-relaxed">
             A motivated student of computer science, interested in working with people
-            who want to solve meaningful problems with software engineering. I prefer
-            using Python for programming/scripting, HTML/CSS/JavaScript/React for
-            web-development, AWS Amplify or Firebase for cloud services, and Kali Linux/Burp Suite to test web-security.
-        <br/>
+            who want to solve meaningful problems with software engineering.
+            <br />
+            <br/>
             I enjoy learning about technology and find pride in solving problems.
             <br />
             <br />

@@ -12,7 +12,7 @@ export const projects = [
     title: "CunyFirst Remade",
     subtitle: "React + Express + PostgreSQL",
     description:
-      "I used MaterialUI for styling components (responive to mobile and desktop web browsers), Swal alert for pop-ups, and RTK Query from the Redux Toolkit for API request.",
+      "This app helps you keep track of teachers and classes that your taking. I used MaterialUI for styling components making it responive to mobile and desktop web browsers.",
     image:
       "https://user-images.githubusercontent.com/40577932/168820750-f430fb37-d758-4d7c-b0d2-0e4498756b20.gif",
     link: "https://elchic00.github.io/CunyFirst-front/",
@@ -38,7 +38,7 @@ export const projects = [
     title: "Macros-for-geeks",
     subtitle: "Angular, .Net, SQLite",
     description:
-      "A food diary app to help people keep track of their macronutrients. They can save their diary to a local SQLite database, which they can later view whether online or not.",
+      "A food diary app to help users keep track of their macronutrients. They can save their diary to a local SQLite database, which they can later view whether online or not.",
     image: "https://github.com/elchic00/Macros-for-geeks/raw/main/macros.gif",
     link: "https://github.com/elchic00/Macros-for-geeks",
   },
@@ -55,15 +55,15 @@ export const skills = [
   "Python",
   "Git/Github",
   "CSS/HTML",
-  "JavaScript (React, TypeScript)",
-  "C++",
+  "JavaScript (ReactJS, TypeScript)",
   "C#",
+  "C++",
   "SQL",
   "NoSQL",
-  "Kali Linux & Burp-suite",
+  "Kali Linux", 
+  "Burp-suite",
   "AWS",
-  ,
+  "Firebase"
 ];
 // export const testimonials = [
-
 // ];
