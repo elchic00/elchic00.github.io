@@ -7,16 +7,15 @@ export default function About() {
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
           <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
             Hi, my name is Andrew Alagna.
-            <br/>
-            I enjoy building apps and learning about technology.
           </h1>
 
           <p className="mb-8 leading-relaxed">
             A motivated student of computer science, interested in working with people
             who want to solve meaningful problems with software engineering. I prefer
-            using Python for programming and scripting, HTML/CSS/JavaScript/React for
-            web-development, and Kali Linux/Burp Suite to test web-security. I enjoy
-            learning and find pride in solving problems.
+            using Python for programming/scripting, HTML/CSS/JavaScript/React for
+            web-development, AWS Amplify or Firebase for cloud services, and Kali Linux/Burp Suite to test web-security.
+        <br/>
+            I enjoy learning about technology and find pride in solving problems.
             <br />
             <br />
             Graduated from CUNY: Hunter College with a BA in Computer Science, Cum Laude.
