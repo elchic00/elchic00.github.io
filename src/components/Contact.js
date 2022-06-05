@@ -49,12 +49,7 @@ export default function Contact() {
             />
             />
             <div className="bg-gray-900 relative flex flex-wrap py-6 rounded shadow-md">
-              <div className="lg:w-1/2 px-6">
-                <h2 className="title-font font-semibold text-white tracking-widest text-xs">
-                  Location
-                </h2>
-                <p className="mt-1">Nassau County, NY</p>
-              </div>
+
               <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
                 <h2 className="title-font font-semibold text-white tracking-widest text-xs">
                   EMAIL
@@ -63,22 +58,22 @@ export default function Contact() {
                 <h2 className="title-font font-semibold text-white tracking-widest text-xs mt-4">
                   PHONE
                 </h2>
-                <p className="leading-relaxed">917-601-9404</p>
+                <p className="leading-relaxed w-max">917-601-9404</p>
               </div>
             </div>
           </div>
           <form
             onSubmit={sendEmail}
             name="contact"
-            className="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0"
+            className="lg:w-1/3 md:w-1/2 flex flex-col md:ml-auto w-full md:py-3 mt-8 md:mt-0 mr-auto"
           >
-            <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font">
+            <h2 className="text-white sm:text-4xl text-3xl text-center mb-1 font-medium title-font">
               Work With Me <ion-icon name="happy"></ion-icon>
             </h2>
-            <p className="leading-relaxed mb-5">
-              Are you looking for a motivated engineer?
+            <p className="leading-relaxed mb-5 text-center">
+              Looking for a motivated engineer?
               <br />
-              Want to talk about a project your planning?
+              Want to discuss your next project?
               <br />
               Contact me with the form below.
             </p>
