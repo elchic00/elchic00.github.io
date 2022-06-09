@@ -1,19 +1,22 @@
 import { ArrowRightIcon } from "@heroicons/react/solid";
 import React, {useState} from "react";
+import {useNavigate} from "react-router-dom"
+import { HashLink as Link } from 'react-router-hash-link';
 
 export default function Navbar() {
   let Links = [
       {name:"Past Work",link:"#projects"},
       {name:"Skills",link:"#skills"},
-    { name: "Play Snake", link: "#snake" },
+    // { name: "Play Snake", link: "#snake" },
   ];
-
+  const navigate = useNavigate();
   let [open, setOpen] = useState(false);
   return (
     <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0">
-      <div className="justify-between  md:flex items-center py-4 md:px-10 px-7">
+      <div className="justify-between  md:flex items-center py-4 md:px-10 px-7 ">
         <a
-          href="#about"
+          onClick={()=>navigate('/')}
+          // href="#about"
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-400 hover:text-white"
         >
@@ -41,21 +44,23 @@ export default function Navbar() {
               key={link.name}
               className="md:ml-8 text-xl md:my-0 my-7"
             >
-              <a href={link.link} className="text-gray-400 hover:text-white duration-500">
+              <Link to={link.link} className="text-gray-400 hover:text-white duration-500">
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
-          
-          <a
+          <a     onClick={()=>navigate('/snake')} className="md:ml-8 text-xl md:my-0 my-7 text-gray-400 hover:text-white duration-500 cursor-pointer">
+            Play Snake
+          </a>
+          <Link
             onClick={() => setOpen(!open)}
-            href="#contact"
+            to="#contact"
             className="inline-flex items-center top-0 right-0 bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
     duration-500"
           >
             Contact
             <ArrowRightIcon className="w-4 h-4 ml-1" />
-          </a>
+          </Link>
         </ul>
       </div>
     </div>
