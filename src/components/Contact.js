@@ -2,6 +2,8 @@ import React from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
 import {LinearProgress} from '@mui/material';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import { HashLink as Link } from 'react-router-hash-link';
 
 export default function Contact() {
     const [disable, setDisable] = React.useState(false);
@@ -34,6 +36,13 @@ export default function Contact() {
 
     return (
       <section id="contact" className="relative">
+          <Link to='#about'>
+          <ArrowCircleUpIcon
+              sx={{ml: 'auto', mr:'auto', display:'block', fontSize: 50, color:'#6366f1', "&:hover":{color:'#a5b4fc'}}}
+
+          />
+          </Link>
+
         <div className="container px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap">
           <div className="lg:w-2/3 md:w-1/2 bg-gray-900 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
             <iframe
