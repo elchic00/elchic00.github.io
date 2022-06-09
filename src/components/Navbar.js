@@ -14,9 +14,9 @@ export default function Navbar() {
   return (
     <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0">
       <div className="justify-between  md:flex items-center py-4 md:px-10 px-7 ">
-        <a
-          onClick={()=>navigate('/')}
-          // href="#about"
+        <Link
+          // onClick={()=>navigate('/')}
+          to="#about"
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-400 hover:text-white"
         >
@@ -24,7 +24,7 @@ export default function Navbar() {
             <ion-icon name="globe"></ion-icon>{" "}
           </span>
           Andrew Alagna
-        </a>
+        </Link>
 
         <div
           onClick={() => setOpen(!open)}
