@@ -4,6 +4,11 @@ import Snake from "react-simple-snake";
 const PlaySnake = () => {
   const [play, setPlay] = useState("false");
   const [button, showPlayButton] = useState("true");
+    window.addEventListener("keydown", function(e) {
+        if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+            e.preventDefault();
+        }
+    }, false);
 
   function clickPlay() {
     setPlay("true");
@@ -32,7 +37,7 @@ const PlaySnake = () => {
         {play === "true" && (
           <>
             <h2 className="text-white sm:text-3xl text-3xl mb-1 font-medium title-font">
-              Use W/A/S/D keys to play:
+              Use arrows or W/A/S/D keys to play:
             </h2>
             <Snake
             //   style={{ marginBottom: 100 }}
