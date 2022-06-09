@@ -6,17 +6,18 @@ import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Snake from './components/Snake'
 import Testimonials from "./components/Testimonials";
+import {AppRoutes} from "./routes";
 
 export default function App() {
   return (
     <main className="text-gray-400 bg-gray-900 body-font">
-      <Navbar />
-      <About />
-      <Projects />
-      <Skills />
-      {/* <Testimonials /> */}
-      <Contact/>
-      <Snake/>
+      <AppRoutes/>
+      {/*<About />*/}
+      {/*<Projects />*/}
+      {/*<Skills />*/}
+      {/*/!* <Testimonials /> *!/*/}
+      {/*<Contact/>*/}
+      {/*<Snake/>*/}
     </main>
   );
 }
