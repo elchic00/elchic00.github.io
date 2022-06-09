@@ -44,7 +44,7 @@ const PlaySnake = () => {
             </h2>
             <Snake
             //   style={{ marginBottom: 100 }}
-              percentageWidth="55"
+              percentageWidth="50"
               startSnakeSize="5"
               appleColor="red"
               snakeColor="green"
@@ -63,7 +63,7 @@ const PlaySnake = () => {
             style={{ marginBottom: 25 }}
             onClick={()=>navigate('/')}
           >
-            Stop Snake + Go Home
+            Back to Portfolio
           </button>
         {/*)}*/}
       </div>
