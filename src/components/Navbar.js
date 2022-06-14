@@ -12,7 +12,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   let [open, setOpen] = useState(false);
   return (
-    <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0">
+    <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10">
       <div className="justify-between  md:flex items-center py-4 md:px-10 px-7 ">
         <Link
           // onClick={()=>navigate('/')}
@@ -49,18 +49,22 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-          <a     onClick={()=>navigate('/snake')} className="md:ml-8 text-xl md:my-0 my-7 text-gray-400 hover:text-white duration-500 cursor-pointer">
+<li   className="md:ml-8 text-xl md:my-0 my-7">
+          <button     onClick={()=>{navigate('/snake'); setOpen(!open)}} className="text-gray-400 hover:text-white duration-500 cursor-pointer">
             Play Snake
-          </a>
+          </button>
+</li>
+          <li   className="md:ml-8 text-xl md:my-0 my-7">
           <Link
             onClick={() => setOpen(!open)}
             to="#contact"
-            className="inline-flex items-center top-0 right-0 bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-8 hover:bg-indigo-400 
+            className="inline-flex items-center top-0 right-0 bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-indigo-500
     duration-500"
           >
             Contact
             <ArrowRightIcon className="w-4 h-4 ml-1" />
           </Link>
+          </li>
         </ul>
       </div>
     </div>
