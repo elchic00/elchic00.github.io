@@ -66,8 +66,6 @@ export const skills = [
   "NoSQL",
   "AWS",
   "Firebase",
-   "Kali Linux",
-   "Burp-suite",
 ];
 // export const testimonials = [
 // ];

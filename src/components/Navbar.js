@@ -19,7 +19,7 @@ export default function Navbar() {
           // onClick={()=>navigate('/')}
           to="#about"
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
-      text-gray-400 hover:text-white"
+      text-gray-300 hover:text-white"
         >
           <span className=" text-2xl text-lime-700 mr-1 pt-2">
             <ion-icon name="globe"></ion-icon>{" "}
@@ -29,7 +29,7 @@ export default function Navbar() {
 
         <div
           onClick={() => setOpen(!open)}
-          className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
+          className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden hover:text-white"
         >
           <ion-icon name={open ? "close" : "menu"}></ion-icon>
         </div>
@@ -45,13 +45,13 @@ export default function Navbar() {
               key={link.name}
               className="md:ml-8 text-xl md:my-0 my-7"
             >
-              <Link to={link.link} className="text-gray-400 hover:text-white duration-500">
+              <Link to={link.link} className="hover:text-white duration-300">
                 {link.name}
               </Link>
             </li>
           ))}
 <li   className="md:ml-8 text-xl md:my-0 my-7">
-          <button     onClick={()=>{navigate('/snake'); setOpen(!open)}} className="text-gray-400 hover:text-white duration-500 cursor-pointer">
+          <button     onClick={()=>{navigate('/snake'); setOpen(!open)}} className="hover:text-white duration-300 cursor-pointer">
             Play Snake
           </button>
 </li>

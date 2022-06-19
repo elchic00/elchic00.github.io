@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar";
 
 export default function App() {
   return (
-    <main className="text-gray-400 bg-gray-900 body-font scrollbar-hide">
+    <main className="text-gray-300 bg-gray-900 body-font scrollbar-hide">
         <Navbar/>
         <AppRoutes/>
     </main>

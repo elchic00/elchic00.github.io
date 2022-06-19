@@ -9,6 +9,7 @@ export default function About() {
   const navigate = useNavigate();
 
   return (
+      <>
     <section id="about">
       <div className="container mx-auto flex px-10 py-20 md:flex-row flex-col items-center mt-10">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
@@ -30,7 +31,7 @@ export default function About() {
               href="https://www.github.com/elchic00/"
               rel="noreferrer"
               target="_blank"
-              className="mb-6 inline-flex items-center h-10 p-5 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-150 rounded focus:shadow-outline hover:text-white "
+              className="mb-6 inline-flex items-center h-10 p-5 text-gray-300 bg-gray-800 hover:bg-gray-700 duration-500 transition-colors duration-150 rounded focus:shadow-outline hover:text-white "
             >
               <svg
                   aria-hidden="true"
@@ -53,10 +54,10 @@ export default function About() {
               href="https://www.linkedin.com/in/andrew-a-10b88215b/"
               rel="noreferrer"
               target="_blank"
-              class="mb-6 inline-flex items-center h-10 p-5 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-150 rounded focus:shadow-outline hover:text-white  "
+              class="mb-6 inline-flex items-center h-10 p-5 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white  "
             >
               <svg
-                class=" hover:text-white mr-3 w-6 text-blue-500 fill-current"
+                class=" hover:text-white mr-3 w-6 text-blue-500 fill-current duration-700 "
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 448 512"
               >
@@ -66,7 +67,7 @@ export default function About() {
             </a>
             <div className="text-center">
               <button
-                className="inline-flex items-center text-white bg-green-800 hover:bg-green-700 border-0 h-10 px-5 rounded focus:outline-none text-lg mb-5"
+                className="inline-flex items-center text-white bg-green-800 hover:bg-green-700 duration-500 border-0 h-10 px-5 rounded focus:outline-none text-lg mb-5"
                 onClick={() => navigate("/snake")}
               >
                 Play Snake
@@ -76,32 +77,33 @@ export default function About() {
           <div className="flex justify-center">
             <Link
               to="#contact"
-              className="inline-flex text-white bg-lime-700 border-0 py-2 px-6 focus:outline-none hover:bg-lime-600 rounded text-lg"
+              className="duration-500 inline-flex text-white bg-lime-700 border-0 py-2 px-6 focus:outline-none hover:bg-lime-600 rounded text-lg"
             >
               Work With Me
             </Link>
             <Link
               to="#projects"
-              className="ml-4 inline-flex text-gray-300 bg-indigo-800 hover:bg-indigo-700 border-0 py-2 px-6 focus:outline-none hover:text-white rounded text-lg"
+              className="ml-4 inline-flex text-gray-300 bg-indigo-800 duration-500 hover:bg-indigo-700 border-0 py-2 px-6 focus:outline-none hover:text-white rounded text-lg"
             >
               See My Past Work
             </Link>
           </div>
         </div>
 
-        <div className="lg:max-w-sm lg:w-sm md:w-1/2 w-5/6">
           <img
-            className="object-cover object-center rounded mx-auto sm:h-96 h-80"
+            className="object-cover object-center rounded mx-auto sm:h-80 h-80"
             alt="andrew"
             src="https://i.imgur.com/ddraBJx.jpg"
           />
-        </div>
-      </div>
-      <Projects id="projects" />
 
+      </div>
+    </section>
+
+      <Projects id="projects" />
       <Skills />
       {/* <Testimonials /> */}
       <Contact />
-    </section>
+      </>
+
   );
 }
