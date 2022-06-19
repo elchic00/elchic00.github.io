@@ -9,7 +9,7 @@ export const projects = [
     link: "https://main.d2lpf19m4xl42s.amplifyapp.com/",
   },
   {
-    title: "CunyFirst Remade",
+    title: "myTeachers",
     subtitle: "React + Express + PostgreSQL + Firebase",
     description:
       "This app helps you keep track of teachers and courses while in school. " +

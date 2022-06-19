@@ -20,7 +20,7 @@ export default function Navbar() {
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-gray-400 hover:text-white"
         >
-          <span className=" text-2xl text-indigo-600 mr-1 pt-2">
+          <span className=" text-2xl text-lime-700 mr-1 pt-2">
             <ion-icon name="globe"></ion-icon>{" "}
           </span>
           Andrew Alagna
@@ -58,7 +58,7 @@ export default function Navbar() {
           <Link
             onClick={() => setOpen(!open)}
             to="#contact"
-            className="inline-flex items-center top-0 right-0 bg-indigo-600 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-indigo-500
+            className="inline-flex items-center top-0 right-0 bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-lime-600
     duration-500"
           >
             Contact
