@@ -19,7 +19,7 @@ export default function Navbar() {
           // onClick={()=>navigate('/')}
           to="#about"
           className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
-      text-gray-300 hover:text-white"
+      text-gray-300 hover:text-white duration-500"
         >
           <span className=" text-2xl text-lime-700 mr-1 pt-2">
             <ion-icon name="globe"></ion-icon>{" "}

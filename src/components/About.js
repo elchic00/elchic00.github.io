@@ -13,7 +13,7 @@ export default function About() {
     <section id="about">
       <div className="container mx-auto flex px-10 py-20 md:flex-row flex-col items-center mt-10">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white mt-5">
+          <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white mt-5 ">
             Hi, my name is Andrew Alagna.
           </h1>
           <p className="mb-7 leading-relaxed">
@@ -31,7 +31,7 @@ export default function About() {
               href="https://www.github.com/elchic00/"
               rel="noreferrer"
               target="_blank"
-              className="mb-6 inline-flex items-center h-10 p-5 text-gray-300 bg-gray-800 hover:bg-gray-700 duration-500 transition-colors duration-150 rounded focus:shadow-outline hover:text-white "
+              className="mb-6 inline-flex items-center h-10 p-5 text-gray-300 bg-gray-800 hover:bg-gray-700 duration-500 transition-colors rounded focus:shadow-outline hover:text-white "
             >
               <svg
                   aria-hidden="true"

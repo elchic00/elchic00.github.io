@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Footer() {
     return (
-        <footer className="text-white bg-gray-900 border-t-2 border-t-gray-300">
+        <footer className="border-t border-t-gray-400">
             <div className=" p-2 ">
                 <div className="flex ">
                     {/* <a href="#!" className="mr-9 text-gray-800 p-2 border-2 rounded border-indigo-600 ">
@@ -81,7 +81,7 @@ export default function Footer() {
                             ></path>
                         </svg>
                     </a>
-                    <div className="text-gray-300 sm:text-md my-auto ml-auto text-sm ">
+                    <div className="my-auto ml-auto ">
                         by Andrew Alagna
                     </div>
                 </div>
