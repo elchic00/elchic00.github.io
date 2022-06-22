@@ -46,7 +46,7 @@ export default function Contact() {
                     name="contact"
                     className="lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0"
                 >
-                    <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font border-b sm:w-1/2 w-3/4 ">
+                    <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font underline-offset-4 underline">
                         Work With Me <ion-icon name="happy"></ion-icon>
                     </h2>
                     <p className="leading-relaxed mb-5 mt-2">
