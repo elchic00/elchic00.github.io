@@ -44,16 +44,16 @@ export default function Contact() {
                 <form
                     onSubmit={sendEmail}
                     name="contact"
-                    className="lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-8 md:mt-0"
+                    className="lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0"
                 >
-                    <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font">
+                    <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font border-b sm:w-1/2 w-3/4 ">
                         Work With Me <ion-icon name="happy"></ion-icon>
                     </h2>
                     <p className="leading-relaxed mb-5 mt-2">
                         Send me a message with the form below
                     </p>
                     <div className="relative mb-4">
-                        <label htmlFor="name" className="leading-7 text-sm text-gray-400">
+                        <label htmlFor="name" className="leading-7 text-sm ">
                             Name
                         </label>
                         <input
@@ -65,7 +65,7 @@ export default function Contact() {
                         />
                     </div>
                     <div className="relative mb-4">
-                        <label htmlFor="email" className="leading-7 text-sm text-gray-400">
+                        <label htmlFor="email" className="leading-7 text-sm ">
                             Email
                         </label>
                         <input
@@ -77,7 +77,7 @@ export default function Contact() {
                         />
                     </div>
                     <div className="relative mb-4">
-                        <label htmlFor="message" className="leading-7 text-sm text-gray-400">
+                        <label htmlFor="message" className="leading-7 text-sm">
                             Message
                         </label>
                         <textarea
@@ -90,7 +90,7 @@ export default function Contact() {
                         <button
                             disabled={disable}
                             type="submit"
-                            className="text-white bg-indigo-600 border-0 py-2  focus:outline-none hover:bg-indigo-500 duration-300 rounded text-lg"
+                            className="text-white bg-indigo-600 border-0 py-2  focus:outline-none hover:bg-indigo-500 duration-500 rounded text-lg"
                         >
                             Send
                         </button>
