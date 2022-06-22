@@ -23,7 +23,7 @@ export const projects = [
     subtitle: "Python (PyQT5)",
     description:
       "Multi-Purpose Calculator is a stylish calculator app that features an on-sceen calculator and converter." +
-        "This is to be used on a desktop with Python installed.",
+        " This can be cloned and used wherever Python is installed.",
     image:
       "https://github.com/NesQuickCoding/Multi-Purpose-Calculator/raw/main/demo/Demo.gif?raw=true",
     link: "https://github.com/NesQuickCoding/Multi-Purpose-Calculator",
@@ -42,7 +42,7 @@ export const projects = [
     subtitle: "Angular, .Net, SQLite",
     description:
       "A food diary app to help users keep track of their macronutrients. " +
-        "They can save their diary to a local SQLite database, which they can later view whether online or not.",
+        "They can save their diary to a local SQLite database, which they can later view whether connected to the internet or not.",
     image: "https://github.com/elchic00/Macros-for-geeks/raw/main/macros.gif",
     link: "https://github.com/elchic00/Macros-for-geeks",
   },
@@ -50,7 +50,7 @@ export const projects = [
     title: "myPal",
     subtitle: "React Native, CSS, SQLite",
     description:
-      "An Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays to communicate more effectively.",
+      "An Augmentative and Alternative Communication (AAC) mobile app created to help children with autism, special needs, or verbal delays to communicate more effectively.",
     image: "https://github.com/myPal-TMS/myPal/raw/main/Walkthrough.gif",
     link: "https://github.com/myPal-TMS/myPal",
   },

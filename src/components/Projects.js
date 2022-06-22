@@ -4,17 +4,16 @@ import { projects } from "../data";
 
 export default function Projects() {
   return (
-    <section id="projects" className="body-font">
-      <div className="container px-5 py-10 mx-auto text-center lg:px-40">
-        <div className="flex flex-col w-full mb-20">
+    <section id="projects" className="body-font mt-16">
+      <div className="container px-5 py-10 mx-auto text-center lg:px-40 ">
+        <div className="flex flex-col w-full sm:mb-16">
           <CodeIcon className="mx-auto inline-block w-10 mb-1" />
-          <h1 className="sm:text-4xl text-3xl font-medium title-font text-white">
+          <h1 className="sm:text-4xl text-3xl font-medium title-font text-white mx-auto border-b mb-4">
             Recent Apps
           </h1>
         </div>
         <div className="flex flex-wrap -m-4">
           {projects.map((project) => (
-
             <a
               target="_blank"
               rel="noreferrer"
@@ -22,14 +21,14 @@ export default function Projects() {
               key={project.image}
               className="sm:w-1/2 w-100 p-4 z-0"
             >
-              <p className='sm:hidden '>{project.title}</p>
               <div className="flex relative">
                 <img
                   alt="gallery"
-                  className="absolute inset-0 w-full h-full object-cover object-center"
+                  className="absolute inset-0 w-full h-full sm:object-fill object-contain object-center"
+                  key={project.image}
                   src={project.image}
                 />
-                <div className="px-8 py-10 relative z-10 w-full border-4 border-gray-800 bg-gray-900 opacity-0 hover:opacity-100">
+                <div className=" sm:px-8 sm:py-10 relative z-10 sm:w-full sm:border-4 sm:border-gray-800 bg-gray-900 opacity-0 sm:hover:opacity-100">
                   <h2 className="tracking-widest text-sm title-font font-medium text-green-400 mb-1">
                     {project.subtitle}
                   </h2>
@@ -38,6 +37,15 @@ export default function Projects() {
                   </h1>
                   <p className="leading-relaxed">{project.description}</p>
                 </div>
+              </div>
+              <div id='project-desc' className='sm:hidden mt-2'>
+              <h2 className="tracking-widest text-sm title-font font-medium text-green-400 mb-1">
+                {project.subtitle}
+              </h2>
+              <h1 className="title-font text-lg font-medium text-white mb-3">
+                {project.title}
+              </h1>
+              <p className="leading-relaxed">{project.description}</p>
               </div>
             </a>
           ))}
