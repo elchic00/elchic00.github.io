@@ -82,7 +82,7 @@ export default function About() {
                 to="#projects"
                 className="ml-4 inline-flex text-gray-300 bg-indigo-800 duration-500 hover:bg-indigo-700 border-0 py-2 px-6 focus:outline-none hover:text-white rounded text-lg"
               >
-                See My Past Work
+                Past Work
               </Link>
             </div>
           </div>
@@ -90,7 +90,7 @@ export default function About() {
           <img
             className="object-cover object-center rounded mx-auto sm:h-80 h-80"
             alt="andrew"
-            src="https://i.imgur.com/ddraBJx.jpg"
+            src="https://i.imgur.com/fdxP7CQ.jpg"
           />
         </div>
       </section>
