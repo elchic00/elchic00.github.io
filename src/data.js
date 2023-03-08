@@ -6,7 +6,7 @@ export const projects = [
       "This app helps businesses keep track of their inventory across different storage locations. We used Amplify from AWS for authentication, hosting, and for our database & API.",
     image:
       "https://user-images.githubusercontent.com/40577932/168584742-5f09d0d2-5683-46b3-9393-748f5dad6a89.gif",
-    link: "https://main.d2lpf19m4xl42s.amplifyapp.com/",
+    link: "https://github.com/elchic00/invent0ry",
   },
   {
     title: "myTeachers",

@@ -1,5 +1,4 @@
 import {Route, Routes} from "react-router-dom";
-import Navbar from "./components/Navbar";
 import About from "./components/About";
 import PlaySnake from "./components/Snake";
 
