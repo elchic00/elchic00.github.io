@@ -90,7 +90,7 @@ export default function About() {
           <img
             className="object-cover object-center rounded mx-auto sm:h-80 h-80"
             alt="andrew"
-            src="https://i.imgur.com/fdxP7CQ.jpg"
+            src="https://i.imgur.com/xIkAKHZ.jpg"
           />
         </div>
       </section>
