@@ -17,11 +17,11 @@ export default function About() {
               Hi, my name is Andrew Alagna.
             </h1>
             <p className="mb-7 leading-relaxed">
-              A motivated student of computer science, interested in working with people
-              who want to solve meaningful problems with software engineering.
+              A motivated software engineer, interested in working with people
+              who want to solve meaningful problems with software.
               <br />
               <br />
-              I enjoy learning about technology and find pride in solving problems.
+              I enjoy learning about technology and find pride in understanding complex problems.
               <br />
               <br />
               Graduated from CUNY: Hunter College with a BA in Computer Science, Cum
@@ -89,7 +89,7 @@ export default function About() {
 
           <img
             className="object-cover object-center rounded mx-auto sm:h-80 h-80"
-            alt="andrew"
+            alt="Andrew Alagna"
             src="https://i.imgur.com/xIkAKHZ.jpg"
           />
         </div>

@@ -24,7 +24,7 @@ export default function Projects() {
               >
                 <div className="flex relative">
                   <img
-                    alt="gallery"
+                    alt="Andrew Alagna's project"
                     className="absolute last:w-0 inset-0 w-full h-full object-contain object-center hover:bg-gray-800"
                     key={project.image}
                     src={project.image}
