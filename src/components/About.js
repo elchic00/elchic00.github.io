@@ -17,7 +17,7 @@ export default function About() {
               Hi, my name is Andrew Alagna.
             </h1>
             <p className="mb-7 leading-relaxed">
-              A motivated software engineer, interested in working with people
+              A motivated software engineer interested in working with people
               who want to solve meaningful problems with software.
               <br />
               <br />
