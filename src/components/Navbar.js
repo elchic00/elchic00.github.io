@@ -1,32 +1,42 @@
 import { ArrowRightIcon } from "@heroicons/react/solid";
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom"
-import { HashLink as Link } from 'react-router-hash-link';
-
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 export default function Navbar() {
   let Links = [
-      {name:"Past Work",link:"#projects"},
-      {name:"Skills",link:"#skills"},
+    { name: "Past Work", link: "#projects" },
+    { name: "Skills", link: "#skills" },
     // { name: "Play Snake", link: "#snake" },
   ];
   const navigate = useNavigate();
+  const location = useLocation();
   let [open, setOpen] = useState(false);
   return (
     <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10">
       <div className="justify-between  md:flex items-center py-4 md:px-10 px-7 ">
-        <Link
+        {location.pathname === "/" ? (
+          <Link
+            to="#about"
+            className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500"
             onClick={() => setOpen(false)}
-          // onClick={()=>navigate('/')}
-          to="#about"
-          className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
-      text-gray-300 hover:text-white duration-500"
-        >
-          <span className=" text-2xl text-lime-700 mr-1 pt-2">
-            <ion-icon name="globe"></ion-icon>{" "}
-          </span>
-          Andrew Alagna
-        </Link>
-
+          >
+            <span className=" text-2xl text-lime-700 mr-1 pt-2">
+              <ion-icon name="globe"></ion-icon>{" "}
+            </span>
+            Andrew Alagna
+          </Link>
+        ) : (
+          <Link
+            to="/"
+            className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500"
+            onClick={() => setOpen(false)}
+          >
+            <span className=" text-2xl text-lime-700 mr-1 pt-2">
+              <ion-icon name="globe"></ion-icon>{" "}
+            </span>
+            Andrew Alagna
+          </Link>
+        )}
         <div
           onClick={() => setOpen(!open)}
           className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden hover:text-white"
@@ -50,21 +60,27 @@ export default function Navbar() {
               </Link>
             </li>
           ))}
-<li   className="md:ml-8 text-xl md:my-0 my-7">
-          <button     onClick={()=>{navigate('/snake'); setOpen(!open)}} className="hover:text-white duration-300 cursor-pointer">
-            Play Snake
-          </button>
-</li>
-          <li   className="md:ml-8 text-xl md:my-0 my-7">
-          <Link
-            onClick={() => setOpen(!open)}
-            to="#contact"
-            className="inline-flex items-center top-0 right-0 bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-lime-600
+          <li className="md:ml-8 text-xl md:my-0 my-7">
+            <button
+              onClick={() => {
+                navigate("/snake");
+                setOpen(!open);
+              }}
+              className="hover:text-white duration-300 cursor-pointer"
+            >
+              Play Snake
+            </button>
+          </li>
+          <li className="md:ml-8 text-xl md:my-0 my-7">
+            <Link
+              onClick={() => setOpen(!open)}
+              to="#contact"
+              className="inline-flex items-center top-0 right-0 bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-lime-600
     duration-500"
-          >
-            Contact
-            <ArrowRightIcon className="w-4 h-4 ml-1" />
-          </Link>
+            >
+              Contact
+              <ArrowRightIcon className="w-4 h-4 ml-1" />
+            </Link>
           </li>
         </ul>
       </div>
