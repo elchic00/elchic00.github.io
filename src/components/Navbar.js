@@ -61,7 +61,7 @@ export default function Navbar() {
           <li className="md:ml-8 text-xl md:my-0 my-7">
             <Link
               onClick={() => setOpen(!open)}
-              to="#contact"
+              to="/#contact"
               className="inline-flex items-center top-0 right-0 bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-lime-600
     duration-500"
             >
