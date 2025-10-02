@@ -4,9 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 export default function Navbar() {
   let Links = [
-    { name: "Past Work", link: "#projects" },
-    { name: "Skills", link: "#skills" },
-    // { name: "Play Snake", link: "#snake" },
+    { name: "Past Work", link: "/#projects" },
+    { name: "Skills", link: "/#skills" },
   ];
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,9 +13,8 @@ export default function Navbar() {
   return (
     <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10">
       <div className="justify-between  md:flex items-center py-4 md:px-10 px-7 ">
-        {location.pathname === "/" ? (
           <Link
-            to="#about"
+            to="/#about"
             className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500"
             onClick={() => setOpen(false)}
           >
@@ -25,18 +23,7 @@ export default function Navbar() {
             </span>
             Andrew Alagna
           </Link>
-        ) : (
-          <Link
-            to="/"
-            className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500"
-            onClick={() => setOpen(false)}
-          >
-            <span className=" text-2xl text-lime-700 mr-1 pt-2">
-              <ion-icon name="globe"></ion-icon>{" "}
-            </span>
-            Andrew Alagna
-          </Link>
-        )}
+      
         <div
           onClick={() => setOpen(!open)}
           className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden hover:text-white"
