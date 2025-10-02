@@ -16,7 +16,7 @@ export const projects = [
       "I used MaterialUI for styling components making it responive to mobile and desktop web browsers.",
     image:
       "https://user-images.githubusercontent.com/40577932/168820750-f430fb37-d758-4d7c-b0d2-0e4498756b20.gif",
-    link: "https://elchic00.github.io/CunyFirst-front/",
+    link: "https://github.com/elchic00/CunyFirst-front",
   },
   {
     title: "Macros-for-geeks",
