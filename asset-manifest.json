@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/andrew_react_website/static/css/main.0d151482.css",
-    "main.js": "/andrew_react_website/static/js/main.d18ecb41.js",
-    "static/js/467.12954f9c.chunk.js": "/andrew_react_website/static/js/467.12954f9c.chunk.js",
+    "main.css": "/andrew_react_website/static/css/main.ffca7b92.css",
+    "main.js": "/andrew_react_website/static/js/main.556add3d.js",
+    "static/js/467.d21db0e1.chunk.js": "/andrew_react_website/static/js/467.d21db0e1.chunk.js",
     "index.html": "/andrew_react_website/index.html",
-    "main.0d151482.css.map": "/andrew_react_website/static/css/main.0d151482.css.map",
-    "main.d18ecb41.js.map": "/andrew_react_website/static/js/main.d18ecb41.js.map",
-    "467.12954f9c.chunk.js.map": "/andrew_react_website/static/js/467.12954f9c.chunk.js.map"
+    "main.ffca7b92.css.map": "/andrew_react_website/static/css/main.ffca7b92.css.map",
+    "main.556add3d.js.map": "/andrew_react_website/static/js/main.556add3d.js.map",
+    "467.d21db0e1.chunk.js.map": "/andrew_react_website/static/js/467.d21db0e1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d151482.css",
-    "static/js/main.d18ecb41.js"
+    "static/css/main.ffca7b92.css",
+    "static/js/main.556add3d.js"
   ]
 }
