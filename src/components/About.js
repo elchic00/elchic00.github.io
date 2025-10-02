@@ -18,7 +18,7 @@ export default function About() {
             </h1>
             <p className="mb-7 leading-relaxed">
               A motivated software engineer interested in working with people
-              who want to solve meaningful problems with software.
+              who want to solve meaningful problems.
               <br />
               <br />
               I enjoy learning about technology and solving complex problems.
