@@ -21,7 +21,7 @@ export default function About() {
               who want to solve meaningful problems with software.
               <br />
               <br />
-              I enjoy learning about technology and find pride in understanding complex problems.
+              I enjoy learning about technology and solving complex problems.
               <br />
               <br />
               Graduated from CUNY: Hunter College with a BA in Computer Science, Cum
@@ -71,26 +71,12 @@ export default function About() {
                 Play Snake
               </button>
             </ul>
-            <div className="flex justify-center">
-              <Link
-                to="#contact"
-                className="duration-500 inline-flex text-white bg-lime-700 border-0 py-2 px-6 focus:outline-none hover:bg-lime-600 rounded text-lg"
-              >
-                Work With Me
-              </Link>
-              <Link
-                to="#projects"
-                className="ml-4 inline-flex text-gray-300 bg-indigo-800 duration-500 hover:bg-indigo-700 border-0 py-2 px-6 focus:outline-none hover:text-white rounded text-lg"
-              >
-                Past Work
-              </Link>
-            </div>
           </div>
 
           <img
             className="object-cover object-center rounded mx-auto sm:h-80 h-80"
             alt="Andrew Alagna"
-            src="https://i.imgur.com/xIkAKHZ.jpg"
+            src="https://i.imgur.com/O1wMaAv.png"
           />
         </div>
       </section>
