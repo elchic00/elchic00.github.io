@@ -15,7 +15,7 @@ export default function Navbar() {
       <div className="justify-between  md:flex items-center py-4 md:px-10 px-7 ">
           <Link
             to="/#about"
-            className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500"
+            className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500 border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
             onClick={() => setOpen(false)}
           >
             <span className=" text-2xl text-lime-700 mr-1 pt-2">
@@ -42,28 +42,48 @@ export default function Navbar() {
               key={link.name}
               className="md:ml-8 text-xl md:my-0 my-7"
             >
-              <Link to={link.link} className="hover:text-white duration-300">
+              <Link
+                to={link.link}
+                className="hover:text-white duration-500 border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
+                onClick={(e) => {
+                  // close mobile menu and remove focus ring after click (mouse)
+                  setOpen(false);
+                  // blur the clicked element so the focus border doesn't 'stick'
+                  // using currentTarget keeps it accessible for keyboard users
+                  if (e && e.currentTarget && typeof e.currentTarget.blur === 'function') {
+                    e.currentTarget.blur();
+                  }
+                }}
+              >
                 {link.name}
               </Link>
             </li>
           ))}
           <li className="md:ml-8 text-xl md:my-0 my-7">
             <button
-              onClick={() => {
+              onClick={(e) => {
                 navigate("/snake");
                 setOpen(!open);
+                // blur the button to remove persistent focus border after click
+                if (e && e.currentTarget && typeof e.currentTarget.blur === 'function') {
+                  e.currentTarget.blur();
+                }
               }}
-              className="hover:text-white duration-300 cursor-pointer"
+              className="hover:text-white duration-500 cursor-pointer border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
             >
               Play Snake
             </button>
           </li>
           <li className="md:ml-8 text-xl md:my-0 my-7">
             <Link
-              onClick={() => setOpen(!open)}
+              onClick={(e) => {
+                setOpen(!open);
+                if (e && e.currentTarget && typeof e.currentTarget.blur === 'function') {
+                  e.currentTarget.blur();
+                }
+              }}
               to="/#contact"
-              className="inline-flex items-center top-0 right-0 bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-lime-600
-    duration-500"
+              className="inline-flex items-center top-0 right-0 bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-lime-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
             >
               Contact
               <ArrowRightIcon className="w-4 h-4 ml-1" />
