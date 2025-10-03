@@ -2,7 +2,6 @@ import React from "react";
 import Projects from "./Projects";
 import Skills from "./Skills";
 import Contact from "./Contact";
-import { HashLink as Link } from 'react-router-hash-link';
 import {useNavigate} from "react-router-dom";
 
 export default function About() {
@@ -27,7 +26,7 @@ export default function About() {
               Graduated from CUNY: Hunter College with a BA in Computer Science, Cum
               Laude.
             </p>
-            <ul className="flex lg:flex-row space-x-4 flex-row list-none mb-5">
+            <ul className="flex lg:flex-row space-x-4 flex-row list-none mb-5 mt-5">
               <a
                 href="https://www.linkedin.com/in/andrew-a-10b88215b/"
                 rel="noreferrer"
