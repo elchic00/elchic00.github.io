@@ -21,6 +21,7 @@ const PlaySnake = ({
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const runningRef = useRef(true);
+  const gameOverRef = useRef(false);
   const [running, setRunning] = useState(true);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(() => parseInt(localStorage.getItem("snakeHighScore") || "0", 10));
@@ -77,6 +78,7 @@ const PlaySnake = ({
       setNewHighScore(false);
       placeApple();
       setGameOver(false);
+      gameOverRef.current = false;
       setScore(0);
     };
 
@@ -127,6 +129,7 @@ const PlaySnake = ({
         runningRef.current = false;
         setRunning(false);
         setGameOver(true);
+        gameOverRef.current = true;
         setHighScore((h) => Math.max(h, currentScore));
         return;
       }
@@ -162,9 +165,11 @@ const PlaySnake = ({
       if (k === "arrowleft" || k === "a") next = { x: -1, y: 0 };
       if (k === "arrowright" || k === "d") next = { x: 1, y: 0 };
       if (k === " ") {
-        // space toggles pause
-        runningRef.current = !runningRef.current;
-        setRunning(runningRef.current);
+        // space toggles pause only when game is not over; if game is over do nothing
+        if (!gameOverRef.current) {
+          runningRef.current = !runningRef.current;
+          setRunning(runningRef.current);
+        }
       }
       if (next) {
         // prevent reversing directly
@@ -260,8 +265,19 @@ const PlaySnake = ({
 
   // controls handlers
   const toggleRunning = () => {
-    runningRef.current = !runningRef.current;
-    setRunning(runningRef.current);
+    if (gameOver) {
+      // restart
+      runningRef.current = true;
+      setRunning(true);
+      setGameOver(false);
+      gameOverRef.current = false;
+      setScore(0);
+      setNewHighScore(false);
+      setTick((t) => t + 1);
+    } else {
+      runningRef.current = !runningRef.current;
+      setRunning(runningRef.current);
+    }
   };
 
   const restart = () => {
@@ -269,6 +285,7 @@ const PlaySnake = ({
     runningRef.current = true;
     setRunning(true);
     setGameOver(false);
+    gameOverRef.current = false;
     setScore(0);
     setTick((t) => t + 1);
   };
@@ -284,7 +301,7 @@ const PlaySnake = ({
               <div className="text-white">Score: {score}</div>
               <div className="text-white">High: {highScore}</div>
             </div>
-            <canvas ref={canvasRef} className="block w-full h-auto border-4 border-slate-900 bg-[#0f172a]" />
+            <canvas ref={canvasRef} className="block w-full h-auto border-4 border-white rounded-md shadow-lg bg-[#0f172a]" />
             <div className="absolute left-1/2 -translate-x-1/2 bottom-3 flex gap-2">
               <button onClick={toggleRunning} className="px-3 py-1 rounded bg-slate-700 text-white">
                 {running ? "Pause" : gameOver ? "Start" : "Resume"}
