@@ -1,10 +1,6 @@
-import React from "react";
-import Projects from "./Projects";
-import Skills from "./Skills";
-import Contact from "./Contact";
 import {useNavigate} from "react-router-dom";
 
-export default function About() {
+export const About = () => {
   const navigate = useNavigate();
 
   return (
@@ -79,11 +75,6 @@ export default function About() {
           />
         </div>
       </section>
-
-      <Projects id="projects" />
-      <Skills />
-      {/* <Testimonials /> */}
-      <Contact />
     </>
   );
 }

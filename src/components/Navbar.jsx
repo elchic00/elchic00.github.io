@@ -1,14 +1,14 @@
 import { ArrowRightIcon } from "@heroicons/react/solid";
-import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
-export default function Navbar() {
+
+export const Navbar = () => {
   let Links = [
     { name: "Past Work", link: "/#projects" },
     { name: "Skills", link: "/#skills" },
   ];
   const navigate = useNavigate();
-  const location = useLocation();
   let [open, setOpen] = useState(false);
   return (
     <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10">

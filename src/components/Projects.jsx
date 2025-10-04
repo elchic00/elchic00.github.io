@@ -1,8 +1,7 @@
 import { CodeIcon } from "@heroicons/react/solid";
-import React from "react";
 import { projects } from "../data";
 
-export default function Projects() {
+export const Projects = () => {
   return (
     <section id="projects" className="body-font mt-16">
       <div className="container px-5 py-10 mx-auto text-center lg:px-40 ">

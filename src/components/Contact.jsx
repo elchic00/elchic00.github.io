@@ -1,11 +1,11 @@
-import React from "react";
+import {useState} from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
 import {CircularProgress} from '@mui/material';
-import Footer from "./Footer";
+import { Footer } from "./Footer";
 
-export default function Contact() {
-    const [disable, setDisable] = React.useState(false);
+export const Contact = () => {
+    const [disable, setDisable] = useState(false);
 
     function sendEmail(e) {
         setDisable(true);
