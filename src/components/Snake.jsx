@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Local Snake component (replacement for react-simple-snake)
@@ -16,7 +16,7 @@ const PlaySnake = ({
   appleColor = "red",
   snakeColor = "green",
   gridSize = 20,
-  speed = 75,
+  speed = 67,
 }) => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
