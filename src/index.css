@@ -19,3 +19,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#snake, canvas {
+  touch-action: none;
+  overscroll-behavior: none;
+}
+

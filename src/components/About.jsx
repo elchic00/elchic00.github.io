@@ -59,11 +59,19 @@ export const About = () => {
                   ></path>
                 </svg>
               </a>
+                          <a
+                href="/#/resume"
+                rel="noreferrer"
+                target="_blank"
+                class="mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white  "
+              >
+                Resume
+              </a>
               <button
-                className="inline-flex items-center text-center text-white bg-green-800 hover:bg-green-700 duration-500 border-0 h-10 px-5 rounded focus:outline-none text-lg mb-5"
+                className="inline-flex items-center text-center text-white bg-green-800 hover:bg-green-700 duration-500 border-0 h-10 px-3 rounded focus:outline-none mb-6"
                 onClick={() => navigate("/snake")}
               >
-                Play Snake
+                Snake
               </button>
             </ul>
           </div>

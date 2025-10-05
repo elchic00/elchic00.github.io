@@ -5,17 +5,18 @@ import { HashLink as Link } from "react-router-hash-link";
 
 export const Navbar = () => {
   let Links = [
-    { name: "Past Work", link: "/#projects" },
+    { name: "Resume", link: "/resume" },
+    { name: "Projects", link: "/#projects" },
     { name: "Skills", link: "/#skills" },
   ];
   const navigate = useNavigate();
   let [open, setOpen] = useState(false);
   return (
     <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10">
-      <div className="justify-between  md:flex items-center py-4 md:px-10 px-7 ">
+      <div className="justify-between  md:flex items-center py-4 md:px-4 px-7 ">
           <Link
             to="/#about"
-            className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500 border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
+            className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500 border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500 whitespace-nowrap"
             onClick={() => setOpen(false)}
           >
             <span className=" text-2xl text-lime-700 mr-1 pt-2">
@@ -40,16 +41,14 @@ export const Navbar = () => {
             <li
               onClick={() => setOpen(!open)}
               key={link.name}
-              className="md:ml-8 text-xl md:my-0 my-7"
+              className="md:ml-4 text-xl md:my-0 my-7"
             >
               <Link
                 to={link.link}
-                className="hover:text-white duration-500 border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
+                className="hover:text-white duration-500 border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500 whitespace-nowrap"
+                //                                                                                                                                                   ^^^^^^^^^^^^^^^^
                 onClick={(e) => {
-                  // close mobile menu and remove focus ring after click (mouse)
                   setOpen(false);
-                  // blur the clicked element so the focus border doesn't 'stick'
-                  // using currentTarget keeps it accessible for keyboard users
                   if (e && e.currentTarget && typeof e.currentTarget.blur === 'function') {
                     e.currentTarget.blur();
                   }
@@ -59,7 +58,7 @@ export const Navbar = () => {
               </Link>
             </li>
           ))}
-          <li className="md:ml-8 text-xl md:my-0 my-7">
+          <li className="md:ml-4 text-xl md:my-0 my-7">
             <button
               onClick={(e) => {
                 navigate("/snake");
@@ -71,24 +70,24 @@ export const Navbar = () => {
               }}
               className="hover:text-white duration-500 cursor-pointer border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
             >
-              Play Snake
+              Snake
             </button>
           </li>
-          <li className="md:ml-8 text-xl md:my-0 my-7">
-            <Link
-              onClick={(e) => {
-                setOpen(!open);
-                if (e && e.currentTarget && typeof e.currentTarget.blur === 'function') {
-                  e.currentTarget.blur();
-                }
-              }}
-              to="/#contact"
-              className="inline-flex items-center top-0 right-0 bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded md:ml-4 hover:bg-lime-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
-            >
-              Contact
-              <ArrowRightIcon className="w-4 h-4 ml-1" />
-            </Link>
-          </li>
+          <li className="md:ml-4 text-xl md:my-0 my-7">
+          <Link
+            onClick={(e) => {
+              setOpen(!open);
+              if (e && e.currentTarget && typeof e.currentTarget.blur === 'function') {
+                e.currentTarget.blur();
+              }
+            }}
+            to="/#contact"
+            className="inline-flex items-center top-0 right-0 bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded hover:bg-lime-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
+          >
+            Contact
+            <ArrowRightIcon className="w-4 h-4 ml-1" />
+          </Link>
+        </li>
         </ul>
       </div>
     </div>
