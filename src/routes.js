@@ -11,11 +11,13 @@ const LoadingFallback = () => (
 
 export const AppRoutes = () => {
     return (
-        <Suspense fallback={<LoadingFallback />}>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/snake" element={<PlaySnake />} />
-            </Routes>
-        </Suspense>
-    );
+        <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/snake" element={
+            <Suspense fallback={<LoadingFallback />}>
+                <PlaySnake />
+            </Suspense>
+            } />
+        </Routes>
+);
 };

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Local Snake component (replacement for react-simple-snake)
+ * Local Snake component
  * Props:
  * - percentageWidth: number|string (percent of parent width, e.g. 50 or "50")
  * - startSnakeSize: number (initial snake length)
@@ -20,91 +20,97 @@ const PlaySnake = ({
 }) => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
-  const runningRef = useRef(true);
-  const gameOverRef = useRef(false);
-  const [running, setRunning] = useState(true);
-  const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(() => parseInt(localStorage.getItem("snakeHighScore") || "0", 10));
-  const [newHighScore, setNewHighScore] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
-  const [tick, setTick] = useState(0); // used to trigger restart
 
+  // refs to hold mutable game state
+  const gameStateRef = useRef({
+    snake: [],
+    dir: { x: 1, y: 0 },
+    lastDir: { x: 1, y: 0 },
+    apple: { x: 0, y: 0 },
+    currentScore: 0,
+    stepInterval: Math.max(25, speed || 50),
+    running: true,
+    gameOver: false,
+  });
+
+  const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
+  const [newHighScore, setNewHighScore] = useState(false);
+  const [tick, setTick] = useState(0);
+  const [mounted, setMounted] = useState(false);
+
+  // mark mounted
+  useEffect(() => setMounted(true), []);
+
+  // load high score
+  useEffect(() => {
+    const stored = localStorage.getItem("snakeHighScore");
+    if (stored) setHighScore(parseInt(stored, 10));
+  }, []);
+
+  // save high score whenever it updates
   useEffect(() => {
     localStorage.setItem("snakeHighScore", String(highScore));
   }, [highScore]);
 
   useEffect(() => {
+    if (!canvasRef.current || !containerRef.current) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
     let size = gridSize;
-    // compute canvas pixel size based on container width and percentageWidth
+    let scale = 10;
+
     const computeSize = () => {
-      const containerWidth = containerRef.current ? containerRef.current.clientWidth : 600;
+      const containerWidth = containerRef.current.clientWidth || 600;
       const pct = typeof percentageWidth === "string" ? parseFloat(percentageWidth) : percentageWidth;
       const canvasPx = Math.max(200, Math.floor((containerWidth * pct) / 100));
-      // make square canvas and ensure scale is integer
-      const scale = Math.floor(canvasPx / size) || 10;
+      scale = Math.floor(canvasPx / size) || 10;
       canvas.width = scale * size;
       canvas.height = scale * size;
-      return { scale, size };
     };
 
-    let { scale } = computeSize();
-      // disable smoothing for pixel-perfect output
-      if (ctx.imageSmoothingEnabled !== undefined) ctx.imageSmoothingEnabled = false;
-
-    // game state
-  let snake = [];
-  let dir = { x: 1, y: 0 };
-  let lastDir = { x: 1, y: 0 };
-  let apple = { x: 0, y: 0 };
-  let currentScore = 0;
-  // mutable step interval (ms per step) - will decrease when eating apples to speed up
-  let stepInterval = Math.max(25, speed || 50);
+    computeSize();
+    if (ctx.imageSmoothingEnabled !== undefined) ctx.imageSmoothingEnabled = false;
 
     const resetState = () => {
-      snake = [];
       const startX = Math.floor(size / 2);
       const startY = Math.floor(size / 2);
+      const snake = [];
       for (let i = 0; i < startSnakeSize; i++) {
         snake.push({ x: startX - i, y: startY });
       }
-      dir = { x: 1, y: 0 };
-      lastDir = { x: 1, y: 0 };
-      currentScore = 0;
-      runningRef.current = true;
-      stepInterval = Math.max(25, speed || 50);
-      setNewHighScore(false);
+      gameStateRef.current = {
+        snake,
+        dir: { x: 1, y: 0 },
+        lastDir: { x: 1, y: 0 },
+        apple: { x: 0, y: 0 },
+        currentScore: 0,
+        stepInterval: Math.max(25, speed || 50),
+        running: true,
+        gameOver: false,
+      };
       placeApple();
-      setGameOver(false);
-      gameOverRef.current = false;
       setScore(0);
+      setNewHighScore(false);
     };
 
     const placeApple = () => {
+      const { snake } = gameStateRef.current;
       let spot = null;
-      // pick a random cell that's not on the snake; avoid declaring functions inside the loop
       while (true) {
         const x = Math.floor(Math.random() * size);
         const y = Math.floor(Math.random() * size);
-        let collision = false;
-        for (let i = 0; i < snake.length; i++) {
-          if (snake[i].x === x && snake[i].y === y) {
-            collision = true;
-            break;
-          }
-        }
-        if (!collision) {
+        if (!snake.some((s) => s.x === x && s.y === y)) {
           spot = { x, y };
           break;
         }
       }
-      apple = spot;
+      gameStateRef.current.apple = spot;
     };
 
     const draw = () => {
-      // background
+      const { snake, apple } = gameStateRef.current;
       ctx.fillStyle = "#0f172a";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -114,50 +120,48 @@ const PlaySnake = ({
 
       // snake
       ctx.fillStyle = snakeColor;
-      snake.forEach((s, i) => {
-        ctx.fillRect(s.x * scale, s.y * scale, scale - 1, scale - 1);
-      });
+      snake.forEach((s) => ctx.fillRect(s.x * scale, s.y * scale, scale - 1, scale - 1));
     };
 
     const step = () => {
-      if (!runningRef.current) return;
+      const state = gameStateRef.current;
+      if (!state.running || state.gameOver) return;
 
-      const head = { x: (snake[0].x + dir.x + size) % size, y: (snake[0].y + dir.y + size) % size };
+      const head = {
+        x: (state.snake[0].x + state.dir.x + size) % size,
+        y: (state.snake[0].y + state.dir.y + size) % size,
+      };
 
-      // self collision
-      if (snake.some((s) => s.x === head.x && s.y === head.y)) {
-        runningRef.current = false;
-        setRunning(false);
-        setGameOver(true);
-        gameOverRef.current = true;
-        setHighScore((h) => Math.max(h, currentScore));
+      if (state.snake.some((s) => s.x === head.x && s.y === head.y)) {
+        state.running = false;
+        state.gameOver = true;
+        setScore(state.currentScore);
+        setHighScore((h) => Math.max(h, state.currentScore));
         return;
       }
 
-      snake.unshift(head);
+      state.snake.unshift(head);
 
-      // eat apple
-      if (head.x === apple.x && head.y === apple.y) {
-        currentScore += 1;
-        setScore(currentScore);
-        // check and update high score
-        if (currentScore > highScore) {
-          setHighScore(currentScore);
+      if (head.x === state.apple.x && head.y === state.apple.y) {
+        state.currentScore += 1;
+        setScore(state.currentScore);
+
+        if (state.currentScore > highScore) {
+          setHighScore(state.currentScore);
           setNewHighScore(true);
-          localStorage.setItem("snakeHighScore", String(currentScore));
         }
-        // speed up: decrease interval down to a minimum of 25ms
-        if (stepInterval > 25) stepInterval = Math.max(25, stepInterval - 0.5);
+
+        state.stepInterval = Math.max(25, state.stepInterval - 0.5);
         placeApple();
       } else {
-        snake.pop();
+        state.snake.pop();
       }
 
-      lastDir = dir;
+      state.lastDir = state.dir;
     };
 
-    // input handling
     const keyHandler = (e) => {
+      const state = gameStateRef.current;
       const k = e.key.toLowerCase();
       let next = null;
       if (k === "arrowup" || k === "w") next = { x: 0, y: -1 };
@@ -165,20 +169,13 @@ const PlaySnake = ({
       if (k === "arrowleft" || k === "a") next = { x: -1, y: 0 };
       if (k === "arrowright" || k === "d") next = { x: 1, y: 0 };
       if (k === " ") {
-        // space toggles pause only when game is not over; if game is over do nothing
-        if (!gameOverRef.current) {
-          runningRef.current = !runningRef.current;
-          setRunning(runningRef.current);
-        }
+        state.running = !state.running;
       }
-      if (next) {
-        // prevent reversing directly
-        if (next.x === -lastDir.x && next.y === -lastDir.y) return;
-        dir = next;
+      if (next && !(next.x === -state.lastDir.x && next.y === -state.lastDir.y)) {
+        state.dir = next;
       }
     };
 
-    // touch / swipe controls
     let touchStart = null;
     const touchStartHandler = (e) => {
       const t = e.touches[0];
@@ -189,32 +186,24 @@ const PlaySnake = ({
       const t = e.changedTouches[0];
       const dx = t.clientX - touchStart.x;
       const dy = t.clientY - touchStart.y;
+      const state = gameStateRef.current;
       if (Math.abs(dx) > Math.abs(dy)) {
-        if (dx > 20) {
-          // right
-          if (!(lastDir.x === 1 && lastDir.y === 0)) dir = { x: 1, y: 0 };
-        } else if (dx < -20) {
-          if (!(lastDir.x === -1 && lastDir.y === 0)) dir = { x: -1, y: 0 };
-        }
+        if (dx > 20 && state.lastDir.x !== 1) state.dir = { x: 1, y: 0 };
+        if (dx < -20 && state.lastDir.x !== -1) state.dir = { x: -1, y: 0 };
       } else {
-        if (dy > 20) {
-          if (!(lastDir.x === 0 && lastDir.y === 1)) dir = { x: 0, y: 1 };
-        } else if (dy < -20) {
-          if (!(lastDir.x === 0 && lastDir.y === -1)) dir = { x: 0, y: -1 };
-        }
+        if (dy > 20 && state.lastDir.y !== 1) state.dir = { x: 0, y: 1 };
+        if (dy < -20 && state.lastDir.y !== -1) state.dir = { x: 0, y: -1 };
       }
       touchStart = null;
     };
 
-  // initialize
-  resetState();
+    resetState();
     draw();
 
     window.addEventListener("keydown", keyHandler);
     canvas.addEventListener("touchstart", touchStartHandler, { passive: true });
     canvas.addEventListener("touchend", touchEndHandler, { passive: true });
 
-    // Use requestAnimationFrame with a fixed-step accumulator for smooth rendering
     let rafId = null;
     let lastTime = 0;
     let acc = 0;
@@ -224,71 +213,42 @@ const PlaySnake = ({
       const delta = time - lastTime;
       lastTime = time;
       acc += delta;
-
-      // perform steps at the configured speed (ms per step)
-      // use the mutable stepInterval so eating apples speeds the loop
-      const effectiveInterval = Math.max(25, stepInterval);
-      while (acc >= effectiveInterval) {
-        if (runningRef.current) step();
-        acc -= effectiveInterval;
+      const { stepInterval, running } = gameStateRef.current;
+      const interval = Math.max(25, stepInterval);
+      while (acc >= interval && running) {
+        step();
+        acc -= interval;
       }
-
-      // draw every frame to keep visuals responsive
       draw();
       rafId = requestAnimationFrame(loop);
     };
 
     rafId = requestAnimationFrame(loop);
 
-    // handle resize
     const ro = new ResizeObserver(() => {
-      const c = computeSize();
-      scale = c.scale;
+      computeSize();
       draw();
     });
-    const observedNode = containerRef.current;
-    if (observedNode) ro.observe(observedNode);
-
-    // restart on tick change
-    // tick is a state value we can bump to force a restart
-    // we capture it through closure by returning a cleanup that doesn't depend on it; to respond to tick changes we re-run effect
+    ro.observe(containerRef.current);
 
     return () => {
-  if (rafId) cancelAnimationFrame(rafId);
-  window.removeEventListener("keydown", keyHandler);
-  canvas.removeEventListener("touchstart", touchStartHandler);
-  canvas.removeEventListener("touchend", touchEndHandler);
-  if (observedNode) ro.disconnect();
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("keydown", keyHandler);
+      canvas.removeEventListener("touchstart", touchStartHandler);
+      canvas.removeEventListener("touchend", touchEndHandler);
+      ro.disconnect();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tick, percentageWidth, startSnakeSize, appleColor, snakeColor, gridSize, speed]);
+  }, [tick, percentageWidth, startSnakeSize, appleColor, snakeColor, gridSize, speed, highScore]);
 
-  // controls handlers
   const toggleRunning = () => {
-    if (gameOver) {
-      // restart
-      runningRef.current = true;
-      setRunning(true);
-      setGameOver(false);
-      gameOverRef.current = false;
-      setScore(0);
-      setNewHighScore(false);
-      setTick((t) => t + 1);
-    } else {
-      runningRef.current = !runningRef.current;
-      setRunning(runningRef.current);
-    }
+    const state = gameStateRef.current;
+    if (state.gameOver) setTick((t) => t + 1);
+    else state.running = !state.running;
   };
 
-  const restart = () => {
-    // bump tick to recreate internal game state
-    runningRef.current = true;
-    setRunning(true);
-    setGameOver(false);
-    gameOverRef.current = false;
-    setScore(0);
-    setTick((t) => t + 1);
-  };
+  const restart = () => setTick((t) => t + 1);
+
+  if (!mounted) return <section id="snake"><div>Snake game loading…</div></section>;
 
   return (
     <section id="snake" ref={containerRef}>
@@ -304,11 +264,11 @@ const PlaySnake = ({
             <canvas ref={canvasRef} className="block w-full h-auto border-4 border-white rounded-md shadow-lg bg-[#0f172a]" />
             <div className="absolute left-1/2 -translate-x-1/2 bottom-3 flex gap-2">
               <button onClick={toggleRunning} className="px-3 py-1 rounded bg-slate-700 text-white">
-                {running ? "Pause" : gameOver ? "Start" : "Resume"}
+                {gameStateRef.current.running ? "Pause" : gameStateRef.current.gameOver ? "Start" : "Resume"}
               </button>
               <button onClick={restart} className="px-3 py-1 rounded bg-slate-700 text-white">Restart</button>
             </div>
-            {gameOver && (
+            {gameStateRef.current.gameOver && (
               <div style={{ color: "#f87171", marginTop: 8 }}>
                 Game Over — final score: {score}
                 <div>{newHighScore ? "New local high score!" : ""}</div>
