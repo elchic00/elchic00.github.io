@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ArrowRightIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +12,28 @@ export const Navbar = () => {
   ];
   const navigate = useNavigate();
   let [open, setOpen] = useState(false);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navRef.current && !navRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    // Only add listener when menu is open
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open]);
+
   return (
-    <div className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10">
+    <div ref={navRef} className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10">
       <div className="justify-between  md:flex items-center py-4 md:px-4 px-7 ">
           <Link
             to="/#about"

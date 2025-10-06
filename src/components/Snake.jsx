@@ -160,6 +160,7 @@ const PlaySnake = ({
     const keyHandler = (e) => {
       const k = e.key.toLowerCase();
       let next = null;
+      e.preventDefault()
       if (k === "arrowup" || k === "w") next = { x: 0, y: -1 };
       if (k === "arrowdown" || k === "s") next = { x: 0, y: 1 };
       if (k === "arrowleft" || k === "a") next = { x: -1, y: 0 };
