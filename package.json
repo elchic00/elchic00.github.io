@@ -57,11 +57,7 @@
   },
   "reactSnap": {
     "inlineCss": true,
-    "skipThirdPartyRequests": true,
-    "exclude": [
-      "/#/resume",
-      "/#/snake"
-    ]
+    "skipThirdPartyRequests": true
   },
   "homepage": "https://elchic00.github.io/"
 }
