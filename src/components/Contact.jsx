@@ -146,7 +146,7 @@ export const Contact = () => {
           className="lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0"
         >
           <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font underline-offset-4 underline">
-            Work With Me <ion-icon name="happy"></ion-icon>
+            Contact Me <ion-icon name="happy"></ion-icon>
           </h2>
           <p className="leading-relaxed mb-5 mt-2">
             Send me a message with the form below

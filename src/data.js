@@ -1,3 +1,4 @@
+// src/data.js - UPDATED
 export const projects = [
   {
     title: "Invent0ry",
@@ -24,7 +25,7 @@ export const projects = [
     description:
       "A food diary app to help users keep track of their macronutrients. " +
       "They can save their diary to a local SQLite database, which they can later view whether connected to the internet or not.",
-    image: "https://github.com/elchic00/Macros-for-geeks/raw/main/macros.gif",
+    image: "/images/projects/macros.webp",
     link: "https://github.com/elchic00/Macros-for-geeks",
   },
   {
@@ -33,7 +34,7 @@ export const projects = [
     description:
       "Finding the trend of crime in Queens NYC. This project uses Python data-science libraries to process the data. " +
       "The web-page was created using html and Github MD.",
-    image: "https://elchic00.github.io/CrimeInQueens/crimesByPrec.png",
+    image: "/images/projects/crime.webp",
     link: "https://elchic00.github.io/CrimeInQueens",
   },
   {
@@ -42,8 +43,7 @@ export const projects = [
     description:
       "Multi-Purpose Calculator is a stylish calculator app that features an on-sceen calculator and converter." +
       " This can be cloned and used wherever Python is installed.",
-    image:
-      "https://github.com/NesQuickCoding/Multi-Purpose-Calculator/raw/main/demo/Demo.gif?raw=true",
+    image: "/images/projects/calculator.webp",
     link: "https://github.com/NesQuickCoding/Multi-Purpose-Calculator",
   },
   {
@@ -51,7 +51,7 @@ export const projects = [
     subtitle: "React Native, CSS, SQLite",
     description:
       "An Augmentative and Alternative Communication (AAC) mobile app created to help children with autism, special needs, or verbal delays to communicate more effectively.",
-    image: "https://github.com/myPal-TMS/myPal/raw/main/Walkthrough.gif",
+    image: "/images/projects/mypal.webp",
     link: "https://github.com/myPal-TMS/myPal",
   },
 ];
@@ -67,5 +67,3 @@ export const skills = [
   "AWS",
   "Firebase",
 ];
-// export const testimonials = [
-// ];

@@ -12,13 +12,18 @@ const ProjectCard = ({ project, index }) => {
         aria-label={`View ${project.title} project on GitHub`}
       >
         <div className="flex relative">
-          <img
-            alt={`Screenshot of ${project.title} project`}
-            className="absolute inset-0 w-full h-full object-contain object-center group-hover:bg-gray-800 transition-colors"
-            src={project.image}
-            loading={index < 2 ? "eager" : "lazy"}
-          />
-          
+          <picture>
+            <source srcSet={project.image} type="image/webp" />
+            <img
+              alt={`Screenshot of ${project.title} project`}
+              className="absolute inset-0 w-full h-full object-contain object-center group-hover:bg-gray-800 transition-colors"
+              src={project.image.replace(".webp", ".jpg")}
+              loading={index < 2 ? "eager" : "lazy"}
+              width="800"
+              height="600"
+            />
+          </picture>
+
           {/* Hover overlay for desktop */}
           <div className="sm:px-8 sm:py-10 relative z-10 sm:w-full sm:border-4 sm:border-gray-800 bg-gray-900 opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
             <h3 className="tracking-widest text-sm title-font font-medium text-green-400 mb-1">
@@ -51,17 +56,20 @@ export const Projects = () => {
     <section id="projects" className="body-font mt-16">
       <div className="container px-5 py-10 mx-auto text-center lg:px-40">
         <header className="flex flex-col w-full sm:mb-16">
-          <CodeIcon className="mx-auto inline-block w-10 mb-1" aria-hidden="true" />
-          <h1 className="sm:text-4xl text-3xl font-medium title-font text-white underline-offset-4 underline mb-4">
+          <CodeIcon
+            className="mx-auto inline-block w-10 mb-1"
+            aria-hidden="true"
+          />
+          <h2 className="sm:text-4xl text-3xl font-medium title-font text-white underline-offset-4 underline mb-4">
             Recent Apps
-          </h1>
+          </h2>
         </header>
 
         <div className="flex flex-wrap -m-4">
           {projects.map((project, index) => (
-            <ProjectCard 
-              key={`${project.title}-${index}`} 
-              project={project} 
+            <ProjectCard
+              key={`${project.title}-${index}`}
+              project={project}
               index={index}
             />
           ))}

@@ -1,10 +1,10 @@
-import React from 'react';
-import { APP_CONFIG } from '../constants';
+import { APP_CONFIG } from "../constants";
 
 const ResumePage = () => {
   const pdfPath = `${process.env.PUBLIC_URL}/${APP_CONFIG.RESUME_FILENAME}`;
 
-  const buttonBaseClasses = "inline-block py-3 px-6 rounded font-bold transition-colors duration-150";
+  const buttonBaseClasses =
+    "inline-block py-3 px-6 rounded font-bold transition-colors duration-150";
   const downloadButtonClasses = `${buttonBaseClasses} bg-blue-600 hover:bg-blue-700 text-white mr-3`;
   const openButtonClasses = `${buttonBaseClasses} bg-gray-600 hover:bg-gray-700 text-white`;
 
@@ -13,7 +13,7 @@ const ResumePage = () => {
       {/* Header with action buttons */}
       <header className="p-5 text-center bg-gray-700 shadow-md">
         <h1 className="text-2xl font-bold text-white mb-4">Resume</h1>
-        
+
         <nav aria-label="Resume actions">
           <a
             href={pdfPath}
@@ -70,8 +70,8 @@ const ResumePage = () => {
             Resume Preview
           </h2>
           <p className="text-gray-600 mb-4">
-            For the best experience, please download the PDF or view it in a new tab.
-            Inline viewing is not supported on mobile devices.
+            For the best experience, please download the PDF or view it in a new
+            tab. Inline viewing is not supported on mobile devices.
           </p>
           <a
             href={pdfPath}

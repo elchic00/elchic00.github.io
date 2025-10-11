@@ -10,19 +10,26 @@ export const About = () => {
       <div className="container mx-auto flex px-10 py-20 md:flex-row flex-col items-center mt-10">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
           <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white mt-5">
-            Hi, my name is Andrew Alagna.
+            Andrew Alagna - Software Engineer
           </h1>
-
+          <p className="text-xl text-gray-400 mb-4">Hey there! I'm Drew 👋</p>
           <p className="mb-7 leading-relaxed">
-            A motivated software engineer interested in working with people who
-            want to solve meaningful problems.
+            I build accessible, performant web applications at American Express,
+            serving millions of users across the globe.
             <br />
             <br />
-            I enjoy learning about technology and solving complex problems.
+            My passion lies in creating inclusive digital experiences and
+            optimizing performance—whether that's improving accessibility across
+            international markets, or cutting load times through smart
+            architecture.
             <br />
             <br />
-            Graduated from CUNY: Hunter College with a BA in Computer Science,
-            Cum Laude.
+            When I'm not coding, I'm teaching, bouldering, or travelling. I
+            mentor students through CodePath and students from my alma mater,
+            helping the next generation of engineers level up their skills.
+            <br />
+            <br />
+            Hunter College grad. NYC based. Always learning.
           </p>
 
           <nav aria-label="Social links and actions">
