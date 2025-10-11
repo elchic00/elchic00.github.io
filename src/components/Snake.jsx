@@ -1,4 +1,5 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { useLocalStorage } from "../hooks";
 
 /**
  * Local Snake component (replacement for react-simple-snake)
@@ -25,7 +26,7 @@ const PlaySnake = ({
 
   const [running, setRunning] = useState(true);
   const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
+  const [highScore, setHighScore] = useLocalStorage("snakeHighScore", 0);
   const [newHighScore, setNewHighScore] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [tick, setTick] = useState(0); // force restart
@@ -35,21 +36,6 @@ const PlaySnake = ({
   useLayoutEffect(() => {
     setMounted(true);
   }, []);
-
-  // load high score from localStorage
-  useLayoutEffect(() => {
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("snakeHighScore");
-      if (stored) setHighScore(parseInt(stored, 10));
-    }
-  }, []);
-
-  // persist high score
-  useLayoutEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("snakeHighScore", String(highScore));
-    }
-  }, [highScore]);
 
   // main game loop
   useLayoutEffect(() => {
@@ -62,7 +48,10 @@ const PlaySnake = ({
 
     const computeSize = () => {
       const containerWidth = containerRef.current?.clientWidth || 600;
-      const pct = typeof percentageWidth === "string" ? parseFloat(percentageWidth) : percentageWidth;
+      const pct =
+        typeof percentageWidth === "string"
+          ? parseFloat(percentageWidth)
+          : percentageWidth;
       const canvasPx = Math.max(200, Math.floor((containerWidth * pct) / 100));
       const scale = Math.floor(canvasPx / size) || 10;
       canvas.width = scale * size;
@@ -71,7 +60,8 @@ const PlaySnake = ({
     };
 
     let { scale } = computeSize();
-    if (ctx.imageSmoothingEnabled !== undefined) ctx.imageSmoothingEnabled = false;
+    if (ctx.imageSmoothingEnabled !== undefined)
+      ctx.imageSmoothingEnabled = false;
 
     // game state
     let snake = [];
@@ -105,7 +95,7 @@ const PlaySnake = ({
       while (true) {
         const x = Math.floor(Math.random() * size);
         const y = Math.floor(Math.random() * size);
-        if (!snake.some(s => s.x === x && s.y === y)) {
+        if (!snake.some((s) => s.x === x && s.y === y)) {
           spot = { x, y };
           break;
         }
@@ -121,20 +111,30 @@ const PlaySnake = ({
       ctx.fillRect(apple.x * scale, apple.y * scale, scale, scale);
 
       ctx.fillStyle = snakeColor;
-      snake.forEach(s => ctx.fillRect(s.x * scale, s.y * scale, scale - 1, scale - 1));
+      snake.forEach((s) =>
+        ctx.fillRect(s.x * scale, s.y * scale, scale - 1, scale - 1)
+      );
     };
 
     const step = () => {
       if (!runningRef.current) return;
 
-      const head = { x: (snake[0].x + dir.x + size) % size, y: (snake[0].y + dir.y + size) % size };
+      const head = {
+        x: (snake[0].x + dir.x + size) % size,
+        y: (snake[0].y + dir.y + size) % size,
+      };
 
-      if (snake.some(s => s.x === head.x && s.y === head.y)) {
+      if (snake.some((s) => s.x === head.x && s.y === head.y)) {
         runningRef.current = false;
         setRunning(false);
         setGameOver(true);
         gameOverRef.current = true;
-        setHighScore(h => Math.max(h, currentScore));
+
+        // ✨ Update high score using the hook's setter
+        if (currentScore > highScore) {
+          setHighScore(currentScore);
+          setNewHighScore(true);
+        }
         return;
       }
 
@@ -160,7 +160,7 @@ const PlaySnake = ({
     const keyHandler = (e) => {
       const k = e.key.toLowerCase();
       let next = null;
-      e.preventDefault()
+      e.preventDefault();
       if (k === "arrowup" || k === "w") next = { x: 0, y: -1 };
       if (k === "arrowdown" || k === "s") next = { x: 0, y: 1 };
       if (k === "arrowleft" || k === "a") next = { x: -1, y: 0 };
@@ -178,17 +178,23 @@ const PlaySnake = ({
 
     // touch/swipe
     let touchStart = null;
-    const touchStartHandler = e => { touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY }; };
-    const touchEndHandler = e => {
+    const touchStartHandler = (e) => {
+      touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    };
+    const touchEndHandler = (e) => {
       if (!touchStart) return;
       const dx = e.changedTouches[0].clientX - touchStart.x;
       const dy = e.changedTouches[0].clientY - touchStart.y;
       if (Math.abs(dx) > Math.abs(dy)) {
-        if (dx > 20 && !(lastDir.x === 1 && lastDir.y === 0)) dir = { x: 1, y: 0 };
-        if (dx < -20 && !(lastDir.x === -1 && lastDir.y === 0)) dir = { x: -1, y: 0 };
+        if (dx > 20 && !(lastDir.x === 1 && lastDir.y === 0))
+          dir = { x: 1, y: 0 };
+        if (dx < -20 && !(lastDir.x === -1 && lastDir.y === 0))
+          dir = { x: -1, y: 0 };
       } else {
-        if (dy > 20 && !(lastDir.x === 0 && lastDir.y === 1)) dir = { x: 0, y: 1 };
-        if (dy < -20 && !(lastDir.x === 0 && lastDir.y === -1)) dir = { x: 0, y: -1 };
+        if (dy > 20 && !(lastDir.x === 0 && lastDir.y === 1))
+          dir = { x: 0, y: 1 };
+        if (dy < -20 && !(lastDir.x === 0 && lastDir.y === -1))
+          dir = { x: 0, y: -1 };
       }
       touchStart = null;
     };
@@ -204,7 +210,7 @@ const PlaySnake = ({
     let lastTime = 0;
     let acc = 0;
 
-    const loop = time => {
+    const loop = (time) => {
       if (!lastTime) lastTime = time;
       const delta = time - lastTime;
       lastTime = time;
@@ -238,7 +244,18 @@ const PlaySnake = ({
       if (observedNode) ro.disconnect();
     };
     // eslint-disable-next-line -- dont want to reset when breaking high score
-  }, [tick, percentageWidth, startSnakeSize, appleColor, snakeColor, gridSize, speed, mounted]);
+  }, [
+    tick,
+    percentageWidth,
+    startSnakeSize,
+    appleColor,
+    snakeColor,
+    gridSize,
+    speed,
+    mounted,
+    highScore,
+    setHighScore,
+  ]);
 
   const toggleRunning = () => {
     if (gameOver) {
@@ -248,7 +265,7 @@ const PlaySnake = ({
       gameOverRef.current = false;
       setScore(0);
       setNewHighScore(false);
-      setTick(t => t + 1);
+      setTick((t) => t + 1);
     } else {
       runningRef.current = !runningRef.current;
       setRunning(runningRef.current);
@@ -261,15 +278,12 @@ const PlaySnake = ({
     setGameOver(false);
     gameOverRef.current = false;
     setScore(0);
-    setTick(t => t + 1);
+    setNewHighScore(false);
+    setTick((t) => t + 1);
   };
 
   return (
-    <section 
-    id="snake" 
-    ref={containerRef}
-    className="pt-5"
-    >
+    <section id="snake" ref={containerRef} className="pt-5">
       {!mounted && <div>Snake game loading…</div>}
       <div className="overflow-hidden text-center h-full h-screen">
         <h2 className="text-white text-3xl mb-1 font-medium pt-10 mt-12">
@@ -277,22 +291,48 @@ const PlaySnake = ({
         </h2>
 
         <div className="flex justify-center pt-5">
-          <div style={{ width: `${percentageWidth}%` }} className="relative max-w-[640px] pb-16 mx-auto">
+          <div
+            style={{ width: `${percentageWidth}%` }}
+            className="relative max-w-[640px] pb-16 mx-auto"
+          >
             <div className="flex justify-between items-center mb-2">
               <div className="text-white">Score: {score}</div>
               <div className="text-white">High: {highScore}</div>
             </div>
-            <canvas ref={canvasRef} className="block w-full h-auto border-4 border-white rounded-md shadow-lg bg-[#0f172a]" />
+            <canvas
+              ref={canvasRef}
+              className="block w-full h-auto border-4 border-white rounded-md shadow-lg bg-[#0f172a]"
+            />
             <div className="absolute left-1/2 -translate-x-1/2 bottom-3 flex gap-2">
-              <button onClick={toggleRunning} className="px-3 py-1 rounded bg-slate-700 text-white">
+              <button
+                onClick={toggleRunning}
+                className="px-3 py-1 rounded bg-slate-700 text-white hover:bg-slate-600 transition-colors"
+                aria-label={
+                  running
+                    ? "Pause game"
+                    : gameOver
+                    ? "Start new game"
+                    : "Resume game"
+                }
+              >
                 {running ? "Pause" : gameOver ? "Start" : "Resume"}
               </button>
-              <button onClick={restart} className="px-3 py-1 rounded bg-slate-700 text-white">Restart</button>
+              <button
+                onClick={restart}
+                className="px-3 py-1 rounded bg-slate-700 text-white hover:bg-slate-600 transition-colors"
+                aria-label="Restart game"
+              >
+                Restart
+              </button>
             </div>
             {gameOver && (
-              <div style={{ color: "#f87171", marginTop: 8 }}>
+              <div className="text-red-400 mt-2">
                 Game Over — final score: {score}
-                <div>{newHighScore ? "New local high score!" : ""}</div>
+                {newHighScore && (
+                  <div className="text-green-400 font-bold">
+                    🎉 New local high score!
+                  </div>
+                )}
               </div>
             )}
           </div>
