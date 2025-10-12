@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
+Allow: /images/
 
+# Specific allowances for Google's image crawler
+User-agent: Googlebot-Image
+Allow: /
+Allow: /images/
+
+# Main sitemap
 Sitemap: https://elchic00.github.io/sitemap.xml
+
+# Image sitemap
+Sitemap: https://elchic00.github.io/image-sitemap.xml

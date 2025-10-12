@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import ResumePage from "./components/Resume";
-import { Travel } from "./components/Trave";
+import { Travel } from "./components/Travel";
 
 // Lazy-load the Snake page to keep the initial bundle smaller.
 const PlaySnake = lazy(() => import("./components/Snake"));

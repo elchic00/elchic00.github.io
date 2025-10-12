@@ -124,8 +124,130 @@ const TripCard = ({ trip }) => {
 };
 
 export const Travel = () => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: "Andrew Alagna's Galapagos Travel Photography",
+    description:
+      "Andrew Alagna's travel photography from Ecuador and the Galapagos Islands",
+    author: {
+      "@type": "Person",
+      name: "Andrew Alagna",
+      url: "https://elchic00.github.io",
+    },
+    image: [
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-turtle-friend.jpeg",
+        description:
+          "Andrew Alagna snorkeling with sea turtles in Galapagos Islands, Ecuador",
+        name: "Andrew Alagna - Turtle Snorkeling",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-turtle-snorkle.jpeg",
+        description:
+          "Andrew Alagna swimming alongside sea turtles underwater in Galapagos",
+        name: "Andrew Alagna - Underwater Turtle Photography",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-blue-foot-boobie.jpeg",
+        description:
+          "Andrew Alagna photographing blue-footed boobies in Galapagos Islands",
+        name: "Andrew Alagna - Blue-Footed Booby Galapagos",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-sea-lions.jpeg",
+        description:
+          "Andrew Alagna's photograph of sea lions colony in Galapagos, Ecuador",
+        name: "Andrew Alagna - Sea Lions Galapagos Beach",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-isabella-island.jpeg",
+        description:
+          "Andrew Alagna at Isabela Island welcome sign in Galapagos, Ecuador",
+        name: "Andrew Alagna - Isabela Island Galapagos",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-equator.jpeg",
+        description:
+          "Andrew Alagna standing at the equator monument in Ecuador",
+        name: "Andrew Alagna - Equator Line Ecuador",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-sunset-boats.jpeg",
+        description:
+          "Andrew Alagna's sunset photography over boats in Galapagos Islands",
+        name: "Andrew Alagna - Galapagos Sunset",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-sea-horse.jpeg",
+        description:
+          "Andrew Alagna's underwater photograph of seahorse in Galapagos",
+        name: "Andrew Alagna - Seahorse Underwater Photography",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+      {
+        "@type": "ImageObject",
+        contentUrl:
+          "https://elchic00.github.io/images/travel/andrew-alagna-inactive-volcano.jpeg",
+        description:
+          "Andrew Alagna hiking the inactive volcano rim in Galapagos Islands",
+        name: "Andrew Alagna - Volcano Hiking Galapagos",
+        author: { "@type": "Person", name: "Andrew Alagna" },
+        copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
+        creator: { "@type": "Person", name: "Andrew Alagna" },
+      },
+    ],
+  };
   return (
     <section id="travel" className="body-font mt-16 min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="container px-5 py-10 mx-auto lg:px-40">
         <header className="flex flex-col w-full mb-12 text-center">
           <GlobeIcon
