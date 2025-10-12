@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://elchic00.github.io/#travel</loc>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-turtle-friend.jpeg</image:loc>
+      <image:caption>Andrew Alagna snorkeling with sea turtles in Galapagos Islands, Ecuador</image:caption>
+      <image:title>Andrew Alagna - Turtle Snorkeling Galapagos</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-turtle-snorkle.jpeg</image:loc>
+      <image:caption>Andrew Alagna swimming alongside sea turtles underwater in Galapagos, Ecuador</image:caption>
+      <image:title>Andrew Alagna - Underwater Turtle Photography</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-blue-foot-boobie.jpeg</image:loc>
+      <image:caption>Andrew Alagna photographing blue-footed boobies on the rocks in Galapagos Islands</image:caption>
+      <image:title>Andrew Alagna - Blue-Footed Booby Galapagos</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-sea-lions.jpeg</image:loc>
+      <image:caption>Andrew Alagna's photograph of sea lions colony relaxing on the beach in Galapagos, Ecuador</image:caption>
+      <image:title>Andrew Alagna - Sea Lions Galapagos Beach</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-isabella-island.jpeg</image:loc>
+      <image:caption>Andrew Alagna at Isabela Island welcome sign in Galapagos, Ecuador</image:caption>
+      <image:title>Andrew Alagna - Isabela Island Galapagos</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-equator.jpeg</image:loc>
+      <image:caption>Andrew Alagna standing at the equator monument in Ecuador</image:caption>
+      <image:title>Andrew Alagna - Equator Line Ecuador</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-sunset-boats.jpeg</image:loc>
+      <image:caption>Andrew Alagna's sunset photography over boats in Galapagos Islands, Ecuador</image:caption>
+      <image:title>Andrew Alagna - Galapagos Sunset</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-sea-horse.jpeg</image:loc>
+      <image:caption>Andrew Alagna's underwater photograph of seahorse clinging to coral in Galapagos</image:caption>
+      <image:title>Andrew Alagna - Seahorse Underwater Photography</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-inactive-volcano.jpeg</image:loc>
+      <image:caption>Andrew Alagna hiking the inactive volcano rim in Galapagos Islands, Ecuador</image:caption>
+      <image:title>Andrew Alagna - Volcano Hiking Galapagos</image:title>
+    </image:image>
+  </url>
+</urlset>

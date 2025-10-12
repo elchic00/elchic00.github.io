@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://elchic00.github.io/sitemap.xml
+Sitemap: https://elchic00.github.io/image-sitemap.xml
