@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- Home/About Page -->
+  <url>
+    <loc>https://elchic00.github.io/</loc>
+    <lastmod>2025-10-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://i.imgur.com/O1wMaAv.png</image:loc>
+      <image:caption>Andrew Alagna - Software Engineer at American Express</image:caption>
+      <image:title>Andrew Alagna Professional Profile Photo</image:title>
+    </image:image>
+  </url>
+
+  <!-- Travel Page - Galapagos Islands -->
   <url>
     <loc>https://elchic00.github.io/#/travel</loc>
     <lastmod>2025-10-11</lastmod>
@@ -17,7 +32,7 @@
     <image:image>
       <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-turtle-snorkle.jpeg</image:loc>
       <image:caption>Andrew Alagna swimming alongside sea turtles underwater in Galapagos, Ecuador</image:caption>
-      <image:title>Andrew Alagna - Underwater Turtle Photography</image:title>
+      <image:title>Andrew Alagna - Underwater Turtle Photography Galapagos</image:title>
       <image:geo_location>Galapagos Islands, Ecuador</image:geo_location>
     </image:image>
 
@@ -52,14 +67,14 @@
     <image:image>
       <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-sunset-boats.jpeg</image:loc>
       <image:caption>Andrew Alagna's sunset photography over boats in Galapagos Islands, Ecuador</image:caption>
-      <image:title>Andrew Alagna - Galapagos Sunset</image:title>
+      <image:title>Andrew Alagna - Galapagos Sunset Photography</image:title>
       <image:geo_location>Galapagos Islands, Ecuador</image:geo_location>
     </image:image>
 
     <image:image>
       <image:loc>https://elchic00.github.io/images/travel/andrew-alagna-sea-horse.jpeg</image:loc>
       <image:caption>Andrew Alagna's underwater photograph of seahorse clinging to coral in Galapagos</image:caption>
-      <image:title>Andrew Alagna - Seahorse Underwater Photography</image:title>
+      <image:title>Andrew Alagna - Seahorse Underwater Photography Galapagos</image:title>
       <image:geo_location>Galapagos Islands, Ecuador</image:geo_location>
     </image:image>
 
