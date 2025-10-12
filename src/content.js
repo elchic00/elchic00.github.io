@@ -122,6 +122,11 @@ export const trips = [
         alt: "Andrew Alagna - Inactive volcano landscape",
         caption: "Hiking the inactive volcano rim",
       },
+      {
+        url: "/images/travel/andrew-alagna-land-turtles.jpeg",
+        alt: "Andrew Alagna - land turtles",
+        caption: "Galápago Tortuga",
+      },
     ],
   },
   // {

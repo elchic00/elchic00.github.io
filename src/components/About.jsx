@@ -59,9 +59,11 @@ export const About = () => {
           className="object-cover object-center rounded mx-auto sm:h-80 h-80"
           alt="Andrew Alagna - Software Engineer"
           src={SOCIAL_LINKS.PROFILE_IMAGE}
-          loading="lazy"
-          width="320"
-          height="320"
+          loading="eager"
+          width="460"
+          height="460"
+          decoding="async"
+          fetchpriority="high"
         />
       </div>
     </section>
