@@ -55,16 +55,19 @@ export const About = () => {
           </nav>
         </div>
 
-        <img
-          className="object-cover object-center rounded mx-auto sm:h-80 h-80"
-          alt="Andrew Alagna - Software Engineer"
-          src={SOCIAL_LINKS.PROFILE_IMAGE}
-          loading="eager"
-          width="460"
-          height="460"
-          decoding="async"
-          fetchpriority="high"
-        />
+        <picture>
+          <source srcSet={SOCIAL_LINKS.PROFILE_IMAGE} type="image/webp" />
+          <img
+            className="object-cover object-center rounded mx-auto sm:h-80 h-80 border-4 border-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+            alt="Andrew Alagna - Software Engineer"
+            src={SOCIAL_LINKS.PROFILE_IMAGE_FALLBACK}
+            loading="eager"
+            width="460"
+            height="460"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </picture>
       </div>
     </section>
   );

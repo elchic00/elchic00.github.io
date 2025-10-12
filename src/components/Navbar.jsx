@@ -49,7 +49,7 @@ export const Navbar = () => {
       className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10"
       aria-label="Main navigation"
     >
-      <div className="justify-between md:flex items-center py-4 md:px-4 px-7">
+      <div className="justify-between md:flex items-center py-4 px-4 md:px-6">
         {/* Logo */}
         <Link
           to="/#about"
@@ -67,7 +67,7 @@ export const Navbar = () => {
         {isMobile && (
           <button
             onClick={toggleMenu}
-            className="text-3xl absolute right-8 top-6 cursor-pointer hover:text-white focus:outline-none focus:ring-2 focus:ring-lime-500 rounded"
+            className="text-3xl absolute right-4 top-6 cursor-pointer hover:text-white focus:outline-none focus:ring-2 focus:ring-lime-500 rounded"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -103,8 +103,8 @@ export const Navbar = () => {
             </button>
           </li>
 
-          {/* Contact CTA */}
-          <li className="md:ml-4 text-xl md:my-0 my-7">
+          {/* Contact CTA - ✨ Fixed spacing to prevent cutoff */}
+          <li className="md:ml-4 text-xl md:my-0 my-7 md:mr-0 mr-4">
             <Link
               to="/#contact"
               className="inline-flex items-center bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded hover:bg-lime-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"

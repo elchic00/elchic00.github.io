@@ -49,12 +49,15 @@ const PhotoGallery = ({ photos }) => {
             className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-lime-500"
             aria-label={`View ${photo.alt}`}
           >
-            <img
-              src={photo.url}
-              alt={photo.alt}
-              loading={index < 3 ? "eager" : "lazy"}
-              className="w-full h-64 object-cover"
-            />
+            <picture>
+              <source srcSet={photo.url} type="image/webp" />
+              <img
+                src={photo.fallback}
+                alt={photo.alt}
+                loading={index < 3 ? "eager" : "lazy"}
+                className="w-full h-64 object-cover"
+              />
+            </picture>
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 <p className="text-white text-sm font-medium">
@@ -86,11 +89,14 @@ const PhotoGallery = ({ photos }) => {
             className="max-w-4xl w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={selectedPhoto.url}
-              alt={selectedPhoto.alt}
-              className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
-            />
+            <picture>
+              <source srcSet={selectedPhoto.url} type="image/webp" />
+              <img
+                src={selectedPhoto.fallback}
+                alt={selectedPhoto.alt}
+                className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+              />
+            </picture>
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
               <p className="text-white text-center text-lg font-medium">
                 {selectedPhoto.caption}

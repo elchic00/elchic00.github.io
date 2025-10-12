@@ -27,7 +27,9 @@
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "optimize-images": "node scripts/optimize-images.js",
+    "generate-logos": "node scripts/generate-logos.js"
   },
   "eslintConfig": {
     "extends": [

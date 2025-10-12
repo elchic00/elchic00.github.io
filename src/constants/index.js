@@ -10,7 +10,8 @@ export const APP_CONFIG = {
 export const SOCIAL_LINKS = {
   LINKEDIN: "https://www.linkedin.com/in/andrew-a-10b88215b/",
   GITHUB: "https://www.github.com/elchic00/",
-  PROFILE_IMAGE: "/images/projects/profile.webp",
+  PROFILE_IMAGE: "/images/profile.webp",
+  PROFILE_IMAGE_FALLBACK: "/images/profile.jpg",
 };
 
 // Navigation Links
