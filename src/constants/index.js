@@ -18,6 +18,7 @@ export const NAV_LINKS = [
   { name: "Resume", link: "/resume" },
   { name: "Projects", link: "/#projects" },
   { name: "Skills", link: "/#skills" },
+  { name: "Travel", link: "/travel" },
 ];
 
 // Snake Game Configuration
