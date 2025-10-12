@@ -56,14 +56,14 @@ export const projects = [
   },
 ];
 export const skills = [
-  "Python",
-  "Git/Github",
-  "CSS/HTML",
+  "Git + Github",
+  "CSS + HTML",
   "JavaScript (ReactJS, TypeScript)",
-  "C#",
-  "C++",
+  "Python",
+  "User Analytics",
+  "Test Driven Development",
+  "Cross-team Collaboration",
+  "Agile + Waterfall Methodologies",
   "SQL (SQLite, MySQL, PostgreSQL)",
-  "NoSQL",
-  "AWS",
-  "Firebase",
+  "Java",
 ];
