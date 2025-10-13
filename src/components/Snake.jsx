@@ -253,7 +253,6 @@ const PlaySnake = ({
     gridSize,
     speed,
     mounted,
-    highScore,
     setHighScore,
   ]);
 
