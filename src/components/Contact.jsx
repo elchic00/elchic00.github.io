@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
 import { CircularProgress } from "@mui/material";
@@ -29,6 +29,12 @@ const validationRules = {
 
 export const Contact = () => {
   const formRef = useRef(null);
+  const [showMailtoFallback, setShowMailtoFallback] = useState(false);
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(APP_CONFIG.EMAIL_PUBLIC_KEY);
+  }, []);
 
   const {
     values,
@@ -111,12 +117,25 @@ export const Contact = () => {
         errorMessage = error.message;
       }
 
+      // Show mailto fallback option
+      setShowMailtoFallback(true);
+
       Swal.fire({
         icon: "error",
         title: "Message was not sent!",
         text: errorMessage,
+        footer: '<small>A fallback option will appear below if you have a VPN or firewall blocking the form.</small>',
       });
     }
+  };
+
+  // Generate mailto link with form data
+  const generateMailtoLink = () => {
+    const subject = encodeURIComponent("Portfolio Contact");
+    const body = encodeURIComponent(
+      `Name: ${values.user_name}\n\nEmail: ${values.user_email}\n\nMessage:\n${values.message}`
+    );
+    return `mailto:aalagna04@gmail.com?subject=${subject}&body=${body}`;
   };
 
   const getInputClassName = (fieldName) => {
@@ -257,6 +276,21 @@ export const Contact = () => {
               "Send"
             )}
           </button>
+
+          {/* Mailto Fallback - shown when EmailJS fails */}
+          {showMailtoFallback && (
+            <div className="mt-4 p-4 bg-yellow-900/30 border border-yellow-600 rounded">
+              <p className="text-sm text-yellow-200 mb-3">
+                Having trouble? This might be due to a VPN or firewall. Click below to open your email client instead:
+              </p>
+              <a
+                href={generateMailtoLink()}
+                className="block text-center bg-yellow-600 hover:bg-yellow-500 text-white font-medium py-2 px-4 rounded transition-colors"
+              >
+                Open Email Client
+              </a>
+            </div>
+          )}
         </form>
       </div>
       <Footer />

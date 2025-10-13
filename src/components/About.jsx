@@ -51,6 +51,13 @@ export const About = () => {
               >
                 Snake
               </button>
+              <button
+                className="inline-flex items-center text-center text-white bg-indigo-600 hover:bg-indigo-500 duration-500 border-0 h-10 px-3 rounded focus:outline-none mb-6 focus:ring-2 focus:ring-lime-500"
+                onClick={() => navigate("/travel")}
+                aria-label="View Travel Photography"
+              >
+                Travel
+              </button>
             </div>
           </nav>
         </div>

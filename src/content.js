@@ -78,6 +78,87 @@ export const skills = [
 
 export const trips = [
   {
+    id: "thailand-2024",
+    title: "Thailand Adventure",
+    location: "Thailand",
+    date: "2024",
+    description:
+      "Exploring the temples, jungles, and vibrant culture of Northern Thailand. From cooking classes to elephant sanctuaries, an unforgettable journey.",
+    photos: [
+      {
+        url: "/images/travel/thailand/andrew-alagna-white-temple2.webp",
+        alt: "Andrew Alagna - White Temple detail",
+        caption: "Intricate details of the White Temple",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-white-temple.webp",
+        alt: "Andrew Alagna - White Temple",
+        caption: "The stunning White Temple in Chiang Rai",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-gold-temple2.webp",
+        alt: "Andrew Alagna - Golden Temple interior",
+        caption: "Inside the magnificent golden temple",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-gold-temple.webp",
+        alt: "Andrew Alagna - Golden Temple",
+        caption: "Golden temple illuminated at sunset",
+      },
+
+      {
+        url: "/images/travel/thailand/andrew-alagna-small-temple.webp",
+        alt: "Andrew Alagna - Small temple",
+        caption: "A peaceful temple in the countryside",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-elephant.webp",
+        alt: "Andrew Alagna - Elephant sanctuary",
+        caption: "Meeting gentle giants at the elephant sanctuary",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-buffalo.webp",
+        alt: "Andrew Alagna - Water buffalo",
+        caption: "Water buffalo in the rice fields",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-rice-field.webp",
+        alt: "Andrew Alagna - Rice fields",
+        caption: "Scenic rice terraces in Northern Thailand",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-bamboo-raft.webp",
+        alt: "Andrew Alagna - Bamboo rafting",
+        caption: "Bamboo rafting down the river",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-jungle.webp",
+        alt: "Andrew Alagna - Jungle trek",
+        caption: "Trekking through lush jungle",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-waterfall.webp",
+        alt: "Andrew Alagna - Waterfall",
+        caption: "Refreshing waterfall in the jungle",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-cooking.webp",
+        alt: "Andrew Alagna - Thai cooking class",
+        caption: "Learning to cook authentic Thai cuisine",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-creating-traditional.webp",
+        alt: "Andrew Alagna - Traditional craft",
+        caption: "Creating traditional Thai handicrafts",
+      },
+      {
+        url: "/images/travel/thailand/andrew-alagna-jungle-night.webp",
+        alt: "Andrew Alagna - Jungle at night",
+        caption: "Night time in the jungle",
+      },
+    ],
+  },
+  {
     id: "ecuador-2024",
     title: "Galapagos Islands",
     location: "Ecuador",
@@ -86,62 +167,52 @@ export const trips = [
       "Exploring the Galapagos Island in Ecuador. More marine life than one can imagine.",
     photos: [
       {
-        url: "/images/travel/optimized/andrew-alagna-turtle-friend.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-turtle-friend.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-turtle-friend.webp",
         alt: "Andrew Alagna - Snorkeling with turtle",
         caption: "Making turtle friends",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-turtle-snorkle.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-turtle-snorkle.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-turtle-snorkle.webp",
         alt: "Andrew Alagna - Turtle underwater",
         caption: "Swimming alongside sea turtles",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-blue-foot-boobie.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-blue-foot-boobie.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-blue-foot-boobie.webp",
         alt: "Andrew Alagna - Blue-footed booby",
         caption: "Blue-footed booby on the rocks",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-sea-lions.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-sea-lions.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-sea-lions.webp",
         alt: "Andrew Alagna - Sea lions colony",
         caption: "Sea lions relaxing on the beach",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-isabella-island.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-isabella-island.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-isabella-island.webp",
         alt: "Andrew Alagna - Isabela Island sign",
         caption: "Isabela Island welcome sign",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-equator.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-equator.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-equator.webp",
         alt: "Andrew Alagna - Equator monument",
         caption: "Standing at the equator line",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-sunset-boats.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-sunset-boats.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-sunset-boats.webp",
         alt: "Andrew Alagna - Sunset over boats",
         caption: "Beautiful Galapagos sunset",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-sea-horse.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-sea-horse.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-sea-horse.webp",
         alt: "Andrew Alagna - Seahorse underwater",
         caption: "Seahorse clinging to coral structure",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-inactive-volcano.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-inactive-volcano.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-inactive-volcano.webp",
         alt: "Andrew Alagna - Inactive volcano landscape",
         caption: "Hiking the inactive volcano rim",
       },
       {
-        url: "/images/travel/optimized/andrew-alagna-land-turtles.webp",
-        fallback: "/images/travel/optimized/andrew-alagna-land-turtles.jpg",
+        url: "/images/travel/ecuador/andrew-alagna-land-turtles.webp",
         alt: "Andrew Alagna - land turtles",
         caption: "Galápago Tortuga",
       },

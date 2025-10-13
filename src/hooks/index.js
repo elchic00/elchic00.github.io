@@ -128,12 +128,15 @@ export const useFormValidation = (initialValues, validationRules) => {
   const handleChange = useCallback((e) => {
     const { name, value } = e.target;
     setValues(prev => ({ ...prev, [name]: value }));
-    
-    if (touched[name]) {
-      const error = validate(name, value);
-      setErrors(prev => ({ ...prev, [name]: error }));
-    }
-  }, [touched, validate]);
+
+    setTouched(prev => {
+      if (prev[name]) {
+        const error = validate(name, value);
+        setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
+      }
+      return prev;
+    });
+  }, [validate]);
 
   const handleBlur = useCallback((e) => {
     const { name, value } = e.target;
@@ -143,21 +146,27 @@ export const useFormValidation = (initialValues, validationRules) => {
   }, [validate]);
 
   const validateAll = useCallback(() => {
-    const newErrors = {};
     let isValid = true;
+    const newErrors = {};
+    const newTouched = {};
 
-    Object.keys(validationRules).forEach(fieldName => {
-      const error = validate(fieldName, values[fieldName]);
-      if (error) {
-        newErrors[fieldName] = error;
-        isValid = false;
-      }
+    // Use functional state update to get latest values
+    setValues(currentValues => {
+      Object.keys(validationRules).forEach(fieldName => {
+        const error = validate(fieldName, currentValues[fieldName]);
+        newTouched[fieldName] = true;
+        if (error) {
+          newErrors[fieldName] = error;
+          isValid = false;
+        }
+      });
+      return currentValues; // Don't modify values
     });
 
     setErrors(newErrors);
-    setTouched(Object.keys(validationRules).reduce((acc, key) => ({...acc, [key]: true}), {}));
+    setTouched(newTouched);
     return isValid;
-  }, [values, validationRules, validate]);
+  }, [validationRules, validate]);
 
   const resetForm = useCallback(() => {
     setValues(initialValues);

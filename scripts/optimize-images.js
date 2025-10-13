@@ -6,10 +6,11 @@ const path = require("path");
 const config = {
   travelImages: {
     inputDir: path.join(__dirname, "../public/images/travel"),
-    outputDir: path.join(__dirname, "../public/images/travel/optimized"),
+    outputDir: path.join(__dirname, "../public/images/travel"),
     maxWidth: 1920,
     quality: 85,
-    formats: ["webp", "jpeg"],
+    formats: ["webp"],
+    processSubdirectories: true,
   },
   projectImages: {
     inputDir: path.join(__dirname, "../public/images/projects"),
@@ -89,20 +90,56 @@ async function optimizeImage(inputPath, outputDir, options) {
 }
 
 async function optimizeDirectory(inputDir, outputDir, options) {
-  const files = fs
-    .readdirSync(inputDir)
-    .filter((file) => /\.(jpe?g|png)$/i.test(file))
-    .filter((file) => !file.includes("optimized"));
+  const items = fs.readdirSync(inputDir);
+  const results = [];
 
-  console.log(
-    `\n🚀 Optimizing ${files.length} images from ${path.basename(inputDir)}/\n`
+  // Process files in current directory
+  const files = items.filter(
+    (file) =>
+      /\.(jpe?g|png)$/i.test(file) &&
+      !file.includes("optimized") &&
+      fs.statSync(path.join(inputDir, file)).isFile()
   );
 
-  const results = [];
-  for (const file of files) {
-    const inputPath = path.join(inputDir, file);
-    const result = await optimizeImage(inputPath, outputDir, options);
-    if (result) results.push(result);
+  if (files.length > 0) {
+    console.log(
+      `\n🚀 Optimizing ${files.length} images from ${path.basename(inputDir)}/\n`
+    );
+
+    for (const file of files) {
+      const inputPath = path.join(inputDir, file);
+      const result = await optimizeImage(inputPath, outputDir, options);
+      if (result) results.push(result);
+    }
+  }
+
+  // Process subdirectories if enabled
+  if (options.processSubdirectories) {
+    const subdirs = items.filter((item) => {
+      const fullPath = path.join(inputDir, item);
+      return (
+        fs.statSync(fullPath).isDirectory() &&
+        item !== "optimized" &&
+        !item.startsWith(".")
+      );
+    });
+
+    for (const subdir of subdirs) {
+      const subInputDir = path.join(inputDir, subdir);
+      const subOutputDir = path.join(outputDir, subdir);
+
+      // Ensure subdirectory output exists
+      if (!fs.existsSync(subOutputDir)) {
+        fs.mkdirSync(subOutputDir, { recursive: true });
+      }
+
+      const subResults = await optimizeDirectory(
+        subInputDir,
+        subOutputDir,
+        options
+      );
+      results.push(...subResults);
+    }
   }
 
   return results;
