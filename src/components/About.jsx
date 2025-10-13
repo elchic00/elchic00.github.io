@@ -58,7 +58,7 @@ export const About = () => {
         <picture>
           <source srcSet={SOCIAL_LINKS.PROFILE_IMAGE} type="image/webp" />
           <img
-            className="object-cover object-center rounded mx-auto sm:h-80 h-80 border-4 border-white shadow-[0_0_10px_rgba(255,255,255,0.8)]"
+            className="object-cover object-center rounded mx-auto sm:h-80 h-80 border-2 shadow-[0_0_15px_rgba(255,255,255,0.8)]"
             alt="Andrew Alagna - Software Engineer"
             src={SOCIAL_LINKS.PROFILE_IMAGE_FALLBACK}
             loading="eager"
