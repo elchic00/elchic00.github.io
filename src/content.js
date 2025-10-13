@@ -6,7 +6,7 @@ export const projects = [
     description:
       "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
     image: "/images/projects/reps.webp",
-    link: "https://reps-elchic00-elchic00s-projects.vercel.app/",
+    link: "https://reps-pink.vercel.app/",
   },
   {
     title: "Invent0ry",
