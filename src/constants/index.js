@@ -11,7 +11,7 @@ export const SOCIAL_LINKS = {
   LINKEDIN: "https://www.linkedin.com/in/andrew-a-10b88215b/",
   GITHUB: "https://www.github.com/elchic00/",
   PROFILE_IMAGE: "/images/profile.webp",
-  PROFILE_IMAGE_FALLBACK: "/images/profile.jpg",
+  PROFILE_IMAGE_FALLBACK: "/images/profile.webp", // Updated to use WebP for Google indexing
 };
 
 // Navigation Links

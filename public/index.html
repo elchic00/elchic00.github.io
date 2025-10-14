@@ -80,6 +80,10 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://elchic00.github.io/" />
 
+    <!-- Sitemap Links for Search Engines -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://elchic00.github.io/sitemap.xml" />
+    <link rel="sitemap" type="application/xml" title="Image Sitemap" href="https://elchic00.github.io/image-sitemap.xml" />
+
     <!-- Additional SEO Links -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
@@ -189,6 +193,47 @@
             "position": 3,
             "name": "Travel Photography",
             "item": "https://elchic00.github.io/#/travel"
+          }
+        ]
+      }
+    </script>
+
+    <!-- Image Gallery Schema for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageGallery",
+        "name": "Andrew Alagna Travel Photography",
+        "description": "Travel photography by Andrew Alagna, Software Engineer, featuring photos from Ecuador Galapagos Islands, Thailand, and Laos",
+        "author": {
+          "@type": "Person",
+          "name": "Andrew Alagna",
+          "jobTitle": "Software Engineer",
+          "url": "https://elchic00.github.io"
+        },
+        "image": [
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://elchic00.github.io/images/profile.webp",
+            "description": "Andrew Alagna Software Engineer at the Equator in Ecuador",
+            "name": "Andrew Alagna at the Equator",
+            "author": "Andrew Alagna"
+          },
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://elchic00.github.io/images/travel/ecuador/andrew-alagna-equator.webp",
+            "description": "Andrew Alagna Software Engineer standing at the Equator monument in Ecuador",
+            "name": "Andrew Alagna Equator Ecuador",
+            "author": "Andrew Alagna",
+            "locationCreated": "Ecuador"
+          },
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://elchic00.github.io/images/travel/laos/andrew-alagna-bike-mountain.webp",
+            "description": "Andrew Alagna Software Engineer mountain biking in Laos with Laotian flag",
+            "name": "Andrew Alagna Laos Mountain Biking",
+            "author": "Andrew Alagna",
+            "locationCreated": "Laos"
           }
         ]
       }
