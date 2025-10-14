@@ -11,9 +11,10 @@ export const Skills = () => {
             Skills &amp; Technologies
           </h2>
           <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-            Objected oriented and functional programming experience.
-            <br />
-            Creating both front-end and back-end applications.
+            Specialized in building high-performance, WCAG AAA-compliant web
+            applications with React.js and Node.js. Skilled in accessibility,
+            performance optimization, and delivering measurable impact for
+            millions of users.
           </p>
         </div>
         <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
