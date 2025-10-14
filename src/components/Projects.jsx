@@ -1,7 +1,6 @@
 import { CodeIcon, ExternalLinkIcon } from "@heroicons/react/solid";
 import { projects } from "../content";
 
-// Bento Grid Layout Component
 const BentoGridProject = ({ project, index, featured = false }) => {
   const hasMultipleVideos = project.videos && project.videos.length > 1;
   const isVideo =
