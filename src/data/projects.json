@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Reps",
+    "subtitle": "React Native + React Web",
+    "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
+    "videos": [
+      "/images/projects/reps-mobile.mp4",
+      "/images/projects/reps-web.mp4"
+    ],
+    "link": "https://reps-pink.vercel.app/"
+  },
+  {
+    "title": "myTeachers",
+    "subtitle": "React + Express + PostgreSQL + Firebase",
+    "description": "This app helps you keep track of teachers and courses while in school. I used MaterialUI for styling components making it responive to mobile and desktop web browsers.",
+    "image": "/images/projects/myteachers-demo.mp4",
+    "link": "https://github.com/elchic00/CunyFirst-front"
+  },
+  {
+    "title": "Macros-for-geeks",
+    "subtitle": "Angular, .Net, SQLite",
+    "description": "A food diary app to help users keep track of their macronutrients. They can save their diary to a local SQLite database, which they can later view whether connected to the internet or not.",
+    "image": "/images/projects/macros-demo.mp4",
+    "link": "https://github.com/elchic00/Macros-for-geeks"
+  },
+  {
+    "title": "Invent0ry",
+    "subtitle": "React and AWS (Amplify)",
+    "description": "This app helps businesses keep track of their inventory across different storage locations. We used Amplify from AWS for authentication, hosting, and for our database & API.",
+    "image": "/images/projects/inventory-demo.mp4",
+    "link": "https://github.com/elchic00/invent0ry"
+  },
+  {
+    "title": "Crime in Queens NYC",
+    "subtitle": "Python, HTML, Github MD",
+    "description": "Finding the trend of crime in Queens NYC. This project uses Python data-science libraries to process the data. The web-page was created using html and Github MD.",
+    "image": "/images/projects/crime.webp",
+    "link": "https://elchic00.github.io/CrimeInQueens"
+  },
+  {
+    "title": "myPal",
+    "subtitle": "React Native, CSS, SQLite",
+    "description": "An Augmentative and Alternative Communication (AAC) mobile app created to help children with autism, special needs, or verbal delays to communicate more effectively.",
+    "image": "/images/projects/mypal-demo.mp4",
+    "link": "https://github.com/myPal-TMS/myPal"
+  }
+]

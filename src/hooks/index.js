@@ -213,3 +213,5 @@ export const useAsync = (asyncFunction) => {
 
   return { execute, status, data, error, isLoading: status === 'pending' };
 };
+
+export { useSnakeGame } from './useSnakeGame';

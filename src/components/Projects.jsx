@@ -1,10 +1,9 @@
 import { CodeIcon, ExternalLinkIcon } from "@heroicons/react/solid";
-import { projects } from "../content";
+import projectsData from "../data/projects.json";
 
 const BentoGridProject = ({ project, index, featured = false }) => {
   const hasMultipleVideos = project.videos && project.videos.length > 1;
-  const isVideo =
-    project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
+  const isVideo = project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
 
   return (
     <article
@@ -118,7 +117,7 @@ export const Projects = () => {
 
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projects.map((project, index) => (
+          {projectsData.map((project, index) => (
             <BentoGridProject
               key={`${project.title}-${index}`}
               project={project}
