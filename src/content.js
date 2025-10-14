@@ -273,6 +273,11 @@ export const trips = [
         caption: "Temple silhouette at sunset",
       },
       {
+        url: "/images/travel/laos/andrew-alagna-temple9.webp",
+        alt: "Andrew Alagna - Temple ornate ceiling",
+        caption: "Ornate temple ceiling with traditional paintings",
+      },
+      {
         url: "/images/travel/laos/andrew-alagna-springs1.webp",
         alt: "Andrew Alagna - Natural springs",
         caption: "Crystal clear natural springs",
@@ -283,14 +288,14 @@ export const trips = [
         caption: "Stunning blue lagoon pools",
       },
       {
-        url: "/images/travel/laos/andrew-alagna-cave.webp",
-        alt: "Andrew Alagna - Sacred cave",
-        caption: "Exploring a sacred Buddhist cave",
-      },
-      {
         url: "/images/travel/laos/andrew-alagna-sunset.webp",
         alt: "Andrew Alagna - Mekong sunset",
         caption: "Sunset over the Mekong River",
+      },
+      {
+        url: "/images/travel/laos/andrew-alagna-night-market.webp",
+        alt: "Andrew Alagna - Night market",
+        caption: "Vibrant night market in Luang Prabang",
       },
       {
         url: "/images/travel/laos/andrew-alagna-bike-mountain.webp",
@@ -304,44 +309,159 @@ export const trips = [
       },
     ],
   },
-  // {
-  //   id: "costarica-2023",
-  //   title: "Costa Rican Adventure",
-  //   location: "Costa Rica",
-  //   date: "2024",
-  //   description:
-  //     "Exploring the rainforests, beaches, and incredible biodiversity of Costa Rica. Pura Vida!",
-  //   photos: [
-  //     {
-  //       url: "https://via.placeholder.com/800x600?text=Photo+1",
-  //       alt: "Rainforest",
-  //       caption: "Lush rainforest canopy",
-  //     },
-  //     {
-  //       url: "https://via.placeholder.com/800x600?text=Photo+2",
-  //       alt: "Beach",
-  //       caption: "Beautiful Pacific coast beach",
-  //     },
-  //     {
-  //       url: "https://via.placeholder.com/800x600?text=Photo+3",
-  //       alt: "Wildlife",
-  //       caption: "Sloth in the wild",
-  //     },
-  //     {
-  //       url: "https://via.placeholder.com/800x600?text=Photo+4",
-  //       alt: "Waterfall",
-  //       caption: "Stunning waterfall hike",
-  //     },
-  //     {
-  //       url: "https://via.placeholder.com/800x600?text=Photo+5",
-  //       alt: "Volcano",
-  //       caption: "Arenal Volcano view",
-  //     },
-  //     {
-  //       url: "https://via.placeholder.com/800x600?text=Photo+6",
-  //       alt: "Sunset",
-  //       caption: "Caribbean coast sunset",
-  //     },
-  //   ],
-  // },
+  {
+    id: "costarica-2023",
+    title: "Costa Rican Adventure",
+    location: "Costa Rica",
+    date: "2023",
+    description:
+      "Exploring the rainforests, beaches, and incredible biodiversity of Costa Rica. From cloud forests to white-water rafting, experiencing the pure life of Pura Vida!",
+    photos: [
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-beach.webp",
+        alt: "Andrew Alagna - Costa Rica beach",
+        caption: "Beautiful Pacific coast beach",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-sunrise1.webp",
+        alt: "Andrew Alagna - Sunrise",
+        caption: "Stunning sunrise over the ocean",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-sunset1.webp",
+        alt: "Andrew Alagna - Sunset over ocean",
+        caption: "Vibrant Costa Rican sunset",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-sunset2.webp",
+        alt: "Andrew Alagna - Sunset sky",
+        caption: "Golden sunset through the palm trees",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-cloud-forest-canopy.webp",
+        alt: "Andrew Alagna - Cloud forest canopy",
+        caption: "Walking through the cloud forest canopy",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-cloud-forest.webp",
+        alt: "Andrew Alagna - Cloud forest",
+        caption: "Lush cloud forest scenery",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-hanging-bridge.webp",
+        alt: "Andrew Alagna - Hanging bridge",
+        caption: "Crossing a hanging bridge in the rainforest",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-waterfall.webp",
+        alt: "Andrew Alagna - Waterfall",
+        caption: "Majestic waterfall in the jungle",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-white-water-rafting.webp",
+        alt: "Andrew Alagna - White water rafting",
+        caption: "White-water rafting adventure",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-white-water-rafting2.webp",
+        alt: "Andrew Alagna - Rafting rapids",
+        caption: "Navigating the rapids",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-snorkel1.webp",
+        alt: "Andrew Alagna - Snorkeling",
+        caption: "Snorkeling in crystal clear waters",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-bird.webp",
+        alt: "Andrew Alagna - Tropical bird",
+        caption: "Colorful tropical bird",
+      },
+      {
+        url: "/images/travel/costa-rica/andrew-alagna-bat.webp",
+        alt: "Andrew Alagna - Bat",
+        caption: "Bat in the rainforest",
+      },
+    ],
+  },
+  {
+    id: "puertorico-2024",
+    title: "Puerto Rico Discovery",
+    location: "Puerto Rico",
+    date: "2024",
+    description:
+      "Exploring the vibrant culture, historic Old San Juan, and stunning Caribbean coastline of Puerto Rico. From colorful colonial architecture to pristine beaches.",
+    photos: [
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-old-san-juan1.webp",
+        alt: "Andrew Alagna - Old San Juan",
+        caption: "Colorful streets of Old San Juan",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-old-san-juan2.webp",
+        alt: "Andrew Alagna - Old San Juan architecture",
+        caption: "Historic colonial architecture",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-old-san-juan3.webp",
+        alt: "Andrew Alagna - Old San Juan buildings",
+        caption: "Vibrant buildings in the old town",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-old-san-juan4.webp",
+        alt: "Andrew Alagna - Old San Juan street",
+        caption: "Cobblestone streets and colorful facades",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-old-san-juan5.webp",
+        alt: "Andrew Alagna - Old San Juan plaza",
+        caption: "Historic plaza in Old San Juan",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-old-san-juan6.webp",
+        alt: "Andrew Alagna - Old San Juan view",
+        caption: "Panoramic view of Old San Juan",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-old-san-juan-historical.webp",
+        alt: "Andrew Alagna - Old San Juan historical building",
+        caption: "Historic building in Old San Juan",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-castle.webp",
+        alt: "Andrew Alagna - El Morro fortress",
+        caption: "Historic El Morro fortress",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-clear-waters.webp",
+        alt: "Andrew Alagna - Caribbean beach",
+        caption: "Crystal clear Caribbean waters",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-beach2.webp",
+        alt: "Andrew Alagna - Puerto Rico beach panorama",
+        caption: "Wide panoramic view of the Caribbean coast",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-mosquitos.webp",
+        alt: "Andrew Alagna - Mosquito Bay",
+        caption: "Beautiful Mosquito Bay bioluminescent waters",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-vasques.webp",
+        alt: "Andrew Alagna - Vasques waterfall",
+        caption: "Exploring Vasques waterfall pools",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-sunrise.webp",
+        alt: "Andrew Alagna - Puerto Rico sunrise",
+        caption: "Beautiful sunrise over the coast",
+      },
+      {
+        url: "/images/travel/puerto-rico/andrew-alagna-sunset.webp",
+        alt: "Andrew Alagna - Puerto Rico sunset",
+        caption: "Stunning Caribbean sunset",
+      },
+    ],
+  },
 ];
