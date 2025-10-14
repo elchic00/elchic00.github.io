@@ -38,6 +38,7 @@ const PhotoGallery = ({ photos }) => {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedIndex, photos]);
 
   const openPhoto = (photo, index) => {
@@ -146,9 +147,7 @@ const PhotoGallery = ({ photos }) => {
 
           <div
             className={`w-full relative ${
-              isZoomed
-                ? "overflow-auto max-h-[90vh] max-w-full"
-                : "max-w-4xl"
+              isZoomed ? "overflow-auto max-h-[90vh] max-w-full" : "max-w-4xl"
             }`}
             onClick={(e) => e.stopPropagation()}
             onTouchStart={(e) => {
@@ -159,8 +158,12 @@ const PhotoGallery = ({ photos }) => {
             }}
             onTouchEnd={(e) => {
               if (isZoomed) return; // Don't handle swipe when zoomed
-              const touchStartX = parseFloat(e.currentTarget.dataset.touchStartX);
-              const touchStartY = parseFloat(e.currentTarget.dataset.touchStartY);
+              const touchStartX = parseFloat(
+                e.currentTarget.dataset.touchStartX
+              );
+              const touchStartY = parseFloat(
+                e.currentTarget.dataset.touchStartY
+              );
               const touchEndX = e.changedTouches[0].clientX;
               const touchEndY = e.changedTouches[0].clientY;
 

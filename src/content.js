@@ -5,17 +5,11 @@ export const projects = [
     subtitle: "React Native + React Web",
     description:
       "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
-    image: "/images/projects/reps.webp",
+    videos: [
+      "/images/projects/reps-mobile.mp4",
+      "/images/projects/reps-web.mp4",
+    ],
     link: "https://reps-pink.vercel.app/",
-  },
-  {
-    title: "Invent0ry",
-    subtitle: "React and AWS (Amplify)",
-    description:
-      "This app helps businesses keep track of their inventory across different storage locations. We used Amplify from AWS for authentication, hosting, and for our database & API.",
-    image:
-      "https://user-images.githubusercontent.com/40577932/168584742-5f09d0d2-5683-46b3-9393-748f5dad6a89.gif",
-    link: "https://github.com/elchic00/invent0ry",
   },
   {
     title: "myTeachers",
@@ -23,8 +17,7 @@ export const projects = [
     description:
       "This app helps you keep track of teachers and courses while in school. " +
       "I used MaterialUI for styling components making it responive to mobile and desktop web browsers.",
-    image:
-      "https://user-images.githubusercontent.com/40577932/168820750-f430fb37-d758-4d7c-b0d2-0e4498756b20.gif",
+    image: "/images/projects/myteachers-demo.mp4",
     link: "https://github.com/elchic00/CunyFirst-front",
   },
   {
@@ -33,8 +26,16 @@ export const projects = [
     description:
       "A food diary app to help users keep track of their macronutrients. " +
       "They can save their diary to a local SQLite database, which they can later view whether connected to the internet or not.",
-    image: "/images/projects/macros.webp",
+    image: "/images/projects/macros-demo.mp4",
     link: "https://github.com/elchic00/Macros-for-geeks",
+  },
+  {
+    title: "Invent0ry",
+    subtitle: "React and AWS (Amplify)",
+    description:
+      "This app helps businesses keep track of their inventory across different storage locations. We used Amplify from AWS for authentication, hosting, and for our database & API.",
+    image: "/images/projects/inventory-demo.mp4",
+    link: "https://github.com/elchic00/invent0ry",
   },
   {
     title: "Crime in Queens NYC",
@@ -45,21 +46,21 @@ export const projects = [
     image: "/images/projects/crime.webp",
     link: "https://elchic00.github.io/CrimeInQueens",
   },
-  {
-    title: "Multi-Purpose Calculator",
-    subtitle: "Python (PyQT5)",
-    description:
-      "Multi-Purpose Calculator is a stylish calculator app that features an on-sceen calculator and converter." +
-      " This can be cloned and used wherever Python is installed.",
-    image: "/images/projects/calculator.webp",
-    link: "https://github.com/NesQuickCoding/Multi-Purpose-Calculator",
-  },
+  // {
+  //   title: "Multi-Purpose Calculator",
+  //   subtitle: "Python (PyQT5)",
+  //   description:
+  //     "Multi-Purpose Calculator is a stylish calculator app that features an on-sceen calculator and converter." +
+  //     " This can be cloned and used wherever Python is installed.",
+  //   image: "/images/projects/calculator.webp",
+  //   link: "https://github.com/NesQuickCoding/Multi-Purpose-Calculator",
+  // },
   {
     title: "myPal",
     subtitle: "React Native, CSS, SQLite",
     description:
       "An Augmentative and Alternative Communication (AAC) mobile app created to help children with autism, special needs, or verbal delays to communicate more effectively.",
-    image: "/images/projects/mypal.webp",
+    image: "/images/projects/mypal-demo.mp4",
     link: "https://github.com/myPal-TMS/myPal",
   },
 ];
