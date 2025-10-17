@@ -120,7 +120,7 @@ export const Navbar = () => {
       </div>
 
       {/* ✨ Optional: Show screen width indicator in development */}
-      {process.env.NODE_ENV === "development" && (
+      {import.meta.env.DEV && (
         <div className="fixed bottom-4 right-4 bg-gray-900 text-white px-3 py-1 rounded text-xs">
           {width}px {isMobile ? "(Mobile)" : "(Desktop)"}
         </div>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { APP_CONFIG } from "../constants";
 
 const ResumePage = () => {
-  const pdfPath = `${process.env.PUBLIC_URL}/${APP_CONFIG.RESUME_FILENAME}`;
+  const pdfPath = `/${APP_CONFIG.RESUME_FILENAME}`;
 
   const buttonBaseClasses =
     "inline-block py-3 px-6 rounded font-bold transition-colors duration-150";
