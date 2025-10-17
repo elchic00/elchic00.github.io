@@ -1,13 +1,21 @@
-[
-  "CSS + HTML",
-  "JavaScript (ReactJS, TypeScript)",
-  "Python",
-  "CI/CD + Github Actions",
-  "User Analytics",
-  "Git + Github",
-  "Test Driven Development",
-  "Cross-team Collaboration",
-  "Agile + Waterfall Methodologies",
-  "SQL (SQLite, MySQL, PostgreSQL)",
-  "Java"
-]
+{
+  "Languages & Frameworks": [
+    "JavaScript (ReactJS, TypeScript)",
+    "Python",
+    "Java",
+    "CSS + HTML"
+  ],
+  "Databases": [
+    "SQL (SQLite, MySQL, PostgreSQL)"
+  ],
+  "DevOps & Tools": [
+    "CI/CD + Github Actions",
+    "Git + Github"
+  ],
+  "Practices & Methodologies": [
+    "Test Driven Development",
+    "User Analytics",
+    "Cross-team Collaboration",
+    "Agile + Waterfall Methodologies"
+  ]
+}
