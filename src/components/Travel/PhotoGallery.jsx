@@ -186,10 +186,10 @@ export const PhotoGallery = ({ photos }) => {
               <img
                 src={selectedPhoto.url}
                 alt={selectedPhoto.alt}
-                className={`rounded-lg transition-all duration-300 ${
+                className={`transition-all duration-300 ${
                   isZoomed
                     ? "cursor-zoom-out w-auto h-auto"
-                    : "w-full h-auto max-h-[85vh] object-contain cursor-zoom-in"
+                    : "w-full h-auto max-h-[85vh] object-contain cursor-zoom-in rounded-lg"
                 }`}
                 style={isZoomed ? { minWidth: "200%", minHeight: "200%" } : {}}
                 onClick={(e) => {
@@ -198,16 +198,19 @@ export const PhotoGallery = ({ photos }) => {
                 }}
               />
             </div>
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
-              <p className="text-white text-center text-lg font-medium">
-                {selectedPhoto.caption}
-              </p>
-              {photos.length > 1 && (
-                <p className="text-gray-400 text-center text-sm mt-2">
-                  {selectedIndex + 1} / {photos.length}
+            {/* Only show caption when not zoomed */}
+            {!isZoomed && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+                <p className="text-white text-center text-lg font-medium">
+                  {selectedPhoto.caption}
                 </p>
-              )}
-            </div>
+                {photos.length > 1 && (
+                  <p className="text-gray-400 text-center text-sm mt-2">
+                    {selectedIndex + 1} / {photos.length}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
