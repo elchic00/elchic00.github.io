@@ -1,9 +1,104 @@
-import { CodeIcon, ExternalLinkIcon } from "@heroicons/react/solid";
+import { useEffect, useRef, useState } from "react";
+import { CodeIcon, ExternalLinkIcon, PlayIcon } from "@heroicons/react/solid";
 import projectsData from "../data/projects.json";
 
 const BentoGridProject = ({ project, index, featured = false }) => {
   const hasMultipleVideos = project.videos && project.videos.length > 1;
-  const isVideo = project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
+  const isVideo =
+    project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
+  const videoRefs = useRef([]);
+  const [videoPlayStates, setVideoPlayStates] = useState({});
+
+  // Track which videos need play buttons
+  const checkAutoplayBlocked = (videoElement, videoId) => {
+    // Try to play and see if it's blocked
+    const playPromise = videoElement.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Autoplay succeeded, hide play button
+          setVideoPlayStates((prev) => ({
+            ...prev,
+            [videoId]: { showButton: false, playing: true },
+          }));
+        })
+        .catch(() => {
+          // Autoplay was blocked, show play button
+          setVideoPlayStates((prev) => ({
+            ...prev,
+            [videoId]: { showButton: true, playing: false },
+          }));
+        });
+    }
+  };
+
+  // Use Intersection Observer to play videos when visible (better for mobile)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          const videoId = video.dataset.videoId;
+
+          if (entry.isIntersecting) {
+            // Video is visible, try to play and check if autoplay works
+            checkAutoplayBlocked(video, videoId);
+          } else {
+            // Video is not visible, pause it
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.5 } // Play when 50% of video is visible
+    );
+
+    videoRefs.current.forEach((video, idx) => {
+      if (video) {
+        const videoId = `video-${index}-${idx}`;
+        video.dataset.videoId = videoId;
+        observer.observe(video);
+        // Also try to play immediately and check autoplay
+        checkAutoplayBlocked(video, videoId);
+      }
+    });
+
+    // Capture videoRefs.current in cleanup to avoid stale reference
+    const currentVideos = videoRefs.current;
+    return () => {
+      currentVideos.forEach((video) => {
+        if (video) observer.unobserve(video);
+      });
+    };
+  }, [index]);
+
+  const handleVideoClick = (e, video) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const videoId = video.dataset.videoId;
+
+    // If video is paused, play it. If playing, pause it.
+    if (video.paused) {
+      video
+        .play()
+        .then(() => {
+          setVideoPlayStates((prev) => ({
+            ...prev,
+            [videoId]: { showButton: false, playing: true },
+          }));
+        })
+        .catch(() => {
+          console.log("Play prevented");
+        });
+    } else {
+      video.pause();
+      setVideoPlayStates((prev) => ({
+        ...prev,
+        [videoId]: { showButton: true, playing: false },
+      }));
+    }
+  };
 
   return (
     <article
@@ -21,39 +116,98 @@ const BentoGridProject = ({ project, index, featured = false }) => {
           {/* Media Section */}
           <div
             className={`px-4 pt-4 pb-2 flex items-center justify-center gap-2 ${
-              featured ? "md:h-96 h-64" : "h-64"
+              featured
+                ? "md:h-96 h-64"
+                : hasMultipleVideos || project.title === "myPal"
+                  ? "h-72"
+                  : "flex-grow min-h-72"
             }`}
           >
             {hasMultipleVideos ? (
               // Multiple videos side by side
-              project.videos.map((videoSrc, idx) => (
-                <video
-                  key={idx}
-                  className={`object-contain rounded-lg ${
+              project.videos.map((videoSrc, idx) => {
+                const videoId = `video-${index}-${idx}`;
+                const showButton = videoPlayStates[videoId]?.showButton;
+
+                return (
+                  <div key={idx} className={`relative ${
                     featured
                       ? "md:h-full h-full md:max-w-[48%] max-w-[48%]"
                       : "h-56 max-w-[48%]"
-                  }`}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload={index < 2 ? "auto" : "metadata"}
-                >
-                  <source src={videoSrc} type="video/mp4" />
-                </video>
-              ))
+                  }`}>
+                    <video
+                      ref={(el) => (videoRefs.current[idx] = el)}
+                      className="w-full h-full object-contain rounded-lg cursor-pointer"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      disablePictureInPicture
+                      disableRemotePlayback
+                      preload={index < 2 ? "auto" : "metadata"}
+                      onCanPlay={(e) => e.target.play().catch(() => {})}
+                      onClick={(e) => handleVideoClick(e, e.target)}
+                    >
+                      <source src={videoSrc} type="video/mp4" />
+                    </video>
+                    {showButton && (
+                      <div
+                        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const video = videoRefs.current[idx];
+                          if (video) handleVideoClick(e, video);
+                        }}
+                      >
+                        <div className="bg-black/60 rounded-full p-4 pointer-events-auto cursor-pointer hover:bg-black/80 transition-colors">
+                          <PlayIcon className="w-12 h-12 text-white" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })
             ) : isVideo ? (
-              <video
-                className="w-full h-full object-contain rounded-lg"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload={index < 2 ? "auto" : "metadata"}
-              >
-                <source src={project.image} type="video/mp4" />
-              </video>
+              (() => {
+                const videoId = `video-${index}-0`;
+                const showButton = videoPlayStates[videoId]?.showButton;
+
+                return (
+                  <div className="relative w-full h-full">
+                    <video
+                      ref={(el) => (videoRefs.current[0] = el)}
+                      className="w-full h-full object-contain rounded-lg cursor-pointer"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      disablePictureInPicture
+                      disableRemotePlayback
+                      preload={index < 2 ? "auto" : "metadata"}
+                      onCanPlay={(e) => e.target.play().catch(() => {})}
+                      onClick={(e) => handleVideoClick(e, e.target)}
+                    >
+                      <source src={project.image} type="video/mp4" />
+                    </video>
+                    {showButton && (
+                      <div
+                        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const video = videoRefs.current[0];
+                          if (video) handleVideoClick(e, video);
+                        }}
+                      >
+                        <div className="bg-black/60 rounded-full p-4 pointer-events-auto cursor-pointer hover:bg-black/80 transition-colors">
+                          <PlayIcon className="w-12 h-12 text-white" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              })()
             ) : (
               <img
                 src={project.image}
