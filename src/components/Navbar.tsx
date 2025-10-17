@@ -9,16 +9,14 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
-  // ✨ Track window size for responsive behavior
-  const { width } = useWindowSize(150); // Debounced by 150ms
-  const isMobile = width < 768; // Match Tailwind's 'md' breakpoint
+  const { width } = useWindowSize(150);
+  const isMobile = width < 768;
 
   const closeMenu = useCallback(() => setOpen(false), []);
   const toggleMenu = useCallback(() => setOpen((prev) => !prev), []);
 
   const navRef = useClickOutside(closeMenu);
 
-  // ✨ Auto-close mobile menu when resizing to desktop
   useEffect(() => {
     if (!isMobile && open) {
       closeMenu();
@@ -28,7 +26,6 @@ export const Navbar = () => {
   const handleLinkClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>) => {
       closeMenu();
-      // Remove focus from the link after clicking
       e?.currentTarget?.blur?.();
     },
     [closeMenu]
@@ -50,7 +47,6 @@ export const Navbar = () => {
       aria-label="Main navigation"
     >
       <div className="flex justify-between items-center py-4 px-4 md:px-6">
-        {/* Logo */}
         <Link
           to="/#about"
           className="font-bold text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
@@ -61,7 +57,6 @@ export const Navbar = () => {
           Andrew Alagna
         </Link>
 
-        {/* Mobile menu button - ✨ Only show on mobile */}
         {isMobile && (
           <button
             onClick={toggleMenu}
@@ -77,7 +72,6 @@ export const Navbar = () => {
           </button>
         )}
 
-        {/* Navigation Links */}
         <ul
           className={`bg-slate-800 md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
             open ? "top-20" : "top-[-490px]"
@@ -95,7 +89,6 @@ export const Navbar = () => {
             </li>
           ))}
 
-          {/* Snake Game Link */}
           <li className="md:ml-4 text-xl md:my-0 my-7">
             <button
               onClick={handleSnakeClick}
@@ -105,7 +98,6 @@ export const Navbar = () => {
             </button>
           </li>
 
-          {/* Contact CTA - ✨ Fixed spacing to prevent cutoff */}
           <li className="md:ml-4 text-xl md:my-0 my-7 md:mr-0 mr-4">
             <Link
               to="/#contact"
@@ -119,7 +111,6 @@ export const Navbar = () => {
         </ul>
       </div>
 
-      {/* ✨ Optional: Show screen width indicator in development */}
       {import.meta.env.DEV && (
         <div className="fixed bottom-4 right-4 bg-slate-950 text-white px-3 py-1 rounded text-xs">
           {width}px {isMobile ? "(Mobile)" : "(Desktop)"}

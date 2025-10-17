@@ -9,19 +9,16 @@ const ResumePage = () => {
   const downloadButtonClasses = `${buttonBaseClasses} bg-cyan-500 hover:bg-cyan-400 text-white mr-3`;
   const openButtonClasses = `${buttonBaseClasses} bg-slate-600 hover:bg-slate-700 text-white`;
 
-  // Auto-open PDF in new tab on mobile
   useEffect(() => {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-      // Open the PDF file directly for mobile
       window.location.href = pdfPath;
     }
   }, [pdfPath]);
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-slate-600 pt-20">
-      {/* Header with action buttons */}
       <header className="p-5 text-center bg-slate-700 shadow-md">
         <h1 className="text-2xl font-bold text-white mb-4">Resume</h1>
 
@@ -46,7 +43,6 @@ const ResumePage = () => {
         </nav>
       </header>
 
-      {/* PDF viewer for tablet and desktop */}
       <div className="flex-1 min-h-[80vh] hidden md:block">
         <object
           data={pdfPath}
@@ -74,7 +70,6 @@ const ResumePage = () => {
         </object>
       </div>
 
-      {/* Mobile fallback */}
       <div className="flex-1 min-h-[80vh] md:hidden">
         <div className="p-10 text-center bg-white m-5 rounded-lg mt-10">
           <h2 className="text-xl font-bold text-slate-800 mb-2">

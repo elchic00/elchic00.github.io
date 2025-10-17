@@ -21,22 +21,18 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [videoPlayStates, setVideoPlayStates] = useState<Record<string, VideoPlayState>>({});
 
-  // Track which videos need play buttons
   const checkAutoplayBlocked = (videoElement: HTMLVideoElement, videoId: string) => {
-    // Try to play and see if it's blocked
     const playPromise = videoElement.play();
 
     if (playPromise !== undefined) {
       playPromise
         .then(() => {
-          // Autoplay succeeded, hide play button
           setVideoPlayStates((prev) => ({
             ...prev,
             [videoId]: { showButton: false, playing: true },
           }));
         })
         .catch(() => {
-          // Autoplay was blocked, show play button
           setVideoPlayStates((prev) => ({
             ...prev,
             [videoId]: { showButton: true, playing: false },
@@ -45,7 +41,6 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
     }
   };
 
-  // Use Intersection Observer to play videos when visible (better for mobile)
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -54,15 +49,13 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
           const videoId = video.dataset.videoId;
 
           if (entry.isIntersecting && videoId) {
-            // Video is visible, try to play and check if autoplay works
             checkAutoplayBlocked(video, videoId);
           } else {
-            // Video is not visible, pause it
             video.pause();
           }
         });
       },
-      { threshold: 0.5 } // Play when 50% of video is visible
+      { threshold: 0.5 }
     );
 
     videoRefs.current.forEach((video, idx) => {
@@ -70,12 +63,10 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
         const videoId = `video-${index}-${idx}`;
         video.dataset.videoId = videoId;
         observer.observe(video);
-        // Also try to play immediately and check autoplay
         checkAutoplayBlocked(video, videoId);
       }
     });
 
-    // Capture videoRefs.current in cleanup to avoid stale reference
     const currentVideos = videoRefs.current;
     return () => {
       currentVideos.forEach((video) => {
@@ -91,7 +82,6 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
     const videoId = video.dataset.videoId;
     if (!videoId) return;
 
-    // If video is paused, play it. If playing, pause it.
     if (video.paused) {
       video
         .play()
@@ -126,7 +116,6 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
         className="block h-full"
       >
         <div className="relative h-full flex flex-col bg-slate-950">
-          {/* Media Section */}
           <div
             className={`px-4 pt-4 pb-2 flex items-center justify-center gap-2 ${
               featured
@@ -137,7 +126,6 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
             }`}
           >
             {hasMultipleVideos ? (
-              // Multiple videos side by side
               project.videos?.map((videoSrc, idx) => {
                 const videoId = `video-${index}-${idx}`;
                 const showButton = videoPlayStates[videoId]?.showButton;
@@ -231,7 +219,6 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
             )}
           </div>
 
-          {/* Content Section */}
           <div
             className={`bg-slate-800 ${
               featured ? "md:px-6 md:py-5 px-4 py-3" : "px-4 py-3"
@@ -248,7 +235,6 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
               >
                 {project.title}
               </h3>
-              {/* Show description on mobile for all, on desktop only for featured */}
               <p
                 className={`text-slate-200 text-sm leading-relaxed line-clamp-3 mb-4 ${
                   featured ? "block" : "md:hidden"
@@ -282,14 +268,13 @@ export const Projects: React.FC = () => {
           </h2>
         </header>
 
-        {/* Bento Grid Layout - Featured projects (0, 3) span 2x2 on desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {(projectsData as Project[]).map((project, index) => (
             <BentoGridProject
               key={`${project.title}-${index}`}
               project={project}
               index={index}
-              featured={index === 0 || index === 3} // Feature Reps (0) and Invent0ry (3)
+              featured={index === 0 || index === 3}
             />
           ))}
         </div>

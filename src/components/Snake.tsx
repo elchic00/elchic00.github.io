@@ -11,16 +11,6 @@ interface PlaySnakeProps {
   speed?: number;
 }
 
-/**
- * Local Snake component (replacement for react-simple-snake)
- * Props:
- * - percentageWidth: number|string (percent of parent width, e.g. 50 or "50")
- * - startSnakeSize: number (initial snake length)
- * - appleColor: string
- * - snakeColor: string
- * - gridSize: number (number of cells per side)
- * - speed: number (ms per step)
- */
 const PlaySnake: React.FC<PlaySnakeProps> = ({
   percentageWidth = 50,
   startSnakeSize = 4,
@@ -50,7 +40,7 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
     snakeColor,
     canvasRef,
     containerRef,
-  } as any); // Hook is still JS, will accept any config
+  } as any);
 
   return (
     <section id="snake" ref={containerRef} className="pt-5">

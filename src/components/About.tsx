@@ -35,7 +35,7 @@ export const About = () => {
 
           <nav aria-label="Social links and actions">
             <div className="flex flex-row gap-4 mb-5 mt-5">
-              <SocialLinks variant="about" /> {/* Returns two links directly */}
+              <SocialLinks variant="about" />
               <a
                 href="/#/resume"
                 rel="noreferrer"

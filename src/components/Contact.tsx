@@ -19,7 +19,6 @@ interface ValidationRules {
   [key: string]: ValidationRule[];
 }
 
-// Validation rules
 const validationRules: ValidationRules = {
   user_name: [
     (value: string) => (!value?.trim() ? "Name is required" : ""),
@@ -44,7 +43,6 @@ export const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [showMailtoFallback, setShowMailtoFallback] = useState(false);
 
-  // Initialize EmailJS
   useEffect(() => {
     emailjs.init(APP_CONFIG.EMAIL_PUBLIC_KEY);
   }, []);
@@ -74,12 +72,10 @@ export const Contact: React.FC = () => {
     resetForm: () => void;
   };
 
-  // ✨ Debounce validation feedback for better UX (wait 400ms after typing stops)
   const debouncedName = useDebounce(values.user_name, 400);
   const debouncedEmail = useDebounce(values.user_email, 400);
   const debouncedMessage = useDebounce(values.message, 400);
 
-  // Only show errors after debounce period and if field has been touched
   const showNameError =
     touched.user_name && errors.user_name && values.user_name === debouncedName;
   const showEmailError =
@@ -105,7 +101,6 @@ export const Contact: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Validate all fields
     if (!validateAll()) {
       Swal.fire({
         icon: "warning",
@@ -140,7 +135,6 @@ export const Contact: React.FC = () => {
         }
       }
 
-      // Show mailto fallback option
       setShowMailtoFallback(true);
 
       Swal.fire({
@@ -152,7 +146,6 @@ export const Contact: React.FC = () => {
     }
   };
 
-  // Generate mailto link with form data
   const generateMailtoLink = (): string => {
     const subject = encodeURIComponent("Portfolio Contact");
     const body = encodeURIComponent(
@@ -165,7 +158,6 @@ export const Contact: React.FC = () => {
     const baseClasses =
       "w-full bg-slate-800 rounded border text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out";
 
-    // ✨ Use debounced error state for smoother UX
     let hasError = false;
     if (fieldName === "user_name") hasError = !!showNameError;
     if (fieldName === "user_email") hasError = !!showEmailError;
@@ -194,7 +186,6 @@ export const Contact: React.FC = () => {
             Send me a message with the form below
           </p>
 
-          {/* Name Field */}
           <div className="relative mb-4">
             <label htmlFor="name" className="leading-7 text-sm">
               Name <span className="text-red-500">*</span>
@@ -211,7 +202,6 @@ export const Contact: React.FC = () => {
               aria-invalid={!!showNameError}
               aria-describedby={showNameError ? "name-error" : undefined}
             />
-            {/* ✨ Only show error after debounce period */}
             {showNameError && (
               <p
                 id="name-error"
@@ -223,7 +213,6 @@ export const Contact: React.FC = () => {
             )}
           </div>
 
-          {/* Email Field */}
           <div className="relative mb-4">
             <label htmlFor="email" className="leading-7 text-sm">
               Email <span className="text-red-500">*</span>
@@ -240,7 +229,6 @@ export const Contact: React.FC = () => {
               aria-invalid={!!showEmailError}
               aria-describedby={showEmailError ? "email-error" : undefined}
             />
-            {/* ✨ Only show error after debounce period */}
             {showEmailError && (
               <p
                 id="email-error"
@@ -252,7 +240,6 @@ export const Contact: React.FC = () => {
             )}
           </div>
 
-          {/* Message Field */}
           <div className="relative mb-4">
             <label htmlFor="message" className="leading-7 text-sm">
               Message <span className="text-red-500">*</span>
@@ -270,7 +257,6 @@ export const Contact: React.FC = () => {
               aria-invalid={!!showMessageError}
               aria-describedby={showMessageError ? "message-error" : undefined}
             />
-            {/* ✨ Only show error after debounce period */}
             {showMessageError && (
               <p
                 id="message-error"
@@ -282,7 +268,6 @@ export const Contact: React.FC = () => {
             )}
           </div>
 
-          {/* Submit Button */}
           <Button
             type="submit"
             variant="primary"
@@ -294,7 +279,6 @@ export const Contact: React.FC = () => {
             Send
           </Button>
 
-          {/* Mailto Fallback - shown when EmailJS fails */}
           {showMailtoFallback && (
             <div className="mt-4 p-4 bg-yellow-900/30 border border-yellow-600 rounded">
               <p className="text-sm text-yellow-200 mb-3">
