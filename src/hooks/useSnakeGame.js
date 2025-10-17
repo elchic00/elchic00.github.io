@@ -185,16 +185,19 @@ export const useSnakeGame = ({
       if (!touchStart) return;
       const dx = e.changedTouches[0].clientX - touchStart.x;
       const dy = e.changedTouches[0].clientY - touchStart.y;
+      let next = null;
       if (Math.abs(dx) > Math.abs(dy)) {
-        if (dx > 20 && !(lastDir.x === 1 && lastDir.y === 0))
-          dir = { x: 1, y: 0 };
-        if (dx < -20 && !(lastDir.x === -1 && lastDir.y === 0))
-          dir = { x: -1, y: 0 };
+        // Horizontal swipe
+        if (dx > 20) next = { x: 1, y: 0 }; // Swipe right
+        if (dx < -20) next = { x: -1, y: 0 }; // Swipe left
       } else {
-        if (dy > 20 && !(lastDir.x === 0 && lastDir.y === 1))
-          dir = { x: 0, y: 1 };
-        if (dy < -20 && !(lastDir.x === 0 && lastDir.y === -1))
-          dir = { x: 0, y: -1 };
+        // Vertical swipe
+        if (dy > 20) next = { x: 0, y: 1 }; // Swipe down
+        if (dy < -20) next = { x: 0, y: -1 }; // Swipe up
+      }
+      // Only apply direction if it's not opposite to current direction
+      if (next && !(next.x === -lastDir.x && next.y === -lastDir.y)) {
+        dir = next;
       }
       touchStart = null;
     };
