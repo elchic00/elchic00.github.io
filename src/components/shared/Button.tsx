@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import { ButtonProps, ButtonVariant, ButtonSize } from '../../types';
 
 /**
  * Reusable Button Component
@@ -14,7 +14,7 @@ import PropTypes from 'prop-types';
  * - md: Medium padding (default)
  * - lg: Large padding
  */
-export const Button = ({
+export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
   size = 'md',
@@ -28,14 +28,14 @@ export const Button = ({
 }) => {
   const baseClasses = 'inline-flex items-center justify-center text-center border-0 rounded focus:outline-none focus:ring-2 focus:ring-lime-500 transition-colors duration-500 disabled:cursor-not-allowed disabled:opacity-50';
 
-  const variantClasses = {
+  const variantClasses: Record<ButtonVariant, string> = {
     primary: 'text-white bg-indigo-600 hover:bg-indigo-500',
     secondary: 'text-white bg-slate-700 hover:bg-slate-600',
     success: 'text-white bg-green-800 hover:bg-green-700',
     ghost: 'text-gray-300 bg-gray-800 hover:bg-gray-700',
   };
 
-  const sizeClasses = {
+  const sizeClasses: Record<ButtonSize, string> = {
     sm: 'h-8 px-2 text-sm',
     md: 'h-10 px-3 text-base',
     lg: 'h-12 px-6 text-lg',
@@ -60,16 +60,4 @@ export const Button = ({
       )}
     </button>
   );
-};
-
-Button.propTypes = {
-  children: PropTypes.node,
-  variant: PropTypes.oneOf(['primary', 'secondary', 'success', 'ghost']),
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  loading: PropTypes.bool,
-  type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  onClick: PropTypes.func,
-  ariaLabel: PropTypes.string,
 };

@@ -4,7 +4,7 @@ export const APP_CONFIG = {
   EMAIL_TEMPLATE_ID: "template_z9zlm01",
   EMAIL_PUBLIC_KEY: "user_FhEWKM5IXCkmUoOqe2yTB",
   RESUME_FILENAME: "andrew-alagna-resume.pdf",
-};
+} as const;
 
 // Social Links
 export const SOCIAL_LINKS = {
@@ -12,7 +12,7 @@ export const SOCIAL_LINKS = {
   GITHUB: "https://www.github.com/elchic00/",
   PROFILE_IMAGE: "/images/profile.webp",
   PROFILE_IMAGE_FALLBACK: "/images/profile.webp", // Updated to use WebP for Google indexing
-};
+} as const;
 
 // Navigation Links
 export const NAV_LINKS = [
@@ -20,7 +20,7 @@ export const NAV_LINKS = [
   { name: "Projects", link: "/#projects" },
   { name: "Skills", link: "/#skills" },
   { name: "Travel", link: "/travel" },
-];
+] as const;
 
 // Snake Game Configuration
 export const SNAKE_CONFIG = {
@@ -33,13 +33,13 @@ export const SNAKE_CONFIG = {
   MIN_SPEED: 25,
   SPEED_DECREASE: 0.5,
   HIGH_SCORE_KEY: "snakeHighScore",
-};
+} as const;
 
 // Animation & Timing
 export const TIMING = {
   TRANSITION_DURATION: 500,
   DEBOUNCE_DELAY: 300,
-};
+} as const;
 
 // Breakpoints (for reference, matches Tailwind)
 export const BREAKPOINTS = {
@@ -47,4 +47,4 @@ export const BREAKPOINTS = {
   MD: 768,
   LG: 1024,
   XL: 1280,
-};
+} as const;

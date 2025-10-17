@@ -1,8 +1,12 @@
-import PropTypes from 'prop-types';
 import { GlobeIcon } from "@heroicons/react/solid";
 import { PhotoGallery } from "./PhotoGallery";
+import { Trip } from "../../types";
 
-export const TripCard = ({ trip }) => {
+interface TripCardProps {
+  trip: Trip;
+}
+
+export const TripCard: React.FC<TripCardProps> = ({ trip }) => {
   return (
     <article className="mb-16 pb-16 border-b border-gray-700 last:border-b-0">
       <header className="mb-6">
@@ -20,21 +24,4 @@ export const TripCard = ({ trip }) => {
       <PhotoGallery photos={trip.photos} />
     </article>
   );
-};
-
-TripCard.propTypes = {
-  trip: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    location: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    photos: PropTypes.arrayOf(
-      PropTypes.shape({
-        url: PropTypes.string.isRequired,
-        alt: PropTypes.string.isRequired,
-        caption: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
 };

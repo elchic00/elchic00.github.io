@@ -1,16 +1,28 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, MouseEvent } from "react";
 import { CodeIcon, ExternalLinkIcon, PlayIcon } from "@heroicons/react/solid";
 import projectsData from "../data/projects.json";
+import { Project } from "../types";
 
-const BentoGridProject = ({ project, index, featured = false }) => {
+interface VideoPlayState {
+  showButton: boolean;
+  playing: boolean;
+}
+
+interface BentoGridProjectProps {
+  project: Project;
+  index: number;
+  featured?: boolean;
+}
+
+const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, featured = false }) => {
   const hasMultipleVideos = project.videos && project.videos.length > 1;
   const isVideo =
     project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
-  const videoRefs = useRef([]);
-  const [videoPlayStates, setVideoPlayStates] = useState({});
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [videoPlayStates, setVideoPlayStates] = useState<Record<string, VideoPlayState>>({});
 
   // Track which videos need play buttons
-  const checkAutoplayBlocked = (videoElement, videoId) => {
+  const checkAutoplayBlocked = (videoElement: HTMLVideoElement, videoId: string) => {
     // Try to play and see if it's blocked
     const playPromise = videoElement.play();
 
@@ -38,10 +50,10 @@ const BentoGridProject = ({ project, index, featured = false }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          const video = entry.target;
+          const video = entry.target as HTMLVideoElement;
           const videoId = video.dataset.videoId;
 
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && videoId) {
             // Video is visible, try to play and check if autoplay works
             checkAutoplayBlocked(video, videoId);
           } else {
@@ -72,11 +84,12 @@ const BentoGridProject = ({ project, index, featured = false }) => {
     };
   }, [index]);
 
-  const handleVideoClick = (e, video) => {
+  const handleVideoClick = (e: MouseEvent, video: HTMLVideoElement) => {
     e.preventDefault();
     e.stopPropagation();
 
     const videoId = video.dataset.videoId;
+    if (!videoId) return;
 
     // If video is paused, play it. If playing, pause it.
     if (video.paused) {
@@ -125,7 +138,7 @@ const BentoGridProject = ({ project, index, featured = false }) => {
           >
             {hasMultipleVideos ? (
               // Multiple videos side by side
-              project.videos.map((videoSrc, idx) => {
+              project.videos?.map((videoSrc, idx) => {
                 const videoId = `video-${index}-${idx}`;
                 const showButton = videoPlayStates[videoId]?.showButton;
 
@@ -145,8 +158,8 @@ const BentoGridProject = ({ project, index, featured = false }) => {
                       disablePictureInPicture
                       disableRemotePlayback
                       preload={index < 2 ? "auto" : "metadata"}
-                      onCanPlay={(e) => e.target.play().catch(() => {})}
-                      onClick={(e) => handleVideoClick(e, e.target)}
+                      onCanPlay={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
+                      onClick={(e) => handleVideoClick(e as unknown as MouseEvent, e.target as HTMLVideoElement)}
                     >
                       <source src={videoSrc} type="video/mp4" />
                     </video>
@@ -157,7 +170,7 @@ const BentoGridProject = ({ project, index, featured = false }) => {
                           e.preventDefault();
                           e.stopPropagation();
                           const video = videoRefs.current[idx];
-                          if (video) handleVideoClick(e, video);
+                          if (video) handleVideoClick(e as unknown as MouseEvent, video);
                         }}
                       >
                         <div className="bg-black/60 rounded-full p-4 pointer-events-auto cursor-pointer hover:bg-black/80 transition-colors">
@@ -185,8 +198,8 @@ const BentoGridProject = ({ project, index, featured = false }) => {
                       disablePictureInPicture
                       disableRemotePlayback
                       preload={index < 2 ? "auto" : "metadata"}
-                      onCanPlay={(e) => e.target.play().catch(() => {})}
-                      onClick={(e) => handleVideoClick(e, e.target)}
+                      onCanPlay={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
+                      onClick={(e) => handleVideoClick(e as unknown as MouseEvent, e.target as HTMLVideoElement)}
                     >
                       <source src={project.image} type="video/mp4" />
                     </video>
@@ -197,7 +210,7 @@ const BentoGridProject = ({ project, index, featured = false }) => {
                           e.preventDefault();
                           e.stopPropagation();
                           const video = videoRefs.current[0];
-                          if (video) handleVideoClick(e, video);
+                          if (video) handleVideoClick(e as unknown as MouseEvent, video);
                         }}
                       >
                         <div className="bg-black/60 rounded-full p-4 pointer-events-auto cursor-pointer hover:bg-black/80 transition-colors">
@@ -255,7 +268,7 @@ const BentoGridProject = ({ project, index, featured = false }) => {
   );
 };
 
-export const Projects = () => {
+export const Projects: React.FC = () => {
   return (
     <section id="projects" className="body-font mt-16">
       <div className="container px-5 py-10 mx-auto lg:px-40">
@@ -271,7 +284,7 @@ export const Projects = () => {
 
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {projectsData.map((project, index) => (
+          {(projectsData as Project[]).map((project, index) => (
             <BentoGridProject
               key={`${project.title}-${index}`}
               project={project}

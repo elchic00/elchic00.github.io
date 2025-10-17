@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
-import PropTypes from 'prop-types';
+import { useState, useEffect, TouchEvent, MouseEvent } from "react";
 import { ZoomInIcon, ZoomOutIcon } from "@heroicons/react/solid";
+import { Photo } from "../../types";
 
-export const PhotoGallery = ({ photos }) => {
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(null);
+interface PhotoGalleryProps {
+  photos: Photo[];
+}
+
+export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
+  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
 
   const goToNext = () => {
@@ -25,7 +29,7 @@ export const PhotoGallery = ({ photos }) => {
   useEffect(() => {
     if (selectedIndex === null) return;
 
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setSelectedPhoto(null);
         setSelectedIndex(null);
@@ -41,7 +45,7 @@ export const PhotoGallery = ({ photos }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedIndex, photos]);
 
-  const openPhoto = (photo, index) => {
+  const openPhoto = (photo: Photo, index: number) => {
     setSelectedPhoto(photo);
     setSelectedIndex(index);
   };
@@ -96,7 +100,7 @@ export const PhotoGallery = ({ photos }) => {
           <div className="absolute top-4 right-4 flex gap-2 z-10">
             {/* Zoom Button */}
             <button
-              onClick={(e) => {
+              onClick={(e: MouseEvent) => {
                 e.stopPropagation();
                 toggleZoom();
               }}
@@ -123,7 +127,7 @@ export const PhotoGallery = ({ photos }) => {
           {photos.length > 1 && (
             <>
               <button
-                onClick={(e) => {
+                onClick={(e: MouseEvent) => {
                   e.stopPropagation();
                   goToPrevious();
                 }}
@@ -133,7 +137,7 @@ export const PhotoGallery = ({ photos }) => {
                 ‹
               </button>
               <button
-                onClick={(e) => {
+                onClick={(e: MouseEvent) => {
                   e.stopPropagation();
                   goToNext();
                 }}
@@ -149,20 +153,20 @@ export const PhotoGallery = ({ photos }) => {
             className={`w-full relative ${
               isZoomed ? "overflow-auto max-h-[90vh] max-w-full" : "max-w-4xl"
             }`}
-            onClick={(e) => e.stopPropagation()}
-            onTouchStart={(e) => {
+            onClick={(e: MouseEvent) => e.stopPropagation()}
+            onTouchStart={(e: TouchEvent<HTMLDivElement>) => {
               if (isZoomed) return; // Don't handle swipe when zoomed
               const touch = e.touches[0];
-              e.currentTarget.dataset.touchStartX = touch.clientX;
-              e.currentTarget.dataset.touchStartY = touch.clientY;
+              e.currentTarget.dataset.touchStartX = String(touch.clientX);
+              e.currentTarget.dataset.touchStartY = String(touch.clientY);
             }}
-            onTouchEnd={(e) => {
+            onTouchEnd={(e: TouchEvent<HTMLDivElement>) => {
               if (isZoomed) return; // Don't handle swipe when zoomed
               const touchStartX = parseFloat(
-                e.currentTarget.dataset.touchStartX
+                e.currentTarget.dataset.touchStartX || "0"
               );
               const touchStartY = parseFloat(
-                e.currentTarget.dataset.touchStartY
+                e.currentTarget.dataset.touchStartY || "0"
               );
               const touchEndX = e.changedTouches[0].clientX;
               const touchEndY = e.changedTouches[0].clientY;
@@ -192,7 +196,7 @@ export const PhotoGallery = ({ photos }) => {
                     : "w-full h-auto max-h-[85vh] object-contain cursor-zoom-in rounded-lg"
                 }`}
                 style={isZoomed ? { minWidth: "200%", minHeight: "200%" } : {}}
-                onClick={(e) => {
+                onClick={(e: MouseEvent) => {
                   e.stopPropagation();
                   toggleZoom();
                 }}
@@ -204,7 +208,7 @@ export const PhotoGallery = ({ photos }) => {
                 <p className="text-white text-center text-lg font-medium">
                   {selectedPhoto.caption}
                 </p>
-                {photos.length > 1 && (
+                {photos.length > 1 && selectedIndex !== null && (
                   <p className="text-gray-400 text-center text-sm mt-2">
                     {selectedIndex + 1} / {photos.length}
                   </p>
@@ -216,14 +220,4 @@ export const PhotoGallery = ({ photos }) => {
       )}
     </>
   );
-};
-
-PhotoGallery.propTypes = {
-  photos: PropTypes.arrayOf(
-    PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      alt: PropTypes.string.isRequired,
-      caption: PropTypes.string.isRequired,
-    })
-  ).isRequired,
 };

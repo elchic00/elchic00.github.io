@@ -1,7 +1,10 @@
-import PropTypes from 'prop-types';
 import { SOCIAL_LINKS } from "../../constants";
 
-const LinkedInIcon = ({ className = "w-6" }) => (
+interface IconProps {
+  className?: string;
+}
+
+const LinkedInIcon: React.FC<IconProps> = ({ className = "w-6" }) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"
@@ -15,7 +18,7 @@ const LinkedInIcon = ({ className = "w-6" }) => (
   </svg>
 );
 
-const GitHubIcon = ({ className = "w-6" }) => (
+const GitHubIcon: React.FC<IconProps> = ({ className = "w-6" }) => (
   <svg
     className={className}
     xmlns="http://www.w3.org/2000/svg"
@@ -29,27 +32,31 @@ const GitHubIcon = ({ className = "w-6" }) => (
   </svg>
 );
 
+type SocialLinksVariant = 'header' | 'footer' | 'about';
+
+interface SocialLinksProps {
+  variant?: SocialLinksVariant;
+  className?: string;
+}
+
 /**
  * Reusable Social Links Component
- * @param {Object} props
- * @param {string} props.variant - 'header' | 'footer' | 'about'
- * @param {string} props.className - Additional classes
  */
-export const SocialLinks = ({ variant = 'footer', className = '' }) => {
-  const baseClasses = {
+export const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'footer', className = '' }) => {
+  const baseClasses: Record<SocialLinksVariant, string> = {
     header: "mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
     footer: "hover:transition-all hover:duration-300 text-gray-800 p-1 border-2 rounded border-indigo-600 hover:bg-gray-500",
     about: "mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
   };
 
-  const iconClasses = {
+  const iconClasses: Record<SocialLinksVariant, string> = {
     header: "text-blue-500 hover:text-white duration-700",
     footer: "text-blue-400 hover:text-white hover:transition-all hover:duration-700",
     about: "text-blue-500 hover:text-white duration-700",
   };
 
-  const linkClass = baseClasses[variant] || baseClasses.footer;
-  const iconClass = iconClasses[variant] || iconClasses.footer;
+  const linkClass = baseClasses[variant];
+  const iconClass = iconClasses[variant];
 
   return (
     <>
@@ -73,9 +80,4 @@ export const SocialLinks = ({ variant = 'footer', className = '' }) => {
       </a>
     </>
   );
-};
-
-SocialLinks.propTypes = {
-  variant: PropTypes.oneOf(['header', 'footer', 'about']),
-  className: PropTypes.string,
 };

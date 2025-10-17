@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import { App } from "./App";
@@ -12,7 +11,7 @@ if (!rootElement) throw new Error("Root element not found");
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
-    <HashRouter>
-      <App />
-    </HashRouter>
+  <HashRouter>
+    <App />
+  </HashRouter>
 );

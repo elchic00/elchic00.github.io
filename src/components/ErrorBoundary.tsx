@@ -1,35 +1,38 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+import { Component, ReactNode, ErrorInfo } from "react";
+import { ErrorBoundaryProps, ErrorBoundaryState } from "../types";
 
 /**
  * Error Boundary Component
  * Catches JavaScript errors anywhere in the child component tree and displays a fallback UI
  */
-export class ErrorBoundary extends Component {
-  constructor(props) {
+export class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null, errorInfo: null };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error): Partial<ErrorBoundaryState> {
     // Update state so the next render will show the fallback UI
     return { hasError: true };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
     // Log error details for debugging
-    console.error('Error caught by ErrorBoundary:', error, errorInfo);
+    console.error("Error caught by ErrorBoundary:", error, errorInfo);
     this.setState({
       error,
       errorInfo,
     });
   }
 
-  handleReset = () => {
+  handleReset = (): void => {
     this.setState({ hasError: false, error: null, errorInfo: null });
   };
 
-  render() {
+  render(): ReactNode {
     if (this.state.hasError) {
       // Custom fallback UI
       return (
@@ -41,11 +44,12 @@ export class ErrorBoundary extends Component {
                 Oops! Something went wrong
               </h1>
               <p className="text-gray-400 mb-6">
-                We encountered an unexpected error. Please try refreshing the page.
+                We encountered an unexpected error. Please try refreshing the
+                page.
               </p>
             </div>
 
-            {process.env.NODE_ENV === 'development' && this.state.error && (
+            {process.env.NODE_ENV === "development" && this.state.error && (
               <details className="mb-6 text-left">
                 <summary className="cursor-pointer text-red-400 font-mono text-sm mb-2 hover:text-red-300">
                   Error Details (Development Only)
@@ -53,7 +57,8 @@ export class ErrorBoundary extends Component {
                 <div className="bg-gray-900 p-4 rounded overflow-auto max-h-60">
                   <pre className="text-red-400 text-xs font-mono whitespace-pre-wrap">
                     {this.state.error.toString()}
-                    {this.state.errorInfo && this.state.errorInfo.componentStack}
+                    {this.state.errorInfo &&
+                      this.state.errorInfo.componentStack}
                   </pre>
                 </div>
               </details>
@@ -67,7 +72,7 @@ export class ErrorBoundary extends Component {
                 Try Again
               </button>
               <button
-                onClick={() => window.location.href = '/'}
+                onClick={() => (window.location.href = "/")}
                 className="px-6 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
               >
                 Go Home
@@ -81,7 +86,3 @@ export class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.node.isRequired,
-};
