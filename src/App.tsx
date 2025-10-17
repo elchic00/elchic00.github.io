@@ -5,7 +5,7 @@ import {ErrorBoundary} from "./components/ErrorBoundary";
 export const App = () => {
   return (
     <ErrorBoundary>
-      <main className="text-gray-300 bg-gray-900 body-font scrollbar-hide">
+      <main className="text-slate-200 bg-slate-950 body-font scrollbar-hide">
           <Navbar/>
           <AppRoutes/>
       </main>

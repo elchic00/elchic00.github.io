@@ -6,8 +6,8 @@ const ResumePage = () => {
 
   const buttonBaseClasses =
     "inline-block py-3 px-6 rounded font-bold transition-colors duration-150";
-  const downloadButtonClasses = `${buttonBaseClasses} bg-blue-600 hover:bg-blue-700 text-white mr-3`;
-  const openButtonClasses = `${buttonBaseClasses} bg-gray-600 hover:bg-gray-700 text-white`;
+  const downloadButtonClasses = `${buttonBaseClasses} bg-cyan-500 hover:bg-cyan-400 text-white mr-3`;
+  const openButtonClasses = `${buttonBaseClasses} bg-slate-600 hover:bg-slate-700 text-white`;
 
   // Auto-open PDF in new tab on mobile
   useEffect(() => {
@@ -20,9 +20,9 @@ const ResumePage = () => {
   }, [pdfPath]);
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-gray-600 pt-20">
+    <div className="w-full min-h-screen flex flex-col bg-slate-600 pt-20">
       {/* Header with action buttons */}
-      <header className="p-5 text-center bg-gray-700 shadow-md">
+      <header className="p-5 text-center bg-slate-700 shadow-md">
         <h1 className="text-2xl font-bold text-white mb-4">Resume</h1>
 
         <nav aria-label="Resume actions">
@@ -57,7 +57,7 @@ const ResumePage = () => {
           aria-label="Resume PDF viewer"
         >
           <div className="p-10 text-center bg-white m-5 rounded-lg">
-            <h2 className="text-xl font-bold text-gray-800 mb-2">
+            <h2 className="text-xl font-bold text-slate-800 mb-2">
               Resume Preview Unavailable
             </h2>
             <p className="text-gray-600 mb-4">
@@ -77,7 +77,7 @@ const ResumePage = () => {
       {/* Mobile fallback */}
       <div className="flex-1 min-h-[80vh] md:hidden">
         <div className="p-10 text-center bg-white m-5 rounded-lg mt-10">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">
+          <h2 className="text-xl font-bold text-slate-800 mb-2">
             Resume Preview
           </h2>
           <p className="text-gray-600 mb-4">

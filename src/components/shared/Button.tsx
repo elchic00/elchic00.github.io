@@ -4,9 +4,9 @@ import { ButtonProps, ButtonVariant, ButtonSize } from '../../types';
  * Reusable Button Component
  *
  * Variants:
- * - primary: Indigo background (default)
+ * - primary: Cyan background (default)
  * - secondary: Slate background
- * - success: Green background
+ * - success: Emerald background
  * - ghost: Transparent with border
  *
  * Sizes:
@@ -26,13 +26,13 @@ export const Button: React.FC<ButtonProps> = ({
   ariaLabel,
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center text-center border-0 rounded focus:outline-none focus:ring-2 focus:ring-lime-500 transition-colors duration-500 disabled:cursor-not-allowed disabled:opacity-50';
+  const baseClasses = 'inline-flex items-center justify-center text-center border-0 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors duration-500 disabled:cursor-not-allowed disabled:opacity-50';
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary: 'text-white bg-indigo-600 hover:bg-indigo-500',
+    primary: 'text-white bg-cyan-500 hover:bg-cyan-400',
     secondary: 'text-white bg-slate-700 hover:bg-slate-600',
-    success: 'text-white bg-green-800 hover:bg-green-700',
-    ghost: 'text-gray-300 bg-gray-800 hover:bg-gray-700',
+    success: 'text-white bg-emerald-700 hover:bg-emerald-600',
+    ghost: 'text-slate-200 bg-slate-800 hover:bg-slate-700',
   };
 
   const sizeClasses: Record<ButtonSize, string> = {

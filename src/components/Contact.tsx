@@ -163,7 +163,7 @@ export const Contact: React.FC = () => {
 
   const getInputClassName = (fieldName: keyof ContactFormValues): string => {
     const baseClasses =
-      "w-full bg-gray-800 rounded border text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out";
+      "w-full bg-slate-800 rounded border text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out";
 
     // ✨ Use debounced error state for smoother UX
     let hasError = false;

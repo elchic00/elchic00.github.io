@@ -150,7 +150,7 @@ const Travel = () => {
           <h2 className="sm:text-4xl text-3xl font-medium title-font text-white underline-offset-4 underline mb-4">
             Travel Adventures
           </h2>
-          <p className="lg:w-2/3 mx-auto leading-relaxed text-gray-400">
+          <p className="lg:w-2/3 mx-auto leading-relaxed text-slate-400">
             Exploring the world one trip at a time. Here are some of my favorite
             moments and places I've been lucky enough to visit.
           </p>
@@ -163,7 +163,7 @@ const Travel = () => {
         </div>
 
         {tripsData.length === 0 && (
-          <div className="text-center text-gray-400 py-20">
+          <div className="text-center text-slate-400 py-20">
             <p>More travel adventures coming soon!</p>
           </div>
         )}

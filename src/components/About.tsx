@@ -13,7 +13,7 @@ export const About = () => {
           <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white mt-5">
             Andrew Alagna - Software Engineer
           </h1>
-          <p className="text-xl text-gray-400 mb-4">Hey there! I'm Drew 👋</p>
+          <p className="text-xl text-slate-400 mb-4">Hey there! I'm Drew 👋</p>
           <p className="mb-7 leading-relaxed">
             I build accessible, performant web applications at American Express,
             serving millions of users across the globe.
@@ -40,7 +40,7 @@ export const About = () => {
                 href="/#/resume"
                 rel="noreferrer"
                 target="_blank"
-                className="mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white focus:outline-none focus:ring-2 focus:ring-lime-500"
+                className="mb-6 inline-flex items-center h-10 p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 aria-label="View Resume"
               >
                 Resume

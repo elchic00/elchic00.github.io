@@ -101,7 +101,7 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
               <div className="text-red-400 mt-2">
                 Game Over — final score: {score}
                 {newHighScore && (
-                  <div className="text-green-400 font-bold">
+                  <div className="text-emerald-400 font-bold">
                     🎉 New local high score!
                   </div>
                 )}

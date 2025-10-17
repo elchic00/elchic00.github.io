@@ -48,18 +48,18 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
 }) => {
   const baseClasses: Record<SocialLinksVariant, string> = {
     header:
-      "mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
+      "mb-6 inline-flex items-center h-10 p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
     footer:
-      "hover:transition-all hover:duration-300 text-gray-800 p-1 border-2 rounded border-indigo-600 hover:bg-gray-500",
+      "hover:transition-all hover:duration-300 text-slate-800 p-1 border-2 rounded border-cyan-500 hover:bg-slate-500",
     about:
-      "mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
+      "mb-6 inline-flex items-center h-10 p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
   };
 
   const iconClasses: Record<SocialLinksVariant, string> = {
-    header: "text-blue-500 hover:text-white duration-700",
+    header: "text-cyan-400 hover:text-white duration-700",
     footer:
-      "text-blue-400 hover:text-white hover:transition-all hover:duration-700",
-    about: "text-blue-500 hover:text-white duration-700",
+      "text-cyan-300 hover:text-white hover:transition-all hover:duration-700",
+    about: "text-cyan-400 hover:text-white duration-700",
   };
 
   const linkClass = baseClasses[variant];

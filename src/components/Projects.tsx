@@ -115,7 +115,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
 
   return (
     <article
-      className={`bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] ${
+      className={`bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] ${
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
     >
@@ -125,7 +125,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
         rel="noreferrer"
         className="block h-full"
       >
-        <div className="relative h-full flex flex-col bg-gray-900">
+        <div className="relative h-full flex flex-col bg-slate-950">
           {/* Media Section */}
           <div
             className={`px-4 pt-4 pb-2 flex items-center justify-center gap-2 ${
@@ -233,12 +233,12 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
 
           {/* Content Section */}
           <div
-            className={`bg-gray-800 ${
+            className={`bg-slate-800 ${
               featured ? "md:px-6 md:py-5 px-4 py-3" : "px-4 py-3"
             }`}
           >
             <div className={featured ? "max-w-2xl" : ""}>
-              <p className="text-green-400 text-xs font-medium tracking-wide mb-1">
+              <p className="text-emerald-400 text-xs font-medium tracking-wide mb-1">
                 {project.subtitle}
               </p>
               <h3
@@ -250,7 +250,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
               </h3>
               {/* Show description on mobile for all, on desktop only for featured */}
               <p
-                className={`text-gray-300 text-sm leading-relaxed line-clamp-3 mb-4 ${
+                className={`text-slate-200 text-sm leading-relaxed line-clamp-3 mb-4 ${
                   featured ? "block" : "md:hidden"
                 }`}
               >

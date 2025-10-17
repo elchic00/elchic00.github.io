@@ -67,7 +67,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
           <button
             key={index}
             onClick={() => openPhoto(photo, index)}
-            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-lime-500"
+            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400"
             aria-label={`View ${photo.alt}`}
           >
             <img
@@ -104,7 +104,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                 e.stopPropagation();
                 toggleZoom();
               }}
-              className="text-white p-2 bg-black/50 hover:bg-black/70 rounded-full focus:outline-none focus:ring-2 focus:ring-lime-500 transition-colors"
+              className="text-white p-2 bg-black/50 hover:bg-black/70 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors"
               aria-label={isZoomed ? "Zoom out" : "Zoom in"}
             >
               {isZoomed ? (
@@ -116,7 +116,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
             {/* Close Button */}
             <button
               onClick={closePhoto}
-              className="text-white text-4xl hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded"
+              className="text-white text-4xl hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
               aria-label="Close lightbox"
             >
               ×
@@ -131,7 +131,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                   e.stopPropagation();
                   goToPrevious();
                 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-6xl hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded px-4 py-2 z-10"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-6xl hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-4 py-2 z-10"
                 aria-label="Previous photo"
               >
                 ‹
@@ -141,7 +141,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                   e.stopPropagation();
                   goToNext();
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-6xl hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-lime-500 rounded px-4 py-2 z-10"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-6xl hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-4 py-2 z-10"
                 aria-label="Next photo"
               >
                 ›
@@ -209,7 +209,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                   {selectedPhoto.caption}
                 </p>
                 {photos.length > 1 && selectedIndex !== null && (
-                  <p className="text-gray-400 text-center text-sm mt-2">
+                  <p className="text-slate-400 text-center text-sm mt-2">
                     {selectedIndex + 1} / {photos.length}
                   </p>
                 )}

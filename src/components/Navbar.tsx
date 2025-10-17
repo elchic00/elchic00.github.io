@@ -46,18 +46,18 @@ export const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="bg-gray-800 shadow-md w-full fixed top-0 left-0 z-10"
+      className="bg-slate-800 shadow-md w-full fixed top-0 left-0 z-10"
       aria-label="Main navigation"
     >
       <div className="justify-between md:flex items-center py-4 px-4 md:px-6">
         {/* Logo */}
         <Link
           to="/#about"
-          className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-gray-300 hover:text-white duration-500 border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500 whitespace-nowrap"
+          className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
           onClick={handleLinkClick}
           aria-label="Andrew Alagna - Home"
         >
-          <GlobeIcon className="w-8 h-8 text-lime-700 mr-1" aria-hidden="true" />
+          <GlobeIcon className="w-8 h-8 text-cyan-500 mr-1" aria-hidden="true" />
           Andrew Alagna
         </Link>
 
@@ -65,7 +65,7 @@ export const Navbar = () => {
         {isMobile && (
           <button
             onClick={toggleMenu}
-            className="absolute right-4 top-6 cursor-pointer text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-lime-500 rounded"
+            className="absolute right-4 top-6 cursor-pointer text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -79,7 +79,7 @@ export const Navbar = () => {
 
         {/* Navigation Links */}
         <ul
-          className={`bg-gray-800 md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+          className={`bg-slate-800 md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
             open ? "top-20" : "top-[-490px]"
           }`}
         >
@@ -87,7 +87,7 @@ export const Navbar = () => {
             <li key={link.name} className="md:ml-4 text-xl md:my-0 my-7">
               <Link
                 to={link.link}
-                className="hover:text-white duration-500 border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500 whitespace-nowrap"
+                className="hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
                 onClick={handleLinkClick}
               >
                 {link.name}
@@ -99,7 +99,7 @@ export const Navbar = () => {
           <li className="md:ml-4 text-xl md:my-0 my-7">
             <button
               onClick={handleSnakeClick}
-              className="hover:text-white duration-500 cursor-pointer border border-transparent hover:border-lime-700 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
+              className="hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
             >
               Snake
             </button>
@@ -109,7 +109,7 @@ export const Navbar = () => {
           <li className="md:ml-4 text-xl md:my-0 my-7 md:mr-0 mr-4">
             <Link
               to="/#contact"
-              className="inline-flex items-center bg-lime-700 text-white font-[Poppins] py-2 px-6 rounded hover:bg-lime-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-lime-500"
+              className="inline-flex items-center bg-purple-600 text-white font-[Poppins] py-2 px-6 rounded hover:bg-purple-500 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
               onClick={handleLinkClick}
             >
               Contact
@@ -121,7 +121,7 @@ export const Navbar = () => {
 
       {/* ✨ Optional: Show screen width indicator in development */}
       {import.meta.env.DEV && (
-        <div className="fixed bottom-4 right-4 bg-gray-900 text-white px-3 py-1 rounded text-xs">
+        <div className="fixed bottom-4 right-4 bg-slate-950 text-white px-3 py-1 rounded text-xs">
           {width}px {isMobile ? "(Mobile)" : "(Desktop)"}
         </div>
       )}
