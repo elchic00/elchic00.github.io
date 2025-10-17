@@ -12,35 +12,35 @@
   {
     "title": "myTeachers",
     "subtitle": "React + Express + PostgreSQL + Firebase",
-    "description": "This app helps you keep track of teachers and courses while in school. I used MaterialUI for styling components making it responive to mobile and desktop web browsers.",
+    "description": "A modern redesign of the CUNY registration system for tracking courses and professors. Built with a full-stack architecture using React with Material UI, Express backend, PostgreSQL database, and Firebase authentication. Features responsive design, Redux Toolkit Query for state management, and custom alerts.",
     "image": "/images/projects/myteachers-demo.mp4",
     "link": "https://github.com/elchic00/CunyFirst-front"
   },
   {
     "title": "Macros-for-geeks",
     "subtitle": "Angular, .Net, SQLite",
-    "description": "A food diary app to help users keep track of their macronutrients. They can save their diary to a local SQLite database, which they can later view whether connected to the internet or not.",
+    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
     "image": "/images/projects/macros-demo.mp4",
     "link": "https://github.com/elchic00/Macros-for-geeks"
   },
   {
     "title": "Invent0ry",
     "subtitle": "React and AWS (Amplify)",
-    "description": "This app helps businesses keep track of their inventory across different storage locations. We used Amplify from AWS for authentication, hosting, and for our database & API.",
+    "description": "A full-stack inventory management system enabling businesses to track stock across multiple storage locations with custom categories. Features real-time inventory monitoring to ensure adequate supply levels, built with React and AWS Amplify for authentication, hosting, and GraphQL API.",
     "image": "/images/projects/inventory-demo.mp4",
     "link": "https://github.com/elchic00/invent0ry"
   },
   {
     "title": "Crime in Queens NYC",
     "subtitle": "Python, HTML, Github MD",
-    "description": "Finding the trend of crime in Queens NYC. This project uses Python data-science libraries to process the data. The web-page was created using html and Github MD.",
+    "description": "A data analysis project examining crime trends in Queens, NYC using Python data science libraries (Pandas, Matplotlib, NumPy) to process and visualize patterns. Interactive visualizations deployed as a GitHub Pages site.",
     "image": "/images/projects/crime.webp",
     "link": "https://elchic00.github.io/CrimeInQueens"
   },
   {
     "title": "myPal",
     "subtitle": "React Native, CSS, SQLite",
-    "description": "An Augmentative and Alternative Communication (AAC) mobile app created to help children with autism, special needs, or verbal delays to communicate more effectively.",
+    "description": "An Augmentative and Alternative Communication (AAC) app implementing the Picture Exchange Communication System (PECS) to help children with autism and speech delays communicate through pictures. Features customizable sentences for greetings, responses, and needs using React Native and SQLite.",
     "image": "/images/projects/mypal-demo.mp4",
     "link": "https://github.com/myPal-TMS/myPal"
   }
