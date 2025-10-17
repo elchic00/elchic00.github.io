@@ -1,15 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { GlobeIcon } from "@heroicons/react/solid";
 import tripsData from "../data/trips.json";
 import { TripCard } from "./Travel/TripCard";
 
 export const Travel = () => {
-  // Scroll to top when component mounts
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const location = useLocation();
+  const isInitialMount = useRef(true);
 
-  const structuredData = {
+  // Scroll to top only when navigating from another route, not on page refresh
+  useEffect(() => {
+    // If this is the initial mount (page refresh/direct visit), don't scroll
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    // Only scroll to top when navigating from another route
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  // Memoize structured data to prevent recreation on every render
+  const structuredData = useMemo(() => ({
     "@context": "https://schema.org",
     "@type": "ImageGallery",
     name: "Andrew Alagna's Galapagos Travel Photography",
@@ -121,7 +133,8 @@ export const Travel = () => {
         creator: { "@type": "Person", name: "Andrew Alagna" },
       },
     ],
-  };
+  }), []);
+
   return (
     <section id="travel" className="body-font mt-16 min-h-screen">
       <script
