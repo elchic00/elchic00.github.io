@@ -32,7 +32,7 @@ const GitHubIcon: React.FC<IconProps> = ({ className = "w-6" }) => (
   </svg>
 );
 
-type SocialLinksVariant = 'header' | 'footer' | 'about';
+type SocialLinksVariant = "header" | "footer" | "about";
 
 interface SocialLinksProps {
   variant?: SocialLinksVariant;
@@ -42,16 +42,23 @@ interface SocialLinksProps {
 /**
  * Reusable Social Links Component
  */
-export const SocialLinks: React.FC<SocialLinksProps> = ({ variant = 'footer', className = '' }) => {
+export const SocialLinks: React.FC<SocialLinksProps> = ({
+  variant = "footer",
+  className = "",
+}) => {
   const baseClasses: Record<SocialLinksVariant, string> = {
-    header: "mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
-    footer: "hover:transition-all hover:duration-300 text-gray-800 p-1 border-2 rounded border-indigo-600 hover:bg-gray-500",
-    about: "mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
+    header:
+      "mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
+    footer:
+      "hover:transition-all hover:duration-300 text-gray-800 p-1 border-2 rounded border-indigo-600 hover:bg-gray-500",
+    about:
+      "mb-6 inline-flex items-center h-10 p-3 text-gray-300 bg-gray-800 hover:bg-gray-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
   };
 
   const iconClasses: Record<SocialLinksVariant, string> = {
     header: "text-blue-500 hover:text-white duration-700",
-    footer: "text-blue-400 hover:text-white hover:transition-all hover:duration-700",
+    footer:
+      "text-blue-400 hover:text-white hover:transition-all hover:duration-700",
     about: "text-blue-500 hover:text-white duration-700",
   };
 
