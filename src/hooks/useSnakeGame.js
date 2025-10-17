@@ -166,7 +166,12 @@ export const useSnakeGame = ({
       if (k === "arrowleft" || k === "a") next = { x: -1, y: 0 };
       if (k === "arrowright" || k === "d") next = { x: 1, y: 0 };
       if (k === " ") {
-        if (!gameOverRef.current) {
+        if (gameOverRef.current) {
+          // If game is over, space starts a new game
+          resetState();
+          draw();
+        } else {
+          // If game is running or paused, space toggles pause
           runningRef.current = !runningRef.current;
           setRunning(runningRef.current);
         }

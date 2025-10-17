@@ -12,7 +12,7 @@ interface PlaySnakeProps {
 }
 
 const PlaySnake: React.FC<PlaySnakeProps> = ({
-  percentageWidth = 50,
+  percentageWidth = 100,
   startSnakeSize = 4,
   appleColor = "red",
   snakeColor = "green",
@@ -20,7 +20,7 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
   speed = 67,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const containerRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const {
     score,
@@ -43,7 +43,7 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
   } as any);
 
   return (
-    <section id="snake" ref={containerRef} className="min-h-screen landscape:min-h-0 flex flex-col pt-20">
+    <section id="snake" className="min-h-screen landscape:min-h-0 flex flex-col pt-20">
       {!mounted && <div>Snake game loading…</div>}
       <div className="flex-1 flex flex-col items-center justify-center landscape:justify-start">
         <div className="text-center mb-2 landscape:mb-1">
@@ -55,19 +55,18 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
           </p>
         </div>
 
-        <div className="w-full max-w-[min(95vw,calc(100vh-200px))] md:max-w-[calc(100vh-160px)] lg:max-w-[calc(100vh-140px)] xl:max-w-[calc(100vh-130px)] landscape:max-w-[calc(100vh-100px)] mx-auto">
-          <div className="flex justify-between items-center mb-1 px-2 text-sm md:text-base">
+        <div className="w-full max-w-[min(95vw,calc(100vh-340px))] md:max-w-[min(90vw,calc(100vh-320px))] lg:max-w-[min(85vw,calc(100vh-300px))] xl:max-w-[min(80vw,calc(100vh-290px))] landscape:max-w-[calc(100vh-200px)] mx-auto">
+          <div className="flex justify-between items-center mb-2 px-2 text-sm md:text-base">
             <div className="text-white font-semibold">Score: {score}</div>
             <div className="text-emerald-400 font-semibold">High: {highScore}</div>
           </div>
-          <div
-            style={{ width: "100%" }}
-            className="relative"
-          >
-            <canvas
-              ref={canvasRef}
-              className="block w-full h-auto aspect-square landscape:max-h-[50vh] landscape:object-contain border-4 border-white rounded-md shadow-lg bg-[#0f172a]"
-            />
+          <div className="aspect-square w-full">
+            <div ref={containerRef} className="w-full h-full">
+              <canvas
+                ref={canvasRef}
+                className="block w-full h-full border-4 border-white rounded-md shadow-lg bg-[#0f172a]"
+              />
+            </div>
           </div>
           <div className="flex justify-center gap-2 mt-2 landscape:mt-1">
             <Button
