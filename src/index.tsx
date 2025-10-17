@@ -2,6 +2,7 @@ import ReactDOM from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import { App } from "./App";
 import "./index.css";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 // Get the root element
 const rootElement = document.getElementById("root");
