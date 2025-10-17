@@ -149,7 +149,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
                       : "h-56 max-w-[48%]"
                   }`}>
                     <video
-                      ref={(el) => (videoRefs.current[idx] = el)}
+                      ref={(el) => { videoRefs.current[idx] = el; }}
                       className="w-full h-full object-contain rounded-lg cursor-pointer"
                       autoPlay
                       loop
@@ -189,7 +189,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
                 return (
                   <div className="relative w-full h-full">
                     <video
-                      ref={(el) => (videoRefs.current[0] = el)}
+                      ref={(el) => { videoRefs.current[0] = el; }}
                       className="w-full h-full object-contain rounded-lg cursor-pointer"
                       autoPlay
                       loop

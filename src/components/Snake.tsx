@@ -2,6 +2,15 @@ import { useRef } from "react";
 import { useSnakeGame } from "../hooks/useSnakeGame";
 import { Button } from "./shared/Button";
 
+interface PlaySnakeProps {
+  percentageWidth?: number | string;
+  startSnakeSize?: number;
+  appleColor?: string;
+  snakeColor?: string;
+  gridSize?: number;
+  speed?: number;
+}
+
 /**
  * Local Snake component (replacement for react-simple-snake)
  * Props:
@@ -12,7 +21,7 @@ import { Button } from "./shared/Button";
  * - gridSize: number (number of cells per side)
  * - speed: number (ms per step)
  */
-const PlaySnake = ({
+const PlaySnake: React.FC<PlaySnakeProps> = ({
   percentageWidth = 50,
   startSnakeSize = 4,
   appleColor = "red",
@@ -20,8 +29,8 @@ const PlaySnake = ({
   gridSize = 20,
   speed = 67,
 }) => {
-  const canvasRef = useRef(null);
-  const containerRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
   const {
     score,
@@ -41,7 +50,7 @@ const PlaySnake = ({
     snakeColor,
     canvasRef,
     containerRef,
-  });
+  } as any); // Hook is still JS, will accept any config
 
   return (
     <section id="snake" ref={containerRef} className="pt-5">

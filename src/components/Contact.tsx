@@ -1,4 +1,4 @@
-import { useRef, useCallback, useEffect, useState } from "react";
+import { useRef, useCallback, useEffect, useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
 import { EmojiHappyIcon } from "@heroicons/react/solid";
@@ -7,29 +7,41 @@ import { Button } from "./shared/Button";
 import { useFormValidation, useAsync, useDebounce } from "../hooks";
 import { APP_CONFIG } from "../constants";
 
+interface ContactFormValues {
+  user_name: string;
+  user_email: string;
+  message: string;
+}
+
+type ValidationRule = (value: string) => string;
+
+interface ValidationRules {
+  [key: string]: ValidationRule[];
+}
+
 // Validation rules
-const validationRules = {
+const validationRules: ValidationRules = {
   user_name: [
-    (value) => (!value?.trim() ? "Name is required" : ""),
-    (value) =>
+    (value: string) => (!value?.trim() ? "Name is required" : ""),
+    (value: string) =>
       value?.trim().length < 2 ? "Name must be at least 2 characters" : "",
   ],
   user_email: [
-    (value) => (!value?.trim() ? "Email is required" : ""),
-    (value) =>
+    (value: string) => (!value?.trim() ? "Email is required" : ""),
+    (value: string) =>
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
         ? "Please enter a valid email"
         : "",
   ],
   message: [
-    (value) => (!value?.trim() ? "Message is required" : ""),
-    (value) =>
+    (value: string) => (!value?.trim() ? "Message is required" : ""),
+    (value: string) =>
       value?.trim().length < 10 ? "Message must be at least 10 characters" : "",
   ],
 };
 
-export const Contact = () => {
-  const formRef = useRef(null);
+export const Contact: React.FC = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [showMailtoFallback, setShowMailtoFallback] = useState(false);
 
   // Initialize EmailJS
@@ -52,7 +64,15 @@ export const Contact = () => {
       message: "",
     },
     validationRules
-  );
+  ) as {
+    values: ContactFormValues;
+    errors: Partial<Record<keyof ContactFormValues, string>>;
+    touched: Partial<Record<keyof ContactFormValues, boolean>>;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    handleBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    validateAll: () => boolean;
+    resetForm: () => void;
+  };
 
   // ✨ Debounce validation feedback for better UX (wait 400ms after typing stops)
   const debouncedName = useDebounce(values.user_name, 400);
@@ -82,7 +102,7 @@ export const Contact = () => {
 
   const { execute: sendEmail, isLoading } = useAsync(sendEmailAsync);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Validate all fields
@@ -106,16 +126,18 @@ export const Contact = () => {
 
       resetForm();
       if (formRef.current) formRef.current.reset();
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Email send error:", error);
 
       let errorMessage =
         "An error occurred while sending your message. Please try again.";
 
-      if (error?.text) {
-        errorMessage = error.text;
-      } else if (error?.message) {
-        errorMessage = error.message;
+      if (error && typeof error === 'object') {
+        if ('text' in error && typeof error.text === 'string') {
+          errorMessage = error.text;
+        } else if ('message' in error && typeof error.message === 'string') {
+          errorMessage = error.message;
+        }
       }
 
       // Show mailto fallback option
@@ -131,7 +153,7 @@ export const Contact = () => {
   };
 
   // Generate mailto link with form data
-  const generateMailtoLink = () => {
+  const generateMailtoLink = (): string => {
     const subject = encodeURIComponent("Portfolio Contact");
     const body = encodeURIComponent(
       `Name: ${values.user_name}\n\nEmail: ${values.user_email}\n\nMessage:\n${values.message}`
@@ -139,15 +161,15 @@ export const Contact = () => {
     return `mailto:aalagna04@gmail.com?subject=${subject}&body=${body}`;
   };
 
-  const getInputClassName = (fieldName) => {
+  const getInputClassName = (fieldName: keyof ContactFormValues): string => {
     const baseClasses =
       "w-full bg-gray-800 rounded border text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out";
 
     // ✨ Use debounced error state for smoother UX
     let hasError = false;
-    if (fieldName === "user_name") hasError = showNameError;
-    if (fieldName === "user_email") hasError = showEmailError;
-    if (fieldName === "message") hasError = showMessageError;
+    if (fieldName === "user_name") hasError = !!showNameError;
+    if (fieldName === "user_email") hasError = !!showEmailError;
+    if (fieldName === "message") hasError = !!showMessageError;
 
     const errorClasses = hasError
       ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-900"
@@ -186,7 +208,7 @@ export const Contact = () => {
               onBlur={handleBlur}
               className={getInputClassName("user_name")}
               aria-required="true"
-              aria-invalid={showNameError}
+              aria-invalid={!!showNameError}
               aria-describedby={showNameError ? "name-error" : undefined}
             />
             {/* ✨ Only show error after debounce period */}
@@ -215,7 +237,7 @@ export const Contact = () => {
               onBlur={handleBlur}
               className={getInputClassName("user_email")}
               aria-required="true"
-              aria-invalid={showEmailError}
+              aria-invalid={!!showEmailError}
               aria-describedby={showEmailError ? "email-error" : undefined}
             />
             {/* ✨ Only show error after debounce period */}
@@ -245,7 +267,7 @@ export const Contact = () => {
                 "message"
               )} h-32 resize-none leading-6`}
               aria-required="true"
-              aria-invalid={showMessageError}
+              aria-invalid={!!showMessageError}
               aria-describedby={showMessageError ? "message-error" : undefined}
             />
             {/* ✨ Only show error after debounce period */}

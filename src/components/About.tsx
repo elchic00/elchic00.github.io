@@ -75,7 +75,7 @@ export const About = () => {
             width="460"
             height="460"
             decoding="async"
-            fetchpriority="high"
+            fetchPriority="high"
           />
         </picture>
       </div>

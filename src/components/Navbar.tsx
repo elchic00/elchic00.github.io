@@ -26,7 +26,7 @@ export const Navbar = () => {
   }, [isMobile, open, closeMenu]);
 
   const handleLinkClick = useCallback(
-    (e) => {
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
       closeMenu();
       // Remove focus from the link after clicking
       e?.currentTarget?.blur?.();
@@ -35,7 +35,7 @@ export const Navbar = () => {
   );
 
   const handleSnakeClick = useCallback(
-    (e) => {
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       navigate("/snake");
       closeMenu();
       e?.currentTarget?.blur?.();
