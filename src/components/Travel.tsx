@@ -4,7 +4,7 @@ import { GlobeIcon } from "@heroicons/react/solid";
 import tripsData from "../data/trips.json";
 import { TripCard } from "./Travel/TripCard";
 
-export const Travel = () => {
+const Travel = () => {
   const location = useLocation();
   const isInitialMount = useRef(true);
 
@@ -171,3 +171,5 @@ export const Travel = () => {
     </section>
   );
 };
+
+export default Travel;
