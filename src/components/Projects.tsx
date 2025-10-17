@@ -282,14 +282,14 @@ export const Projects: React.FC = () => {
           </h2>
         </header>
 
-        {/* Bento Grid Layout */}
+        {/* Bento Grid Layout - Featured projects (0, 3) span 2x2 on desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {(projectsData as Project[]).map((project, index) => (
             <BentoGridProject
               key={`${project.title}-${index}`}
               project={project}
               index={index}
-              featured={index === 0 || index === 3} // Feature first and fourth projects
+              featured={index === 0 || index === 3} // Feature Reps (0) and Invent0ry (3)
             />
           ))}
         </div>

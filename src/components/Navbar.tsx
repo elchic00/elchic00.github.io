@@ -49,11 +49,11 @@ export const Navbar = () => {
       className="bg-slate-800 shadow-md w-full fixed top-0 left-0 z-10"
       aria-label="Main navigation"
     >
-      <div className="justify-between md:flex items-center py-4 px-4 md:px-6">
+      <div className="flex justify-between items-center py-4 px-4 md:px-6">
         {/* Logo */}
         <Link
           to="/#about"
-          className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
+          className="font-bold text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
           onClick={handleLinkClick}
           aria-label="Andrew Alagna - Home"
         >
