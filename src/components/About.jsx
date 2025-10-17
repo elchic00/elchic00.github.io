@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { SocialLinks } from "./shared/SocialLinks";
+import { Button } from "./shared/Button";
 import { SOCIAL_LINKS } from "../constants";
 
 export const About = () => {
@@ -44,20 +45,22 @@ export const About = () => {
               >
                 Resume
               </a>
-              <button
-                className="inline-flex items-center text-center text-white bg-green-800 hover:bg-green-700 duration-500 border-0 h-10 px-3 rounded focus:outline-none mb-6 focus:ring-2 focus:ring-lime-500"
+              <Button
+                variant="success"
                 onClick={() => navigate("/snake")}
-                aria-label="Play Snake Game"
+                ariaLabel="Play Snake Game"
+                className="mb-6"
               >
                 Snake
-              </button>
-              <button
-                className="inline-flex items-center text-center text-white bg-indigo-600 hover:bg-indigo-500 duration-500 border-0 h-10 px-3 rounded focus:outline-none mb-6 focus:ring-2 focus:ring-lime-500"
+              </Button>
+              <Button
+                variant="primary"
                 onClick={() => navigate("/travel")}
-                aria-label="View Travel Photography"
+                ariaLabel="View Travel Photography"
+                className="mb-6"
               >
                 Travel
-              </button>
+              </Button>
             </div>
           </nav>
         </div>

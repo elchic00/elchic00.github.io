@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { SOCIAL_LINKS } from "../../constants";
 
 const LinkedInIcon = ({ className = "w-6" }) => (
@@ -72,4 +73,9 @@ export const SocialLinks = ({ variant = 'footer', className = '' }) => {
       </a>
     </>
   );
+};
+
+SocialLinks.propTypes = {
+  variant: PropTypes.oneOf(['header', 'footer', 'about']),
+  className: PropTypes.string,
 };

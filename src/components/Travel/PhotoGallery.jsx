@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import { ZoomInIcon, ZoomOutIcon } from "@heroicons/react/solid";
 
 export const PhotoGallery = ({ photos }) => {
@@ -212,4 +213,14 @@ export const PhotoGallery = ({ photos }) => {
       )}
     </>
   );
+};
+
+PhotoGallery.propTypes = {
+  photos: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      alt: PropTypes.string.isRequired,
+      caption: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };

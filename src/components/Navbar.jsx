@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { ArrowRightIcon } from "@heroicons/react/solid";
+import { ArrowRightIcon, GlobeIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import { useNavigate } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
@@ -57,9 +57,7 @@ export const Navbar = () => {
           onClick={handleLinkClick}
           aria-label="Andrew Alagna - Home"
         >
-          <span className="text-2xl text-lime-700 mr-1 pt-2" aria-hidden="true">
-            <ion-icon name="globe"></ion-icon>
-          </span>
+          <GlobeIcon className="w-8 h-8 text-lime-700 mr-1" aria-hidden="true" />
           Andrew Alagna
         </Link>
 
@@ -67,11 +65,15 @@ export const Navbar = () => {
         {isMobile && (
           <button
             onClick={toggleMenu}
-            className="text-3xl absolute right-4 top-6 cursor-pointer hover:text-white focus:outline-none focus:ring-2 focus:ring-lime-500 rounded"
+            className="absolute right-4 top-6 cursor-pointer text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-lime-500 rounded"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
-            <ion-icon name={open ? "close" : "menu"}></ion-icon>
+            {open ? (
+              <XIcon className="w-8 h-8" aria-hidden="true" />
+            ) : (
+              <MenuIcon className="w-8 h-8" aria-hidden="true" />
+            )}
           </button>
         )}
 

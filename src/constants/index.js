@@ -3,7 +3,7 @@ export const APP_CONFIG = {
   EMAIL_SERVICE_ID: "default_service",
   EMAIL_TEMPLATE_ID: "template_z9zlm01",
   EMAIL_PUBLIC_KEY: "user_FhEWKM5IXCkmUoOqe2yTB",
-  RESUME_FILENAME: "andrew_alagna_resume_2025.pdf",
+  RESUME_FILENAME: "andrew-alagna-resume.pdf",
 };
 
 // Social Links

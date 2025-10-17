@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { useSnakeGame } from "../hooks/useSnakeGame";
+import { Button } from "./shared/Button";
 
 /**
  * Local Snake component (replacement for react-simple-snake)
@@ -64,10 +65,11 @@ const PlaySnake = ({
               className="block w-full h-auto border-4 border-white rounded-md shadow-lg bg-[#0f172a]"
             />
             <div className="absolute left-1/2 -translate-x-1/2 bottom-3 flex gap-2">
-              <button
+              <Button
+                variant="secondary"
+                size="sm"
                 onClick={toggleRunning}
-                className="px-3 py-1 rounded bg-slate-700 text-white hover:bg-slate-600 transition-colors"
-                aria-label={
+                ariaLabel={
                   running
                     ? "Pause game"
                     : gameOver
@@ -76,14 +78,15 @@ const PlaySnake = ({
                 }
               >
                 {running ? "Pause" : gameOver ? "Start" : "Resume"}
-              </button>
-              <button
+              </Button>
+              <Button
+                variant="secondary"
+                size="sm"
                 onClick={restart}
-                className="px-3 py-1 rounded bg-slate-700 text-white hover:bg-slate-600 transition-colors"
-                aria-label="Restart game"
+                ariaLabel="Restart game"
               >
                 Restart
-              </button>
+              </Button>
             </div>
             {gameOver && (
               <div className="text-red-400 mt-2">

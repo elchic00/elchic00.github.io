@@ -1,8 +1,9 @@
 import { useRef, useCallback, useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Swal from "sweetalert2";
-import { CircularProgress } from "@mui/material";
+import { EmojiHappyIcon } from "@heroicons/react/solid";
 import { Footer } from "./Footer";
+import { Button } from "./shared/Button";
 import { useFormValidation, useAsync, useDebounce } from "../hooks";
 import { APP_CONFIG } from "../constants";
 
@@ -164,8 +165,8 @@ export const Contact = () => {
           noValidate
           className="lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0"
         >
-          <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font underline-offset-4 underline">
-            Contact Me <ion-icon name="happy"></ion-icon>
+          <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font underline-offset-4 underline flex items-center gap-2">
+            Contact Me <EmojiHappyIcon className="w-10 h-10 inline-block" aria-hidden="true" />
           </h2>
           <p className="leading-relaxed mb-5 mt-2">
             Send me a message with the form below
@@ -260,22 +261,16 @@ export const Contact = () => {
           </div>
 
           {/* Submit Button */}
-          <button
+          <Button
             type="submit"
+            variant="primary"
+            size="lg"
             disabled={isLoading}
-            className={`text-white border-0 py-2 rounded text-lg w-full transition-colors ${
-              isLoading
-                ? "bg-indigo-500 cursor-not-allowed"
-                : "bg-indigo-600 hover:bg-indigo-500"
-            }`}
-            aria-busy={isLoading}
+            loading={isLoading}
+            className="w-full"
           >
-            {isLoading ? (
-              <CircularProgress size={24} sx={{ color: "white" }} />
-            ) : (
-              "Send"
-            )}
-          </button>
+            Send
+          </Button>
 
           {/* Mailto Fallback - shown when EmailJS fails */}
           {showMailtoFallback && (

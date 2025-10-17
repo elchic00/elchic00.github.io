@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { APP_CONFIG } from "../constants";
 
 const ResumePage = () => {
@@ -8,6 +9,16 @@ const ResumePage = () => {
   const downloadButtonClasses = `${buttonBaseClasses} bg-blue-600 hover:bg-blue-700 text-white mr-3`;
   const openButtonClasses = `${buttonBaseClasses} bg-gray-600 hover:bg-gray-700 text-white`;
 
+  // Auto-open PDF in new tab on mobile
+  useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // Open the PDF file directly for mobile
+      window.location.href = pdfPath;
+    }
+  }, [pdfPath]);
+
   return (
     <div className="w-full min-h-screen flex flex-col bg-gray-600 pt-20">
       {/* Header with action buttons */}
@@ -17,7 +28,7 @@ const ResumePage = () => {
         <nav aria-label="Resume actions">
           <a
             href={pdfPath}
-            download="Andrew_Alagna_Resume.pdf"
+            download="andrew-alagna-resume.pdf"
             className={downloadButtonClasses}
             aria-label="Download resume as PDF"
           >
@@ -54,7 +65,7 @@ const ResumePage = () => {
             </p>
             <a
               href={pdfPath}
-              download="Andrew_Alagna_Resume.pdf"
+              download="andrew-alagna-resume.pdf"
               className={downloadButtonClasses}
             >
               Download PDF Instead
@@ -75,7 +86,7 @@ const ResumePage = () => {
           </p>
           <a
             href={pdfPath}
-            download="Andrew_Alagna_Resume.pdf"
+            download="andrew-alagna-resume.pdf"
             className={downloadButtonClasses}
           >
             Download Resume
