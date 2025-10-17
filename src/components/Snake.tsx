@@ -55,19 +55,22 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
   return (
     <section id="snake" ref={containerRef} className="pt-5">
       {!mounted && <div>Snake game loading…</div>}
-      <div className="overflow-hidden text-center h-full h-screen">
-        <h2 className="text-white text-3xl mb-1 font-medium pt-10 mt-12">
-          Use arrows, W/A/S/D keys, or touchscreen to play:
+      <div className="overflow-hidden text-center min-h-screen">
+        <h2 className="text-white text-3xl mb-2 font-medium pt-10 mt-12">
+          Snake Game
         </h2>
+        <p className="text-slate-300 text-lg mb-4">
+          Arrow keys / WASD to move • Space to pause • Touch/swipe on mobile
+        </p>
 
         <div className="flex justify-center pt-5">
           <div
             style={{ width: `${percentageWidth}%` }}
             className="relative max-w-[640px] pb-16 mx-auto"
           >
-            <div className="flex justify-between items-center mb-2">
-              <div className="text-white">Score: {score}</div>
-              <div className="text-white">High: {highScore}</div>
+            <div className="flex justify-between items-center mb-3 px-2">
+              <div className="text-white text-lg font-semibold">Score: {score}</div>
+              <div className="text-emerald-400 text-lg font-semibold">High: {highScore}</div>
             </div>
             <canvas
               ref={canvasRef}
