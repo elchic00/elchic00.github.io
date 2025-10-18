@@ -14,7 +14,8 @@ Instructions:
    - Add detailed bullet points in the body explaining what changed and why
    - Include technical details that would help someone understand the changes
 4. Push all commits to remote. Use `git done`, my custom alias, to push to github
-5. Report back with commit hashes and a summary of what was pushed
+5. Run `npm run deploy` to deploy to github pages
+6. Report back with commit hashes and a summary of what was pushed
 
 Guidelines:
 
