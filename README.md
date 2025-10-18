@@ -17,9 +17,9 @@
 
 ### 🌍 **Travel Photography**
 
-- Interactive photo gallery from my adventures to the Galapagos Islands, Ecuador
+- Interactive photo galleries from my adventures around the world
 - Keyboard navigation and lightbox modal for an immersive experience
-- Sea turtles, blue-footed boobies, and volcanic landscapes!
+- Wildlife, landscapes, and cultural moments captured across multiple destinations
 
 ### 🎮 **Interactive Fun**
 
@@ -164,12 +164,12 @@ React Native communication app for children with special needs
 
 ## 🌍 Travel Photography
 
-Check out my [**Ecuador & Galapagos Islands photo gallery**](https://elchic00.github.io/#travel) featuring:
+Check out my [**travel photo galleries**](https://elchic00.github.io/#travel) featuring moments from around the world:
 
-- 🐢 Swimming with sea turtles
-- 🦆 Blue-footed boobies
-- 🌋 Inactive volcanic landscapes
-- 🌊 Underwater marine life photography
+- 🌎 Multiple destinations across different continents
+- 🐢 Wildlife encounters and nature photography
+- 🏔️ Stunning landscapes and cultural experiences
+- 📸 Interactive galleries with keyboard navigation
 
 ---
 
