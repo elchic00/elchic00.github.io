@@ -215,3 +215,4 @@ export const useAsync = (asyncFunction) => {
 };
 
 export { useSnakeGame } from './useSnakeGame';
+export { useActiveTrip } from './useActiveTrip';

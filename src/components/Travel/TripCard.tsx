@@ -8,7 +8,10 @@ interface TripCardProps {
 
 export const TripCard: React.FC<TripCardProps> = ({ trip }) => {
   return (
-    <article className="mb-16 pb-16 border-b border-gray-700 last:border-b-0">
+    <article
+      id={trip.id}
+      className="mb-16 pb-16 border-b border-gray-700 last:border-b-0 scroll-mt-32"
+    >
       <header className="mb-6">
         <h3 className="text-3xl font-bold text-white mb-2">{trip.title}</h3>
         <div className="flex flex-wrap gap-4 text-slate-400 text-sm mb-3">
