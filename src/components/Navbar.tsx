@@ -47,7 +47,7 @@ export const Navbar = () => {
       className="bg-slate-800 shadow-md w-full fixed top-0 left-0 z-10"
       aria-label="Main navigation"
     >
-      <div className="flex justify-between items-center py-4 px-4 md:px-6">
+      <div className="flex justify-between items-center py-3 px-4 md:px-6">
         <Link
           to="/#about"
           className="font-bold text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
@@ -61,7 +61,7 @@ export const Navbar = () => {
         {isMobile && (
           <button
             onClick={toggleMenu}
-            className="absolute right-4 top-6 cursor-pointer text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
+            className="absolute right-4 top-5 cursor-pointer text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -75,7 +75,7 @@ export const Navbar = () => {
 
         <ul
           className={`bg-slate-800 md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            open ? "top-20" : "top-[-490px]"
+            open ? "top-[68px]" : "top-[-490px]"
           }`}
         >
           {NAV_LINKS.map((link) => (
