@@ -6,7 +6,7 @@ import { ButtonProps, ButtonVariant, ButtonSize } from '../../types';
  * Variants:
  * - primary: Cyan background (default)
  * - secondary: Slate background
- * - success: Emerald background
+ * - success: Teal background
  * - ghost: Transparent with border
  *
  * Sizes:
@@ -29,9 +29,9 @@ export const Button: React.FC<ButtonProps> = ({
   const baseClasses = 'inline-flex items-center justify-center text-center border-0 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors duration-500 disabled:cursor-not-allowed disabled:opacity-50';
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary: 'text-white bg-cyan-500 hover:bg-cyan-400',
+    primary: 'text-white bg-cyan-600 hover:bg-cyan-500',
     secondary: 'text-white bg-slate-700 hover:bg-slate-600',
-    success: 'text-white bg-emerald-700 hover:bg-emerald-600',
+    success: 'text-white bg-teal-700 hover:bg-teal-600',
     ghost: 'text-slate-200 bg-slate-800 hover:bg-slate-700',
   };
 

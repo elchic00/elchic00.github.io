@@ -6,7 +6,7 @@ const ResumePage = () => {
 
   const buttonBaseClasses =
     "inline-block py-3 px-6 rounded font-bold transition-colors duration-150";
-  const downloadButtonClasses = `${buttonBaseClasses} bg-cyan-500 hover:bg-cyan-400 text-white mr-3`;
+  const downloadButtonClasses = `${buttonBaseClasses} bg-cyan-600 hover:bg-cyan-500 text-white mr-3`;
   const openButtonClasses = `${buttonBaseClasses} bg-slate-600 hover:bg-slate-700 text-white`;
 
   useEffect(() => {
