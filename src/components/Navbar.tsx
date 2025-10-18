@@ -3,7 +3,7 @@ import { ArrowRightIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
-import { NAV_LINKS } from "../constants";
+import { NAV_LINKS, scrollWithOffset } from "../constants";
 import { MonogramOverlap } from "./shared/MonogramLogo";
 
 export const Navbar = () => {
@@ -67,6 +67,7 @@ export const Navbar = () => {
       <div className="flex justify-between items-center py-3 px-4 md:px-6">
         <Link
           to="/#about"
+          scroll={scrollWithOffset}
           className="font-bold text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
           onClick={(e) => handleLinkClick(e, "/#about")}
           aria-label="Andrew Alagna - Home"
@@ -99,6 +100,7 @@ export const Navbar = () => {
             <li key={link.name} className="md:ml-4 text-xl md:my-0 my-7">
               <Link
                 to={link.link}
+                scroll={scrollWithOffset}
                 className="hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
                 onClick={(e) => handleLinkClick(e, link.link)}
               >
@@ -119,6 +121,7 @@ export const Navbar = () => {
           <li className="md:ml-4 text-xl md:my-0 my-7 md:mr-0 mr-4">
             <Link
               to="/#contact"
+              scroll={scrollWithOffset}
               className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-6 rounded hover:bg-purple-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
               onClick={(e) => handleLinkClick(e, "/#contact")}
             >

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { scrollWithOffset } from "../constants";
 
 /**
  * Component that automatically scrolls to hash anchors on page load
@@ -22,8 +23,7 @@ export const ScrollToHash = () => {
         try {
           const element = document.querySelector(hash);
           if (element) {
-            // Use scroll-mt-32 class offset for proper positioning
-            element.scrollIntoView({ behavior: "smooth", block: "start" });
+            scrollWithOffset(element as HTMLElement);
           } else if (attempts < maxAttempts) {
             attempts++;
             setTimeout(scrollToElement, 100);

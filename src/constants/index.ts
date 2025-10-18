@@ -48,3 +48,17 @@ export const BREAKPOINTS = {
   LG: 1024,
   XL: 1280,
 } as const;
+
+// Scroll Configuration
+export const SCROLL_CONFIG = {
+  NAVBAR_OFFSET: -60, // Offset for fixed navbar when scrolling to hash anchors
+} as const;
+
+// Scroll helper function for hash navigation
+export const scrollWithOffset = (el: HTMLElement) => {
+  const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
+  window.scrollTo({
+    top: yCoordinate + SCROLL_CONFIG.NAVBAR_OFFSET,
+    behavior: "smooth",
+  });
+};
