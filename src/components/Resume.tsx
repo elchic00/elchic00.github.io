@@ -10,6 +10,9 @@ const ResumePage = () => {
   const openButtonClasses = `${buttonBaseClasses} bg-slate-600 hover:bg-slate-700 text-white`;
 
   useEffect(() => {
+    // Scroll to top when page loads
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (isMobile) {

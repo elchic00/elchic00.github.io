@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSnakeGame } from "../hooks/useSnakeGame";
 import { Button } from "./shared/Button";
 
@@ -41,6 +41,11 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
     canvasRef,
     containerRef,
   } as any);
+
+  // Scroll to top when page loads
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <section

@@ -1,31 +1,55 @@
-import { useEffect, useMemo, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useMemo } from "react";
 import { GlobeAltIcon } from "@heroicons/react/solid";
 import tripsData from "../data/trips.json";
 import { TripCard } from "./Travel/TripCard";
+import { TripNavigation } from "./Travel/TripNavigation";
 import { generateTravelStructuredData } from "../utils/generateTravelStructuredData";
+import { useActiveTrip } from "../hooks";
 
 const Travel = () => {
-  const location = useLocation();
-  const isInitialMount = useRef(true);
-
-  // Scroll to top when navigating from another route (not on page refresh/direct visit)
+  // Handle initial scroll on mount
   useEffect(() => {
-    // If this is the initial mount (page refresh/direct visit), don't scroll
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
+    const fullHash = window.location.hash;
+    // Format: #/travel#tripId -> extract tripId
+    const hashParts = fullHash.split('#');
+    const tripHash = hashParts[hashParts.length - 1];
 
-    // Scroll to top when navigating from another route
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [location.pathname]);
+    // Check if there's a trip hash (not just the route)
+    if (tripHash && tripHash !== '/travel' && !tripHash.startsWith('/')) {
+      // If there's a trip hash, scroll to that trip after content loads
+      const scrollToHash = () => {
+        try {
+          const element = document.getElementById(tripHash);
+          if (element) {
+            // Use setTimeout to ensure DOM is fully rendered
+            setTimeout(() => {
+              element.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 100);
+          }
+        } catch (error) {
+          // Invalid selector, ignore
+          console.warn('Invalid trip hash:', tripHash);
+        }
+      };
+
+      // Try immediately and also after a short delay for images
+      scrollToHash();
+      setTimeout(scrollToHash, 300);
+    } else {
+      // No trip hash, scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, []);
 
   // Generate structured data from all trips for SEO
   const structuredData = useMemo(
     () => generateTravelStructuredData(tripsData),
     []
   );
+
+  // Track which trip is currently visible
+  const tripIds = useMemo(() => tripsData.map((trip) => trip.id), []);
+  const activeId = useActiveTrip(tripIds);
 
   return (
     <section id="travel" className="body-font mt-16 min-h-screen">
@@ -47,6 +71,9 @@ const Travel = () => {
             moments and places I've been lucky enough to visit.
           </p>
         </header>
+
+        {/* Sticky trip navigation */}
+        <TripNavigation trips={tripsData} activeId={activeId} />
 
         <div className="mt-12">
           {tripsData.map((trip) => (
