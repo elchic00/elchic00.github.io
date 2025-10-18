@@ -1,9 +1,10 @@
 import { useState, useCallback, useEffect } from "react";
-import { ArrowRightIcon, GlobeIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
+import { ArrowRightIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import { useNavigate } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
 import { NAV_LINKS } from "../constants";
+import { MonogramOverlap } from "./shared/MonogramLogo";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ export const Navbar = () => {
           onClick={handleLinkClick}
           aria-label="Andrew Alagna - Home"
         >
-          <GlobeIcon className="w-8 h-8 text-cyan-500 mr-1" aria-hidden="true" />
+          <MonogramOverlap className="w-10 h-10 text-cyan-500 mr-1" />
           Andrew Alagna
         </Link>
 
