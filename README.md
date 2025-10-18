@@ -23,7 +23,7 @@
 
 ### 🎮 **Interactive Fun**
 
-- Play a fully functional Snake game built with React
+- Play a fully functional [Snake game](https://elchic00.github.io/#/snake) built with React
 - Because developers need to have fun too!
 
 ### 📬 **Get in Touch**
@@ -152,9 +152,9 @@ Food diary app with Angular, .NET, and SQLite
 
 Python-based crime trend analysis with interactive visualizations
 
-### 💪 **Reps** - Workout Tracking App
+### 💪 **Reps** - Technical Interview Prep App
 
-Progressive web app for tracking gym workouts and progress with React and TypeScript
+Mobile app and complementary web app for technical interview preparation, inspired by Duolingo's learning approach. Built with React and TypeScript
 
 ### 🗣️ **myPal** - AAC Mobile App
 
