@@ -1,5 +1,14 @@
-import { BadgeCheckIcon, ChipIcon } from "@heroicons/react/solid";
+import { ChipIcon } from "@heroicons/react/solid";
 import skillsData from "../data/skills.json";
+
+// Color schemes for different categories
+const categoryColors: Record<string, string> = {
+  "Languages & Frameworks": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30",
+  Databases: "bg-teal-600/20 text-teal-400 border-teal-500/30",
+  "DevOps & Tools": "bg-purple-600/20 text-purple-400 border-purple-500/30",
+  "Practices & Methodologies":
+    "bg-slate-600/20 text-slate-300 border-slate-500/30",
+};
 
 export const Skills = () => {
   return (
@@ -19,20 +28,21 @@ export const Skills = () => {
         </div>
         <div className="lg:w-4/5 mx-auto">
           {Object.entries(skillsData).map(([category, skills]) => (
-            <div key={category} className="mb-8">
-              <h3 className="text-xl font-medium text-emerald-400 mb-4 pl-2">
+            <div key={category} className="mb-12">
+              <h3 className="text-lg font-bold text-white mb-5">
                 {category}
               </h3>
-              <div className="flex flex-wrap sm:mb-2 -mx-2">
+              <div className="flex flex-wrap gap-3">
                 {skills.map((skill) => (
-                  <div key={skill} className="p-2 sm:w-1/2 w-full">
-                    <div className="bg-slate-800 rounded flex p-4 h-full items-center">
-                      <BadgeCheckIcon className="text-emerald-400 w-6 h-6 flex-shrink-0 mr-4" />
-                      <span className="title-font font-medium text-white">
-                        {skill}
-                      </span>
-                    </div>
-                  </div>
+                  <span
+                    key={skill}
+                    className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                      categoryColors[category] ||
+                      "bg-slate-700/20 text-slate-300 border-slate-600/30"
+                    }`}
+                  >
+                    {skill}
+                  </span>
                 ))}
               </div>
             </div>
