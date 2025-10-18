@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { ArrowRightIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
 import { NAV_LINKS } from "../constants";
@@ -8,6 +8,7 @@ import { MonogramOverlap } from "./shared/MonogramLogo";
 
 export const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
 
   const { width } = useWindowSize(150);
@@ -25,20 +26,36 @@ export const Navbar = () => {
   }, [isMobile, open, closeMenu]);
 
   const handleLinkClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>) => {
+    (e: React.MouseEvent<HTMLAnchorElement>, linkPath: string) => {
+      // Extract route path and hash from link
+      const targetRoute = linkPath.startsWith("/#") ? "/" : linkPath;
+      const hasHash = linkPath.includes("#");
+
+      // If already on this route AND there's no hash, scroll to top
+      if (location.pathname === targetRoute && !hasHash) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      // If there's a hash, let react-router-hash-link handle it
+
       closeMenu();
       e?.currentTarget?.blur?.();
     },
-    [closeMenu]
+    [closeMenu, location.pathname]
   );
 
   const handleSnakeClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      navigate("/snake");
+      // If already on Snake page, scroll to top instead of navigating
+      if (location.pathname === "/snake") {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate("/snake");
+      }
       closeMenu();
       e?.currentTarget?.blur?.();
     },
-    [navigate, closeMenu]
+    [navigate, closeMenu, location.pathname]
   );
 
   return (
@@ -51,7 +68,7 @@ export const Navbar = () => {
         <Link
           to="/#about"
           className="font-bold text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
-          onClick={handleLinkClick}
+          onClick={(e) => handleLinkClick(e, "/#about")}
           aria-label="Andrew Alagna - Home"
         >
           <MonogramOverlap className="w-10 h-10 text-cyan-500 mr-1" />
@@ -83,7 +100,7 @@ export const Navbar = () => {
               <Link
                 to={link.link}
                 className="hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
-                onClick={handleLinkClick}
+                onClick={(e) => handleLinkClick(e, link.link)}
               >
                 {link.name}
               </Link>
@@ -103,7 +120,7 @@ export const Navbar = () => {
             <Link
               to="/#contact"
               className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-6 rounded hover:bg-purple-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              onClick={handleLinkClick}
+              onClick={(e) => handleLinkClick(e, "/#contact")}
             >
               Contact
               <ArrowRightIcon className="w-4 h-4 ml-1" />

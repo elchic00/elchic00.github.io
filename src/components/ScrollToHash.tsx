@@ -12,18 +12,25 @@ export const ScrollToHash = () => {
     // Get the hash from the URL (e.g., "#projects" from "/#/#projects")
     const hash = location.hash;
 
-    if (hash) {
+    // Only process hash if it doesn't contain a slash (not a route like #/travel)
+    if (hash && !hash.includes('/')) {
       // Retry mechanism to handle async component loading
       let attempts = 0;
       const maxAttempts = 20; // Try for up to 2 seconds (20 * 100ms)
 
       const scrollToElement = () => {
-        const element = document.querySelector(hash);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        } else if (attempts < maxAttempts) {
-          attempts++;
-          setTimeout(scrollToElement, 100);
+        try {
+          const element = document.querySelector(hash);
+          if (element) {
+            // Use scroll-mt-32 class offset for proper positioning
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else if (attempts < maxAttempts) {
+            attempts++;
+            setTimeout(scrollToElement, 100);
+          }
+        } catch (error) {
+          // Invalid selector, ignore
+          console.warn('Invalid hash selector:', hash);
         }
       };
 
