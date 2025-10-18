@@ -3,12 +3,13 @@ import { useLocation } from "react-router-dom";
 import { GlobeAltIcon } from "@heroicons/react/solid";
 import tripsData from "../data/trips.json";
 import { TripCard } from "./Travel/TripCard";
+import { generateTravelStructuredData } from "../utils/generateTravelStructuredData";
 
 const Travel = () => {
   const location = useLocation();
   const isInitialMount = useRef(true);
 
-  // Scroll to top only when navigating from another route, not on page refresh
+  // Scroll to top when navigating from another route (not on page refresh/direct visit)
   useEffect(() => {
     // If this is the initial mount (page refresh/direct visit), don't scroll
     if (isInitialMount.current) {
@@ -16,125 +17,13 @@ const Travel = () => {
       return;
     }
 
-    // Only scroll to top when navigating from another route
-    window.scrollTo(0, 0);
+    // Scroll to top when navigating from another route
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
 
-  // Memoize structured data to prevent recreation on every render
+  // Generate structured data from all trips for SEO
   const structuredData = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "ImageGallery",
-      name: "Andrew Alagna's Galapagos Travel Photography",
-      description:
-        "Andrew Alagna's travel photography from Ecuador and the Galapagos Islands",
-      author: {
-        "@type": "Person",
-        name: "Andrew Alagna",
-        url: "https://elchic00.github.io",
-      },
-      image: [
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-turtle-friend.jpeg",
-          description:
-            "Andrew Alagna snorkeling with sea turtles in Galapagos Islands, Ecuador",
-          name: "Andrew Alagna - Turtle Snorkeling",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-turtle-snorkle.jpeg",
-          description:
-            "Andrew Alagna swimming alongside sea turtles underwater in Galapagos",
-          name: "Andrew Alagna - Underwater Turtle Photography",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-blue-foot-boobie.jpeg",
-          description:
-            "Andrew Alagna photographing blue-footed boobies in Galapagos Islands",
-          name: "Andrew Alagna - Blue-Footed Booby Galapagos",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-sea-lions.jpeg",
-          description:
-            "Andrew Alagna's photograph of sea lions colony in Galapagos, Ecuador",
-          name: "Andrew Alagna - Sea Lions Galapagos Beach",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-isabella-island.jpeg",
-          description:
-            "Andrew Alagna at Isabela Island welcome sign in Galapagos, Ecuador",
-          name: "Andrew Alagna - Isabela Island Galapagos",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-equator.jpeg",
-          description:
-            "Andrew Alagna standing at the equator monument in Ecuador",
-          name: "Andrew Alagna - Equator Line Ecuador",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-sunset-boats.jpeg",
-          description:
-            "Andrew Alagna's sunset photography over boats in Galapagos Islands",
-          name: "Andrew Alagna - Galapagos Sunset",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-sea-horse.jpeg",
-          description:
-            "Andrew Alagna's underwater photograph of seahorse in Galapagos",
-          name: "Andrew Alagna - Seahorse Underwater Photography",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-        {
-          "@type": "ImageObject",
-          contentUrl:
-            "https://elchic00.github.io/images/travel/andrew-alagna-inactive-volcano.jpeg",
-          description:
-            "Andrew Alagna hiking the inactive volcano rim in Galapagos Islands",
-          name: "Andrew Alagna - Volcano Hiking Galapagos",
-          author: { "@type": "Person", name: "Andrew Alagna" },
-          copyrightHolder: { "@type": "Person", name: "Andrew Alagna" },
-          creator: { "@type": "Person", name: "Andrew Alagna" },
-        },
-      ],
-    }),
+    () => generateTravelStructuredData(tripsData),
     []
   );
 
