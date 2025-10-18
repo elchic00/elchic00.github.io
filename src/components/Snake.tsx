@@ -43,7 +43,10 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
   } as any);
 
   return (
-    <section id="snake" className="min-h-screen landscape:min-h-0 flex flex-col pt-16">
+    <section
+      id="snake"
+      className="min-h-screen landscape:min-h-0 flex flex-col pt-16"
+    >
       {!mounted && <div>Snake game loading…</div>}
       <div className="flex-1 flex flex-col items-center justify-center landscape:justify-start py-2">
         <h2 className="text-white text-xl md:text-2xl font-medium landscape:text-lg mb-1 text-center">
@@ -65,14 +68,20 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
           </div>
           <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 text-slate-200 text-xs mt-1 mb-1">
             <div className="inline-flex gap-0.5">
-              <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm min-w-[22px] text-center">↑↓←→</kbd>
+              <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm min-w-[22px] text-center">
+                ↑→↓←
+              </kbd>
             </div>
             <span className="text-slate-400 text-xs">or</span>
             <div className="inline-flex gap-0.5">
-              <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">WASD</kbd>
+              <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">
+                WASD
+              </kbd>
             </div>
             <span className="text-slate-500">•</span>
-            <kbd className="px-2 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">Space</kbd>
+            <kbd className="px-2 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">
+              Space
+            </kbd>
             <span className="text-slate-400 text-xs">to pause</span>
           </div>
           <div className="flex justify-center gap-2">
