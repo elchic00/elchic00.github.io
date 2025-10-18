@@ -43,22 +43,17 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
   } as any);
 
   return (
-    <section id="snake" className="min-h-screen landscape:min-h-0 flex flex-col pt-20">
+    <section id="snake" className="min-h-screen landscape:min-h-0 flex flex-col pt-16">
       {!mounted && <div>Snake game loading…</div>}
-      <div className="flex-1 flex flex-col items-center justify-center landscape:justify-start">
-        <div className="text-center mb-2 landscape:mb-1">
-          <h2 className="text-white text-2xl md:text-3xl font-medium landscape:text-xl">
-            Snake Game
-          </h2>
-          <p className="text-slate-300 text-sm md:text-base mt-1 landscape:text-xs">
-            Arrow keys / WASD to move • Space to pause • Touch/swipe on mobile
-          </p>
-        </div>
+      <div className="flex-1 flex flex-col items-center justify-center landscape:justify-start py-2">
+        <h2 className="text-white text-xl md:text-2xl font-medium landscape:text-lg mb-1 text-center">
+          Snake Game
+        </h2>
 
-        <div className="w-full max-w-[min(95vw,calc(100vh-340px))] md:max-w-[min(90vw,calc(100vh-320px))] lg:max-w-[min(85vw,calc(100vh-300px))] xl:max-w-[min(80vw,calc(100vh-290px))] landscape:max-w-[calc(100vh-200px)] mx-auto">
-          <div className="flex justify-between items-center mb-2 px-2 text-sm md:text-base">
+        <div className="w-full max-w-[min(95vw,calc(100vh-320px))] md:max-w-[min(90vw,calc(100vh-300px))] lg:max-w-[min(85vw,calc(100vh-290px))] xl:max-w-[min(80vw,calc(100vh-280px))] landscape:max-w-[calc(100vh-200px)] mx-auto">
+          <div className="flex justify-between items-center mb-1 px-2 text-sm md:text-base">
             <div className="text-white font-semibold">Score: {score}</div>
-            <div className="text-emerald-400 font-semibold">High: {highScore}</div>
+            <div className="text-teal-400 font-semibold">High: {highScore}</div>
           </div>
           <div className="aspect-square w-full">
             <div ref={containerRef} className="w-full h-full">
@@ -68,7 +63,19 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
               />
             </div>
           </div>
-          <div className="flex justify-center gap-2 mt-2 landscape:mt-1">
+          <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 text-slate-200 text-xs mt-1 mb-1">
+            <div className="inline-flex gap-0.5">
+              <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm min-w-[22px] text-center">↑↓←→</kbd>
+            </div>
+            <span className="text-slate-400 text-xs">or</span>
+            <div className="inline-flex gap-0.5">
+              <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">WASD</kbd>
+            </div>
+            <span className="text-slate-500">•</span>
+            <kbd className="px-2 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">Space</kbd>
+            <span className="text-slate-400 text-xs">to pause</span>
+          </div>
+          <div className="flex justify-center gap-2">
             <Button
               variant="secondary"
               size="sm"
