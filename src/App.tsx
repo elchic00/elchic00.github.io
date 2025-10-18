@@ -2,6 +2,7 @@ import {AppRoutes} from "./routes";
 import {Navbar} from "./components/Navbar";
 import {ErrorBoundary} from "./components/ErrorBoundary";
 import {ScrollToHash} from "./components/ScrollToHash";
+import {ScrollToTopButton} from "./components/shared/ScrollToTopButton";
 
 export const App = () => {
   return (
@@ -10,6 +11,7 @@ export const App = () => {
           <Navbar/>
           <ScrollToHash/>
           <AppRoutes/>
+          <ScrollToTopButton/>
       </main>
     </ErrorBoundary>
   );
