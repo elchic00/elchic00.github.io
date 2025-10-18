@@ -1,21 +1,17 @@
 {
   "Languages & Frameworks": [
     "JavaScript (ReactJS, TypeScript)",
+    "CSS + HTML",
     "Python",
     "Java",
-    "CSS + HTML"
+    "Shell Scripting"
   ],
-  "Databases": [
-    "SQL (SQLite, MySQL, PostgreSQL)"
-  ],
-  "DevOps & Tools": [
-    "CI/CD + Github Actions",
-    "Git + Github"
-  ],
+  "Databases": ["SQL (SQLite, MySQL, PostgreSQL)"],
+  "DevOps & Tools": ["CI/CD + Github Actions", "Git + Github"],
   "Practices & Methodologies": [
-    "Test Driven Development",
     "User Analytics",
     "Cross-team Collaboration",
+    "Comprensive Test Coverage",
     "Agile + Waterfall Methodologies"
   ]
 }
