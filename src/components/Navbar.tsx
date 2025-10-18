@@ -102,7 +102,7 @@ export const Navbar = () => {
           <li className="md:ml-4 text-xl md:my-0 my-7 md:mr-0 mr-4">
             <Link
               to="/#contact"
-              className="inline-flex items-center bg-purple-600 text-white font-[Poppins] py-2 px-6 rounded hover:bg-purple-500 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-6 rounded hover:bg-purple-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
               onClick={handleLinkClick}
             >
               Contact
