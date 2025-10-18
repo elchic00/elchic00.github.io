@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Trip } from "../../types";
 
 interface TripNavigationProps {
@@ -11,6 +11,8 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
   activeId,
 }) => {
   const [isSticky, setIsSticky] = useState(false);
+  const navContainerRef = useRef<HTMLDivElement>(null);
+  const buttonRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +23,27 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Auto-scroll the active button into view
+  useEffect(() => {
+    if (activeId && navContainerRef.current) {
+      const activeButton = buttonRefs.current.get(activeId);
+      if (activeButton) {
+        const container = navContainerRef.current;
+        const buttonLeft = activeButton.offsetLeft;
+        const buttonWidth = activeButton.offsetWidth;
+        const containerWidth = container.offsetWidth;
+
+        // Calculate position to center the button
+        const scrollPosition = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
+
+        container.scrollTo({
+          left: scrollPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [activeId]);
 
   const scrollToTrip = (tripId: string) => {
     const element = document.getElementById(tripId);
@@ -54,6 +77,7 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
     >
       <div className="container mx-auto px-5 lg:px-40">
         <div
+          ref={navContainerRef}
           className={`flex items-center gap-3 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-transparent ${
             isSticky ? "py-2" : "py-3"
           }`}
@@ -66,6 +90,13 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
             return (
               <button
                 key={trip.id}
+                ref={(el) => {
+                  if (el) {
+                    buttonRefs.current.set(trip.id, el);
+                  } else {
+                    buttonRefs.current.delete(trip.id);
+                  }
+                }}
                 onClick={() => scrollToTrip(trip.id)}
                 className={`
                   ${isSticky ? "px-3 py-1.5" : "px-4 py-2"} rounded-full text-sm font-medium whitespace-nowrap
