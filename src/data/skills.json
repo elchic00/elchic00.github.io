@@ -1,17 +1,37 @@
 {
   "Languages & Frameworks": [
-    "JavaScript (ReactJS, TypeScript)",
-    "CSS + HTML",
+    "JavaScript",
+    "Node.js",
+    "ReactJS",
+    "Next.js",
+    "TypeScript",
+    "CSS",
+    "HTML",
     "Python",
     "Java",
     "Shell Scripting"
   ],
-  "Databases": ["SQL (SQLite, MySQL, PostgreSQL)"],
-  "DevOps & Tools": ["CI/CD + Github Actions", "Git + Github"],
+  "Databases & Backend": [
+    "PostgreSQL",
+    "MySQL",
+    "SQLite",
+    "MongoDB",
+    "Supabase",
+    "Firebase"
+  ],
+  "DevOps, Tools & Testing": [
+    "CI/CD",
+    "Github Actions",
+    "Git",
+    "Github",
+    "Jest",
+    "React Testing Library"
+  ],
   "Practices & Methodologies": [
     "User Analytics",
     "Cross-team Collaboration",
-    "Comprensive Test Coverage",
-    "Agile + Waterfall Methodologies"
+    "Comprehensive Test Coverage",
+    "Agile",
+    "Waterfall"
   ]
 }
