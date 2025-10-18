@@ -37,7 +37,9 @@
 
 This portfolio is crafted with modern web technologies:
 
+- **[Vite](https://vitejs.dev/)** - Next-generation frontend build tool for blazing fast development
 - **[React](https://reactjs.org/)** - UI framework for building interactive components
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript for better developer experience
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS for responsive design
 - **[EmailJS](https://www.emailjs.com/)** - Contact form without a backend server
 - **[React Router](https://reactrouter.com/)** - Seamless client-side navigation
@@ -110,9 +112,9 @@ elchic00.github.io/
 
 ### ⚡ **Performance Optimized**
 
+- Built with Vite for lightning-fast builds and HMR
 - Code splitting with React lazy loading
 - Optimized images in WebP format
-- Pre-rendering with `react-snap` for better SEO
 - Lighthouse score: 95+ across all metrics
 
 ---
@@ -150,21 +152,21 @@ Food diary app with Angular, .NET, and SQLite
 
 Python-based crime trend analysis with interactive visualizations
 
-### 🧮 **Multi-Purpose Calculator** - Desktop App
+### 💪 **Reps** - Workout Tracking App
 
-Stylish calculator and converter built with Python (PyQt5)
+Progressive web app for tracking gym workouts and progress with React and TypeScript
 
 ### 🗣️ **myPal** - AAC Mobile App
 
 React Native communication app for children with special needs
 
-[**→ View All Projects Live**](https://elchic00.github.io/#projects)
+[**→ View All Projects Live**](https://elchic00.github.io/#/#projects)
 
 ---
 
 ## 🌍 Travel Photography
 
-Check out my [**travel photo galleries**](https://elchic00.github.io/#travel) featuring moments from around the world:
+Check out my [**travel photo galleries**](https://elchic00.github.io/#/travel) featuring moments from around the world:
 
 - 🌎 Multiple destinations across different continents
 - 🐢 Wildlife encounters and nature photography
@@ -187,7 +189,7 @@ I'm always open to interesting conversations about:
 - 🌐 Portfolio: [elchic00.github.io](https://elchic00.github.io)
 - 💼 LinkedIn: [Andrew Alagna](https://www.linkedin.com/in/andrew-a-10b88215b/)
 - 🐙 GitHub: [@elchic00](https://github.com/elchic00)
-- 📧 Email: Via [contact form](https://elchic00.github.io/#contact)
+- 📧 Email: Via [contact form](https://elchic00.github.io/#/#contact)
 
 ---
 
@@ -214,6 +216,6 @@ Feel free to use this code as inspiration for your own portfolio! If you do, I'd
 
 ⭐ Star this repo if you find it helpful!
 
-[🌐 Visit Live Site](https://elchic00.github.io) | [📧 Get in Touch](https://elchic00.github.io/#contact)
+[🌐 Visit Live Site](https://elchic00.github.io) | [📧 Get in Touch](https://elchic00.github.io/#/#contact)
 
 </div>
