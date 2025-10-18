@@ -15,22 +15,17 @@ export const About = () => {
           </h1>
           <p className="text-xl text-slate-400 mb-4">Hey there! I'm Drew 👋</p>
           <p className="mb-7 leading-relaxed">
-            I build accessible, performant web applications at American Express,
-            serving millions of users across the globe.
+            Software engineer at American Express building web applications for
+            millions of users. I care deeply about accessibility and performance
+            — if your screen reader works and your page loads fast, I'm happy.
             <br />
             <br />
-            My passion lies in creating inclusive digital experiences and
-            optimizing performance—whether that's improving accessibility across
-            international markets, or cutting load times through smart
-            architecture.
+            I mentor students through CodePath and Hunter College (my alma
+            mater) because teaching keeps me sharp. When I'm not coding, I'm
+            bouldering, traveling, or building side projects.
             <br />
             <br />
-            When I'm not coding, I'm teaching, bouldering, or travelling. I
-            mentor students through CodePath and students from my alma mater,
-            helping the next generation of engineers level up their skills.
-            <br />
-            <br />
-            Hunter College grad. NYC based. Always learning.
+            NYC based. Always learning.
           </p>
 
           <nav aria-label="Social links and actions">
