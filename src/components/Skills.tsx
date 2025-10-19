@@ -4,10 +4,9 @@ import skillsData from "../data/skills.json";
 // Color schemes for different categories
 const categoryColors: Record<string, string> = {
   "Languages & Frameworks": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30",
-  Databases: "bg-teal-600/20 text-teal-400 border-teal-500/30",
-  "DevOps & Tools": "bg-purple-600/20 text-purple-400 border-purple-500/30",
-  "Practices & Methodologies":
-    "bg-slate-600/20 text-slate-300 border-slate-500/30",
+  "Databases & Backend": "bg-teal-600/20 text-teal-400 border-teal-500/30",
+  "DevOps, Tools & Testing": "bg-purple-600/20 text-purple-400 border-purple-500/30",
+  "Practices & Methodologies": "bg-slate-600/20 text-slate-300 border-slate-500/30",
 };
 
 export const Skills = () => {
