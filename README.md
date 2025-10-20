@@ -21,6 +21,12 @@
 - Keyboard navigation and lightbox modal for an immersive experience
 - Wildlife, landscapes, and cultural moments captured across multiple destinations
 
+### 🤖 **AI Chat Assistant**
+
+- Interactive AI-powered chat to answer questions about my experience, projects, and skills
+- Powered by Google Gemini with secure Cloudflare Workers backend
+- Rate-limited and optimized for natural conversations
+
 ### 🎮 **Interactive Fun**
 
 - Play a fully functional [Snake game](https://elchic00.github.io/#/snake) built with React
@@ -41,6 +47,8 @@ This portfolio is crafted with modern web technologies:
 - **[React](https://reactjs.org/)** - UI framework for building interactive components
 - **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript for better developer experience
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS for responsive design
+- **[Google Gemini](https://ai.google.dev/)** - AI chat assistant for answering visitor questions
+- **[Cloudflare Workers](https://workers.cloudflare.com/)** - Serverless backend for secure API proxying
 - **[EmailJS](https://www.emailjs.com/)** - Contact form without a backend server
 - **[React Router](https://reactrouter.com/)** - Seamless client-side navigation
 - **[Heroicons](https://heroicons.com/)** - Beautiful SVG icons
@@ -82,6 +90,7 @@ elchic00.github.io/
 ├── src/
 │   ├── components/        # React components
 │   │   ├── About.jsx
+│   │   ├── AIChatAssistant.tsx  # AI chat widget
 │   │   ├── Contact.jsx
 │   │   ├── Projects.jsx
 │   │   ├── Snake.jsx
@@ -89,12 +98,24 @@ elchic00.github.io/
 │   │   └── ...
 │   ├── content.js         # Centralized content data
 │   └── App.js
+├── worker/
+│   └── index.js           # Cloudflare Worker for AI chat backend
+├── wrangler.toml          # Cloudflare deployment config
 └── package.json
 ```
 
 ---
 
 ## ✨ Key Features
+
+### 🤖 **AI Chat Assistant**
+
+- **Natural Conversations** - Ask about my experience, projects, or skills
+- **Context-Aware** - Maintains conversation history for coherent responses
+- **Secure Architecture** - API keys protected via Cloudflare Worker secrets
+- **Rate Limited** - 5 requests per minute per IP to prevent abuse
+- **Free Tier** - Powered by Google Gemini (1,500 requests/day)
+- **Mobile-Friendly** - Floating chat button with smooth animations
 
 ### 🖼️ **Interactive Photo Gallery**
 
