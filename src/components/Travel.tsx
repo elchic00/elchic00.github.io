@@ -7,47 +7,37 @@ import { generateTravelStructuredData } from "../utils/generateTravelStructuredD
 import { useActiveTrip } from "../hooks";
 
 const Travel = () => {
-  // Handle initial scroll on mount
   useEffect(() => {
     const fullHash = window.location.hash;
-    // Format: #/travel#tripId -> extract tripId
     const hashParts = fullHash.split('#');
     const tripHash = hashParts[hashParts.length - 1];
 
-    // Check if there's a trip hash (not just the route)
     if (tripHash && tripHash !== '/travel' && !tripHash.startsWith('/')) {
-      // If there's a trip hash, scroll to that trip after content loads
       const scrollToHash = () => {
         try {
           const element = document.getElementById(tripHash);
           if (element) {
-            // Use setTimeout to ensure DOM is fully rendered
             setTimeout(() => {
               element.scrollIntoView({ behavior: "smooth", block: "start" });
             }, 100);
           }
         } catch (error) {
-          // Invalid selector, ignore
           console.warn('Invalid trip hash:', tripHash);
         }
       };
 
-      // Try immediately and also after a short delay for images
       scrollToHash();
       setTimeout(scrollToHash, 300);
     } else {
-      // No trip hash, scroll to top
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, []);
 
-  // Generate structured data from all trips for SEO
   const structuredData = useMemo(
     () => generateTravelStructuredData(tripsData),
     []
   );
 
-  // Track which trip is currently visible
   const tripIds = useMemo(() => tripsData.map((trip) => trip.id), []);
   const activeId = useActiveTrip(tripIds);
 
@@ -72,7 +62,6 @@ const Travel = () => {
           </p>
         </header>
 
-        {/* Sticky trip navigation */}
         <TripNavigation trips={tripsData} activeId={activeId} />
 
         <div className="mt-12">

@@ -1,7 +1,6 @@
 import { ChipIcon } from "@heroicons/react/solid";
 import skillsData from "../data/skills.json";
 
-// Color schemes for different categories
 const categoryColors: Record<string, string> = {
   "Languages & Frameworks": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30",
   "Databases & Backend": "bg-teal-600/20 text-teal-400 border-teal-500/30",

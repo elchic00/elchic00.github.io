@@ -16,7 +16,6 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      // Make sticky after scrolling past the header (200px)
       setIsSticky(window.scrollY > 200);
     };
 
@@ -24,7 +23,6 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Auto-scroll the active button into view
   useEffect(() => {
     if (activeId && navContainerRef.current) {
       const activeButton = buttonRefs.current.get(activeId);
@@ -33,8 +31,6 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
         const buttonLeft = activeButton.offsetLeft;
         const buttonWidth = activeButton.offsetWidth;
         const containerWidth = container.offsetWidth;
-
-        // Calculate position to center the button
         const scrollPosition = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
 
         container.scrollTo({
@@ -48,7 +44,6 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
   const scrollToTrip = (tripId: string) => {
     const element = document.getElementById(tripId);
     if (element) {
-      // Account for navbar (64px) + trip nav (60px) = 124px offset
       const offset = 124;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.scrollY - offset;
@@ -58,8 +53,6 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
         behavior: "smooth",
       });
 
-      // Update URL hash while preserving the route (for HashRouter)
-      // Format: /#/travel#tripId
       window.history.replaceState(null, "", `#/travel#${tripId}`);
     }
   };
@@ -127,7 +120,6 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
   );
 };
 
-// Helper function to get country flags
 function getCountryFlag(location: string): string {
   const flags: Record<string, string> = {
     Ecuador: "🇪🇨",
