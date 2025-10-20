@@ -74,6 +74,80 @@
     ]
   },
   {
+    "id": "puertorico-2024",
+    "title": "Puerto Rico Discovery",
+    "location": "Puerto Rico",
+    "date": "2024",
+    "description": "Exploring the vibrant culture, historic Old San Juan, and stunning Caribbean coastline of Puerto Rico. From colorful colonial architecture to pristine beaches.",
+    "photos": [
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan1.webp",
+        "alt": "Andrew Alagna Old San Juan colorful colonial buildings streets Puerto Rico",
+        "caption": "Colorful streets of Old San Juan"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan2.webp",
+        "alt": "Andrew Alagna Old San Juan colonial architecture balconies Puerto Rico",
+        "caption": "Historic Spanish colonial architecture with balconies"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan3.webp",
+        "alt": "Andrew Alagna Old San Juan vibrant painted buildings Puerto Rico",
+        "caption": "Vibrant painted buildings in the old town"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan4.webp",
+        "alt": "Andrew Alagna Old San Juan cobblestone streets colorful facades Puerto Rico",
+        "caption": "Cobblestone streets and colorful facades"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan5.webp",
+        "alt": "Andrew Alagna Old San Juan historic plaza colonial architecture Puerto Rico",
+        "caption": "Historic plaza in Old San Juan"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan-historical.webp",
+        "alt": "Andrew Alagna Castillo San Felipe del Morro fortress sign Puerto Rico",
+        "caption": "Castillo San Felipe del Morro entrance sign"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-castle.webp",
+        "alt": "Andrew Alagna El Yunque rainforest watchtower mist Puerto Rico",
+        "caption": "Watchtower shrouded in mist at El Yunque rainforest"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-beach2.webp",
+        "alt": "Andrew Alagna Puerto Rico Caribbean coastline panoramic beach view",
+        "caption": "Wide panoramic view of the Caribbean coastline"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-clear-waters.webp",
+        "alt": "Andrew Alagna crystal clear turquoise Caribbean beach waters Puerto Rico",
+        "caption": "Crystal clear turquoise Caribbean waters"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-mosquitos.webp",
+        "alt": "Andrew Alagna colorful welcome sign Maunabo town Puerto Rico",
+        "caption": "Colorful welcome sign to the town of Maunabo"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-vieques.webp",
+        "alt": "Andrew Alagna Welcome to Vieques island sign Puerto Rico Caribbean",
+        "caption": "Welcome to Vieques island sign"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-sunrise.webp",
+        "alt": "Andrew Alagna Caribbean beach sunrise sunlight tropical foliage Puerto Rico",
+        "caption": "Sunlight streaming through tropical foliage on the beach at sunrise"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-sunset.webp",
+        "alt": "Andrew Alagna stunning Caribbean sunset orange sky Puerto Rico",
+        "caption": "Stunning Caribbean sunset over the ocean"
+      }
+    ]
+  },
+  {
     "id": "thailand-2024",
     "title": "Thailand Adventure",
     "location": "Thailand",
@@ -233,80 +307,6 @@
         "url": "/images/travel/laos/andrew-alagna-reclining-buddha.webp",
         "alt": "Andrew Alagna reclining Buddha statue temple garden Laos",
         "caption": "Reclining Buddha statue in a peaceful temple garden"
-      }
-    ]
-  },
-  {
-    "id": "puertorico-2024",
-    "title": "Puerto Rico Discovery",
-    "location": "Puerto Rico",
-    "date": "2024",
-    "description": "Exploring the vibrant culture, historic Old San Juan, and stunning Caribbean coastline of Puerto Rico. From colorful colonial architecture to pristine beaches.",
-    "photos": [
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan1.webp",
-        "alt": "Andrew Alagna Old San Juan colorful colonial buildings streets Puerto Rico",
-        "caption": "Colorful streets of Old San Juan"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan2.webp",
-        "alt": "Andrew Alagna Old San Juan colonial architecture balconies Puerto Rico",
-        "caption": "Historic Spanish colonial architecture with balconies"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan3.webp",
-        "alt": "Andrew Alagna Old San Juan vibrant painted buildings Puerto Rico",
-        "caption": "Vibrant painted buildings in the old town"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan4.webp",
-        "alt": "Andrew Alagna Old San Juan cobblestone streets colorful facades Puerto Rico",
-        "caption": "Cobblestone streets and colorful facades"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan5.webp",
-        "alt": "Andrew Alagna Old San Juan historic plaza colonial architecture Puerto Rico",
-        "caption": "Historic plaza in Old San Juan"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan-historical.webp",
-        "alt": "Andrew Alagna Castillo San Felipe del Morro fortress sign Puerto Rico",
-        "caption": "Castillo San Felipe del Morro entrance sign"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-castle.webp",
-        "alt": "Andrew Alagna El Yunque rainforest watchtower mist Puerto Rico",
-        "caption": "Watchtower shrouded in mist at El Yunque rainforest"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-beach2.webp",
-        "alt": "Andrew Alagna Puerto Rico Caribbean coastline panoramic beach view",
-        "caption": "Wide panoramic view of the Caribbean coastline"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-clear-waters.webp",
-        "alt": "Andrew Alagna crystal clear turquoise Caribbean beach waters Puerto Rico",
-        "caption": "Crystal clear turquoise Caribbean waters"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-mosquitos.webp",
-        "alt": "Andrew Alagna colorful welcome sign Maunabo town Puerto Rico",
-        "caption": "Colorful welcome sign to the town of Maunabo"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-vieques.webp",
-        "alt": "Andrew Alagna Welcome to Vieques island sign Puerto Rico Caribbean",
-        "caption": "Welcome to Vieques island sign"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-sunrise.webp",
-        "alt": "Andrew Alagna Caribbean beach sunrise sunlight tropical foliage Puerto Rico",
-        "caption": "Sunlight streaming through tropical foliage on the beach at sunrise"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-sunset.webp",
-        "alt": "Andrew Alagna stunning Caribbean sunset orange sky Puerto Rico",
-        "caption": "Stunning Caribbean sunset over the ocean"
       }
     ]
   },
