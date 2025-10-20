@@ -26,11 +26,11 @@ refactor: redesign Skills with color-coded pill badges Replace box layout with r
 
 Guidelines:
 
+- Do NOT include me (Claude) as the commit author - use only the user's git config
 - Split commits when changes address different features, bugs, or areas of the codebase
 - Combine commits when changes are part of the same logical unit of work
 - Keep commit bodies concise but informative (avoid wall-of-text descriptions)
 - Never include sensitive information or credentials in commit messages
 - Always use descriptive, professional language
-- Do NOT include me (Claude) as the commit author - use only the user's git config
 
 After pushing, provide a brief summary of what was committed and the commit hash(es).
