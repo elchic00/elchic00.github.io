@@ -27,16 +27,13 @@ export const Navbar = () => {
 
   const handleLinkClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, linkPath: string) => {
-      // Extract route path and hash from link
       const targetRoute = linkPath.startsWith("/#") ? "/" : linkPath;
       const hasHash = linkPath.includes("#");
 
-      // If already on this route AND there's no hash, scroll to top
       if (location.pathname === targetRoute && !hasHash) {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
-      // If there's a hash, let react-router-hash-link handle it
 
       closeMenu();
       e?.currentTarget?.blur?.();
@@ -46,7 +43,6 @@ export const Navbar = () => {
 
   const handleSnakeClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-      // If already on Snake page, scroll to top instead of navigating
       if (location.pathname === "/snake") {
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
@@ -64,16 +60,17 @@ export const Navbar = () => {
       className="bg-slate-800 shadow-md w-full fixed top-0 left-0 z-10"
       aria-label="Main navigation"
     >
-      <div className="flex justify-between items-center py-3 px-4 md:px-6">
+      <div className="flex justify-between items-center py-3 px-4 md:px-8">
         <Link
           to="/#about"
           scroll={scrollWithOffset}
-          className="font-bold text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
+          className="font-bold text-xl md:text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
           onClick={(e) => handleLinkClick(e, "/#about")}
           aria-label="Andrew Alagna - Home"
         >
-          <MonogramOverlap className="w-10 h-10 text-cyan-500 mr-1" />
-          Andrew Alagna
+          <MonogramOverlap className="w-8 h-8 md:w-10 md:h-10 text-cyan-500 mr-1" />
+          <span className="hidden sm:inline">Andrew Alagna</span>
+          <span className="sm:hidden">AA</span>
         </Link>
 
         {isMobile && (
@@ -92,12 +89,12 @@ export const Navbar = () => {
         )}
 
         <ul
-          className={`bg-slate-800 md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+          className={`bg-slate-800 md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 md:pr-0 pr-4 transition-all duration-500 ease-in ${
             open ? "top-[68px]" : "top-[-490px]"
           }`}
         >
           {NAV_LINKS.map((link) => (
-            <li key={link.name} className="md:ml-4 text-xl md:my-0 my-7">
+            <li key={link.name} className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7">
               <Link
                 to={link.link}
                 scroll={scrollWithOffset}
@@ -109,7 +106,7 @@ export const Navbar = () => {
             </li>
           ))}
 
-          <li className="md:ml-4 text-xl md:my-0 my-7">
+          <li className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7">
             <button
               onClick={handleSnakeClick}
               className="hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
@@ -118,15 +115,16 @@ export const Navbar = () => {
             </button>
           </li>
 
-          <li className="md:ml-4 text-xl md:my-0 my-7 md:mr-0 mr-4">
+          <li className="md:ml-4 lg:ml-5 text-xl md:text-base lg:text-xl md:my-0 my-7">
             <Link
               to="/#contact"
               scroll={scrollWithOffset}
-              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-6 rounded hover:bg-purple-600 duration-500 transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 md:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-800"
               onClick={(e) => handleLinkClick(e, "/#contact")}
+              aria-label="Contact Andrew Alagna"
             >
               Contact
-              <ArrowRightIcon className="w-4 h-4 ml-1" />
+              <ArrowRightIcon className="w-3 h-3 md:w-4 md:h-4 ml-1" aria-hidden="true" />
             </Link>
           </li>
         </ul>
