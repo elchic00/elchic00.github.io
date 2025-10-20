@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSnakeGame } from "../hooks/useSnakeGame";
 import { Button } from "./shared/Button";
 
@@ -21,6 +21,7 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   const {
     score,
@@ -42,7 +43,11 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
     containerRef,
   } as any);
 
-  // Scroll to top when page loads
+  useEffect(() => {
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    setIsTouchDevice(hasTouch);
+  }, []);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
@@ -72,22 +77,35 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
             </div>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-1 text-slate-200 text-xs mt-1 mb-1">
-            <div className="inline-flex gap-0.5">
-              <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm min-w-[22px] text-center">
-                ↑→↓←
-              </kbd>
-            </div>
-            <span className="text-slate-400 text-xs">or</span>
-            <div className="inline-flex gap-0.5">
-              <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">
-                WASD
-              </kbd>
-            </div>
-            <span className="text-slate-500">•</span>
-            <kbd className="px-2 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">
-              Space
-            </kbd>
-            <span className="text-slate-400 text-xs">to pause</span>
+            {isTouchDevice ? (
+              <div className="flex items-center gap-x-2">
+                <kbd className="px-2 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">
+                  Swipe
+                </kbd>
+                <span className="text-slate-400 text-xs">to control</span>
+                <span className="text-slate-500">•</span>
+                <span className="text-slate-400 text-xs">Tap buttons to pause</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-x-2">
+                <div className="inline-flex gap-0.5">
+                  <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm min-w-[22px] text-center">
+                    ↑→↓←
+                  </kbd>
+                </div>
+                <span className="text-slate-400 text-xs">or</span>
+                <div className="inline-flex gap-0.5">
+                  <kbd className="px-1.5 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">
+                    WASD
+                  </kbd>
+                </div>
+                <span className="text-slate-500">•</span>
+                <kbd className="px-2 py-0.5 text-xs font-semibold text-slate-900 bg-slate-200 border border-slate-300 rounded shadow-sm">
+                  Space
+                </kbd>
+                <span className="text-slate-400 text-xs">to pause</span>
+              </div>
+            )}
           </div>
           <div className="flex justify-center gap-2">
             <Button
