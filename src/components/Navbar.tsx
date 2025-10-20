@@ -69,8 +69,7 @@ export const Navbar = () => {
           aria-label="Andrew Alagna - Home"
         >
           <MonogramOverlap className="w-8 h-8 md:w-10 md:h-10 text-cyan-500 mr-1" />
-          <span className="hidden sm:inline">Andrew Alagna</span>
-          <span className="sm:hidden">AA</span>
+          <span>Andrew Alagna</span>
         </Link>
 
         {isMobile && (
