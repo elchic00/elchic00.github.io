@@ -3,6 +3,7 @@ import {Navbar} from "./components/Navbar";
 import {ErrorBoundary} from "./components/ErrorBoundary";
 import {ScrollToHash} from "./components/ScrollToHash";
 import {ScrollToTopButton} from "./components/shared/ScrollToTopButton";
+import {AIChatAssistant} from "./components/AIChatAssistant";
 
 export const App = () => {
   return (
@@ -12,6 +13,7 @@ export const App = () => {
           <ScrollToHash/>
           <AppRoutes/>
           <ScrollToTopButton/>
+          <AIChatAssistant/>
       </main>
     </ErrorBoundary>
   );

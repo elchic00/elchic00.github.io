@@ -1,0 +1,12 @@
+name = "portfolio-ai-chat"
+main = "worker/index.js"
+compatibility_date = "2024-01-01"
+
+# Route configuration - you'll need to set this up in Cloudflare dashboard
+# or add your custom domain here
+# routes = [
+#   { pattern = "elchic00.github.io/api/*", zone_name = "elchic00.github.io" }
+# ]
+
+[env.production]
+name = "portfolio-ai-chat-production"
