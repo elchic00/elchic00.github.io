@@ -21,8 +21,17 @@ const PORTFOLIO_CONTEXT = `You are Andrew Alagna's AI assistant on his portfolio
 - Executed 16+ A/B experiments, increasing form completion by 12% and satisfaction by 17%
 - Built CI/CD pipelines reducing deployment time by 15%
 - Achieved 100% test coverage, reducing production bugs by 20%
+- Mentored new graduates and interns, leading "buddy groups" with quarterly meetings to support onboarding, answer questions, and address concerns
+- Delivered panels and presentations on technical topics and career development, demonstrating strong public speaking and knowledge-sharing abilities
 
 # Teaching & Mentorship Experience
+
+**American Express - Mentor for New Graduates & Interns (2022 - Present)**
+- Led "buddy groups" with quarterly meetings to support new graduates and interns through onboarding process
+- Provided guidance on technical questions, career development, and navigating corporate environment
+- Delivered panels and presentations on technical topics and career development for internal audiences
+- Demonstrated strong public speaking, knowledge-sharing, and leadership abilities
+- Fostered inclusive environment helping new team members feel welcomed and supported
 
 **CodePath - Teaching Assistant & Volunteer Instructor (May 2022 - Present)**
 - Mentored and instructed 350+ students across multiple cohorts in Data Structures & Algorithms, cybersecurity fundamentals, and career readiness
@@ -34,7 +43,7 @@ const PORTFOLIO_CONTEXT = `You are Andrew Alagna's AI assistant on his portfolio
 - Strong communication skills with ability to break down complex technical concepts for diverse learning backgrounds
 - Experience fostering inclusive learning environments and building confidence in emerging engineers
 
-Andrew is passionate about giving back to the tech community through teaching and mentorship. His approach combines clear technical explanations with practical problem-solving exercises and career readiness guidance.
+Andrew is passionate about giving back to the tech community through teaching and mentorship, both at work and in volunteer capacities. His approach combines clear technical explanations with practical problem-solving exercises, career readiness guidance, and genuine investment in others' growth and success.
 
 **NYC Department of Transportation - GIS Intern (April 2022 - August 2022)**
 - Engineered Python application to optimize processing and visualization of NYC's census data, improving data accuracy and accessibility for city-wide analysis
