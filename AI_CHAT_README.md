@@ -2,23 +2,26 @@
 
 ## ✅ What's Been Built
 
-I've successfully implemented a **free, high-quality AI chat assistant** for your portfolio using Google Gemini 1.5 Flash and Cloudflare Workers.
+I've successfully implemented a **free, high-quality AI chat assistant** for your portfolio using Google Gemini 2.5 Flash and Cloudflare Workers.
 
 ### Components Created
 
 1. **React Chat UI** ([src/components/AIChatAssistant.tsx](src/components/AIChatAssistant.tsx))
+
    - Floating chat button (bottom-right, above scroll button)
    - Animated chat window with smooth transitions
    - Message history with typing indicators
    - Error handling and loading states
 
 2. **Cloudflare Worker API** ([worker/index.js](worker/index.js))
+
    - Secure proxy to Gemini API (keeps API key hidden)
    - Rate limiting (5 requests/min per IP)
    - Portfolio context injection
    - CORS handling
 
 3. **Portfolio Context** ([src/data/portfolioContext.ts](src/data/portfolioContext.ts))
+
    - Comprehensive data about your experience
    - Includes resume details, projects, skills
    - Optimized prompts for quality responses
@@ -31,7 +34,7 @@ I've successfully implemented a **free, high-quality AI chat assistant** for you
 ## 🎨 Features
 
 ✅ **Free Forever** - Gemini free tier (1,500 req/day) + Cloudflare Workers free tier
-✅ **High Quality** - Gemini 1.5 Flash with full portfolio context
+✅ **High Quality** - Gemini 2.5 Flash with full portfolio context
 ✅ **Secure** - API key never exposed to frontend
 ✅ **Rate Limited** - 5 requests/min per IP to prevent abuse
 ✅ **Beautiful UI** - Gradient chat button with smooth animations
@@ -55,6 +58,7 @@ npm run worker:deploy
 ```
 
 This will give you a URL like:
+
 ```
 https://portfolio-ai-chat.YOUR-USERNAME.workers.dev
 ```
@@ -80,6 +84,7 @@ npm start
 ```
 
 Visit http://localhost:5173 and click the chat button in the bottom-right. Ask questions like:
+
 - "Tell me about Andrew's experience at American Express"
 - "What projects has Andrew built?"
 - "What are Andrew's technical skills?"
@@ -92,35 +97,22 @@ Once testing looks good:
 npm run deploy
 ```
 
-## 🔒 Security Best Practice (Optional but Recommended)
+## 🔒 Security Configuration Required
 
-Your API key is currently in `worker/index.js`. For better security:
+The worker is configured to use environment variables for the API key for maximum security.
 
-### Move API Key to Cloudflare Secrets
+### Set Up Your API Key as a Cloudflare Secret
 
 ```bash
 npx wrangler secret put GEMINI_API_KEY
-# Paste: ***REDACTED-GOOGLE-API-KEY***
+# When prompted, paste your Google Gemini API key
+# Get one free at: https://aistudio.google.com/app/apikey
 ```
 
-Then update `worker/index.js`:
+The worker code is already configured to use `env.GEMINI_API_KEY` - no code changes needed!
 
-```javascript
-// Line 4: Remove hardcoded key
-// const GEMINI_API_KEY = '***REDACTED-GOOGLE-API-KEY***';
+Deploy after setting the secret:
 
-// Line 85: Update function signature
-export default {
-  async fetch(request, env) {
-    // Use env variable instead
-    const GEMINI_API_KEY = env.GEMINI_API_KEY;
-
-    // ... rest of code stays the same
-  }
-};
-```
-
-Redeploy:
 ```bash
 npm run worker:deploy
 ```
@@ -142,11 +134,11 @@ npx wrangler tail
 
 **Free Tier (Plenty for Portfolio Traffic)**
 
-| Service | Limit | Notes |
-|---------|-------|-------|
-| Gemini API | 15 req/min, 1500 req/day | More than enough |
-| Cloudflare Workers | 100,000 req/day | Way more than needed |
-| Rate Limiting | 5 req/min per IP | Prevents spam |
+| Service            | Limit                    | Notes                |
+| ------------------ | ------------------------ | -------------------- |
+| Gemini API         | 15 req/min, 1500 req/day | More than enough     |
+| Cloudflare Workers | 100,000 req/day          | Way more than needed |
+| Rate Limiting      | 5 req/min per IP         | Prevents spam        |
 
 ## 💡 Customization Tips
 
@@ -157,6 +149,7 @@ Edit the `PORTFOLIO_CONTEXT` in `worker/index.js` to change how the AI responds.
 ### Change Rate Limits
 
 In `worker/index.js`:
+
 ```javascript
 const RATE_LIMIT = 5; // requests per minute
 const RATE_LIMIT_WINDOW = 60000; // 1 minute in ms
@@ -165,6 +158,7 @@ const RATE_LIMIT_WINDOW = 60000; // 1 minute in ms
 ### Modify AI Temperature
 
 In `worker/index.js` (line ~130):
+
 ```javascript
 generationConfig: {
   temperature: 0.7, // 0-1: lower = focused, higher = creative
@@ -179,15 +173,18 @@ Edit `src/components/AIChatAssistant.tsx` - modify colors, sizes, positioning, e
 ## 🐛 Troubleshooting
 
 ### Chat button shows but doesn't respond
+
 - Check browser console for errors
 - Verify worker URL is correct in AIChatAssistant.tsx
 - Test worker directly: `curl -X POST https://your-worker.workers.dev/api/chat -H "Content-Type: application/json" -d '{"message":"test"}'`
 
 ### "Rate limit exceeded"
+
 - Wait 60 seconds (user limit: 5 req/min)
 - Adjust limits in worker/index.js if needed
 
 ### Worker deployment fails
+
 - Run `npx wrangler login` first
 - Check wrangler.toml is properly configured
 - Verify you have a Cloudflare account
@@ -195,6 +192,7 @@ Edit `src/components/AIChatAssistant.tsx` - modify colors, sizes, positioning, e
 ## 📝 Files Created/Modified
 
 **New Files:**
+
 - `src/components/AIChatAssistant.tsx` - Chat UI component
 - `src/data/portfolioContext.ts` - Portfolio context data
 - `worker/index.js` - Cloudflare Worker API
@@ -203,6 +201,7 @@ Edit `src/components/AIChatAssistant.tsx` - modify colors, sizes, positioning, e
 - `AI_CHAT_README.md` - This file
 
 **Modified Files:**
+
 - `src/App.tsx` - Added AIChatAssistant component
 - `tailwind.config.js` - Added slide-up animation
 - `package.json` - Added wrangler scripts
