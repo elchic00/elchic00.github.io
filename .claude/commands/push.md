@@ -22,15 +22,21 @@ Instructions:
 6. Report back with commit hashes and a summary of what was pushed
 
 Commit message example:
-refactor: redesign Skills with color-coded pill badges Replace box layout with rounded pills using themed colors for visual hierarchy. Add hover animations for better interactivity. Improves scannability and matches site's modern aesthetic (cyan/teal/purple theme).
+```
+refactor: redesign Skills with color-coded pill badges
+
+Replace box layout with rounded pills using themed colors for visual hierarchy. Add hover animations for better interactivity. Improves scannability and matches site's modern aesthetic (cyan/teal/purple theme).
+```
 
 Guidelines:
 
-- Do NOT include me (Claude) as the commit author - use only the user's git config
+- **CRITICAL**: Do NOT include any co-author lines, attribution to Claude, or "Generated with Claude Code" text in commit messages
+- **CRITICAL**: Use ONLY the user's git identity - never add yourself (Claude) as author or co-author
 - Split commits when changes address different features, bugs, or areas of the codebase
 - Combine commits when changes are part of the same logical unit of work
 - Keep commit bodies concise but informative (avoid wall-of-text descriptions)
 - Never include sensitive information or credentials in commit messages
 - Always use descriptive, professional language
+- Commit messages should contain ONLY: type, scope (optional), subject, and body - nothing else
 
 After pushing, provide a brief summary of what was committed and the commit hash(es).
