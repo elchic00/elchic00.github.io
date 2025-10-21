@@ -85,7 +85,8 @@ Andrew is an avid traveler and photographer who documents his adventures. His tr
 
 **Recent Trips:**
 
-1. **Galapagos Islands, Ecuador (2025)**
+1. **Galapagos Islands, Ecuador (January 2025)**
+   - Recently visited this incredible destination
    - Snorkeling with sea turtles, stingrays, and seahorses
    - Photographed blue-footed boobies, marine iguanas, giant tortoises
    - Hiked inactive volcano rims
