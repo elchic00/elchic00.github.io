@@ -5,8 +5,9 @@ This guide will help you deploy the AI-powered chat assistant to your portfolio 
 ## Overview
 
 The AI chat assistant uses:
+
 - **Frontend**: React component with floating chat button
-- **AI Provider**: Google Gemini 1.5 Flash (free tier)
+- **AI Provider**: Google Gemini 2.5 Flash (free tier)
 - **Backend**: Cloudflare Worker (serverless proxy to keep API key secure)
 
 ## Features
@@ -59,6 +60,7 @@ npm run worker:deploy
 ```
 
 This will deploy your worker and give you a URL like:
+
 ```
 https://portfolio-ai-chat.YOUR-USERNAME.workers.dev
 ```
@@ -68,11 +70,14 @@ https://portfolio-ai-chat.YOUR-USERNAME.workers.dev
 Edit `src/components/AIChatAssistant.tsx` and update the fetch URL:
 
 ```typescript
-const response = await fetch("https://portfolio-ai-chat.YOUR-USERNAME.workers.dev/api/chat", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ message: userMessage, messages }),
-});
+const response = await fetch(
+  "https://portfolio-ai-chat.YOUR-USERNAME.workers.dev/api/chat",
+  {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: userMessage, messages }),
+  }
+);
 ```
 
 Replace `YOUR-USERNAME` with your actual Cloudflare Workers subdomain.
@@ -123,6 +128,7 @@ Edit `worker/index.js` and modify the `PORTFOLIO_CONTEXT` constant to update wha
 ### Adjust Rate Limits
 
 In `worker/index.js`, modify:
+
 ```javascript
 const RATE_LIMIT = 5; // requests per minute
 const RATE_LIMIT_WINDOW = 60000; // 1 minute
@@ -131,6 +137,7 @@ const RATE_LIMIT_WINDOW = 60000; // 1 minute
 ### Change AI Temperature
 
 In `worker/index.js`, adjust the `generationConfig`:
+
 ```javascript
 generationConfig: {
   temperature: 0.7, // Lower = more focused, Higher = more creative
@@ -141,6 +148,7 @@ generationConfig: {
 ## Monitoring & Limits
 
 ### Free Tier Limits (Google Gemini)
+
 - **Rate limit**: 15 requests per minute
 - **Daily limit**: 1,500 requests per day
 - **Token limit**: 1M tokens per minute
@@ -148,25 +156,30 @@ generationConfig: {
 ### Check Usage
 
 Monitor your API usage at:
+
 - Gemini: https://ai.google.dev/
 - Cloudflare Workers: https://dash.cloudflare.com/
 
 ## Troubleshooting
 
 ### "Rate limit exceeded"
+
 Users are limited to 5 requests per minute. Wait 60 seconds and try again.
 
 ### "Failed to get response from AI"
+
 - Check your API key is correct
 - Verify Gemini API is enabled at https://ai.google.dev/
 - Check Cloudflare Worker logs: `wrangler tail`
 
 ### Chat button appears but doesn't work
+
 - Check browser console for errors
 - Verify the worker URL is correct in `AIChatAssistant.tsx`
 - Ensure CORS headers are properly set (they are by default)
 
 ### Worker deployment fails
+
 - Make sure you're logged in: `npx wrangler login`
 - Check `wrangler.toml` is properly configured
 - Verify your Cloudflare account is set up
@@ -187,6 +200,7 @@ Users are limited to 5 requests per minute. Wait 60 seconds and try again.
 ## Support
 
 If you encounter issues:
+
 1. Check Cloudflare Worker logs: `npx wrangler tail`
 2. Review browser console for frontend errors
 3. Test the worker endpoint directly with curl:
