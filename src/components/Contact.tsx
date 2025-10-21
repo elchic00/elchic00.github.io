@@ -171,13 +171,34 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative">
-      <div className="container px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap">
+    <section id="contact" className="relative pb-0">
+      {/* Background Image - extends to footer */}
+      <div
+        className="absolute inset-x-0 top-0 bottom-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: "url('/images/nyc-sunset.jpg')",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Subtle Dark Overlay for text readability */}
+      <div
+        className="absolute inset-x-0 top-0 bottom-0 bg-gradient-to-b from-slate-900/50 via-slate-900/60 to-slate-900/70"
+        aria-hidden="true"
+      />
+
+      {/* Smooth transition gradient from previous section */}
+      <div
+        className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-slate-900 via-slate-900/80 to-transparent z-0"
+        aria-hidden="true"
+      />
+
+      <div className="container px-5 py-10 mx-auto flex sm:flex-nowrap flex-wrap relative z-10">
         <form
           ref={formRef}
           onSubmit={handleSubmit}
           noValidate
-          className="lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0"
+          className="lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0 bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/50"
         >
           <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font underline-offset-4 underline flex items-center gap-2">
             Contact Me <EmojiHappyIcon className="w-10 h-10 inline-block" aria-hidden="true" />
@@ -294,7 +315,9 @@ export const Contact: React.FC = () => {
           )}
         </form>
       </div>
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </section>
   );
 };
