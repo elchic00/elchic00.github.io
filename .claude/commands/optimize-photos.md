@@ -2,7 +2,7 @@
 description: Optimize all jpeg photos in the image/travel directory
 ---
 
-Search the travel directory for all jpeg photos and optimize them to webp using the optimize-images script.
+Search the public images directory for all jpeg photos and optimize them to webp using the optimize-images script.
 
 Instructions:
 

@@ -176,7 +176,7 @@ export const Contact: React.FC = () => {
       <div
         className="absolute inset-x-0 top-0 bottom-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/images/nyc-sunset.jpg')",
+          backgroundImage: "url('/images/nyc-sunset.webp')",
         }}
         aria-hidden="true"
       />
