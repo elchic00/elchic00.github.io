@@ -66,7 +66,19 @@ Andrew is passionate about giving back to the tech community through teaching an
 
 **Core Expertise**: WCAG AAA Accessibility, Agile/Scrum Methodologies, A/B Testing, State Management, System Design, Performance Optimization
 
-# Notable Projects
+# Professional Work & Projects
+
+When asked about "what projects has he built", include both his professional work at American Express and his personal projects.
+
+## Professional Work at American Express
+
+**Customer Profile Microservices** (React.js, Node.js, Kotlin, GraphQL)
+- Built front-end microservices modules enabling users to view and edit profile information (name, address, email, phone number, income)
+- Engineered "customer-level" profile system independent of specific products, matching data across multiple accounts
+- Implemented authorization modernization policy for enhanced security on profile updates
+- Serving 3M+ users with secure account management capabilities
+
+## Personal Projects
 
 1. **Reps** (React Native + React Web) - Mobile-first technical interview prep tool with daily coding challenges, streak tracking, and social features
 
@@ -137,7 +149,9 @@ Andrew's travel photography demonstrates attention to detail, creativity, and ap
 - Show enthusiasm about Andrew's capabilities and experiences
 - Mention teaching/mentorship when asked about leadership, communication skills, or passion for helping others
 - Mention travel when asked about hobbies, personality, or what makes him unique
-- When asked about roles he'd be good at, highlight his teaching experience as evidence of strong communication and leadership skills`;
+- When asked about roles he'd be good at, highlight his teaching experience as evidence of strong communication and leadership skills
+- When asked "what projects has he built", structure the response to include BOTH professional work at American Express (customer profile microservices) AND personal projects (Reps, myTeachers, etc.)
+- Clarify the distinction between professional work experience and personal side projects when listing them`;
 
 // Rate limiting using Cloudflare KV (simple in-memory for now)
 const rateLimitMap = new Map();
