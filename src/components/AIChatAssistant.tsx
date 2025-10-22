@@ -1,10 +1,18 @@
 import { useState, useRef, useEffect } from "react";
-import { XIcon, ChatIcon, PaperAirplaneIcon } from "@heroicons/react/solid";
+import { XIcon, ChatIcon, PaperAirplaneIcon, RefreshIcon } from "@heroicons/react/solid";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
+  error?: boolean;
 }
+
+const SUGGESTED_QUESTIONS = [
+  "What are Andrew's main technical skills?",
+  "Tell me about his teaching experience",
+  "What projects has he built?",
+  "Where has Andrew traveled?",
+];
 
 export const AIChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +24,7 @@ export const AIChatAssistant = () => {
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -33,12 +42,12 @@ export const AIChatAssistant = () => {
     }
   }, [isOpen]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
+  const sendMessage = async (messageText: string) => {
+    if (!messageText.trim() || isLoading) return;
 
-    const userMessage = input.trim();
+    const userMessage = messageText.trim();
     setInput("");
+    setShowSuggestions(false);
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
 
@@ -64,11 +73,43 @@ export const AIChatAssistant = () => {
         {
           role: "assistant",
           content: "Sorry, I'm having trouble connecting right now. Please try again later or reach out directly via the contact form!",
+          error: true,
         },
       ]);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await sendMessage(input);
+  };
+
+  const handleSuggestedQuestion = (question: string) => {
+    sendMessage(question);
+  };
+
+  const handleRetry = () => {
+    const lastUserMessage = [...messages]
+      .reverse()
+      .find((msg) => msg.role === "user");
+    if (lastUserMessage) {
+      // Remove last error message
+      setMessages((prev) => prev.slice(0, -1));
+      sendMessage(lastUserMessage.content);
+    }
+  };
+
+  const handleClearChat = () => {
+    setMessages([
+      {
+        role: "assistant",
+        content: "Hi! I'm Andrew's AI assistant. Ask me about his experience, projects, skills, or travel adventures!",
+      },
+    ]);
+    setShowSuggestions(true);
+    setInput("");
   };
 
   const toggleChat = () => {
@@ -96,7 +137,7 @@ export const AIChatAssistant = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-44 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] h-[500px] bg-slate-800 rounded-lg shadow-2xl flex flex-col border border-slate-700 animate-slide-up">
+        <div className="fixed bottom-44 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] sm:h-[500px] h-[calc(100vh-12rem)] bg-slate-800 rounded-lg shadow-2xl flex flex-col border border-slate-700 animate-slide-up">
           {/* Header */}
           <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -105,13 +146,23 @@ export const AIChatAssistant = () => {
                 Ask About Andrew
               </h3>
             </div>
-            <button
-              onClick={toggleChat}
-              className="text-white hover:bg-white/20 rounded p-1 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
-              aria-label="Close chat"
-            >
-              <XIcon className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handleClearChat}
+                className="text-white hover:bg-white/20 rounded p-1 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                aria-label="Clear conversation"
+                title="Clear conversation"
+              >
+                <RefreshIcon className="w-5 h-5" />
+              </button>
+              <button
+                onClick={toggleChat}
+                className="text-white hover:bg-white/20 rounded p-1 transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+                aria-label="Close chat"
+              >
+                <XIcon className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
@@ -126,11 +177,21 @@ export const AIChatAssistant = () => {
                 <div
                   className={`max-w-[80%] p-3 rounded-lg ${
                     message.role === "user"
-                      ? "bg-cyan-600 text-white"
+                      ? "bg-cyan-700 text-white"
+                      : message.error
+                      ? "bg-red-900/50 text-slate-100 border border-red-700"
                       : "bg-slate-700 text-slate-100"
                   }`}
                 >
                   <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  {message.error && (
+                    <button
+                      onClick={handleRetry}
+                      className="mt-2 text-xs text-cyan-400 hover:text-cyan-300 underline focus:outline-none"
+                    >
+                      Retry
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -145,6 +206,25 @@ export const AIChatAssistant = () => {
                 </div>
               </div>
             )}
+
+            {/* Suggested Questions */}
+            {showSuggestions && messages.length === 1 && !isLoading && (
+              <div className="space-y-2">
+                <p className="text-xs text-slate-400 text-center">Suggested questions:</p>
+                <div className="grid grid-cols-1 gap-2">
+                  {SUGGESTED_QUESTIONS.map((question, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handleSuggestedQuestion(question)}
+                      className="text-left text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 p-2 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                    >
+                      {question}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div ref={messagesEndRef} />
           </div>
 
@@ -166,7 +246,7 @@ export const AIChatAssistant = () => {
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-600 disabled:cursor-not-allowed text-white p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="bg-cyan-700 hover:bg-cyan-600 disabled:bg-slate-600 disabled:cursor-not-allowed text-white p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
                 aria-label="Send message"
               >
                 <PaperAirplaneIcon className="w-5 h-5 rotate-90" />
