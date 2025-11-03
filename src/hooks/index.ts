@@ -1,12 +1,15 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, Dispatch, SetStateAction } from 'react';
 
 /**
  * Hook for managing localStorage with type safety and SSR compatibility
  */
-export const useLocalStorage = (key, initialValue) => {
-  const [storedValue, setStoredValue] = useState(() => {
+export const useLocalStorage = <T>(
+  key: string,
+  initialValue: T
+): [T, Dispatch<SetStateAction<T>>] => {
+  const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') return initialValue;
-    
+
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -16,7 +19,7 @@ export const useLocalStorage = (key, initialValue) => {
     }
   });
 
-  const setValue = useCallback((value) => {
+  const setValue = useCallback<Dispatch<SetStateAction<T>>>((value) => {
     try {
       setStoredValue((currentValue) => {
         const valueToStore = value instanceof Function ? value(currentValue) : value;
@@ -38,15 +41,17 @@ export const useLocalStorage = (key, initialValue) => {
 /**
  * Hook for detecting clicks outside an element (SSR-safe)
  */
-export const useClickOutside = (callback) => {
-  const ref = useRef(null);
+export const useClickOutside = <T extends HTMLElement = HTMLElement>(
+  callback: () => void
+): React.RefObject<T | null> => {
+  const ref = useRef<T | null>(null);
 
   useEffect(() => {
     // SSR guard - only run in browser
     if (typeof document === 'undefined') return;
 
-    const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         callback();
       }
     };
@@ -61,8 +66,8 @@ export const useClickOutside = (callback) => {
 /**
  * Hook for debouncing values
  */
-export const useDebounce = (value, delay) => {
-  const [debouncedValue, setDebouncedValue] = useState(value);
+export const useDebounce = <T>(value: T, delay: number): T => {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedValue(value), delay);
@@ -72,11 +77,16 @@ export const useDebounce = (value, delay) => {
   return debouncedValue;
 };
 
+interface WindowSize {
+  width: number;
+  height: number;
+}
+
 /**
  * Hook for window resize with debouncing (SSR-safe)
  */
-export const useWindowSize = (debounceDelay = 150) => {
-  const [windowSize, setWindowSize] = useState({
+export const useWindowSize = (debounceDelay: number = 150): WindowSize => {
+  const [windowSize, setWindowSize] = useState<WindowSize>({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
   });
@@ -85,7 +95,7 @@ export const useWindowSize = (debounceDelay = 150) => {
     // SSR guard - only run in browser
     if (typeof window === 'undefined') return;
 
-    let timeoutId;
+    let timeoutId: NodeJS.Timeout;
     const handleResize = () => {
       clearTimeout(timeoutId);
       timeoutId = setTimeout(() => {
@@ -106,15 +116,31 @@ export const useWindowSize = (debounceDelay = 150) => {
   return windowSize;
 };
 
+type ValidationRule<T> = (value: T) => string;
+
+interface FormValidationReturn<T> {
+  values: T;
+  errors: Partial<Record<keyof T, string>>;
+  touched: Partial<Record<keyof T, boolean>>;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  validateAll: () => boolean;
+  resetForm: () => void;
+  setValues: Dispatch<SetStateAction<T>>;
+}
+
 /**
  * Hook for form validation
  */
-export const useFormValidation = (initialValues, validationRules) => {
-  const [values, setValues] = useState(initialValues);
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
+export const useFormValidation = <T extends Record<string, any>>(
+  initialValues: T,
+  validationRules: Partial<Record<keyof T, ValidationRule<any>[]>>
+): FormValidationReturn<T> => {
+  const [values, setValues] = useState<T>(initialValues);
+  const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
+  const [touched, setTouched] = useState<Partial<Record<keyof T, boolean>>>({});
 
-  const validate = useCallback((fieldName, value) => {
+  const validate = useCallback((fieldName: keyof T, value: any): string => {
     const rules = validationRules[fieldName];
     if (!rules) return '';
 
@@ -125,38 +151,38 @@ export const useFormValidation = (initialValues, validationRules) => {
     return '';
   }, [validationRules]);
 
-  const handleChange = useCallback((e) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setValues(prev => ({ ...prev, [name]: value }));
 
     setTouched(prev => {
-      if (prev[name]) {
-        const error = validate(name, value);
+      if (prev[name as keyof T]) {
+        const error = validate(name as keyof T, value);
         setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
       }
       return prev;
     });
   }, [validate]);
 
-  const handleBlur = useCallback((e) => {
+  const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setTouched(prev => ({ ...prev, [name]: true }));
-    const error = validate(name, value);
+    const error = validate(name as keyof T, value);
     setErrors(prev => ({ ...prev, [name]: error }));
   }, [validate]);
 
-  const validateAll = useCallback(() => {
+  const validateAll = useCallback((): boolean => {
     let isValid = true;
-    const newErrors = {};
-    const newTouched = {};
+    const newErrors: Partial<Record<keyof T, string>> = {};
+    const newTouched: Partial<Record<keyof T, boolean>> = {};
 
     // Use functional state update to get latest values
     setValues(currentValues => {
       Object.keys(validationRules).forEach(fieldName => {
-        const error = validate(fieldName, currentValues[fieldName]);
-        newTouched[fieldName] = true;
+        const error = validate(fieldName as keyof T, currentValues[fieldName as keyof T]);
+        newTouched[fieldName as keyof T] = true;
         if (error) {
-          newErrors[fieldName] = error;
+          newErrors[fieldName as keyof T] = error;
           isValid = false;
         }
       });
@@ -186,15 +212,27 @@ export const useFormValidation = (initialValues, validationRules) => {
   };
 };
 
+type AsyncStatus = 'idle' | 'pending' | 'success' | 'error';
+
+interface AsyncReturn<T, P extends any[]> {
+  execute: (...params: P) => Promise<T>;
+  status: AsyncStatus;
+  data: T | null;
+  error: Error | null;
+  isLoading: boolean;
+}
+
 /**
  * Hook for managing async operations
  */
-export const useAsync = (asyncFunction) => {
-  const [status, setStatus] = useState('idle');
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
+export const useAsync = <T, P extends any[] = any[]>(
+  asyncFunction: (...params: P) => Promise<T>
+): AsyncReturn<T, P> => {
+  const [status, setStatus] = useState<AsyncStatus>('idle');
+  const [data, setData] = useState<T | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
-  const execute = useCallback(async (...params) => {
+  const execute = useCallback(async (...params: P): Promise<T> => {
     setStatus('pending');
     setData(null);
     setError(null);
@@ -204,7 +242,8 @@ export const useAsync = (asyncFunction) => {
       setData(response);
       setStatus('success');
       return response;
-    } catch (error) {
+    } catch (err) {
+      const error = err instanceof Error ? err : new Error(String(err));
       setError(error);
       setStatus('error');
       throw error;

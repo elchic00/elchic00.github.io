@@ -1,17 +1,35 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, RefObject } from "react";
 import { useLocalStorage } from "./index";
+
+interface Position {
+  x: number;
+  y: number;
+}
+
+interface SnakeGameConfig {
+  gridSize: number;
+  startSnakeSize: number;
+  speed: number;
+  percentageWidth: number | string;
+  appleColor: string;
+  snakeColor: string;
+  canvasRef: RefObject<HTMLCanvasElement>;
+  containerRef: RefObject<HTMLDivElement>;
+}
+
+interface SnakeGameReturn {
+  score: number;
+  highScore: number;
+  newHighScore: boolean;
+  gameOver: boolean;
+  running: boolean;
+  mounted: boolean;
+  toggleRunning: () => void;
+  restart: () => void;
+}
 
 /**
  * Custom hook for Snake game logic
- * @param {Object} config - Game configuration
- * @param {number} config.gridSize - Grid size (cells per side)
- * @param {number} config.startSnakeSize - Initial snake length
- * @param {number} config.speed - Game speed in milliseconds
- * @param {number|string} config.percentageWidth - Canvas width as percentage
- * @param {string} config.appleColor - Apple color
- * @param {string} config.snakeColor - Snake color
- * @param {HTMLCanvasElement} canvasRef - Canvas element reference
- * @param {HTMLElement} containerRef - Container element reference
  */
 export const useSnakeGame = ({
   gridSize,
@@ -22,17 +40,17 @@ export const useSnakeGame = ({
   snakeColor,
   canvasRef,
   containerRef,
-}) => {
-  const runningRef = useRef(true);
-  const gameOverRef = useRef(false);
+}: SnakeGameConfig): SnakeGameReturn => {
+  const runningRef = useRef<boolean>(true);
+  const gameOverRef = useRef<boolean>(false);
 
-  const [running, setRunning] = useState(true);
-  const [score, setScore] = useState(0);
-  const [highScore, setHighScore] = useLocalStorage("snakeHighScore", 0);
-  const [newHighScore, setNewHighScore] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
-  const [tick, setTick] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const [running, setRunning] = useState<boolean>(true);
+  const [score, setScore] = useState<number>(0);
+  const [highScore, setHighScore] = useLocalStorage<number>("snakeHighScore", 0);
+  const [newHighScore, setNewHighScore] = useState<boolean>(false);
+  const [gameOver, setGameOver] = useState<boolean>(false);
+  const [tick, setTick] = useState<number>(0);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   // Client-only mount
   useLayoutEffect(() => {
@@ -45,9 +63,11 @@ export const useSnakeGame = ({
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
     let size = gridSize;
 
-    const computeSize = () => {
+    const computeSize = (): { scale: number; size: number } => {
       const containerWidth = containerRef.current?.clientWidth || 600;
       const pct =
         typeof percentageWidth === "string"
@@ -65,14 +85,14 @@ export const useSnakeGame = ({
       ctx.imageSmoothingEnabled = false;
 
     // Game state
-    let snake = [];
-    let dir = { x: 1, y: 0 };
-    let lastDir = { x: 1, y: 0 };
-    let apple = { x: 0, y: 0 };
+    let snake: Position[] = [];
+    let dir: Position = { x: 1, y: 0 };
+    let lastDir: Position = { x: 1, y: 0 };
+    let apple: Position = { x: 0, y: 0 };
     let currentScore = 0;
     let stepInterval = Math.max(25, speed || 50);
 
-    const resetState = () => {
+    const resetState = (): void => {
       snake = [];
       const startX = Math.floor(size / 2);
       const startY = Math.floor(size / 2);
@@ -91,8 +111,8 @@ export const useSnakeGame = ({
       placeApple();
     };
 
-    const placeApple = () => {
-      let spot = null;
+    const placeApple = (): void => {
+      let spot: Position | null = null;
       while (true) {
         const x = Math.floor(Math.random() * size);
         const y = Math.floor(Math.random() * size);
@@ -104,7 +124,7 @@ export const useSnakeGame = ({
       apple = spot;
     };
 
-    const draw = () => {
+    const draw = (): void => {
       ctx.fillStyle = "#0f172a";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -117,10 +137,10 @@ export const useSnakeGame = ({
       );
     };
 
-    const step = () => {
+    const step = (): void => {
       if (!runningRef.current) return;
 
-      const head = {
+      const head: Position = {
         x: (snake[0].x + dir.x + size) % size,
         y: (snake[0].y + dir.y + size) % size,
       };
@@ -157,9 +177,9 @@ export const useSnakeGame = ({
     };
 
     // Keyboard handler
-    const keyHandler = (e) => {
+    const keyHandler = (e: KeyboardEvent): void => {
       const k = e.key.toLowerCase();
-      let next = null;
+      let next: Position | null = null;
       e.preventDefault();
       if (k === "arrowup" || k === "w") next = { x: 0, y: -1 };
       if (k === "arrowdown" || k === "s") next = { x: 0, y: 1 };
@@ -182,15 +202,15 @@ export const useSnakeGame = ({
     };
 
     // Touch/swipe handlers
-    let touchStart = null;
-    const touchStartHandler = (e) => {
+    let touchStart: Position | null = null;
+    const touchStartHandler = (e: TouchEvent): void => {
       touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     };
-    const touchEndHandler = (e) => {
+    const touchEndHandler = (e: TouchEvent): void => {
       if (!touchStart) return;
       const dx = e.changedTouches[0].clientX - touchStart.x;
       const dy = e.changedTouches[0].clientY - touchStart.y;
-      let next = null;
+      let next: Position | null = null;
       if (Math.abs(dx) > Math.abs(dy)) {
         // Horizontal swipe
         if (dx > 20) next = { x: 1, y: 0 }; // Swipe right
@@ -214,11 +234,11 @@ export const useSnakeGame = ({
     canvas.addEventListener("touchstart", touchStartHandler, { passive: true });
     canvas.addEventListener("touchend", touchEndHandler, { passive: true });
 
-    let rafId = null;
+    let rafId: number | null = null;
     let lastTime = 0;
     let acc = 0;
 
-    const loop = (time) => {
+    const loop = (time: number): void => {
       if (!lastTime) lastTime = time;
       const delta = time - lastTime;
       lastTime = time;
@@ -264,7 +284,7 @@ export const useSnakeGame = ({
     setHighScore,
   ]);
 
-  const toggleRunning = () => {
+  const toggleRunning = (): void => {
     if (gameOver) {
       runningRef.current = true;
       setRunning(true);
@@ -279,7 +299,7 @@ export const useSnakeGame = ({
     }
   };
 
-  const restart = () => {
+  const restart = (): void => {
     runningRef.current = true;
     setRunning(true);
     setGameOver(false);
