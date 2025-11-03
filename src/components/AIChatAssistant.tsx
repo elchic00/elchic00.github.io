@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { XIcon, ChatIcon, PaperAirplaneIcon, RefreshIcon } from "@heroicons/react/solid";
-import { marked } from "marked";
 import DOMPurify from "dompurify";
+import type { MarkedOptions } from "marked";
 
 interface Message {
   role: "user" | "assistant";
@@ -15,6 +15,24 @@ const SUGGESTED_QUESTIONS = [
   "What projects has he built?",
   "Where has Andrew traveled?",
 ];
+
+// Lazy-loaded marked instance
+let markedInstance: typeof import("marked").marked | null = null;
+let markedLoading: Promise<typeof import("marked")> | null = null;
+
+const loadMarked = async () => {
+  if (markedInstance) return markedInstance;
+  if (!markedLoading) {
+    markedLoading = import("marked");
+  }
+  const { marked } = await markedLoading;
+  marked.setOptions({
+    breaks: true,
+    gfm: true,
+  } as MarkedOptions);
+  markedInstance = marked;
+  return marked;
+};
 
 export const AIChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,13 +48,20 @@ export const AIChatAssistant = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Configure marked to open links in same window (for internal navigation)
+  // Preload marked when chat is opened
   useEffect(() => {
-    marked.setOptions({
-      breaks: true,
-      gfm: true,
-    });
-  }, []);
+    if (isOpen && !markedInstance && !markedLoading) {
+      loadMarked();
+    }
+  }, [isOpen]);
+
+  const renderMarkdown = (content: string): string => {
+    if (markedInstance) {
+      return DOMPurify.sanitize(markedInstance(content) as string);
+    }
+    // Fallback: return plain text with line breaks until marked loads
+    return DOMPurify.sanitize(content.replace(/\n/g, '<br/>'));
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -197,7 +222,7 @@ export const AIChatAssistant = () => {
                     <div
                       className="text-sm assistant-message-content"
                       dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(marked(message.content) as string),
+                        __html: renderMarkdown(message.content),
                       }}
                     />
                   ) : (
