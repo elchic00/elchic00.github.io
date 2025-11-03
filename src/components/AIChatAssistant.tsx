@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { XIcon, ChatIcon, PaperAirplaneIcon, RefreshIcon } from "@heroicons/react/solid";
+import { marked } from "marked";
 
 interface Message {
   role: "user" | "assistant";
@@ -27,6 +28,14 @@ export const AIChatAssistant = () => {
   const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Configure marked to open links in same window (for internal navigation)
+  useEffect(() => {
+    marked.setOptions({
+      breaks: true,
+      gfm: true,
+    });
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -183,7 +192,16 @@ export const AIChatAssistant = () => {
                       : "bg-slate-700 text-slate-100"
                   }`}
                 >
-                  <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  {message.role === "assistant" ? (
+                    <div
+                      className="text-sm prose prose-invert prose-sm max-w-none prose-a:text-cyan-400 prose-a:underline hover:prose-a:text-cyan-300"
+                      dangerouslySetInnerHTML={{
+                        __html: marked(message.content) as string,
+                      }}
+                    />
+                  ) : (
+                    <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                  )}
                   {message.error && (
                     <button
                       onClick={handleRetry}
