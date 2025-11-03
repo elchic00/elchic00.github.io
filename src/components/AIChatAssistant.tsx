@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { XIcon, ChatIcon, PaperAirplaneIcon, RefreshIcon } from "@heroicons/react/solid";
 import { marked } from "marked";
+import DOMPurify from "dompurify";
 
 interface Message {
   role: "user" | "assistant";
@@ -196,7 +197,7 @@ export const AIChatAssistant = () => {
                     <div
                       className="text-sm assistant-message-content"
                       dangerouslySetInnerHTML={{
-                        __html: marked(message.content) as string,
+                        __html: DOMPurify.sanitize(marked(message.content) as string),
                       }}
                     />
                   ) : (
