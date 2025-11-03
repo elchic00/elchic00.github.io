@@ -26,13 +26,13 @@ export const Button: React.FC<ButtonProps> = ({
   ariaLabel,
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center text-center border-0 rounded focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors duration-500 disabled:cursor-not-allowed disabled:opacity-50';
+  const baseClasses = 'inline-flex items-center justify-center text-center border-0 rounded focus-ring transition-colors duration-500 disabled:cursor-not-allowed';
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary: 'text-white bg-cyan-700 hover:bg-cyan-600',
-    secondary: 'text-white bg-slate-700 hover:bg-slate-600',
-    success: 'text-white bg-teal-700 hover:bg-teal-600',
-    ghost: 'text-slate-200 bg-slate-800 hover:bg-slate-700',
+    primary: 'text-white bg-cyan-700 hover:bg-cyan-600 disabled:bg-cyan-900 disabled:text-gray-400',
+    secondary: 'text-white bg-slate-700 hover:bg-slate-600 disabled:bg-slate-800 disabled:text-gray-500',
+    success: 'text-white bg-teal-700 hover:bg-teal-600 disabled:bg-teal-900 disabled:text-gray-400',
+    ghost: 'text-slate-200 bg-slate-800 hover:bg-slate-700 disabled:bg-slate-900 disabled:text-gray-600',
   };
 
   const sizeClasses: Record<ButtonSize, string> = {
