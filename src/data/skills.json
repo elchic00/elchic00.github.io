@@ -2,22 +2,21 @@
   "Languages & Frameworks": [
     "JavaScript",
     "React.js",
-    "Next.js",
     "TypeScript",
+    "Next.js",
     "Node.js",
     "CSS",
     "HTML",
     "Python",
-    "Java",
-    "Shell Scripting"
+    "Shell Scripting",
+    "Java"
   ],
   "Databases & Backend": [
     "PostgreSQL",
     "MySQL",
     "SQLite",
     "MongoDB",
-    "Supabase",
-    "Firebase"
+    "Supabase"
   ],
   "DevOps, Tools & Testing": [
     "CI/CD",
