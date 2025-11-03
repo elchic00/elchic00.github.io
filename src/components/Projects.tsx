@@ -1,12 +1,7 @@
-import { useEffect, useRef, useState, MouseEvent } from "react";
-import { CodeIcon, ExternalLinkIcon, PlayIcon } from "@heroicons/react/solid";
+import { CodeIcon, ExternalLinkIcon } from "@heroicons/react/solid";
 import projectsData from "../data/projects.json";
 import { Project } from "../types";
-
-interface VideoPlayState {
-  showButton: boolean;
-  playing: boolean;
-}
+import { VideoPlayer } from "./shared/VideoPlayer";
 
 interface BentoGridProjectProps {
   project: Project;
@@ -14,94 +9,14 @@ interface BentoGridProjectProps {
   featured?: boolean;
 }
 
-const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, featured = false }) => {
+const BentoGridProject: React.FC<BentoGridProjectProps> = ({
+  project,
+  index,
+  featured = false,
+}) => {
   const hasMultipleVideos = project.videos && project.videos.length > 1;
   const isVideo =
     project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
-  const [videoPlayStates, setVideoPlayStates] = useState<Record<string, VideoPlayState>>({});
-
-  const checkAutoplayBlocked = (videoElement: HTMLVideoElement, videoId: string) => {
-    const playPromise = videoElement.play();
-
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setVideoPlayStates((prev) => ({
-            ...prev,
-            [videoId]: { showButton: false, playing: true },
-          }));
-        })
-        .catch(() => {
-          setVideoPlayStates((prev) => ({
-            ...prev,
-            [videoId]: { showButton: true, playing: false },
-          }));
-        });
-    }
-  };
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target as HTMLVideoElement;
-          const videoId = video.dataset.videoId;
-
-          if (entry.isIntersecting && videoId) {
-            checkAutoplayBlocked(video, videoId);
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    videoRefs.current.forEach((video, idx) => {
-      if (video) {
-        const videoId = `video-${index}-${idx}`;
-        video.dataset.videoId = videoId;
-        observer.observe(video);
-        checkAutoplayBlocked(video, videoId);
-      }
-    });
-
-    const currentVideos = videoRefs.current;
-    return () => {
-      currentVideos.forEach((video) => {
-        if (video) observer.unobserve(video);
-      });
-    };
-  }, [index]);
-
-  const handleVideoClick = (e: MouseEvent, video: HTMLVideoElement) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const videoId = video.dataset.videoId;
-    if (!videoId) return;
-
-    if (video.paused) {
-      video
-        .play()
-        .then(() => {
-          setVideoPlayStates((prev) => ({
-            ...prev,
-            [videoId]: { showButton: false, playing: true },
-          }));
-        })
-        .catch(() => {
-          console.log("Play prevented");
-        });
-    } else {
-      video.pause();
-      setVideoPlayStates((prev) => ({
-        ...prev,
-        [videoId]: { showButton: true, playing: false },
-      }));
-    }
-  };
 
   return (
     <article
@@ -121,94 +36,31 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({ project, index, fea
               featured
                 ? "md:h-96 h-64"
                 : hasMultipleVideos || project.title === "myPal"
-                  ? "h-72"
-                  : "flex-grow min-h-72"
+                ? "h-72"
+                : "flex-grow min-h-72"
             }`}
           >
             {hasMultipleVideos ? (
-              project.videos?.map((videoSrc, idx) => {
-                const videoId = `video-${index}-${idx}`;
-                const showButton = videoPlayStates[videoId]?.showButton;
-
-                return (
-                  <div key={idx} className={`relative ${
+              project.videos?.map((videoSrc, idx) => (
+                <VideoPlayer
+                  key={idx}
+                  src={videoSrc}
+                  videoId={`video-${index}-${idx}`}
+                  projectIndex={index}
+                  containerClassName={
                     featured
                       ? "md:h-full h-full md:max-w-[48%] max-w-[48%]"
                       : "h-56 max-w-[48%]"
-                  }`}>
-                    <video
-                      ref={(el) => { videoRefs.current[idx] = el; }}
-                      className="w-full h-full object-contain rounded-lg cursor-pointer"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      disablePictureInPicture
-                      disableRemotePlayback
-                      preload={index < 2 ? "auto" : "metadata"}
-                      onCanPlay={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
-                      onClick={(e) => handleVideoClick(e as unknown as MouseEvent, e.target as HTMLVideoElement)}
-                    >
-                      <source src={videoSrc} type="video/mp4" />
-                    </video>
-                    {showButton && (
-                      <div
-                        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          const video = videoRefs.current[idx];
-                          if (video) handleVideoClick(e as unknown as MouseEvent, video);
-                        }}
-                      >
-                        <div className="bg-black/60 rounded-full p-4 pointer-events-auto cursor-pointer hover:bg-black/80 transition-colors">
-                          <PlayIcon className="w-12 h-12 text-white" />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })
+                  }
+                />
+              ))
             ) : isVideo ? (
-              (() => {
-                const videoId = `video-${index}-0`;
-                const showButton = videoPlayStates[videoId]?.showButton;
-
-                return (
-                  <div className="relative w-full h-full">
-                    <video
-                      ref={(el) => { videoRefs.current[0] = el; }}
-                      className="w-full h-full object-contain rounded-lg cursor-pointer"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      disablePictureInPicture
-                      disableRemotePlayback
-                      preload={index < 2 ? "auto" : "metadata"}
-                      onCanPlay={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
-                      onClick={(e) => handleVideoClick(e as unknown as MouseEvent, e.target as HTMLVideoElement)}
-                    >
-                      <source src={project.image} type="video/mp4" />
-                    </video>
-                    {showButton && (
-                      <div
-                        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          const video = videoRefs.current[0];
-                          if (video) handleVideoClick(e as unknown as MouseEvent, video);
-                        }}
-                      >
-                        <div className="bg-black/60 rounded-full p-4 pointer-events-auto cursor-pointer hover:bg-black/80 transition-colors">
-                          <PlayIcon className="w-12 h-12 text-white" />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })()
+              <VideoPlayer
+                src={project.image!}
+                videoId={`video-${index}-0`}
+                projectIndex={index}
+                containerClassName="w-full h-full"
+              />
             ) : (
               <img
                 src={project.image}
