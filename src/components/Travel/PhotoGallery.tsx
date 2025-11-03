@@ -1,4 +1,4 @@
-import { useState, useEffect, TouchEvent, MouseEvent } from "react";
+import { useState, useEffect, useRef, useCallback, TouchEvent, MouseEvent } from "react";
 import { ZoomInIcon, ZoomOutIcon } from "@heroicons/react/solid";
 import { Photo } from "../../types";
 
@@ -10,20 +10,21 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
+  const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     if (selectedIndex === null) return;
     const nextIndex = (selectedIndex + 1) % photos.length;
     setSelectedIndex(nextIndex);
     setSelectedPhoto(photos[nextIndex]);
-  };
+  }, [selectedIndex, photos]);
 
-  const goToPrevious = () => {
+  const goToPrevious = useCallback(() => {
     if (selectedIndex === null) return;
     const prevIndex = (selectedIndex - 1 + photos.length) % photos.length;
     setSelectedIndex(prevIndex);
     setSelectedPhoto(photos[prevIndex]);
-  };
+  }, [selectedIndex, photos]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -45,7 +46,10 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedIndex, photos]);
 
-  const openPhoto = (photo: Photo, index: number) => {
+  const openPhoto = (photo: Photo, index: number, buttonRef?: HTMLButtonElement) => {
+    if (buttonRef) {
+      triggerButtonRef.current = buttonRef;
+    }
     setSelectedPhoto(photo);
     setSelectedIndex(index);
   };
@@ -54,6 +58,11 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     setSelectedPhoto(null);
     setSelectedIndex(null);
     setIsZoomed(false);
+    // Return focus to the button that opened the lightbox
+    if (triggerButtonRef.current) {
+      triggerButtonRef.current.focus();
+      triggerButtonRef.current = null;
+    }
   };
 
   const toggleZoom = () => {
@@ -66,8 +75,8 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
         {photos.map((photo, index) => (
           <button
             key={index}
-            onClick={() => openPhoto(photo, index)}
-            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            onClick={(e) => openPhoto(photo, index, e.currentTarget)}
+            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus-ring"
             aria-label={`View ${photo.alt}`}
           >
             <img
@@ -94,7 +103,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
           onClick={closePhoto}
           role="dialog"
           aria-modal="true"
-          aria-label="Photo lightbox"
+          aria-label={`Photo viewer: ${selectedPhoto.caption || selectedPhoto.alt}`}
         >
           {/* Top Controls */}
           <div className="absolute top-4 right-4 flex gap-2 z-10">
@@ -104,7 +113,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                 e.stopPropagation();
                 toggleZoom();
               }}
-              className="text-white p-2 bg-black/50 hover:bg-black/70 rounded-full focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-colors"
+              className="text-white p-2 bg-black/50 hover:bg-black/70 rounded-full focus-ring transition-colors"
               aria-label={isZoomed ? "Zoom out" : "Zoom in"}
             >
               {isZoomed ? (
@@ -116,7 +125,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
             {/* Close Button */}
             <button
               onClick={closePhoto}
-              className="text-white text-4xl hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
+              className="text-white text-4xl hover:text-slate-200 focus-ring rounded"
               aria-label="Close lightbox"
             >
               ×
@@ -131,7 +140,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                   e.stopPropagation();
                   goToPrevious();
                 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-6xl hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-4 py-2 z-10"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-6xl hover:text-slate-200 focus-ring rounded px-4 py-2 z-10"
                 aria-label="Previous photo"
               >
                 ‹
@@ -141,7 +150,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                   e.stopPropagation();
                   goToNext();
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-6xl hover:text-slate-200 focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded px-4 py-2 z-10"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-white text-6xl hover:text-slate-200 focus-ring rounded px-4 py-2 z-10"
                 aria-label="Next photo"
               >
                 ›
