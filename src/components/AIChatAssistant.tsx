@@ -4,10 +4,14 @@ import DOMPurify from "dompurify";
 import type { MarkedOptions } from "marked";
 
 interface Message {
+  id: string;
   role: "user" | "assistant";
   content: string;
   error?: boolean;
 }
+
+// Generate unique message ID
+const generateMessageId = () => `msg-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
 const SUGGESTED_QUESTIONS = [
   "What are Andrew's main technical skills?",
@@ -38,6 +42,7 @@ export const AIChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
+      id: generateMessageId(),
       role: "assistant",
       content: "Hi! I'm Andrew's AI assistant. Ask me about his experience, projects, skills, or travel adventures!",
     },
@@ -83,7 +88,7 @@ export const AIChatAssistant = () => {
     const userMessage = messageText.trim();
     setInput("");
     setShowSuggestions(false);
-    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+    setMessages((prev) => [...prev, { id: generateMessageId(), role: "user", content: userMessage }]);
     setIsLoading(true);
 
     try {
@@ -100,12 +105,13 @@ export const AIChatAssistant = () => {
       const data = await response.json();
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: data.response },
+        { id: generateMessageId(), role: "assistant", content: data.response },
       ]);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
         {
+          id: generateMessageId(),
           role: "assistant",
           content: "Sorry, I'm having trouble connecting right now. Please try again later or reach out directly via the contact form!",
           error: true,
@@ -139,6 +145,7 @@ export const AIChatAssistant = () => {
   const handleClearChat = () => {
     setMessages([
       {
+        id: generateMessageId(),
         role: "assistant",
         content: "Hi! I'm Andrew's AI assistant. Ask me about his experience, projects, skills, or travel adventures!",
       },
@@ -156,7 +163,7 @@ export const AIChatAssistant = () => {
       {/* Floating Chat Button */}
       <button
         onClick={toggleChat}
-        className={`fixed bottom-24 right-6 z-50 p-4 rounded-full shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-900 ${
+        className={`fixed bottom-24 right-6 z-50 p-4 rounded-full shadow-lg transition-all duration-300 focus-ring focus:ring-offset-2 focus:ring-offset-slate-900 ${
           isOpen
             ? "bg-slate-700 hover:bg-slate-600"
             : "bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 hover:scale-110"
@@ -201,10 +208,15 @@ export const AIChatAssistant = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
-            {messages.map((message, index) => (
+          <div
+            className="flex-1 overflow-y-auto p-4 space-y-4"
+            role="log"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
+            {messages.map((message) => (
               <div
-                key={index}
+                key={message.id}
                 className={`flex ${
                   message.role === "user" ? "justify-end" : "justify-start"
                 }`}
@@ -240,9 +252,9 @@ export const AIChatAssistant = () => {
               </div>
             ))}
             {isLoading && (
-              <div className="flex justify-start">
+              <div className="flex justify-start" role="status" aria-label="Loading response">
                 <div className="bg-slate-700 text-slate-100 p-3 rounded-lg">
-                  <div className="flex gap-1">
+                  <div className="flex gap-1" aria-hidden="true">
                     <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
                     <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
                     <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
@@ -260,7 +272,7 @@ export const AIChatAssistant = () => {
                     <button
                       key={index}
                       onClick={() => handleSuggestedQuestion(question)}
-                      className="text-left text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 p-2 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                      className="text-left text-xs bg-slate-700 hover:bg-slate-600 text-slate-200 p-2 rounded transition-colors focus-ring"
                     >
                       {question}
                     </button>
@@ -284,13 +296,13 @@ export const AIChatAssistant = () => {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask me anything..."
-                className="flex-1 bg-slate-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400 placeholder-slate-400"
+                className="flex-1 bg-slate-700 text-white px-4 py-2 rounded-lg focus-ring placeholder-slate-400"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-cyan-700 hover:bg-cyan-600 disabled:bg-slate-600 disabled:cursor-not-allowed text-white p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                className="bg-cyan-700 hover:bg-cyan-600 disabled:bg-slate-600 disabled:cursor-not-allowed text-white p-2 rounded-lg transition-colors focus-ring"
                 aria-label="Send message"
               >
                 <PaperAirplaneIcon className="w-5 h-5 rotate-90" />
