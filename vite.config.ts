@@ -8,6 +8,19 @@ export default defineConfig({
   build: {
     outDir: 'build',
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separate vendor chunks for better caching
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'markdown-vendor': ['marked', 'dompurify'],
+        },
+      },
+    },
+    // Optimize chunk size warnings
+    chunkSizeWarningLimit: 600,
+    // Enable minification (esbuild is faster than terser)
+    minify: 'esbuild',
   },
   server: {
     port: 3000,
