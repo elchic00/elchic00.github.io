@@ -3,7 +3,7 @@ import { MonogramOverlap } from "./shared/MonogramLogo";
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-t-gray-400">
+    <footer className="border-t border-t-gray-600">
       <div className="p-2">
         <div className="flex">
           <SocialLinks variant="footer" className="mr-4" />
