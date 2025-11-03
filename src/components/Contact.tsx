@@ -19,6 +19,9 @@ interface ValidationRules {
   [key: string]: ValidationRule[];
 }
 
+// Email validation pattern - requires valid TLD with at least 2 letters
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+
 const validationRules: ValidationRules = {
   user_name: [
     (value: string) => (!value?.trim() ? "Name is required" : ""),
@@ -28,7 +31,7 @@ const validationRules: ValidationRules = {
   user_email: [
     (value: string) => (!value?.trim() ? "Email is required" : ""),
     (value: string) =>
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+      !EMAIL_PATTERN.test(value)
         ? "Please enter a valid email"
         : "",
   ],
@@ -251,6 +254,8 @@ export const Contact: React.FC = () => {
               onBlur={handleBlur}
               className={getInputClassName("user_email")}
               required
+              pattern={EMAIL_PATTERN.source.slice(1, -1)}
+              title="Please enter a valid email address (e.g., user@example.com)"
               aria-required="true"
               aria-invalid={!!showEmailError}
               aria-describedby={showEmailError ? "email-error" : undefined}
