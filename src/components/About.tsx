@@ -32,11 +32,11 @@ export const About = () => {
             <div className="flex flex-row gap-4 mb-5 mt-5">
               <SocialLinks variant="about" />
               <a
-                href="/#/resume"
-                rel="noreferrer"
+                href="/andrew-alagna-resume.pdf"
+                rel="noopener noreferrer"
                 target="_blank"
                 className="mb-6 inline-flex items-center h-10 p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400"
-                aria-label="View Resume"
+                aria-label="View Resume in new tab"
               >
                 Resume
               </a>

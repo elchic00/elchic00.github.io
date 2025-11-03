@@ -26,7 +26,24 @@ export const Navbar = () => {
   }, [isMobile, open, closeMenu]);
 
   const handleLinkClick = useCallback(
-    (e: React.MouseEvent<HTMLAnchorElement>, linkPath: string) => {
+    (
+      e: React.MouseEvent<HTMLAnchorElement>,
+      linkPath: string,
+      linkName: string
+    ) => {
+      // Handle Resume link - always open in new tab
+      if (linkName === "Resume") {
+        e.preventDefault();
+        window.open(
+          "/andrew-alagna-resume.pdf",
+          "_blank",
+          "noopener,noreferrer"
+        );
+        closeMenu();
+        e?.currentTarget?.blur?.();
+        return;
+      }
+
       const targetRoute = linkPath.startsWith("/#") ? "/" : linkPath;
       const hasHash = linkPath.includes("#");
 
@@ -65,7 +82,7 @@ export const Navbar = () => {
           to="/#about"
           scroll={scrollWithOffset}
           className="font-bold text-xl md:text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
-          onClick={(e) => handleLinkClick(e, "/#about")}
+          onClick={(e) => handleLinkClick(e, "/#about", "Home")}
           aria-label="Andrew Alagna - Home"
         >
           <MonogramOverlap className="w-8 h-8 md:w-10 md:h-10 text-cyan-500 mr-1" />
@@ -93,12 +110,15 @@ export const Navbar = () => {
           }`}
         >
           {NAV_LINKS.map((link) => (
-            <li key={link.name} className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7">
+            <li
+              key={link.name}
+              className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7"
+            >
               <Link
                 to={link.link}
                 scroll={scrollWithOffset}
                 className="hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
-                onClick={(e) => handleLinkClick(e, link.link)}
+                onClick={(e) => handleLinkClick(e, link.link, link.name)}
               >
                 {link.name}
               </Link>
@@ -119,11 +139,14 @@ export const Navbar = () => {
               to="/#contact"
               scroll={scrollWithOffset}
               className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 md:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-800"
-              onClick={(e) => handleLinkClick(e, "/#contact")}
+              onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
               aria-label="Contact Andrew Alagna"
             >
               Contact
-              <ArrowRightIcon className="w-3 h-3 md:w-4 md:h-4 ml-1" aria-hidden="true" />
+              <ArrowRightIcon
+                className="w-3 h-3 md:w-4 md:h-4 ml-1"
+                aria-hidden="true"
+              />
             </Link>
           </li>
         </ul>

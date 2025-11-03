@@ -1,91 +1,49 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { APP_CONFIG } from "../constants";
 
 const ResumePage = () => {
   const pdfPath = `/${APP_CONFIG.RESUME_FILENAME}`;
-
-  const buttonBaseClasses =
-    "inline-block py-2 px-5 rounded font-bold transition-colors duration-150 text-sm";
-  const downloadButtonClasses = `${buttonBaseClasses} bg-cyan-600 hover:bg-cyan-500 text-white mr-3`;
-  const openButtonClasses = `${buttonBaseClasses} bg-slate-600 hover:bg-slate-700 text-white`;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Automatically open PDF in new tab and redirect to home
+    window.open(pdfPath, "_blank", "noopener,noreferrer");
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    // Redirect back to home after opening PDF
+    const timer = setTimeout(() => {
+      navigate("/");
+    }, 500);
 
-    if (isMobile) {
-      window.location.href = pdfPath;
-    }
-  }, [pdfPath]);
+    return () => clearTimeout(timer);
+  }, [pdfPath, navigate]);
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-slate-600 pt-20">
-      <header className="sticky top-20 z-10 py-2 px-4 text-center bg-slate-700 shadow-md">
-        <nav aria-label="Resume actions">
+    <div className="w-full min-h-screen flex items-center justify-center bg-slate-800">
+      <div className="text-center p-8">
+        <div className="mb-6">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-500"></div>
+        </div>
+        <h1 className="text-2xl font-bold text-white mb-4">
+          Opening Resume...
+        </h1>
+        <p className="text-slate-300 mb-6">
+          Your resume will open in a new tab
+        </p>
+        <div className="flex gap-4 justify-center">
           <a
             href={pdfPath}
             download="andrew-alagna-resume.pdf"
-            className={downloadButtonClasses}
-            aria-label="Download resume as PDF"
+            className="inline-block py-2 px-6 rounded font-bold transition-colors duration-150 bg-cyan-600 hover:bg-cyan-500 text-white"
           >
             Download PDF
           </a>
-          <a
-            href={pdfPath}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={openButtonClasses}
-            aria-label="Open resume in new tab"
+          <button
+            onClick={() => navigate("/")}
+            className="inline-block py-2 px-6 rounded font-bold transition-colors duration-150 bg-slate-600 hover:bg-slate-700 text-white"
           >
-            Open in New Tab
-          </a>
-        </nav>
-      </header>
-
-      <div className="flex-1 min-h-[80vh] hidden md:block">
-        <object
-          data={pdfPath}
-          type="application/pdf"
-          width="100%"
-          height="100%"
-          className="min-h-[80vh]"
-          aria-label="Resume PDF viewer"
-        >
-          <div className="p-10 text-center bg-white m-5 rounded-lg">
-            <h2 className="text-xl font-bold text-slate-800 mb-2">
-              Resume Preview Unavailable
-            </h2>
-            <p className="text-gray-600 mb-4">
-              Your browser doesn't support inline PDF viewing.
-            </p>
-            <a
-              href={pdfPath}
-              download="andrew-alagna-resume.pdf"
-              className={downloadButtonClasses}
-            >
-              Download PDF Instead
-            </a>
-          </div>
-        </object>
-      </div>
-
-      <div className="flex-1 min-h-[80vh] md:hidden">
-        <div className="p-8 text-center bg-white m-5 rounded-lg mt-8">
-          <h2 className="text-lg font-bold text-slate-800 mb-2">
-            Resume Preview
-          </h2>
-          <p className="text-gray-600 mb-4 text-sm">
-            For the best experience, please download the PDF or view it in a new
-            tab. Inline viewing is not supported on mobile devices.
-          </p>
-          <a
-            href={pdfPath}
-            download="andrew-alagna-resume.pdf"
-            className={downloadButtonClasses}
-          >
-            Download Resume
-          </a>
+            Go Home
+          </button>
         </div>
       </div>
     </div>
