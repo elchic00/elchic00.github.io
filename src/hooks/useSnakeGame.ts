@@ -41,16 +41,16 @@ export const useSnakeGame = ({
   canvasRef,
   containerRef,
 }: SnakeGameConfig): SnakeGameReturn => {
-  const runningRef = useRef<boolean>(true);
-  const gameOverRef = useRef<boolean>(false);
+  const runningRef = useRef(true);
+  const gameOverRef = useRef(false);
 
-  const [running, setRunning] = useState<boolean>(true);
-  const [score, setScore] = useState<number>(0);
+  const [running, setRunning] = useState(true);
+  const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useLocalStorage<number>("snakeHighScore", 0);
-  const [newHighScore, setNewHighScore] = useState<boolean>(false);
-  const [gameOver, setGameOver] = useState<boolean>(false);
-  const [tick, setTick] = useState<number>(0);
-  const [mounted, setMounted] = useState<boolean>(false);
+  const [newHighScore, setNewHighScore] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [tick, setTick] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
   // Client-only mount
   useLayoutEffect(() => {
