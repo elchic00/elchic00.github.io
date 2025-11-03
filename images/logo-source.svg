@@ -1,0 +1,35 @@
+<svg
+  width="100"
+  height="100"
+  viewBox="0 0 100 100"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- First A (semi-transparent) -->
+  <text
+    x="35"
+    y="50"
+    font-size="56"
+    font-weight="700"
+    font-family="Poppins, sans-serif"
+    fill="#06b6d4"
+    text-anchor="middle"
+    dominant-baseline="central"
+    opacity="0.6"
+  >
+    A
+  </text>
+  <!-- Second A (overlapping, full opacity) -->
+  <text
+    x="65"
+    y="50"
+    font-size="56"
+    font-weight="700"
+    font-family="Poppins, sans-serif"
+    fill="#06b6d4"
+    text-anchor="middle"
+    dominant-baseline="central"
+  >
+    A
+  </text>
+</svg>
