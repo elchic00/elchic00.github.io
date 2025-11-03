@@ -44,6 +44,7 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
   } as any);
 
   useEffect(() => {
+    document.title = "Snake Game - Andrew Alagna";
     const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     setIsTouchDevice(hasTouch);
   }, []);

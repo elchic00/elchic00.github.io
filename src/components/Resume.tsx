@@ -7,6 +7,8 @@ const ResumePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = "Resume - Andrew Alagna";
+
     // Automatically open PDF in new tab and redirect to home
     window.open(pdfPath, "_blank", "noopener,noreferrer");
 

@@ -8,6 +8,8 @@ import { useActiveTrip } from "../hooks";
 
 const Travel = () => {
   useEffect(() => {
+    document.title = "Travel Adventures - Andrew Alagna";
+
     const fullHash = window.location.hash;
     const hashParts = fullHash.split('#');
     const tripHash = hashParts[hashParts.length - 1];
