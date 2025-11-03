@@ -5,6 +5,7 @@ import { TripCard } from "./Travel/TripCard";
 import { TripNavigation } from "./Travel/TripNavigation";
 import { generateTravelStructuredData } from "../utils/generateTravelStructuredData";
 import { useActiveTrip } from "../hooks";
+import { TIMING } from "../constants";
 
 const Travel = () => {
   useEffect(() => {
@@ -21,7 +22,7 @@ const Travel = () => {
           if (element) {
             setTimeout(() => {
               element.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, 100);
+            }, TIMING.INITIAL_SCROLL_DELAY);
           }
         } catch (error) {
           console.warn('Invalid trip hash:', tripHash);
@@ -29,7 +30,7 @@ const Travel = () => {
       };
 
       scrollToHash();
-      setTimeout(scrollToHash, 300);
+      setTimeout(scrollToHash, TIMING.LAYOUT_DELAY);
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }

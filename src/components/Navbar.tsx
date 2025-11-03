@@ -3,7 +3,7 @@ import { ArrowRightIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
-import { NAV_LINKS, scrollWithOffset } from "../constants";
+import { NAV_LINKS, scrollWithOffset, TIMING } from "../constants";
 import { MonogramOverlap } from "./shared/MonogramLogo";
 
 export const Navbar = () => {
@@ -11,7 +11,7 @@ export const Navbar = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
-  const { width } = useWindowSize(150);
+  const { width } = useWindowSize(TIMING.NAVBAR_DEBOUNCE);
   const isMobile = width < 768;
 
   const closeMenu = useCallback(() => setOpen(false), []);

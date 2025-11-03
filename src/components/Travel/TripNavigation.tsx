@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { Trip } from "../../types";
+import { TIMING } from "../../constants";
 
 interface TripNavigationProps {
   trips: Trip[];
@@ -16,7 +17,7 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 200);
+      setIsSticky(window.scrollY > TIMING.STICKY_THRESHOLD);
     };
 
     window.addEventListener("scroll", handleScroll);

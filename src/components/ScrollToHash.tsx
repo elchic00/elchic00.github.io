@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { scrollWithOffset } from "../constants";
+import { scrollWithOffset, TIMING } from "../constants";
 
 /**
  * Component that automatically scrolls to hash anchors on page load
@@ -23,14 +23,14 @@ export const ScrollToHash = () => {
             scrollWithOffset(element as HTMLElement);
           } else if (attempts < maxAttempts) {
             attempts++;
-            setTimeout(scrollToElement, 100);
+            setTimeout(scrollToElement, TIMING.INITIAL_SCROLL_DELAY);
           }
         } catch (error) {
           console.warn('Invalid hash selector:', hash);
         }
       };
 
-      setTimeout(scrollToElement, 100);
+      setTimeout(scrollToElement, TIMING.INITIAL_SCROLL_DELAY);
     }
   }, [location]);
 

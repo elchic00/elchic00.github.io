@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ArrowUpIcon } from "@heroicons/react/solid";
+import { TIMING } from "../../constants";
 
 /**
  * Floating button that appears when user scrolls down
@@ -10,7 +11,7 @@ export const ScrollToTopButton = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 300) {
+      if (window.scrollY > TIMING.SCROLL_TO_TOP_THRESHOLD) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
