@@ -81,7 +81,7 @@ export const Navbar = () => {
         <Link
           to="/#about"
           scroll={scrollWithOffset}
-          className="font-bold text-xl md:text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
+          className="font-bold text-xl md:text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap"
           onClick={(e) => handleLinkClick(e, "/#about", "Home")}
           aria-label="Andrew Alagna - Home"
         >
@@ -92,7 +92,7 @@ export const Navbar = () => {
         {isMobile && (
           <button
             onClick={toggleMenu}
-            className="absolute right-4 top-5 cursor-pointer text-slate-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 rounded"
+            className="absolute right-4 top-5 cursor-pointer text-slate-200 hover:text-white focus-ring rounded"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
           >
@@ -117,7 +117,7 @@ export const Navbar = () => {
               <Link
                 to={link.link}
                 scroll={scrollWithOffset}
-                className="hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400 whitespace-nowrap"
+                className="hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap"
                 onClick={(e) => handleLinkClick(e, link.link, link.name)}
               >
                 {link.name}
@@ -128,7 +128,7 @@ export const Navbar = () => {
           <li className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7">
             <button
               onClick={handleSnakeClick}
-              className="hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              className="hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring"
             >
               Snake
             </button>
@@ -138,7 +138,7 @@ export const Navbar = () => {
             <Link
               to="/#contact"
               scroll={scrollWithOffset}
-              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 md:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-slate-800"
+              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 md:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800"
               onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
               aria-label="Contact Andrew Alagna"
             >

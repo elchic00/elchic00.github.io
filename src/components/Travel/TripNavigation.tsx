@@ -102,7 +102,7 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
                       ? "bg-cyan-600 text-white shadow-lg scale-105"
                       : "bg-slate-700/50 text-slate-300 hover:bg-slate-700 hover:text-white hover:scale-105"
                   }
-                  focus:outline-none focus:ring-2 focus:ring-cyan-400
+                  focus-ring
                 `}
                 aria-label={`Scroll to ${trip.title}`}
                 aria-current={isActive ? "location" : undefined}

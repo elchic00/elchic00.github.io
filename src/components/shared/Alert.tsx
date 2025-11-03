@@ -64,7 +64,7 @@ export const Alert: React.FC<AlertProps> = ({ type, title, message, footer, onCl
 
         <button
           onClick={handleClose}
-          className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 px-4 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          className="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-2 px-4 rounded transition-colors focus-ring"
         >
           OK
         </button>
