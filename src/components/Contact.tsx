@@ -155,7 +155,7 @@ export const Contact: React.FC = () => {
     const body = encodeURIComponent(
       `Name: ${values.user_name}\n\nEmail: ${values.user_email}\n\nMessage:\n${values.message}`
     );
-    return `mailto:aalagna04@gmail.com?subject=${subject}&body=${body}`;
+    return `mailto:${APP_CONFIG.CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   const getInputClassName = (fieldName: keyof ContactFormValues): string => {
