@@ -5,7 +5,7 @@ const ResumePage = () => {
   const pdfPath = `/${APP_CONFIG.RESUME_FILENAME}`;
 
   const buttonBaseClasses =
-    "inline-block py-3 px-6 rounded font-bold transition-colors duration-150";
+    "inline-block py-2 px-5 rounded font-bold transition-colors duration-150 text-sm";
   const downloadButtonClasses = `${buttonBaseClasses} bg-cyan-600 hover:bg-cyan-500 text-white mr-3`;
   const openButtonClasses = `${buttonBaseClasses} bg-slate-600 hover:bg-slate-700 text-white`;
 
@@ -21,9 +21,7 @@ const ResumePage = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-slate-600 pt-20">
-      <header className="p-5 text-center bg-slate-700 shadow-md">
-        <h1 className="text-2xl font-bold text-white mb-4">Resume</h1>
-
+      <header className="sticky top-20 z-10 py-2 px-4 text-center bg-slate-700 shadow-md">
         <nav aria-label="Resume actions">
           <a
             href={pdfPath}
@@ -73,11 +71,11 @@ const ResumePage = () => {
       </div>
 
       <div className="flex-1 min-h-[80vh] md:hidden">
-        <div className="p-10 text-center bg-white m-5 rounded-lg mt-10">
-          <h2 className="text-xl font-bold text-slate-800 mb-2">
+        <div className="p-8 text-center bg-white m-5 rounded-lg mt-8">
+          <h2 className="text-lg font-bold text-slate-800 mb-2">
             Resume Preview
           </h2>
-          <p className="text-gray-600 mb-4">
+          <p className="text-gray-600 mb-4 text-sm">
             For the best experience, please download the PDF or view it in a new
             tab. Inline viewing is not supported on mobile devices.
           </p>
