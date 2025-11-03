@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { CheckCircleIcon, ExclamationCircleIcon, ExclamationIcon } from "@heroicons/react/solid";
+import DOMPurify from "dompurify";
+import { TIMING } from "../../constants";
 
 interface AlertProps {
   type: "success" | "error" | "warning";
@@ -19,7 +21,7 @@ export const Alert: React.FC<AlertProps> = ({ type, title, message, footer, onCl
 
   const handleClose = () => {
     setIsVisible(false);
-    setTimeout(onClose, 200); // Wait for fade out animation
+    setTimeout(onClose, TIMING.ALERT_FADE_OUT); // Wait for fade out animation
   };
 
   const iconMap = {
@@ -58,7 +60,7 @@ export const Alert: React.FC<AlertProps> = ({ type, title, message, footer, onCl
         {footer && (
           <div
             className="text-sm text-slate-400 text-center mb-4 border-t border-slate-700 pt-4"
-            dangerouslySetInnerHTML={{ __html: footer }}
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(footer) }}
           />
         )}
 
