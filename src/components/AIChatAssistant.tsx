@@ -194,7 +194,7 @@ export const AIChatAssistant = () => {
                 >
                   {message.role === "assistant" ? (
                     <div
-                      className="text-sm prose prose-invert prose-sm max-w-none prose-a:text-cyan-400 prose-a:underline hover:prose-a:text-cyan-300"
+                      className="text-sm assistant-message-content"
                       dangerouslySetInnerHTML={{
                         __html: marked(message.content) as string,
                       }}

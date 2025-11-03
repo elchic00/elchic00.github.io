@@ -27,3 +27,19 @@ code {
   overscroll-behavior: none;
 }
 
+/* AI Chat Assistant Link Styling */
+.assistant-message-content a {
+  color: #22d3ee; /* cyan-400 */
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.assistant-message-content a:hover {
+  color: #67e8f9; /* cyan-300 */
+}
+
+.assistant-message-content p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
