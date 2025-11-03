@@ -1,9 +1,9 @@
 import { useRef, useCallback, useEffect, useState, FormEvent } from "react";
 import emailjs from "@emailjs/browser";
-import Swal from "sweetalert2";
 import { EmojiHappyIcon } from "@heroicons/react/solid";
 import { Footer } from "./Footer";
 import { Button } from "./shared/Button";
+import { useAlert } from "./shared/Alert";
 import { useFormValidation, useAsync, useDebounce } from "../hooks";
 import { APP_CONFIG } from "../constants";
 
@@ -42,6 +42,7 @@ const validationRules: ValidationRules = {
 export const Contact: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const [showMailtoFallback, setShowMailtoFallback] = useState(false);
+  const { fire: showAlert, AlertComponent } = useAlert();
 
   useEffect(() => {
     emailjs.init(APP_CONFIG.EMAIL_PUBLIC_KEY);
@@ -102,10 +103,10 @@ export const Contact: React.FC = () => {
     e.preventDefault();
 
     if (!validateAll()) {
-      Swal.fire({
-        icon: "warning",
+      showAlert({
+        type: "warning",
         title: "Validation Error",
-        text: "Please fix the errors in the form before submitting.",
+        message: "Please fix the errors in the form before submitting.",
       });
       return;
     }
@@ -113,10 +114,10 @@ export const Contact: React.FC = () => {
     try {
       await sendEmail();
 
-      Swal.fire({
-        icon: "success",
+      showAlert({
+        type: "success",
         title: "Message Sent Successfully",
-        text: "Thank you for reaching out! I'll get back to you soon.",
+        message: "Thank you for reaching out! I'll get back to you soon.",
       });
 
       resetForm();
@@ -137,10 +138,10 @@ export const Contact: React.FC = () => {
 
       setShowMailtoFallback(true);
 
-      Swal.fire({
-        icon: "error",
+      showAlert({
+        type: "error",
         title: "Message was not sent!",
-        text: errorMessage,
+        message: errorMessage,
         footer: '<small>A fallback option will appear below if you have a VPN or firewall blocking the form.</small>',
       });
     }
@@ -171,8 +172,10 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="relative pb-0">
-      {/* Background Image - extends to footer */}
+    <>
+      {AlertComponent}
+      <section id="contact" className="relative pb-0">
+        {/* Background Image - extends to footer */}
       <div
         className="absolute inset-x-0 top-0 bottom-0 bg-cover bg-center bg-no-repeat"
         style={{
@@ -197,7 +200,6 @@ export const Contact: React.FC = () => {
         <form
           ref={formRef}
           onSubmit={handleSubmit}
-          noValidate
           className="lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0 bg-slate-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-slate-700/50"
         >
           <h2 className="text-white sm:text-4xl text-3xl mb-1 font-medium title-font underline-offset-4 underline flex items-center gap-2">
@@ -219,6 +221,8 @@ export const Contact: React.FC = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               className={getInputClassName("user_name")}
+              required
+              minLength={2}
               aria-required="true"
               aria-invalid={!!showNameError}
               aria-describedby={showNameError ? "name-error" : undefined}
@@ -246,6 +250,7 @@ export const Contact: React.FC = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               className={getInputClassName("user_email")}
+              required
               aria-required="true"
               aria-invalid={!!showEmailError}
               aria-describedby={showEmailError ? "email-error" : undefined}
@@ -274,6 +279,8 @@ export const Contact: React.FC = () => {
               className={`${getInputClassName(
                 "message"
               )} h-32 resize-none leading-6`}
+              required
+              minLength={10}
               aria-required="true"
               aria-invalid={!!showMessageError}
               aria-describedby={showMessageError ? "message-error" : undefined}
@@ -319,5 +326,6 @@ export const Contact: React.FC = () => {
         <Footer />
       </div>
     </section>
+    </>
   );
 };
