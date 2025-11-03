@@ -2,13 +2,17 @@
   "Languages & Frameworks": [
     "JavaScript",
     "React.js",
+    "Redux",
     "TypeScript",
     "Next.js",
     "Node.js",
+    "Component Libraries",
+    "Tailwind CSS",
     "CSS",
     "HTML",
     "Python",
     "Shell Scripting",
+    "Kotlin",
     "Java"
   ],
   "Databases & Backend": [
@@ -16,7 +20,10 @@
     "MySQL",
     "SQLite",
     "MongoDB",
-    "Supabase"
+    "Supabase",
+    "GraphQL",
+    "REST APIs",
+    "Microservices"
   ],
   "DevOps, Tools & Testing": [
     "CI/CD",
@@ -24,13 +31,17 @@
     "Git",
     "Github",
     "Jest",
-    "React Testing Library"
+    "React Testing Library",
+    "AWS",
+    "Docker"
   ],
   "Practices & Methodologies": [
+    "Web Accessibility (WCAG)",
+    "Performance Optimization",
+    "A/B Testing",
     "User Analytics",
     "Cross-team Collaboration",
     "Comprehensive Test Coverage",
-    "Agile",
-    "Waterfall"
+    "Agile"
   ]
 }
