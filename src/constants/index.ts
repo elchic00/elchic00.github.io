@@ -1,8 +1,8 @@
 // App Configuration
 export const APP_CONFIG = {
-  EMAIL_SERVICE_ID: "default_service",
-  EMAIL_TEMPLATE_ID: "template_z9zlm01",
-  EMAIL_PUBLIC_KEY: "user_FhEWKM5IXCkmUoOqe2yTB",
+  EMAIL_SERVICE_ID: import.meta.env.VITE_EMAIL_SERVICE_ID || "",
+  EMAIL_TEMPLATE_ID: import.meta.env.VITE_EMAIL_TEMPLATE_ID || "",
+  EMAIL_PUBLIC_KEY: import.meta.env.VITE_EMAIL_PUBLIC_KEY || "",
   RESUME_FILENAME: "andrew-alagna-resume.pdf",
 } as const;
 
