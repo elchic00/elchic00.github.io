@@ -20,7 +20,6 @@ export class ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo): void {
-    // Log error details for debugging
     console.error("Error caught by ErrorBoundary:", error, errorInfo);
     this.setState({
       error,
@@ -34,7 +33,6 @@ export class ErrorBoundary extends Component<
 
   render(): ReactNode {
     if (this.state.hasError) {
-      // Custom fallback UI
       return (
         <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
           <div className="max-w-lg w-full bg-slate-800 rounded-lg shadow-xl p-8 text-center">

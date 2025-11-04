@@ -10,7 +10,6 @@ interface Message {
   error?: boolean;
 }
 
-// Generate unique message ID
 const generateMessageId = () => `msg-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
 const SUGGESTED_QUESTIONS = [
@@ -20,7 +19,6 @@ const SUGGESTED_QUESTIONS = [
   "Where has Andrew traveled?",
 ];
 
-// Lazy-loaded marked instance
 let markedInstance: typeof import("marked").marked | null = null;
 let markedLoading: Promise<typeof import("marked")> | null = null;
 
@@ -53,7 +51,6 @@ export const AIChatAssistant = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Preload marked when chat is opened
   useEffect(() => {
     if (isOpen && !markedInstance && !markedLoading) {
       loadMarked();
@@ -64,7 +61,6 @@ export const AIChatAssistant = () => {
     if (markedInstance) {
       return DOMPurify.sanitize(markedInstance(content) as string);
     }
-    // Fallback: return plain text with line breaks until marked loads
     return DOMPurify.sanitize(content.replace(/\n/g, '<br/>'));
   };
 
@@ -136,7 +132,6 @@ export const AIChatAssistant = () => {
       .reverse()
       .find((msg) => msg.role === "user");
     if (lastUserMessage) {
-      // Remove last error message
       setMessages((prev) => prev.slice(0, -1));
       sendMessage(lastUserMessage.content);
     }
@@ -160,7 +155,6 @@ export const AIChatAssistant = () => {
 
   return (
     <>
-      {/* Floating Chat Button */}
       <button
         onClick={toggleChat}
         className={`fixed bottom-24 right-6 z-50 p-4 rounded-full shadow-lg transition-all duration-300 focus-ring focus:ring-offset-2 focus:ring-offset-slate-900 ${
@@ -177,10 +171,8 @@ export const AIChatAssistant = () => {
         )}
       </button>
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="fixed bottom-44 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] sm:h-[500px] h-[calc(100vh-12rem)] bg-slate-800 rounded-lg shadow-2xl flex flex-col border border-slate-700 animate-slide-up">
-          {/* Header */}
           <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center gap-2">
               <ChatIcon className="w-5 h-5 text-white" />
@@ -207,7 +199,6 @@ export const AIChatAssistant = () => {
             </div>
           </div>
 
-          {/* Messages */}
           <div
             className="flex-1 overflow-y-auto p-4 space-y-4"
             role="log"
@@ -263,7 +254,6 @@ export const AIChatAssistant = () => {
               </div>
             )}
 
-            {/* Suggested Questions */}
             {showSuggestions && messages.length === 1 && !isLoading && (
               <div className="space-y-2">
                 <p className="text-xs text-slate-400 text-center">Suggested questions:</p>
@@ -284,7 +274,6 @@ export const AIChatAssistant = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input */}
           <form
             onSubmit={handleSubmit}
             className="p-4 border-t border-slate-700"

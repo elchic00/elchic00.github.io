@@ -179,7 +179,6 @@ export const Contact: React.FC = () => {
     <>
       {AlertComponent}
       <section id="contact" className="relative pb-0 bg-slate-950">
-      {/* Smooth transition gradient from previous section */}
       <div
         className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-900 to-slate-950 z-0"
         aria-hidden="true"

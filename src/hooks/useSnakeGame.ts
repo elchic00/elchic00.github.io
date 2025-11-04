@@ -28,9 +28,6 @@ interface SnakeGameReturn {
   restart: () => void;
 }
 
-/**
- * Custom hook for Snake game logic
- */
 export const useSnakeGame = ({
   gridSize,
   startSnakeSize,
@@ -52,12 +49,10 @@ export const useSnakeGame = ({
   const [tick, setTick] = useState(0);
   const [mounted, setMounted] = useState(false);
 
-  // Client-only mount
   useLayoutEffect(() => {
     setMounted(true);
   }, []);
 
-  // Main game loop
   useLayoutEffect(() => {
     if (!mounted || !canvasRef.current || !containerRef.current) return;
 
@@ -84,7 +79,6 @@ export const useSnakeGame = ({
     if (ctx.imageSmoothingEnabled !== undefined)
       ctx.imageSmoothingEnabled = false;
 
-    // Game state
     let snake: Position[] = [];
     let dir: Position = { x: 1, y: 0 };
     let lastDir: Position = { x: 1, y: 0 };
@@ -176,7 +170,6 @@ export const useSnakeGame = ({
       lastDir = dir;
     };
 
-    // Keyboard handler
     const keyHandler = (e: KeyboardEvent): void => {
       const k = e.key.toLowerCase();
       let next: Position | null = null;
@@ -187,11 +180,9 @@ export const useSnakeGame = ({
       if (k === "arrowright" || k === "d") next = { x: 1, y: 0 };
       if (k === " ") {
         if (gameOverRef.current) {
-          // If game is over, space starts a new game
           resetState();
           draw();
         } else {
-          // If game is running or paused, space toggles pause
           runningRef.current = !runningRef.current;
           setRunning(runningRef.current);
         }
@@ -201,7 +192,6 @@ export const useSnakeGame = ({
       }
     };
 
-    // Touch/swipe handlers
     let touchStart: Position | null = null;
     const touchStartHandler = (e: TouchEvent): void => {
       touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -212,15 +202,12 @@ export const useSnakeGame = ({
       const dy = e.changedTouches[0].clientY - touchStart.y;
       let next: Position | null = null;
       if (Math.abs(dx) > Math.abs(dy)) {
-        // Horizontal swipe
-        if (dx > 20) next = { x: 1, y: 0 }; // Swipe right
-        if (dx < -20) next = { x: -1, y: 0 }; // Swipe left
+        if (dx > 20) next = { x: 1, y: 0 };
+        if (dx < -20) next = { x: -1, y: 0 };
       } else {
-        // Vertical swipe
-        if (dy > 20) next = { x: 0, y: 1 }; // Swipe down
-        if (dy < -20) next = { x: 0, y: -1 }; // Swipe up
+        if (dy > 20) next = { x: 0, y: 1 };
+        if (dy < -20) next = { x: 0, y: -1 };
       }
-      // Only apply direction if it's not opposite to current direction
       if (next && !(next.x === -lastDir.x && next.y === -lastDir.y)) {
         dir = next;
       }
@@ -256,7 +243,6 @@ export const useSnakeGame = ({
 
     rafId = requestAnimationFrame(loop);
 
-    // Resize observer
     const ro = new ResizeObserver(() => {
       scale = computeSize().scale;
       draw();

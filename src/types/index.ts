@@ -1,4 +1,3 @@
-// Project types
 export interface Project {
   title: string;
   subtitle: string;
@@ -8,7 +7,6 @@ export interface Project {
   link: string;
 }
 
-// Travel types
 export interface Photo {
   url: string;
   alt: string;
@@ -24,7 +22,6 @@ export interface Trip {
   photos: Photo[];
 }
 
-// Button component types
 export type ButtonVariant = 'primary' | 'secondary' | 'success' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
@@ -41,7 +38,6 @@ export interface ButtonProps {
   ariaLabel?: string;
 }
 
-// Error Boundary types
 export interface ErrorBoundaryProps {
   children: React.ReactNode;
   fallback?: React.ReactNode;
@@ -53,7 +49,6 @@ export interface ErrorBoundaryState {
   errorInfo: React.ErrorInfo | null;
 }
 
-// Social Links types
 export interface SocialLink {
   name: string;
   url: string;

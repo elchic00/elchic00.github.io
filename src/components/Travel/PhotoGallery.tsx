@@ -26,7 +26,6 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     setSelectedPhoto(photos[prevIndex]);
   }, [selectedIndex, photos]);
 
-  // Keyboard navigation
   useEffect(() => {
     if (selectedIndex === null) return;
 
@@ -58,7 +57,6 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     setSelectedPhoto(null);
     setSelectedIndex(null);
     setIsZoomed(false);
-    // Return focus to the button that opened the lightbox
     if (triggerButtonRef.current) {
       triggerButtonRef.current.focus();
       triggerButtonRef.current = null;
@@ -96,7 +94,6 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
         ))}
       </div>
 
-      {/* Lightbox Modal */}
       {selectedPhoto && (
         <div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
@@ -105,9 +102,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
           aria-modal="true"
           aria-label={`Photo viewer: ${selectedPhoto.caption || selectedPhoto.alt}`}
         >
-          {/* Top Controls */}
           <div className="absolute top-4 right-4 flex gap-2 z-10">
-            {/* Zoom Button */}
             <button
               onClick={(e: MouseEvent) => {
                 e.stopPropagation();
@@ -122,7 +117,6 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                 <ZoomInIcon className="w-6 h-6" />
               )}
             </button>
-            {/* Close Button */}
             <button
               onClick={closePhoto}
               className="text-white text-4xl hover:text-slate-200 focus-ring rounded"
@@ -132,7 +126,6 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
             </button>
           </div>
 
-          {/* Previous/Next Navigation Buttons */}
           {photos.length > 1 && (
             <>
               <button
@@ -170,7 +163,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
               e.currentTarget.dataset.touchStartY = String(touch.clientY);
             }}
             onTouchEnd={(e: TouchEvent<HTMLDivElement>) => {
-              if (isZoomed) return; // Don't handle swipe when zoomed
+              if (isZoomed) return;
               const touchStartX = parseFloat(
                 e.currentTarget.dataset.touchStartX || "0"
               );
@@ -183,13 +176,10 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
               const dx = touchEndX - touchStartX;
               const dy = touchEndY - touchStartY;
 
-              // Only trigger swipe if horizontal movement is greater than vertical
               if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
                 if (dx > 0) {
-                  // Swipe right - go to previous
                   goToPrevious();
                 } else {
-                  // Swipe left - go to next
                   goToNext();
                 }
               }
@@ -211,7 +201,6 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                 }}
               />
             </div>
-            {/* Only show caption when not zoomed */}
             {!isZoomed && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
                 <p className="text-white text-center text-lg font-medium">

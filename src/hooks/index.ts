@@ -1,8 +1,5 @@
 import { useState, useEffect, useCallback, useRef, Dispatch, SetStateAction } from 'react';
 
-/**
- * Hook for managing localStorage with type safety and SSR compatibility
- */
 export const useLocalStorage = <T>(
   key: string,
   initialValue: T
@@ -38,16 +35,12 @@ export const useLocalStorage = <T>(
   return [storedValue, setValue];
 };
 
-/**
- * Hook for detecting clicks outside an element (SSR-safe)
- */
 export const useClickOutside = <T extends HTMLElement = HTMLElement>(
   callback: () => void
 ): React.RefObject<T | null> => {
   const ref = useRef<T | null>(null);
 
   useEffect(() => {
-    // SSR guard - only run in browser
     if (typeof document === 'undefined') return;
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -63,9 +56,6 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
   return ref;
 };
 
-/**
- * Hook for debouncing values
- */
 export const useDebounce = <T>(value: T, delay: number): T => {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
@@ -82,9 +72,6 @@ interface WindowSize {
   height: number;
 }
 
-/**
- * Hook for window resize with debouncing (SSR-safe)
- */
 export const useWindowSize = (debounceDelay: number = 150): WindowSize => {
   const [windowSize, setWindowSize] = useState<WindowSize>({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
@@ -92,7 +79,6 @@ export const useWindowSize = (debounceDelay: number = 150): WindowSize => {
   });
 
   useEffect(() => {
-    // SSR guard - only run in browser
     if (typeof window === 'undefined') return;
 
     let timeoutId: NodeJS.Timeout;
@@ -129,9 +115,6 @@ interface FormValidationReturn<T> {
   setValues: Dispatch<SetStateAction<T>>;
 }
 
-/**
- * Hook for form validation
- */
 export const useFormValidation = <T extends Record<string, any>>(
   initialValues: T,
   validationRules: Partial<Record<keyof T, ValidationRule<any>[]>>
@@ -176,7 +159,6 @@ export const useFormValidation = <T extends Record<string, any>>(
     const newErrors: Partial<Record<keyof T, string>> = {};
     const newTouched: Partial<Record<keyof T, boolean>> = {};
 
-    // Use functional state update to get latest values
     setValues(currentValues => {
       Object.keys(validationRules).forEach(fieldName => {
         const error = validate(fieldName as keyof T, currentValues[fieldName as keyof T]);
@@ -186,7 +168,7 @@ export const useFormValidation = <T extends Record<string, any>>(
           isValid = false;
         }
       });
-      return currentValues; // Don't modify values
+      return currentValues;
     });
 
     setErrors(newErrors);
@@ -222,9 +204,6 @@ interface AsyncReturn<T, P extends any[]> {
   isLoading: boolean;
 }
 
-/**
- * Hook for managing async operations
- */
 export const useAsync = <T, P extends any[] = any[]>(
   asyncFunction: (...params: P) => Promise<T>
 ): AsyncReturn<T, P> => {
@@ -253,9 +232,6 @@ export const useAsync = <T, P extends any[] = any[]>(
   return { execute, status, data, error, isLoading: status === 'pending' };
 };
 
-/**
- * Hook for scroll reveal animations using Intersection Observer
- */
 export const useScrollReveal = (options?: IntersectionObserverInit) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -268,7 +244,6 @@ export const useScrollReveal = (options?: IntersectionObserverInit) => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
-          // Once visible, stop observing (animation only happens once)
           observer.unobserve(element);
         }
       },

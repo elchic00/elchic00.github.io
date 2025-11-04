@@ -15,13 +15,12 @@ export const Alert: React.FC<AlertProps> = ({ type, title, message, footer, onCl
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Trigger animation
     setIsVisible(true);
   }, []);
 
   const handleClose = () => {
     setIsVisible(false);
-    setTimeout(onClose, TIMING.ALERT_FADE_OUT); // Wait for fade out animation
+    setTimeout(onClose, TIMING.ALERT_FADE_OUT);
   };
 
   const iconMap = {
@@ -37,10 +36,8 @@ export const Alert: React.FC<AlertProps> = ({ type, title, message, footer, onCl
       }`}
       onClick={handleClose}
     >
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
-      {/* Alert Box */}
       <div
         className={`relative bg-slate-800 rounded-lg shadow-2xl max-w-md w-full p-6 border border-slate-700 transform transition-all duration-200 ${
           isVisible ? "scale-100" : "scale-95"

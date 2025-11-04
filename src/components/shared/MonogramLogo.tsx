@@ -1,6 +1,3 @@
-// Custom monogram logo for Andrew Alagna
-// Overlapping A's design - sophisticated and personal
-
 export const MonogramOverlap = ({
   className = "w-8 h-8",
 }: {
@@ -14,7 +11,6 @@ export const MonogramOverlap = ({
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      {/* First A */}
       <text
         x="35"
         y="50"
@@ -28,7 +24,6 @@ export const MonogramOverlap = ({
       >
         A
       </text>
-      {/* Second A overlapping */}
       <text
         x="65"
         y="50"

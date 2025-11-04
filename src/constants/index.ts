@@ -7,7 +7,6 @@ const validateEnvVar = (name: string, value: string | undefined): string => {
   return value;
 };
 
-// App Configuration
 export const APP_CONFIG = {
   EMAIL_SERVICE_ID: validateEnvVar("VITE_EMAIL_SERVICE_ID", import.meta.env.VITE_EMAIL_SERVICE_ID),
   EMAIL_TEMPLATE_ID: validateEnvVar("VITE_EMAIL_TEMPLATE_ID", import.meta.env.VITE_EMAIL_TEMPLATE_ID),
@@ -16,23 +15,20 @@ export const APP_CONFIG = {
   RESUME_FILENAME: "andrew-alagna-resume.pdf",
 } as const;
 
-// Social Links
 export const SOCIAL_LINKS = {
   LINKEDIN: "https://www.linkedin.com/in/andrew-a-10b88215b/",
   GITHUB: "https://www.github.com/elchic00/",
   PROFILE_IMAGE: "/images/profile.webp",
-  PROFILE_IMAGE_FALLBACK: "/images/profile.webp", // Updated to use WebP for Google indexing
+  PROFILE_IMAGE_FALLBACK: "/images/profile.webp",
 } as const;
 
-// Navigation Links
 export const NAV_LINKS = [
-  { name: "Resume", link: "/resume" },
   { name: "Projects", link: "/#projects" },
   { name: "Skills", link: "/#skills" },
   { name: "Travel", link: "/travel" },
+  { name: "Resume", link: "/resume" },
 ] as const;
 
-// Snake Game Configuration
 export const SNAKE_CONFIG = {
   PERCENTAGE_WIDTH: 50,
   START_SNAKE_SIZE: 4,
@@ -45,7 +41,6 @@ export const SNAKE_CONFIG = {
   HIGH_SCORE_KEY: "snakeHighScore",
 } as const;
 
-// Animation & Timing
 export const TIMING = {
   NAVBAR_DEBOUNCE: 150,
   TRANSITION_DURATION: 500,
@@ -57,7 +52,6 @@ export const TIMING = {
   ALERT_FADE_OUT: 200,
 } as const;
 
-// Breakpoints (for reference, matches Tailwind)
 export const BREAKPOINTS = {
   SM: 640,
   MD: 768,
@@ -65,12 +59,10 @@ export const BREAKPOINTS = {
   XL: 1280,
 } as const;
 
-// Scroll Configuration
 export const SCROLL_CONFIG = {
-  NAVBAR_OFFSET: -60, // Offset for fixed navbar when scrolling to hash anchors
+  NAVBAR_OFFSET: -60,
 } as const;
 
-// Scroll helper function for hash navigation
 export const scrollWithOffset = (el: HTMLElement) => {
   const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
   window.scrollTo({
