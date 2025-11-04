@@ -106,7 +106,7 @@ export const Experience = () => {
       "Engineered secure account management system serving 5M+ users annually with React.js and Node.js",
       "Built full-stack 2FA system processing 4M+ annual updates with React.js and Kotlin-based BFF API",
       "Designed 16+ A/B experiments increasing form completion by 12% and customer satisfaction by 17% across 3M+ users",
-      "Implemented CI/CD pipelines with GitHub Actions and achieved 100% code coverage, reducing production bugs by 17%",
+      "Established CI/CD pipelines with GitHub Actions and comprehensive testing strategy using Jest/React Testing Library in Agile environment, achieving 100% code coverage and near zero production bugs across enterprise-scale applications",
     ],
   };
 
