@@ -7,6 +7,113 @@
   .focus-ring {
     @apply focus:outline-none focus:ring-2 focus:ring-cyan-400;
   }
+
+  /* Fade-in animations for hero section */
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-1 {
+    animation: fadeIn 1s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-2 {
+    animation: fadeIn 1s ease-out 0.4s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-3 {
+    animation: fadeIn 1s ease-out 0.6s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-4 {
+    animation: fadeIn 1s ease-out 0.8s forwards;
+    opacity: 0;
+  }
+
+  .animate-fade-in-delay-5 {
+    animation: fadeIn 1s ease-out 1s forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Scroll reveal animations */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Slide in from left */
+  .scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .scroll-reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Slide in from right */
+  .scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .scroll-reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Scale up reveal */
+  .scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .scroll-reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  /* Stagger delays for multiple items */
+  .scroll-reveal-delay-1 {
+    transition-delay: 0.1s;
+  }
+
+  .scroll-reveal-delay-2 {
+    transition-delay: 0.2s;
+  }
+
+  .scroll-reveal-delay-3 {
+    transition-delay: 0.3s;
+  }
+
+  .scroll-reveal-delay-4 {
+    transition-delay: 0.4s;
+  }
 }
 
 body {
