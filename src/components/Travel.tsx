@@ -4,10 +4,12 @@ import tripsData from "../data/trips.json";
 import { TripCard } from "./Travel/TripCard";
 import { TripNavigation } from "./Travel/TripNavigation";
 import { generateTravelStructuredData } from "../utils/generateTravelStructuredData";
-import { useActiveTrip } from "../hooks";
+import { useActiveTrip, useScrollReveal } from "../hooks";
 import { TIMING } from "../constants";
 
 const Travel = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+
   useEffect(() => {
     document.title = "Travel Adventures - Andrew Alagna";
 
@@ -51,15 +53,18 @@ const Travel = () => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
       <div className="container px-5 py-10 mx-auto lg:px-40">
-        <header className="flex flex-col w-full mb-12 text-center">
+        <header
+          ref={headerRef}
+          className={`flex flex-col w-full mb-12 text-center scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
+        >
           <GlobeAltIcon
-            className="mx-auto inline-block w-10 mb-4"
+            className="mx-auto inline-block w-10 mb-4 text-cyan-400"
             aria-hidden="true"
           />
-          <h2 className="sm:text-4xl text-3xl font-medium title-font text-white underline-offset-4 underline mb-4">
+          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white underline-offset-4 underline decoration-cyan-500 mb-4">
             Travel Adventures
           </h2>
-          <p className="lg:w-2/3 mx-auto leading-relaxed text-slate-400">
+          <p className="lg:w-2/3 mx-auto leading-relaxed text-slate-300">
             Exploring the world one trip at a time. Here are some of my favorite
             moments and places I've been lucky enough to visit.
           </p>

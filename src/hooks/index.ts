@@ -253,5 +253,43 @@ export const useAsync = <T, P extends any[] = any[]>(
   return { execute, status, data, error, isLoading: status === 'pending' };
 };
 
+/**
+ * Hook for scroll reveal animations using Intersection Observer
+ */
+export const useScrollReveal = (options?: IntersectionObserverInit) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          // Once visible, stop observing (animation only happens once)
+          observer.unobserve(element);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px',
+        ...options,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, [options]);
+
+  return { ref, isVisible };
+};
+
 export { useSnakeGame } from './useSnakeGame';
 export { useActiveTrip } from './useActiveTrip';

@@ -1,16 +1,20 @@
 import { GlobeIcon } from "@heroicons/react/solid";
 import { PhotoGallery } from "./PhotoGallery";
 import { Trip } from "../../types";
+import { useScrollReveal } from "../../hooks";
 
 interface TripCardProps {
   trip: Trip;
 }
 
 export const TripCard: React.FC<TripCardProps> = ({ trip }) => {
+  const { ref, isVisible } = useScrollReveal();
+
   return (
     <article
+      ref={ref}
       id={trip.id}
-      className="mb-16 pb-16 border-b border-gray-700 last:border-b-0 scroll-mt-32"
+      className={`mb-16 pb-16 border-b border-gray-700 last:border-b-0 scroll-mt-32 scroll-reveal ${isVisible ? 'visible' : ''}`}
     >
       <header className="mb-6">
         <h3 className="text-3xl font-bold text-white mb-2">{trip.title}</h3>
