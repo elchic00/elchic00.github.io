@@ -94,9 +94,14 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     e.stopPropagation();
     const video = videoRef.current;
     if (video) {
-      video.play().catch(() => {
-        // Play prevented - silently handle autoplay restrictions
-      });
+      video
+        .play()
+        .then(() => {
+          setPlayState({ showButton: false, playing: true });
+        })
+        .catch(() => {
+          // Play prevented - silently handle autoplay restrictions
+        });
     }
   };
 
