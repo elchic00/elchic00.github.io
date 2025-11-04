@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { SocialLinks } from "./shared/SocialLinks";
 import { Button } from "./shared/Button";
 import { SOCIAL_LINKS } from "../constants";
 
 export const About = () => {
+  const navigate = useNavigate();
 
   return (
     <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
@@ -41,10 +43,19 @@ export const About = () => {
           </p>
 
           <nav aria-label="Social links and actions" className="animate-fade-in-delay-4">
-            <div className="flex flex-row gap-3 mb-6 mt-6">
+            <div className="flex flex-row gap-4 mb-6 mt-6 justify-center md:justify-start">
               <SocialLinks variant="about" />
             </div>
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+              <a
+                href="/andrew-alagna-resume.pdf"
+                rel="noopener noreferrer"
+                target="_blank"
+                className="inline-flex items-center h-10 px-4 text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 rounded-lg font-medium shadow-md hover:shadow-lg hover:shadow-cyan-500/30 focus-ring hover:scale-105"
+                aria-label="View Resume in new tab"
+              >
+                Resume
+              </a>
               <Button
                 variant="primary"
                 onClick={() => {
@@ -63,7 +74,7 @@ export const About = () => {
                 View Experience
               </Button>
               <Button
-                variant="primary"
+                variant="secondary"
                 onClick={() => {
                   const projectsSection = document.getElementById('projects');
                   if (projectsSection) {
@@ -75,35 +86,17 @@ export const About = () => {
                   }
                 }}
                 ariaLabel="View Personal Projects"
-                className="hover:scale-105 transition-transform duration-300 bg-slate-700 hover:bg-slate-600"
+                className="hover:scale-105 transition-transform duration-300"
               >
                 View Projects
               </Button>
-              <a
-                href="/andrew-alagna-resume.pdf"
-                rel="noopener noreferrer"
-                target="_blank"
-                className="inline-flex items-center h-10 px-4 text-white bg-cyan-600 hover:bg-cyan-500 transition-all duration-300 rounded-lg font-medium shadow-md hover:shadow-lg hover:shadow-cyan-500/30 focus-ring hover:scale-105"
-                aria-label="View Resume in new tab"
-              >
-                Resume
-              </a>
               <Button
                 variant="secondary"
-                onClick={() => {
-                  const contactSection = document.getElementById('contact');
-                  if (contactSection) {
-                    const yCoordinate = contactSection.getBoundingClientRect().top + window.pageYOffset;
-                    window.scrollTo({
-                      top: yCoordinate - 60,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                ariaLabel="Contact Me"
+                onClick={() => navigate('/travel')}
+                ariaLabel="View Travel Adventures"
                 className="hover:scale-105 transition-transform duration-300"
               >
-                Contact Me
+                Travel
               </Button>
             </div>
           </nav>

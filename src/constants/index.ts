@@ -26,8 +26,8 @@ export const NAV_LINKS = [
   { name: "Experience", link: "/#experience" },
   { name: "Projects", link: "/#projects" },
   { name: "Skills", link: "/#skills" },
-  { name: "Travel", link: "/travel" },
   { name: "Resume", link: "/resume" },
+  { name: "Travel", link: "/travel" },
 ] as const;
 
 export const SNAKE_CONFIG = {
