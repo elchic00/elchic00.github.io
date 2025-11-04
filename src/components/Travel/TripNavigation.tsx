@@ -32,7 +32,8 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
         const buttonLeft = activeButton.offsetLeft;
         const buttonWidth = activeButton.offsetWidth;
         const containerWidth = container.offsetWidth;
-        const scrollPosition = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
+        const scrollPosition =
+          buttonLeft - containerWidth / 2 + buttonWidth / 2;
 
         container.scrollTo({
           left: scrollPosition,
@@ -61,9 +62,7 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
   return (
     <nav
       className={`${
-        isSticky
-          ? "fixed top-16 left-0 right-0 z-40 shadow-lg"
-          : "relative"
+        isSticky ? "fixed top-[73px] left-0 right-0 z-40 shadow-lg" : "relative"
       } bg-slate-800/95 backdrop-blur-sm border-b border-slate-700 transition-all duration-300 ${
         isSticky ? "" : "border-t border-slate-700/50"
       }`}
@@ -76,9 +75,11 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
             isSticky ? "py-2 lg:py-1.5" : "py-3"
           }`}
         >
-          <span className={`text-slate-400 font-medium whitespace-nowrap mr-2 hidden sm:inline ${
-            isSticky ? "text-xs lg:text-sm" : "text-sm"
-          }`}>
+          <span
+            className={`text-slate-400 font-medium whitespace-nowrap mr-2 hidden sm:inline ${
+              isSticky ? "text-xs lg:text-sm" : "text-sm"
+            }`}
+          >
             Jump to:
           </span>
           {trips.map((trip) => {
@@ -95,7 +96,11 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
                 }}
                 onClick={() => scrollToTrip(trip.id)}
                 className={`
-                  ${isSticky ? "px-2.5 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm" : "px-4 py-2 text-sm"}
+                  ${
+                    isSticky
+                      ? "px-2.5 py-1 lg:px-3 lg:py-1.5 text-xs lg:text-sm"
+                      : "px-4 py-2 text-sm"
+                  }
                   rounded-full font-medium whitespace-nowrap
                   transition-all duration-300 flex items-center gap-1.5
                   ${

@@ -74,7 +74,7 @@ export const Navbar = () => {
   return (
     <nav
       ref={navRef}
-      className="bg-slate-800 shadow-md w-full fixed top-0 left-0 z-10"
+      className="bg-slate-800/95 backdrop-blur-md shadow-lg w-full fixed top-0 left-0 z-50"
       aria-label="Main navigation"
     >
       <div className="flex justify-between items-center py-3 px-4 md:px-8">
@@ -105,7 +105,7 @@ export const Navbar = () => {
         )}
 
         <ul
-          className={`bg-slate-800 md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 md:pr-0 pr-4 transition-all duration-500 ease-in ${
+          className={`bg-slate-800/95 backdrop-blur-md md:backdrop-blur-none md:bg-transparent md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 md:pr-0 pr-4 transition-all duration-500 ease-in ${
             open ? "top-[68px]" : "top-[-490px]"
           }`}
         >
