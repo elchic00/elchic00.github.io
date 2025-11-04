@@ -33,7 +33,24 @@
 *.pem
 secrets.json
 
+# Temporary and backup files
+*.backup
+*.old
+*.bak
+*~
+.tmp_pack/
+.tmp/
+
+# Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Generated files
 scripts/generate-favicon.html
+
+# IDE
+.idea/
+.vscode/settings.json
+*.swp
+*.swo
