@@ -29,9 +29,9 @@ export const ACTION_CONFIGS: Record<string, ActionButton> = {
 };
 
 export const SUGGESTED_QUESTIONS = [
-  "What are Andrew's main technical skills?",
-  "Tell me about his teaching experience",
-  "What projects has he built?",
+  "What does Andrew do at American Express?",
+  "Tell me about his accessibility expertise",
+  "What side projects has he built?",
   "Where has Andrew traveled?",
 ];
 
