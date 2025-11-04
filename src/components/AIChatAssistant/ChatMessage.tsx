@@ -2,6 +2,7 @@
  * Individual chat message component with markdown rendering and action buttons
  */
 
+import { memo } from "react";
 import { renderMarkdown } from "./utils";
 import { Message, ACTION_CONFIGS } from "./types";
 
@@ -11,7 +12,7 @@ interface ChatMessageProps {
   onRetry?: () => void;
 }
 
-export const ChatMessage = ({ message, onAction, onRetry }: ChatMessageProps) => {
+export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProps) => {
   return (
     <div
       className={`flex ${
@@ -67,4 +68,4 @@ export const ChatMessage = ({ message, onAction, onRetry }: ChatMessageProps) =>
       </div>
     </div>
   );
-};
+});

@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { GlobeAltIcon } from "@heroicons/react/solid";
 import tripsData from "../data/trips.json";
 import { TripCard } from "./Travel/TripCard";
@@ -6,6 +6,10 @@ import { TripNavigation } from "./Travel/TripNavigation";
 import { generateTravelStructuredData } from "../utils/generateTravelStructuredData";
 import { useActiveTrip, useScrollReveal } from "../hooks";
 import { TIMING } from "../constants";
+
+// Compute these once outside the component since tripsData is static
+const structuredData = generateTravelStructuredData(tripsData);
+const tripIds = tripsData.map((trip) => trip.id);
 
 const Travel = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
@@ -38,12 +42,6 @@ const Travel = () => {
     }
   }, []);
 
-  const structuredData = useMemo(
-    () => generateTravelStructuredData(tripsData),
-    []
-  );
-
-  const tripIds = useMemo(() => tripsData.map((trip) => trip.id), []);
   const activeId = useActiveTrip(tripIds);
 
   return (

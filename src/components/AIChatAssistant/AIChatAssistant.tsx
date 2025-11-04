@@ -3,7 +3,7 @@
  * Refactored for better maintainability and readability
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { XIcon, ChatIcon } from "@heroicons/react/solid";
 import { ChatWindow } from "./ChatWindow";
 import { loadMarked, parseActionsFromContent, handleAction } from "./utils";
@@ -77,7 +77,14 @@ export const AIChatAssistant = () => {
     sendMessage(question);
   };
 
-  const handleRetry = () => {
+  const handleClearChat = () => {
+    setMessages([INITIAL_MESSAGE]);
+    setShowSuggestions(true);
+    setInput("");
+  };
+
+  // Only memoize callbacks passed to memoized ChatMessage component
+  const handleRetry = useCallback(() => {
     const lastUserMessage = [...messages]
       .reverse()
       .find((msg) => msg.role === "user");
@@ -85,15 +92,9 @@ export const AIChatAssistant = () => {
       setMessages((prev) => prev.slice(0, -1));
       sendMessage(lastUserMessage.content);
     }
-  };
+  }, [messages]);
 
-  const handleClearChat = () => {
-    setMessages([INITIAL_MESSAGE]);
-    setShowSuggestions(true);
-    setInput("");
-  };
-
-  const handleActionClick = (action: string) => {
+  const handleActionClick = useCallback((action: string) => {
     if (action === "ask_directly") {
       const lastUserMessage = [...messages]
         .reverse()
@@ -114,10 +115,10 @@ export const AIChatAssistant = () => {
     } else {
       handleAction(action, setIsOpen);
     }
-  };
+  }, [messages]);
 
   const toggleChat = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   return (
