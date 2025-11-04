@@ -1,8 +1,9 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import { HomePage } from "./pages/HomePage";
+import { HomePage } from "@pages/HomePage";
 
 // Lazy-load pages to keep the initial bundle smaller
+// Note: Dynamic imports require relative paths, not aliases
 const ResumePage = lazy(() => import("./components/Resume"));
 const Travel = lazy(() => import("./components/Travel"));
 const PlaySnake = lazy(() => import("./components/Snake"));

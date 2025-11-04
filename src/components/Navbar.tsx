@@ -134,8 +134,12 @@ export const Navbar = () => {
           }`}
         >
           {NAV_LINKS.map((link) => {
-            const linkHash = link.link.includes("#") ? `#${link.link.split("#")[1]}` : "";
-            const isActive = (linkHash && activeSection === linkHash) || (location.pathname === link.link && link.link.startsWith("/"));
+            const linkHash = link.link.includes("#")
+              ? `#${link.link.split("#")[1]}`
+              : "";
+            const isActive =
+              (linkHash && activeSection === linkHash) ||
+              (location.pathname === link.link && link.link.startsWith("/"));
             return (
               <li
                 key={link.name}
@@ -159,7 +163,9 @@ export const Navbar = () => {
             <button
               onClick={handleSnakeClick}
               className={`hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring ${
-                location.pathname === "/snake" ? "border-b-2 !border-cyan-400 text-cyan-400" : ""
+                location.pathname === "/snake"
+                  ? "border-b-2 !border-cyan-400 text-cyan-400"
+                  : ""
               }`}
             >
               Snake
