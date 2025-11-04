@@ -12,7 +12,7 @@ export const About = () => {
           alt=""
           className="w-full h-full object-cover"
           loading="eager"
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as any)}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-900/95"></div>
       </div>
@@ -119,7 +119,7 @@ export const About = () => {
             width="460"
             height="460"
             decoding="async"
-            fetchPriority="high"
+            {...({ fetchpriority: "high" } as any)}
           />
         </picture>
       </div>
