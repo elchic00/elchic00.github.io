@@ -13,7 +13,7 @@ export const Navbar = () => {
   const [activeSection, setActiveSection] = useState("");
 
   const { width } = useWindowSize(TIMING.NAVBAR_DEBOUNCE);
-  const isMobile = width < 768;
+  const isMobile = width < 1024;
 
   const closeMenu = useCallback(() => setOpen(false), []);
   const toggleMenu = useCallback(() => setOpen((prev) => !prev), []);
@@ -101,15 +101,15 @@ export const Navbar = () => {
       className="bg-slate-800/95 backdrop-blur-md shadow-lg w-full fixed top-0 left-0 z-50"
       aria-label="Main navigation"
     >
-      <div className="flex justify-between items-center py-3 px-4 md:px-8">
+      <div className="flex justify-between items-center py-3 px-4 lg:px-8">
         <Link
           to="/#about"
           scroll={scrollWithOffset}
-          className="font-bold text-xl md:text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap"
+          className="font-bold text-xl lg:text-2xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap"
           onClick={(e) => handleLinkClick(e, "/#about", "Home")}
           aria-label="Andrew Alagna - Home"
         >
-          <MonogramOverlap className="w-8 h-8 md:w-10 md:h-10 text-cyan-500 mr-1" />
+          <MonogramOverlap className="w-8 h-8 lg:w-10 lg:h-10 text-cyan-500 mr-1" />
           <span>Andrew Alagna</span>
         </Link>
 
@@ -129,7 +129,7 @@ export const Navbar = () => {
         )}
 
         <ul
-          className={`bg-slate-800/95 backdrop-blur-md md:backdrop-blur-none md:bg-transparent md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 md:pr-0 pr-4 transition-all duration-500 ease-in ${
+          className={`bg-slate-800/95 backdrop-blur-md lg:backdrop-blur-none lg:bg-transparent lg:flex lg:items-center lg:pb-0 pb-12 absolute lg:static lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 lg:pr-0 pr-4 transition-all duration-500 ease-in ${
             open ? "top-[68px]" : "top-[-490px]"
           }`}
         >
@@ -143,7 +143,7 @@ export const Navbar = () => {
             return (
               <li
                 key={link.name}
-                className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7"
+                className="lg:ml-4 text-xl lg:text-base xl:text-xl lg:my-0 my-7"
               >
                 <Link
                   to={link.link}
@@ -159,7 +159,7 @@ export const Navbar = () => {
             );
           })}
 
-          <li className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7">
+          <li className="lg:ml-4 text-xl lg:text-base xl:text-xl lg:my-0 my-7">
             <button
               onClick={handleSnakeClick}
               className={`hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring ${
@@ -172,17 +172,17 @@ export const Navbar = () => {
             </button>
           </li>
 
-          <li className="md:ml-4 lg:ml-5 text-xl md:text-base lg:text-xl md:my-0 my-7">
+          <li className="lg:ml-5 text-xl lg:text-base xl:text-xl lg:my-0 my-7">
             <Link
               to="/#contact"
               scroll={scrollWithOffset}
-              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 md:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800"
+              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 lg:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800"
               onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
               aria-label="Contact Andrew Alagna"
             >
               Contact
               <ArrowRightIcon
-                className="w-3 h-3 md:w-4 md:h-4 ml-1"
+                className="w-3 h-3 lg:w-4 lg:h-4 ml-1"
                 aria-hidden="true"
               />
             </Link>
