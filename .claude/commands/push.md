@@ -21,11 +21,13 @@ Instructions:
      - Non-obvious implementation decisions
    - **Avoid**: Exhaustive lists, line numbers, file paths (visible in diff), implementation details obvious from the diff
    - **Focus on**: The "why" and context, not just the "what"
-5. Push all commits to remote using `git done` (custom alias)
-6. Run `npm run deploy` to deploy to GitHub Pages
-7. Report back with commit hashes and a summary of what was pushed
+5. Push all commits to remote using `git done`
+6. Report back with commit hashes and a summary of what was pushed
+
+Note: GitHub Actions automatically deploys to GitHub Pages on push to main - no manual deployment needed.
 
 Commit message example:
+
 ```
 refactor: redesign Skills with color-coded pill badges
 
