@@ -2,7 +2,7 @@
 export const skillTooltips: Record<string, string> = {
   // Languages & Frameworks
   JavaScript: "5+ years building interactive web applications",
-  "React.js": "Primary framework for component-based UIs",
+  "React.js": "Primary library for component-based UIs",
   "Context API": "React's built-in state management",
   Redux: "State management for complex applications",
   TypeScript: "Type-safe development for scalable codebases",
@@ -13,8 +13,8 @@ export const skillTooltips: Record<string, string> = {
   CSS: "Advanced layouts, animations, and responsive design",
   HTML: "Semantic markup and accessibility best practices",
   Python: "Scripting, automation, and data processing",
-  "Shell Scripting": "Bash automation and DevOps workflows",
-  Kotlin: "Android development and backend services",
+  "Shell Scripting": "Automation improving the developer experience",
+  Kotlin: "Backend services",
   Java: "Object-oriented programming and enterprise applications",
 
   // Databases & Backend
