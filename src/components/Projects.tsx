@@ -32,7 +32,6 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
         className="block h-full"
       >
         <div className="relative h-full flex flex-col bg-slate-950 overflow-hidden">
-          {/* Subtle gradient overlay on hover */}
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/5 group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none z-10"></div>
           <div
             className={`px-4 pt-4 pb-2 flex items-center justify-center gap-2 ${
@@ -97,7 +96,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
               >
                 {project.description}
               </p>
-              <div className="flex items-center gap-2 text-indigo-400 group-hover:text-cyan-400 text-sm transition-all duration-300">
+              <div className="flex items-center gap-2 text-cyan-400 group-hover:text-cyan-300 text-sm font-medium transition-all duration-300">
                 <span className="group-hover:underline">View Project</span>
                 <ExternalLinkIcon className="w-3 h-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </div>

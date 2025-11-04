@@ -1,14 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import { SocialLinks } from "./shared/SocialLinks";
 import { Button } from "./shared/Button";
 import { SOCIAL_LINKS } from "../constants";
 
 export const About = () => {
-  const navigate = useNavigate();
 
   return (
     <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src="/images/nyc-sunset.webp"
@@ -44,8 +41,27 @@ export const About = () => {
           </p>
 
           <nav aria-label="Social links and actions" className="animate-fade-in-delay-4">
-            <div className="flex flex-wrap gap-3 mb-5 mt-5">
+            <div className="flex flex-row gap-3 mb-6 mt-6">
               <SocialLinks variant="about" />
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button
+                variant="primary"
+                onClick={() => {
+                  const projectsSection = document.getElementById('projects');
+                  if (projectsSection) {
+                    const yCoordinate = projectsSection.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                      top: yCoordinate - 60,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+                ariaLabel="View Projects Section"
+                className="hover:scale-105 transition-transform duration-300 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500"
+              >
+                View Projects
+              </Button>
               <a
                 href="/andrew-alagna-resume.pdf"
                 rel="noopener noreferrer"
@@ -56,20 +72,21 @@ export const About = () => {
                 Resume
               </a>
               <Button
-                variant="success"
-                onClick={() => navigate("/snake")}
-                ariaLabel="Play Snake Game"
-                className="mb-6 hover:scale-105 transition-transform duration-300"
+                variant="secondary"
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  if (contactSection) {
+                    const yCoordinate = contactSection.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                      top: yCoordinate - 60,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+                ariaLabel="Contact Me"
+                className="hover:scale-105 transition-transform duration-300"
               >
-                Snake
-              </Button>
-              <Button
-                variant="primary"
-                onClick={() => navigate("/travel")}
-                ariaLabel="View Travel Photography"
-                className="mb-6 hover:scale-105 transition-transform duration-300"
-              >
-                Travel
+                Contact Me
               </Button>
             </div>
           </nav>

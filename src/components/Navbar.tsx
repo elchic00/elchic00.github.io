@@ -10,6 +10,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   const { width } = useWindowSize(TIMING.NAVBAR_DEBOUNCE);
   const isMobile = width < 768;
@@ -25,13 +26,36 @@ export const Navbar = () => {
     }
   }, [isMobile, open, closeMenu]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = NAV_LINKS.map((link) => {
+        const hash = link.link.split("#")[1];
+        return hash ? document.getElementById(hash) : null;
+      }).filter(Boolean);
+
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(`#${section.id}`);
+          return;
+        }
+      }
+      setActiveSection("");
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleLinkClick = useCallback(
     (
       e: React.MouseEvent<HTMLAnchorElement>,
       linkPath: string,
       linkName: string
     ) => {
-      // Handle Resume link - always open in new tab
       if (linkName === "Resume") {
         e.preventDefault();
         window.open(
@@ -109,26 +133,34 @@ export const Navbar = () => {
             open ? "top-[68px]" : "top-[-490px]"
           }`}
         >
-          {NAV_LINKS.map((link) => (
-            <li
-              key={link.name}
-              className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7"
-            >
-              <Link
-                to={link.link}
-                scroll={scrollWithOffset}
-                className="hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap"
-                onClick={(e) => handleLinkClick(e, link.link, link.name)}
+          {NAV_LINKS.map((link) => {
+            const linkHash = link.link.includes("#") ? `#${link.link.split("#")[1]}` : "";
+            const isActive = (linkHash && activeSection === linkHash) || (location.pathname === link.link && link.link.startsWith("/"));
+            return (
+              <li
+                key={link.name}
+                className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7"
               >
-                {link.name}
-              </Link>
-            </li>
-          ))}
+                <Link
+                  to={link.link}
+                  scroll={scrollWithOffset}
+                  className={`hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap ${
+                    isActive ? "border-b-2 !border-cyan-400 text-cyan-400" : ""
+                  }`}
+                  onClick={(e) => handleLinkClick(e, link.link, link.name)}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            );
+          })}
 
           <li className="md:ml-3 lg:ml-4 text-xl md:text-base lg:text-xl md:my-0 my-7">
             <button
               onClick={handleSnakeClick}
-              className="hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring"
+              className={`hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring ${
+                location.pathname === "/snake" ? "border-b-2 !border-cyan-400 text-cyan-400" : ""
+              }`}
             >
               Snake
             </button>

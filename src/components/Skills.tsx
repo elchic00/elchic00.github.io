@@ -10,6 +10,13 @@ const categoryColors: Record<string, string> = {
   "Practices & Methodologies": "bg-orange-600/20 text-orange-400 border-orange-500/30 hover:bg-orange-600/30 hover:border-orange-400/50 hover:shadow-orange-500/20",
 };
 
+const categoryBorderColors: Record<string, string> = {
+  "Languages & Frameworks": "border-cyan-500",
+  "Databases & Backend": "border-emerald-500",
+  "DevOps, Tools & Testing": "border-purple-500",
+  "Practices & Methodologies": "border-orange-500",
+};
+
 const categoryIcons: Record<string, React.FC<{ className?: string }>> = {
   "Languages & Frameworks": LightningBoltIcon,
   "Databases & Backend": DatabaseIcon,
@@ -52,7 +59,7 @@ export const Skills = () => {
               ref={categoryRefs[idx]}
               className={`mb-12 scroll-reveal ${categoryVisibility[idx] ? 'visible' : ''}`}
             >
-              <div className="flex items-center gap-3 mb-5">
+              <div className={`flex items-center gap-3 mb-5 border-l-4 ${categoryBorderColors[category]} pl-4`}>
                 {(() => {
                   const IconComponent = categoryIcons[category];
                   return IconComponent ? (

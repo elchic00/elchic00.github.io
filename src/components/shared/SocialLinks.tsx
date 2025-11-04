@@ -48,18 +48,18 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
 }) => {
   const baseClasses: Record<SocialLinksVariant, string> = {
     header:
-      "mb-6 inline-flex items-center h-10 p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
+      "mb-6 inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus-ring hover:text-white",
     footer:
       "hover:transition-all hover:duration-300 text-slate-800 p-1 border-2 rounded border-cyan-500 hover:bg-slate-500",
     about:
-      "mb-6 inline-flex items-center h-10 p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus:shadow-outline hover:text-white",
+      "inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-3 text-slate-200 bg-slate-800/80 hover:bg-slate-700 transition-all duration-300 rounded-lg focus-ring hover:text-white hover:scale-105 shadow-md hover:shadow-lg backdrop-blur-sm",
   };
 
   const iconClasses: Record<SocialLinksVariant, string> = {
-    header: "text-cyan-400 hover:text-white duration-700",
+    header: "w-6 h-6 text-cyan-400 hover:text-white duration-700",
     footer:
-      "text-cyan-300 hover:text-white hover:transition-all hover:duration-700",
-    about: "text-cyan-400 hover:text-white duration-700",
+      "w-6 h-6 text-cyan-300 hover:text-white hover:transition-all hover:duration-700",
+    about: "w-6 h-6 text-cyan-400 transition-colors duration-300",
   };
 
   const linkClass = baseClasses[variant];
@@ -74,7 +74,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
         className={`${linkClass} ${className}`}
         aria-label="LinkedIn Profile"
       >
-        <LinkedInIcon className={`w-6 ${iconClass}`} />
+        <LinkedInIcon className={iconClass} />
       </a>
       <a
         href={SOCIAL_LINKS.GITHUB}
@@ -83,7 +83,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
         className={`${linkClass} ${className}`}
         aria-label="GitHub Profile"
       >
-        <GitHubIcon className="w-6 text-white hover:text-white" />
+        <GitHubIcon className={iconClass} />
       </a>
     </>
   );
