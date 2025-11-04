@@ -50,11 +50,11 @@
     }
   }
 
-  /* Scroll reveal animations */
+  /* Scroll reveal animations - optimized timing */
   .scroll-reveal {
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
 
   .scroll-reveal.visible {
@@ -65,8 +65,8 @@
   /* Slide in from left */
   .scroll-reveal-left {
     opacity: 0;
-    transform: translateX(-50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateX(-30px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
 
   .scroll-reveal-left.visible {
@@ -77,8 +77,8 @@
   /* Slide in from right */
   .scroll-reveal-right {
     opacity: 0;
-    transform: translateX(50px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: translateX(30px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
 
   .scroll-reveal-right.visible {
@@ -89,8 +89,8 @@
   /* Scale up reveal */
   .scroll-reveal-scale {
     opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
   }
 
   .scroll-reveal-scale.visible {
@@ -98,21 +98,21 @@
     transform: scale(1);
   }
 
-  /* Stagger delays for multiple items */
+  /* Stagger delays for multiple items - faster timing */
   .scroll-reveal-delay-1 {
-    transition-delay: 0.1s;
+    transition-delay: 0.05s;
   }
 
   .scroll-reveal-delay-2 {
-    transition-delay: 0.2s;
+    transition-delay: 0.1s;
   }
 
   .scroll-reveal-delay-3 {
-    transition-delay: 0.3s;
+    transition-delay: 0.15s;
   }
 
   .scroll-reveal-delay-4 {
-    transition-delay: 0.4s;
+    transition-delay: 0.2s;
   }
 }
 

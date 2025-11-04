@@ -1,5 +1,6 @@
-import { ChipIcon } from "@heroicons/react/solid";
+import { ChipIcon, LightningBoltIcon, DatabaseIcon, CogIcon, ChartBarIcon } from "@heroicons/react/solid";
 import skillsData from "../data/skills.json";
+import { skillTooltips } from "../data/skillTooltips";
 import { useScrollReveal } from "../hooks";
 
 const categoryColors: Record<string, string> = {
@@ -9,11 +10,11 @@ const categoryColors: Record<string, string> = {
   "Practices & Methodologies": "bg-orange-600/20 text-orange-400 border-orange-500/30 hover:bg-orange-600/30 hover:border-orange-400/50 hover:shadow-orange-500/20",
 };
 
-const categoryIcons: Record<string, string> = {
-  "Languages & Frameworks": "⚡",
-  "Databases & Backend": "🗄️",
-  "DevOps, Tools & Testing": "🔧",
-  "Practices & Methodologies": "📊",
+const categoryIcons: Record<string, React.FC<{ className?: string }>> = {
+  "Languages & Frameworks": LightningBoltIcon,
+  "Databases & Backend": DatabaseIcon,
+  "DevOps, Tools & Testing": CogIcon,
+  "Practices & Methodologies": ChartBarIcon,
 };
 
 export const Skills = () => {
@@ -52,9 +53,12 @@ export const Skills = () => {
               className={`mb-12 scroll-reveal ${categoryVisibility[idx] ? 'visible' : ''}`}
             >
               <div className="flex items-center gap-3 mb-5">
-                <span className="text-2xl" aria-hidden="true">
-                  {categoryIcons[category]}
-                </span>
+                {(() => {
+                  const IconComponent = categoryIcons[category];
+                  return IconComponent ? (
+                    <IconComponent className="w-6 h-6 text-current" aria-hidden="true" />
+                  ) : null;
+                })()}
                 <h3 className="text-xl font-bold text-white">
                   {category}
                 </h3>
@@ -63,12 +67,19 @@ export const Skills = () => {
                 {skills.map((skill, skillIdx) => (
                   <span
                     key={skill}
-                    className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:scale-110 hover:shadow-xl scroll-reveal-delay-${Math.min(skillIdx % 4 + 1, 4)} ${
+                    className={`group relative px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:scale-110 hover:shadow-xl scroll-reveal-delay-${Math.min(skillIdx % 4 + 1, 4)} ${
                       categoryColors[category] ||
                       "bg-slate-700/20 text-slate-300 border-slate-600/30"
                     }`}
+                    title={skillTooltips[skill] || skill}
                   >
                     {skill}
+                    {skillTooltips[skill] && (
+                      <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 bg-slate-800 text-white text-xs rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none shadow-xl border border-slate-700 z-50">
+                        {skillTooltips[skill]}
+                        <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800"></span>
+                      </span>
+                    )}
                   </span>
                 ))}
               </div>
