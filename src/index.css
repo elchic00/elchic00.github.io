@@ -125,10 +125,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #020617; /* slate-950 */
   color: #e2e8f0; /* slate-200 */
+  overflow-x: hidden;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 code {

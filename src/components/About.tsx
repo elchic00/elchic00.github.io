@@ -17,7 +17,7 @@ export const About = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-900/95"></div>
       </div>
 
-      <div className="container mx-auto flex px-10 py-20 md:flex-row flex-col items-center mt-10 relative z-10">
+      <div className="container mx-auto flex px-5 sm:px-8 md:px-10 py-20 md:flex-row flex-col items-center mt-10 relative z-10">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
           <h1 className="title-font sm:text-5xl text-4xl mb-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 mt-5 animate-fade-in">
             Andrew Alagna
