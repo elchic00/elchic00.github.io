@@ -290,7 +290,7 @@ For detailed setup, troubleshooting, and customization, see [docs/AI_CHAT.md](do
 
 - **[AI Chat Guide](docs/AI_CHAT.md)** - Complete setup, customization, and troubleshooting
 - **[Custom Hooks](docs/HOOKS.md)** - Documentation for 11 reusable React hooks
-- **[Image Optimization](IMAGE-OPTIMIZATION-GUIDE.md)** - Guide for optimizing photos
+- **[Image Optimization](docs/IMAGE_OPTIMIZATION.md)** - Guide for optimizing photos
 
 ---
 
