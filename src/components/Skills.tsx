@@ -3,10 +3,10 @@ import skillsData from "../data/skills.json";
 import { useScrollReveal } from "../hooks";
 
 const categoryColors: Record<string, string> = {
-  "Languages & Frameworks": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/30 hover:border-cyan-400/50",
-  "Databases & Backend": "bg-teal-600/20 text-teal-400 border-teal-500/30 hover:bg-teal-600/30 hover:border-teal-400/50",
-  "DevOps, Tools & Testing": "bg-purple-600/20 text-purple-400 border-purple-500/30 hover:bg-purple-600/30 hover:border-purple-400/50",
-  "Practices & Methodologies": "bg-slate-600/20 text-slate-300 border-slate-500/30 hover:bg-slate-600/30 hover:border-slate-400/50",
+  "Languages & Frameworks": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/30 hover:border-cyan-400/50 hover:shadow-cyan-500/20",
+  "Databases & Backend": "bg-emerald-600/20 text-emerald-400 border-emerald-500/30 hover:bg-emerald-600/30 hover:border-emerald-400/50 hover:shadow-emerald-500/20",
+  "DevOps, Tools & Testing": "bg-purple-600/20 text-purple-400 border-purple-500/30 hover:bg-purple-600/30 hover:border-purple-400/50 hover:shadow-purple-500/20",
+  "Practices & Methodologies": "bg-orange-600/20 text-orange-400 border-orange-500/30 hover:bg-orange-600/30 hover:border-orange-400/50 hover:shadow-orange-500/20",
 };
 
 const categoryIcons: Record<string, string> = {

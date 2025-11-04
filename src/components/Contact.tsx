@@ -170,7 +170,7 @@ export const Contact: React.FC = () => {
 
     const errorClasses = hasError
       ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-900"
-      : "border-gray-700 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-900";
+      : "border-gray-700 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 focus:shadow-lg focus:shadow-cyan-500/10";
 
     return `${baseClasses} ${errorClasses}`;
   };
