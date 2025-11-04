@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react";
 
+/**
+ * Tracks which trip section is currently active based on scroll position and URL hash.
+ * Automatically updates the URL hash as users scroll through different trip sections
+ * and highlights the most visible trip in the viewport.
+ *
+ * @param tripIds - Array of trip IDs to track (should correspond to element IDs in the DOM)
+ * @returns The ID of the currently active/most visible trip, or null if none are visible
+ *
+ * @example
+ * const activeTrip = useActiveTrip(['thailand-2024', 'costarica-2023', 'ecuador-2024']);
+ * // Returns 'thailand-2024' when that section is most visible
+ * // Automatically updates URL to #/travel#thailand-2024
+ */
 export const useActiveTrip = (tripIds: string[]): string | null => {
   const [activeId, setActiveId] = useState<string | null>(null);
 

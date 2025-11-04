@@ -28,6 +28,36 @@ interface SnakeGameReturn {
   restart: () => void;
 }
 
+/**
+ * Implements a complete Snake game with canvas rendering, collision detection, and scoring.
+ * Manages game state including snake movement, apple spawning, collision detection,
+ * keyboard controls, and persistent high score tracking.
+ *
+ * @param config - Configuration object for the Snake game
+ * @param config.gridSize - Number of cells in the grid (e.g., 20 for 20x20 grid)
+ * @param config.startSnakeSize - Initial length of the snake in cells
+ * @param config.speed - Game speed in milliseconds between updates (lower = faster)
+ * @param config.percentageWidth - Canvas width as percentage of container or fixed width
+ * @param config.appleColor - Hex color for the apple/food
+ * @param config.snakeColor - Hex color for the snake body
+ * @param config.canvasRef - React ref to the canvas element for rendering
+ * @param config.containerRef - React ref to the container element for responsive sizing
+ * @returns Game state and control functions
+ *
+ * @example
+ * const canvasRef = useRef<HTMLCanvasElement>(null);
+ * const containerRef = useRef<HTMLDivElement>(null);
+ * const game = useSnakeGame({
+ *   gridSize: 20,
+ *   startSnakeSize: 3,
+ *   speed: 100,
+ *   percentageWidth: '100%',
+ *   appleColor: '#FF0000',
+ *   snakeColor: '#00FF00',
+ *   canvasRef,
+ *   containerRef
+ * });
+ */
 export const useSnakeGame = ({
   gridSize,
   startSnakeSize,
