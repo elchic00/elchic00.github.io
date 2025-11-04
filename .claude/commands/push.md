@@ -6,9 +6,13 @@ Analyze all uncommitted changes and create descriptive, well-structured git comm
 
 Instructions:
 
-1. Run `git status` and `git diff` to understand all changes
-2. Analyze the changes and determine if they should be split into multiple logical commits or combined into one
-3. For each commit:
+1. **Check for portfolio context changes:**
+   - Check if `src/data/portfolioContext.ts` has been modified: `git diff --name-only | grep portfolioContext.ts`
+   - If it has changed, run `npm run sync-context` to sync it to `worker/index.js`
+   - Stage the synced worker file if changes were made: `git add worker/index.js`
+2. Run `git status` and `git diff` to understand all changes
+3. Analyze the changes and determine if they should be split into multiple logical commits or combined into one
+4. For each commit:
    - Create a descriptive commit message following conventional commits format (feat:, fix:, refactor:, docs:, etc.)
    - Include a clear summary line (50-72 chars)
    - Add a concise body (2-5 bullet points) explaining:
@@ -17,9 +21,9 @@ Instructions:
      - Non-obvious implementation decisions
    - **Avoid**: Exhaustive lists, line numbers, file paths (visible in diff), implementation details obvious from the diff
    - **Focus on**: The "why" and context, not just the "what"
-4. Push all commits to remote using `git done` (custom alias)
-5. Run `npm run deploy` to deploy to GitHub Pages
-6. Report back with commit hashes and a summary of what was pushed
+5. Push all commits to remote using `git done` (custom alias)
+6. Run `npm run deploy` to deploy to GitHub Pages
+7. Report back with commit hashes and a summary of what was pushed
 
 Commit message example:
 ```
