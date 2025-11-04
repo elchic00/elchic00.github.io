@@ -113,7 +113,7 @@ export const Projects: React.FC = () => {
   const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
 
   return (
-    <section id="projects" className="body-font mt-16">
+    <section id="projects" className="body-font mt-8">
       <div className="container px-5 py-10 mx-auto lg:px-40">
         <header
           ref={headerRef}
@@ -124,8 +124,11 @@ export const Projects: React.FC = () => {
             aria-hidden="true"
           />
           <h2 className="sm:text-4xl text-3xl font-bold title-font text-white underline-offset-4 underline decoration-cyan-500 mb-4">
-            Things I've Built
+            Personal Projects
           </h2>
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+            Side projects built in my free time to explore new technologies and solve real-world problems
+          </p>
         </header>
 
         <div

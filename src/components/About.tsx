@@ -48,6 +48,23 @@ export const About = () => {
               <Button
                 variant="primary"
                 onClick={() => {
+                  const experienceSection = document.getElementById('experience');
+                  if (experienceSection) {
+                    const yCoordinate = experienceSection.getBoundingClientRect().top + window.pageYOffset;
+                    window.scrollTo({
+                      top: yCoordinate - 60,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+                ariaLabel="View Professional Experience"
+                className="hover:scale-105 transition-transform duration-300 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500"
+              >
+                View Experience
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
                   const projectsSection = document.getElementById('projects');
                   if (projectsSection) {
                     const yCoordinate = projectsSection.getBoundingClientRect().top + window.pageYOffset;
@@ -57,8 +74,8 @@ export const About = () => {
                     });
                   }
                 }}
-                ariaLabel="View Projects Section"
-                className="hover:scale-105 transition-transform duration-300 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500"
+                ariaLabel="View Personal Projects"
+                className="hover:scale-105 transition-transform duration-300 bg-slate-700 hover:bg-slate-600"
               >
                 View Projects
               </Button>
