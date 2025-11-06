@@ -2,7 +2,7 @@
  * Custom hook for managing contact form state, validation, and email sending
  */
 
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { useFormValidation, useAsync, useDebounce } from "./index";
 import { APP_CONFIG } from "../constants";
@@ -57,6 +57,11 @@ interface UseContactFormReturn {
   getInputClassName: (fieldName: keyof ContactFormValues) => string;
   generateMailtoLink: () => string;
   EMAIL_PATTERN: RegExp;
+  characterCount: number;
+  maxCharacters: number;
+  hasDraft: boolean;
+  clearDraft: () => void;
+  applyTemplate: (template: string) => void;
 }
 
 /**
@@ -78,6 +83,9 @@ interface UseContactFormReturn {
  *   </form>
  * );
  */
+const DRAFT_KEY = "contact_form_draft";
+const MAX_MESSAGE_LENGTH = 1000;
+
 export const useContactForm = (
   onSuccess: () => void,
   onError: (error: Error) => void
@@ -85,20 +93,34 @@ export const useContactForm = (
   const formRef = useRef<HTMLFormElement>(null);
   const [showMailtoFallback, setShowMailtoFallback] = useState(false);
 
+  // Load draft from localStorage on mount
+  const loadDraft = (): ContactFormValues => {
+    try {
+      const draft = localStorage.getItem(DRAFT_KEY);
+      if (draft) {
+        return JSON.parse(draft);
+      }
+    } catch (error) {
+      console.error("Failed to load draft:", error);
+    }
+    return {
+      user_name: "",
+      user_email: "",
+      message: "",
+    };
+  };
+
   const {
     values,
     errors,
     touched,
-    handleChange,
+    handleChange: originalHandleChange,
     handleBlur,
     validateAll,
-    resetForm,
+    resetForm: originalResetForm,
+    setValues,
   } = useFormValidation<ContactFormValues>(
-    {
-      user_name: "",
-      user_email: "",
-      message: "",
-    },
+    loadDraft(),
     validationRules
   );
 
@@ -112,6 +134,50 @@ export const useContactForm = (
     !!(touched.user_email && errors.user_email && values.user_email === debouncedEmail);
   const showMessageError =
     !!(touched.message && errors.message && values.message === debouncedMessage);
+
+  // Auto-save draft to localStorage with debounce
+  useEffect(() => {
+    const hasContent = values.user_name || values.user_email || values.message;
+    if (hasContent) {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(values));
+    }
+  }, [debouncedName, debouncedEmail, debouncedMessage, values]);
+
+  // Check if draft exists
+  const hasDraft = !!(values.user_name || values.user_email || values.message);
+
+  // Character count for message
+  const characterCount = values.message.length;
+  const maxCharacters = MAX_MESSAGE_LENGTH;
+
+  // Enhanced handleChange with max length check
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+
+    // Enforce max length for message field
+    if (name === "message" && value.length > MAX_MESSAGE_LENGTH) {
+      return;
+    }
+
+    originalHandleChange(e);
+  };
+
+  // Clear draft from localStorage
+  const clearDraft = () => {
+    localStorage.removeItem(DRAFT_KEY);
+    originalResetForm();
+  };
+
+  // Apply template to message field
+  const applyTemplate = (template: string) => {
+    setValues((prev) => ({ ...prev, message: template }));
+  };
+
+  // Enhanced reset form that also clears draft
+  const resetForm = () => {
+    localStorage.removeItem(DRAFT_KEY);
+    originalResetForm();
+  };
 
   const sendEmailAsync = useCallback(async () => {
     if (!formRef.current) throw new Error("Form reference not available");
@@ -167,7 +233,7 @@ export const useContactForm = (
 
   const getInputClassName = (fieldName: keyof ContactFormValues): string => {
     const baseClasses =
-      "w-full bg-slate-800 rounded border text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out";
+      "w-full bg-slate-800 dark:bg-slate-800 light:bg-slate-50 rounded border text-base outline-none text-gray-100 dark:text-gray-100 light:text-gray-900 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out";
 
     let hasError = false;
     if (fieldName === "user_name") hasError = !!showNameError;
@@ -176,7 +242,7 @@ export const useContactForm = (
 
     const errorClasses = hasError
       ? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-900"
-      : "border-gray-700 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 focus:shadow-lg focus:shadow-cyan-500/10";
+      : "border-gray-700 dark:border-gray-700 light:border-slate-300 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 focus:shadow-lg focus:shadow-cyan-500/10";
 
     return `${baseClasses} ${errorClasses}`;
   };
@@ -198,5 +264,10 @@ export const useContactForm = (
     getInputClassName,
     generateMailtoLink,
     EMAIL_PATTERN,
+    characterCount,
+    maxCharacters,
+    hasDraft,
+    clearDraft,
+    applyTemplate,
   };
 };

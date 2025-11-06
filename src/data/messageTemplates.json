@@ -1,0 +1,32 @@
+[
+  {
+    "id": "job-opportunity",
+    "label": "Job Opportunity",
+    "icon": "💼",
+    "template": "Hi Andrew,\n\nI came across your portfolio and I'm impressed by your work. We have an opportunity that might be a great fit for you.\n\nWould you be available for a quick call to discuss?\n\nBest regards,"
+  },
+  {
+    "id": "project-collaboration",
+    "label": "Project Collaboration",
+    "icon": "🤝",
+    "template": "Hi Andrew,\n\nI have a project that I think would benefit from your expertise in React and accessibility.\n\nWould you be interested in collaborating?\n\nLooking forward to hearing from you!"
+  },
+  {
+    "id": "consulting",
+    "label": "Consulting/Freelance",
+    "icon": "💡",
+    "template": "Hi Andrew,\n\nI'm looking for someone with your skill set to help with a web development project.\n\nCould we schedule a time to discuss the details and see if you're available?\n\nThanks!"
+  },
+  {
+    "id": "general-inquiry",
+    "label": "General Question",
+    "icon": "❓",
+    "template": "Hi Andrew,\n\nI have a question about [your project/experience/technology].\n\n"
+  },
+  {
+    "id": "networking",
+    "label": "Networking/Connect",
+    "icon": "🌐",
+    "template": "Hi Andrew,\n\nI'd love to connect about {......} .\nWould you be open to a virtual coffee chat?\n\nBest,"
+  }
+]
