@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { SocialLinks } from "./shared/SocialLinks";
 import { Button } from "./shared/Button";
 import { SOCIAL_LINKS } from "../constants";
+import { trackResumeView } from "../utils/analytics";
 
 export const About = () => {
   const navigate = useNavigate();
@@ -47,15 +48,16 @@ export const About = () => {
               <SocialLinks variant="about" />
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-              <a
-                href="/andrew-alagna-resume.pdf"
-                rel="noopener noreferrer"
-                target="_blank"
+              <button
+                onClick={() => {
+                  trackResumeView();
+                  window.open("/andrew-alagna-resume.pdf", "_blank", "noopener,noreferrer");
+                }}
                 className="inline-flex items-center h-10 px-4 text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 rounded-lg font-medium shadow-md hover:shadow-lg hover:shadow-cyan-500/30 focus-ring hover:scale-105"
                 aria-label="View Resume in new tab"
               >
                 Resume
-              </a>
+              </button>
               <Button
                 variant="primary"
                 onClick={() => {

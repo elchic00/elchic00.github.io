@@ -8,15 +8,8 @@ const ResumePage = () => {
 
   useEffect(() => {
     document.title = "Resume - Andrew Alagna";
-
     window.open(pdfPath, "_blank", "noopener,noreferrer");
-
-    const timer = setTimeout(() => {
-      navigate("/");
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [pdfPath, navigate]);
+  }, [pdfPath]);
 
   return (
     <div className="w-full min-h-screen flex items-center justify-center bg-slate-800">

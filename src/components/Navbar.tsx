@@ -5,6 +5,7 @@ import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
 import { NAV_LINKS, scrollWithOffset, TIMING } from "../constants";
 import { MonogramOverlap } from "./shared/MonogramLogo";
+import { trackResumeView } from "../utils/analytics";
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -58,16 +59,7 @@ export const Navbar = () => {
     ) => {
       if (linkName === "Resume") {
         e.preventDefault();
-
-        // Track Resume PDF view in GA4
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', 'resume_view', {
-            event_category: 'engagement',
-            event_label: 'Resume PDF View',
-            link_url: '/andrew-alagna-resume.pdf'
-          });
-        }
-
+        trackResumeView();
         window.open(
           "/andrew-alagna-resume.pdf",
           "_blank",
