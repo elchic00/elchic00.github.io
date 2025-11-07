@@ -368,4 +368,5 @@ export const useScrollReveal = (options?: IntersectionObserverInit) => {
 export { useSnakeGame } from './useSnakeGame';
 export { useActiveTrip } from './useActiveTrip';
 export { useContactForm } from './useContactForm';
+export { usePageTracking } from './usePageTracking';
 export type { ContactFormValues } from './useContactForm';
