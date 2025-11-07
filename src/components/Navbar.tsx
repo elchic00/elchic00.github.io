@@ -58,6 +58,16 @@ export const Navbar = () => {
     ) => {
       if (linkName === "Resume") {
         e.preventDefault();
+
+        // Track Resume PDF view in GA4
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'resume_view', {
+            event_category: 'engagement',
+            event_label: 'Resume PDF View',
+            link_url: '/andrew-alagna-resume.pdf'
+          });
+        }
+
         window.open(
           "/andrew-alagna-resume.pdf",
           "_blank",
