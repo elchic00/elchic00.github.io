@@ -45,8 +45,12 @@ interface UseContactFormReturn {
   values: ContactFormValues;
   errors: Partial<Record<keyof ContactFormValues, string>>;
   touched: Partial<Record<keyof ContactFormValues, boolean>>;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  handleBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleBlur: (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   resetForm: () => void;
   isLoading: boolean;
@@ -119,31 +123,47 @@ export const useContactForm = (
     validateAll,
     resetForm: originalResetForm,
     setValues,
-  } = useFormValidation<ContactFormValues>(
-    loadDraft(),
-    validationRules
-  );
+  } = useFormValidation<ContactFormValues>(loadDraft(), validationRules);
 
   const debouncedName = useDebounce(values.user_name, 400);
   const debouncedEmail = useDebounce(values.user_email, 400);
   const debouncedMessage = useDebounce(values.message, 400);
 
-  const showNameError =
-    !!(touched.user_name && errors.user_name && values.user_name === debouncedName);
-  const showEmailError =
-    !!(touched.user_email && errors.user_email && values.user_email === debouncedEmail);
-  const showMessageError =
-    !!(touched.message && errors.message && values.message === debouncedMessage);
+  const showNameError = !!(
+    touched.user_name &&
+    errors.user_name &&
+    values.user_name === debouncedName
+  );
+  const showEmailError = !!(
+    touched.user_email &&
+    errors.user_email &&
+    values.user_email === debouncedEmail
+  );
+  const showMessageError = !!(
+    touched.message &&
+    errors.message &&
+    values.message === debouncedMessage
+  );
 
   // Auto-save draft to localStorage with debounce
   useEffect(() => {
-    const hasContent = values.user_name || values.user_email || values.message;
+    const hasContent = debouncedName || debouncedEmail || debouncedMessage;
     if (hasContent) {
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(values));
+      localStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify({
+          user_name: values.user_name,
+          user_email: values.user_email,
+          message: values.message,
+        })
+      );
+    } else {
+      // If all debounced values are empty, remove the draft
+      localStorage.removeItem(DRAFT_KEY);
     }
   }, [debouncedName, debouncedEmail, debouncedMessage, values]);
 
-  // Check if draft exists
+  // Check if draft exists based on form values only
   const hasDraft = !!(values.user_name || values.user_email || values.message);
 
   // Character count for message
@@ -151,7 +171,9 @@ export const useContactForm = (
   const maxCharacters = MAX_MESSAGE_LENGTH;
 
   // Enhanced handleChange with max length check
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
 
     // Enforce max length for message field
@@ -162,18 +184,15 @@ export const useContactForm = (
     originalHandleChange(e);
   };
 
-  // Clear draft from localStorage
-  const clearDraft = () => {
+  const clearDraft = useCallback(() => {
     localStorage.removeItem(DRAFT_KEY);
     originalResetForm();
-  };
+  }, [originalResetForm]);
 
-  // Apply template to message field
   const applyTemplate = (template: string) => {
     setValues((prev) => ({ ...prev, message: template }));
   };
 
-  // Enhanced reset form that also clears draft
   const resetForm = () => {
     localStorage.removeItem(DRAFT_KEY);
     originalResetForm();
@@ -196,7 +215,9 @@ export const useContactForm = (
     e.preventDefault();
 
     if (!validateAll()) {
-      onError(new Error("Please fix the errors in the form before submitting."));
+      onError(
+        new Error("Please fix the errors in the form before submitting.")
+      );
       return;
     }
 
@@ -208,7 +229,8 @@ export const useContactForm = (
     } catch (error: unknown) {
       console.error("Email send error:", error);
 
-      let errorMessage = "An error occurred while sending your message. Please try again.";
+      let errorMessage =
+        "An error occurred while sending your message. Please try again.";
 
       if (error && typeof error === "object") {
         if ("text" in error && typeof error.text === "string") {
