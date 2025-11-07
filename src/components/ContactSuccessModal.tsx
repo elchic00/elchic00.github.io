@@ -1,4 +1,5 @@
 import { CheckCircleIcon, XIcon } from "@heroicons/react/solid";
+import { useNavigate } from "react-router-dom";
 
 interface ContactSuccessModalProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ export const ContactSuccessModal: React.FC<ContactSuccessModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const navigate = useNavigate();
+
   if (!isOpen) return null;
 
   return (
@@ -78,8 +81,12 @@ export const ContactSuccessModal: React.FC<ContactSuccessModalProps> = ({
               type="button"
               className="mt-3 w-full inline-flex justify-center rounded-lg border border-slate-600 dark:border-slate-600 light:border-slate-300 shadow-sm px-4 py-2 bg-slate-700 dark:bg-slate-700 light:bg-white text-base font-medium text-slate-200 dark:text-slate-200 light:text-slate-900 hover:bg-slate-600 dark:hover:bg-slate-600 light:hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 sm:mt-0 sm:w-auto sm:text-sm transition-colors"
               onClick={() => {
-                window.location.hash = "#projects";
+                navigate("/");
                 onClose();
+                // Scroll to projects section after navigation
+                setTimeout(() => {
+                  window.location.hash = "#projects";
+                }, 100);
               }}
             >
               View Projects

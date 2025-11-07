@@ -21,7 +21,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
 
   return (
     <article
-      className={`group bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.03] hover:-translate-y-2 border border-slate-700 hover:border-cyan-500/50 ${
+      className={`group bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 md:hover:scale-[1.03] md:hover:-translate-y-2 border border-slate-700 hover:border-cyan-500/50 ${
         featured ? "md:col-span-2 md:row-span-2" : ""
       }`}
     >
@@ -117,7 +117,9 @@ export const Projects: React.FC = () => {
       <div className="container px-5 py-10 mx-auto lg:px-40">
         <header
           ref={headerRef}
-          className={`flex flex-col w-full sm:mb-16 text-center scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
+          className={`flex flex-col w-full sm:mb-16 text-center scroll-reveal-scale ${
+            headerVisible ? "visible" : ""
+          }`}
         >
           <CodeIcon
             className="mx-auto inline-block w-10 mb-1 text-cyan-400"
@@ -126,14 +128,17 @@ export const Projects: React.FC = () => {
           <h2 className="sm:text-4xl text-3xl font-bold title-font text-white underline-offset-4 underline decoration-cyan-500 mb-4">
             Personal Projects
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Side projects built in my free time to explore new technologies and solve real-world problems
+          <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-5 sm:mb-0">
+            Side projects built in my free time to explore new technologies and
+            solve real-world problems
           </p>
         </header>
 
         <div
           ref={gridRef}
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 scroll-reveal ${gridVisible ? 'visible' : ''}`}
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 scroll-reveal ${
+            gridVisible ? "visible" : ""
+          }`}
         >
           {(projectsData as Project[]).map((project, index) => (
             <BentoGridProject
