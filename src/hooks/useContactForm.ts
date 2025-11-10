@@ -121,7 +121,6 @@ export const useContactForm = (
     handleChange: originalHandleChange,
     handleBlur,
     validateAll,
-    resetForm: originalResetForm,
     setValues,
   } = useFormValidation<ContactFormValues>(loadDraft(), validationRules);
 
@@ -186,8 +185,12 @@ export const useContactForm = (
 
   const clearDraft = useCallback(() => {
     localStorage.removeItem(DRAFT_KEY);
-    originalResetForm();
-  }, [originalResetForm]);
+    setValues({
+      user_name: "",
+      user_email: "",
+      message: "",
+    });
+  }, [setValues]);
 
   const applyTemplate = (template: string) => {
     setValues((prev) => ({ ...prev, message: template }));
@@ -195,7 +198,11 @@ export const useContactForm = (
 
   const resetForm = () => {
     localStorage.removeItem(DRAFT_KEY);
-    originalResetForm();
+    setValues({
+      user_name: "",
+      user_email: "",
+      message: "",
+    });
   };
 
   const sendEmailAsync = useCallback(async () => {

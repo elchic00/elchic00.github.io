@@ -12,6 +12,7 @@ import { useAlert } from "./shared/Alert";
 import { useContactForm, useScrollReveal } from "../hooks";
 import { APP_CONFIG } from "../constants";
 import { ContactSuccessModal } from "./ContactSuccessModal";
+import { ConfirmDialog } from "./shared/ConfirmDialog";
 import messageTemplates from "../data/messageTemplates.json";
 
 export const Contact: React.FC = () => {
@@ -19,6 +20,7 @@ export const Contact: React.FC = () => {
   const { ref: contactRef, isVisible: contactVisible } = useScrollReveal();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showTemplates, setShowTemplates] = useState(false);
+  const [showClearDraftDialog, setShowClearDraftDialog] = useState(false);
 
   useEffect(() => {
     emailjs.init(APP_CONFIG.EMAIL_PUBLIC_KEY);
@@ -96,11 +98,7 @@ export const Contact: React.FC = () => {
             {contactForm.hasDraft && (
               <button
                 type="button"
-                onClick={() => {
-                  if (confirm("Clear draft? This will remove all saved information.")) {
-                    contactForm.clearDraft();
-                  }
-                }}
+                onClick={() => setShowClearDraftDialog(true)}
                 className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-red-400 dark:hover:text-red-400 light:hover:text-red-600 flex items-center gap-1 transition-colors"
                 aria-label="Clear saved draft"
               >
@@ -273,6 +271,24 @@ export const Contact: React.FC = () => {
         <Footer />
       </div>
     </section>
+
+    <ConfirmDialog
+      isOpen={showClearDraftDialog}
+      onClose={() => setShowClearDraftDialog(false)}
+      onConfirm={() => {
+        contactForm.clearDraft();
+        showAlert({
+          type: "success",
+          title: "Draft Cleared",
+          message: "Your draft has been successfully cleared.",
+        });
+      }}
+      title="Clear Draft?"
+      message="This will remove all saved information from your draft. This action cannot be undone."
+      confirmText="Clear Draft"
+      cancelText="Keep Draft"
+      variant="danger"
+    />
     </>
   );
 };
