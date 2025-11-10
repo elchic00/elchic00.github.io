@@ -61,12 +61,19 @@
 
 ### ⚡ Performance & Accessibility
 
-- **WCAG AAA Compliance** - Semantic HTML, ARIA labels, keyboard navigation
-- **Lighthouse Score: 95+** - Optimized for performance across all metrics
+[![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=for-the-badge&logo=lighthouse)](https://pagespeed.web.dev/analysis/https-elchic00-github-io/x97fuakj1n?form_factor=desktop)
+
+- **Perfect Lighthouse Score: 100/100** - Performance, Accessibility, Best Practices, SEO
+  - 🚀 **Performance: 100** - 0.3s First Contentful Paint, 0s Cumulative Layout Shift
+  - ♿ **Accessibility: 100** - WCAG AAA compliant with semantic HTML, ARIA labels, keyboard navigation
+  - ✅ **Best Practices: 100** - Secure, modern web standards
+  - 📊 **SEO: 100** - Optimized meta tags, structured data, mobile-friendly
 - **Lazy Loading** - Code splitting and lazy-loaded routes
 - **Responsive Design** - Mobile-first with Tailwind CSS
-- **SEO Optimized** - Schema.org structured data, image sitemap
+- **Image Optimization** - WebP format with optimized dimensions
 - **Scroll Animations** - Intersection Observer for smooth reveals
+
+[📊 View Full PageSpeed Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/x97fuakj1n?form_factor=desktop)
 
 ---
 
@@ -524,11 +531,13 @@ For recruiters and potential employers:
 - ✅ Rate limiting and error handling
 
 ### Accessibility & UX
+- ✅ **Perfect Lighthouse Score: 100/100** across all categories
 - ✅ WCAG AAA compliance throughout
 - ✅ Keyboard navigation support
 - ✅ Screen reader optimization
 - ✅ Focus management in modals
 - ✅ Semantic HTML and ARIA labels
+- ✅ 0.3s First Contentful Paint, 0s Layout Shift
 
 ### DevOps & Tooling
 - ✅ CI/CD with GitHub Actions
