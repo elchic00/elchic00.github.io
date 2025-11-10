@@ -8,7 +8,10 @@ export const About = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="about" className="relative min-h-screen flex items-center overflow-hidden">
+    <section
+      id="about"
+      className="relative min-h-screen flex items-center overflow-hidden"
+    >
       <div className="absolute inset-0 z-0">
         <img
           src="/images/nyc-sunset.webp"
@@ -25,10 +28,9 @@ export const About = () => {
           <h1 className="title-font sm:text-5xl text-4xl mb-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 mt-5 animate-fade-in">
             Andrew Alagna
           </h1>
-          <h2 className="text-2xl sm:text-3xl font-semibold text-white mb-6 animate-fade-in-delay-1">
-            Software Engineer
-          </h2>
-          <p className="text-xl text-cyan-300 mb-4 animate-fade-in-delay-2">Hey there! I'm Drew 👋</p>
+          <p className="text-xl text-cyan-300 mb-4 animate-fade-in-delay-2">
+            Hey there! I'm Drew 👋
+          </p>
           <p className="mb-7 leading-relaxed text-slate-300 text-lg animate-fade-in-delay-3">
             Software engineer at American Express building web applications for
             millions of users. I care deeply about accessibility and performance
@@ -40,10 +42,15 @@ export const About = () => {
             bouldering, traveling, or building side projects.
             <br />
             <br />
-            <span className="text-cyan-400 font-semibold">NYC based. Always learning.</span>
+            <span className="text-cyan-400 font-semibold">
+              NYC based. Always learning.
+            </span>
           </p>
 
-          <nav aria-label="Social links and actions" className="animate-fade-in-delay-4">
+          <nav
+            aria-label="Social links and actions"
+            className="animate-fade-in-delay-4"
+          >
             <div className="flex flex-row gap-4 mb-6 mt-6 justify-center md:justify-start">
               <SocialLinks variant="about" />
             </div>
@@ -51,7 +58,11 @@ export const About = () => {
               <button
                 onClick={() => {
                   trackResumeView();
-                  window.open("/andrew-alagna-resume.pdf", "_blank", "noopener,noreferrer");
+                  window.open(
+                    "/andrew-alagna-resume.pdf",
+                    "_blank",
+                    "noopener,noreferrer"
+                  );
                 }}
                 className="inline-flex items-center h-10 px-4 text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 rounded-lg font-medium shadow-md hover:shadow-lg hover:shadow-cyan-500/30 focus-ring hover:scale-105"
                 aria-label="View Resume in new tab"
@@ -61,9 +72,12 @@ export const About = () => {
               <Button
                 variant="primary"
                 onClick={() => {
-                  const experienceSection = document.getElementById('experience');
+                  const experienceSection =
+                    document.getElementById("experience");
                   if (experienceSection) {
-                    const yCoordinate = experienceSection.getBoundingClientRect().top + window.pageYOffset;
+                    const yCoordinate =
+                      experienceSection.getBoundingClientRect().top +
+                      window.pageYOffset;
                     window.scrollTo({
                       top: yCoordinate - 60,
                       behavior: "smooth",
@@ -78,9 +92,11 @@ export const About = () => {
               <Button
                 variant="secondary"
                 onClick={() => {
-                  const projectsSection = document.getElementById('projects');
+                  const projectsSection = document.getElementById("projects");
                   if (projectsSection) {
-                    const yCoordinate = projectsSection.getBoundingClientRect().top + window.pageYOffset;
+                    const yCoordinate =
+                      projectsSection.getBoundingClientRect().top +
+                      window.pageYOffset;
                     window.scrollTo({
                       top: yCoordinate - 60,
                       behavior: "smooth",
@@ -94,7 +110,7 @@ export const About = () => {
               </Button>
               <Button
                 variant="secondary"
-                onClick={() => navigate('/travel')}
+                onClick={() => navigate("/travel")}
                 ariaLabel="View Travel Adventures"
                 className="hover:scale-105 transition-transform duration-300"
               >

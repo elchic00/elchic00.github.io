@@ -5,6 +5,7 @@ import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
 import { NAV_LINKS, scrollWithOffset, TIMING } from "../constants";
 import { MonogramOverlap } from "./shared/MonogramLogo";
+import { SocialLinks } from "./shared/SocialLinks";
 import { trackResumeView } from "../utils/analytics";
 
 export const Navbar = () => {
@@ -130,65 +131,150 @@ export const Navbar = () => {
           </button>
         )}
 
+        {/* Desktop Navigation */}
         <ul
-          className={`bg-slate-800/95 backdrop-blur-md lg:backdrop-blur-none lg:bg-transparent lg:flex lg:items-center lg:pb-0 pb-12 absolute lg:static lg:z-auto z-[-1] left-0 w-full lg:w-auto lg:pl-0 pl-9 lg:pr-0 pr-4 transition-all duration-500 ease-in ${
-            open ? "top-[68px]" : "top-[-490px]"
-          }`}
+          className={`bg-slate-800/95 backdrop-blur-md lg:backdrop-blur-none lg:bg-transparent lg:flex lg:items-center lg:pb-0 absolute lg:static lg:z-auto z-[-1] left-0 w-full lg:w-auto transition-all duration-500 ease-in ${
+            open ? "top-[68px] pb-6" : "top-[-650px]"
+          } lg:pr-0 pr-4`}
         >
-          {NAV_LINKS.map((link) => {
-            const linkHash = link.link.includes("#")
-              ? `#${link.link.split("#")[1]}`
-              : "";
-            const isActive =
-              (linkHash && activeSection === linkHash) ||
-              (location.pathname === link.link && link.link.startsWith("/"));
-            return (
-              <li
-                key={link.name}
-                className="lg:ml-4 text-xl lg:text-base xl:text-xl lg:my-0 my-7"
-              >
+          {/* Mobile Menu Layout */}
+          {isMobile && open ? (
+            <div className="w-full px-6 py-4">
+              {/* Primary CTA */}
+              <li className="mb-6">
                 <Link
-                  to={link.link}
+                  to="/#contact"
                   scroll={scrollWithOffset}
-                  className={`hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap ${
-                    isActive ? "border-b-2 !border-cyan-400 text-cyan-400" : ""
-                  }`}
-                  onClick={(e) => handleLinkClick(e, link.link, link.name)}
+                  className="flex items-center justify-center bg-gradient-to-r from-purple-600 to-purple-700 text-white font-medium py-3.5 px-5 rounded-lg hover:from-purple-500 hover:to-purple-600 hover:shadow-lg active:scale-95 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800 text-lg"
+                  onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
+                  aria-label="Contact Andrew Alagna"
                 >
-                  {link.name}
+                  Contact Me
+                  <ArrowRightIcon className="w-5 h-5 ml-2" aria-hidden="true" />
                 </Link>
               </li>
-            );
-          })}
 
-          <li className="lg:ml-4 text-xl lg:text-base xl:text-xl lg:my-0 my-7">
-            <button
-              onClick={handleSnakeClick}
-              className={`hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring ${
-                location.pathname === "/snake"
-                  ? "border-b-2 !border-cyan-400 text-cyan-400"
-                  : ""
-              }`}
-            >
-              Snake
-            </button>
-          </li>
+              {/* Divider */}
+              <div className="border-t border-slate-700 mb-6" />
 
-          <li className="lg:ml-5 text-xl lg:text-base xl:text-xl lg:my-0 my-7">
-            <Link
-              to="/#contact"
-              scroll={scrollWithOffset}
-              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 lg:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800"
-              onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
-              aria-label="Contact Andrew Alagna"
-            >
-              Contact
-              <ArrowRightIcon
-                className="w-3 h-3 lg:w-4 lg:h-4 ml-1"
-                aria-hidden="true"
-              />
-            </Link>
-          </li>
+              {/* Navigation Links */}
+              <nav aria-label="Main navigation links">
+                {NAV_LINKS.map((link) => {
+                  const linkHash = link.link.includes("#")
+                    ? `#${link.link.split("#")[1]}`
+                    : "";
+                  const isActive =
+                    (linkHash && activeSection === linkHash) ||
+                    (location.pathname === link.link && link.link.startsWith("/"));
+                  return (
+                    <li key={link.name} className="mb-1">
+                      <Link
+                        to={link.link}
+                        scroll={scrollWithOffset}
+                        className={`flex items-center py-3.5 px-4 rounded-lg transition-all duration-300 text-lg font-medium ${
+                          isActive
+                            ? "bg-cyan-500/10 text-cyan-400 border-l-4 border-cyan-400"
+                            : "text-slate-200 hover:bg-slate-700/50 hover:text-white active:bg-slate-700"
+                        } focus-ring`}
+                        onClick={(e) => handleLinkClick(e, link.link, link.name)}
+                      >
+                        {link.name}
+                      </Link>
+                    </li>
+                  );
+                })}
+
+                <li className="mb-1">
+                  <button
+                    onClick={handleSnakeClick}
+                    className={`w-full flex items-center py-3.5 px-4 rounded-lg transition-all duration-300 text-lg font-medium ${
+                      location.pathname === "/snake"
+                        ? "bg-cyan-500/10 text-cyan-400 border-l-4 border-cyan-400"
+                        : "text-slate-200 hover:bg-slate-700/50 hover:text-white active:bg-slate-700"
+                    } focus-ring`}
+                  >
+                    Snake
+                  </button>
+                </li>
+              </nav>
+
+              {/* Divider */}
+              <div className="border-t border-slate-700 my-6" />
+
+              {/* Social Links Section */}
+              <div className="text-center">
+                <p className="text-slate-400 text-sm mb-3 font-medium">
+                  Connect with me
+                </p>
+                <div className="flex justify-center gap-4">
+                  <SocialLinks variant="about" />
+                </div>
+              </div>
+
+              {/* Tagline */}
+              <p className="text-center text-slate-500 text-xs mt-6 leading-relaxed">
+                Building impactful software &<br />mentoring the next generation
+              </p>
+            </div>
+          ) : (
+            /* Desktop Menu Layout */
+            <>
+              {NAV_LINKS.map((link) => {
+                const linkHash = link.link.includes("#")
+                  ? `#${link.link.split("#")[1]}`
+                  : "";
+                const isActive =
+                  (linkHash && activeSection === linkHash) ||
+                  (location.pathname === link.link && link.link.startsWith("/"));
+                return (
+                  <li
+                    key={link.name}
+                    className="lg:ml-4 text-xl lg:text-base xl:text-xl"
+                  >
+                    <Link
+                      to={link.link}
+                      scroll={scrollWithOffset}
+                      className={`hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap ${
+                        isActive ? "border-b-2 !border-cyan-400 text-cyan-400" : ""
+                      }`}
+                      onClick={(e) => handleLinkClick(e, link.link, link.name)}
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                );
+              })}
+
+              <li className="lg:ml-4 text-xl lg:text-base xl:text-xl">
+                <button
+                  onClick={handleSnakeClick}
+                  className={`hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring ${
+                    location.pathname === "/snake"
+                      ? "border-b-2 !border-cyan-400 text-cyan-400"
+                      : ""
+                  }`}
+                >
+                  Snake
+                </button>
+              </li>
+
+              <li className="lg:ml-5 text-xl lg:text-base xl:text-xl">
+                <Link
+                  to="/#contact"
+                  scroll={scrollWithOffset}
+                  className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 lg:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800"
+                  onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
+                  aria-label="Contact Andrew Alagna"
+                >
+                  Contact
+                  <ArrowRightIcon
+                    className="w-3 h-3 lg:w-4 lg:h-4 ml-1"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
 
