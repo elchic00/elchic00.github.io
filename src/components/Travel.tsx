@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { GlobeAltIcon } from "@heroicons/react/solid";
-import tripsData from "../data/trips.json";
+import tripsData from "../data/structured/trips.json";
 import { TripCard } from "./Travel/TripCard";
 import { TripNavigation } from "./Travel/TripNavigation";
 import { generateTravelStructuredData } from "../utils/generateTravelStructuredData";
@@ -11,7 +11,7 @@ import { TIMING } from "../constants";
 const structuredData = generateTravelStructuredData(tripsData);
 const tripIds = tripsData.map((trip) => trip.id);
 
-const Travel = () => {
+export const Travel = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
 
   useEffect(() => {
@@ -71,8 +71,8 @@ const Travel = () => {
         <TripNavigation trips={tripsData} activeId={activeId} />
 
         <div className="mt-12">
-          {tripsData.map((trip) => (
-            <TripCard key={trip.id} trip={trip} />
+          {tripsData.map((trip, index) => (
+            <TripCard key={trip.id} trip={trip} isFirst={index === 0} />
           ))}
         </div>
 
@@ -86,4 +86,3 @@ const Travel = () => {
   );
 };
 
-export default Travel;

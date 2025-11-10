@@ -1,20 +1,38 @@
 import { GlobeIcon } from "@heroicons/react/solid";
 import { PhotoGallery } from "./PhotoGallery";
 import { Trip } from "../../types";
-import { useScrollReveal } from "../../hooks";
+import { useScrollReveal, useWindowSize } from "../../hooks";
+import { useState, useEffect } from "react";
 
 interface TripCardProps {
   trip: Trip;
+  isFirst?: boolean;
 }
 
-export const TripCard: React.FC<TripCardProps> = ({ trip }) => {
+export const TripCard: React.FC<TripCardProps> = ({ trip, isFirst = false }) => {
+  const { width } = useWindowSize();
+  const isMobile = width < 1024; // lg breakpoint
+  const [shouldAutoReveal, setShouldAutoReveal] = useState(false);
   const { ref, isVisible } = useScrollReveal();
+
+  useEffect(() => {
+    // Auto-reveal first trip on mobile after a short delay
+    if (isFirst && isMobile) {
+      const timer = setTimeout(() => {
+        setShouldAutoReveal(true);
+      }, 500); // Delay to allow header animation to complete first
+      return () => clearTimeout(timer);
+    }
+  }, [isFirst, isMobile]);
+
+  // Show if either: naturally scrolled into view OR auto-reveal on mobile for first trip
+  const isShown = isVisible || shouldAutoReveal;
 
   return (
     <article
       ref={ref}
       id={trip.id}
-      className={`mb-16 pb-16 border-b border-gray-700 last:border-b-0 scroll-mt-32 scroll-reveal ${isVisible ? 'visible' : ''}`}
+      className={`mb-16 pb-16 border-b border-gray-700 last:border-b-0 scroll-mt-32 scroll-reveal ${isShown ? 'visible' : ''}`}
     >
       <header className="mb-6">
         <h3 className="text-3xl font-bold text-white mb-2">{trip.title}</h3>
