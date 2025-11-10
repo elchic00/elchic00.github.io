@@ -45,7 +45,7 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
 
   useEffect(() => {
     document.title = "Snake Game - Andrew Alagna";
-    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     setIsTouchDevice(hasTouch);
   }, []);
 
@@ -85,7 +85,9 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
                 </kbd>
                 <span className="text-slate-400 text-xs">to control</span>
                 <span className="text-slate-500">•</span>
-                <span className="text-slate-400 text-xs">Tap buttons to pause</span>
+                <span className="text-slate-400 text-xs">
+                  Tap buttons to pause
+                </span>
               </div>
             ) : (
               <div className="flex items-center gap-x-2">
