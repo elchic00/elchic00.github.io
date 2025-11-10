@@ -131,17 +131,16 @@ export const Navbar = () => {
           </button>
         )}
 
-        {/* Desktop Navigation */}
-        <ul
-          className={`bg-slate-800/95 backdrop-blur-md lg:backdrop-blur-none lg:bg-transparent lg:flex lg:items-center lg:pb-0 absolute lg:static lg:z-auto z-[-1] left-0 w-full lg:w-auto transition-all duration-500 ease-in ${
-            open ? "top-[68px] pb-6" : "top-[-650px]"
-          } lg:pr-0 pr-4`}
-        >
-          {/* Mobile Menu Layout */}
-          {isMobile && open ? (
-            <div className="w-full px-6 py-4">
+        {/* Mobile Navigation */}
+        {isMobile && (
+          <div
+            className={`absolute left-0 w-full bg-slate-800/95 backdrop-blur-md transition-all duration-300 ease-out z-40 ${
+              open ? "top-[68px] opacity-100 visible" : "top-[68px] opacity-0 invisible"
+            }`}
+          >
+            <ul className="w-full px-6 py-4">
               {/* Primary CTA */}
-              <li className="mb-6">
+              <li className={`mb-6 transition-all duration-300 ${open ? "translate-y-0 opacity-100 delay-150" : "translate-y-[-10px] opacity-0"}`}>
                 <Link
                   to="/#contact"
                   scroll={scrollWithOffset}
@@ -155,19 +154,20 @@ export const Navbar = () => {
               </li>
 
               {/* Divider */}
-              <div className="border-t border-slate-700 mb-6" />
+              <li className={`border-t border-slate-700 mb-6 transition-all duration-300 ${open ? "translate-y-0 opacity-100 delay-200" : "translate-y-[-10px] opacity-0"}`} aria-hidden="true" />
 
               {/* Navigation Links */}
               <nav aria-label="Main navigation links">
-                {NAV_LINKS.map((link) => {
+                {NAV_LINKS.map((link, index) => {
                   const linkHash = link.link.includes("#")
                     ? `#${link.link.split("#")[1]}`
                     : "";
                   const isActive =
                     (linkHash && activeSection === linkHash) ||
                     (location.pathname === link.link && link.link.startsWith("/"));
+                  const delays = ['delay-[250ms]', 'delay-300', 'delay-[350ms]', 'delay-[400ms]', 'delay-[450ms]'];
                   return (
-                    <li key={link.name} className="mb-1">
+                    <li key={link.name} className={`mb-1 transition-all duration-300 ${open ? `translate-y-0 opacity-100 ${delays[index]}` : "translate-y-[-10px] opacity-0"}`}>
                       <Link
                         to={link.link}
                         scroll={scrollWithOffset}
@@ -184,7 +184,7 @@ export const Navbar = () => {
                   );
                 })}
 
-                <li className="mb-1">
+                <li className={`mb-1 transition-all duration-300 ${open ? "translate-y-0 opacity-100 delay-500" : "translate-y-[-10px] opacity-0"}`}>
                   <button
                     onClick={handleSnakeClick}
                     className={`w-full flex items-center py-3.5 px-4 rounded-lg transition-all duration-300 text-lg font-medium ${
@@ -199,82 +199,82 @@ export const Navbar = () => {
               </nav>
 
               {/* Divider */}
-              <div className="border-t border-slate-700 my-6" />
+              <li className={`border-t border-slate-700 my-6 transition-all duration-300 ${open ? "translate-y-0 opacity-100 delay-[550ms]" : "translate-y-[-10px] opacity-0"}`} aria-hidden="true" />
 
               {/* Social Links Section */}
-              <div className="text-center">
+              <li className={`text-center transition-all duration-300 ${open ? "translate-y-0 opacity-100 delay-[600ms]" : "translate-y-[-10px] opacity-0"}`}>
                 <p className="text-slate-400 text-sm mb-3 font-medium">
                   Connect with me
                 </p>
                 <div className="flex justify-center gap-4">
                   <SocialLinks variant="about" />
                 </div>
-              </div>
+              </li>
 
               {/* Tagline */}
-              <p className="text-center text-slate-500 text-xs mt-6 leading-relaxed">
+              <li className={`text-center text-slate-500 text-xs mt-6 leading-relaxed pb-2 transition-all duration-300 ${open ? "translate-y-0 opacity-100 delay-[650ms]" : "translate-y-[-10px] opacity-0"}`}>
                 Building impactful software &<br />mentoring the next generation
-              </p>
-            </div>
-          ) : (
-            /* Desktop Menu Layout */
-            <>
-              {NAV_LINKS.map((link) => {
-                const linkHash = link.link.includes("#")
-                  ? `#${link.link.split("#")[1]}`
-                  : "";
-                const isActive =
-                  (linkHash && activeSection === linkHash) ||
-                  (location.pathname === link.link && link.link.startsWith("/"));
-                return (
-                  <li
-                    key={link.name}
-                    className="lg:ml-4 text-xl lg:text-base xl:text-xl"
-                  >
-                    <Link
-                      to={link.link}
-                      scroll={scrollWithOffset}
-                      className={`hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap ${
-                        isActive ? "border-b-2 !border-cyan-400 text-cyan-400" : ""
-                      }`}
-                      onClick={(e) => handleLinkClick(e, link.link, link.name)}
-                    >
-                      {link.name}
-                    </Link>
-                  </li>
-                );
-              })}
-
-              <li className="lg:ml-4 text-xl lg:text-base xl:text-xl">
-                <button
-                  onClick={handleSnakeClick}
-                  className={`hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring ${
-                    location.pathname === "/snake"
-                      ? "border-b-2 !border-cyan-400 text-cyan-400"
-                      : ""
-                  }`}
-                >
-                  Snake
-                </button>
               </li>
+            </ul>
+          </div>
+        )}
 
-              <li className="lg:ml-5 text-xl lg:text-base xl:text-xl">
+        {/* Desktop Navigation */}
+        <ul className="hidden lg:flex lg:items-center lg:pr-0 pr-4">
+          {NAV_LINKS.map((link) => {
+            const linkHash = link.link.includes("#")
+              ? `#${link.link.split("#")[1]}`
+              : "";
+            const isActive =
+              (linkHash && activeSection === linkHash) ||
+              (location.pathname === link.link && link.link.startsWith("/"));
+            return (
+              <li
+                key={link.name}
+                className="lg:ml-4 text-xl lg:text-base xl:text-xl"
+              >
                 <Link
-                  to="/#contact"
+                  to={link.link}
                   scroll={scrollWithOffset}
-                  className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 lg:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800"
-                  onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
-                  aria-label="Contact Andrew Alagna"
+                  className={`hover:text-white duration-500 border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring whitespace-nowrap ${
+                    isActive ? "border-b-2 !border-cyan-400 text-cyan-400" : ""
+                  }`}
+                  onClick={(e) => handleLinkClick(e, link.link, link.name)}
                 >
-                  Contact
-                  <ArrowRightIcon
-                    className="w-3 h-3 lg:w-4 lg:h-4 ml-1"
-                    aria-hidden="true"
-                  />
+                  {link.name}
                 </Link>
               </li>
-            </>
-          )}
+            );
+          })}
+
+          <li className="lg:ml-4 text-xl lg:text-base xl:text-xl">
+            <button
+              onClick={handleSnakeClick}
+              className={`hover:text-white duration-500 cursor-pointer border border-transparent hover:border-cyan-500 px-2 py-1 rounded transition-colors focus-ring ${
+                location.pathname === "/snake"
+                  ? "border-b-2 !border-cyan-400 text-cyan-400"
+                  : ""
+              }`}
+            >
+              Snake
+            </button>
+          </li>
+
+          <li className="lg:ml-5 text-xl lg:text-base xl:text-xl">
+            <Link
+              to="/#contact"
+              scroll={scrollWithOffset}
+              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 lg:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800"
+              onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
+              aria-label="Contact Andrew Alagna"
+            >
+              Contact
+              <ArrowRightIcon
+                className="w-3 h-3 lg:w-4 lg:h-4 ml-1"
+                aria-hidden="true"
+              />
+            </Link>
+          </li>
         </ul>
       </div>
 
