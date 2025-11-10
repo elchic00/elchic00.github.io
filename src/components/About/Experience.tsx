@@ -136,8 +136,13 @@ export const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="min-h-screen pt-20 pb-12 bg-slate-950">
-      <div className="container mx-auto px-5 sm:px-8 md:px-10">
+    <section id="experience" className="relative min-h-screen pt-20 pb-12 bg-slate-950">
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
+      {/* Gradient transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-slate-950 pointer-events-none z-0"></div>
+
+      <div className="container mx-auto px-5 sm:px-8 md:px-10 relative z-10">
         <div
           ref={headerRef}
           className={`text-center mb-16 scroll-reveal ${

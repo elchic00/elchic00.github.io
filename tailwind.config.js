@@ -11,6 +11,14 @@ module.exports = {
           '0%': { transform: 'translateY(-10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+        'gradient-shift': {
+          '0%, 100%': {
+            backgroundPosition: '0% 50%',
+          },
+          '50%': {
+            backgroundPosition: '100% 50%',
+          },
+        },
       },
       animation: {
         'slide-up': 'slide-up 0.3s ease-out',
@@ -24,6 +32,7 @@ module.exports = {
         'slide-in-7': 'slide-in 0.3s ease-out 0.45s backwards',
         'slide-in-8': 'slide-in 0.3s ease-out 0.5s backwards',
         'slide-in-9': 'slide-in 0.3s ease-out 0.55s backwards',
+        'gradient-shift': 'gradient-shift 15s ease infinite',
       },
     },
   },

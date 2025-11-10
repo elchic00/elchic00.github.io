@@ -35,8 +35,11 @@ export const Skills = () => {
   const categoryVisibility = [category1Visible, category2Visible, category3Visible, category4Visible];
 
   return (
-    <section id="skills">
-      <div className="container px-5 py-10 mx-auto">
+    <section id="skills" className="relative bg-slate-950">
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
+
+      <div className="container px-5 py-10 mx-auto relative z-10">
         <div
           ref={headerRef}
           className={`text-center mb-20 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}

@@ -175,7 +175,7 @@ export const Navbar = () => {
                 <Link
                   to="/#contact"
                   scroll={scrollWithOffset}
-                  className="flex items-center justify-center bg-gradient-to-r from-purple-600 to-purple-700 text-white font-medium py-3.5 px-5 rounded-lg hover:from-purple-500 hover:to-purple-600 hover:shadow-lg active:scale-95 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800 text-lg"
+                  className="flex items-center justify-center bg-gradient-to-r from-purple-600 to-purple-700 text-white font-medium py-3.5 px-5 rounded-lg hover:from-purple-500 hover:to-purple-600 hover:shadow-lg hover:shadow-purple-500/30 active:scale-95 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800 text-lg shadow-md shadow-purple-500/25"
                   onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
                   aria-label="Contact Andrew Alagna"
                 >
@@ -297,7 +297,7 @@ export const Navbar = () => {
             <Link
               to="/#contact"
               scroll={scrollWithOffset}
-              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 lg:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800"
+              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 lg:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:shadow-purple-500/30 hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800 shadow-md shadow-purple-500/25"
               onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
               aria-label="Contact Andrew Alagna"
             >

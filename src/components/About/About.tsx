@@ -10,7 +10,7 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden pb-32"
     >
       <div className="absolute inset-0 z-0">
         <img
@@ -21,6 +21,14 @@ export const About = () => {
           {...({ fetchpriority: "high" } as any)}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-900/95"></div>
+        {/* Animated gradient mesh overlay */}
+        <div
+          className="absolute inset-0 opacity-60 animate-gradient-shift"
+          style={{
+            background: 'linear-gradient(45deg, rgba(6, 182, 212, 0.3), rgba(147, 51, 234, 0.3), rgba(59, 130, 246, 0.3), rgba(6, 182, 212, 0.3))',
+            backgroundSize: '400% 400%',
+          }}
+        ></div>
       </div>
 
       <div className="container mx-auto flex px-5 sm:px-8 md:px-10 py-20 md:flex-row flex-col items-center mt-10 relative z-10">
@@ -134,6 +142,9 @@ export const About = () => {
           />
         </picture>
       </div>
+
+      {/* Gradient transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-slate-950 z-20 pointer-events-none"></div>
     </section>
   );
 };

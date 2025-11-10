@@ -113,8 +113,13 @@ export const Projects: React.FC = () => {
   const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
 
   return (
-    <section id="projects" className="body-font mt-8">
-      <div className="container px-5 py-10 mx-auto lg:px-40">
+    <section id="projects" className="relative body-font bg-slate-950">
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
+      {/* Gradient transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-slate-950 pointer-events-none z-0"></div>
+
+      <div className="container px-5 py-10 mx-auto lg:px-40 relative z-10">
         <header
           ref={headerRef}
           className={`flex flex-col w-full sm:mb-16 text-center scroll-reveal-scale ${

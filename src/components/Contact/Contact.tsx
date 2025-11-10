@@ -77,10 +77,8 @@ export const Contact: React.FC = () => {
       {AlertComponent}
       <ContactSuccessModal isOpen={showSuccessModal} onClose={() => setShowSuccessModal(false)} />
       <section id="contact" className="relative pb-0 bg-slate-950 dark:bg-slate-950 light:bg-slate-50">
-      <div
-        className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-slate-900 to-slate-950 dark:from-slate-900 dark:to-slate-950 light:from-slate-100 light:to-slate-50 z-0"
-        aria-hidden="true"
-      />
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
 
       <div className="container px-5 py-16 mx-auto flex sm:flex-nowrap flex-wrap relative z-10">
         <form

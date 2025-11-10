@@ -50,7 +50,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
     header:
       "mb-6 inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus-ring hover:text-white",
     footer:
-      "hover:transition-all hover:duration-300 text-slate-800 p-1 border-2 rounded border-cyan-500 hover:bg-slate-500",
+      "transition-all duration-300 text-slate-800 p-1 border-2 rounded border-cyan-500 hover:bg-slate-500 hover:scale-110 hover:shadow-md hover:shadow-cyan-500/30",
     about:
       "inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-3 text-slate-200 bg-slate-800/80 hover:bg-slate-700 transition-all duration-300 rounded-lg focus-ring hover:text-white hover:scale-105 shadow-md hover:shadow-lg backdrop-blur-sm",
   };
