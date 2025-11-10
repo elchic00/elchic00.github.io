@@ -2,7 +2,7 @@
  * Main chat window component containing messages, input, and header
  */
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, RefObject } from "react";
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessage } from "./ChatMessage";
 import { ChatInput } from "./ChatInput";
@@ -15,6 +15,7 @@ interface ChatWindowProps {
   input: string;
   isLoading: boolean;
   showSuggestions: boolean;
+  toggleButtonRef: RefObject<HTMLButtonElement | null>;
   onClose: () => void;
   onClear: () => void;
   onInputChange: (value: string) => void;
@@ -29,6 +30,7 @@ export const ChatWindow = ({
   input,
   isLoading,
   showSuggestions,
+  toggleButtonRef,
   onClose,
   onClear,
   onInputChange,
@@ -39,6 +41,7 @@ export const ChatWindow = ({
 }: ChatWindowProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const chatWindowRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -54,8 +57,29 @@ export const ChatWindow = ({
     }
   }, []);
 
+  // Click outside to close (only if no unsaved input and not clicking toggle button)
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (
+        chatWindowRef.current &&
+        !chatWindowRef.current.contains(target) &&
+        !toggleButtonRef.current?.contains(target) &&
+        !input.trim()
+      ) {
+        onClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [input, onClose, toggleButtonRef]);
+
   return (
-    <div className="fixed bottom-44 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] sm:h-[500px] h-[calc(100vh-12rem)] bg-slate-800 rounded-lg shadow-2xl flex flex-col border border-slate-700 animate-slide-up">
+    <div
+      ref={chatWindowRef}
+      className="fixed bottom-44 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] sm:h-[500px] h-[calc(100vh-12rem)] bg-slate-800 rounded-lg shadow-2xl flex flex-col border border-slate-700 animate-slide-up"
+    >
       <ChatHeader onClose={onClose} onClear={onClear} />
 
       <div

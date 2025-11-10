@@ -3,7 +3,7 @@
  * Refactored for better maintainability and readability
  */
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { XIcon, ChatIcon } from "@heroicons/react/solid";
 import { ChatWindow } from "./ChatWindow";
 import { loadMarked, parseActionsFromContent, handleAction } from "./utils";
@@ -21,6 +21,7 @@ export const AIChatAssistant = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -124,6 +125,7 @@ export const AIChatAssistant = () => {
   return (
     <>
       <button
+        ref={toggleButtonRef}
         onClick={toggleChat}
         className={`fixed bottom-24 right-6 z-50 p-4 rounded-full shadow-lg transition-all duration-300 focus-ring focus:ring-offset-2 focus:ring-offset-slate-900 ${
           isOpen
@@ -145,6 +147,7 @@ export const AIChatAssistant = () => {
           input={input}
           isLoading={isLoading}
           showSuggestions={showSuggestions}
+          toggleButtonRef={toggleButtonRef}
           onClose={toggleChat}
           onClear={handleClearChat}
           onInputChange={setInput}
