@@ -3,9 +3,9 @@ import { Route, Routes } from "react-router-dom";
 import { HomePage } from "@pages/HomePage";
 
 // Lazy-load pages to keep the initial bundle smaller
-const ResumePage = lazy(() => import("./components/Resume"));
-const Travel = lazy(() => import("./components/Travel"));
-const PlaySnake = lazy(() => import("./components/Snake"));
+const ResumePage = lazy(() => import("./components/Resume").then(module => ({ default: module.ResumePage })));
+const Travel = lazy(() => import("./components/Travel").then(module => ({ default: module.Travel })));
+const PlaySnake = lazy(() => import("./components/Snake").then(module => ({ default: module.PlaySnake })));
 
 const LoadingFallback = () => <div className="text-center p-8">Loading...</div>;
 

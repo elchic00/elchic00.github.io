@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 /**
- * Syncs portfolio context from src/data/portfolioContext.ts to worker/index.js
+ * Syncs portfolio context from src/data/context/index.ts to worker/index.js
  * This ensures both files always have the same content
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const SOURCE_FILE = path.join(__dirname, '../src/data/portfolioContext.ts');
+const SOURCE_FILE = path.join(__dirname, '../src/data/context/index.ts');
 const WORKER_FILE = path.join(__dirname, '../worker/index.js');
 
 console.log('🔄 Syncing portfolio context...');
