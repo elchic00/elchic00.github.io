@@ -6,14 +6,14 @@
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { EmojiHappyIcon, LightningBoltIcon, TrashIcon } from "@heroicons/react/solid";
-import { Footer } from "./Footer";
-import { Button } from "./shared/Button";
-import { useAlert } from "./shared/Alert";
-import { useContactForm, useScrollReveal } from "../hooks";
-import { APP_CONFIG } from "../constants";
+import { Footer } from "../Footer";
+import { Button } from "../shared/Button";
+import { useAlert } from "../shared/Alert";
+import { useContactForm, useScrollReveal } from "../../hooks";
+import { APP_CONFIG } from "../../constants";
 import { ContactSuccessModal } from "./ContactSuccessModal";
-import { ConfirmDialog } from "./shared/ConfirmDialog";
-import messageTemplates from "../data/messageTemplates.json";
+import { ConfirmDialog } from "../shared/ConfirmDialog";
+import messageTemplates from "../../data/structured/messageTemplates.json";
 
 export const Contact: React.FC = () => {
   const { fire: showAlert, AlertComponent } = useAlert();

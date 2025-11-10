@@ -1,8 +1,8 @@
 import { CodeIcon, ExternalLinkIcon } from "@heroicons/react/solid";
-import projectsData from "../data/projects.json";
-import { Project } from "../types";
-import { VideoPlayer } from "./shared/VideoPlayer";
-import { useScrollReveal } from "../hooks";
+import projectsData from "../../data/structured/projects.json";
+import { Project } from "../../types";
+import { VideoPlayer } from "../shared/VideoPlayer";
+import { useScrollReveal } from "../../hooks";
 
 interface BentoGridProjectProps {
   project: Project;

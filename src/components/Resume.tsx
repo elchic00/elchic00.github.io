@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { APP_CONFIG } from "../constants";
 
-const ResumePage = () => {
+export const ResumePage = () => {
   const pdfPath = `/${APP_CONFIG.RESUME_FILENAME}`;
   const navigate = useNavigate();
 
@@ -43,4 +43,3 @@ const ResumePage = () => {
   );
 };
 
-export default ResumePage;

@@ -11,7 +11,7 @@ interface PlaySnakeProps {
   speed?: number;
 }
 
-const PlaySnake: React.FC<PlaySnakeProps> = ({
+export const PlaySnake: React.FC<PlaySnakeProps> = ({
   percentageWidth = 100,
   startSnakeSize = 4,
   appleColor = "red",
@@ -149,5 +149,3 @@ const PlaySnake: React.FC<PlaySnakeProps> = ({
     </section>
   );
 };
-
-export default PlaySnake;

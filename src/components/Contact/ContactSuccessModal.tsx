@@ -1,6 +1,6 @@
 import { CheckCircleIcon } from "@heroicons/react/solid";
 import { useNavigate } from "react-router-dom";
-import { Modal } from "./shared/Modal";
+import { Modal } from "../shared/Modal";
 
 interface ContactSuccessModalProps {
   isOpen: boolean;

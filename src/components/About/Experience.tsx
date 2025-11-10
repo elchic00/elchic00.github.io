@@ -3,7 +3,7 @@ import {
   AcademicCapIcon,
   CheckCircleIcon,
 } from "@heroicons/react/solid";
-import { useScrollReveal } from "../hooks";
+import { useScrollReveal } from "../../hooks";
 
 interface ExperienceItemProps {
   company: string;

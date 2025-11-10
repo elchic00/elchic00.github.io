@@ -1,7 +1,7 @@
 import { ChipIcon, LightningBoltIcon, DatabaseIcon, CogIcon, ChartBarIcon } from "@heroicons/react/solid";
-import skillsData from "../data/skills.json";
-import { skillTooltips } from "../data/skillTooltips";
-import { useScrollReveal } from "../hooks";
+import skillsData from "../../data/structured/skills.json";
+import { skillTooltips } from "../../data/structured/skillTooltips";
+import { useScrollReveal } from "../../hooks";
 
 const categoryColors: Record<string, string> = {
   "Languages & Frameworks": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/30 hover:border-cyan-400/50 hover:shadow-cyan-500/20",

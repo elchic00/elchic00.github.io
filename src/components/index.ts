@@ -8,34 +8,34 @@
  *   import { About, Experience, Projects } from '@components';
  */
 
-// Main sections
-export { About } from "./About";
-export { Experience } from "./Experience";
-export { Projects } from "./Projects";
-export { Skills } from "./Skills";
-export { Contact } from "./Contact";
-export { default as Travel } from "./Travel";
+// Main sections - organized by feature
+export { About, Experience, Skills } from "./About";
+export { Contact, ContactSuccessModal } from "./Contact";
+export { Projects } from "./Portfolio";
+export { Travel } from "./Travel";
 
 // Layout components
 export { Navbar } from "./Navbar";
 export { Footer } from "./Footer";
 
 // Feature components
-export { default as Resume } from "./Resume";
-export { default as Snake } from "./Snake";
+export { ResumePage } from "./Resume";
+export { PlaySnake } from "./Snake";
 export { AIChatAssistant } from "./AIChatAssistant";
 
 // Utility components
 export { ErrorBoundary } from "./ErrorBoundary";
 export { ScrollToHash } from "./ScrollToHash";
 
-// Shared components (re-export from shared folder)
+// Shared components
 export { Button } from "./shared/Button";
 export { Alert } from "./shared/Alert";
 export { SocialLinks } from "./shared/SocialLinks";
 export { VideoPlayer } from "./shared/VideoPlayer";
 export { MonogramOverlap } from "./shared/MonogramLogo";
 export { ScrollToTopButton } from "./shared/ScrollToTopButton";
+export { Modal } from "./shared/Modal";
+export { ConfirmDialog } from "./shared/ConfirmDialog";
 
 // Travel sub-components
 export { TripCard } from "./Travel/TripCard";
