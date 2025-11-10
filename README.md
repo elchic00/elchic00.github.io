@@ -33,7 +33,7 @@
 - **5 major trips** - Ecuador/Galapagos, Puerto Rico, Thailand, Laos, Costa Rica
 - **70+ curated photos** - Wildlife, landscapes, and cultural moments
 - **Lightbox modal** with keyboard navigation (←/→ arrows, ESC to close)
-- **Zoom functionality** - Click to zoom in on details
+- **Multi-level zoom** - 3 zoom levels (100%, 125%, 175%) with click-to-zoom positioning
 - **Touch-optimized** - Swipe gestures for mobile devices
 
 ### 🎮 Snake Game
@@ -50,7 +50,12 @@
 
 - **EmailJS integration** - Serverless email delivery
 - **Real-time validation** - Name, email, message with error messages
+- **Draft auto-save** - Automatic localStorage persistence with debouncing
+- **Draft restoration** - Resumes unsent messages on page revisit
+- **Custom modals** - Themed confirmation dialogs (success, clear draft)
 - **Mailto fallback** - Alternative for VPN/firewall issues
+- **Message templates** - Quick-fill templates for common inquiries
+- **Character counter** - Real-time feedback with 1000-character limit
 - **Accessibility** - WCAG AAA compliant with proper ARIA labels
 - **Loading states** - Visual feedback during submission
 
@@ -167,6 +172,8 @@ elchic00.github.io/
 │   │   ├── shared/             # Reusable components
 │   │   │   ├── Button.tsx
 │   │   │   ├── Alert.tsx
+│   │   │   ├── Modal.tsx
+│   │   │   ├── ConfirmDialog.tsx
 │   │   │   ├── SocialLinks.tsx
 │   │   │   ├── VideoPlayer.tsx
 │   │   │   └── ...
@@ -290,6 +297,7 @@ For detailed setup, troubleshooting, and customization, see [docs/AI_CHAT.md](do
 
 - **[AI Chat Guide](docs/AI_CHAT.md)** - Complete setup, customization, and troubleshooting
 - **[Custom Hooks](docs/HOOKS.md)** - Documentation for 11 reusable React hooks
+- **[Shared Components](docs/COMPONENTS.md)** - Modal system, alerts, and reusable UI components
 - **[Image Optimization](docs/IMAGE_OPTIMIZATION.md)** - Guide for optimizing photos
 
 ---
@@ -304,19 +312,24 @@ Components are organized by feature with clear separation of concerns:
 components/
 ├── AIChatAssistant/    # 8 focused sub-components
 ├── Travel/             # 3 gallery components
-└── shared/             # 6 reusable UI components
+└── shared/             # 8 reusable UI components
 ```
 
 ### 2. **Custom React Hooks** (11 Total)
 
 Encapsulate complex logic for reusability:
 
-- `useLocalStorage` - State persistence
-- `useFormValidation` - Form management with validation
-- `useAsync` - Async operation handling
+- `useLocalStorage` - State persistence with JSON serialization
+- `useFormValidation` - Form management with multi-rule validation
+- `useAsync` - Async operation with loading/error states
+- `useDebounce` - Value debouncing for performance
+- `useClickOutside` - Click detection for modals/dropdowns
+- `useWindowSize` - Responsive breakpoint tracking
+- `useScrollReveal` - Intersection Observer animations
 - `useSnakeGame` - Complete game logic (308 lines!)
-- `useContactForm` - Contact form + email sending (203 lines)
-- And 6 more utility hooks
+- `useContactForm` - Contact form + draft persistence (300 lines)
+- `useActiveTrip` - Gallery navigation tracking
+- `usePageTracking` - Google Analytics integration
 
 [📖 View Full Hook Documentation](docs/HOOKS.md)
 
@@ -328,18 +341,32 @@ Encapsulate complex logic for reusability:
 - ⚡ **Debouncing** - Window resize, form validation
 - ⚡ **Lazy Loading** - Images and markdown library
 
-### 4. **Accessibility (WCAG AAA)**
+### 4. **Reusable Component Library**
+
+8 shared components for consistency:
+
+- `Modal` - Portal-rendered base modal with scroll locking
+- `ConfirmDialog` - Themed confirmation dialogs (danger/warning/info)
+- `Alert` - Toast notification system with auto-dismiss
+- `Button` - Variants, sizes, and loading states
+- `SocialLinks` - Social media icon links
+- `VideoPlayer` - Lazy-loaded video with controls
+- And more...
+
+[📖 View Component Documentation](docs/COMPONENTS.md)
+
+### 5. **Accessibility (WCAG AAA)**
 
 - ✅ Semantic HTML structure
 - ✅ Proper heading hierarchy
 - ✅ ARIA labels and roles
 - ✅ Keyboard navigation support
-- ✅ Focus management
+- ✅ Focus management in modals
 - ✅ Color contrast ratios
 - ✅ Alt text for all images
 - ✅ Form accessibility with aria-describedby
 
-### 5. **SEO Optimization**
+### 6. **SEO Optimization**
 
 - Schema.org structured data (Person, ImageGallery, ImageObject)
 - Image sitemap for Google Images

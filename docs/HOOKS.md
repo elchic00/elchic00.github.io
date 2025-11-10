@@ -344,18 +344,23 @@ return (
 
 ### 10. `useContactForm`
 
-**Purpose:** Manage contact form state, validation, and email sending.
+**Purpose:** Manage contact form state, validation, email sending, and draft persistence.
 
-**Location:** `src/hooks/useContactForm.ts` (203 lines)
+**Location:** `src/hooks/useContactForm.ts` (300 lines)
 
 **Features:**
 - ✅ Form validation with multiple rules
 - ✅ EmailJS integration
 - ✅ Loading states
 - ✅ Error handling
-- ✅ Debounced validation
+- ✅ Debounced validation (400ms)
+- ✅ Draft auto-save to localStorage
+- ✅ Draft restoration on page revisit
+- ✅ Message templates support
+- ✅ Character counter (1000 max)
 - ✅ Mailto fallback generation
 - ✅ Dynamic input styling
+- ✅ Form clearing on successful submission
 
 **Example:**
 ```typescript
@@ -400,8 +405,15 @@ return (
 **Validation Rules:**
 - Name: min 2 characters
 - Email: RFC-compliant regex
-- Message: min 10 characters
+- Message: min 10 characters, max 1000 characters
 - Real-time validation with debouncing
+
+**Draft Persistence:**
+- Auto-saves to localStorage after 400ms of inactivity
+- Loads draft on component mount
+- Clears draft on successful submission
+- Manual clear draft option with confirmation
+- Debounced to prevent excessive localStorage writes
 
 ---
 
@@ -621,9 +633,10 @@ This portfolio demonstrates advanced React patterns through **11 custom hooks**:
 | useScrollReveal | ~35 | Medium | Scroll animations |
 | **useSnakeGame** | **308** | **Very High** | Game logic |
 | useActiveTrip | ~75 | Medium | Navigation tracking |
-| **useContactForm** | **203** | **High** | Form + email |
+| **useContactForm** | **300** | **Very High** | Form + email + drafts |
+| usePageTracking | ~30 | Low | GA4 integration |
 
-**Total:** ~876 lines of reusable, tested, documented hook code!
+**Total:** ~1000+ lines of reusable, tested, documented hook code!
 
 ---
 
