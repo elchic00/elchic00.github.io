@@ -17,18 +17,26 @@ interface PhotoGalleryProps {
 export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
-  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState<0 | 1 | 2>(0); // 0=fit (100%), 1=125%, 2=175%
   const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
   const lightboxRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
 
+  const ZOOM_LEVELS = {
+    0: { scale: 1, label: "Fit to screen" },
+    1: { scale: 1.25, label: "125% zoom" },
+    2: { scale: 1.75, label: "175% zoom" },
+  };
+
   const goToNext = useCallback(() => {
     if (selectedIndex === null) return;
     const nextIndex = (selectedIndex + 1) % photos.length;
     setSelectedIndex(nextIndex);
     setSelectedPhoto(photos[nextIndex]);
+    setZoomLevel(0);
+    setZoomOrigin({ x: 50, y: 50 });
   }, [selectedIndex, photos]);
 
   const goToPrevious = useCallback(() => {
@@ -36,6 +44,8 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     const prevIndex = (selectedIndex - 1 + photos.length) % photos.length;
     setSelectedIndex(prevIndex);
     setSelectedPhoto(photos[prevIndex]);
+    setZoomLevel(0);
+    setZoomOrigin({ x: 50, y: 50 });
   }, [selectedIndex, photos]);
 
   useEffect(() => {
@@ -86,7 +96,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
   const closePhoto = () => {
     setSelectedPhoto(null);
     setSelectedIndex(null);
-    setIsZoomed(false);
+    setZoomLevel(0);
     setZoomOrigin({ x: 50, y: 50 });
     if (triggerButtonRef.current) {
       triggerButtonRef.current.focus();
@@ -95,7 +105,11 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
   };
 
   const toggleZoom = (e?: MouseEvent<HTMLImageElement>) => {
-    if (!isZoomed && e && imageRef.current && imageContainerRef.current) {
+    // Cycle through zoom levels: 0 → 1 → 2 → 0
+    const nextLevel = ((zoomLevel + 1) % 3) as 0 | 1 | 2;
+
+    // If zooming in and click event provided
+    if (nextLevel > 0 && e && imageRef.current && imageContainerRef.current) {
       const img = imageRef.current;
       const rect = img.getBoundingClientRect();
 
@@ -106,7 +120,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
       const y = (clickY / rect.height) * 100;
       setZoomOrigin({ x, y });
 
-      setIsZoomed(true);
+      setZoomLevel(nextLevel);
 
       setTimeout(() => {
         if (imageContainerRef.current && imageRef.current) {
@@ -127,11 +141,10 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
           });
         }
       }, 100);
-    } else if (!isZoomed) {
-      setZoomOrigin({ x: 50, y: 50 });
-      setIsZoomed(true);
     } else {
-      setIsZoomed(false);
+      // Either zooming out to fit, or zooming without click position
+      setZoomOrigin({ x: 50, y: 50 });
+      setZoomLevel(nextLevel);
     }
   };
 
@@ -201,7 +214,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
           <div
             ref={lightboxRef}
             className={`w-full relative ${
-              isZoomed ? "overflow-auto max-h-[90vh] max-w-full" : "max-w-4xl"
+              zoomLevel > 0 ? "overflow-auto max-h-[90vh] max-w-full" : "max-w-4xl"
             }`}
             onClick={(e: MouseEvent) => e.stopPropagation()}
           >
@@ -213,9 +226,16 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                   toggleZoom();
                 }}
                 className="text-white p-2 bg-black/50 hover:bg-black/70 rounded-full focus-ring transition-colors"
-                aria-label={isZoomed ? "Zoom out" : "Zoom in"}
+                aria-label={zoomLevel > 0 ? ZOOM_LEVELS[zoomLevel].label : "Zoom in"}
+                title={
+                  zoomLevel === 0
+                    ? "Click to zoom (125%)"
+                    : zoomLevel === 1
+                    ? "Click to zoom (175%)"
+                    : "Click to reset zoom"
+                }
               >
-                {isZoomed ? (
+                {zoomLevel > 0 ? (
                   <ZoomOutIcon className="w-6 h-6" />
                 ) : (
                   <ZoomInIcon className="w-6 h-6" />
@@ -235,15 +255,15 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
 
             <div
               ref={imageContainerRef}
-              className={isZoomed ? "overflow-auto max-h-[85vh]" : ""}
+              className={zoomLevel > 0 ? "overflow-auto max-h-[85vh]" : ""}
               onTouchStart={(e: TouchEvent<HTMLDivElement>) => {
-                if (isZoomed) return;
+                if (zoomLevel > 0) return;
                 const touch = e.touches[0];
                 e.currentTarget.dataset.touchStartX = String(touch.clientX);
                 e.currentTarget.dataset.touchStartY = String(touch.clientY);
               }}
               onTouchEnd={(e: TouchEvent<HTMLDivElement>) => {
-                if (isZoomed) return;
+                if (zoomLevel > 0) return;
                 const touchStartX = parseFloat(
                   e.currentTarget.dataset.touchStartX || "0"
                 );
@@ -270,15 +290,15 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                 src={selectedPhoto.url}
                 alt={selectedPhoto.alt}
                 className={`transition-all duration-300 ${
-                  isZoomed
+                  zoomLevel > 0
                     ? "cursor-zoom-out w-auto h-auto"
                     : "w-full h-auto max-h-[85vh] object-contain cursor-zoom-in rounded-lg"
                 }`}
                 style={
-                  isZoomed
+                  zoomLevel > 0
                     ? {
-                        minWidth: "200%",
-                        minHeight: "200%",
+                        minWidth: `${ZOOM_LEVELS[zoomLevel].scale * 100}%`,
+                        minHeight: `${ZOOM_LEVELS[zoomLevel].scale * 100}%`,
                         transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
                       }
                     : {}
@@ -289,7 +309,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                 }}
               />
             </div>
-            {!isZoomed && (
+            {zoomLevel === 0 && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
                 <p className="text-white text-center text-lg font-medium">
                   {selectedPhoto.caption}
