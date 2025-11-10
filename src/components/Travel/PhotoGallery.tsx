@@ -11,6 +11,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
+  const lightboxRef = useRef<HTMLDivElement | null>(null);
 
   const goToNext = useCallback(() => {
     if (selectedIndex === null) return;
@@ -25,6 +26,22 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     setSelectedIndex(prevIndex);
     setSelectedPhoto(photos[prevIndex]);
   }, [selectedIndex, photos]);
+
+  // Scroll lightbox content into view when photo changes (fixes mobile centering)
+  useEffect(() => {
+    if (selectedPhoto && lightboxRef.current) {
+      // Small delay to ensure DOM is updated
+      const timeoutId = setTimeout(() => {
+        lightboxRef.current?.scrollIntoView({
+          behavior: 'auto',
+          block: 'center',
+          inline: 'center'
+        });
+      }, 50);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [selectedPhoto, selectedIndex]);
 
   useEffect(() => {
     if (selectedIndex === null) return;
@@ -152,6 +169,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
           )}
 
           <div
+            ref={lightboxRef}
             className={`w-full relative ${
               isZoomed ? "overflow-auto max-h-[90vh] max-w-full" : "max-w-4xl"
             }`}
