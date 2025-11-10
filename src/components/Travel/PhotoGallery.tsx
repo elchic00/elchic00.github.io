@@ -6,6 +6,7 @@ import {
   TouchEvent,
   MouseEvent,
 } from "react";
+import { createPortal } from "react-dom";
 import { ZoomInIcon, ZoomOutIcon } from "@heroicons/react/solid";
 import { Photo } from "../../types";
 
@@ -17,7 +18,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [isZoomed, setIsZoomed] = useState(false);
-  const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 }); // percentage
+  const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
   const lightboxRef = useRef<HTMLDivElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
@@ -37,10 +38,8 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     setSelectedPhoto(photos[prevIndex]);
   }, [selectedIndex, photos]);
 
-  // Scroll lightbox content into view when photo changes (fixes mobile centering)
   useEffect(() => {
     if (selectedPhoto && lightboxRef.current) {
-      // Small delay to ensure DOM is updated
       const timeoutId = setTimeout(() => {
         lightboxRef.current?.scrollIntoView({
           behavior: "auto",
@@ -88,7 +87,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     setSelectedPhoto(null);
     setSelectedIndex(null);
     setIsZoomed(false);
-    setZoomOrigin({ x: 50, y: 50 }); // Reset zoom origin
+    setZoomOrigin({ x: 50, y: 50 });
     if (triggerButtonRef.current) {
       triggerButtonRef.current.focus();
       triggerButtonRef.current = null;
@@ -97,31 +96,29 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
 
   const toggleZoom = (e?: MouseEvent<HTMLImageElement>) => {
     if (!isZoomed && e && imageRef.current && imageContainerRef.current) {
-      // Calculate click position relative to image
-      const rect = imageRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      const img = imageRef.current;
+      const rect = img.getBoundingClientRect();
+
+      const clickX = e.clientX - rect.left;
+      const clickY = e.clientY - rect.top;
+
+      const x = (clickX / rect.width) * 100;
+      const y = (clickY / rect.height) * 100;
       setZoomOrigin({ x, y });
 
-      // Zoom in, then scroll to the clicked position
       setIsZoomed(true);
 
       setTimeout(() => {
         if (imageContainerRef.current && imageRef.current) {
           const container = imageContainerRef.current;
-          const img = imageRef.current;
+          const zoomedImg = imageRef.current;
+          const zoomedRect = zoomedImg.getBoundingClientRect();
 
-          // Calculate the zoomed image dimensions (200% of original)
-          const zoomedWidth = img.naturalWidth * 2;
-          const zoomedHeight = img.naturalHeight * 2;
+          const clickXInZoomed = (clickX / rect.width) * zoomedRect.width;
+          const clickYInZoomed = (clickY / rect.height) * zoomedRect.height;
 
-          // Calculate where the click point is in the zoomed image
-          const clickX = zoomedWidth * (x / 100);
-          const clickY = zoomedHeight * (y / 100);
-
-          // Scroll to center the clicked point in the viewport
-          const scrollX = clickX - container.clientWidth / 2;
-          const scrollY = clickY - container.clientHeight / 2;
+          const scrollX = clickXInZoomed - container.clientWidth / 2;
+          const scrollY = clickYInZoomed - container.clientHeight / 2;
 
           container.scrollTo({
             left: Math.max(0, scrollX),
@@ -131,11 +128,9 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
         }
       }, 100);
     } else if (!isZoomed) {
-      // If no event (e.g., zoom button clicked), zoom to center
       setZoomOrigin({ x: 50, y: 50 });
       setIsZoomed(true);
     } else {
-      // Zoom out
       setIsZoomed(false);
     }
   };
@@ -167,18 +162,18 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
         ))}
       </div>
 
-      {selectedPhoto && (
-        <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={closePhoto}
-          role="dialog"
-          aria-modal="true"
-          aria-label={`Photo viewer: ${
-            selectedPhoto.caption || selectedPhoto.alt
-          }`}
-        >
-
-          {photos.length > 1 && (
+      {selectedPhoto &&
+        createPortal(
+          <div
+            className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
+            onClick={closePhoto}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Photo viewer: ${
+              selectedPhoto.caption || selectedPhoto.alt
+            }`}
+          >
+            {photos.length > 1 && (
             <>
               <button
                 onClick={(e: MouseEvent) => {
@@ -242,7 +237,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
               ref={imageContainerRef}
               className={isZoomed ? "overflow-auto max-h-[85vh]" : ""}
               onTouchStart={(e: TouchEvent<HTMLDivElement>) => {
-                if (isZoomed) return; // Don't handle swipe when zoomed
+                if (isZoomed) return;
                 const touch = e.touches[0];
                 e.currentTarget.dataset.touchStartX = String(touch.clientX);
                 e.currentTarget.dataset.touchStartY = String(touch.clientY);
@@ -307,7 +302,8 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
               </div>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
