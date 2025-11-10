@@ -1,5 +1,15 @@
 import { useState, useCallback, useEffect } from "react";
-import { ArrowRightIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
+import {
+  ArrowRightIcon,
+  MenuIcon,
+  XIcon,
+  BriefcaseIcon,
+  CodeIcon,
+  LightningBoltIcon,
+  DocumentTextIcon,
+  GlobeAltIcon,
+  SparklesIcon,
+} from "@heroicons/react/solid";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
@@ -16,6 +26,27 @@ export const Navbar = () => {
 
   const { width } = useWindowSize(TIMING.NAVBAR_DEBOUNCE);
   const isMobile = width < 1024;
+
+  // Icon mapping for navigation items
+  const getNavIcon = (name: string) => {
+    const iconClass = "w-5 h-5 mr-2.5";
+    switch (name) {
+      case "Experience":
+        return <BriefcaseIcon className={iconClass} />;
+      case "Projects":
+        return <CodeIcon className={iconClass} />;
+      case "Skills":
+        return <LightningBoltIcon className={iconClass} />;
+      case "Resume":
+        return <DocumentTextIcon className={iconClass} />;
+      case "Travel":
+        return <GlobeAltIcon className={iconClass} />;
+      case "Snake":
+        return <SparklesIcon className={iconClass} />;
+      default:
+        return null;
+    }
+  };
 
   const closeMenu = useCallback(() => setOpen(false), []);
   const toggleMenu = useCallback(() => setOpen((prev) => !prev), []);
@@ -178,6 +209,7 @@ export const Navbar = () => {
                         } focus-ring`}
                         onClick={(e) => handleLinkClick(e, link.link, link.name)}
                       >
+                        {getNavIcon(link.name)}
                         {link.name}
                       </Link>
                     </li>
@@ -193,6 +225,7 @@ export const Navbar = () => {
                         : "text-slate-200 hover:bg-slate-700/50 hover:text-white active:bg-slate-700"
                     } focus-ring`}
                   >
+                    {getNavIcon("Snake")}
                     Snake
                   </button>
                 </li>
