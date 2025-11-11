@@ -5,10 +5,10 @@ import {
   XIcon,
   BriefcaseIcon,
   CodeIcon,
-  LightningBoltIcon,
+  ChipIcon,
   DocumentTextIcon,
   GlobeAltIcon,
-  SparklesIcon,
+  PuzzleIcon,
 } from "@heroicons/react/solid";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
@@ -36,13 +36,13 @@ export const Navbar = () => {
       case "Projects":
         return <CodeIcon className={iconClass} />;
       case "Skills":
-        return <LightningBoltIcon className={iconClass} />;
+        return <ChipIcon className={iconClass} />;
       case "Resume":
         return <DocumentTextIcon className={iconClass} />;
       case "Travel":
         return <GlobeAltIcon className={iconClass} />;
       case "Snake":
-        return <SparklesIcon className={iconClass} />;
+        return <PuzzleIcon className={iconClass} />;
       default:
         return null;
     }
