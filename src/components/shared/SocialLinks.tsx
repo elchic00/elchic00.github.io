@@ -48,11 +48,11 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
 }) => {
   const baseClasses: Record<SocialLinksVariant, string> = {
     header:
-      "mb-6 inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-colors duration-500 rounded focus-ring hover:text-white",
+      "mb-6 inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-3 text-slate-200 bg-slate-800 hover:bg-slate-700 transition-all duration-300 rounded border border-cyan-500/40 hover:border-cyan-400 focus-ring hover:text-white hover:shadow-md hover:shadow-cyan-500/20",
     footer:
-      "transition-all duration-300 text-slate-800 p-1 border-2 rounded border-cyan-500 hover:bg-slate-500 hover:scale-110 hover:shadow-md hover:shadow-cyan-500/30",
+      "transition-all duration-300 text-slate-800 p-2 border rounded border-cyan-500 hover:bg-slate-500 hover:border-cyan-400 hover:scale-110 hover:shadow-md hover:shadow-cyan-500/30",
     about:
-      "inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-3 text-slate-200 bg-slate-800/80 hover:bg-slate-700 transition-all duration-300 rounded-lg focus-ring hover:text-white hover:scale-105 shadow-md hover:shadow-lg backdrop-blur-sm",
+      "inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-3 text-slate-200 bg-slate-800/80 hover:bg-slate-700 transition-all duration-300 rounded-lg border border-cyan-500/30 hover:border-cyan-400 focus-ring hover:text-white hover:scale-105 shadow-md hover:shadow-lg backdrop-blur-sm",
   };
 
   const iconClasses: Record<SocialLinksVariant, string> = {
