@@ -61,12 +61,17 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = NAV_LINKS.map((link) => {
-        const hash = link.link.split("#")[1];
-        return hash ? document.getElementById(hash) : null;
-      }).filter(Boolean);
+      // Include all hash sections, including contact which isn't in NAV_LINKS
+      const allSectionIds = [
+        ...NAV_LINKS.map((link) => link.link.split("#")[1]).filter(Boolean),
+        "contact", // Add contact section for scroll detection
+      ];
 
-      const scrollPosition = window.scrollY + 100;
+      const sections = allSectionIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
@@ -175,7 +180,11 @@ export const Navbar = () => {
                 <Link
                   to="/#contact"
                   scroll={scrollWithOffset}
-                  className="flex items-center justify-center bg-gradient-to-r from-purple-600 to-purple-700 text-white font-medium py-3.5 px-5 rounded-lg hover:from-purple-500 hover:to-purple-600 hover:shadow-lg hover:shadow-purple-500/30 active:scale-95 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800 text-lg shadow-md shadow-purple-500/25"
+                  className={`flex items-center justify-center font-medium py-3.5 px-5 rounded-lg active:scale-95 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800 text-lg ${
+                    activeSection === "#contact"
+                      ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg shadow-purple-500/40 ring-2 ring-purple-400"
+                      : "bg-gradient-to-r from-purple-600 to-purple-700 text-white hover:from-purple-500 hover:to-purple-600 hover:shadow-lg hover:shadow-purple-500/30 shadow-md shadow-purple-500/25"
+                  }`}
                   onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
                   aria-label="Contact Andrew Alagna"
                 >
@@ -297,7 +306,11 @@ export const Navbar = () => {
             <Link
               to="/#contact"
               scroll={scrollWithOffset}
-              className="inline-flex items-center bg-purple-700 text-white font-[Poppins] py-2 px-3 lg:px-4 rounded hover:bg-purple-600 hover:shadow-lg hover:shadow-purple-500/30 hover:scale-105 duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800 shadow-md shadow-purple-500/25"
+              className={`inline-flex items-center text-white font-[Poppins] py-2 px-3 lg:px-4 rounded duration-300 transition-all focus-ring focus:ring-offset-2 focus:ring-offset-slate-800 ${
+                activeSection === "#contact"
+                  ? "bg-purple-600 shadow-lg shadow-purple-500/40 ring-2 ring-purple-400 scale-105"
+                  : "bg-purple-700 hover:bg-purple-600 hover:shadow-lg hover:shadow-purple-500/30 hover:scale-105 shadow-md shadow-purple-500/25"
+              }`}
               onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
               aria-label="Contact Andrew Alagna"
             >
