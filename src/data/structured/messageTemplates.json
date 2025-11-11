@@ -9,7 +9,7 @@
     "id": "project-collaboration",
     "label": "Project Collaboration",
     "icon": "🤝",
-    "template": "Hi Andrew,\n\nI have a project that I think would benefit from your expertise in React and accessibility.\n\nWould you be interested in collaborating?\n\nLooking forward to hearing from you!"
+    "template": "Hi Andrew,\n\nI have a project that I think would benefit from your expertise.\n\nWould you be interested in collaborating?\n\nLooking forward to hearing from you!"
   },
   {
     "id": "consulting",
