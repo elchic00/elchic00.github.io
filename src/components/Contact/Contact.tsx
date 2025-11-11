@@ -275,11 +275,7 @@ export const Contact: React.FC = () => {
       onClose={() => setShowClearDraftDialog(false)}
       onConfirm={() => {
         contactForm.clearDraft();
-        showAlert({
-          type: "success",
-          title: "Draft Cleared",
-          message: "Your draft has been successfully cleared.",
-        });
+        setShowClearDraftDialog(false);
       }}
       title="Clear Draft?"
       message="This will remove all saved information from your draft. This action cannot be undone."

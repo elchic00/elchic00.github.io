@@ -23,10 +23,15 @@ module.exports = {
           '0%': { transform: 'translateY(10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+        'shimmer': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
       },
       animation: {
         'slide-up': 'slide-up 0.3s ease-out',
         'fade-in-up': 'fade-in-up 0.4s ease-out',
+        'shimmer': 'shimmer 2s infinite',
         'slide-in': 'slide-in 0.3s ease-out backwards',
         'slide-in-1': 'slide-in 0.3s ease-out 0.15s backwards',
         'slide-in-2': 'slide-in 0.3s ease-out 0.2s backwards',

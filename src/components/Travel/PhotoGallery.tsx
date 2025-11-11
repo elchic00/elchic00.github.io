@@ -9,6 +9,7 @@ import {
 import { createPortal } from "react-dom";
 import { ZoomInIcon, ZoomOutIcon } from "@heroicons/react/solid";
 import { Photo } from "../../types";
+import { ImageWithLoader } from "../shared/ImageWithLoader";
 
 interface PhotoGalleryProps {
   photos: Photo[];
@@ -155,10 +156,10 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
           <button
             key={index}
             onClick={(e) => openPhoto(photo, index, e.currentTarget)}
-            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus-ring"
+            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus-ring h-64"
             aria-label={`View ${photo.alt}`}
           >
-            <img
+            <ImageWithLoader
               src={photo.url}
               alt={photo.alt}
               loading={index < 3 ? "eager" : "lazy"}

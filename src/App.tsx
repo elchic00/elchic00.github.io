@@ -4,6 +4,8 @@ import { ErrorBoundary } from "@components/ErrorBoundary";
 import { ScrollToHash } from "@components/ScrollToHash";
 import { ScrollToTopButton } from "@components/shared/ScrollToTopButton";
 import { AIChatAssistant } from "@components/AIChatAssistant";
+import { ToastProvider } from "./contexts/ToastContext";
+import { ToastContainer } from "@components/shared/ToastContainer";
 import { usePageTracking } from "./hooks";
 
 export const App = () => {
@@ -12,13 +14,16 @@ export const App = () => {
 
   return (
     <ErrorBoundary>
-      <main className="text-slate-200 bg-slate-950 body-font scrollbar-hide">
-        <Navbar />
-        <ScrollToHash />
-        <AppRoutes />
-        <ScrollToTopButton />
-        <AIChatAssistant />
-      </main>
+      <ToastProvider>
+        <main className="text-slate-200 bg-slate-950 body-font scrollbar-hide">
+          <Navbar />
+          <ScrollToHash />
+          <AppRoutes />
+          <ScrollToTopButton />
+          <AIChatAssistant />
+          <ToastContainer />
+        </main>
+      </ToastProvider>
     </ErrorBoundary>
   );
 };
