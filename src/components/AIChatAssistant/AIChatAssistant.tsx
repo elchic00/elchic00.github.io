@@ -24,6 +24,10 @@ export const AIChatAssistant = () => {
   const [showSuggestions, setShowSuggestions] = useState(() => messages.length === 1);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
+  // Detect platform for keyboard shortcut display
+  const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
+  const shortcutKey = isMac ? '⌘K' : 'Ctrl+K';
+
   useEffect(() => {
     if (isOpen) {
       loadMarked();
@@ -177,7 +181,7 @@ export const AIChatAssistant = () => {
           {!isOpen && (
             <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
               <div className="bg-slate-800 text-white text-xs px-2 py-1 rounded shadow-lg">
-                Press <kbd className="px-1.5 py-0.5 bg-slate-700 rounded font-mono">⌘K</kbd>
+                Press <kbd className="px-1.5 py-0.5 bg-slate-700 rounded font-mono">{shortcutKey}</kbd>
               </div>
             </div>
           )}
