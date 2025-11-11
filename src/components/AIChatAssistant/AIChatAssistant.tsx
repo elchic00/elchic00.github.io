@@ -14,6 +14,7 @@ const INITIAL_MESSAGE: Message = {
   id: generateMessageId(),
   role: "assistant",
   content: "Hi! I'm Andrew's AI assistant. Ask me about his experience, projects, skills, or travel adventures!",
+  timestamp: Date.now(),
 };
 
 export const AIChatAssistant = () => {
@@ -71,7 +72,7 @@ export const AIChatAssistant = () => {
     const userMessage = messageText.trim();
     setInput("");
     setShowSuggestions(false);
-    setMessages((prev) => [...prev, { id: generateMessageId(), role: "user", content: userMessage }]);
+    setMessages((prev) => [...prev, { id: generateMessageId(), role: "user", content: userMessage, timestamp: Date.now() }]);
     setIsLoading(true);
 
     try {
@@ -87,10 +88,22 @@ export const AIChatAssistant = () => {
 
       const data = await response.json();
       const { cleanContent, actions } = parseActionsFromContent(data.response);
+      const messageId = generateMessageId();
+
+      // Add message with streaming enabled
       setMessages((prev) => [
         ...prev,
-        { id: generateMessageId(), role: "assistant", content: cleanContent, actions },
+        { id: messageId, role: "assistant", content: cleanContent, actions, timestamp: Date.now(), isStreaming: true },
       ]);
+
+      // After streaming completes, mark as done
+      setTimeout(() => {
+        setMessages((prev) =>
+          prev.map((msg) =>
+            msg.id === messageId ? { ...msg, isStreaming: false } : msg
+          )
+        );
+      }, cleanContent.split(/(\s+)/).length * 20 + 100); // Calculate duration based on word count
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -99,6 +112,7 @@ export const AIChatAssistant = () => {
           role: "assistant",
           content: "Sorry, I'm having trouble connecting right now. Please try again later or reach out directly via the contact form!",
           error: true,
+          timestamp: Date.now(),
         },
       ]);
     } finally {
@@ -160,7 +174,7 @@ export const AIChatAssistant = () => {
 
   return (
     <>
-      <div className="fixed bottom-24 right-6 z-50">
+      <div className={`fixed bottom-24 right-6 z-50 ${isOpen ? 'md:block hidden' : 'block'}`}>
         <button
           ref={toggleButtonRef}
           onClick={toggleChat}
