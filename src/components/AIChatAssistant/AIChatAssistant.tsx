@@ -156,22 +156,33 @@ export const AIChatAssistant = () => {
 
   return (
     <>
-      <button
-        ref={toggleButtonRef}
-        onClick={toggleChat}
-        className={`fixed bottom-24 right-6 z-50 p-4 rounded-full shadow-lg transition-all duration-300 focus-ring focus:ring-offset-2 focus:ring-offset-slate-900 ${
-          isOpen
-            ? "bg-slate-700 hover:bg-slate-600"
-            : "bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 hover:scale-110"
-        }`}
-        aria-label={isOpen ? "Close chat" : "Open AI chat assistant"}
-      >
-        {isOpen ? (
-          <XIcon className="w-6 h-6 text-white" />
-        ) : (
-          <ChatIcon className="w-6 h-6 text-white" />
-        )}
-      </button>
+      <div className="fixed bottom-24 right-6 z-50">
+        <button
+          ref={toggleButtonRef}
+          onClick={toggleChat}
+          className={`group relative p-4 rounded-full shadow-lg transition-all duration-300 focus-ring focus:ring-offset-2 focus:ring-offset-slate-900 ${
+            isOpen
+              ? "bg-slate-700 hover:bg-slate-600"
+              : "bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 hover:scale-110"
+          }`}
+          aria-label={isOpen ? "Close chat" : "Open AI chat assistant"}
+        >
+          {isOpen ? (
+            <XIcon className="w-6 h-6 text-white" />
+          ) : (
+            <ChatIcon className="w-6 h-6 text-white" />
+          )}
+
+          {/* Keyboard shortcut hint */}
+          {!isOpen && (
+            <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+              <div className="bg-slate-800 text-white text-xs px-2 py-1 rounded shadow-lg">
+                Press <kbd className="px-1.5 py-0.5 bg-slate-700 rounded font-mono">⌘K</kbd>
+              </div>
+            </div>
+          )}
+        </button>
+      </div>
 
       {isOpen && (
         <ChatWindow
