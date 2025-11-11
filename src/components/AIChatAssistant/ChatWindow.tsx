@@ -78,7 +78,7 @@ export const ChatWindow = ({
   return (
     <div
       ref={chatWindowRef}
-      className="fixed bottom-44 right-6 z-50 w-96 max-w-[calc(100vw-3rem)] sm:h-[500px] h-[calc(100vh-12rem)] bg-slate-800 rounded-lg shadow-2xl flex flex-col border border-slate-700 animate-slide-up"
+      className="fixed md:bottom-44 md:right-6 md:w-96 md:max-w-[calc(100vw-3rem)] md:h-[500px] md:rounded-lg inset-0 md:inset-auto z-50 bg-slate-800 shadow-2xl flex flex-col border border-slate-700 animate-slide-up"
     >
       <ChatHeader onClose={onClose} onClear={onClear} />
 
