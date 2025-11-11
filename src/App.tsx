@@ -1,11 +1,13 @@
 import { AppRoutes } from "./routes";
-import { Navbar } from "@components/Navbar";
-import { ErrorBoundary } from "@components/ErrorBoundary";
-import { ScrollToHash } from "@components/ScrollToHash";
-import { ScrollToTopButton } from "@components/shared/ScrollToTopButton";
-import { AIChatAssistant } from "@components/AIChatAssistant";
+import {
+  Navbar,
+  ErrorBoundary,
+  ScrollToHash,
+  ScrollToTopButton,
+  AIChatAssistant,
+  ToastContainer,
+} from "@components";
 import { ToastProvider } from "./contexts/ToastContext";
-import { ToastContainer } from "@components/shared/ToastContainer";
 import { usePageTracking } from "./hooks";
 
 export const App = () => {

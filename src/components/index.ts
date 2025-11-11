@@ -6,13 +6,15 @@
  *
  * Example:
  *   import { About, Experience, Projects } from '@components';
+ *
+ * Note: Travel and PlaySnake are intentionally excluded to preserve
+ * lazy-loading and code-splitting in routes.tsx.
  */
 
 // Main sections - organized by feature
 export { About, Experience, Skills } from "./About";
 export { Contact, ContactSuccessModal } from "./Contact";
 export { Projects } from "./Portfolio";
-export { Travel } from "./Travel";
 
 // Layout components
 export { Navbar } from "./Navbar";
@@ -20,7 +22,6 @@ export { Footer } from "./Footer";
 
 // Feature components
 export { ResumePage } from "./Resume";
-export { PlaySnake } from "./Snake";
 export { AIChatAssistant } from "./AIChatAssistant";
 
 // Utility components
@@ -36,6 +37,8 @@ export { MonogramOverlap } from "./shared/MonogramLogo";
 export { ScrollToTopButton } from "./shared/ScrollToTopButton";
 export { Modal } from "./shared/Modal";
 export { ConfirmDialog } from "./shared/ConfirmDialog";
+export { ToastContainer } from "./shared/ToastContainer";
+export { ImageWithLoader } from "./shared/ImageWithLoader";
 
 // Travel sub-components
 export { TripCard } from "./Travel/TripCard";
