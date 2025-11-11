@@ -4,8 +4,9 @@
 
 import { memo, useState } from "react";
 import { ClipboardCopyIcon, CheckIcon } from "@heroicons/react/outline";
-import { renderMarkdown } from "./utils";
+import { renderMarkdown, formatRelativeTime } from "./utils";
 import { Message, ACTION_CONFIGS } from "./types";
+import { useStreamingText } from "./useStreamingText";
 
 interface ChatMessageProps {
   message: Message;
@@ -15,6 +16,7 @@ interface ChatMessageProps {
 
 export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProps) => {
   const [copied, setCopied] = useState(false);
+  const displayedContent = useStreamingText(message.content, message.isStreaming || false);
 
   const handleCopy = async () => {
     try {
@@ -40,6 +42,7 @@ export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProp
             ? "bg-red-900/50 text-slate-100 border border-red-700"
             : "bg-slate-700 text-slate-100"
         }`}
+        title={message.timestamp ? formatRelativeTime(message.timestamp) : undefined}
       >
         {/* Copy button for assistant messages */}
         {message.role === "assistant" && !message.error && (
@@ -62,7 +65,7 @@ export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProp
             <div
               className="text-sm assistant-message-content"
               dangerouslySetInnerHTML={{
-                __html: renderMarkdown(message.content),
+                __html: renderMarkdown(displayedContent),
               }}
             />
             {message.actions && message.actions.length > 0 && (
@@ -93,6 +96,13 @@ export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProp
           >
             Retry
           </button>
+        )}
+
+        {/* Timestamp - visible on hover */}
+        {message.timestamp && (
+          <div className="mt-1 text-[10px] text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity">
+            {formatRelativeTime(message.timestamp)}
+          </div>
         )}
       </div>
     </div>
