@@ -1,4 +1,11 @@
-import { useState, useEffect, useCallback, useRef, Dispatch, SetStateAction } from 'react';
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 /**
  * Persists state to localStorage with automatic synchronization.
@@ -18,7 +25,7 @@ export const useLocalStorage = <T>(
   initialValue: T
 ): [T, Dispatch<SetStateAction<T>>] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
-    if (typeof window === 'undefined') return initialValue;
+    if (typeof window === "undefined") return initialValue;
 
     try {
       const item = window.localStorage.getItem(key);
@@ -29,21 +36,25 @@ export const useLocalStorage = <T>(
     }
   });
 
-  const setValue = useCallback<Dispatch<SetStateAction<T>>>((value) => {
-    try {
-      setStoredValue((currentValue) => {
-        const valueToStore = value instanceof Function ? value(currentValue) : value;
+  const setValue = useCallback<Dispatch<SetStateAction<T>>>(
+    (value) => {
+      try {
+        setStoredValue((currentValue) => {
+          const valueToStore =
+            value instanceof Function ? value(currentValue) : value;
 
-        if (typeof window !== 'undefined') {
-          window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        }
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+          }
 
-        return valueToStore;
-      });
-    } catch (error) {
-      console.error(`Error setting localStorage key "${key}":`, error);
-    }
-  }, [key]);
+          return valueToStore;
+        });
+      } catch (error) {
+        console.error(`Error setting localStorage key "${key}":`, error);
+      }
+    },
+    [key]
+  );
 
   return [storedValue, setValue];
 };
@@ -66,7 +77,7 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
   const ref = useRef<T | null>(null);
 
   useEffect(() => {
-    if (typeof document === 'undefined') return;
+    if (typeof document === "undefined") return;
 
     const handleClickOutside = (event: MouseEvent) => {
       if (ref.current && !ref.current.contains(event.target as Node)) {
@@ -74,8 +85,8 @@ export const useClickOutside = <T extends HTMLElement = HTMLElement>(
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [callback]);
 
   return ref;
@@ -124,12 +135,12 @@ interface WindowSize {
  */
 export const useWindowSize = (debounceDelay: number = 150): WindowSize => {
   const [windowSize, setWindowSize] = useState<WindowSize>({
-    width: typeof window !== 'undefined' ? window.innerWidth : 0,
-    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+    width: typeof window !== "undefined" ? window.innerWidth : 0,
+    height: typeof window !== "undefined" ? window.innerHeight : 0,
   });
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     let timeoutId: NodeJS.Timeout;
     const handleResize = () => {
@@ -142,10 +153,10 @@ export const useWindowSize = (debounceDelay: number = 150): WindowSize => {
       }, debounceDelay);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
       clearTimeout(timeoutId);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, [debounceDelay]);
 
@@ -158,8 +169,12 @@ interface FormValidationReturn<T> {
   values: T;
   errors: Partial<Record<keyof T, string>>;
   touched: Partial<Record<keyof T, boolean>>;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-  handleBlur: (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleBlur: (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   validateAll: () => boolean;
   resetForm: () => void;
   setValues: Dispatch<SetStateAction<T>>;
@@ -191,45 +206,57 @@ export const useFormValidation = <T extends Record<string, any>>(
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [touched, setTouched] = useState<Partial<Record<keyof T, boolean>>>({});
 
-  const validate = useCallback((fieldName: keyof T, value: any): string => {
-    const rules = validationRules[fieldName];
-    if (!rules) return '';
+  const validate = useCallback(
+    (fieldName: keyof T, value: any): string => {
+      const rules = validationRules[fieldName];
+      if (!rules) return "";
 
-    for (const rule of rules) {
-      const error = rule(value);
-      if (error) return error;
-    }
-    return '';
-  }, [validationRules]);
-
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setValues(prev => ({ ...prev, [name]: value }));
-
-    setTouched(prev => {
-      if (prev[name as keyof T]) {
-        const error = validate(name as keyof T, value);
-        setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
+      for (const rule of rules) {
+        const error = rule(value);
+        if (error) return error;
       }
-      return prev;
-    });
-  }, [validate]);
+      return "";
+    },
+    [validationRules]
+  );
 
-  const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setTouched(prev => ({ ...prev, [name]: true }));
-    const error = validate(name as keyof T, value);
-    setErrors(prev => ({ ...prev, [name]: error }));
-  }, [validate]);
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setValues((prev) => ({ ...prev, [name]: value }));
+
+      setTouched((prev) => {
+        if (prev[name as keyof T]) {
+          const error = validate(name as keyof T, value);
+          setErrors((prevErrors) => ({ ...prevErrors, [name]: error }));
+        }
+        return prev;
+      });
+    },
+    [validate]
+  );
+
+  const handleBlur = useCallback(
+    (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setTouched((prev) => ({ ...prev, [name]: true }));
+      const error = validate(name as keyof T, value);
+      setErrors((prev) => ({ ...prev, [name]: error }));
+    },
+    [validate]
+  );
 
   const validateAll = useCallback((): boolean => {
     let isValid = true;
     const newErrors: Partial<Record<keyof T, string>> = {};
     const newTouched: Partial<Record<keyof T, boolean>> = {};
 
-    setValues(currentValues => {
-      Object.keys(validationRules).forEach(fieldName => {
-        const error = validate(fieldName as keyof T, currentValues[fieldName as keyof T]);
+    setValues((currentValues) => {
+      Object.keys(validationRules).forEach((fieldName) => {
+        const error = validate(
+          fieldName as keyof T,
+          currentValues[fieldName as keyof T]
+        );
         newTouched[fieldName as keyof T] = true;
         if (error) {
           newErrors[fieldName as keyof T] = error;
@@ -262,7 +289,7 @@ export const useFormValidation = <T extends Record<string, any>>(
   };
 };
 
-type AsyncStatus = 'idle' | 'pending' | 'success' | 'error';
+type AsyncStatus = "idle" | "pending" | "success" | "error";
 
 interface AsyncReturn<T, P extends any[]> {
   execute: (...params: P) => Promise<T>;
@@ -291,29 +318,32 @@ interface AsyncReturn<T, P extends any[]> {
 export const useAsync = <T, P extends any[] = any[]>(
   asyncFunction: (...params: P) => Promise<T>
 ): AsyncReturn<T, P> => {
-  const [status, setStatus] = useState<AsyncStatus>('idle');
+  const [status, setStatus] = useState<AsyncStatus>("idle");
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  const execute = useCallback(async (...params: P): Promise<T> => {
-    setStatus('pending');
-    setData(null);
-    setError(null);
+  const execute = useCallback(
+    async (...params: P): Promise<T> => {
+      setStatus("pending");
+      setData(null);
+      setError(null);
 
-    try {
-      const response = await asyncFunction(...params);
-      setData(response);
-      setStatus('success');
-      return response;
-    } catch (err) {
-      const error = err instanceof Error ? err : new Error(String(err));
-      setError(error);
-      setStatus('error');
-      throw error;
-    }
-  }, [asyncFunction]);
+      try {
+        const response = await asyncFunction(...params);
+        setData(response);
+        setStatus("success");
+        return response;
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
+        setError(error);
+        setStatus("error");
+        throw error;
+      }
+    },
+    [asyncFunction]
+  );
 
-  return { execute, status, data, error, isLoading: status === 'pending' };
+  return { execute, status, data, error, isLoading: status === "pending" };
 };
 
 /**
@@ -348,7 +378,7 @@ export const useScrollReveal = (options?: IntersectionObserverInit) => {
       },
       {
         threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px',
+        rootMargin: "0px 0px -100px 0px",
         ...options,
       }
     );
@@ -365,8 +395,8 @@ export const useScrollReveal = (options?: IntersectionObserverInit) => {
   return { ref, isVisible };
 };
 
-export { useSnakeGame } from './useSnakeGame';
-export { useActiveTrip } from './useActiveTrip';
-export { useContactForm } from './useContactForm';
-export { usePageTracking } from './usePageTracking';
-export type { ContactFormValues } from './useContactForm';
+export { useSnakeGame } from "./useSnakeGame";
+export { useActiveTrip } from "./useActiveTrip";
+export { useContactForm } from "./useContactForm";
+export { usePageTracking } from "./usePageTracking";
+export type { ContactFormValues } from "./useContactForm";
