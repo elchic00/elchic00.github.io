@@ -61,7 +61,7 @@
 
 ### ⚡ Performance & Accessibility
 
-[![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=for-the-badge&logo=lighthouse)](https://pagespeed.web.dev/analysis/https-elchic00-github-io/x97fuakj1n?form_factor=desktop)
+[![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=for-the-badge&logo=lighthouse)](https://pagespeed.web.dev/analysis/https-elchic00-github-io/8av5etqmba?form_factor=mobile)
 
 - **Perfect Lighthouse Score: 100/100** - Performance, Accessibility, Best Practices, SEO
   - 🚀 **Performance: 100** - 0.3s First Contentful Paint, 0s Cumulative Layout Shift
@@ -73,13 +73,14 @@
 - **Image Optimization** - WebP format with optimized dimensions
 - **Scroll Animations** - Intersection Observer for smooth reveals
 
-[📊 View Full PageSpeed Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/x97fuakj1n?form_factor=desktop)
+[📊 View Full PageSpeed Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/8av5etqmba?form_factor=mobile)
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
+
 - **[React 18](https://reactjs.org/)** - UI framework with hooks and TypeScript
 - **[TypeScript 5.9](https://www.typescriptlang.org/)** - Type-safe JavaScript
 - **[Vite 7.1](https://vitejs.dev/)** - Next-generation build tool with HMR
@@ -87,21 +88,25 @@
 - **[React Router 6](https://reactrouter.com/)** - Client-side routing with hash support
 
 ### Backend & APIs
+
 - **[Google Gemini 2.5 Flash](https://ai.google.dev/)** - AI chat assistant
 - **[Cloudflare Workers](https://workers.cloudflare.com/)** - Serverless API proxy
 - **[EmailJS](https://www.emailjs.com/)** - Contact form email delivery
 
 ### Development & Build
+
 - **[ESLint + TypeScript](https://typescript-eslint.io/)** - Code quality and type checking
 - **[PostCSS + Autoprefixer](https://postcss.org/)** - CSS processing
 - **[Sharp](https://sharp.pixelplumbing.com/)** - Image optimization scripts
 
 ### Deployment & Hosting
+
 - **[GitHub Pages](https://pages.github.com/)** - Static site hosting
 - **[Wrangler](https://developers.cloudflare.com/workers/wrangler/)** - Cloudflare Workers CLI
 - **[gh-pages](https://www.npmjs.com/package/gh-pages)** - Automated deployment
 
 ### Additional Libraries
+
 - **[Heroicons](https://heroicons.com/)** - Beautiful SVG icons
 - **[marked](https://marked.js.org/)** - Markdown parser for AI chat
 - **[DOMPurify](https://github.com/cure53/DOMPurify)** - XSS sanitization
@@ -509,7 +514,7 @@ I'm always open to interesting conversations about:
 - 🌐 Portfolio: [elchic00.github.io](https://elchic00.github.io)
 - 💼 LinkedIn: [Andrew Alagna](https://www.linkedin.com/in/andrew-a-10b88215b/)
 - 🐙 GitHub: [@elchic00](https://github.com/elchic00)
-- 📧 Email: Via [contact form](https://elchic00.github.io/#contact)
+- 📧 Email: Via [contact form](https://elchic00.github.io/#/#contact)
 
 ---
 
@@ -518,6 +523,7 @@ I'm always open to interesting conversations about:
 For recruiters and potential employers:
 
 ### Frontend Engineering
+
 - ✅ React 18 with TypeScript and modern hooks
 - ✅ Component architecture with proper separation of concerns
 - ✅ Custom hook library (11 hooks, 876 lines of reusable code)
@@ -525,21 +531,23 @@ For recruiters and potential employers:
 - ✅ Performance optimization (lazy loading, code splitting)
 
 ### Full-Stack Capabilities
+
 - ✅ Serverless backend with Cloudflare Workers
 - ✅ API integration (Google Gemini, EmailJS)
 - ✅ Secure secrets management
 - ✅ Rate limiting and error handling
 
 ### Accessibility & UX
+
 - ✅ **Perfect Lighthouse Score: 100/100** across all categories
 - ✅ WCAG AAA compliance throughout
 - ✅ Keyboard navigation support
 - ✅ Screen reader optimization
 - ✅ Focus management in modals
 - ✅ Semantic HTML and ARIA labels
-- ✅ 0.3s First Contentful Paint, 0s Layout Shift
 
 ### DevOps & Tooling
+
 - ✅ CI/CD with GitHub Actions
 - ✅ Automated deployment scripts
 - ✅ Image optimization pipeline
@@ -547,6 +555,7 @@ For recruiters and potential employers:
 - ✅ TypeScript for type safety
 
 ### Software Engineering Practices
+
 - ✅ Modular, maintainable architecture
 - ✅ Comprehensive documentation
 - ✅ Git best practices
@@ -561,6 +570,6 @@ For recruiters and potential employers:
 
 ⭐ Star this repo if you find it helpful!
 
-[🌐 Visit Live Site](https://elchic00.github.io) | [📧 Get in Touch](https://elchic00.github.io/#contact) | [📖 Documentation](docs/)
+[🌐 Visit Live Site](https://elchic00.github.io) | [📧 Get in Touch](https://elchic00.github.io/#/#contact) | [📖 Documentation](docs/)
 
 </div>

@@ -9,7 +9,8 @@ src/hooks/
 ├── index.ts              # 7 general-purpose hooks
 ├── useSnakeGame.ts       # Snake game logic
 ├── useActiveTrip.ts      # Travel gallery navigation
-└── useContactForm.ts     # Contact form management
+├── useContactForm.ts     # Contact form management
+└── usePageTracking.ts    # Analytics tracking
 ```
 
 ---
@@ -21,13 +22,15 @@ src/hooks/
 **Purpose:** Persist state to localStorage with automatic synchronization.
 
 **Use Cases:**
+
 - Saving high scores
 - Storing user preferences
 - Caching API responses
 
 **Example:**
+
 ```typescript
-const [highScore, setHighScore] = useLocalStorage<number>('snakeHighScore', 0);
+const [highScore, setHighScore] = useLocalStorage<number>("snakeHighScore", 0);
 
 // Automatically saves to localStorage
 setHighScore(42);
@@ -36,6 +39,7 @@ setHighScore(42);
 ```
 
 **Features:**
+
 - ✅ Type-safe generic
 - ✅ SSR-safe (checks for window)
 - ✅ JSON serialization
@@ -48,24 +52,23 @@ setHighScore(42);
 **Purpose:** Detect clicks outside a referenced element.
 
 **Use Cases:**
+
 - Closing dropdown menus
 - Dismissing modals
 - Hiding tooltips
 
 **Example:**
+
 ```typescript
 const dropdownRef = useClickOutside<HTMLDivElement>(() => {
   setIsOpen(false);
 });
 
-return (
-  <div ref={dropdownRef}>
-    {isOpen && <DropdownMenu />}
-  </div>
-);
+return <div ref={dropdownRef}>{isOpen && <DropdownMenu />}</div>;
 ```
 
 **Features:**
+
 - ✅ Generic element type
 - ✅ Automatic cleanup
 - ✅ SSR-safe
@@ -77,13 +80,15 @@ return (
 **Purpose:** Delay value updates until after a specified period.
 
 **Use Cases:**
+
 - Search input optimization
 - API call reduction
 - Form validation delay
 
 **Example:**
+
 ```typescript
-const [searchTerm, setSearchTerm] = useState('');
+const [searchTerm, setSearchTerm] = useState("");
 const debouncedSearch = useDebounce(searchTerm, 500);
 
 useEffect(() => {
@@ -93,6 +98,7 @@ useEffect(() => {
 ```
 
 **Features:**
+
 - ✅ Configurable delay
 - ✅ Type preservation
 - ✅ Cleanup on unmount
@@ -104,11 +110,13 @@ useEffect(() => {
 **Purpose:** Track current window dimensions with automatic debouncing.
 
 **Use Cases:**
+
 - Responsive UI logic
 - Conditional rendering
 - Breakpoint detection
 
 **Example:**
+
 ```typescript
 const { width, height } = useWindowSize(200);
 
@@ -120,121 +128,37 @@ return isMobile ? <MobileNav /> : <DesktopNav />;
 ```
 
 **Features:**
+
 - ✅ Debounced for performance
 - ✅ SSR-safe (returns 0 on server)
 - ✅ Automatic cleanup
 
 ---
 
-### 5. `useFormValidation<T>`
-
-**Purpose:** Manage form state with built-in validation and error tracking.
-
-**Use Cases:**
-- Contact forms
-- Login/signup forms
-- Multi-step forms
-
-**Example:**
-```typescript
-const { values, errors, touched, handleChange, handleBlur, validateAll } = useFormValidation(
-  { email: '', password: '' },
-  {
-    email: [
-      (v) => !v ? 'Email required' : '',
-      (v) => !v.includes('@') ? 'Invalid email' : ''
-    ],
-    password: [
-      (v) => v.length < 8 ? 'Must be 8+ characters' : ''
-    ]
-  }
-);
-
-<input
-  name="email"
-  value={values.email}
-  onChange={handleChange}
-  onBlur={handleBlur}
-/>
-{touched.email && errors.email && <span>{errors.email}</span>}
-```
-
-**Features:**
-- ✅ Multiple validation rules per field
-- ✅ Touch tracking
-- ✅ Form reset
-- ✅ Generic typing
-
----
-
-### 6. `useAsync<T, P>`
-
-**Purpose:** Manage async operations with loading, success, and error states.
-
-**Use Cases:**
-- API calls
-- Data fetching
-- Async form submission
-
-**Example:**
-```typescript
-const { execute, isLoading, data, error } = useAsync(async (userId: string) => {
-  const response = await fetch(`/api/users/${userId}`);
-  return response.json();
-});
-
-const handleLoad = async () => {
-  try {
-    await execute('123');
-    // data is now populated
-  } catch (err) {
-    // error is now populated
-  }
-};
-
-return (
-  <>
-    <button onClick={handleLoad} disabled={isLoading}>
-      {isLoading ? 'Loading...' : 'Load User'}
-    </button>
-    {data && <UserCard user={data} />}
-    {error && <ErrorMessage error={error} />}
-  </>
-);
-```
-
-**Features:**
-- ✅ Loading state tracking
-- ✅ Error handling
-- ✅ Type-safe parameters and return
-- ✅ Status tracking (idle, pending, success, error)
-
----
-
-### 7. `useScrollReveal`
+### 5. `useScrollReveal`
 
 **Purpose:** Reveal elements on scroll using Intersection Observer API.
 
 **Use Cases:**
+
 - Scroll-triggered animations
 - Lazy component initialization
 - Progressive disclosure
 
 **Example:**
+
 ```typescript
 const { ref, isVisible } = useScrollReveal();
 
 return (
-  <div
-    ref={ref}
-    className={isVisible ? 'fade-in' : 'opacity-0'}
-  >
+  <div ref={ref} className={isVisible ? "fade-in" : "opacity-0"}>
     Content revealed on scroll
   </div>
 );
 ```
 
 **Features:**
+
 - ✅ Intersection Observer API
 - ✅ Custom threshold and rootMargin
 - ✅ Automatic observer disconnect after reveal
@@ -244,13 +168,14 @@ return (
 
 ## Feature-Specific Hooks
 
-### 8. `useSnakeGame`
+### 6. `useSnakeGame`
 
 **Purpose:** Implements complete Snake game logic with canvas rendering.
 
 **Location:** `src/hooks/useSnakeGame.ts` (308 lines)
 
 **Features:**
+
 - ✅ Snake movement with collision detection
 - ✅ Apple spawning and eating
 - ✅ Score tracking
@@ -262,6 +187,7 @@ return (
 - ✅ Progressive difficulty (speed increases)
 
 **Example:**
+
 ```typescript
 const canvasRef = useRef<HTMLCanvasElement>(null);
 const containerRef = useRef<HTMLDivElement>(null);
@@ -270,11 +196,11 @@ const game = useSnakeGame({
   gridSize: 20,
   startSnakeSize: 3,
   speed: 100,
-  percentageWidth: '100%',
-  appleColor: '#FF0000',
-  snakeColor: '#00FF00',
+  percentageWidth: "100%",
+  appleColor: "#FF0000",
+  snakeColor: "#00FF00",
   canvasRef,
-  containerRef
+  containerRef,
 });
 
 return (
@@ -283,7 +209,7 @@ return (
     <div>High Score: {game.highScore}</div>
     {game.gameOver && <div>Game Over!</div>}
     <button onClick={game.toggleRunning}>
-      {game.running ? 'Pause' : 'Resume'}
+      {game.running ? "Pause" : "Resume"}
     </button>
     <button onClick={game.restart}>Restart</button>
     <div ref={containerRef}>
@@ -294,6 +220,7 @@ return (
 ```
 
 **Game Mechanics:**
+
 - Grid: 20x20 cells
 - Wrap-around walls (exits left, enters right)
 - Speed increases by 0.5ms per apple (min 25ms)
@@ -301,31 +228,29 @@ return (
 
 ---
 
-### 9. `useActiveTrip`
+### 7. `useActiveTrip`
 
 **Purpose:** Track which trip section is currently visible in viewport.
 
 **Location:** `src/hooks/useActiveTrip.ts`
 
 **Features:**
+
 - ✅ Intersection Observer with multiple thresholds
 - ✅ Automatic URL hash updates
 - ✅ Hash change detection
 - ✅ Most-visible-trip logic
 
 **Example:**
+
 ```typescript
-const tripIds = ['thailand-2024', 'costarica-2023', 'ecuador-2024'];
+const tripIds = ["thailand-2024", "costarica-2023", "ecuador-2024"];
 const activeTrip = useActiveTrip(tripIds);
 
 return (
   <nav>
-    {tripIds.map(id => (
-      <a
-        key={id}
-        href={`#${id}`}
-        className={activeTrip === id ? 'active' : ''}
-      >
+    {tripIds.map((id) => (
+      <a key={id} href={`#${id}`} className={activeTrip === id ? "active" : ""}>
         {id}
       </a>
     ))}
@@ -334,6 +259,7 @@ return (
 ```
 
 **How It Works:**
+
 1. Observes all trip elements
 2. Tracks intersection ratios
 3. Determines most-visible trip
@@ -342,13 +268,14 @@ return (
 
 ---
 
-### 10. `useContactForm`
+### 8. `useContactForm`
 
 **Purpose:** Manage contact form state, validation, email sending, and draft persistence.
 
 **Location:** `src/hooks/useContactForm.ts` (300 lines)
 
 **Features:**
+
 - ✅ Form validation with multiple rules
 - ✅ EmailJS integration
 - ✅ Loading states
@@ -363,13 +290,14 @@ return (
 - ✅ Form clearing on successful submission
 
 **Example:**
+
 ```typescript
 const contactForm = useContactForm(
   () => {
-    showAlert({ type: 'success', message: 'Message sent!' });
+    showAlert({ type: "success", message: "Message sent!" });
   },
   (error) => {
-    showAlert({ type: 'error', message: error.message });
+    showAlert({ type: "error", message: error.message });
   }
 );
 
@@ -380,40 +308,62 @@ return (
       value={contactForm.values.user_name}
       onChange={contactForm.handleChange}
       onBlur={contactForm.handleBlur}
-      className={contactForm.getInputClassName('user_name')}
+      className={contactForm.getInputClassName("user_name")}
     />
-    {contactForm.showNameError && (
-      <span>{contactForm.errors.user_name}</span>
-    )}
+    {contactForm.showNameError && <span>{contactForm.errors.user_name}</span>}
 
-    <button
-      type="submit"
-      disabled={contactForm.isLoading}
-    >
-      {contactForm.isLoading ? 'Sending...' : 'Send'}
+    <button type="submit" disabled={contactForm.isLoading}>
+      {contactForm.isLoading ? "Sending..." : "Send"}
     </button>
 
     {contactForm.showMailtoFallback && (
-      <a href={contactForm.generateMailtoLink()}>
-        Open Email Client
-      </a>
+      <a href={contactForm.generateMailtoLink()}>Open Email Client</a>
     )}
   </form>
 );
 ```
 
 **Validation Rules:**
+
 - Name: min 2 characters
 - Email: RFC-compliant regex
 - Message: min 10 characters, max 1000 characters
 - Real-time validation with debouncing
 
 **Draft Persistence:**
+
 - Auto-saves to localStorage after 400ms of inactivity
 - Loads draft on component mount
 - Clears draft on successful submission
 - Manual clear draft option with confirmation
 - Debounced to prevent excessive localStorage writes
+
+**Internal Implementation:**
+
+- Uses custom validation logic (similar to useFormValidation pattern)
+- Uses async operation handling (similar to useAsync pattern)
+- These patterns are encapsulated within useContactForm for cohesion
+
+---
+
+### 9. `usePageTracking`
+
+**Purpose:** Track page views and navigation with Google Analytics.
+
+**Location:** `src/hooks/usePageTracking.ts`
+
+**Features:**
+
+- ✅ Automatic page view tracking
+- ✅ React Router integration
+- ✅ Production-only tracking
+
+**Example:**
+
+```typescript
+// Automatically tracks page views on route changes
+usePageTracking();
+```
 
 ---
 
@@ -424,7 +374,7 @@ Hooks can be combined for powerful effects:
 ### Example: Debounced Form Validation
 
 ```typescript
-const [email, setEmail] = useState('');
+const [email, setEmail] = useState("");
 const debouncedEmail = useDebounce(email, 400);
 
 useEffect(() => {
@@ -438,12 +388,12 @@ useEffect(() => {
 
 ```typescript
 const { width } = useWindowSize();
-const [theme, setTheme] = useLocalStorage('theme', 'light');
+const [theme, setTheme] = useLocalStorage("theme", "light");
 
 useEffect(() => {
   // Auto-switch to dark mode on mobile
   if (width < 768) {
-    setTheme('dark');
+    setTheme("dark");
   }
 }, [width]);
 ```
@@ -478,9 +428,12 @@ Hooks use `useCallback` internally to prevent unnecessary re-renders:
 
 ```typescript
 // From useFormValidation
-const handleChange = useCallback((e) => {
-  // ...
-}, [validate]);
+const handleChange = useCallback(
+  (e) => {
+    // ...
+  },
+  [validate]
+);
 ```
 
 ### Cleanup
@@ -491,7 +444,7 @@ All hooks clean up after themselves:
 // From useWindowSize
 return () => {
   clearTimeout(timeoutId);
-  window.removeEventListener('resize', handleResize);
+  window.removeEventListener("resize", handleResize);
 };
 ```
 
@@ -503,20 +456,18 @@ return () => {
 
 ```typescript
 // Test hook in isolation
-import { renderHook, act } from '@testing-library/react';
-import { useLocalStorage } from './hooks';
+import { renderHook, act } from "@testing-library/react";
+import { useLocalStorage } from "./hooks";
 
-test('useLocalStorage persists value', () => {
-  const { result } = renderHook(() =>
-    useLocalStorage('test', 0)
-  );
+test("useLocalStorage persists value", () => {
+  const { result } = renderHook(() => useLocalStorage("test", 0));
 
   act(() => {
     result.current[1](42);
   });
 
   expect(result.current[0]).toBe(42);
-  expect(localStorage.getItem('test')).toBe('42');
+  expect(localStorage.getItem("test")).toBe("42");
 });
 ```
 
@@ -528,20 +479,20 @@ test('useLocalStorage persists value', () => {
 
 ```typescript
 // ✅ Good
-const [count, setCount] = useLocalStorage('count', 0);
+const [count, setCount] = useLocalStorage("count", 0);
 
 // ❌ Bad
-const [count, setCount] = useLocalStorage('count');
+const [count, setCount] = useLocalStorage("count");
 ```
 
 ### 2. Use Generic Types
 
 ```typescript
 // ✅ Good - Type-safe
-const [user, setUser] = useLocalStorage<User>('user', null);
+const [user, setUser] = useLocalStorage<User>("user", null);
 
 // ❌ Bad - No type safety
-const [user, setUser] = useLocalStorage('user', null);
+const [user, setUser] = useLocalStorage("user", null);
 ```
 
 ### 3. Handle Loading States
@@ -622,21 +573,23 @@ export const useMyHook = (param1: string, param2: number) => {
 
 This portfolio demonstrates advanced React patterns through **11 custom hooks**:
 
-| Hook | Lines | Complexity | Purpose |
-|------|-------|------------|---------|
-| useLocalStorage | ~35 | Low | State persistence |
-| useClickOutside | ~25 | Low | Click detection |
-| useDebounce | ~15 | Low | Value debouncing |
-| useWindowSize | ~40 | Medium | Responsive tracking |
-| useFormValidation | ~95 | High | Form management |
-| useAsync | ~45 | Medium | Async operations |
-| useScrollReveal | ~35 | Medium | Scroll animations |
-| **useSnakeGame** | **308** | **Very High** | Game logic |
-| useActiveTrip | ~75 | Medium | Navigation tracking |
+| Hook               | Lines   | Complexity    | Purpose               |
+| ------------------ | ------- | ------------- | --------------------- |
+| useLocalStorage    | ~35     | Low           | State persistence     |
+| useClickOutside    | ~25     | Low           | Click detection       |
+| useDebounce        | ~15     | Low           | Value debouncing      |
+| useWindowSize      | ~40     | Medium        | Responsive tracking   |
+| useFormValidation  | ~95     | High          | Form management       |
+| useAsync           | ~45     | Medium        | Async operations      |
+| useScrollReveal    | ~35     | Medium        | Scroll animations     |
+| **useSnakeGame**   | **308** | **Very High** | Game logic            |
+| useActiveTrip      | ~75     | Medium        | Navigation tracking   |
 | **useContactForm** | **300** | **Very High** | Form + email + drafts |
-| usePageTracking | ~30 | Low | GA4 integration |
+| usePageTracking    | ~30     | Low           | GA4 integration       |
 
 **Total:** ~1000+ lines of reusable, tested, documented hook code!
+
+**Note:** `useContactForm` internally implements validation and async patterns, but these are encapsulated within the hook rather than exposed as separate utilities.
 
 ---
 
