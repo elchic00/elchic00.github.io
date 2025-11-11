@@ -2,7 +2,8 @@
  * Individual chat message component with markdown rendering and action buttons
  */
 
-import { memo } from "react";
+import { memo, useState } from "react";
+import { ClipboardCopyIcon, CheckIcon } from "@heroicons/react/outline";
 import { renderMarkdown } from "./utils";
 import { Message, ACTION_CONFIGS } from "./types";
 
@@ -13,14 +14,26 @@ interface ChatMessageProps {
 }
 
 export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProps) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(message.content);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text:", err);
+    }
+  };
+
   return (
     <div
-      className={`flex ${
+      className={`flex animate-fade-in-up ${
         message.role === "user" ? "justify-end" : "justify-start"
       }`}
     >
       <div
-        className={`max-w-[80%] p-3 rounded-lg ${
+        className={`relative group max-w-[80%] p-3 rounded-lg ${
           message.role === "user"
             ? "bg-cyan-700 text-white"
             : message.error
@@ -28,6 +41,22 @@ export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProp
             : "bg-slate-700 text-slate-100"
         }`}
       >
+        {/* Copy button for assistant messages */}
+        {message.role === "assistant" && !message.error && (
+          <button
+            onClick={handleCopy}
+            className="absolute top-2 right-2 p-1.5 rounded opacity-0 group-hover:opacity-100 transition-opacity bg-slate-600 hover:bg-slate-500 focus:opacity-100 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            aria-label={copied ? "Copied!" : "Copy message"}
+            title={copied ? "Copied!" : "Copy message"}
+          >
+            {copied ? (
+              <CheckIcon className="w-4 h-4 text-green-400" />
+            ) : (
+              <ClipboardCopyIcon className="w-4 h-4 text-slate-300" />
+            )}
+          </button>
+        )}
+
         {message.role === "assistant" ? (
           <>
             <div

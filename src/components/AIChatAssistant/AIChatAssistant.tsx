@@ -8,6 +8,7 @@ import { XIcon, ChatIcon } from "@heroicons/react/solid";
 import { ChatWindow } from "./ChatWindow";
 import { loadMarked, parseActionsFromContent, handleAction } from "./utils";
 import { Message, generateMessageId } from "./types";
+import { useLocalStorage } from "../../hooks";
 
 const INITIAL_MESSAGE: Message = {
   id: generateMessageId(),
@@ -17,10 +18,10 @@ const INITIAL_MESSAGE: Message = {
 
 export const AIChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
+  const [messages, setMessages] = useLocalStorage<Message[]>("ai-chat-history", [INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showSuggestions, setShowSuggestions] = useState(() => messages.length === 1);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -28,6 +29,37 @@ export const AIChatAssistant = () => {
       loadMarked();
     }
   }, [isOpen]);
+
+  // Keyboard shortcuts: Cmd/Ctrl+K to toggle, Esc to close
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Cmd/Ctrl+K to toggle chat
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsOpen(prev => !prev);
+      }
+      // Esc to close chat
+      if (e.key === 'Escape' && isOpen) {
+        const target = e.target as HTMLElement;
+        const isInputOrTextarea = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+
+        // Close if: not in input, OR in input but it's empty
+        if (!isInputOrTextarea || !input.trim()) {
+          e.preventDefault();
+          setIsOpen(false);
+          // Clear input if closing
+          if (input) setInput('');
+          // Blur the current element to prevent scroll jump
+          if (document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, input]);
 
   const sendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
