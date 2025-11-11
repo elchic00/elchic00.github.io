@@ -102,11 +102,12 @@ export const Experience = () => {
     period: "August 2022 - Present",
     type: "work",
     highlights: [
-      "Spearheaded WCAG AAA compliance across 10+ international markets, improving accessibility scores from 72% to 100% for 10M+ users",
-      "Engineered secure account management system serving 5M+ users annually with React.js and Node.js",
-      "Built full-stack 2FA system processing 4M+ annual updates with React.js and Kotlin-based BFF API",
-      "Designed 16+ A/B experiments increasing form completion by 12% and customer satisfaction by 17% across 3M+ users",
-      "Established CI/CD pipelines with GitHub Actions and comprehensive testing strategy using Jest/React Testing Library in Agile environment, achieving 100% code coverage and near zero production bugs across enterprise-scale applications",
+      "Spearheaded Web Content Accessibility Guidelines (WCAG) AAA compliance implementation across 10+ international markets using HTML5 and React.js with axe DevTools and screen reader testing, improving accessibility audit scores from 72% to 100%, mitigating legal risk and expanding market reach for 10M+ global users",
+      "Engineered secure user account management system using React.js and Node.js, serving 5M+ users annually to update sensitive information (name, address, contact details, income) while maintaining data integrity and regulatory compliance",
+      "Engineered full-stack two-factor authentication (2FA) system processing 4M+ annual updates to phone numbers and email addresses, building React.js forms with real-time validation and Kotlin-based BFF API layer to handle sensitive data updates while maintaining data integrity",
+      "Designed and executed 16+ A/B experiments using JavaScript, analytics APIs, and statistical significance testing, including A/B testing 'Find It Fast' navigation to identify and prioritize top 3 revenue-driving links, increasing form completion rates by 12% and customer satisfaction scores by 17% across 3M+ users",
+      "Built automated CI/CD pipelines using GitHub Actions, reducing deployment time and simplifying release processes through automated version tagging, while implementing feature flagging system with real-time toggles for safer releases",
+      "Established comprehensive testing strategy using Jest/React Testing Library in Agile environment, achieving 100% code coverage and near zero production bugs across enterprise-scale applications",
     ],
   };
 
