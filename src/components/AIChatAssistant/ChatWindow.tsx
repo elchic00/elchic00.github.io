@@ -8,6 +8,7 @@ import { ChatMessage } from "./ChatMessage";
 import { ChatInput } from "./ChatInput";
 import { LoadingIndicator } from "./LoadingIndicator";
 import { SuggestedQuestions } from "./SuggestedQuestions";
+import { QuickActions } from "./QuickActions";
 import { Message } from "./types";
 
 interface ChatWindowProps {
@@ -100,7 +101,10 @@ export const ChatWindow = ({
         {isLoading && <LoadingIndicator />}
 
         {showSuggestions && messages.length === 1 && !isLoading && (
-          <SuggestedQuestions onQuestionClick={onSuggestedQuestion} />
+          <div className="space-y-6">
+            <QuickActions onActionClick={onAction} />
+            <SuggestedQuestions onQuestionClick={onSuggestedQuestion} />
+          </div>
         )}
 
         <div ref={messagesEndRef} />
