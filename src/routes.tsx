@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import { HomePage } from "@pages/HomePage";
 
 // Lazy-load pages to keep the initial bundle smaller
-const ResumePage = lazy(() => import("./components/Resume").then(module => ({ default: module.ResumePage })));
 const Travel = lazy(() => import("./components/Travel").then(module => ({ default: module.Travel })));
 const PlaySnake = lazy(() => import("./components/Snake").then(module => ({ default: module.PlaySnake })));
 
@@ -13,14 +12,6 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route
-        path="/resume"
-        element={
-          <Suspense fallback={<LoadingFallback />}>
-            <ResumePage />
-          </Suspense>
-        }
-      />
       <Route
         path="/travel"
         element={
