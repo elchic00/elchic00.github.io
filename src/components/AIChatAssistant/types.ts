@@ -8,6 +8,8 @@ export interface Message {
   content: string;
   error?: boolean;
   actions?: string[];
+  timestamp?: number;
+  isStreaming?: boolean;
 }
 
 export interface ActionButton {
