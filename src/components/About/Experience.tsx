@@ -150,12 +150,11 @@ export const Experience = () => {
             headerVisible ? "visible" : ""
           }`}
         >
-          <BriefcaseIcon className="w-12 h-12 md:w-16 md:h-16 text-cyan-500 mx-auto mb-4" />
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <BriefcaseIcon className="w-10 inline-block mb-2 text-cyan-400" />
+          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-2 underline-offset-4 underline decoration-cyan-500">
             Professional Experience
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto mb-6"></div>
-          <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto">
+          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
             Building impactful software at scale and empowering the next
             generation of engineers
           </p>

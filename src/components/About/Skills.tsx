@@ -44,7 +44,7 @@ export const Skills = () => {
           ref={headerRef}
           className={`text-center mb-20 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
         >
-          <ChipIcon className="w-10 inline-block mb-4 -mt-2 text-cyan-400" />
+          <ChipIcon className="w-10 inline-block mb-2 text-cyan-400" />
           <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4 mx-auto underline-offset-4 underline decoration-cyan-500">
             Technical Skills
           </h2>
