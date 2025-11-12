@@ -47,19 +47,39 @@ Key Achievements:
 
 ## CodePath - Volunteer Teaching & Mentoring (06/2021 - Present)
 
-**Current Role - Open Source Course Mentor (Present):**
-- Leads weekly 1-hour video chat sessions with group of 5 students
-- Teaches how to make meaningful open source contributions (finding projects, creating PRs, navigating codebases)
-- Provides async support throughout the week via Slack/Discord for technical questions and guidance
-- Covers early career readiness: resume building, interview prep, professional networking, standing out as junior developer
-- Focus on practical skills that help students transition from academia to industry
+**Current Role - Open Source Mentor (September 2025 - Present):**
+- Leading weekly mentorship sessions for 5 students in open source contribution
+- Teaching GitHub workflows, PR creation, and navigating unfamiliar codebases with AI tools
+- Providing guidance on early career readiness and professional development
+- Focus: helping students make their first open source contributions and build confidence
 
-**Previous Roles (06/2021 - 2023):**
-- Teaching Assistant for Intro to Software Engineering (Summer 2022): Led weekly instruction sessions for 180+ students in Python-based Data Structures & Algorithms, achieving 90% student satisfaction
-- Mentored and instructed 350+ students across multiple cohorts in Data Structures & Algorithms, cybersecurity fundamentals, and career readiness
-- Designed 20+ coding exercises and debugging workshops that improved student technical interview performance
-- Developed technical curriculum achieving 85%+ student satisfaction
-- Secured free professional certifications for 300+ students
+**Previous Roles:**
+- **Technical Coach (Intermediate) - Summer 2024 (June 2024 - August 2024, 3 months)**
+  - Guided groups of 4-6 students weekly in mastering Data Structures & Algorithms
+  - Ensured collaborative progress and effective problem-solving
+  - Provided comprehensive career guidance and technical interview preparation
+  - Empowered students for success in their tech careers
+
+- **Technical Coach (Intermediate) - Summer 2023 (June 2023 - August 2023, 3 months)**
+  - Guided groups of 4-6 students weekly in mastering Data Structures & Algorithms
+  - Ensured collaborative progress and effective problem-solving
+  - Provided comprehensive career guidance and technical interview preparation
+  - Certificate issued for coaching students on data structure & algorithm technical interview preparation
+
+- **Teaching Assistant - Intro to Software Engineering (May 2022 - August 2022, 4 months)**
+  - Led instruction for over 180 students in Data Structures & Algorithms using Python
+  - Developed and presented engaging weekly review lessons to enhance student understanding
+  - Facilitated collaborative problem-solving in small groups, monitoring progress on assignments
+  - Fostered a supportive learning environment that improved student performance and engagement (tracked through student satisfaction survey)
+
+- **Tech Fellow (June 2021 - April 2022, 11 months)**
+  - Served as an instructor for cybersecurity fundamentals at CUNY: Hunter College
+  - Empowered students with web application security knowledge
+  - Beyond preparing and presenting engaging weekly lessons, actively supported students through hands-on debugging during labs and CTF assignments
+  - Ensured their practical understanding and coordinated with logistics team to ensure smooth program delivery
+  - This initiative provided free certification to 100 students, reflecting profound commitment to enhancing the computer science community at my university
+
+**Total Impact:** Mentored 350+ students across multiple cohorts in Data Structures & Algorithms, cybersecurity fundamentals, and career readiness
 
 ## Hunter College - Alumni Mentor (Present)
 - Provides 1-on-1 career mentorship to 2 current Hunter students through official alumni mentorship program
@@ -129,6 +149,21 @@ When asked about "what projects has he built", include both his professional wor
    - Helps children with autism and speech delays communicate
    - Customizable sentences using pictures
    - Link: https://github.com/myPal-TMS/myPal
+
+7. **This Portfolio Website** (React, TypeScript, Vite, Cloudflare Workers)
+   - **Perfect Lighthouse Score: 100/100** - Performance, Accessibility, Best Practices, SEO
+   - Modern portfolio with AI chat assistant, travel gallery, Snake game, and contact form
+   - **AI Chat Assistant**: Google Gemini 2.5 Flash with Cloudflare Workers backend, conversational memory, action buttons
+   - **Travel Gallery**: 70+ curated photos from 5 trips with lightbox modal, multi-level zoom, keyboard navigation, touch gestures
+   - **Snake Game**: HTML5 Canvas game with keyboard/touch controls, high score persistence, progressive difficulty
+   - **Contact Form**: EmailJS integration, draft auto-save, message templates, real-time validation, WCAG AAA compliant
+   - **11 Custom React Hooks**: 876 lines of reusable logic including useSnakeGame (308 lines), useContactForm (203 lines)
+   - **Performance**: Code splitting, lazy loading, WebP images, bundle optimization, debouncing
+   - **Architecture**: 8 shared components (Modal, Alert, Button, etc.), modular structure with clear separation of concerns
+   - **SEO**: Schema.org structured data, image sitemap, Open Graph meta tags
+   - **Tech Stack**: React 18, TypeScript 5.9, Vite 7.1, Tailwind CSS 3.0, React Router 6
+   - Live: https://elchic00.github.io/
+   - Code: https://github.com/elchic00/elchic00.github.io
 
 # Travel & Photography
 

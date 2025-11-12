@@ -7,9 +7,10 @@ Analyze all uncommitted changes and create descriptive, well-structured git comm
 Instructions:
 
 1. **Check for portfolio context changes:**
-   - Check if `src/data/portfolioContext.ts` has been modified: `git diff --name-only | grep portfolioContext.ts`
-   - If it has changed, run `npm run sync-context` to sync it to `worker/index.js`
-   - Stage the synced worker file if changes were made: `git add worker/index.js`
+   - Check if any context files changed: `git diff --name-only | grep -E "src/data/context/(biography|systemPrompt|skills|index)\.ts"`
+   - If any changed, run `npm run sync-context` to sync to `worker/index.js`
+   - Stage the synced worker file: `git add worker/index.js`
+   - Set flag to deploy worker after push: `DEPLOY_WORKER=true`
 
 2. **Review all changes:**
    - Run `git status` to see all modified/untracked files
@@ -44,9 +45,16 @@ Instructions:
    - Push all commits to remote using `git done` (alias for `git push origin main`)
    - Verify push was successful
 
-6. **Report summary:**
+6. **Deploy worker (if context changed):**
+   - If `DEPLOY_WORKER=true` flag was set in step 1, run `npm run worker:deploy`
+   - This deploys the updated AI context to Cloudflare Workers
+   - Verify deployment was successful
+   - Note: This ensures the chatbot uses the latest context immediately
+
+7. **Report summary:**
    - List each commit with its hash and message
    - Summarize what was accomplished overall
+   - Note if worker was deployed
    - Note: GitHub Actions will automatically deploy to GitHub Pages
 
 **Pre-flight checks:**
