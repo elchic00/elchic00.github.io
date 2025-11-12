@@ -81,47 +81,49 @@ export const handleAction = (action: string, setIsOpen: (open: boolean) => void)
       window.open("https://github.com/elchic00", "_blank");
       break;
     case "contact_form":
-      const contactSection = document.getElementById("contact");
-      if (contactSection) {
-        setIsOpen(false);
-        setTimeout(() => {
-          contactSection.scrollIntoView({ behavior: "smooth" });
-        }, 300);
-      }
+      setIsOpen(false);
+      navigateToSection("contact");
       break;
     case "ask_directly":
-      // Note: This requires access to messages state from parent
-      const contactSectionDirect = document.getElementById("contact");
-      if (contactSectionDirect) {
-        setIsOpen(false);
-        setTimeout(() => {
-          contactSectionDirect.scrollIntoView({ behavior: "smooth" });
-        }, 300);
-      }
+      setIsOpen(false);
+      navigateToSection("contact");
       break;
     case "view_projects":
-      const projectsSection = document.getElementById("projects");
-      if (projectsSection) {
-        setIsOpen(false);
-        setTimeout(() => {
-          projectsSection.scrollIntoView({ behavior: "smooth" });
-        }, 300);
-      }
+      setIsOpen(false);
+      navigateToSection("projects");
       break;
     case "view_travel":
       window.location.href = "/#/travel";
+      setIsOpen(false);
       break;
     case "view_experience":
-      const experienceSection = document.getElementById("experience");
-      if (experienceSection) {
-        setIsOpen(false);
-        setTimeout(() => {
-          experienceSection.scrollIntoView({ behavior: "smooth" });
-        }, 300);
-      }
+      setIsOpen(false);
+      navigateToSection("experience");
+      break;
+    case "play_snake":
+      window.location.href = "/#/snake";
+      setIsOpen(false);
       break;
     case "send_email":
       window.location.href = "mailto:aalagna04@gmail.com";
       break;
+  }
+};
+
+/**
+ * Navigate to a section, handling both same-page and cross-page navigation
+ */
+const navigateToSection = (sectionId: string) => {
+  const section = document.getElementById(sectionId);
+
+  if (section) {
+    // Section exists on current page - scroll to it
+    setTimeout(() => {
+      section.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+  } else {
+    // Section doesn't exist - navigate to home page with hash
+    // Use /#/#section format for hash routing compatibility
+    window.location.href = `/#/#${sectionId}`;
   }
 };

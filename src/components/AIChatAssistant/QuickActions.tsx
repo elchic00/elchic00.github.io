@@ -2,7 +2,7 @@
  * Quick action chips for common navigation tasks
  */
 
-import { BriefcaseIcon, LightningBoltIcon, MailIcon, DocumentTextIcon } from "@heroicons/react/solid";
+import { BriefcaseIcon, LightningBoltIcon, MailIcon, PuzzleIcon } from "@heroicons/react/solid";
 
 interface QuickActionsProps {
   onActionClick: (action: string) => void;
@@ -12,7 +12,7 @@ const QUICK_ACTIONS = [
   { Icon: BriefcaseIcon, label: "Experience", action: "view_experience" },
   { Icon: LightningBoltIcon, label: "Projects", action: "view_projects" },
   { Icon: MailIcon, label: "Contact", action: "contact_form" },
-  { Icon: DocumentTextIcon, label: "Resume", action: "view_resume" },
+  { Icon: PuzzleIcon, label: "Play Snake", action: "play_snake" },
 ];
 
 export const QuickActions = ({ onActionClick }: QuickActionsProps) => {

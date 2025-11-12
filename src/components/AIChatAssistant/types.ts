@@ -33,7 +33,8 @@ export const ACTION_CONFIGS: Record<string, ActionButton> = {
 export const SUGGESTED_QUESTIONS = [
   "What does Andrew do at American Express?",
   "Tell me about his accessibility expertise",
-  "What side projects has he built?",
+  "How has he mentored 350+ students?",
+  "What unique features does this portfolio have?",
   "Where has Andrew traveled?",
 ];
 
