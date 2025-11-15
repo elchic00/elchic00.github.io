@@ -118,7 +118,7 @@ export const Experience = () => {
       period: "June 2021 - Present",
       type: "mentorship",
       highlights: [
-        "Leading weekly mentorship sessions for 5 students in open source contribution, teaching GitHub workflows and PR creation",
+        "Leading weekly mentorship sessions for 5 students in open source contribution, teaching GitHub workflows and utilizing AI to understand codebases",
         "Mentored 350+ students across multiple cohorts in Data Structures & Algorithms and cybersecurity fundamentals",
         "Guided students through technical interview preparation, securing free certifications for 300+ students",
       ],
@@ -137,7 +137,10 @@ export const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="relative min-h-screen pt-20 pb-12 bg-slate-950">
+    <section
+      id="experience"
+      className="relative min-h-screen pt-20 pb-12 bg-slate-950"
+    >
       {/* Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
       {/* Gradient transition to next section */}
