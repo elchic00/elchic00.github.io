@@ -13,21 +13,24 @@ import { useLocalStorage } from "../../hooks";
 const INITIAL_MESSAGE: Message = {
   id: generateMessageId(),
   role: "assistant",
-  content: "Hi! I'm Andrew's AI assistant. Ask me about his experience, projects, skills, or travel adventures!",
+  content: "Hi! I'm Andrew's AI assistant. Ask me anything about Andrew!",
   timestamp: Date.now(),
 };
 
 export const AIChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useLocalStorage<Message[]>("ai-chat-history", [INITIAL_MESSAGE]);
+  const [messages, setMessages] = useLocalStorage<Message[]>(
+    "ai-chat-history",
+    [INITIAL_MESSAGE]
+  );
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(() => messages.length === 1);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   // Detect platform for keyboard shortcut display
   const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
-  const shortcutKey = isMac ? '⌘K' : 'Ctrl+K';
+  const shortcutKey = isMac ? "⌘K" : "Ctrl+K";
 
   useEffect(() => {
     if (isOpen) {
@@ -39,21 +42,22 @@ export const AIChatAssistant = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       // Cmd/Ctrl+K to toggle chat
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        setIsOpen(prev => !prev);
+        setIsOpen((prev) => !prev);
       }
       // Esc to close chat
-      if (e.key === 'Escape' && isOpen) {
+      if (e.key === "Escape" && isOpen) {
         const target = e.target as HTMLElement;
-        const isInputOrTextarea = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+        const isInputOrTextarea =
+          target.tagName === "INPUT" || target.tagName === "TEXTAREA";
 
         // Close if: not in input, OR in input but it's empty
         if (!isInputOrTextarea || !input.trim()) {
           e.preventDefault();
           setIsOpen(false);
           // Clear input if closing
-          if (input) setInput('');
+          if (input) setInput("");
           // Blur the current element to prevent scroll jump
           if (document.activeElement instanceof HTMLElement) {
             document.activeElement.blur();
@@ -62,8 +66,8 @@ export const AIChatAssistant = () => {
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, input]);
 
   const sendMessage = async (messageText: string) => {
@@ -71,16 +75,26 @@ export const AIChatAssistant = () => {
 
     const userMessage = messageText.trim();
     setInput("");
-    setShowSuggestions(false);
-    setMessages((prev) => [...prev, { id: generateMessageId(), role: "user", content: userMessage, timestamp: Date.now() }]);
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: generateMessageId(),
+        role: "user",
+        content: userMessage,
+        timestamp: Date.now(),
+      },
+    ]);
     setIsLoading(true);
 
     try {
-      const response = await fetch("https://portfolio-ai-chat.andrew-portfolio-chat.workers.dev/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage, messages }),
-      });
+      const response = await fetch(
+        "https://portfolio-ai-chat.andrew-portfolio-chat.workers.dev/api/chat",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: userMessage, messages }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to get response");
@@ -93,7 +107,14 @@ export const AIChatAssistant = () => {
       // Add message with streaming enabled
       setMessages((prev) => [
         ...prev,
-        { id: messageId, role: "assistant", content: cleanContent, actions, timestamp: Date.now(), isStreaming: true },
+        {
+          id: messageId,
+          role: "assistant",
+          content: cleanContent,
+          actions,
+          timestamp: Date.now(),
+          isStreaming: true,
+        },
       ]);
 
       // After streaming completes, mark as done
@@ -110,7 +131,8 @@ export const AIChatAssistant = () => {
         {
           id: generateMessageId(),
           role: "assistant",
-          content: "Sorry, I'm having trouble connecting right now. Please try again later or reach out directly via the contact form!",
+          content:
+            "Sorry, I'm having trouble connecting right now. Please try again later or reach out directly via the contact form!",
           error: true,
           timestamp: Date.now(),
         },
@@ -145,28 +167,33 @@ export const AIChatAssistant = () => {
     }
   }, [messages]);
 
-  const handleActionClick = useCallback((action: string) => {
-    if (action === "ask_directly") {
-      const lastUserMessage = [...messages]
-        .reverse()
-        .find((msg) => msg.role === "user");
-      if (lastUserMessage) {
-        const contactSection = document.getElementById("contact");
-        if (contactSection) {
-          setIsOpen(false);
-          sessionStorage.setItem("preFillMessage", lastUserMessage.content);
-          setTimeout(() => {
-            contactSection.scrollIntoView({ behavior: "smooth" });
-            window.dispatchEvent(new CustomEvent("preFillContactForm", {
-              detail: { message: lastUserMessage.content }
-            }));
-          }, 300);
+  const handleActionClick = useCallback(
+    (action: string) => {
+      if (action === "ask_directly") {
+        const lastUserMessage = [...messages]
+          .reverse()
+          .find((msg) => msg.role === "user");
+        if (lastUserMessage) {
+          const contactSection = document.getElementById("contact");
+          if (contactSection) {
+            setIsOpen(false);
+            sessionStorage.setItem("preFillMessage", lastUserMessage.content);
+            setTimeout(() => {
+              contactSection.scrollIntoView({ behavior: "smooth" });
+              window.dispatchEvent(
+                new CustomEvent("preFillContactForm", {
+                  detail: { message: lastUserMessage.content },
+                })
+              );
+            }, 300);
+          }
         }
+      } else {
+        handleAction(action, setIsOpen);
       }
-    } else {
-      handleAction(action, setIsOpen);
-    }
-  }, [messages]);
+    },
+    [messages]
+  );
 
   const toggleChat = () => {
     setIsOpen((prev) => !prev);
@@ -174,7 +201,11 @@ export const AIChatAssistant = () => {
 
   return (
     <>
-      <div className={`fixed bottom-24 right-6 z-50 ${isOpen ? 'md:block hidden' : 'block'}`}>
+      <div
+        className={`fixed bottom-24 right-6 z-50 ${
+          isOpen ? "md:block hidden" : "block"
+        }`}
+      >
         <button
           ref={toggleButtonRef}
           onClick={toggleChat}
@@ -195,7 +226,10 @@ export const AIChatAssistant = () => {
           {!isOpen && (
             <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
               <div className="bg-slate-800 text-white text-xs px-2 py-1 rounded shadow-lg">
-                Press <kbd className="px-1.5 py-0.5 bg-slate-700 rounded font-mono">{shortcutKey}</kbd>
+                Press{" "}
+                <kbd className="px-1.5 py-0.5 bg-slate-700 rounded font-mono">
+                  {shortcutKey}
+                </kbd>
               </div>
             </div>
           )}

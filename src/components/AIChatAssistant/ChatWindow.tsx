@@ -79,7 +79,7 @@ export const ChatWindow = ({
   return (
     <div
       ref={chatWindowRef}
-      className="fixed md:bottom-44 md:right-6 md:w-96 md:max-w-[calc(100vw-3rem)] md:h-[500px] md:rounded-lg inset-0 md:inset-auto z-50 bg-slate-800 shadow-2xl flex flex-col border border-slate-700 animate-slide-up"
+      className="fixed md:bottom-44 md:right-6 md:w-96 md:max-w-[calc(100vw-3rem)] md:h-[600px] md:rounded-lg inset-0 md:inset-auto z-50 bg-slate-800 shadow-2xl flex flex-col border border-slate-700 animate-slide-up"
     >
       <ChatHeader onClose={onClose} onClear={onClear} />
 
@@ -100,7 +100,7 @@ export const ChatWindow = ({
 
         {isLoading && <LoadingIndicator />}
 
-        {showSuggestions && messages.length === 1 && !isLoading && (
+        {showSuggestions && messages.length <= 1 && !isLoading && (
           <div className="space-y-6">
             <QuickActions onActionClick={onAction} />
             <SuggestedQuestions onQuestionClick={onSuggestedQuestion} />
