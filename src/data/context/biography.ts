@@ -151,7 +151,7 @@ When asked about "what projects has he built", include both his professional wor
    - Link: https://github.com/myPal-TMS/myPal
 
 7. **This Portfolio Website** (React, TypeScript, Vite, Cloudflare Workers)
-   - **Perfect Lighthouse Score: 100/100** - Performance, Accessibility, Best Practices, SEO
+   - **Perfect Lighthouse Score: 100/100** - Performance, Accessibility, Best Practices, SEO ([View Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/cokbwtk6dh))
    - Modern portfolio with AI chat assistant, travel gallery, Snake game, and contact form
    - **AI Chat Assistant**: Google Gemini 2.5 Flash with Cloudflare Workers backend, conversational memory, action buttons
    - **Travel Gallery**: 70+ curated photos from 5 trips with lightbox modal, multi-level zoom, keyboard navigation, touch gestures

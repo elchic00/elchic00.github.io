@@ -13,7 +13,7 @@ export const Footer = () => {
 
           {/* Lighthouse Score Badge */}
           <a
-            href="https://pagespeed.web.dev/analysis/https-elchic00-github-io/8av5etqmba?form_factor=mobile"
+            href="https://pagespeed.web.dev/analysis/https-elchic00-github-io/cokbwtk6dh"
             target="_blank"
             rel="noopener noreferrer"
             className="my-auto sm:ml-auto sm:mr-4 group flex items-center justify-center sm:justify-start gap-2 text-sm hover:text-cyan-400 transition-colors duration-200"
