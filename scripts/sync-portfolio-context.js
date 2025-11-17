@@ -1,30 +1,52 @@
 #!/usr/bin/env node
 
 /**
- * Syncs portfolio context from src/data/context/index.ts to worker/index.js
- * This ensures both files always have the same content
+ * Syncs portfolio context from src/data/context/ to worker/index.js
+ * Reads the three source TypeScript files and combines them into worker
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const SOURCE_FILE = path.join(__dirname, '../src/data/context/index.ts');
+const SYSTEM_PROMPT_FILE = path.join(__dirname, '../src/data/context/systemPrompt.ts');
+const BIOGRAPHY_FILE = path.join(__dirname, '../src/data/context/biography.ts');
+const SKILLS_FILE = path.join(__dirname, '../src/data/context/skills.ts');
 const WORKER_FILE = path.join(__dirname, '../worker/index.js');
 
 console.log('🔄 Syncing portfolio context...');
 
-// Read the source TypeScript file
-const sourceContent = fs.readFileSync(SOURCE_FILE, 'utf8');
+/**
+ * Extracts the exported const string from a TypeScript file
+ * @param {string} filePath - Path to the TypeScript file
+ * @param {string} constName - Name of the constant to extract
+ * @returns {string} - The extracted string value
+ */
+function extractConstFromFile(filePath, constName) {
+  const content = fs.readFileSync(filePath, 'utf8');
 
-// Extract the PORTFOLIO_CONTEXT string using regex
-const contextMatch = sourceContent.match(/export const PORTFOLIO_CONTEXT = `([\s\S]*?)`;/);
+  // Match: export const CONST_NAME = `...`;
+  const regex = new RegExp(`export const ${constName} = \`([\\s\\S]*?)\`;`, 'm');
+  const match = content.match(regex);
 
-if (!contextMatch) {
-  console.error('❌ Could not find PORTFOLIO_CONTEXT in source file');
-  process.exit(1);
+  if (!match) {
+    console.error(`❌ Could not find "export const ${constName}" in ${filePath}`);
+    process.exit(1);
+  }
+
+  return match[1];
 }
 
-const portfolioContext = contextMatch[1];
+// Extract the three context components
+const systemPrompt = extractConstFromFile(SYSTEM_PROMPT_FILE, 'SYSTEM_PROMPT');
+const biography = extractConstFromFile(BIOGRAPHY_FILE, 'BIOGRAPHY');
+const skills = extractConstFromFile(SKILLS_FILE, 'SKILLS');
+
+// Combine them with the same structure as index.ts
+const portfolioContext = `${systemPrompt}
+
+${biography}
+
+${skills}`;
 
 // Read the worker file
 let workerContent = fs.readFileSync(WORKER_FILE, 'utf8');
@@ -45,5 +67,8 @@ workerContent = workerContent.replace(workerContextRegex, replacement);
 fs.writeFileSync(WORKER_FILE, workerContent, 'utf8');
 
 console.log('✅ Portfolio context synced successfully!');
-console.log(`   Source: ${SOURCE_FILE}`);
+console.log(`   System Prompt: ${SYSTEM_PROMPT_FILE}`);
+console.log(`   Biography: ${BIOGRAPHY_FILE}`);
+console.log(`   Skills: ${SKILLS_FILE}`);
 console.log(`   Target: ${WORKER_FILE}`);
+console.log(`   Total context size: ${portfolioContext.length} characters`);
