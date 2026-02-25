@@ -1,0 +1,41 @@
+# Cache headers for GitHub Pages (Cloudflare/CDN)
+# Note: GitHub Pages uses Cloudflare which respects some cache headers
+
+# HTML files - short cache (1 hour) with revalidation
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# JavaScript and CSS - long cache (1 year) since they're content-hashed
+/assets/*.js
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images - long cache (1 year)
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts - long cache (1 year)
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static assets - long cache
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.json
+  Cache-Control: public, max-age=86400
+
+# PDFs - moderate cache (1 week)
+/*.pdf
+  Cache-Control: public, max-age=604800
