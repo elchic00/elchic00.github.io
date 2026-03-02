@@ -98,16 +98,16 @@ export const Experience = () => {
 
   const workExperience: Omit<ExperienceItemProps, "icon"> = {
     company: "American Express",
-    role: "Software Engineer",
+    role: "Software Engineer — Overview Page Team",
     period: "August 2022 - Present",
     type: "work",
     highlights: [
-      "Spearheaded Web Content Accessibility Guidelines (WCAG) AAA compliance implementation across 10+ international markets using HTML5 and React.js with axe DevTools and screen reader testing, improving accessibility audit scores from 72% to 100%, mitigating legal risk and expanding market reach for 10M+ global users",
-      "Engineered secure user account management system using React.js and Node.js, serving 5M+ users annually to update sensitive information (name, address, contact details, income) while maintaining data integrity and regulatory compliance",
-      "Engineered full-stack two-factor authentication (2FA) system processing 4M+ annual updates to phone numbers and email addresses, building React.js forms with real-time validation and Kotlin-based BFF API layer to handle sensitive data updates while maintaining data integrity",
-      "Designed and executed 16+ A/B experiments using JavaScript, analytics APIs, and statistical significance testing, including A/B testing 'Find It Fast' navigation to identify and prioritize top 3 revenue-driving links, increasing form completion rates by 12% and customer satisfaction scores by 17% across 3M+ users",
-      "Built automated CI/CD pipelines using GitHub Actions, reducing deployment time and simplifying release processes through automated version tagging, while implementing feature flagging system with real-time toggles for safer releases",
-      "Established comprehensive testing strategy using Jest/React Testing Library in Agile environment, achieving 100% code coverage and near zero production bugs across enterprise-scale applications",
+      "Currently embedded on the Overview Page team, the highest-traffic surface in the consumer app serving 10M+ users, collaborating with senior and staff engineers on frontend architecture",
+      "Spearheaded Web Content Accessibility Guidelines (WCAG) AAA compliance implementation across Account Services modules using HTML5 and React.js with axe DevTools and screen reader testing, improving accessibility audit scores from 72% to 100%, mitigating legal risk and expanding market reach for 10M+ global users",
+      "Engineered secure user account management flows serving 5M+ users annually, building React.js forms with real-time validation and Kotlin-based BFF API layer for sensitive data updates while maintaining regulatory compliance",
+      "Designed and executed 16+ A/B experiments using JavaScript, analytics APIs, and statistical significance testing to identify revenue-driving UX patterns, increasing form completion rates by 12% and customer satisfaction scores by 17%",
+      "Built automated CI/CD pipelines using GitHub Actions and implemented feature flagging systems for safer releases, reducing deployment friction and enabling real-time toggles",
+      "Established comprehensive testing strategy using Jest/React Testing Library in Agile environment, achieving high test coverage and near-zero production bugs across enterprise-scale applications",
     ],
   };
 

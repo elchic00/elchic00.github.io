@@ -1,9 +1,37 @@
+import { ServerIcon } from "@heroicons/react/solid";
 import { SocialLinks } from "./shared/SocialLinks";
 import { MonogramOverlap } from "./shared/MonogramLogo";
 
 export const Footer = () => {
   return (
     <footer className="border-t border-t-gray-600">
+      {/* Engineering Section */}
+      <div className="border-b border-gray-700/50 bg-slate-900/50">
+        <div className="container mx-auto px-5 sm:px-8 md:px-10 py-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="bg-cyan-600/20 p-2 rounded-lg">
+                <ServerIcon className="w-5 h-5 text-cyan-400" />
+              </div>
+              <h3 className="text-white font-semibold text-sm tracking-wide">
+                Engineering the Experience
+              </h3>
+            </div>
+            <p className="text-slate-400 text-sm sm:text-left">
+              Vite + React SPA with 11 custom hooks. WCAG AAA compliant.
+              <span className="hidden sm:inline"> </span>
+              <span className="sm:hidden block">
+                <br />
+              </span>
+              Gemini AI assistant via Cloudflare Workers.
+              <span className="mx-2 text-slate-600">|</span>
+              <span className="text-emerald-400 font-medium">100/100 Lighthouse Score</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer */}
       <div className="p-3 sm:p-4">
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-0">
           {/* Social Links */}

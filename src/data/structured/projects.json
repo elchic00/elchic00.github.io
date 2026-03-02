@@ -1,5 +1,12 @@
 [
   {
+    "title": "myPal",
+    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
+    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
+    "image": "/images/projects/mypal-demo.mp4",
+    "link": "https://github.com/myPal-TMS/myPal"
+  },
+  {
     "title": "Reps",
     "subtitle": "React Native + React Web",
     "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
@@ -36,12 +43,5 @@
     "description": "A data analysis project examining crime trends in Queens, NYC using Python data science libraries (Pandas, Matplotlib, NumPy) to process and visualize patterns. Interactive visualizations deployed as a GitHub Pages site.",
     "image": "/images/projects/crime.webp",
     "link": "https://elchic00.github.io/CrimeInQueens"
-  },
-  {
-    "title": "myPal",
-    "subtitle": "React Native, CSS, SQLite",
-    "description": "An Augmentative and Alternative Communication (AAC) app implementing the Picture Exchange Communication System (PECS) to help children with autism and speech delays communicate through pictures. Features customizable sentences for greetings, responses, and needs using React Native and SQLite.",
-    "image": "/images/projects/mypal-demo.mp4",
-    "link": "https://github.com/myPal-TMS/myPal"
   }
 ]
