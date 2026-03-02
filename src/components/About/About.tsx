@@ -97,25 +97,6 @@ export const About = () => {
               </Button>
               <Button
                 variant="secondary"
-                onClick={() => {
-                  const projectsSection = document.getElementById("projects");
-                  if (projectsSection) {
-                    const yCoordinate =
-                      projectsSection.getBoundingClientRect().top +
-                      window.pageYOffset;
-                    window.scrollTo({
-                      top: yCoordinate - 60,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                ariaLabel="View Personal Projects"
-                className="hover:scale-105 transition-transform duration-300"
-              >
-                View Projects
-              </Button>
-              <Button
-                variant="secondary"
                 onClick={() => navigate("/travel")}
                 ariaLabel="View Travel Adventures"
                 className="hover:scale-105 transition-transform duration-300"
