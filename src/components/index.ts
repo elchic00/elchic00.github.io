@@ -1,16 +1,3 @@
-/**
- * Component Barrel Export
- *
- * Provides centralized exports for all components.
- * Use this to import multiple components from a single location.
- *
- * Example:
- *   import { About, Experience, Projects } from '@components';
- *
- * Note: Travel and PlaySnake are intentionally excluded to preserve
- * lazy-loading and code-splitting in routes.tsx.
- */
-
 // Main sections - organized by feature
 export { About, Experience, Skills } from "./About";
 export { Contact, ContactSuccessModal } from "./Contact";
@@ -23,6 +10,9 @@ export { Footer } from "./Footer";
 // Feature components
 export { ResumePage } from "./Resume";
 export { AIChatAssistant } from "./AIChatAssistant";
+
+// This is the new one we added:
+export { AccessibilityExpertise } from "./AccessibilityExpertise";
 
 // Utility components
 export { ErrorBoundary } from "./ErrorBoundary";
@@ -52,3 +42,6 @@ export { ChatInput } from "./AIChatAssistant/ChatInput";
 export { ChatHeader } from "./AIChatAssistant/ChatHeader";
 export { SuggestedQuestions } from "./AIChatAssistant/SuggestedQuestions";
 export { LoadingIndicator } from "./AIChatAssistant/LoadingIndicator";
+
+// Page components
+export { ProjectsPage } from "../pages/ProjectsPage";

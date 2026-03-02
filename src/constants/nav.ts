@@ -2,7 +2,6 @@
  * Navigation Configuration
  * Contains navigation links, social links, and scroll behavior
  */
-
 export const SOCIAL_LINKS = {
   LINKEDIN: "https://www.linkedin.com/in/andrew-a-10b88215b/",
   GITHUB: "https://www.github.com/elchic00/",
@@ -12,7 +11,7 @@ export const SOCIAL_LINKS = {
 
 export const NAV_LINKS = [
   { name: "Experience", link: "/#experience" },
-  { name: "Projects", link: "/#projects" },
+  { name: "Projects", link: "/projects" },
   { name: "Skills", link: "/#skills" },
   { name: "Resume", link: "#resume" },
   { name: "Travel", link: "/travel" },

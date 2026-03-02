@@ -1,6 +1,7 @@
 import { Suspense, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { HomePage } from "@pages/HomePage";
+import { ProjectsPage } from "@pages/ProjectsPage";
 
 // Lazy-load pages to keep the initial bundle smaller
 const Travel = lazy(() => import("./components/Travel").then(module => ({ default: module.Travel })));
@@ -12,22 +13,17 @@ export const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route
-        path="/travel"
-        element={
-          <Suspense fallback={<LoadingFallback />}>
-            <Travel />
-          </Suspense>
-        }
-      />
-      <Route
-        path="/snake"
-        element={
-          <Suspense fallback={<LoadingFallback />}>
-            <PlaySnake />
-          </Suspense>
-        }
-      />
+      <Route path="/projects" element={<ProjectsPage />} />
+      <Route path="/travel" element={
+        <Suspense fallback={<LoadingFallback />}>
+          <Travel />
+        </Suspense>
+      } />
+      <Route path="/snake" element={
+        <Suspense fallback={<LoadingFallback />}>
+          <PlaySnake />
+        </Suspense>
+      } />
     </Routes>
   );
 };
