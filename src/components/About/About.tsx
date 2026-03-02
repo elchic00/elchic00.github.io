@@ -25,17 +25,15 @@ export const About = () => {
         <div
           className="absolute inset-0 opacity-60 animate-gradient-shift"
           style={{
-            background: 'linear-gradient(45deg, rgba(6, 182, 212, 0.3), rgba(147, 51, 234, 0.3), rgba(59, 130, 246, 0.3), rgba(6, 182, 212, 0.3))',
-            backgroundSize: '400% 400%',
+            background:
+              "linear-gradient(45deg, rgba(6, 182, 212, 0.3), rgba(147, 51, 234, 0.3), rgba(59, 130, 246, 0.3), rgba(6, 182, 212, 0.3))",
+            backgroundSize: "400% 400%",
           }}
         ></div>
       </div>
 
       <div className="container mx-auto flex px-5 sm:px-8 md:px-10 py-20 md:flex-row flex-col items-center mt-10 relative z-10">
         <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-          <h1 className="title-font sm:text-5xl text-4xl mb-4 font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 mt-5 animate-fade-in">
-            Andrew Alagna
-          </h1>
           <p className="text-xl text-cyan-300 mb-4 animate-fade-in-delay-2">
             Hey there! I'm Drew 👋
           </p>
@@ -69,7 +67,7 @@ export const About = () => {
                   window.open(
                     "/andrew-alagna-resume.pdf",
                     "_blank",
-                    "noopener,noreferrer"
+                    "noopener,noreferrer",
                   );
                 }}
                 className="inline-flex items-center h-10 px-4 text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 rounded-lg font-medium shadow-md hover:shadow-lg hover:shadow-cyan-500/30 focus-ring hover:scale-105"
