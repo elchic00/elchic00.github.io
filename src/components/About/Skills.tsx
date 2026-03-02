@@ -1,27 +1,33 @@
-import { ChipIcon, LightningBoltIcon, DatabaseIcon, CogIcon, ChartBarIcon } from "@heroicons/react/solid";
+import { ChipIcon, LightningBoltIcon, DatabaseIcon, CogIcon, ChartBarIcon, SparklesIcon, UsersIcon } from "@heroicons/react/solid";
 import skillsData from "../../data/structured/skills.json";
 import { skillTooltips } from "../../data/structured/skillTooltips";
 import { useScrollReveal } from "../../hooks";
 
 const categoryColors: Record<string, string> = {
-  "Languages & Frameworks": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/30 hover:border-cyan-400/50 hover:shadow-cyan-500/20",
+  "Frontend Architecture & Systems": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/30 hover:border-cyan-400/50 hover:shadow-cyan-500/20",
+  "Edge Computing & AI Orchestration": "bg-rose-600/20 text-rose-400 border-rose-500/30 hover:bg-rose-600/30 hover:border-rose-400/50 hover:shadow-rose-500/20",
   "Databases & Backend": "bg-emerald-600/20 text-emerald-400 border-emerald-500/30 hover:bg-emerald-600/30 hover:border-emerald-400/50 hover:shadow-emerald-500/20",
-  "DevOps, Tools & Testing": "bg-purple-600/20 text-purple-400 border-purple-500/30 hover:bg-purple-600/30 hover:border-purple-400/50 hover:shadow-purple-500/20",
+  "Platform & DX Architecture": "bg-purple-600/20 text-purple-400 border-purple-500/30 hover:bg-purple-600/30 hover:border-purple-400/50 hover:shadow-purple-500/20",
   "Practices & Methodologies": "bg-orange-600/20 text-orange-400 border-orange-500/30 hover:bg-orange-600/30 hover:border-orange-400/50 hover:shadow-orange-500/20",
+  "Technical Leadership & Strategy": "bg-amber-600/20 text-amber-400 border-amber-500/30 hover:bg-amber-600/30 hover:border-amber-400/50 hover:shadow-amber-500/20",
 };
 
 const categoryBorderColors: Record<string, string> = {
-  "Languages & Frameworks": "border-cyan-500",
+  "Frontend Architecture & Systems": "border-cyan-500",
+  "Edge Computing & AI Orchestration": "border-rose-500",
   "Databases & Backend": "border-emerald-500",
-  "DevOps, Tools & Testing": "border-purple-500",
+  "Platform & DX Architecture": "border-purple-500",
   "Practices & Methodologies": "border-orange-500",
+  "Technical Leadership & Strategy": "border-amber-500",
 };
 
 const categoryIcons: Record<string, React.FC<{ className?: string }>> = {
-  "Languages & Frameworks": LightningBoltIcon,
+  "Frontend Architecture & Systems": LightningBoltIcon,
+  "Edge Computing & AI Orchestration": SparklesIcon,
   "Databases & Backend": DatabaseIcon,
-  "DevOps, Tools & Testing": CogIcon,
+  "Platform & DX Architecture": CogIcon,
   "Practices & Methodologies": ChartBarIcon,
+  "Technical Leadership & Strategy": UsersIcon,
 };
 
 export const Skills = () => {
@@ -30,9 +36,11 @@ export const Skills = () => {
   const { ref: category2Ref, isVisible: category2Visible } = useScrollReveal();
   const { ref: category3Ref, isVisible: category3Visible } = useScrollReveal();
   const { ref: category4Ref, isVisible: category4Visible } = useScrollReveal();
+  const { ref: category5Ref, isVisible: category5Visible } = useScrollReveal();
+  const { ref: category6Ref, isVisible: category6Visible } = useScrollReveal();
 
-  const categoryRefs = [category1Ref, category2Ref, category3Ref, category4Ref];
-  const categoryVisibility = [category1Visible, category2Visible, category3Visible, category4Visible];
+  const categoryRefs = [category1Ref, category2Ref, category3Ref, category4Ref, category5Ref, category6Ref];
+  const categoryVisibility = [category1Visible, category2Visible, category3Visible, category4Visible, category5Visible, category6Visible];
 
   return (
     <section id="skills" className="relative bg-slate-950">
@@ -49,12 +57,10 @@ export const Skills = () => {
             Technical Skills
           </h2>
           <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-            Specialized in building high-performance, WCAG AAA-compliant web
-            applications with React.js and Node.js. Skilled in accessibility,
-            performance optimization, and delivering measurable impact for
-            millions of users.
+            Specialized in building high-performance, WCAG AAA-compliant web applications with React.js and Node.js. Skilled in accessibility, performance optimization, and delivering measurable impact for millions of users.
           </p>
         </div>
+
         <div className="lg:w-4/5 mx-auto">
           {Object.entries(skillsData).map(([category, skills], idx) => (
             <div
@@ -73,13 +79,13 @@ export const Skills = () => {
                   {category}
                 </h3>
               </div>
+
               <div className="flex flex-wrap gap-3">
                 {skills.map((skill, skillIdx) => (
                   <span
                     key={skill}
                     className={`group relative px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:scale-110 hover:shadow-xl scroll-reveal-delay-${Math.min(skillIdx % 4 + 1, 4)} ${
-                      categoryColors[category] ||
-                      "bg-slate-700/20 text-slate-300 border-slate-600/30"
+                      categoryColors[category] || "bg-slate-700/20 text-slate-300 border-slate-600/30"
                     }`}
                     title={skillTooltips[skill] || skill}
                   >

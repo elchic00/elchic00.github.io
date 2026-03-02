@@ -1,21 +1,26 @@
 // Tooltip content for skills - provides context on hover
 export const skillTooltips: Record<string, string> = {
-  // Languages & Frameworks
-  JavaScript: "5+ years building interactive web applications",
+  // Frontend Architecture & Systems
   "React.js": "Primary library for component-based UIs",
+  "Custom Hooks (11+)": "Reusable stateful logic patterns for scalable React apps",
+  TypeScript: "Type-safe development for scalable codebases",
   "Context API": "React's built-in state management",
   Redux: "State management for complex applications",
-  TypeScript: "Type-safe development for scalable codebases",
   "Next.js": "Server-side rendering and static generation",
-  "Node.js": "Backend development and API services",
   "Component Libraries": "Custom design systems and reusable components",
+  "Design Systems": "Scalable UI component architecture and documentation",
+  "Vite": "Next-gen build tooling for rapid development",
+  "Node.js": "Backend development and API services",
   "Tailwind CSS": "Utility-first styling for rapid development",
-  CSS: "Advanced layouts, animations, and responsive design",
-  HTML: "Semantic markup and accessibility best practices",
   Python: "Scripting, automation, and data processing",
-  "Shell Scripting": "Automation improving the developer experience",
-  Kotlin: "Backend services",
-  Java: "Object-oriented programming and enterprise applications",
+
+  // Edge Computing & AI Orchestration
+  "Cloudflare Workers": "Edge-compute platform for serverless functions at the edge",
+  "RAG Pattern Implementation": "Retrieval-Augmented Generation for AI-powered content",
+  "Gemini API Integration": "Google Gemini LLM orchestration and prompt engineering",
+  "Edge-side AI": "AI inference and processing at the network edge",
+  "Serverless Functions": "Event-driven compute without infrastructure management",
+  "Streaming Responses": "Real-time AI response streaming for UX fluidity",
 
   // Databases & Backend
   PostgreSQL: "Relational database design and optimization",
@@ -26,24 +31,38 @@ export const skillTooltips: Record<string, string> = {
   GraphQL: "Efficient API queries and data fetching",
   "REST APIs": "RESTful service design and integration",
   Microservices: "Distributed system architecture",
+  Kotlin: "Backend services",
+  Java: "Object-oriented programming and enterprise applications",
 
-  // DevOps, Tools & Testing
-  "CI/CD": "Automated testing and deployment pipelines",
+  // Platform & DX Architecture
+  "CI/CD Pipeline Design": "Automated testing and deployment pipeline architecture",
   "Github Actions": "Workflow automation and continuous integration",
-  Git: "Version control and collaborative development",
-  Github: "Code collaboration and project management",
-  Jest: "JavaScript unit and integration testing",
-  "React Testing Library": "Component testing with user-centric approach",
+  "Developer Experience": "DX tooling, automation, and developer productivity",
+  "Build Tooling": "Custom build scripts and optimization pipelines",
+  Webpack: "Module bundling and asset optimization",
   AWS: "Cloud infrastructure and serverless deployment",
   Docker: "Containerization for consistent environments",
+  Jest: "JavaScript unit and integration testing",
+  "React Testing Library": "Component testing with user-centric approach",
 
   // Practices & Methodologies
   "Web Accessibility (WCAG)": "WCAG AAA compliance for inclusive design",
-  "Performance Optimization": "Core Web Vitals and load time improvements",
+  "Web Performance Engineering": "End-to-end performance optimization and auditing",
+  "Core Web Vitals": "LCP, FID/INP, CLS metrics optimization",
+  "Critical CSS Inlining": "Above-the-fold CSS extraction and injection",
+  "Bundle Analysis": "Webpack/vite bundle size optimization and tree shaking",
+  "100/100 Lighthouse": "Perfect scores across all Lighthouse categories",
   "A/B Testing": "Data-driven experimentation and feature validation",
   "User Analytics": "User behavior tracking and insights",
   "Cross-team Collaboration": "Working with design, product, and backend teams",
-  "Comprehensive Test Coverage":
-    "Unit, integration, and e2e testing strategies",
+  "Comprehensive Test Coverage": "Unit, integration, and e2e testing strategies",
   Agile: "Sprint planning, standups, and iterative development",
+
+  // Technical Leadership & Strategy
+  "Technical Mentorship (350+)": "Career coaching and skill development for 350+ students",
+  "Cross-functional Architecture": "Design decisions across frontend, backend, and product",
+  "WCAG Compliance Strategy": "Enterprise accessibility governance and implementation",
+  "Engineering Roadmapping": "Technical vision and quarterly planning execution",
+  "Stakeholder Communication": "Translating technical complexity for business partners",
+  "Team Enablement": "Building tools and processes that unlock team velocity",
 };

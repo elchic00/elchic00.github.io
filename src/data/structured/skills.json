@@ -1,20 +1,25 @@
 {
-  "Languages & Frameworks": [
-    "JavaScript",
+  "Frontend Architecture & Systems": [
     "React.js",
+    "TypeScript",
+    "Custom Hooks (11+)",
+    "Component Libraries",
+    "Design Systems",
     "Context API",
     "Redux",
-    "TypeScript",
     "Next.js",
+    "Vite",
     "Node.js",
-    "Component Libraries",
     "Tailwind CSS",
-    "CSS",
-    "HTML",
-    "Python",
-    "Shell Scripting",
-    "Kotlin",
-    "Java"
+    "Python"
+  ],
+  "Edge Computing & AI Orchestration": [
+    "Cloudflare Workers",
+    "RAG Pattern Implementation",
+    "Gemini API Integration",
+    "Edge-side AI",
+    "Serverless Functions",
+    "Streaming Responses"
   ],
   "Databases & Backend": [
     "PostgreSQL",
@@ -24,25 +29,39 @@
     "Supabase",
     "GraphQL",
     "REST APIs",
-    "Microservices"
+    "Microservices",
+    "Kotlin",
+    "Java"
   ],
-  "DevOps, Tools & Testing": [
-    "CI/CD",
+  "Platform & DX Architecture": [
+    "CI/CD Pipeline Design",
     "Github Actions",
-    "Git",
-    "Github",
-    "Jest",
-    "React Testing Library",
+    "Developer Experience",
+    "Build Tooling",
     "AWS",
-    "Docker"
+    "Docker",
+    "Jest",
+    "React Testing Library"
   ],
   "Practices & Methodologies": [
     "Web Accessibility (WCAG)",
-    "Performance Optimization",
+    "Web Performance Engineering",
+    "Core Web Vitals",
+    "Critical CSS Inlining",
+    "Bundle Analysis",
+    "100/100 Lighthouse",
     "A/B Testing",
     "User Analytics",
     "Cross-team Collaboration",
     "Comprehensive Test Coverage",
     "Agile"
+  ],
+  "Technical Leadership & Strategy": [
+    "Technical Mentorship (350+)",
+    "Cross-functional Architecture",
+    "WCAG Compliance Strategy",
+    "Engineering Roadmapping",
+    "Stakeholder Communication",
+    "Team Enablement"
   ]
 }
