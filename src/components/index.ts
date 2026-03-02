@@ -10,8 +10,6 @@ export { Footer } from "./Footer";
 // Feature components
 export { ResumePage } from "./Resume";
 export { AIChatAssistant } from "./AIChatAssistant";
-
-// This is the new one we added:
 export { AccessibilityExpertise } from "./AccessibilityExpertise";
 
 // Utility components
