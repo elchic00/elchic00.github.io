@@ -1,16 +1,9 @@
-/**
- * Utility functions for AI Chat Assistant
- */
-
-import DOMPurify from "dompurify";
-import type { MarkedOptions } from "marked";
+/** * Utility functions for AI Chat Assistant */ import DOMPurify from "dompurify"; import type { MarkedOptions } from "marked";
 
 let markedInstance: typeof import("marked").marked | null = null;
 let markedLoading: Promise<typeof import("marked")> | null = null;
 
-/**
- * Lazy loads the marked library for markdown rendering
- */
+/** * Lazy loads the marked library for markdown rendering */
 export const loadMarked = async () => {
   if (markedInstance) return markedInstance;
   if (!markedLoading) {
@@ -25,9 +18,7 @@ export const loadMarked = async () => {
   return marked;
 };
 
-/**
- * Renders markdown content to sanitized HTML
- */
+/** * Renders markdown content to sanitized HTML */
 export const renderMarkdown = (content: string): string => {
   if (markedInstance) {
     return DOMPurify.sanitize(markedInstance(content) as string);
@@ -35,9 +26,7 @@ export const renderMarkdown = (content: string): string => {
   return DOMPurify.sanitize(content.replace(/\n/g, '<br/>'));
 };
 
-/**
- * Parses action buttons from assistant response content
- */
+/** * Parses action buttons from assistant response content */
 export const parseActionsFromContent = (content: string): { cleanContent: string; actions: string[] } => {
   const actionMatch = content.match(/\[ACTIONS:\s*([^\]]+)\]/);
   if (actionMatch) {
@@ -48,9 +37,7 @@ export const parseActionsFromContent = (content: string): { cleanContent: string
   return { cleanContent: content, actions: [] };
 };
 
-/**
- * Formats timestamp as relative time (e.g., "Just now", "2 min ago")
- */
+/** * Formats timestamp as relative time (e.g., "Just now", "2 min ago") */
 export const formatRelativeTime = (timestamp: number): string => {
   const now = Date.now();
   const diff = now - timestamp;
@@ -66,9 +53,7 @@ export const formatRelativeTime = (timestamp: number): string => {
   return `${days} day${days > 1 ? 's' : ''} ago`;
 };
 
-/**
- * Handles action button clicks (navigation, scrolling, external links)
- */
+/** * Handles action button clicks (navigation, scrolling, external links) */
 export const handleAction = (action: string, setIsOpen: (open: boolean) => void) => {
   switch (action) {
     case "view_resume":
@@ -89,8 +74,8 @@ export const handleAction = (action: string, setIsOpen: (open: boolean) => void)
       navigateToSection("contact");
       break;
     case "view_projects":
+      window.location.href = "/#/projects";
       setIsOpen(false);
-      navigateToSection("projects");
       break;
     case "view_travel":
       window.location.href = "/#/travel";
@@ -110,12 +95,9 @@ export const handleAction = (action: string, setIsOpen: (open: boolean) => void)
   }
 };
 
-/**
- * Navigate to a section, handling both same-page and cross-page navigation
- */
+/** * Navigate to a section, handling both same-page and cross-page navigation */
 const navigateToSection = (sectionId: string) => {
   const section = document.getElementById(sectionId);
-
   if (section) {
     // Section exists on current page - scroll to it
     setTimeout(() => {
