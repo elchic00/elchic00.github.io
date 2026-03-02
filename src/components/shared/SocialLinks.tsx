@@ -57,8 +57,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
 
   const iconClasses: Record<SocialLinksVariant, string> = {
     header: "w-6 h-6 text-cyan-400 hover:text-white duration-700",
-    footer:
-      "w-6 h-6 text-cyan-300 hover:text-white hover:transition-all hover:duration-700",
+    footer: "w-4 h-4 text-cyan-300 hover:text-white hover:transition-all hover:duration-700",
     about: "w-6 h-6 text-cyan-400 transition-colors duration-300",
   };
 

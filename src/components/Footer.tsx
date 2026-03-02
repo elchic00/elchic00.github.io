@@ -4,67 +4,40 @@ import { MonogramOverlap } from "./shared/MonogramLogo";
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-t-gray-600">
-      {/* Engineering Section */}
-      <div className="border-b border-gray-700/50 bg-slate-900/50">
-        <div className="container mx-auto px-5 sm:px-8 md:px-10 py-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="flex items-center gap-3">
-              <div className="bg-cyan-600/20 p-2 rounded-lg">
-                <ServerIcon className="w-5 h-5 text-cyan-400" />
-              </div>
-              <h3 className="text-white font-semibold text-sm tracking-wide">
-                Engineering the Experience
-              </h3>
+    <footer className="border-t border-slate-800/40 bg-slate-950/80 backdrop-blur-md w-full relative z-20">
+      <div className="max-w-7xl mx-auto px-6 py-6">
+        <div className="flex flex-row items-center justify-between">
+          
+          {/* LEFT: System Status */}
+          <div className="flex-1 flex items-center gap-3 justify-start">
+            <div className="bg-cyan-500/10 p-2 rounded-lg border border-cyan-500/20">
+              <ServerIcon className="w-5 h-5 text-cyan-400" />
             </div>
-            <p className="text-slate-400 text-sm sm:text-left">
-              Vite + React SPA with 11 custom hooks. WCAG AAA compliant.
-              <span className="hidden sm:inline"> </span>
-              <span className="sm:hidden block">
-                <br />
+            <div className="flex flex-col">
+              <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-bold">System Status</span>
+              <span className="text-xs text-slate-400 whitespace-nowrap">
+                Vite + React • <span className="text-emerald-400/90 font-medium">100/100 Lighthouse</span>
               </span>
-              Gemini AI assistant via Cloudflare Workers.
-              <span className="mx-2 text-slate-600">|</span>
-              <span className="text-emerald-400 font-medium">100/100 Lighthouse Score</span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer */}
-      <div className="p-3 sm:p-4">
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-0">
-          {/* Social Links */}
-          <div className="flex gap-2 justify-center sm:justify-start">
-            <SocialLinks variant="footer" />
+            </div>
           </div>
 
-          {/* Lighthouse Score Badge */}
-          <a
-            href="https://pagespeed.web.dev/analysis/https-elchic00-github-io/cokbwtk6dh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="my-auto sm:ml-auto sm:mr-4 group flex items-center justify-center sm:justify-start gap-2 text-sm hover:text-cyan-400 transition-colors duration-200"
-            aria-label="View Lighthouse performance report - Perfect 100 score"
-          >
-            <svg
-              className="w-5 h-5 text-emerald-500 group-hover:text-emerald-400 transition-colors"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M12 2L4.5 20.5l.5.5 7-4 7 4 .5-.5L12 2zm0 2.5l6.5 15-6.5-3.7-6.5 3.7L12 4.5z" />
-              <circle cx="12" cy="12" r="2" />
-            </svg>
-            <span className="hidden sm:inline">Lighthouse: 100/100</span>
-            <span className="sm:hidden text-xs">Perfect Lighthouse Score</span>
-          </a>
-
-          {/* Attribution */}
-          <div className="my-auto sm:ml-0 flex items-center justify-center sm:justify-start gap-2 text-sm">
-            <MonogramOverlap className="w-6 h-6 text-cyan-500" />
-            <span>by Andrew Alagna</span>
+          {/* CENTER: Socials - Forced Horizontal & No Box */}
+          <div className="flex-1 flex justify-center items-center">
+             <div className="flex flex-row items-center gap-4 py-2 px-6 rounded-full bg-slate-900/30 border border-slate-800/50">
+                <SocialLinks variant="footer" />
+             </div>
           </div>
+
+          {/* RIGHT: Identity with Cyan Brand Color */}
+          <div className="flex-1 flex items-center gap-4 justify-end">
+            <div className="text-right hidden md:block">
+              <span className="text-[10px] uppercase tracking-[0.15em] text-slate-500 font-bold block">Developer</span>
+              <span className="text-xs text-slate-400">© 2026 Andrew Alagna</span>
+            </div>
+            {/* The cyan-400 color makes the brand feel alive */}
+            <MonogramOverlap className="h-8 w-auto text-cyan-400/40 hover:text-cyan-400 transition-all duration-300" />
+          </div>
+
         </div>
       </div>
     </footer>
