@@ -3,15 +3,9 @@
     "React.js",
     "TypeScript",
     "Custom Hooks (11+)",
-    "Component Libraries",
     "Design Systems",
-    "Context API",
-    "Redux",
-    "Next.js",
     "Vite",
-    "Node.js",
-    "Tailwind CSS",
-    "Python"
+    "Component Libraries"
   ],
   "Edge Computing & AI Orchestration": [
     "Cloudflare Workers",
@@ -23,38 +17,25 @@
   ],
   "Databases & Backend": [
     "PostgreSQL",
-    "MySQL",
-    "SQLite",
-    "MongoDB",
-    "Supabase",
     "GraphQL",
     "REST APIs",
     "Microservices",
-    "Kotlin",
-    "Java"
+    "Supabase"
   ],
   "Platform & DX Architecture": [
     "CI/CD Pipeline Design",
-    "Github Actions",
     "Developer Experience",
-    "Build Tooling",
     "AWS",
     "Docker",
-    "Jest",
-    "React Testing Library"
+    "Build Tooling"
   ],
   "Practices & Methodologies": [
     "Web Accessibility (WCAG)",
     "Web Performance Engineering",
-    "Core Web Vitals",
-    "Critical CSS Inlining",
-    "Bundle Analysis",
     "100/100 Lighthouse",
     "A/B Testing",
-    "User Analytics",
     "Cross-team Collaboration",
-    "Comprehensive Test Coverage",
-    "Agile"
+    "Comprehensive Test Coverage"
   ],
   "Technical Leadership & Strategy": [
     "Technical Mentorship (350+)",
