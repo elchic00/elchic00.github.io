@@ -83,7 +83,7 @@ export const AccessibilityExpertise = () => {
                 <span className="text-purple-400 font-semibold text-sm uppercase tracking-wide"> Solution </span>
                 <p className="text-slate-300 mt-1">
                   {" "}
-                  Applied engineering patterns achieving 100/100 Lighthouse accessibility on this portfolio—semantic HTML5, ARIA patterns, axe DevTools validation—to mobile with offline-first SQLite storage, large touch targets for motor difficulties, and high-contrast PECS visuals. React Native for cross-device parity.{" "}
+                  Mobile with offline-first SQLite storage, large touch targets for motor difficulties, and high-contrast PECS visuals. React Native for cross-device parity.{" "}
                 </p>
               </div>
               <div className="border-l-4 border-green-500/50 pl-4">
