@@ -9,7 +9,7 @@ interface ConfirmDialogProps {
   message: string;
   confirmText?: string;
   cancelText?: string;
-  variant?: "danger" | "warning" | "info";
+  variant?: "danger" | "warning" | "info" | "neutral";
 }
 
 export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
@@ -42,6 +42,11 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
       iconBg: "bg-cyan-500/10",
       iconColor: "text-cyan-500",
       button: "bg-cyan-600 hover:bg-cyan-700 focus:ring-cyan-500",
+    },
+    neutral: {
+      iconBg: "bg-slate-500/10",
+      iconColor: "text-slate-400",
+      button: "bg-slate-600 hover:bg-slate-500 focus:ring-slate-500",
     },
   };
 

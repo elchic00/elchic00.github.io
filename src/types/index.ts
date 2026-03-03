@@ -22,7 +22,7 @@ export interface Trip {
   photos: Photo[];
 }
 
-export type ButtonVariant = 'primary' | 'secondary' | 'success' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'neutral' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
 

@@ -10,16 +10,13 @@ export const AccessibilityExpertise = () => {
       <div className="container mx-auto px-5 sm:px-8 md:px-10">
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-semibold mb-4">
-            {" "}
-            Perfect Lighthouse Score: 100/100{" "}
+            Perfect Lighthouse Score: 100/100
           </span>
           <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4">
-            {" "}
-            Accessibility is a <span className="text-cyan-400">Feature</span>, Not Compliance{" "}
+            Accessibility is a <span className="text-cyan-400">Feature</span>, Not Compliance
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            {" "}
-            From enterprise-scale compliance to assistive tech innovation — WCAG AAA expertise applied across professional and personal work.{" "}
+            From enterprise-scale compliance to assistive tech innovation — WCAG AAA expertise applied across professional and personal work.
           </p>
         </div>
 
@@ -39,22 +36,20 @@ export const AccessibilityExpertise = () => {
               <div className="border-l-4 border-red-500/50 pl-4">
                 <span className="text-red-400 font-semibold text-sm uppercase tracking-wide"> Problem </span>
                 <p className="text-slate-300 mt-1">
-                  {" "}
-                  AmEx's Account Services modules scored 72% on accessibility audits, exposing legal risk and blocking expansion into 10+ international markets with strict compliance requirements.{" "}
+                  AmEx modules faced a 72% audit score and high user drop-off in flows to update 2FA information, risking compliance and limiting expansion into 10+ international markets.
                 </p>
               </div>
               <div className="border-l-4 border-cyan-500/50 pl-4">
                 <span className="text-cyan-400 font-semibold text-sm uppercase tracking-wide"> Solution </span>
                 <p className="text-slate-300 mt-1">
-                  {" "}
-                  Spearheaded WCAG AAA compliance implementation using semantic HTML5, React.js ARIA patterns, and axe DevTools with screen reader validation. Built automated testing into CI/CD for regression prevention.{" "}
+                  Spearheaded WCAG AAA compliance while engineering a <strong>full-stack 2FA system</strong> (React.js/Kotlin BFF) to handle 5M+ sensitive annual updates securely.
                 </p>
               </div>
               <div className="border-l-4 border-green-500/50 pl-4">
                 <span className="text-green-400 font-semibold text-sm uppercase tracking-wide"> Impact </span>
                 <p className="text-slate-300 mt-1">
-                  <strong className="text-white"> Audit score: 72% <span className="text-slate-500">→</span>{" "} 100% </strong>
-                  . Zero legal exposure. Market expansion unblocked for 10M+ global users. Pattern adopted by 3+ other product teams.
+                  <strong className="text-white text-base">100% Audit Score</strong>
+                  . Processed <strong className="text-white">4M+ secure updates</strong> with a <strong className="text-white">12% boost in form completion</strong> via A/B tested accessible navigation.
                 </p>
               </div>
             </div>
@@ -75,23 +70,20 @@ export const AccessibilityExpertise = () => {
               <div className="border-l-4 border-red-500/50 pl-4">
                 <span className="text-red-400 font-semibold text-sm uppercase tracking-wide"> Problem </span>
                 <p className="text-slate-300 mt-1">
-                  {" "}
-                  Children with autism and speech delays need communication tools that work offline, load instantly, and remain usable for non-verbal users with motor impairments—existing solutions were expensive and connectivity-dependent.{" "}
+                  Non-verbal children with motor impairments need communication tools that work offline and load instantly—existing solutions were expensive and connectivity-dependent.
                 </p>
               </div>
               <div className="border-l-4 border-purple-500/50 pl-4">
                 <span className="text-purple-400 font-semibold text-sm uppercase tracking-wide"> Solution </span>
                 <p className="text-slate-300 mt-1">
-                  {" "}
-                  Mobile with offline-first SQLite storage, large touch targets for motor difficulties, and high-contrast PECS visuals. React Native for cross-device parity.{" "}
+                  Mobile app with offline-first SQLite storage, large touch targets, and high-contrast PECS visuals. Built with React Native for cross-device parity.
                 </p>
               </div>
               <div className="border-l-4 border-green-500/50 pl-4">
                 <span className="text-green-400 font-semibold text-sm uppercase tracking-wide"> Impact </span>
                 <p className="text-slate-300 mt-1">
                   Functional AAC tool at 0% cost to families.{" "}
-                  <strong className="text-white"> Architectural parity with portfolio's 100/100 patterns</strong>
-                  . Open-sourced for special needs community adoption.
+                  <strong className="text-white">Architectural parity with portfolio's 100/100 patterns</strong>. Open-sourced for special needs community adoption.
                 </p>
               </div>
             </div>
@@ -101,8 +93,7 @@ export const AccessibilityExpertise = () => {
         {/* Bottom CTA */}
         <div className="mt-12 text-center">
           <p className="text-slate-400 mb-4">
-            {" "}
-            View the PageSpeed report and technical implementation details{" "}
+            View the PageSpeed report and technical implementation details
           </p>
           <a
             href="https://pagespeed.web.dev/analysis?url=https://elchic00.github.io/"
