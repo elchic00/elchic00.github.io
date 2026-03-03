@@ -61,7 +61,7 @@ export const About = () => {
               <SocialLinks variant="about" />
             </div>
             <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-              <button
+              <Button
                 onClick={() => {
                   trackResumeView();
                   window.open(
@@ -70,13 +70,22 @@ export const About = () => {
                     "noopener,noreferrer",
                   );
                 }}
-                className="inline-flex items-center h-10 px-4 text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 transition-all duration-300 rounded-lg font-medium shadow-md hover:shadow-lg hover:shadow-cyan-500/30 focus-ring hover:scale-105"
+                className="bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600 text-white shadow-lg shadow-cyan-900/20"
                 aria-label="View Resume in new tab"
               >
                 Resume
-              </button>
+              </Button>
+              
               <Button
-                variant="primary"
+                onClick={() => navigate("/#accessibility-expertise")}
+                ariaLabel="View Travel Adventures"
+                className="bg-slate-800/40 border border-slate-700 hover:bg-slate-800 hover:border-cyan-500/50 text-slate-200"
+                variant="ghost"
+              >
+                View Accessibility Work
+              </Button>
+              
+              <Button
                 onClick={() => {
                   const experienceSection =
                     document.getElementById("experience");
@@ -91,17 +100,10 @@ export const About = () => {
                   }
                 }}
                 ariaLabel="View Professional Experience"
-                className="hover:scale-105 transition-transform duration-300 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500"
+                className="border border-slate-400/60 bg-transparent text-slate-100 hover:bg-white/5"
+                variant="neutral"
               >
                 View Experience
-              </Button>
-              <Button
-                variant="secondary"
-                onClick={() => navigate("/travel")}
-                ariaLabel="View Travel Adventures"
-                className="hover:scale-105 transition-transform duration-300"
-              >
-                Travel
               </Button>
             </div>
           </nav>
