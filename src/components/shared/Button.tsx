@@ -1,19 +1,5 @@
 import { ButtonProps, ButtonVariant, ButtonSize } from '../../types';
 
-/**
- * Reusable Button Component
- *
- * Variants:
- * - primary: Cyan background with WCAG AA compliant contrast (default)
- * - secondary: Slate background
- * - success: Teal background
- * - ghost: Transparent with border
- *
- * Sizes:
- * - sm: Small padding
- * - md: Medium padding (default)
- * - lg: Large padding
- */
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant = 'primary',
@@ -26,19 +12,23 @@ export const Button: React.FC<ButtonProps> = ({
   ariaLabel,
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center text-center rounded focus-ring transition-all duration-500 disabled:cursor-not-allowed';
+  const baseClasses = 'inline-flex items-center justify-center text-center rounded-lg focus-ring transition-all duration-300 disabled:cursor-not-allowed font-medium';
 
   const variantClasses: Record<ButtonVariant, string> = {
-    primary: 'text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 shadow-md hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-[1.02] active:scale-100 disabled:from-cyan-900 disabled:to-blue-900 disabled:text-gray-400 disabled:shadow-none',
-    secondary: 'text-white bg-slate-700 hover:bg-slate-600 hover:scale-[1.02] active:scale-100 disabled:bg-slate-800 disabled:text-gray-500',
-    neutral: 'border border-slate-500/50 text-slate-200 bg-transparent hover:bg-slate-800/40',
-    ghost: 'border border-cyan-500/50 text-cyan-50 bg-cyan-500/10 hover:bg-cyan-500/20 shadow-sm',
+    // Primary: High-contrast call to action with a subtle outer glow on hover
+    primary: 'text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 shadow-lg hover:shadow-cyan-500/40 hover:scale-[1.03] active:scale-95 disabled:opacity-50',
+    
+    secondary: 'text-white bg-slate-800 hover:bg-slate-700 hover:scale-[1.03] active:scale-95 border border-slate-700',
+    
+    neutral: 'border border-slate-500/50 text-slate-200 bg-slate-900/40 backdrop-blur-md hover:bg-slate-800/80 hover:border-cyan-500/50 hover:text-white transition-all duration-300',
+
+    ghost: 'border border-cyan-400/40 text-cyan-300 bg-cyan-950/20 backdrop-blur-md hover:bg-cyan-500/30 hover:border-cyan-300 hover:text-cyan-100 font-semibold shadow-sm',
   };
 
   const sizeClasses: Record<ButtonSize, string> = {
-    sm: 'h-8 px-2 text-sm',
-    md: 'h-10 px-3 text-base',
-    lg: 'h-12 px-6 text-lg',
+    sm: 'h-9 px-4 text-sm',
+    md: 'h-11 px-6 text-base',
+    lg: 'h-14 px-8 text-lg',
   };
 
   const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
