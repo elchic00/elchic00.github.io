@@ -9,9 +9,8 @@
   ],
   "Edge Computing & AI Orchestration": [
     "Cloudflare Workers",
-    "RAG Pattern Implementation",
-    "Gemini API Integration",
-    "Edge-side AI",
+    "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)",
+    "Local LLM Orchestration (Ollama)",
     "Serverless Functions",
     "Streaming Responses"
   ],
