@@ -11,7 +11,7 @@ import {
   PuzzleIcon,
   ChatAlt2Icon,
 } from "@heroicons/react/solid";
-import { useLocation, useNavigate } from "react-router-dom"; // Added useNavigate
+import { useLocation, useNavigate } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
 import { NAV_LINKS, scrollWithOffset, TIMING } from "../constants";
@@ -20,18 +20,13 @@ import { trackResumeView } from "../utils/analytics";
 
 export const Navbar = () => {
   const location = useLocation();
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [scrollProgress, setScrollProgress] = useState(0);
 
   const { width } = useWindowSize(TIMING.NAVBAR_DEBOUNCE);
   const isMobile = width < 1024;
-
-  const orderedLinks = [...NAV_LINKS].sort((a, b) => {
-    const order = ["Experience", "Skills", "Projects", "Resume", "Travel"];
-    return order.indexOf(a.name) - order.indexOf(b.name);
-  });
 
   const getNavIcon = (name: string) => {
     const iconClass = "w-5 h-5 mr-2.5";
@@ -83,7 +78,6 @@ export const Navbar = () => {
     return () => { document.body.style.overflow = 'unset'; };
   }, [isMobile, open, closeMenu]);
 
-  // Handle Snake navigation
   const handleSnakeClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname === "/snake") {
@@ -130,7 +124,6 @@ export const Navbar = () => {
           scroll={scrollWithOffset}
           className="font-bold text-xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white transition-all focus-ring whitespace-nowrap group border border-transparent hover:border-cyan-500/30 px-2 py-1 rounded-lg"
           onClick={(e) => handleLinkClick(e, "/#about", "Home")}
-          title="Back to Home"
         >
           <MonogramOverlap className="w-8 h-8 lg:w-9 lg:h-9 text-cyan-500 mr-2 group-hover:scale-110 transition-transform" />
           <span className="hidden sm:inline tracking-tight">Andrew Alagna</span>
@@ -170,7 +163,7 @@ export const Navbar = () => {
               </div>
 
               <ul className="grid grid-cols-1 gap-2">
-                {orderedLinks.map((link, index) => {
+                {NAV_LINKS.map((link, index) => {
                   const linkHash = link.link.includes("#") ? `#${link.link.split("#")[1]}` : "";
                   const isActive = (linkHash && activeSection === linkHash) || (location.pathname === link.link);
                   return (
@@ -189,8 +182,7 @@ export const Navbar = () => {
                     </li>
                   );
                 })}
-                {/* Mobile Snake Item */}
-                <li style={{ transitionDelay: `${orderedLinks.length * 50}ms` }} className={`${open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'} transition-all duration-300`}>
+                <li style={{ transitionDelay: `${NAV_LINKS.length * 50}ms` }} className={`${open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'} transition-all duration-300`}>
                   <button
                     onClick={handleSnakeClick}
                     className={`flex items-center w-full p-4 rounded-xl text-lg font-medium transition-all ${location.pathname === "/snake" ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" : "text-slate-300 active:bg-slate-700"}`}
@@ -215,10 +207,9 @@ export const Navbar = () => {
           </div>
         )}
 
-        {/* DESKTOP NAV */}
         <div className="hidden lg:flex items-center flex-1 justify-end">
           <ul className="flex items-center space-x-2 mr-6">
-            {orderedLinks.map((link) => {
+            {NAV_LINKS.map((link) => {
               const linkHash = link.link.includes("#") ? `#${link.link.split("#")[1]}` : "";
               const isActive = (linkHash && activeSection === linkHash) || (location.pathname === link.link);
 
@@ -235,7 +226,6 @@ export const Navbar = () => {
                 </li>
               );
             })}
-            {/* Desktop Snake Item */}
             <li>
               <button
                 onClick={handleSnakeClick}
