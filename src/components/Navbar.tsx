@@ -11,7 +11,7 @@ import {
   PuzzleIcon,
   ChatAlt2Icon,
 } from "@heroicons/react/solid";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom"; // Added useNavigate
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
 import { NAV_LINKS, scrollWithOffset, TIMING } from "../constants";
@@ -20,6 +20,7 @@ import { trackResumeView } from "../utils/analytics";
 
 export const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // Initialize navigate
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -27,7 +28,6 @@ export const Navbar = () => {
   const { width } = useWindowSize(TIMING.NAVBAR_DEBOUNCE);
   const isMobile = width < 1024;
 
-  // REORDERED NAV: Experience -> Skills -> Projects -> Resume -> Travel
   const orderedLinks = [...NAV_LINKS].sort((a, b) => {
     const order = ["Experience", "Skills", "Projects", "Resume", "Travel"];
     return order.indexOf(a.name) - order.indexOf(b.name);
@@ -79,10 +79,20 @@ export const Navbar = () => {
 
   useEffect(() => {
     if (!isMobile && open) closeMenu();
-    // Prevent background scrolling when menu is open
     document.body.style.overflow = open ? 'hidden' : 'unset';
     return () => { document.body.style.overflow = 'unset'; };
   }, [isMobile, open, closeMenu]);
+
+  // Handle Snake navigation
+  const handleSnakeClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === "/snake") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/snake");
+    }
+    closeMenu();
+  }, [navigate, closeMenu, location.pathname]);
 
   const handleLinkClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, linkPath: string, linkName: string) => {
@@ -130,18 +140,15 @@ export const Navbar = () => {
           <button
             onClick={toggleMenu}
             className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-700/50 border border-slate-600 text-slate-200 active:scale-95 transition-all"
-            aria-label={open ? "Close menu" : "Open menu"}
           >
             <span className="text-xs font-bold uppercase tracking-wider">{open ? "Close" : "Menu"}</span>
             {open ? <XIcon className="w-6 h-6" /> : <MenuIcon className="w-6 h-6" />}
           </button>
         )}
 
-        {/* MOBILE DRAWER - Made Opaque to fix the double-text issue */}
         {isMobile && (
           <div
-            className={`absolute left-0 w-full h-[calc(100vh-68px)] overflow-y-auto bg-slate-900 transition-all duration-300 ease-in-out z-40 ${open ? "top-[68px] opacity-100 translate-x-0" : "top-[68px] opacity-0 -translate-x-full"
-              }`}
+            className={`absolute left-0 w-full h-[calc(100vh-68px)] overflow-y-auto bg-slate-900 transition-all duration-300 ease-in-out z-40 ${open ? "top-[68px] opacity-100 translate-x-0" : "top-[68px] opacity-0 -translate-x-full"}`}
           >
             <div className="px-6 py-8 flex flex-col h-full bg-slate-900">
               <div className="mb-8 p-4 bg-gradient-to-br from-cyan-900/40 to-slate-800 rounded-2xl border border-cyan-500/30">
@@ -171,8 +178,7 @@ export const Navbar = () => {
                       <Link
                         to={link.link}
                         scroll={scrollWithOffset}
-                        className={`flex items-center p-4 rounded-xl text-lg font-medium transition-all ${isActive ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" : "text-slate-300 active:bg-slate-700"
-                          }`}
+                        className={`flex items-center p-4 rounded-xl text-lg font-medium transition-all ${isActive ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" : "text-slate-300 active:bg-slate-700"}`}
                         onClick={(e) => handleLinkClick(e, link.link, link.name)}
                       >
                         <span className={`p-2 rounded-lg mr-4 ${isActive ? 'bg-cyan-500/20' : 'bg-slate-700'}`}>
@@ -183,6 +189,18 @@ export const Navbar = () => {
                     </li>
                   );
                 })}
+                {/* Mobile Snake Item */}
+                <li style={{ transitionDelay: `${orderedLinks.length * 50}ms` }} className={`${open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'} transition-all duration-300`}>
+                  <button
+                    onClick={handleSnakeClick}
+                    className={`flex items-center w-full p-4 rounded-xl text-lg font-medium transition-all ${location.pathname === "/snake" ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" : "text-slate-300 active:bg-slate-700"}`}
+                  >
+                    <span className={`p-2 rounded-lg mr-4 ${location.pathname === "/snake" ? 'bg-cyan-500/20' : 'bg-slate-700'}`}>
+                      {getNavIcon("Snake")}
+                    </span>
+                    Snake
+                  </button>
+                </li>
               </ul>
               <div className="mt-auto pb-10">
                 <Link
@@ -209,8 +227,7 @@ export const Navbar = () => {
                   <Link
                     to={link.link}
                     scroll={scrollWithOffset}
-                    className={`px-3 py-1.5 rounded-md text-sm xl:text-base font-medium transition-all duration-300 border border-transparent hover:border-cyan-500/50 hover:text-white ${isActive ? "text-cyan-400 bg-cyan-500/10 !border-cyan-500/30" : "text-slate-300"
-                      }`}
+                    className={`px-3 py-1.5 rounded-md text-base xl:text-lg font-medium transition-all duration-300 border border-transparent hover:border-cyan-500/50 hover:text-white ${isActive ? "text-cyan-400 bg-cyan-500/10 !border-cyan-500/30" : "text-slate-300"}`}
                     onClick={(e) => handleLinkClick(e, link.link, link.name)}
                   >
                     {link.name}
@@ -218,6 +235,15 @@ export const Navbar = () => {
                 </li>
               );
             })}
+            {/* Desktop Snake Item */}
+            <li>
+              <button
+                onClick={handleSnakeClick}
+                className={`px-3 py-1.5 rounded-md text-base xl:text-lg font-medium transition-all duration-300 border border-transparent hover:border-cyan-500/50 hover:text-white ${location.pathname === "/snake" ? "text-cyan-400 bg-cyan-500/10 !border-cyan-500/30" : "text-slate-300"}`}
+              >
+                Snake
+              </button>
+            </li>
           </ul>
 
           <div className="pl-6 border-l border-slate-700/50">
@@ -225,8 +251,8 @@ export const Navbar = () => {
               to="/#contact"
               className={`flex items-center px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 ${activeSection === "#contact"
                   ? "bg-purple-500 text-white shadow-lg shadow-purple-500/40 scale-105"
-                  : "bg-purple-700/80 text-slate-100 hover:bg-purple-600 hover:text-white hover:scale-105"
-                }`}
+                  : "bg-purple-700/80 text-slate-100 hover:bg-purple-600 hover:text-white hover:scale-105"}`}
+              onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
             >
               Contact
               <ArrowRightIcon className="w-4 h-4 ml-2" />

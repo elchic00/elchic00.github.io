@@ -11,8 +11,8 @@ export const SOCIAL_LINKS = {
 
 export const NAV_LINKS = [
   { name: "Experience", link: "/#experience" },
-  { name: "Projects", link: "/projects" },
   { name: "Skills", link: "/#skills" },
+  { name: "Projects", link: "/projects" },
   { name: "Resume", link: "#resume" },
   { name: "Travel", link: "/travel" },
 ] as const;

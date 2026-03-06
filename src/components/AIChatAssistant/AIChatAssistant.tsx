@@ -70,7 +70,6 @@ export const AIChatAssistant = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, input]);
 
-  // Inside your AIChatAssistant component, add this useEffect:
 
 useEffect(() => {
   const handleOpenChat = () => {
