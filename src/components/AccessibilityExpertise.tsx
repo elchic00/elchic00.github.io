@@ -70,7 +70,7 @@ export const AccessibilityExpertise = () => {
               <div className="border-l-4 border-red-500/50 pl-4">
                 <span className="text-red-400 font-semibold text-sm uppercase tracking-wide"> Problem </span>
                 <p className="text-slate-300 mt-1">
-                  Non-verbal children with motor impairments need communication tools that work offline and load instantly—existing solutions were expensive and connectivity-dependent.
+                  Non-verbal children with motor impairments need communication tools that work offline and load instantly — existing solutions were expensive and connectivity-dependent.
                 </p>
               </div>
               <div className="border-l-4 border-purple-500/50 pl-4">
