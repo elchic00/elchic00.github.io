@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { SocialLinks } from "../shared/SocialLinks";
 import { Button } from "../shared/Button";
 import { SOCIAL_LINKS } from "../../constants";
-import { trackResumeView } from "../../utils/analytics";
 
 export const About = () => {
   const navigate = useNavigate();
