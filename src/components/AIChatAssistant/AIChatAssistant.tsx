@@ -26,6 +26,7 @@ export const AIChatAssistant = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
+  const [showAutoLabel, setShowAutoLabel] = useState(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
 
   // Detect platform for keyboard shortcut display
@@ -37,6 +38,26 @@ export const AIChatAssistant = () => {
       loadMarked();
     }
   }, [isOpen]);
+
+  // Auto-show the label briefly after 3s on first load, only once
+  useEffect(() => {
+    const hasSeenLabel = sessionStorage.getItem("ai-chat-label-shown");
+    if (!hasSeenLabel && !isOpen) {
+      const showTimer = setTimeout(() => {
+        setShowAutoLabel(true);
+        sessionStorage.setItem("ai-chat-label-shown", "true");
+      }, 3000);
+
+      const hideTimer = setTimeout(() => {
+        setShowAutoLabel(false);
+      }, 6500); // Show for ~3.5s
+
+      return () => {
+        clearTimeout(showTimer);
+        clearTimeout(hideTimer);
+      };
+    }
+  }, []);
 
   // Keyboard shortcuts: Cmd/Ctrl+K to toggle, Esc to close
   useEffect(() => {
@@ -70,15 +91,14 @@ export const AIChatAssistant = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, input]);
 
+  useEffect(() => {
+    const handleOpenChat = () => {
+      setIsOpen(true);
+    };
 
-useEffect(() => {
-  const handleOpenChat = () => {
-    setIsOpen(true);
-  };
-
-  window.addEventListener("openAIChat", handleOpenChat);
-  return () => window.removeEventListener("openAIChat", handleOpenChat);
-}, []);
+    window.addEventListener("openAIChat", handleOpenChat);
+    return () => window.removeEventListener("openAIChat", handleOpenChat);
+  }, []);
 
   const sendMessage = async (messageText: string) => {
     if (!messageText.trim() || isLoading) return;
@@ -134,7 +154,7 @@ useEffect(() => {
             msg.id === messageId ? { ...msg, isStreaming: false } : msg
           )
         );
-      }, cleanContent.split(/(\s+)/).length * 20 + 100); // Calculate duration based on word count
+      }, cleanContent.split(/(\s+)/).length * 20 + 100);
     } catch (error) {
       setMessages((prev) => [
         ...prev,
@@ -211,19 +231,108 @@ useEffect(() => {
 
   return (
     <>
+      {/* Keyframe styles injected once */}
+      <style>{`
+        @keyframes ai-glow-pulse {
+          0%, 100% {
+            box-shadow:
+              0 0 0 0 rgba(34, 211, 238, 0),
+              0 0 16px 4px rgba(34, 211, 238, 0.25),
+              0 0 32px 8px rgba(147, 51, 234, 0.15);
+          }
+          50% {
+            box-shadow:
+              0 0 0 6px rgba(34, 211, 238, 0.08),
+              0 0 24px 8px rgba(34, 211, 238, 0.35),
+              0 0 48px 16px rgba(147, 51, 234, 0.2);
+          }
+        }
+
+        @keyframes ai-label-fade-in {
+          from { opacity: 0; transform: translateX(6px); }
+          to   { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes ai-label-fade-out {
+          from { opacity: 1; transform: translateX(0); }
+          to   { opacity: 0; transform: translateX(6px); }
+        }
+
+        .ai-chat-btn-glow {
+          animation: ai-glow-pulse 2.8s ease-in-out infinite;
+        }
+
+        .ai-chat-btn-glow:hover {
+          animation: none;
+          box-shadow:
+            0 0 0 0 rgba(34, 211, 238, 0),
+            0 0 28px 10px rgba(34, 211, 238, 0.4),
+            0 0 56px 20px rgba(147, 51, 234, 0.25);
+        }
+
+        .ai-label-auto-show {
+          animation: ai-label-fade-in 0.35s ease forwards;
+        }
+
+        .ai-label-auto-hide {
+          animation: ai-label-fade-out 0.4s ease forwards;
+        }
+      `}</style>
+
       <div
         className={`fixed bottom-24 right-6 z-50 ${
           isOpen ? "md:block hidden" : "block"
         }`}
       >
+        {/* "Ask me anything" label — shows on hover (CSS) or auto-trigger (JS) */}
+        <div
+          className={`
+            absolute right-full mr-3 top-1/2 -translate-y-1/2
+            pointer-events-none select-none
+            ${showAutoLabel ? "ai-label-auto-show" : "opacity-0"}
+          `}
+          aria-hidden="true"
+        >
+          <div
+            className="
+              flex items-center gap-1.5
+              bg-slate-900/95 backdrop-blur-sm
+              text-white text-xs font-medium
+              px-3 py-1.5 rounded-full
+              border border-slate-700/60
+              shadow-lg shadow-black/30
+              whitespace-nowrap
+            "
+          >
+            {/* Tiny animated dot for liveliness */}
+            <span
+              className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"
+              style={{ animation: "ai-glow-pulse 2s ease-in-out infinite" }}
+            />
+            Ask me anything about Drew
+          </div>
+          {/* Arrow pointing right toward button */}
+          <div
+            className="
+              absolute right-0 top-1/2 -translate-y-1/2 translate-x-full
+              border-4 border-transparent border-l-slate-700/60
+            "
+          />
+        </div>
+
         <button
           ref={toggleButtonRef}
           onClick={toggleChat}
-          className={`group relative p-4 rounded-full shadow-lg transition-all duration-300 focus-ring focus:ring-offset-2 focus:ring-offset-slate-900 ${
-            isOpen
-              ? "bg-slate-700 hover:bg-slate-600"
-              : "bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 hover:scale-110"
-          }`}
+          className={`
+            group relative p-4 rounded-full shadow-lg
+            transition-all duration-300
+            focus-ring focus:ring-offset-2 focus:ring-offset-slate-900
+            ${
+              isOpen
+                ? "bg-slate-700 hover:bg-slate-600"
+                : "bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 hover:scale-110 ai-chat-btn-glow"
+            }
+          `}
           aria-label={isOpen ? "Close chat" : "Open AI chat assistant"}
         >
           {isOpen ? (
@@ -232,15 +341,41 @@ useEffect(() => {
             <ChatIcon className="w-6 h-6 text-white" />
           )}
 
-          {/* Keyboard shortcut hint */}
+          {/* Hover tooltip with keyboard shortcut — always visible on hover when closed */}
           {!isOpen && (
-            <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
-              <div className="bg-slate-800 text-white text-xs px-2 py-1 rounded shadow-lg">
-                Press{" "}
-                <kbd className="px-1.5 py-0.5 bg-slate-700 rounded font-mono">
+            <div
+              className="
+                absolute right-full mr-3 top-1/2 -translate-y-1/2
+                opacity-0 group-hover:opacity-100
+                transition-opacity duration-200
+                pointer-events-none
+              "
+              role="tooltip"
+            >
+              <div
+                className="
+                  flex items-center gap-2
+                  bg-slate-900/95 backdrop-blur-sm
+                  text-white text-xs font-medium
+                  px-3 py-1.5 rounded-full
+                  border border-slate-700/60
+                  shadow-lg shadow-black/30
+                  whitespace-nowrap
+                "
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                Ask me anything about Drew
+                <kbd className="ml-1 px-1.5 py-0.5 bg-slate-700 rounded font-mono text-slate-300 text-[10px]">
                   {shortcutKey}
                 </kbd>
               </div>
+              {/* Arrow */}
+              <div
+                className="
+                  absolute right-0 top-1/2 -translate-y-1/2 translate-x-full
+                  border-4 border-transparent border-l-slate-700/60
+                "
+              />
             </div>
           )}
         </button>
