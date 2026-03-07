@@ -10,6 +10,7 @@ export const SOCIAL_LINKS = {
 } as const;
 
 export const NAV_LINKS = [
+  { name: "Accessibility", link: "/#accessibility-expertise" },
   { name: "Experience", link: "/#experience" },
   { name: "Skills", link: "/#skills" },
   { name: "Projects", link: "/projects" },

@@ -10,6 +10,7 @@ import {
   GlobeAltIcon,
   PuzzleIcon,
   ChatAlt2Icon,
+  UserGroupIcon,
 } from "@heroicons/react/solid";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
@@ -31,6 +32,7 @@ export const Navbar = () => {
   const getNavIcon = (name: string) => {
     const iconClass = "w-5 h-5 mr-2.5";
     switch (name) {
+      case "Accessibility": return <UserGroupIcon className={iconClass} />;
       case "Experience": return <BriefcaseIcon className={iconClass} />;
       case "Projects": return <CodeIcon className={iconClass} />;
       case "Skills": return <ChipIcon className={iconClass} />;
