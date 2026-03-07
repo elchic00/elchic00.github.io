@@ -122,10 +122,14 @@ export const Navbar = () => {
         <Link
           to="/#about"
           scroll={scrollWithOffset}
-          className="font-bold text-xl cursor-pointer inline-flex items-center font-[Poppins] text-slate-200 hover:text-white transition-all focus-ring whitespace-nowrap group border border-transparent hover:border-cyan-500/30 px-2 py-1 rounded-lg"
+          className={`font-bold text-xl cursor-pointer inline-flex items-center font-[Poppins] transition-all focus-ring whitespace-nowrap group px-2 py-1 rounded-lg border ${activeSection === "" || activeSection === "#about"
+            ? "text-cyan-400 bg-cyan-500/10 border-cyan-500/30"
+            : "text-slate-200 hover:text-white border-transparent hover:border-cyan-500/30"
+            }`}
           onClick={(e) => handleLinkClick(e, "/#about", "Home")}
         >
-          <MonogramOverlap className="w-8 h-8 lg:w-9 lg:h-9 text-cyan-500 mr-2 group-hover:scale-110 transition-transform" />
+          <MonogramOverlap className={`w-8 h-8 lg:w-9 lg:h-9 mr-2 group-hover:scale-110 transition-transform ${activeSection === "" || activeSection === "#about" ? "text-cyan-400" : "text-cyan-500"
+            }`} />
           <span className="hidden sm:inline tracking-tight">Andrew Alagna</span>
         </Link>
 
@@ -240,8 +244,8 @@ export const Navbar = () => {
             <Link
               to="/#contact"
               className={`flex items-center px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 ${activeSection === "#contact"
-                  ? "bg-purple-500 text-white shadow-lg shadow-purple-500/40 scale-105"
-                  : "bg-purple-700/80 text-slate-100 hover:bg-purple-600 hover:text-white hover:scale-105"}`}
+                ? "bg-purple-500 text-white shadow-lg shadow-purple-500/40 scale-105"
+                : "bg-purple-700/80 text-slate-100 hover:bg-purple-600 hover:text-white hover:scale-105"}`}
               onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
             >
               Contact

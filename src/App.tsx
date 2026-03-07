@@ -3,7 +3,7 @@ import {
   Navbar,
   ErrorBoundary,
   ScrollToHash,
-  ScrollToTopButton,
+  // ScrollToTopButton,
   AIChatAssistant,
   ToastContainer,
 } from "@components";
@@ -21,7 +21,7 @@ export const App = () => {
           <Navbar />
           <ScrollToHash />
           <AppRoutes />
-          <ScrollToTopButton />
+          {/* <ScrollToTopButton /> */}
           <AIChatAssistant />
           <ToastContainer />
         </main>
