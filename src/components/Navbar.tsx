@@ -122,6 +122,7 @@ export const Navbar = () => {
         <Link
           to="/#about"
           scroll={scrollWithOffset}
+          aria-label="Andrew Alagna - Home"
           className={`font-bold text-xl cursor-pointer inline-flex items-center font-[Poppins] transition-all focus-ring whitespace-nowrap group px-2 py-1 rounded-lg border ${activeSection === "" || activeSection === "#about"
             ? "text-cyan-400 bg-cyan-500/10 border-cyan-500/30"
             : "text-slate-200 hover:text-white border-transparent hover:border-cyan-500/30"
@@ -198,7 +199,7 @@ export const Navbar = () => {
                   </button>
                 </li>
               </ul>
-              <div className="mt-auto pb-10">
+              <div className="mt-auto pb-8">
                 <Link
                   to="/#contact"
                   className="block w-full py-4 bg-purple-600 text-white text-center rounded-xl font-bold text-lg"
