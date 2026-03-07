@@ -63,7 +63,7 @@ export const About = () => {
             </div>
             
             <div className="flex flex-col xl:flex-row gap-4 items-stretch xl:items-center w-full xl:w-auto max-w-sm xl:max-w-none">
-              <Button
+              {/* <Button
                 onClick={() => {
                   trackResumeView();
                   window.open(
@@ -77,7 +77,7 @@ export const About = () => {
                 variant="primary"
               >
                 Resume
-              </Button>
+              </Button> */}
               
               <Button
                 onClick={() => navigate("/#accessibility-expertise")}
