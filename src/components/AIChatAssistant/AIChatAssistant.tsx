@@ -31,7 +31,7 @@ export const AIChatAssistant = () => {
 
   // Detect platform for keyboard shortcut display
   const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
-  const shortcutKey = isMac ? "⌘K" : "Ctrl+K";
+  const shortcutKey = isMac ? "⌘ + K" : "Ctrl + K";
 
   useEffect(() => {
     if (isOpen) {

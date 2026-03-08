@@ -11,8 +11,7 @@
     "Cloudflare Workers",
     "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)",
     "Local LLM Orchestration (Ollama)",
-    "Serverless Functions",
-    "Streaming Responses"
+    "Serverless Functions"
   ],
   "Databases & Backend": [
     "PostgreSQL",
