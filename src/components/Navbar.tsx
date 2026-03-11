@@ -74,11 +74,15 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (!isMobile && open) closeMenu();
-    document.body.style.overflow = open ? 'hidden' : 'unset';
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [isMobile, open, closeMenu]);
+useEffect(() => {
+  if (!isMobile && open) closeMenu();
+  document.body.style.overflow = open ? 'hidden' : '';
+  document.documentElement.style.overflowX = open ? 'hidden' : '';
+  return () => {
+    document.body.style.overflow = '';
+    document.documentElement.style.overflowX = '';
+  };
+}, [isMobile, open, closeMenu]);
 
   const handleSnakeClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
