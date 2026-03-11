@@ -7,12 +7,6 @@
     "Vite",
     "Component Libraries"
   ],
-  "Edge Computing & AI Orchestration": [
-    "Cloudflare Workers",
-    "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)",
-    "Local LLM Orchestration (Ollama)",
-    "Serverless Functions"
-  ],
   "Databases & Backend": [
     "PostgreSQL",
     "GraphQL",
@@ -42,5 +36,11 @@
     "Engineering Roadmapping",
     "Stakeholder Communication",
     "Team Enablement"
+  ],
+    "AI Orchestration": [
+    "Cloudflare Workers",
+    "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)",
+    "Local LLM Orchestration (Ollama)",
+    "Serverless Functions"
   ]
 }

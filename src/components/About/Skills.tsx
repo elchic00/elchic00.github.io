@@ -5,29 +5,29 @@ import { useScrollReveal } from "../../hooks";
 
 const categoryColors: Record<string, string> = {
   "Frontend Architecture & Systems": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/30 hover:border-cyan-400/50 hover:shadow-cyan-500/20",
-  "Edge Computing & AI Orchestration": "bg-rose-600/20 text-rose-400 border-rose-500/30 hover:bg-rose-600/30 hover:border-rose-400/50 hover:shadow-rose-500/20",
   "Databases & Backend": "bg-emerald-600/20 text-emerald-400 border-emerald-500/30 hover:bg-emerald-600/30 hover:border-emerald-400/50 hover:shadow-emerald-500/20",
   "Platform & DX Architecture": "bg-purple-600/20 text-purple-400 border-purple-500/30 hover:bg-purple-600/30 hover:border-purple-400/50 hover:shadow-purple-500/20",
   "Practices & Methodologies": "bg-orange-600/20 text-orange-400 border-orange-500/30 hover:bg-orange-600/30 hover:border-orange-400/50 hover:shadow-orange-500/20",
   "Technical Leadership & Strategy": "bg-amber-600/20 text-amber-400 border-amber-500/30 hover:bg-amber-600/30 hover:border-amber-400/50 hover:shadow-amber-500/20",
+  "AI Orchestration": "bg-rose-600/20 text-rose-400 border-rose-500/30 hover:bg-rose-600/30 hover:border-rose-400/50 hover:shadow-rose-500/20",
 };
 
 const categoryBorderColors: Record<string, string> = {
   "Frontend Architecture & Systems": "border-cyan-500",
-  "Edge Computing & AI Orchestration": "border-rose-500",
   "Databases & Backend": "border-emerald-500",
   "Platform & DX Architecture": "border-purple-500",
   "Practices & Methodologies": "border-orange-500",
   "Technical Leadership & Strategy": "border-amber-500",
+  "AI Orchestration": "border-rose-500",
 };
 
 const categoryIcons: Record<string, React.FC<{ className?: string }>> = {
   "Frontend Architecture & Systems": LightningBoltIcon,
-  "Edge Computing & AI Orchestration": SparklesIcon,
   "Databases & Backend": DatabaseIcon,
   "Platform & DX Architecture": CogIcon,
   "Practices & Methodologies": ChartBarIcon,
   "Technical Leadership & Strategy": UsersIcon,
+  "AI Orchestration": SparklesIcon,
 };
 
 export const Skills = () => {
