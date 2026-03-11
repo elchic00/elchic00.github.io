@@ -83,12 +83,12 @@ export const ChatWindow = ({
     >
       <ChatHeader onClose={onClose} onClear={onClear} />
 
-      <div
-        className="flex-1 overflow-y-auto p-4 space-y-4"
-        role="log"
-        aria-live="polite"
-        aria-label="Chat messages"
-      >
+<div
+  className="flex-1 overflow-y-auto p-3 space-y-3"
+  role="log"
+  aria-live="polite"
+  aria-label="Chat messages"
+>
         {messages.map((message) => (
           <ChatMessage
             key={message.id}
