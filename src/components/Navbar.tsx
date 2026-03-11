@@ -74,15 +74,15 @@ export const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-useEffect(() => {
-  if (!isMobile && open) closeMenu();
-  document.body.style.overflow = open ? 'hidden' : '';
-  document.documentElement.style.overflowX = open ? 'hidden' : '';
-  return () => {
-    document.body.style.overflow = '';
-    document.documentElement.style.overflowX = '';
-  };
-}, [isMobile, open, closeMenu]);
+  useEffect(() => {
+    if (!isMobile && open) closeMenu();
+    document.body.style.overflow = open ? 'hidden' : '';
+    document.documentElement.style.overflowX = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflowX = '';
+    };
+  }, [isMobile, open, closeMenu]);
 
   const handleSnakeClick = useCallback((e: React.MouseEvent) => {
     e.preventDefault();
@@ -152,10 +152,11 @@ useEffect(() => {
 
         {isMobile && (
           <div
-            className={`absolute left-0 w-full h-[calc(100vh-68px)] overflow-y-auto bg-slate-900 transition-all duration-300 ease-in-out z-40 ${open ? "top-[68px] opacity-100 translate-x-0" : "top-[68px] opacity-0 -translate-x-full"}`}
+            className={`fixed left-0 w-screen h-[calc(100vh-68px)] overflow-y-auto bg-slate-900 transition-all duration-300 ease-in-out z-40 ${open ? "top-[68px] opacity-100 translate-x-0" : "top-[68px] opacity-0 -translate-x-full"
+              }`}
           >
-            <div className="px-6 py-8 flex flex-col h-full bg-slate-900">
-              <div className="mb-8 p-4 bg-gradient-to-br from-cyan-900/40 to-slate-800 rounded-2xl border border-cyan-500/30">
+            <div className="px-4 py-4 flex flex-col min-h-full bg-slate-900">
+              <div className="mb-4 p-3 bg-gradient-to-br from-cyan-900/40 to-slate-800 rounded-2xl border border-cyan-500/30">
                 <div className="flex items-center gap-3 mb-2">
                   <div className="p-2 bg-cyan-500/20 rounded-lg">
                     <ChatAlt2Icon className="w-5 h-5 text-cyan-400" />
@@ -173,7 +174,7 @@ useEffect(() => {
                 </button>
               </div>
 
-              <ul className="grid grid-cols-1 gap-2">
+              <ul className="grid grid-cols-1 gap-2 flex-1">
                 {NAV_LINKS.map((link, index) => {
                   const linkHash = link.link.includes("#") ? `#${link.link.split("#")[1]}` : "";
                   const isActive = (linkHash && activeSection === linkHash) || (location.pathname === link.link);
@@ -182,10 +183,10 @@ useEffect(() => {
                       <Link
                         to={link.link}
                         scroll={scrollWithOffset}
-                        className={`flex items-center p-4 rounded-xl text-lg font-medium transition-all ${isActive ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" : "text-slate-300 active:bg-slate-700"}`}
+                        className={`flex items-center p-3 rounded-xl text-base font-medium transition-all h-full ${isActive ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" : "text-slate-300 active:bg-slate-700"}`}
                         onClick={(e) => handleLinkClick(e, link.link, link.name)}
                       >
-                        <span className={`p-2 rounded-lg mr-4 ${isActive ? 'bg-cyan-500/20' : 'bg-slate-700'}`}>
+                        <span className={`p-1.5 rounded-lg mr-3 shrink-0 ${isActive ? 'bg-cyan-500/20' : 'bg-slate-700'}`}>
                           {getNavIcon(link.name)}
                         </span>
                         {link.name}
@@ -196,19 +197,20 @@ useEffect(() => {
                 <li style={{ transitionDelay: `${NAV_LINKS.length * 50}ms` }} className={`${open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'} transition-all duration-300`}>
                   <button
                     onClick={handleSnakeClick}
-                    className={`flex items-center w-full p-4 rounded-xl text-lg font-medium transition-all ${location.pathname === "/snake" ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" : "text-slate-300 active:bg-slate-700"}`}
+                    className={`flex items-center w-full p-3 rounded-xl text-base font-medium transition-all ${location.pathname === "/snake" ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" : "text-slate-300 active:bg-slate-700"}`}
                   >
-                    <span className={`p-2 rounded-lg mr-4 ${location.pathname === "/snake" ? 'bg-cyan-500/20' : 'bg-slate-700'}`}>
+                    <span className={`p-1.5 rounded-lg mr-3 shrink-0 ${location.pathname === "/snake" ? 'bg-cyan-500/20' : 'bg-slate-700'}`}>
                       {getNavIcon("Snake")}
                     </span>
                     Snake
                   </button>
                 </li>
               </ul>
-              <div className="mt-auto pb-8">
+
+              <div className="mt-4 pb-4">
                 <Link
                   to="/#contact"
-                  className="block w-full py-4 bg-purple-600 text-white text-center rounded-xl font-bold text-lg"
+                  className="block w-full py-3 bg-purple-600 text-white text-center rounded-xl font-bold text-lg"
                   onClick={(e) => handleLinkClick(e, "/#contact", "Contact")}
                 >
                   Contact Me
