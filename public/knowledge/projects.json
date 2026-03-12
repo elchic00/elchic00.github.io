@@ -1,0 +1,126 @@
+[
+  {
+    "title": "myPal",
+    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
+    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
+    "image": "/images/projects/mypal-demo.mp4",
+    "link": "https://github.com/myPal-TMS/myPal",
+    "id": "mypal",
+    "githubStats": {
+      "stars": 1,
+      "forks": 2,
+      "languages": [
+        "JavaScript",
+        "Java",
+        "Objective-C",
+        "Ruby",
+        "Starlark"
+      ],
+      "topics": [],
+      "lastUpdated": "2021-08-27T13:32:32Z"
+    },
+    "readmeSummary": "## <ins>MyPAL (Picture Assisted Language) App<ins>\r\n\r\nAn Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays communicate with the world around them. \r\n\r\nThis app was created with the Picture Exchange Communication System (PECS) theory in mind, the goal of which is to provide children with speech delays with a fast and functional method of communication by using pictures. \r\n\r\nBelow is information on performing some common task..."
+  },
+  {
+    "title": "myTeachers",
+    "subtitle": "React + Express + PostgreSQL + Firebase",
+    "description": "A modern redesign of the CUNY registration system for tracking courses and professors. Built with a full-stack architecture using React with Material UI, Express backend, PostgreSQL database, and Firebase authentication. Features responsive design, Redux Toolkit Query for state management, and custom alerts.",
+    "image": "/images/projects/myteachers-demo.mp4",
+    "link": "https://github.com/elchic00/CunyFirst-front",
+    "id": "myteachers",
+    "githubStats": {
+      "stars": 0,
+      "forks": 0,
+      "languages": [
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "topics": [
+        "mui",
+        "reactjs"
+      ],
+      "lastUpdated": "2025-10-02T17:16:00Z"
+    },
+    "readmeSummary": "### A react remake of the cunyfirst website.\n\nSee the backend code here: https://github.com/elchic00/cunyFirst-backend \n\n* Using an Express + PostgreSQL backend to handle the data.\n* MaterialUI for styling components, Swal alert for pop-ups, and RTK Query from the Redux Toolkit to handle API request.\n\nHosted here: https://elchic00.github.io/CunyFirst-front/\n\n![CF](https://user-images.githubusercontent.com/40577932/168820750-f430fb37-d758-4d7c-b0d2-0e4498756b20.gif)"
+  },
+  {
+    "title": "Macros-for-geeks",
+    "subtitle": "Angular, .Net, SQLite",
+    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
+    "image": "/images/projects/macros-demo.mp4",
+    "link": "https://github.com/elchic00/Macros-for-geeks",
+    "id": "macros-for-geeks",
+    "githubStats": {
+      "stars": 2,
+      "forks": 3,
+      "languages": [
+        "TypeScript",
+        "C#",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "topics": [],
+      "lastUpdated": "2022-02-16T16:54:20Z"
+    },
+    "readmeSummary": "This is a nutrition diary to help you keep track of your macronutrients and weight goals. User's can make use of a API from the USDA(https://fdc.nal.usda.gov/) to save nutrition information of food, and then post the data into a SQLite database via a .Net API. We used Angular for the interface to make it easier for CRUD operations (to create, read, update, and delete data).\n\n![](macros.gif)\n\n![](swagger.png)"
+  },
+  {
+    "title": "Reps",
+    "subtitle": "React Native + React Web",
+    "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
+    "videos": [
+      "/images/projects/reps-mobile.mp4",
+      "/images/projects/reps-web.mp4"
+    ],
+    "link": "https://github.com/elchic00/reps",
+    "id": "reps",
+    "githubStats": {
+      "stars": 0,
+      "forks": 0,
+      "languages": [
+        "TypeScript",
+        "Shell",
+        "CSS",
+        "JavaScript"
+      ],
+      "topics": [],
+      "lastUpdated": "2026-03-07T16:56:18Z"
+    },
+    "readmeSummary": "<div align=\"center\">\n  <h1>🎯 Reps</h1>\n  <p><strong>Daily coding practice for technical interviews</strong></p>\n  <p>Build your reps, one challenge at a time.</p>\n\n  [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)](https://www.typescriptlang.org/)\n  [![React](https://img.shields.io/badge/React-19.1-61dafb?logo=react)](https://reactjs.org/)\n  [![Next.js](https://img.shields.io/badge/Next.js-15.5-black?logo=next.js)](https://nextjs.org/)\n  [![React Native](https:/..."
+  },
+  {
+    "title": "Invent0ry",
+    "subtitle": "React and AWS (Amplify)",
+    "description": "A full-stack inventory management system enabling businesses to track stock across multiple storage locations with custom categories. Features real-time inventory monitoring to ensure adequate supply levels, built with React and AWS Amplify for authentication, hosting, and GraphQL API.",
+    "image": "/images/projects/inventory-demo.mp4",
+    "link": "https://github.com/elchic00/invent0ry",
+    "id": "invent0ry",
+    "githubStats": {
+      "stars": 3,
+      "forks": 0,
+      "languages": [
+        "TypeScript",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ],
+      "topics": [
+        "aws-amplify",
+        "inventory",
+        "reactjs"
+      ],
+      "lastUpdated": "2024-08-29T02:12:56Z"
+    },
+    "readmeSummary": "<div align=\"center\">\n    <img src=\"https://raw.githubusercontent.com/elchic00/invent0ry/main/src/assets/inventory-logo.jpg\" width=\"40%\">\n\n<h2><u>Description</u></h2>\n<strong>With this inventory management application, a business owner, manager, or employee can:</strong> <br/>\nKeep track of multiple storage locations for your business. <br/> \nSort items in your inventory by your custom categories. <br/>\nMake sure you have enough inventory to serve your customers.\n\n<h2><u>User Stories</u></h2>\n<h3..."
+  },
+  {
+    "title": "Crime in Queens NYC",
+    "subtitle": "Python, HTML, Github MD",
+    "description": "A data analysis project examining crime trends in Queens, NYC using Python data science libraries (Pandas, Matplotlib, NumPy) to process and visualize patterns. Interactive visualizations deployed as a GitHub Pages site.",
+    "image": "/images/projects/crime.webp",
+    "link": "https://elchic00.github.io/CrimeInQueens",
+    "id": "crime-in-queens-nyc"
+  }
+]
