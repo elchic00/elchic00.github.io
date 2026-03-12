@@ -391,7 +391,6 @@ export const AIChatAssistant = () => {
           onAction={handleActionClick}
           onRetry={handleRetry}
           onSuggestedQuestion={handleSuggestedQuestion}
-          isRAGReady={isRAGReady}
         />
       )}
     </>

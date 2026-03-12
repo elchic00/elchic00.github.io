@@ -29,12 +29,13 @@ export const ACTION_CONFIGS: Record<string, ActionButton> = {
 
 // RAG-enhanced suggested questions
 export const SUGGESTED_QUESTIONS = [
+  "What unique features does this portfolio have?",
   "What technologies does he specialize in?",
   "How has he mentored 350+ students?",
   "What does Andrew do at American Express?",
   "Tell me about his accessibility work",
-  "Tell me about the myPal project",
   "What projects has he built with React Native?",
+  "Tell me about the myPal project",
 ];
 
 export const generateMessageId = () =>

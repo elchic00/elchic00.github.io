@@ -20,7 +20,6 @@ interface ChatWindowProps {
   onAction: (action: string) => void;
   onRetry: () => void;
   onSuggestedQuestion: (question: string) => void;
-  isRAGReady?: boolean;
 }
 
 export const ChatWindow = ({
@@ -36,19 +35,11 @@ export const ChatWindow = ({
   onAction,
   onRetry,
   onSuggestedQuestion,
-  isRAGReady = false,
 }: ChatWindowProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const chatWindowRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -82,14 +73,9 @@ export const ChatWindow = ({
     >
       <ChatHeader onClose={onClose} onClear={onClear} />
 
-      {isRAGReady && (
-        <div className="px-3 py-1 bg-slate-900/50 border-b border-slate-700/50">
-          <span className="text-[10px] text-slate-500">Project data loaded</span>
-        </div>
-      )}
-
       <div
-        className={`p-3 space-y-3 ${hasSuggestions ? '' : 'flex-1'} overflow-y-auto`}
+        ref={scrollContainerRef}
+        className={`p-3 space-y-3 ${hasSuggestions ? "" : "flex-1"} overflow-y-auto`}
         role="log"
         aria-live="polite"
         aria-label="Chat messages"
