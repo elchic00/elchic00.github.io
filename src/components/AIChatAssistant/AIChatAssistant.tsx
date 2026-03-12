@@ -1,19 +1,15 @@
-/**
- * AI Chat Assistant - Main component
- * Refactored for better maintainability and readability
- */
-
 import { useState, useEffect, useCallback, useRef } from "react";
 import { XIcon, ChatIcon } from "@heroicons/react/solid";
 import { ChatWindow } from "./ChatWindow";
 import { loadMarked, parseActionsFromContent, handleAction } from "./utils";
 import { Message, generateMessageId } from "./types";
 import { useLocalStorage } from "../../hooks";
+import { useProjectRAG } from "./useRAG";
 
 const INITIAL_MESSAGE: Message = {
   id: generateMessageId(),
   role: "assistant",
-  content: "Hi! I'm Andrew's AI assistant. Ask me anything about Andrew!",
+  content: "Hi! I'm Andrew's AI assistant. Ask me anything about his experience, projects, or background!",
   timestamp: Date.now(),
 };
 
@@ -28,8 +24,10 @@ export const AIChatAssistant = () => {
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [showAutoLabel, setShowAutoLabel] = useState(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
+  
+  // RAG for dynamic project info
+  const { getContext, isReady: isRAGReady } = useProjectRAG();
 
-  // Detect platform for keyboard shortcut display
   const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
   const shortcutKey = isMac ? "⌘ + K" : "Ctrl + K";
 
@@ -39,7 +37,6 @@ export const AIChatAssistant = () => {
     }
   }, [isOpen]);
 
-  // Auto-show the label briefly after 3s on first load, only once
   useEffect(() => {
     const hasSeenLabel = sessionStorage.getItem("ai-chat-label-shown");
     if (!hasSeenLabel && !isOpen) {
@@ -50,7 +47,7 @@ export const AIChatAssistant = () => {
 
       const hideTimer = setTimeout(() => {
         setShowAutoLabel(false);
-      }, 6500); // Show for ~3.5s
+      }, 6500);
 
       return () => {
         clearTimeout(showTimer);
@@ -59,27 +56,21 @@ export const AIChatAssistant = () => {
     }
   }, []);
 
-  // Keyboard shortcuts: Cmd/Ctrl+K to toggle, Esc to close
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Cmd/Ctrl+K to toggle chat
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setIsOpen((prev) => !prev);
       }
-      // Esc to close chat
       if (e.key === "Escape" && isOpen) {
         const target = e.target as HTMLElement;
         const isInputOrTextarea =
           target.tagName === "INPUT" || target.tagName === "TEXTAREA";
 
-        // Close if: not in input, OR in input but it's empty
         if (!isInputOrTextarea || !input.trim()) {
           e.preventDefault();
           setIsOpen(false);
-          // Clear input if closing
           if (input) setInput("");
-          // Blur the current element to prevent scroll jump
           if (document.activeElement instanceof HTMLElement) {
             document.activeElement.blur();
           }
@@ -117,12 +108,26 @@ export const AIChatAssistant = () => {
     setIsLoading(true);
 
     try {
+      // Get additional project context if RAG is ready
+      let projectContext = "";
+      if (isRAGReady) {
+        try {
+          projectContext = await getContext(userMessage);
+        } catch (e) {
+          console.warn("RAG failed:", e);
+        }
+      }
+
       const response = await fetch(
         "https://portfolio-ai-chat.andrew-portfolio-chat.workers.dev/api/chat",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: userMessage, messages }),
+          body: JSON.stringify({ 
+            message: userMessage, 
+            messages,
+            projectContext: projectContext || undefined,
+          }),
         }
       );
 
@@ -134,7 +139,6 @@ export const AIChatAssistant = () => {
       const { cleanContent, actions } = parseActionsFromContent(data.response);
       const messageId = generateMessageId();
 
-      // Add message with streaming enabled
       setMessages((prev) => [
         ...prev,
         {
@@ -147,7 +151,6 @@ export const AIChatAssistant = () => {
         },
       ]);
 
-      // After streaming completes, mark as done
       setTimeout(() => {
         setMessages((prev) =>
           prev.map((msg) =>
@@ -186,7 +189,6 @@ export const AIChatAssistant = () => {
     setInput("");
   };
 
-  // Only memoize callbacks passed to memoized ChatMessage component
   const handleRetry = useCallback(() => {
     const lastUserMessage = [...messages]
       .reverse()
@@ -231,7 +233,6 @@ export const AIChatAssistant = () => {
 
   return (
     <>
-      {/* Keyframe styles injected once */}
       <style>{`
         @keyframes ai-glow-pulse {
           0%, 100% {
@@ -284,7 +285,6 @@ export const AIChatAssistant = () => {
           isOpen ? "md:block hidden" : "block"
         }`}
       >
-        {/* "Ask me anything" label — shows on hover (CSS) or auto-trigger (JS) */}
         <div
           className={`
             absolute right-full mr-3 top-1/2 -translate-y-1/2
@@ -304,14 +304,12 @@ export const AIChatAssistant = () => {
               whitespace-nowrap
             "
           >
-            {/* Tiny animated dot for liveliness */}
             <span
               className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"
               style={{ animation: "ai-glow-pulse 2s ease-in-out infinite" }}
             />
             Ask me anything about Drew
           </div>
-          {/* Arrow pointing right toward button */}
           <div
             className="
               absolute right-0 top-1/2 -translate-y-1/2 translate-x-full
@@ -341,7 +339,6 @@ export const AIChatAssistant = () => {
             <ChatIcon className="w-6 h-6 text-white" />
           )}
 
-          {/* Hover tooltip with keyboard shortcut — always visible on hover when closed */}
           {!isOpen && (
             <div
               className="
@@ -369,7 +366,6 @@ export const AIChatAssistant = () => {
                   {shortcutKey}
                 </kbd>
               </div>
-              {/* Arrow */}
               <div
                 className="
                   absolute right-0 top-1/2 -translate-y-1/2 translate-x-full
@@ -395,6 +391,7 @@ export const AIChatAssistant = () => {
           onAction={handleActionClick}
           onRetry={handleRetry}
           onSuggestedQuestion={handleSuggestedQuestion}
+          isRAGReady={isRAGReady}
         />
       )}
     </>

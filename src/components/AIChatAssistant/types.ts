@@ -1,6 +1,3 @@
-/**
- * Shared types for AI Chat Assistant components
- */
 
 export interface Message {
   id: string;
@@ -30,12 +27,14 @@ export const ACTION_CONFIGS: Record<string, ActionButton> = {
   send_email: { label: "Send Email", action: "send_email" },
 };
 
+// RAG-enhanced suggested questions
 export const SUGGESTED_QUESTIONS = [
-  "What does Andrew do at American Express?",
-  "Tell me about his accessibility expertise",
+  "What technologies does he specialize in?",
   "How has he mentored 350+ students?",
-  "What unique features does this portfolio have?",
-  "Where has Andrew traveled?",
+  "What does Andrew do at American Express?",
+  "Tell me about his accessibility work",
+  "Tell me about the myPal project",
+  "What projects has he built with React Native?",
 ];
 
 export const generateMessageId = () =>

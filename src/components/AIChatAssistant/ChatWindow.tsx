@@ -1,7 +1,3 @@
-/**
- * Main chat window component containing messages, input, and header
- */
-
 import { useRef, useEffect, RefObject } from "react";
 import { ChatHeader } from "./ChatHeader";
 import { ChatMessage } from "./ChatMessage";
@@ -24,6 +20,7 @@ interface ChatWindowProps {
   onAction: (action: string) => void;
   onRetry: () => void;
   onSuggestedQuestion: (question: string) => void;
+  isRAGReady?: boolean;
 }
 
 export const ChatWindow = ({
@@ -39,6 +36,7 @@ export const ChatWindow = ({
   onAction,
   onRetry,
   onSuggestedQuestion,
+  isRAGReady = false,
 }: ChatWindowProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -58,7 +56,6 @@ export const ChatWindow = ({
     }
   }, []);
 
-  // Click outside to close (only if no unsaved input and not clicking toggle button)
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
@@ -76,19 +73,27 @@ export const ChatWindow = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [input, onClose, toggleButtonRef]);
 
+  const hasSuggestions = showSuggestions && messages.length <= 1 && !isLoading;
+
   return (
     <div
       ref={chatWindowRef}
-      className="fixed md:bottom-44 md:right-6 md:w-96 md:max-w-[calc(100vw-3rem)] md:h-[600px] md:rounded-lg inset-0 md:inset-auto z-50 bg-slate-800 shadow-2xl flex flex-col border border-slate-700 animate-slide-up"
+      className="fixed md:bottom-44 md:right-6 md:w-96 md:max-w-[calc(100vw-3rem)] md:max-h-[min(85vh,680px)] md:h-auto md:rounded-lg inset-0 md:inset-auto z-50 bg-slate-800 shadow-2xl flex flex-col border border-slate-700 animate-slide-up"
     >
       <ChatHeader onClose={onClose} onClear={onClear} />
 
-<div
-  className="flex-1 overflow-y-auto p-3 space-y-3"
-  role="log"
-  aria-live="polite"
-  aria-label="Chat messages"
->
+      {isRAGReady && (
+        <div className="px-3 py-1 bg-slate-900/50 border-b border-slate-700/50">
+          <span className="text-[10px] text-slate-500">Project data loaded</span>
+        </div>
+      )}
+
+      <div
+        className={`p-3 space-y-3 ${hasSuggestions ? '' : 'flex-1'} overflow-y-auto`}
+        role="log"
+        aria-live="polite"
+        aria-label="Chat messages"
+      >
         {messages.map((message) => (
           <ChatMessage
             key={message.id}
@@ -100,7 +105,7 @@ export const ChatWindow = ({
 
         {isLoading && <LoadingIndicator />}
 
-        {showSuggestions && messages.length <= 1 && !isLoading && (
+        {hasSuggestions && (
           <div className="space-y-6">
             <QuickActions onActionClick={onAction} />
             <SuggestedQuestions onQuestionClick={onSuggestedQuestion} />
