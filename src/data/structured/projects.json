@@ -4,23 +4,26 @@
     "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
     "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
     "image": "/images/projects/mypal-demo.mp4",
-    "link": "https://github.com/myPal-TMS/myPal"
+    "link": "https://github.com/myPal-TMS/myPal",
+    "id": "mypal"
   },
   {
     "title": "myTeachers",
     "subtitle": "React + Express + PostgreSQL + Firebase",
     "description": "A modern redesign of the CUNY registration system for tracking courses and professors. Built with a full-stack architecture using React with Material UI, Express backend, PostgreSQL database, and Firebase authentication. Features responsive design, Redux Toolkit Query for state management, and custom alerts.",
     "image": "/images/projects/myteachers-demo.mp4",
-    "link": "https://github.com/elchic00/CunyFirst-front"
+    "link": "https://github.com/elchic00/CunyFirst-front",
+    "id": "myteachers"
   },
   {
     "title": "Macros-for-geeks",
     "subtitle": "Angular, .Net, SQLite",
     "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
     "image": "/images/projects/macros-demo.mp4",
-    "link": "https://github.com/elchic00/Macros-for-geeks"
+    "link": "https://github.com/elchic00/Macros-for-geeks",
+    "id": "macros-for-geeks"
   },
-    {
+  {
     "title": "Reps",
     "subtitle": "React Native + React Web",
     "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
@@ -28,20 +31,23 @@
       "/images/projects/reps-mobile.mp4",
       "/images/projects/reps-web.mp4"
     ],
-    "link": "https://github.com/elchic00/reps"
+    "link": "https://github.com/elchic00/reps",
+    "id": "reps"
   },
   {
     "title": "Invent0ry",
     "subtitle": "React and AWS (Amplify)",
     "description": "A full-stack inventory management system enabling businesses to track stock across multiple storage locations with custom categories. Features real-time inventory monitoring to ensure adequate supply levels, built with React and AWS Amplify for authentication, hosting, and GraphQL API.",
     "image": "/images/projects/inventory-demo.mp4",
-    "link": "https://github.com/elchic00/invent0ry"
+    "link": "https://github.com/elchic00/invent0ry",
+    "id": "invent0ry"
   },
   {
     "title": "Crime in Queens NYC",
     "subtitle": "Python, HTML, Github MD",
     "description": "A data analysis project examining crime trends in Queens, NYC using Python data science libraries (Pandas, Matplotlib, NumPy) to process and visualize patterns. Interactive visualizations deployed as a GitHub Pages site.",
     "image": "/images/projects/crime.webp",
-    "link": "https://elchic00.github.io/CrimeInQueens"
+    "link": "https://elchic00.github.io/CrimeInQueens",
+    "id": "crime-in-queens-nyc"
   }
 ]
