@@ -11,15 +11,10 @@
         "alt": "Mount Fuji rising above the landscape with clear blue skies",
         "caption": "Mount Fuji in all its glory"
       },
-            {
+      {
         "url": "/images/travel/japan/kyoto-shrine-entrance.webp",
         "alt": "Entrance gate of a Kyoto shrine with traditional woodwork",
         "caption": "Kyoto shrine entrance"
-      },
-      {
-        "url": "/images/travel/japan/fushimi-inari-torii.webp",
-        "alt": "Bright orange torii gates at Fushimi Inari Taisha shrine in Kyoto, Japan",
-        "caption": "Fushimi Inari Taisha torii tunnel"
       },
       {
         "url": "/images/travel/japan/shrine-lanterns.webp",
@@ -31,35 +26,30 @@
         "alt": "Stone fox statue wearing a bib at a Shinto shrine",
         "caption": "Fox guardian statue"
       },
-            {
-        "url": "/images/travel/japan/torii-gate-closeup.webp",
-        "alt": "Close-up view of the vivid red torii gate at Fushimi Inari",
-        "caption": "Torii gate close-up"
-      },
       {
         "url": "/images/travel/japan/arashiyama-monkey-sanctuary.webp",
         "alt": "A macaque at the Arashiyama Monkey Park behind mesh fencing",
         "caption": "Monkey at Arashiyama Monkey Park"
       },
       {
+        "url": "/images/travel/japan/sensoji-pagoda-selfie.webp",
+        "alt": "Selfie in front of the five-story pagoda at Senso-ji temple in Tokyo, Japan",
+        "caption": "Senso-ji temple pagoda in Asakusa"
+      },
+      {
+        "url": "/images/travel/japan/meiji-jingu.webp",
+        "alt": "Close-up view of the vivid red torii gate at Fushimi Inari",
+        "caption": "Meiji Jingu Gaien Ginkgo Avenue"
+      },
+      {
         "url": "/images/travel/japan/kinosaki-onsen-night.webp",
         "alt": "Traditional Japanese onsen town at night with lanterns and wooden buildings in Kinosaki Onsen",
         "caption": "Kinosaki Onsen night lights"
       },
-      {
+            {
         "url": "/images/travel/japan/nara-deer-selfie.webp",
         "alt": "A friendly deer photo-bombing a selfie in Nara, Japan",
         "caption": "Deer selfie in Nara"
-      },
-      {
-        "url": "/images/travel/japan/nara-daibutsu.webp",
-        "alt": "The Great Buddha statue inside Todai-ji temple in Nara, Japan",
-        "caption": "Todai-ji Great Buddha"
-      },
-      {
-        "url": "/images/travel/japan/sensoji-pagoda-selfie.webp",
-        "alt": "Selfie in front of the five-story pagoda at Senso-ji temple in Tokyo, Japan",
-        "caption": "Senso-ji temple pagoda in Asakusa"
       }
     ]
   },
@@ -407,6 +397,11 @@
         "caption": "Walking through the cloud forest canopy at Monteverde"
       },
       {
+        "url": "/images/travel/costa-rica/andrew-alagna-white-water-rafting.webp",
+        "alt": "Andrew Alagna white water rafting adventure Costa Rica river rapids",
+        "caption": "White-water rafting adventure through Costa Rican rapids"
+      },
+      {
         "url": "/images/travel/costa-rica/andrew-alagna-cloud-forest.webp",
         "alt": "Andrew Alagna Costa Rica cloud forest lush vegetation Monteverde",
         "caption": "Lush cloud forest scenery in Monteverde"
@@ -420,11 +415,6 @@
         "url": "/images/travel/costa-rica/andrew-alagna-waterfall.webp",
         "alt": "Andrew Alagna Costa Rica jungle waterfall rainforest photography",
         "caption": "Majestic waterfall cascading through the jungle"
-      },
-      {
-        "url": "/images/travel/costa-rica/andrew-alagna-white-water-rafting.webp",
-        "alt": "Andrew Alagna white water rafting adventure Costa Rica river rapids",
-        "caption": "White-water rafting adventure through Costa Rican rapids"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-snorkel1.webp",
