@@ -30,8 +30,8 @@
 ### 🌍 Travel Photography Gallery
 
 - **Interactive photo galleries** from adventures around the world
-- **5 major trips** - Ecuador/Galapagos, Puerto Rico, Thailand, Laos, Costa Rica
-- **70+ curated photos** - Wildlife, landscapes, and cultural moments
+- **6 major trips** - Japan, Ecuador/Galapagos, Puerto Rico, Thailand, Laos, Costa Rica
+- **78+ curated photos** - Wildlife, landscapes, and cultural moments
 - **Lightbox modal** with keyboard navigation (←/→ arrows, ESC to close)
 - **Multi-level zoom** - 3 zoom levels (100%, 125%, 175%) with click-to-zoom positioning
 - **Touch-optimized** - Swipe gestures for mobile devices
@@ -458,13 +458,14 @@ React Native communication app for children with special needs using PECS.
 
 Explore my [travel photo galleries](https://elchic00.github.io/#/travel) featuring:
 
+- �🇵 **Japan (2024)** - Temples, neon cityscapes, onsen towns, Mt. Fuji
 - 🇪🇨 **Ecuador/Galapagos (2025)** - Marine life, tortoises, volcanic landscapes
 - 🇵🇷 **Puerto Rico (2024)** - Colonial architecture, El Yunque rainforest
 - 🇹🇭 **Thailand (2024)** - Temples, elephant sanctuaries, jungle trekking
 - 🇱🇦 **Laos (2024)** - Buddhist culture, Kuang Si Falls, Mekong River
 - 🇨🇷 **Costa Rica (2023)** - Cloud forests, white-water rafting, wildlife
 
-**70+ curated photos** with interactive lightbox and keyboard navigation.
+**78+ curated photos** with interactive lightbox and keyboard navigation.
 
 ---
 

@@ -34,13 +34,18 @@ This will:
 
 ## 📁 File Structure After Optimization
 
+The optimization script behaves slightly differently for travel vs. project images:
+
+- **Travel images** are optimized **in-place** (WebP files replace the originals in the same folder).
+- **Project images** are optimized into an `optimized/` folder alongside the originals.
+
+Example output:
+
 ```
 public/images/
 ├── travel/
-│   ├── andrew-alagna-turtle-friend.jpeg      (237 KB - original)
-│   └── optimized/
-│       ├── andrew-alagna-turtle-friend.webp  (85 KB - 64% smaller!)
-│       └── andrew-alagna-turtle-friend.jpg   (120 KB - fallback)
+│   ├── andrew-alagna-turtle-friend.webp      (optimized WebP replaces original)
+│   └── ...
 └── projects/
     ├── macros.webp
     └── optimized/

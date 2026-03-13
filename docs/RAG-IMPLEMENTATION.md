@@ -1,135 +1,63 @@
 # RAG Implementation Summary
 
-## ✅ What Was Built
+This project includes a lightweight **Retrieval-Augmented Generation (RAG)** capability baked into the AI chat assistant. Rather than relying on large vector stores or third-party embedding services, the system uses a simple keyword-based similarity score over a curated set of project descriptions.
 
-A complete **Retrieval-Augmented Generation (RAG)** system for your portfolio AI chat assistant. The system retrieves relevant context from your resume, experience, and GitHub projects to ground AI responses in accurate, up-to-date information.
+## ✅ What’s Included
 
-## 📁 Files Created/Modified
+- **Project-aware responses**: When a user asks about a project, the worker finds the most relevant projects and injects their details into the AI prompt.
+- **Fast, offline-friendly**: No external embedding service required; the matching logic runs entirely in the Cloudflare Worker.
+- **Easily updatable**: Update the knowledge base by editing JSON/TS files and re-syncing the worker.
 
-### New Knowledge Base Files
-- `public/knowledge/README.md` - Documentation for the knowledge base
-- `public/knowledge/RAG-GUIDE.md` - Comprehensive RAG implementation guide
-- `public/knowledge/resume.md` - Your resume in markdown format
-- `public/knowledge/experience.md` - Detailed work experience
-- `public/knowledge/projects.json` - Enhanced project data with structured fields
+---
 
-### New RAG Components
-- `src/components/AIChatAssistant/rag.ts` - Core RAG logic (embeddings, similarity search, vector store)
-- `src/components/AIChatAssistant/rag-types.ts` - TypeScript type definitions
-- `src/components/AIChatAssistant/useRAG.ts` - React hook for RAG integration
+## 📁 Key Files (Current Implementation)
 
-### Modified Components
-- `src/components/AIChatAssistant/AIChatAssistant.tsx` - Integrated RAG retrieval before sending messages
-- `src/components/AIChatAssistant/ChatWindow.tsx` - Added RAG status indicator
-- `src/components/AIChatAssistant/types.ts` - Updated suggested questions for RAG
-- `src/components/AIChatAssistant/index.ts` - Exported new RAG modules
+- `worker/index.js` – Cloudflare Worker that receives chat requests, performs keyword matching, and calls Gemini.
+- `public/knowledge/projects.json` – Project data used for retrieval.
+- `src/data/context/*` – System prompt content (`systemPrompt.ts`, `biography.ts`, `skills.ts`).
+- `scripts/sync-portfolio-context.js` – Builds the Worker context by combining system prompts + project data.
 
-### Build Scripts
-- `scripts/generate-embeddings.js` - Pre-computes embeddings for faster loading
-- `scripts/scrape-github.js` - Fetches GitHub repo data and READMEs
-- `worker-rag-example.js` - Example Cloudflare Worker with RAG support
+---
 
-### Configuration
-- `package.json` - Added npm scripts for RAG management
+## 🚀 Updating the Knowledge Base
 
-## 🚀 How to Use
+### 1) Edit project or context data
+- Update project summaries in `public/knowledge/projects.json`
+- Edit the system prompt / biography / skills in `src/data/context/`
 
-### 1. Test Locally
+### 2) Sync to the worker
+Run:
 
 ```bash
-cd /Users/openclaw/.openclaw/workspace/elchic00.github.io
-npm run dev
+npm run sync-context
 ```
 
-Open the chat and ask questions like:
-- "What does Andrew do at American Express?"
-- "Tell me about the myPal project"
-- "What technologies does he specialize in?"
+This updates `worker/index.js` in-place with the latest context and project data.
 
-The RAG system will automatically retrieve relevant context and inject it into the prompt.
-
-### 2. Update Your Cloudflare Worker
-
-Your current worker needs to accept the `context` field. Update it using the example in `worker-rag-example.js`:
-
-```javascript
-// In your worker, accept the context:
-const { message, messages, context, useRAG } = await request.json();
-
-// Inject into system prompt:
-if (useRAG && context) {
-  systemPrompt += `\n\nRelevant information:\n${context}`;
-}
-```
-
-### 3. (Optional) Pre-compute Embeddings
-
-For faster loading, get a free Jina API key:
+### 3) Deploy the worker
 
 ```bash
-# Get key at: https://jina.ai/api-dashboard
-JINA_API_KEY=your_key node scripts/generate-embeddings.js
+npm run worker:deploy
 ```
 
-This creates `public/knowledge/embeddings.json` with pre-computed vectors.
+---
 
-### 4. Update Content
+## 🧠 How Retrieval Works (High Level)
 
-When you update your resume or projects:
+1. The worker parses the incoming chat message.
+2. It scores each project from `public/knowledge/projects.json` against the message using keyword matching.
+3. The top projects are formatted into a brief “Relevant Projects” context string.
+4. That context is appended to the system prompt before calling Gemini.
 
-```bash
-# Update GitHub data and regenerate embeddings
-npm run update-knowledge
+This means the assistant can answer questions like:
+- “Tell me about the myPal project”
+- “What stack did you use for Invent0ry?”
+- “How do you approach accessibility in your work?”
 
-# Or individually:
-npm run scrape-github      # Fetch latest GitHub data
-npm run generate-embeddings # Regenerate embeddings
-```
+---
 
-## 💰 Cost
+## 🛠️ Notes
 
-**Completely free.**
-
-- **Jina AI**: Free tier (1M tokens/day) - optional, fallback works without it
-- **Vector Store**: In-memory (no database needed)
-- **Hosting**: Your existing Cloudflare Worker (free tier)
-
-## 🧠 How It Works
-
-1. **Document Loading**: On chat open, loads resume.md, experience.md, and projects.json
-2. **Chunking**: Documents split into ~500 character chunks with overlap
-3. **Embedding**: Each chunk converted to a 384-dimensional vector
-   - Uses Jina AI if API key available
-   - Falls back to hash-based embeddings (free, offline)
-4. **Retrieval**: User query embedded, cosine similarity finds top 3 matches
-5. **Context Injection**: Retrieved chunks added to LLM prompt
-6. **Response**: AI generates answer grounded in your actual content
-
-## 📊 Performance
-
-- **Without pre-computed embeddings**: ~1-2 second delay on first query (generates embeddings on-the-fly)
-- **With pre-computed embeddings**: Near-instant retrieval
-- **Fallback embeddings**: Work offline, slightly less accurate but functional
-
-## 🎯 Example Queries That Now Work Better
-
-| Query | Before (Hardcoded) | After (RAG) |
-|-------|-------------------|-------------|
-| "What does Andrew do at AmEx?" | Generic response | Specific details about /overview page, recent shipments |
-| "Tell me about myPal" | Basic description | Full technical architecture, AAC focus, offline-first design |
-| "How does he mentor students?" | Generic mentorship | 350+ students, focus on low-income individuals |
-| "What did he ship recently?" | No info | Offers deep-linking, split account preferences, ghost accounts |
-
-## 🔮 Future Enhancements
-
-- [ ] Add GitHub Actions workflow to auto-update knowledge base
-- [ ] Implement conversation memory for follow-up questions
-- [ ] Add hybrid search (keywords + embeddings)
-- [ ] Cache embeddings in localStorage for faster subsequent loads
-
-## 📝 Notes
-
-- The system works **immediately** without an API key using fallback embeddings
-- Add `JINA_API_KEY` for better quality neural embeddings
-- The knowledge base is version-controlled with your repo
-- Update content by editing files in `public/knowledge/` and redeploying
+- No special API keys are needed for retrieval (only Gemini API key for generation).
+- The keyword matching is intentionally lightweight and deterministic for reliability.
+- You can extend the system by adding more projects or enhancing the scoring logic in `worker/index.js`.

@@ -1,6 +1,6 @@
 # 🧩 Shared Components Documentation
 
-This portfolio uses **8 reusable shared components** to maintain consistency and reduce code duplication. All components are fully typed with TypeScript and follow React best practices.
+This portfolio uses **10 reusable shared components** to maintain consistency and reduce code duplication. All components are fully typed with TypeScript and follow React best practices.
 
 ## 📁 Location
 
@@ -9,10 +9,13 @@ src/components/shared/
 ├── Alert.tsx           # Toast notifications system
 ├── Button.tsx          # Reusable button component
 ├── ConfirmDialog.tsx   # Themed confirmation dialogs
+├── ImageWithLoader.tsx # Image component with skeleton loader + lazy loading
 ├── Modal.tsx           # Base modal with Portal rendering
+├── MonogramLogo.tsx    # Brand logo SVG component
+├── ScrollToTopButton.tsx # Floating scroll-to-top button
 ├── SocialLinks.tsx     # Social media links
-├── VideoPlayer.tsx     # Lazy-loaded video player
-└── ...
+├── ToastContainer.tsx  # Toast notification container
+└── VideoPlayer.tsx     # Lazy-loaded video player
 ```
 
 ---
