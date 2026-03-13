@@ -6,6 +6,7 @@ import { LoadingIndicator } from "./LoadingIndicator";
 import { SuggestedQuestions } from "./SuggestedQuestions";
 import { QuickActions } from "./QuickActions";
 import { Message } from "./types";
+import { useWindowSize } from "@hooks";
 
 interface ChatWindowProps {
   messages: Message[];
@@ -41,8 +42,10 @@ export const ChatWindow = ({
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  const { width } = useWindowSize(200);
+
   useEffect(() => {
-    if (inputRef.current) {
+    if (inputRef.current && width >= 768) {
       inputRef.current.focus();
     }
   }, []);
