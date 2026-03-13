@@ -207,8 +207,8 @@ export const Navbar = () => {
           >
             <div className="px-4 py-4 flex flex-col h-full">
 
-              {/* AI Chat card — subtle utility strip */}
-              <div className="mb-3 p-3 bg-slate-800/80 rounded-xl flex items-center gap-3 border border-slate-700/60">
+              {/* AI Chat card — tighter spacing */}
+              <div className="mb-3 p-2.5 bg-slate-800/80 rounded-xl flex items-center gap-3 border border-slate-700/60">
                 <div className="p-1.5 bg-cyan-500/20 rounded-lg shrink-0">
                   <ChatAlt2Icon className="w-4 h-4 text-cyan-400" />
                 </div>
@@ -226,84 +226,83 @@ export const Navbar = () => {
                 </button>
               </div>
 
-              {/* Divider */}
-              <div className="h-px bg-slate-700/50 mb-3" />
+              {/* Nav links — unified container for cohesion */}
+              <div className="bg-slate-800/40 rounded-2xl border border-slate-700/40 p-2 flex-1">
+                <ul className="grid grid-cols-1 gap-1">
+                  {NAV_LINKS.map((link, index) => {
+                    const linkHash = link.link.includes("#")
+                      ? `#${link.link.split("#")[1]}`
+                      : "";
+                    const isActive =
+                      (linkHash && activeSection === linkHash) ||
+                      location.pathname === link.link;
+                    const iconColors = getNavIconBg(link.name);
 
-              {/* Nav links */}
-              <ul className="grid grid-cols-1 gap-1 flex-1">
-                {NAV_LINKS.map((link, index) => {
-                  const linkHash = link.link.includes("#")
-                    ? `#${link.link.split("#")[1]}`
-                    : "";
-                  const isActive =
-                    (linkHash && activeSection === linkHash) ||
-                    location.pathname === link.link;
-                  const iconColors = getNavIconBg(link.name);
-
-                  return (
-                    <li
-                      key={link.name}
-                      style={{ transitionDelay: `${index * 40}ms` }}
-                      className={`transition-all duration-300 ${open
-                          ? "opacity-100 translate-x-0"
-                          : "opacity-0 -translate-x-4"
-                        }`}
-                    >
-                      <Link
-                        to={link.link}
-                        scroll={scrollWithOffset}
-                        className={`flex items-center px-3 py-2.5 rounded-xl text-base font-medium transition-all ${isActive
-                            ? "border-l-4 border-cyan-400 bg-slate-800/80 text-cyan-400 pl-2"
-                            : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+                    return (
+                      <li
+                        key={link.name}
+                        style={{ transitionDelay: `${index * 40}ms` }}
+                        className={`transition-all duration-300 ${open
+                            ? "opacity-100 translate-x-0"
+                            : "opacity-0 -translate-x-4"
                           }`}
-                        onClick={(e) =>
-                          handleLinkClick(e, link.link, link.name)
-                        }
                       >
-                        <span
-                          className={`p-1.5 rounded-lg mr-3 shrink-0 ${isActive ? iconColors : "bg-slate-700/80 text-slate-400"
+                        <Link
+                          to={link.link}
+                          scroll={scrollWithOffset}
+                          className={`flex items-center px-3 py-3.5 rounded-xl text-base font-medium transition-all ${isActive
+                              ? "bg-slate-700/60 text-cyan-400 border-l-4 border-cyan-400 pl-2"
+                              : "text-slate-300 hover:bg-slate-700/40 hover:text-white"
                             }`}
+                          onClick={(e) =>
+                            handleLinkClick(e, link.link, link.name)
+                          }
                         >
-                          {getNavIcon(link.name)}
-                        </span>
-                        {link.name}
-                      </Link>
-                    </li>
-                  );
-                })}
+                          <span
+                            className={`p-1.5 rounded-lg mr-3 shrink-0 ${isActive ? iconColors : "bg-slate-700/80 text-slate-400"
+                              }`}
+                          >
+                            {getNavIcon(link.name)}
+                          </span>
+                          {link.name}
+                        </Link>
+                      </li>
+                    );
+                  })}
 
-                {/* Snake */}
-                <li
-                  style={{
-                    transitionDelay: `${NAV_LINKS.length * 40}ms`,
-                  }}
-                  className={`transition-all duration-300 ${open
-                      ? "opacity-100 translate-x-0"
-                      : "opacity-0 -translate-x-4"
-                    }`}
-                >
-                  <button
-                    onClick={handleSnakeClick}
-                    className={`flex items-center w-full px-3 py-2.5 rounded-xl text-base font-medium transition-all ${location.pathname === "/snake"
-                        ? "border-l-4 border-cyan-400 bg-slate-800/80 text-cyan-400 pl-2"
-                        : "text-slate-300 hover:bg-slate-800/50 hover:text-white"
+                  {/* Snake */}
+                  <li
+                    style={{
+                      transitionDelay: `${NAV_LINKS.length * 40}ms`,
+                    }}
+                    className={`transition-all duration-300 ${open
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 -translate-x-4"
                       }`}
                   >
-                    <span
-                      className={`p-1.5 rounded-lg mr-3 shrink-0 ${location.pathname === "/snake"
-                          ? getNavIconBg("Snake")
-                          : "bg-slate-700/80 text-slate-400"
+                    <button
+                      onClick={handleSnakeClick}
+                      className={`flex items-center w-full px-3 py-3.5 rounded-xl text-base font-medium transition-all ${location.pathname === "/snake"
+                          ? "bg-slate-700/60 text-cyan-400 border-l-4 border-cyan-400 pl-2"
+                          : "text-slate-300 hover:bg-slate-700/40 hover:text-white"
                         }`}
                     >
-                      {getNavIcon("Snake")}
-                    </span>
-                    Snake
-                  </button>
-                </li>
-              </ul>
+                      <span
+                        className={`p-1.5 rounded-lg mr-3 shrink-0 ${location.pathname === "/snake"
+                            ? getNavIconBg("Snake")
+                            : "bg-slate-700/80 text-slate-400"
+                          }`}
+                      >
+                        {getNavIcon("Snake")}
+                      </span>
+                      Snake
+                    </button>
+                  </li>
+                </ul>
+              </div>
 
-              {/* Contact button */}
-              <div className="mt-3 pb-3">
+              {/* Contact button — more separation + padding for FAB */}
+              <div className="mt-4 pb-20">
                 <Link
                   to="/#contact"
                   className="block w-full py-3 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white text-center rounded-xl font-bold text-base shadow-lg shadow-purple-500/20 transition-all"
