@@ -83,7 +83,7 @@ export const handleAction = (action: string, setIsOpen: (open: boolean) => void)
       break;
     case "view_experience":
       setIsOpen(false);
-      navigateToSection("experience");
+      navigateToSection("accessibility-expertise");
       break;
     case "play_snake":
       window.location.href = "/#/snake";
