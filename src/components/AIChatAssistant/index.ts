@@ -6,7 +6,6 @@ export { ChatHeader } from "./ChatHeader";
 export { LoadingIndicator } from "./LoadingIndicator";
 export { SuggestedQuestions } from "./SuggestedQuestions";
 export { QuickActions } from "./QuickActions";
-export { useProjectRAG } from "./useRAG";
 export type { Message, ActionButton } from "./types";
 export { ACTION_CONFIGS, SUGGESTED_QUESTIONS, generateMessageId } from "./types";
 export { loadMarked, renderMarkdown, parseActionsFromContent, formatRelativeTime, handleAction } from "./utils";

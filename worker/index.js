@@ -1,12 +1,5 @@
 // Cloudflare Worker for AI Chat Assistant
-// This worker proxies requests to Google Gemini API to keep your API key secure
-
-const GEMINI_API_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
-
-// NOTE: This context is duplicated from src/data/portfolioContext.ts
-// When updating this content, make sure to update both files to keep them in sync
-// Portfolio context embedded in worker
+const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 const PORTFOLIO_CONTEXT = `
 You are Andrew Alagna's AI assistant on his portfolio website. Answer questions about Andrew professionally and conversationally.
 
@@ -578,213 +571,215 @@ Always use the full URL format with markdown link syntax for clickability.
 - ArcGIS Pro - Geographic Information Systems
 - Vite - Modern build tooling
 `;
-
-// Rate limiting using Cloudflare KV (simple in-memory for now)
+const PROJECTS_RAG_DATA = `[
+  {
+    "id": "mypal",
+    "title": "myPal",
+    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
+    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
+    "technologies": [],
+    "link": "https://github.com/myPal-TMS/myPal",
+    "keywords": [
+      "mypal",
+      "mypal",
+      "rapid",
+      "prototyping",
+      "case",
+      "study",
+      "for",
+      "assistive",
+      "tech"
+    ]
+  },
+  {
+    "id": "myteachers",
+    "title": "myTeachers",
+    "subtitle": "React + Express + PostgreSQL + Firebase",
+    "description": "A modern redesign of the CUNY registration system for tracking courses and professors. Built with a full-stack architecture using React with Material UI, Express backend, PostgreSQL database, and Firebase authentication. Features responsive design, Redux Toolkit Query for state management, and custom alerts.",
+    "technologies": [],
+    "link": "https://github.com/elchic00/CunyFirst-front",
+    "keywords": [
+      "myteachers",
+      "myteachers",
+      "react",
+      "express",
+      "postgresql",
+      "firebase"
+    ]
+  },
+  {
+    "id": "macros-for-geeks",
+    "title": "Macros-for-geeks",
+    "subtitle": "Angular, .Net, SQLite",
+    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
+    "technologies": [],
+    "link": "https://github.com/elchic00/Macros-for-geeks",
+    "keywords": [
+      "macros-for-geeks",
+      "macros-for-geeks",
+      "angular",
+      "net",
+      "sqlite"
+    ]
+  },
+  {
+    "id": "reps",
+    "title": "Reps",
+    "subtitle": "React Native + React Web",
+    "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
+    "technologies": [],
+    "link": "https://github.com/elchic00/reps",
+    "keywords": [
+      "reps",
+      "reps",
+      "react",
+      "native",
+      "react",
+      "web"
+    ]
+  },
+  {
+    "id": "invent0ry",
+    "title": "Invent0ry",
+    "subtitle": "React and AWS (Amplify)",
+    "description": "A full-stack inventory management system enabling businesses to track stock across multiple storage locations with custom categories. Features real-time inventory monitoring to ensure adequate supply levels, built with React and AWS Amplify for authentication, hosting, and GraphQL API.",
+    "technologies": [],
+    "link": "https://github.com/elchic00/invent0ry",
+    "keywords": [
+      "invent0ry",
+      "invent0ry",
+      "react",
+      "and",
+      "aws",
+      "amplify"
+    ]
+  },
+  {
+    "id": "crime-in-queens-nyc",
+    "title": "Crime in Queens NYC",
+    "subtitle": "Python, HTML, Github MD",
+    "description": "A data analysis project examining crime trends in Queens, NYC using Python data science libraries (Pandas, Matplotlib, NumPy) to process and visualize patterns. Interactive visualizations deployed as a GitHub Pages site.",
+    "technologies": [],
+    "link": "https://elchic00.github.io/CrimeInQueens",
+    "keywords": [
+      "crime-in-queens-nyc",
+      "crime in queens nyc",
+      "python",
+      "html",
+      "github",
+      "md"
+    ]
+  }
+]`;
 const rateLimitMap = new Map();
-const RATE_LIMIT = 5; // requests per minute
-const RATE_LIMIT_WINDOW = 60000; // 1 minute
-
+const RATE_LIMIT = 5;
+const RATE_LIMIT_WINDOW = 60000;
 function checkRateLimit(ip) {
   const now = Date.now();
   const userRequests = rateLimitMap.get(ip) || [];
-
-  // Filter out old requests
-  const recentRequests = userRequests.filter(
-    (time) => now - time < RATE_LIMIT_WINDOW
-  );
-
-  if (recentRequests.length >= RATE_LIMIT) {
-    return false;
-  }
-
+  const recentRequests = userRequests.filter((time) => now - time < RATE_LIMIT_WINDOW);
+  if (recentRequests.length >= RATE_LIMIT) return false;
   recentRequests.push(now);
   rateLimitMap.set(ip, recentRequests);
   return true;
 }
-
+function findRelevantProjects(query, projects) {
+  if (!projects || projects.length === 0) return [];
+  const stopWords = new Set(['a','an','the','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','must','shall','can','need','dare','ought','used','to','of','in','for','on','with','at','by','from','as','into','through','during','before','after','above','below','between','under','and','but','or','yet','so','if','because','although','though','while','where','when','that','which','who','whom','whose','what','whatever','whoever','whomever','whichever','this','these','those','i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','am','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','about','against','up','down','out','off','over','under','again','further','then','once','here','there','when','where','why','how','all','each','few','more','most','other','some','such','no','nor','not','only','own','same','than','too','very','just','andrew','drew','he','his','him','project','projects']);
+  const queryWords = query.toLowerCase().replace(/[^\w\s]/g, ' ').split(/\s+/).filter(word => word.length > 2 && !stopWords.has(word));
+  if (queryWords.length === 0) return [];
+  const scored = projects.map(project => {
+    let score = 0;
+    const projectText = `${project.title} ${project.subtitle} ${project.description} ${project.technologies?.join(' ') || ''}`.toLowerCase();
+    for (const word of queryWords) {
+      if (project.title.toLowerCase().includes(word)) score += 10;
+      if (project.technologies?.some(t => t.toLowerCase().includes(word))) score += 5;
+      if (project.description.toLowerCase().includes(word)) score += 2;
+      if (project.keywords?.some(k => k.toLowerCase().includes(word))) score += 3;
+      if (projectText.includes(word)) score += 1;
+    }
+    return { project, score };
+  });
+  return scored.filter(item => item.score > 0).sort((a, b) => b.score - a.score).slice(0, 3).map(item => item.project);
+}
+function formatProjectContext(projects) {
+  if (!projects || projects.length === 0) return '';
+  const formatted = projects.map(p => {
+    const techs = p.technologies?.join(', ') || '';
+    return `- **${p.title}**${p.subtitle ? ` (${p.subtitle})` : ''}: ${p.description.slice(0, 300)}${p.description.length > 300 ? '...' : ''}${techs ? ` [Tech: ${techs}]` : ''}${p.link ? ` [Link: ${p.link}]` : ''}`;
+  }).join('\n');
+  return `\n\n# Relevant Projects\nThe user's question relates to these specific projects:\n${formatted}\n`;
+}
 async function handleChatRequest(request, env) {
-  // CORS headers
   const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type",
   };
-
-  // Handle OPTIONS preflight
-  if (request.method === "OPTIONS") {
-    return new Response(null, { headers: corsHeaders });
-  }
-
-  // Only allow POST
-  if (request.method !== "POST") {
-    return new Response("Method not allowed", {
-      status: 405,
-      headers: corsHeaders,
-    });
-  }
-
+  if (request.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
+  if (request.method !== "POST") return new Response("Method not allowed", { status: 405, headers: corsHeaders });
   try {
-    // Get API key from environment variable
     const GEMINI_API_KEY = env.GEMINI_API_KEY;
-
     if (!GEMINI_API_KEY) {
-      console.error("GEMINI_API_KEY environment variable is not set");
-      return new Response(
-        JSON.stringify({ error: "Server configuration error" }),
-        {
-          status: 500,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+      return new Response(JSON.stringify({ error: "Server configuration error" }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
-    // Rate limiting
     const ip = request.headers.get("CF-Connecting-IP") || "unknown";
     if (!checkRateLimit(ip)) {
-      return new Response(
-        JSON.stringify({
-          error: "Rate limit exceeded. Please try again in a minute.",
-        }),
-        {
-          status: 429,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
-      );
+      return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again in a minute." }), { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
-
     const { message, messages = [] } = await request.json();
-
     if (!message || typeof message !== "string") {
-      return new Response(JSON.stringify({ error: "Invalid request" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      return new Response(JSON.stringify({ error: "Invalid request" }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
-
-    // Build conversation history for Gemini
-    // Always start with the portfolio context as a system primer
+    let projects = [];
+    try { projects = JSON.parse(PROJECTS_RAG_DATA); } catch (e) { console.warn("Failed to parse PROJECTS_RAG_DATA:", e); }
+    const relevantProjects = findRelevantProjects(message, projects);
+    const projectContext = formatProjectContext(relevantProjects);
     const conversationHistory = [
-      {
-        role: "user",
-        parts: [{ text: PORTFOLIO_CONTEXT }],
-      },
-      {
-        role: "model",
-        parts: [
-          {
-            text: "I understand. I'm Andrew's AI assistant and will answer questions about his experience, projects, and skills professionally and conversationally based on the information provided.",
-          },
-        ],
-      },
+      { role: "user", parts: [{ text: PORTFOLIO_CONTEXT + projectContext }] },
+      { role: "model", parts: [{ text: "I understand. I'm Andrew's AI assistant and will answer questions about his experience, projects, and skills professionally and conversationally based on the information provided." }] },
     ];
-
-    // Add recent conversation history (skip the initial greeting)
-    const recentMessages = messages
-      .filter(
-        (msg) =>
-          msg.content !==
-          "Hi! I'm Andrew's AI assistant. Ask me about his experience, projects, skills, or travel adventures!"
-      )
-      .slice(-8) // Keep last 8 messages to leave room for context
-      .map((msg) => ({
-        role: msg.role === "assistant" ? "model" : "user",
-        parts: [{ text: msg.content }],
-      }));
-
+    const recentMessages = messages.filter((msg) => msg.content !== "Hi! I'm Andrew's AI assistant. Ask me about his experience, projects, skills, or travel adventures!").slice(-8).map((msg) => ({ role: msg.role === "assistant" ? "model" : "user", parts: [{ text: msg.content }] }));
     conversationHistory.push(...recentMessages);
-
-    // Add current user message
-    conversationHistory.push({
-      role: "user",
-      parts: [{ text: message }],
+    conversationHistory.push({ role: "user", parts: [{ text: message }] });
+    const geminiResponse = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: conversationHistory,
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1100, topP: 0.8, topK: 40 },
+        safetySettings: [
+          { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+          { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
+        ],
+      }),
     });
-
-    // Call Gemini API
-    const geminiResponse = await fetch(
-      `${GEMINI_API_URL}?key=${GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          contents: conversationHistory,
-          generationConfig: {
-            temperature: 0.7,
-            maxOutputTokens: 1100,
-            topP: 0.8,
-            topK: 40,
-          },
-          safetySettings: [
-            {
-              category: "HARM_CATEGORY_HARASSMENT",
-              threshold: "BLOCK_MEDIUM_AND_ABOVE",
-            },
-            {
-              category: "HARM_CATEGORY_HATE_SPEECH",
-              threshold: "BLOCK_MEDIUM_AND_ABOVE",
-            },
-          ],
-        }),
-      }
-    );
-
     if (!geminiResponse.ok) {
       const errorText = await geminiResponse.text();
       console.error("Gemini API error:", errorText);
       throw new Error("Failed to get response from AI");
     }
-
     const data = await geminiResponse.json();
-
-    // Check if response was blocked or empty
     if (!data.candidates || data.candidates.length === 0) {
-      console.error("No candidates returned:", JSON.stringify(data));
-      const aiResponse =
-        "I apologize, but I'm having trouble with that question. Try asking about Andrew's specific experience at American Express, his projects, technical skills, or travel experiences!";
-      return new Response(JSON.stringify({ response: aiResponse }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      const aiResponse = "I apologize, but I'm having trouble with that question. Try asking about Andrew's specific experience at American Express, his projects, technical skills, or travel experiences!";
+      return new Response(JSON.stringify({ response: aiResponse }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
-
     const candidate = data.candidates[0];
-
-    // Check if response was blocked by safety filters
     if (candidate.finishReason === "SAFETY" || !candidate.content) {
-      console.error(
-        "Response blocked or no content:",
-        JSON.stringify(candidate)
-      );
-      const aiResponse =
-        "I apologize, but I couldn't generate a response for that. Try asking about Andrew's work at American Express, his technical projects, or his travel photography!";
-      return new Response(JSON.stringify({ response: aiResponse }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      const aiResponse = "I apologize, but I couldn't generate a response for that. Try asking about Andrew's work at American Express, his technical projects, or his travel photography!";
+      return new Response(JSON.stringify({ response: aiResponse }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
-
-    const aiResponse =
-      candidate.content?.parts?.[0]?.text ||
-      "I'm having trouble processing that. Could you rephrase your question?";
-
-    return new Response(JSON.stringify({ response: aiResponse }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    const aiResponse = candidate.content?.parts?.[0]?.text || "I'm having trouble processing that. Could you rephrase your question?";
+    return new Response(JSON.stringify({ response: aiResponse }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
   } catch (error) {
     console.error("Error:", error);
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    return new Response(JSON.stringify({ error: "Internal server error" }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
   }
 }
-
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-
-    if (url.pathname === "/api/chat") {
-      return handleChatRequest(request, env);
-    }
-
+    if (url.pathname === "/api/chat") return handleChatRequest(request, env);
     return new Response("Not found", { status: 404 });
   },
 };
