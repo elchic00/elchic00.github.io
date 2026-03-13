@@ -114,7 +114,7 @@ export const Contact: React.FC = () => {
             </div>
           )}
 
-          <p className="leading-relaxed mb-3 text-slate-300 dark:text-slate-300 light:text-slate-700">
+          <p className="leading-relaxed mb-3 text-slate-200 dark:text-slate-100 light:text-slate-700">
             Send me a message with the form below
           </p>
 
@@ -123,7 +123,7 @@ export const Contact: React.FC = () => {
             <button
               type="button"
               onClick={() => setShowTemplates(!showTemplates)}
-              className="text-sm text-cyan-400 dark:text-cyan-400 light:text-cyan-600 hover:text-cyan-300 dark:hover:text-cyan-300 light:hover:text-cyan-700 flex items-center gap-1 transition-colors"
+              className="text-sm text-cyan-300 dark:text-cyan-300 light:text-cyan-600 hover:text-cyan-200 dark:hover:text-cyan-200 light:hover:text-cyan-700 flex items-center gap-1 transition-colors"
             >
               <LightningBoltIcon className="w-4 h-4" />
               {showTemplates ? "Hide" : "Use"} Quick Templates

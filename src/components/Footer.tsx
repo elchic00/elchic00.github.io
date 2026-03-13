@@ -34,7 +34,7 @@ export const Footer = () => {
           <div className="md:flex-1 flex items-center gap-4 justify-center md:justify-end">
             <div className="text-center md:text-right">
               {/* On mobile, we show a simplified copyright line */}
-              <span className="text-[10px] uppercase tracking-[0.2em] text-slate-500 font-bold block md:hidden">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold block md:hidden">
                 © 2026 Andrew Alagna
               </span>
               {/* On desktop, we keep the full stack */}
