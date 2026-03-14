@@ -6,7 +6,6 @@
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { MailIcon, LightningBoltIcon, TrashIcon } from "@heroicons/react/solid";
-import { Footer } from "../Footer";
 import { Button } from "../shared/Button";
 import { useAlert } from "../shared/Alert";
 import { useContactForm, useScrollReveal } from "../../hooks";
@@ -264,9 +263,6 @@ export const Contact: React.FC = () => {
             </div>
           )}
         </form>
-      </div>
-      <div className="relative z-10">
-        <Footer />
       </div>
     </section>
 

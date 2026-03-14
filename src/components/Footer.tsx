@@ -4,9 +4,9 @@ import { MonogramOverlap } from "./shared/MonogramLogo";
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-slate-800/40 bg-slate-950/80 backdrop-blur-md w-full relative z-20 pb-24 md:pb-0">
-      <div className="max-w-[1600px] mx-auto px-4 lg:px-12 py-8">
-        <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-8 md:gap-0">
+    <footer className="border-t border-slate-800/40 bg-slate-950/80 backdrop-blur-md w-full relative z-20 md:pb-0">
+      <div className="max-w-[1600px] mx-auto px-4 lg:px-12 py-7 md:py-8">
+        <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-5 md:gap-0">
           
           {/* LEFT: System Status - md:flex-1 restores the left-pin */}
           <div className="md:flex-1 flex items-center gap-3 justify-center md:justify-start">
@@ -31,7 +31,7 @@ export const Footer = () => {
           </div>
 
           {/* RIGHT: Identity - md:flex-1 restores the right-pin */}
-          <div className="md:flex-1 flex items-center gap-4 justify-center md:justify-end">
+          <div className="md:flex-1 flex items-center gap-3 justify-center md:justify-end">
             <div className="text-center md:text-right">
               {/* On mobile, we show a simplified copyright line */}
               <span className="text-[10px] uppercase tracking-[0.2em] text-slate-400 font-bold block md:hidden">
@@ -40,7 +40,7 @@ export const Footer = () => {
               {/* On desktop, we keep the full stack */}
               <div className="hidden md:block">
                 <span className="text-[10px] uppercase tracking-[0.15em] text-slate-400 font-bold block">
-                  Developer
+                  Engineer
                 </span>
                 <span className="text-xs text-slate-300">
                   © 2026 Andrew Alagna

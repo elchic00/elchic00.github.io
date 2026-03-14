@@ -1,6 +1,7 @@
 import { AppRoutes } from "./routes";
 import {
   Navbar,
+  Footer,
   ErrorBoundary,
   ScrollToHash,
   // ScrollToTopButton,
@@ -22,6 +23,7 @@ export const App = () => {
           <ScrollToHash />
           <AppRoutes />
           {/* <ScrollToTopButton /> */}
+          <Footer />
           <AIChatAssistant />
           <ToastContainer />
         </main>
