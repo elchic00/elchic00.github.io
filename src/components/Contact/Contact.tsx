@@ -5,7 +5,7 @@
 
 import { useEffect, useState } from "react";
 import emailjs from "@emailjs/browser";
-import { EmojiHappyIcon, LightningBoltIcon, TrashIcon } from "@heroicons/react/solid";
+import { MailIcon, LightningBoltIcon, TrashIcon } from "@heroicons/react/solid";
 import { Footer } from "../Footer";
 import { Button } from "../shared/Button";
 import { useAlert } from "../shared/Alert";
@@ -91,7 +91,7 @@ export const Contact: React.FC = () => {
         >
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-white dark:text-white light:text-gray-900 sm:text-4xl text-3xl font-medium title-font underline-offset-4 underline flex items-center gap-2">
-              Contact Me <EmojiHappyIcon className="w-10 h-10 inline-block text-yellow-400 dark:text-yellow-400 light:text-yellow-600" aria-hidden="true" />
+              Contact Me <MailIcon className="w-10 h-10 inline-block text-gray-300 light:text-gray-200" aria-hidden="true" />
             </h2>
             {contactForm.hasDraft && (
               <button
