@@ -15,7 +15,7 @@ export const AIChatAssistant = () => {
   const [showAutoLabel, setShowAutoLabel] = useState(false);
   const toggleButtonRef = useRef(null);
   const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
-  const shortcutKey = isMac ? "⌘ + K" : "Ctrl + K";
+  const shortcutKey = isMac ? "⌘ + D" : "Ctrl + D";
   useEffect(() => { if (isOpen) loadMarked(); }, [isOpen]);
   useEffect(() => {
     const hasSeenLabel = sessionStorage.getItem("ai-chat-label-shown");
@@ -27,7 +27,7 @@ export const AIChatAssistant = () => {
   }, []);
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); setIsOpen((prev) => !prev); }
+      if ((e.metaKey || e.ctrlKey) && e.key === "d") { e.preventDefault(); setIsOpen((prev) => !prev); }
       if (e.key === "Escape" && isOpen) {
         const target = e.target as HTMLElement;
         const isInputOrTextarea = target.tagName === "INPUT" || target.tagName === "TEXTAREA";
