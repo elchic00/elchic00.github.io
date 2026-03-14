@@ -38,10 +38,11 @@
     "Team Enablement"
   ],
     "AI Orchestration": [
-    "Cloudflare Workers",
     "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)",
     "Local LLM Orchestration (Ollama)",
     "Serverless Functions",
-    "RAG Pattern Implementation"
+    "RAG Pattern Implementation",
+    "Streaming Responses",
+    "Cloudflare Workers"
   ]
 }
