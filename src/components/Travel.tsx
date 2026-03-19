@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { GlobeAltIcon } from "@heroicons/react/solid";
 import tripsData from "../data/structured/trips.json";
 import { TripCard } from "./Travel/TripCard";
@@ -7,49 +7,70 @@ import { generateTravelStructuredData } from "../utils/generateTravelStructuredD
 import { useActiveTrip, useScrollReveal } from "../hooks";
 import { TIMING } from "../constants";
 
-// Compute these once outside the component since tripsData is static
-const structuredData = generateTravelStructuredData(tripsData);
-const tripIds = tripsData.map((trip) => trip.id);
-
 export const Travel = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  
+  // Compute these inside component to avoid issues with hot reload
+  const tripIds = useMemo(() => tripsData.map((trip) => trip.id), []);
+  const structuredData = useMemo(() => generateTravelStructuredData(tripsData), []);
 
   useEffect(() => {
     document.title = "Travel Adventures - Andrew Alagna";
 
-    const fullHash = window.location.hash;
-    const hashParts = fullHash.split('#');
-    const tripHash = hashParts[hashParts.length - 1];
-
-    if (tripHash && tripHash !== '/travel' && !tripHash.startsWith('/')) {
-      const scrollToHash = () => {
-        try {
-          const element = document.getElementById(tripHash);
-          if (element) {
-            setTimeout(() => {
-              element.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, TIMING.INITIAL_SCROLL_DELAY);
-          }
-        } catch (error) {
-          console.warn('Invalid trip hash:', tripHash);
-        }
-      };
-
-      scrollToHash();
-      setTimeout(scrollToHash, TIMING.LAYOUT_DELAY);
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    // Add structured data script to head
+    const scriptId = "travel-structured-data";
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+    
+    if (!script) {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
     }
-  }, []);
+    script.textContent = JSON.stringify(structuredData);
+
+    // Handle hash scrolling
+    const handleHashScroll = () => {
+      const fullHash = window.location.hash;
+      const hashParts = fullHash.split('#');
+      const tripHash = hashParts[hashParts.length - 1];
+
+      if (tripHash && tripHash !== '/travel' && !tripHash.startsWith('/')) {
+        const scrollToHash = () => {
+          try {
+            const element = document.getElementById(tripHash);
+            if (element) {
+              setTimeout(() => {
+                element.scrollIntoView({ behavior: "smooth", block: "start" });
+              }, TIMING.INITIAL_SCROLL_DELAY);
+            }
+          } catch (error) {
+            console.warn('Invalid trip hash:', tripHash);
+          }
+        };
+
+        scrollToHash();
+        setTimeout(scrollToHash, TIMING.LAYOUT_DELAY);
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    handleHashScroll();
+
+    return () => {
+      // Clean up script on unmount
+      const existingScript = document.getElementById(scriptId);
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, [structuredData]);
 
   const activeId = useActiveTrip(tripIds);
 
   return (
     <section id="travel" className="body-font mt-16 min-h-screen">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
       <div className="container px-5 py-10 mx-auto lg:px-40">
         <header
           ref={headerRef}
@@ -85,4 +106,3 @@ export const Travel = () => {
     </section>
   );
 };
-

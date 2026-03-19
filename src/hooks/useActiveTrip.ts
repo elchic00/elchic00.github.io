@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 /**
  * Tracks which trip section is currently active based on scroll position and URL hash.
@@ -7,16 +7,18 @@ import { useEffect, useState } from "react";
  *
  * @param tripIds - Array of trip IDs to track (should correspond to element IDs in the DOM)
  * @returns The ID of the currently active/most visible trip, or null if none are visible
- *
- * @example
- * const activeTrip = useActiveTrip(['thailand-2024', 'costarica-2023', 'ecuador-2024']);
- * // Returns 'thailand-2024' when that section is most visible
- * // Automatically updates URL to #/travel#thailand-2024
  */
 export const useActiveTrip = (tripIds: string[]): string | null => {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const intersectingTripsRef = useRef<Map<string, number>>(new Map());
+  const isUpdatingRef = useRef(false);
 
   useEffect(() => {
+    // Skip if no trip IDs provided
+    if (!tripIds.length) return;
+
+    // Set initial active ID from hash
     const fullHash = window.location.hash;
     const hashParts = fullHash.split('#');
     const tripHash = hashParts[hashParts.length - 1];
@@ -25,33 +27,49 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
       setActiveId(tripHash);
     }
 
-    const intersectingTrips = new Map<string, number>();
-
-    const observer = new IntersectionObserver(
+    // Create intersection observer
+    observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           const id = entry.target.id;
 
           if (entry.isIntersecting) {
-            intersectingTrips.set(id, entry.intersectionRatio);
+            intersectingTripsRef.current.set(id, entry.intersectionRatio);
           } else {
-            intersectingTrips.delete(id);
+            intersectingTripsRef.current.delete(id);
           }
         });
 
+        // Find most visible trip
         let maxRatio = 0;
         let mostVisibleTrip: string | null = null;
 
-        intersectingTrips.forEach((ratio, id) => {
+        intersectingTripsRef.current.forEach((ratio, id) => {
           if (ratio > maxRatio) {
             maxRatio = ratio;
             mostVisibleTrip = id;
           }
         });
 
-        if (mostVisibleTrip) {
+        if (mostVisibleTrip && mostVisibleTrip !== activeId) {
           setActiveId(mostVisibleTrip);
-          window.history.replaceState(null, "", `#/travel#${mostVisibleTrip}`);
+          
+          // Update URL without triggering navigation
+          if (!isUpdatingRef.current) {
+            isUpdatingRef.current = true;
+            try {
+              window.history.replaceState(
+                { ...window.history.state, tripId: mostVisibleTrip },
+                "",
+                `#/travel#${mostVisibleTrip}`
+              );
+            } catch (e) {
+              console.warn('Failed to update URL:', e);
+            }
+            setTimeout(() => {
+              isUpdatingRef.current = false;
+            }, 100);
+          }
         }
       },
       {
@@ -60,13 +78,20 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
       }
     );
 
-    tripIds.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
+    // Observe all trip elements
+    const observeElements = () => {
+      tripIds.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element && observerRef.current) {
+          observerRef.current.observe(element);
+        }
+      });
+    };
 
+    // Small delay to ensure DOM is ready
+    const timeoutId = setTimeout(observeElements, 100);
+
+    // Handle hash changes from manual navigation
     const handleHashChange = () => {
       const fullHash = window.location.hash;
       const hashParts = fullHash.split('#');
@@ -80,8 +105,10 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
     window.addEventListener("hashchange", handleHashChange);
 
     return () => {
-      observer.disconnect();
+      clearTimeout(timeoutId);
+      observerRef.current?.disconnect();
       window.removeEventListener("hashchange", handleHashChange);
+      intersectingTripsRef.current.clear();
     };
   }, [tripIds]);
 
