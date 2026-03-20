@@ -26,7 +26,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
       }`}
     >
       <a href={project.link} target="_blank" rel="noreferrer" className="block h-full">
-        <div className="relative h-full flex flex-col bg-slate-950 overflow-hidden">
+        <div className="relative flex flex-col bg-slate-950 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/5 group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none z-10"></div>
           <div
             className={`px-4 pt-4 pb-2 flex items-center justify-center gap-2 ${
