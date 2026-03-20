@@ -212,7 +212,7 @@ export const Navbar = () => {
                 <div className="p-1.5 bg-cyan-500/20 rounded-lg shrink-0">
                   <ChatAlt2Icon className="w-4 h-4 text-cyan-400" />
                 </div>
-                <span className="text-slate-400 text-xs flex-1">
+                <span className="text-slate-400 text-s flex-1">
                   Ask my AI anything about me
                 </span>
                 <button
