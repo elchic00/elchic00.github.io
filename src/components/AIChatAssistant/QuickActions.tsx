@@ -9,10 +9,10 @@ interface QuickActionsProps {
 }
 
 const QUICK_ACTIONS = [
-  { Icon: BriefcaseIcon, label: "Experience", action: "view_experience" },
   { Icon: LightningBoltIcon, label: "Projects", action: "view_projects" },
-  { Icon: MailIcon, label: "Contact", action: "contact_form" },
+  { Icon: BriefcaseIcon, label: "Travel", action: "view_travel" },
   { Icon: PuzzleIcon, label: "Play Snake", action: "play_snake" },
+  { Icon: MailIcon, label: "Contact", action: "contact_form" },
 ];
 
 export const QuickActions = ({ onActionClick }: QuickActionsProps) => {
