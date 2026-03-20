@@ -5,7 +5,7 @@
 import { SUGGESTED_QUESTIONS } from "./types";
 
 interface SuggestedQuestionsProps {
-  onQuestionClick: (question: string) => void;
+  onQuestionClick: (question: string, index: number) => void;
 }
 
 export const SuggestedQuestions = ({ onQuestionClick }: SuggestedQuestionsProps) => {
@@ -20,7 +20,7 @@ export const SuggestedQuestions = ({ onQuestionClick }: SuggestedQuestionsProps)
         {SUGGESTED_QUESTIONS.map((question, index) => (
           <button
             key={index}
-            onClick={() => onQuestionClick(question)}
+            onClick={() => onQuestionClick(question, index)}
             className="text-left text-sm bg-slate-700/50 hover:bg-slate-700 border border-slate-600/50 hover:border-slate-500 text-slate-200 py-2.5 px-3 rounded-lg transition-all hover:scale-[1.01] active:scale-[0.99] focus-ring"
           >
             {question}

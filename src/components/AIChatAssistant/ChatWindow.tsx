@@ -7,6 +7,7 @@ import { SuggestedQuestions } from "./SuggestedQuestions";
 import { QuickActions } from "./QuickActions";
 import { Message } from "./types";
 import { useWindowSize } from "@hooks";
+import { SUGGESTED_QUESTIONS } from "./types";
 
 interface ChatWindowProps {
   messages: Message[];
@@ -20,7 +21,8 @@ interface ChatWindowProps {
   onSubmit: () => void;
   onAction: (action: string) => void;
   onRetry: () => void;
-  onSuggestedQuestion: (question: string) => void;
+  onSuggestedQuestion: (question: string, index: number, total: number) => void;
+  onQuickAction: (action: string) => void;
 }
 
 export const ChatWindow = ({
@@ -36,6 +38,7 @@ export const ChatWindow = ({
   onAction,
   onRetry,
   onSuggestedQuestion,
+  onQuickAction,
 }: ChatWindowProps) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -69,6 +72,10 @@ export const ChatWindow = ({
 
   const hasSuggestions = showSuggestions && messages.length <= 1 && !isLoading;
 
+  const handleSuggestedQuestionClick = (question: string, index: number) => {
+    onSuggestedQuestion(question, index, SUGGESTED_QUESTIONS.length);
+  };
+
   return (
     <div
       ref={chatWindowRef}
@@ -96,8 +103,8 @@ export const ChatWindow = ({
 
         {hasSuggestions && (
           <div className="space-y-6">
-            <QuickActions onActionClick={onAction} />
-            <SuggestedQuestions onQuestionClick={onSuggestedQuestion} />
+            <QuickActions onActionClick={onQuickAction} />
+            <SuggestedQuestions onQuestionClick={handleSuggestedQuestionClick} />
           </div>
         )}
 
