@@ -10,7 +10,7 @@ export const AccessibilityExpertise = () => {
       <div className="container mx-auto px-5 sm:px-8 md:px-10">
         <div className="text-center mb-12">
           <span className="inline-block px-4 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-semibold mb-4">
-            Perfect LightHouse Score: 100/100
+            Perfect Lighthouse Score: 100/100
           </span>
           <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4">
             Accessibility is a <span className="text-cyan-400">Feature</span>, Not Compliance
