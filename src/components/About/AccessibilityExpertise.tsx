@@ -22,7 +22,7 @@ export const AccessibilityExpertise = () => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Professional Card: AmEx */}
-          <article className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-cyan-500/30 rounded-2xl p-8 shadow-xl">
+          <article className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-cyan-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-cyan-600/20 p-3 rounded-lg">
                 <BriefcaseIcon className="w-8 h-8 text-cyan-400" />
@@ -56,7 +56,7 @@ export const AccessibilityExpertise = () => {
           </article>
 
           {/* Personal Card: myPal */}
-          <article className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-purple-500/30 rounded-2xl p-8 shadow-xl">
+          <article className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-purple-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-purple-600/20 p-3 rounded-lg">
                 <HeartIcon className="w-8 h-8 text-purple-400" />

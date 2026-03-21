@@ -10,7 +10,7 @@ export { Footer } from "./Footer";
 // Feature components
 export { ResumePage } from "./Resume";
 export { AIChatAssistant } from "./AIChatAssistant";
-export { AccessibilityExpertise } from "./AccessibilityExpertise";
+export { AccessibilityExpertise } from "./About/AccessibilityExpertise";
 
 // Utility components
 export { ErrorBoundary } from "./ErrorBoundary";
