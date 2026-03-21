@@ -70,6 +70,8 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
       if (e.key === "Escape") {
         setSelectedPhoto(null);
         setSelectedIndex(null);
+        setZoomLevel(0);
+        setZoomOrigin({ x: 50, y: 50 });
       } else if (e.key === "ArrowRight") {
         goToNext();
       } else if (e.key === "ArrowLeft") {
