@@ -1,36 +1,29 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import {
   ArrowRightIcon,
   MenuIcon,
   XIcon,
-  BriefcaseIcon,
-  CodeIcon,
-  ChipIcon,
-  DocumentTextIcon,
-  GlobeAltIcon,
-  PuzzleIcon,
   ChatAlt2Icon,
-  UserGroupIcon,
 } from "@heroicons/react/solid";
 import { useLocation, useNavigate } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import { useClickOutside, useWindowSize } from "../hooks";
-import { NAV_LINKS, scrollWithOffset, TIMING } from "../constants";
+import {
+  NAV_ITEMS,
+  CONTACT_CTA,
+  scrollWithOffset,
+  TIMING,
+  getLinkHash,
+  isScrollLink,
+  type NavItem,
+} from "../constants";
 import { MonogramOverlap } from "./shared/MonogramLogo";
 import { trackResumeView } from "../utils/analytics";
 
-const getNavIconBg = (name: string) => {
-  switch (name) {
-    case "Accessibility": return "bg-cyan-500/20 text-cyan-400";
-    case "Experience": return "bg-blue-500/20 text-blue-400";
-    case "Projects": return "bg-red-500/20 text-red-400";
-    case "Skills": return "bg-yellow-500/20 text-yellow-400";
-    case "Resume": return "bg-purple-500/20 text-purple-400";
-    case "Travel": return "bg-orange-500/20 text-orange-400";
-    case "Snake": return "bg-green-500/20 text-green-400";
-    default: return "bg-slate-700 text-slate-400";
-  }
-};
+// Local constants
+const RESUME_URL = "/andrew-alagna-resume.pdf";
+const LOGO_LINK = "/#about";
+const LOGO_SECTION = "#about";
 
 export const Navbar = () => {
   const location = useLocation();
@@ -42,35 +35,122 @@ export const Navbar = () => {
   const { width } = useWindowSize(TIMING.NAVBAR_DEBOUNCE);
   const isMobile = width < 1024;
 
-  const getNavIcon = (name: string) => {
-    const iconClass = "w-5 h-5";
-    switch (name) {
-      case "Accessibility": return <UserGroupIcon className={iconClass} />;
-      case "Experience": return <BriefcaseIcon className={iconClass} />;
-      case "Projects": return <CodeIcon className={iconClass} />;
-      case "Skills": return <ChipIcon className={iconClass} />;
-      case "Resume": return <DocumentTextIcon className={iconClass} />;
-      case "Travel": return <GlobeAltIcon className={iconClass} />;
-      case "Snake": return <PuzzleIcon className={iconClass} />;
-      default: return null;
-    }
-  };
+  // Memoized section IDs for scroll spy
+  const sectionIds = useMemo(
+    () => [
+      ...NAV_ITEMS.filter((item) => isScrollLink(item.link)).map((item) =>
+        getLinkHash(item.link)
+      ),
+      getLinkHash(CONTACT_CTA.link),
+    ],
+    []
+  );
 
+  // Handlers
   const closeMenu = useCallback(() => setOpen(false), []);
   const toggleMenu = useCallback(() => setOpen((prev) => !prev), []);
   const navRef = useClickOutside(closeMenu);
 
+  // Handle resume click - external PDF
+  const handleResumeClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      trackResumeView();
+      window.open(RESUME_URL, "_blank", "noopener,noreferrer");
+      closeMenu();
+    },
+    [closeMenu]
+  );
+
+  // Handle snake/game navigation
+  const handleGameClick = useCallback(
+    (e: React.MouseEvent, link: string) => {
+      e.preventDefault();
+      if (location.pathname === link) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        navigate(link);
+      }
+      closeMenu();
+    },
+    [navigate, closeMenu, location.pathname]
+  );
+
+  // Handle scroll-to-section links
+  const handleScrollLinkClick = useCallback(
+    (e: React.MouseEvent, link: string) => {
+      const targetRoute = isScrollLink(link) ? "/" : link;
+      if (location.pathname === targetRoute && !link.includes("#")) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      closeMenu();
+    },
+    [closeMenu, location.pathname]
+  );
+
+  // Unified link click handler
+  const handleLinkClick = useCallback(
+    (e: React.MouseEvent, item: NavItem) => {
+      switch (item.type) {
+        case "external":
+          handleResumeClick(e);
+          break;
+        case "route":
+          handleGameClick(e, item.link);
+          break;
+        case "scroll":
+        default:
+          handleScrollLinkClick(e, item.link);
+          break;
+      }
+    },
+    [handleResumeClick, handleGameClick, handleScrollLinkClick]
+  );
+
+  // Handle logo click
+  const handleLogoClick = useCallback(
+    (e: React.MouseEvent) => {
+      if (location.pathname === "/" && !LOGO_LINK.includes("#")) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+      closeMenu();
+    },
+    [closeMenu, location.pathname]
+  );
+
+  // Handle contact CTA click
+  const handleContactClick = useCallback(
+    (e: React.MouseEvent) => {
+      void e;
+      if (location.pathname === "/") {
+        // Let HashLink handle scrolling
+        closeMenu();
+      } else {
+        // Navigate to home with hash
+        navigate(CONTACT_CTA.link);
+        closeMenu();
+      }
+    },
+    [closeMenu, location.pathname, navigate]
+  );
+
+  // Open AI chat from mobile menu
+  const handleOpenChat = useCallback(() => {
+    closeMenu();
+    window.dispatchEvent(new CustomEvent("openAIChat"));
+  }, [closeMenu]);
+
+  // Scroll spy for active section
   useEffect(() => {
     const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const totalHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
 
-      const allSectionIds = [
-        ...NAV_LINKS.map((link) => link.link.split("#")[1]).filter(Boolean),
-        "contact",
-      ];
-      const sections = allSectionIds
+      const sections = sectionIds
         .map((id) => document.getElementById(id))
         .filter(Boolean);
       const scrollPosition = window.scrollY + window.innerHeight / 3;
@@ -87,8 +167,9 @@ export const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [sectionIds]);
 
+  // Mobile menu body scroll lock
   useEffect(() => {
     if (!isMobile && open) closeMenu();
     document.body.style.overflow = open ? "hidden" : "";
@@ -99,48 +180,24 @@ export const Navbar = () => {
     };
   }, [isMobile, open, closeMenu]);
 
-  const handleSnakeClick = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault();
-      if (location.pathname === "/snake") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        navigate("/snake");
-      }
-      closeMenu();
+  // Helper to check if a nav item is active
+  const isItemActive = useCallback(
+    (item: NavItem): boolean => {
+      const linkHash = getLinkHash(item.link);
+      return (
+        (linkHash && activeSection === linkHash) ||
+        location.pathname === item.link
+      );
     },
-    [navigate, closeMenu, location.pathname]
+    [activeSection, location.pathname]
   );
 
-  const handleLinkClick = useCallback(
-    (
-      e: React.MouseEvent<HTMLAnchorElement>,
-      linkPath: string,
-      linkName: string
-    ) => {
-      if (linkName === "Resume") {
-        e.preventDefault();
-        trackResumeView();
-        window.open(
-          "/andrew-alagna-resume.pdf",
-          "_blank",
-          "noopener,noreferrer"
-        );
-        closeMenu();
-        return;
-      }
-      const targetRoute = linkPath.startsWith("/#") ? "/" : linkPath;
-      if (
-        location.pathname === targetRoute &&
-        !linkPath.includes("#")
-      ) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-      closeMenu();
-    },
-    [closeMenu, location.pathname]
-  );
+  // Helper to check if logo is active
+  const isLogoActive =
+    activeSection === "" || activeSection === LOGO_SECTION;
+
+  // Helper to check if contact is active
+  const isContactActive = activeSection === getLinkHash(CONTACT_CTA.link);
 
   return (
     <nav
@@ -157,20 +214,20 @@ export const Navbar = () => {
       <div className="flex justify-between items-center py-3 px-4 lg:px-12 max-w-[1600px] mx-auto">
         {/* Logo */}
         <Link
-          to="/#about"
+          to={LOGO_LINK}
           scroll={scrollWithOffset}
           aria-label="Andrew Alagna - Home"
-          className={`font-bold text-xl cursor-pointer inline-flex items-center font-[Poppins] transition-all focus-ring whitespace-nowrap group px-2 py-1 rounded-lg border ${activeSection === "" || activeSection === "#about"
+          className={`font-bold text-xl cursor-pointer inline-flex items-center font-[Poppins] transition-all focus-ring whitespace-nowrap px-2 py-1 rounded-lg border ${
+            isLogoActive
               ? "text-cyan-400 bg-cyan-500/10 border-cyan-500/30"
               : "text-slate-200 hover:text-white border-transparent hover:border-cyan-500/30"
-            }`}
-          onClick={(e) => handleLinkClick(e, "/#about", "Home")}
+          }`}
+          onClick={handleLogoClick}
         >
           <MonogramOverlap
-            className={`w-8 h-8 lg:w-9 lg:h-9 mr-2 group-hover:scale-110 transition-transform ${activeSection === "" || activeSection === "#about"
-                ? "text-cyan-400"
-                : "text-cyan-500"
-              }`}
+            className={`w-8 h-8 lg:w-9 lg:h-9 mr-2 transition-transform group-hover:scale-110 ${
+              isLogoActive ? "text-cyan-400" : "text-cyan-500"
+            }`}
           />
           <span className="hidden sm:inline tracking-tight">
             Andrew Alagna
@@ -199,15 +256,15 @@ export const Navbar = () => {
         {/* Mobile menu panel */}
         {isMobile && (
           <div
-            className={`fixed left-0 w-screen h-[calc(100vh-68px)] overflow-y-auto bg-slate-900 transition-all duration-300 ease-in-out z-40 ${open
+            className={`fixed left-0 w-screen h-[calc(100vh-68px)] overflow-y-auto bg-slate-900 transition-all duration-300 ease-in-out z-40 ${
+              open
                 ? "top-[68px] opacity-100 translate-x-0"
                 : "top-[68px] opacity-0 -translate-x-full pointer-events-none"
-              }`}
+            }`}
             aria-hidden={!open}
           >
             <div className="px-4 py-4 flex flex-col h-full">
-
-              {/* AI Chat card — tighter spacing */}
+              {/* AI Chat card */}
               <div className="mb-3 p-2.5 bg-slate-800/80 rounded-xl flex items-center gap-3 border border-slate-700/60">
                 <div className="p-1.5 bg-cyan-500/20 rounded-lg shrink-0">
                   <ChatAlt2Icon className="w-4 h-4 text-cyan-400" />
@@ -216,101 +273,63 @@ export const Navbar = () => {
                   Ask my AI anything about me
                 </span>
                 <button
-                  onClick={() => {
-                    closeMenu();
-                    window.dispatchEvent(new CustomEvent("openAIChat"));
-                  }}
+                  onClick={handleOpenChat}
                   className="shrink-0 px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-xs font-semibold transition-colors"
                 >
                   Chat
                 </button>
               </div>
 
-              {/* Nav links — unified container for cohesion */}
+              {/* Nav links */}
               <div className="bg-slate-800/40 rounded-2xl border border-slate-700/40 p-2 flex-1">
                 <ul className="grid grid-cols-1 gap-1">
-                  {NAV_LINKS.map((link, index) => {
-                    const linkHash = link.link.includes("#")
-                      ? `#${link.link.split("#")[1]}`
-                      : "";
-                    const isActive =
-                      (linkHash && activeSection === linkHash) ||
-                      location.pathname === link.link;
-                    const iconColors = getNavIconBg(link.name);
+                  {NAV_ITEMS.map((item, index) => {
+                    const active = isItemActive(item);
+                    const Icon = item.icon;
 
                     return (
                       <li
-                        key={link.name}
+                        key={item.name}
                         style={{ transitionDelay: `${index * 40}ms` }}
-                        className={`transition-all duration-300 ${open
+                        className={`transition-all duration-300 ${
+                          open
                             ? "opacity-100 translate-x-0"
                             : "opacity-0 -translate-x-4"
-                          }`}
+                        }`}
                       >
                         <Link
-                          to={link.link}
+                          to={item.link}
                           scroll={scrollWithOffset}
-                          className={`flex items-center px-3 py-3.5 rounded-xl text-base font-medium transition-all ${isActive
+                          className={`flex items-center px-3 py-3.5 rounded-xl text-base font-medium transition-all ${
+                            active
                               ? "bg-slate-700/60 text-cyan-400 border-l-4 border-cyan-400 pl-2"
                               : "text-slate-300 hover:bg-slate-700/40 hover:text-white"
-                            }`}
-                          onClick={(e) =>
-                            handleLinkClick(e, link.link, link.name)
-                          }
+                          }`}
+                          onClick={(e) => handleLinkClick(e, item)}
                         >
                           <span
-                            className={`p-1.5 rounded-lg mr-3 shrink-0 ${isActive ? iconColors : "bg-slate-700/80 text-slate-400"
-                              }`}
+                            className={`p-1.5 rounded-lg mr-3 shrink-0 ${
+                              active ? item.iconBg : "bg-slate-700/80 text-slate-400"
+                            }`}
                           >
-                            {getNavIcon(link.name)}
+                            <Icon className="w-5 h-5" />
                           </span>
-                          {link.name}
+                          {item.name}
                         </Link>
                       </li>
                     );
                   })}
-
-                  {/* Snake */}
-                  <li
-                    style={{
-                      transitionDelay: `${NAV_LINKS.length * 40}ms`,
-                    }}
-                    className={`transition-all duration-300 ${open
-                        ? "opacity-100 translate-x-0"
-                        : "opacity-0 -translate-x-4"
-                      }`}
-                  >
-                    <button
-                      onClick={handleSnakeClick}
-                      className={`flex items-center w-full px-3 py-3.5 rounded-xl text-base font-medium transition-all ${location.pathname === "/snake"
-                          ? "bg-slate-700/60 text-cyan-400 border-l-4 border-cyan-400 pl-2"
-                          : "text-slate-300 hover:bg-slate-700/40 hover:text-white"
-                        }`}
-                    >
-                      <span
-                        className={`p-1.5 rounded-lg mr-3 shrink-0 ${location.pathname === "/snake"
-                            ? getNavIconBg("Snake")
-                            : "bg-slate-700/80 text-slate-400"
-                          }`}
-                      >
-                        {getNavIcon("Snake")}
-                      </span>
-                      Snake
-                    </button>
-                  </li>
                 </ul>
               </div>
 
-              {/* Contact button — more separation + padding for FAB */}
+              {/* Contact button */}
               <div className="mt-4 pb-20">
                 <Link
-                  to="/#contact"
+                  to={CONTACT_CTA.link}
                   className="block w-full py-3 bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white text-center rounded-xl font-bold text-base shadow-lg shadow-purple-500/20 transition-all"
-                  onClick={(e) =>
-                    handleLinkClick(e, "/#contact", "Contact")
-                  }
+                  onClick={handleContactClick}
                 >
-                  Contact Me
+                  {CONTACT_CTA.name} Me
                 </Link>
               </div>
             </div>
@@ -320,57 +339,39 @@ export const Navbar = () => {
         {/* Desktop nav */}
         <div className="hidden lg:flex items-center flex-1 justify-end">
           <ul className="flex items-center space-x-2 mr-6">
-            {NAV_LINKS.map((link) => {
-              const linkHash = link.link.includes("#")
-                ? `#${link.link.split("#")[1]}`
-                : "";
-              const isActive =
-                (linkHash && activeSection === linkHash) ||
-                location.pathname === link.link;
+            {NAV_ITEMS.map((item) => {
+              const active = isItemActive(item);
 
               return (
-                <li key={link.name}>
+                <li key={item.name}>
                   <Link
-                    to={link.link}
+                    to={item.link}
                     scroll={scrollWithOffset}
-                    className={`px-3 py-1.5 rounded-md text-base xl:text-lg font-medium transition-all duration-300 border border-transparent hover:border-cyan-500/50 hover:text-white ${isActive
+                    className={`px-3 py-1.5 rounded-md text-base xl:text-lg font-medium transition-all duration-300 border border-transparent hover:border-cyan-500/50 hover:text-white ${
+                      active
                         ? "text-cyan-400 bg-cyan-500/10 !border-cyan-500/30"
                         : "text-slate-300"
-                      }`}
-                    onClick={(e) =>
-                      handleLinkClick(e, link.link, link.name)
-                    }
+                    }`}
+                    onClick={(e) => handleLinkClick(e, item)}
                   >
-                    {link.name}
+                    {item.name}
                   </Link>
                 </li>
               );
             })}
-            <li>
-              <button
-                onClick={handleSnakeClick}
-                className={`px-3 py-1.5 rounded-md text-base xl:text-lg font-medium transition-all duration-300 border border-transparent hover:border-cyan-500/50 hover:text-white ${location.pathname === "/snake"
-                    ? "text-cyan-400 bg-cyan-500/10 !border-cyan-500/30"
-                    : "text-slate-300"
-                  }`}
-              >
-                Snake
-              </button>
-            </li>
           </ul>
 
           <div className="pl-6 border-l border-slate-700/50">
             <Link
-              to="/#contact"
-              className={`flex items-center px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 ${activeSection === "#contact"
+              to={CONTACT_CTA.link}
+              className={`flex items-center px-6 py-2 rounded-full font-bold text-sm transition-all duration-300 ${
+                isContactActive
                   ? "bg-purple-500 text-white shadow-lg shadow-purple-500/40 scale-105"
                   : "bg-purple-700/80 text-slate-100 hover:bg-purple-600 hover:text-white hover:scale-105"
-                }`}
-              onClick={(e) =>
-                handleLinkClick(e, "/#contact", "Contact")
-              }
+              }`}
+              onClick={handleContactClick}
             >
-              Contact
+              {CONTACT_CTA.name}
               <ArrowRightIcon className="w-4 h-4 ml-2" />
             </Link>
           </div>

@@ -12,7 +12,17 @@
 export { APP_CONFIG } from './app';
 
 // Navigation and social links
-export { SOCIAL_LINKS, NAV_LINKS, SCROLL_CONFIG, scrollWithOffset } from './nav';
+export {
+  SOCIAL_LINKS,
+  NAV_LINKS,
+  NAV_ITEMS,
+  CONTACT_CTA,
+  SCROLL_CONFIG,
+  scrollWithOffset,
+  getLinkHash,
+  isScrollLink,
+} from './nav';
+export type { NavItem, NavItemType, IconComponent } from './nav';
 
 // Timing configuration
 export { TIMING } from './timing';
