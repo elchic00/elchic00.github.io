@@ -38,10 +38,10 @@ async function optimizeImage(inputPath, outputDir, options) {
 
   try {
     const image = sharp(inputPath);
+    let pipeline = image.rotate();
     const metadata = await image.metadata();
 
     // Resize if needed
-    let pipeline = image;
     if (metadata.width > options.maxWidth) {
       pipeline = pipeline.resize(options.maxWidth, null, {
         withoutEnlargement: true,
