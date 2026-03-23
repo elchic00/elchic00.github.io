@@ -94,11 +94,11 @@ export const handleAction = (action: string, onClose?: () => void) => {
       navigateToSection("contact");
       break;
     case "view_projects":
-      window.location.href = "/#/projects";
+      window.location.href = "/projects";
       onClose?.();
       break;
     case "view_travel":
-      window.location.href = "/#/travel";
+      window.location.href = "/travel";
       onClose?.();
       break;
     case "view_experience":
@@ -106,7 +106,7 @@ export const handleAction = (action: string, onClose?: () => void) => {
       navigateToSection("accessibility-expertise");
       break;
     case "play_snake":
-      window.location.href = "/#/snake";
+      window.location.href = "/snake";
       onClose?.();
       break;
     case "send_email":
@@ -127,7 +127,7 @@ const navigateToSection = (sectionId: string) => {
     }, 300);
   } else {
     // Section doesn't exist - navigate to home page with hash
-    // Use /#/#section format for hash routing compatibility
-    window.location.href = `/#/#${sectionId}`;
+    // Use /#section format for BrowserRouter compatibility
+    window.location.href = `/#${sectionId}`;
   }
 };
