@@ -3,12 +3,21 @@ import {
   HeartIcon,
   ExternalLinkIcon,
 } from "@heroicons/react/solid";
+import { useScrollReveal } from "../../hooks";
 
 export const AccessibilityExpertise = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
+  const { ref: card1Ref, isVisible: card1Visible } = useScrollReveal();
+  const { ref: card2Ref, isVisible: card2Visible } = useScrollReveal();
+  const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
+
   return (
     <section id="accessibility-expertise" className="relative py-20 bg-slate-900">
       <div className="container mx-auto px-5 sm:px-8 md:px-10">
-        <div className="text-center mb-12">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-12 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
+        >
           <span className="inline-block px-4 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-semibold mb-4">
             Perfect Lighthouse Score: 100/100
           </span>
@@ -22,7 +31,10 @@ export const AccessibilityExpertise = () => {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Professional Card: AmEx */}
-          <article className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-cyan-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
+          <article 
+            ref={card1Ref}
+            className={`bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-cyan-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02] scroll-reveal-left ${card1Visible ? 'visible' : ''}`}
+          >
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-cyan-600/20 p-3 rounded-lg">
                 <BriefcaseIcon className="w-8 h-8 text-cyan-400" />
@@ -56,7 +68,10 @@ export const AccessibilityExpertise = () => {
           </article>
 
           {/* Personal Card: myPal */}
-          <article className="bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-purple-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]">
+          <article 
+            ref={card2Ref}
+            className={`bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-purple-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02] scroll-reveal-right ${card2Visible ? 'visible' : ''}`}
+          >
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-purple-600/20 p-3 rounded-lg">
                 <HeartIcon className="w-8 h-8 text-purple-400" />
@@ -91,7 +106,10 @@ export const AccessibilityExpertise = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-12 text-center">
+        <div 
+          ref={ctaRef}
+          className={`mt-12 text-center scroll-reveal ${ctaVisible ? 'visible' : ''}`}
+        >
           <p className="text-slate-400 mb-4">
             View the Lighthouse report and technical implementation details
           </p>
