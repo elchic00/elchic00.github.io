@@ -17,6 +17,7 @@ interface ChatMessageProps {
 export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProps) => {
   const [copied, setCopied] = useState(false);
   const displayedContent = useStreamingText(message.content, message.isStreaming || false);
+  const isStreaming = message.isStreaming || false;
 
   const handleCopy = async () => {
     try {
@@ -62,12 +63,18 @@ export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProp
 
         {message.role === "assistant" ? (
           <>
-            <div
-              className="text-sm assistant-message-content"
-              dangerouslySetInnerHTML={{
-                __html: renderMarkdown(displayedContent),
-              }}
-            />
+            {isStreaming ? (
+              // During streaming, render plain text to preserve whitespace
+              <p className="text-sm whitespace-pre-wrap">{displayedContent}</p>
+            ) : (
+              // After streaming completes, render markdown
+              <div
+                className="text-sm assistant-message-content"
+                dangerouslySetInnerHTML={{
+                  __html: renderMarkdown(displayedContent),
+                }}
+              />
+            )}
             {message.actions && message.actions.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-3">
                 {message.actions.map((action, idx) => {
