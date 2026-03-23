@@ -217,7 +217,7 @@ Andrew's travel photography demonstrates attention to detail, creativity, and ap
 
 When users ask to see photos or visit a specific trip (e.g., "show me Puerto Rico", "let me see the Thailand trip", "take me to Costa Rica"), provide a clickable link using this format:
 
-[View Puerto Rico Trip](https://elchic00.github.io/#/travel#puertorico-2024)
+[View Puerto Rico Trip](https://elchic00.github.io/travel#puertorico-2024)
 
 Replace the trip ID at the end with the appropriate one from the list above:
 - Ecuador/Galapagos: ecuador-2024
@@ -232,7 +232,7 @@ Always use the full URL format with markdown link syntax for clickability.
 - LinkedIn: https://www.linkedin.com/in/andrew-a-10b88215b/ (1,167 followers - strong professional network)
 - GitHub: https://www.github.com/elchic00/
 - Portfolio: https://elchic00.github.io/
-- Travel Photos: https://elchic00.github.io/#/travel
+- Travel Photos: https://elchic00.github.io/travel
 - Email: aalagna04@gmail.com
 - Phone: 917-601-9404
 - Location: New York, NY
