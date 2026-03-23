@@ -18,10 +18,19 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
     // Skip if no trip IDs provided
     if (!tripIds.length) return;
 
-    // Set initial active ID from hash
+    // Set initial active ID from hash (handle both #trip-id and #/travel#trip-id formats)
     const fullHash = window.location.hash;
     const hashParts = fullHash.split('#');
-    const tripHash = hashParts[hashParts.length - 1];
+    let tripHash = "";
+    
+    // Get the last valid trip ID from hash
+    for (let i = hashParts.length - 1; i >= 0; i--) {
+      const part = hashParts[i];
+      if (part && part !== "/travel" && !part.startsWith("/")) {
+        tripHash = part;
+        break;
+      }
+    }
 
     if (tripHash && tripIds.includes(tripHash)) {
       setActiveId(tripHash);
@@ -54,14 +63,14 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
         if (mostVisibleTrip && mostVisibleTrip !== activeId) {
           setActiveId(mostVisibleTrip);
           
-          // Update URL without triggering navigation
+          // Update URL without triggering navigation (BrowserRouter compatible)
           if (!isUpdatingRef.current) {
             isUpdatingRef.current = true;
             try {
               window.history.replaceState(
                 { ...window.history.state, tripId: mostVisibleTrip },
                 "",
-                `#/travel#${mostVisibleTrip}`
+                `/travel#${mostVisibleTrip}`
               );
             } catch (e) {
               console.warn('Failed to update URL:', e);
@@ -95,7 +104,15 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
     const handleHashChange = () => {
       const fullHash = window.location.hash;
       const hashParts = fullHash.split('#');
-      const tripHash = hashParts[hashParts.length - 1];
+      let tripHash = "";
+      
+      for (let i = hashParts.length - 1; i >= 0; i--) {
+        const part = hashParts[i];
+        if (part && part !== "/travel" && !part.startsWith("/")) {
+          tripHash = part;
+          break;
+        }
+      }
 
       if (tripHash && tripIds.includes(tripHash)) {
         setActiveId(tripHash);

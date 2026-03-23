@@ -29,23 +29,35 @@ export const Travel = () => {
     }
     script.textContent = JSON.stringify(structuredData);
 
-    // Handle hash scrolling
+    // Handle hash scrolling for BrowserRouter
     const handleHashScroll = () => {
-      const fullHash = window.location.hash;
-      const hashParts = fullHash.split('#');
-      const tripHash = hashParts[hashParts.length - 1];
+      const hash = window.location.hash;
+      
+      // Extract trip ID from hash (format: #trip-id or #/travel#trip-id from old URLs)
+      let tripId = "";
+      if (hash.includes("#")) {
+        const parts = hash.split("#");
+        // Get the last part that's not empty and not "/travel"
+        for (let i = parts.length - 1; i >= 0; i--) {
+          const part = parts[i];
+          if (part && part !== "/travel" && !part.startsWith("/")) {
+            tripId = part;
+            break;
+          }
+        }
+      }
 
-      if (tripHash && tripHash !== '/travel' && !tripHash.startsWith('/')) {
+      if (tripId && tripId !== "travel") {
         const scrollToHash = () => {
           try {
-            const element = document.getElementById(tripHash);
+            const element = document.getElementById(tripId);
             if (element) {
               setTimeout(() => {
                 element.scrollIntoView({ behavior: "smooth", block: "start" });
               }, TIMING.INITIAL_SCROLL_DELAY);
             }
           } catch (error) {
-            console.warn('Invalid trip hash:', tripHash);
+            console.warn('Invalid trip hash:', tripId);
           }
         };
 

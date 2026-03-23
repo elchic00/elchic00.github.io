@@ -55,7 +55,8 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
         behavior: "smooth",
       });
 
-      window.history.replaceState(null, "", `#/travel#${tripId}`);
+      // Update URL hash for the trip section (BrowserRouter compatible)
+      window.history.replaceState(null, "", `/travel#${tripId}`);
     }
   };
 
