@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { XIcon, ChatIcon } from "@heroicons/react/solid";
 import { ChatWindow } from "./ChatWindow";
-import { loadMarked, parseActionsFromContent, handleAction } from "./utils";
+import { loadMarked, parseActionsFromContent, handleAction, detectActionsFromQuestion } from "./utils";
 import type { Message } from "./types";
 import { generateMessageId } from "./types";
 import { useLocalStorage } from "../../hooks";
@@ -180,7 +180,12 @@ export const AIChatAssistant = () => {
       }
 
       const data = await response.json();
-      const { cleanContent, actions } = parseActionsFromContent(data.response);
+      const { cleanContent, actions: parsedActions } = parseActionsFromContent(data.response);
+      
+      // Use parsed actions from AI, or detect from question as fallback
+      const actions = parsedActions.length > 0 
+        ? parsedActions 
+        : detectActionsFromQuestion(userMessage);
 
       // Track successful response
       trackResponseReceived(true, responseTime, (actions?.length ?? 0) > 0);

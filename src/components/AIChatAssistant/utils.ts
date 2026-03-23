@@ -51,6 +51,67 @@ export const parseActionsFromContent = (
 };
 
 /**
+ * Detects relevant actions based on user question
+ * Used as fallback when AI doesn't include action markers
+ */
+export const detectActionsFromQuestion = (question: string): string[] => {
+  const lowerQuestion = question.toLowerCase();
+  const actions: string[] = [];
+
+  // Contact-related
+  if (/contact|reach|email|hire|work with|get in touch/i.test(lowerQuestion)) {
+    actions.push("contact_form", "send_email");
+  }
+
+  // Resume/CV
+  if (/resume|cv|curriculum/i.test(lowerQuestion)) {
+    actions.push("view_resume");
+  }
+
+  // Projects
+  if (/project|portfolio|built|created|github/i.test(lowerQuestion)) {
+    actions.push("view_projects", "view_github");
+  }
+
+  // Travel/Photos
+  if (/travel|photo|gallery|trip|country|visit/i.test(lowerQuestion)) {
+    actions.push("view_travel");
+  }
+
+  // Experience/Work
+  if (/experience|work|job|career|american express|amex/i.test(lowerQuestion)) {
+    actions.push("view_experience", "view_resume");
+  }
+
+  // Skills/Tech
+  if (/skill|tech|stack|react|javascript|typescript/i.test(lowerQuestion)) {
+    actions.push("view_projects");
+  }
+
+  // Social/Online presence
+  if (/linkedin|social|online|find you/i.test(lowerQuestion)) {
+    actions.push("view_linkedin", "view_github");
+  }
+
+  // Snake game
+  if (/snake|game|play/i.test(lowerQuestion)) {
+    actions.push("play_snake");
+  }
+
+  // Features/Portfolio questions (like the one in the screenshot)
+  if (/feature|unique|special|what.*(have|does|include)|portfolio/i.test(lowerQuestion)) {
+    actions.push("view_projects", "view_travel", "play_snake");
+  }
+
+  // Complex questions - offer to ask directly
+  if (/help|assist|question about|specific|complex/i.test(lowerQuestion) && actions.length === 0) {
+    actions.push("ask_directly");
+  }
+
+  return [...new Set(actions)]; // Remove duplicates
+};
+
+/**
  * Formats timestamp as relative time (e.g., "Just now", "2 min ago")
  */
 export const formatRelativeTime = (timestamp: number): string => {
