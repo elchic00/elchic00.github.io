@@ -9,6 +9,9 @@ const path = require('path');
 const BUILD_DIR = path.join(__dirname, '../build');
 const INDEX_HTML = path.join(BUILD_DIR, 'index.html');
 
+// Routes that need static HTML files for SEO
+const ROUTES = ['projects', 'travel', 'snake'];
+
 // Critical CSS for above-the-fold content (navbar, hero section)
 const CRITICAL_CSS = `
 <style>
@@ -49,7 +52,7 @@ function inlineCriticalCSS() {
     // Check if critical CSS is already inlined
     if (html.includes('/* Critical CSS - Inlined for performance */')) {
       console.log('Critical CSS already inlined, skipping...');
-      return;
+      return html;
     }
 
     // Find the CSS link tag
@@ -72,18 +75,73 @@ function inlineCriticalCSS() {
         `${CRITICAL_CSS}\n    ${deferredCssLink}\n    ${noscriptFallback}`
       );
 
-      // Write the modified HTML back
-      fs.writeFileSync(INDEX_HTML, html, 'utf8');
-
       console.log('✅ Critical CSS inlined successfully!');
-      console.log('📊 This should improve your mobile performance score');
+      return html;
     } else {
       console.warn('⚠️  No CSS link found in index.html');
+      return html;
     }
   } catch (error) {
     console.error('❌ Error inlining critical CSS:', error);
+    throw error;
+  }
+}
+
+function createRouteDirectories(html) {
+  try {
+    console.log('Creating static route files for SEO...');
+
+    ROUTES.forEach(route => {
+      const routeDir = path.join(BUILD_DIR, route);
+      
+      // Create directory if it doesn't exist
+      if (!fs.existsSync(routeDir)) {
+        fs.mkdirSync(routeDir, { recursive: true });
+        console.log(`📁 Created directory: ${route}/`);
+      }
+
+      // Write index.html to the route directory
+      const routeHtmlPath = path.join(routeDir, 'index.html');
+      
+      // Update canonical URL for the specific route
+      const routeHtml = html.replace(
+        /<link rel="canonical" href="https:\/\/elchic00.github.io\/" \/>/,
+        `<link rel="canonical" href="https://elchic00.github.io/${route}/" />`
+      ).replace(
+        /<meta property="og:url" content="https:\/\/elchic00.github.io\/" \/>/,
+        `<meta property="og:url" content="https://elchic00.github.io/${route}/" />`
+      );
+      
+      fs.writeFileSync(routeHtmlPath, routeHtml, 'utf8');
+      console.log(`📝 Created: ${route}/index.html`);
+    });
+
+    console.log('✅ Static route files created successfully!');
+  } catch (error) {
+    console.error('❌ Error creating route directories:', error);
+    throw error;
+  }
+}
+
+function main() {
+  try {
+    const html = inlineCriticalCSS();
+    
+    // Write the modified HTML back to root
+    fs.writeFileSync(INDEX_HTML, html, 'utf8');
+    console.log('📊 This should improve your mobile performance score');
+    
+    // Create static files for each route
+    createRouteDirectories(html);
+    
+    console.log('\n🎉 Build post-processing complete!');
+    console.log('   - Routes now have static HTML files for SEO');
+    console.log('   - Critical CSS is inlined for performance');
+    console.log('   - GitHub Pages will serve proper URLs: /projects, /travel, /snake');
+  } catch (error) {
+    console.error('❌ Build post-processing failed:', error);
     process.exit(1);
   }
 }
 
-inlineCriticalCSS();
+main();
