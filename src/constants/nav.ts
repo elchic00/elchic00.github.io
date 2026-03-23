@@ -67,13 +67,6 @@ export const NAV_ITEMS: NavItem[] = [
     type: "route",
   },
   {
-    name: "Resume",
-    link: "#resume",
-    icon: DocumentTextIcon,
-    iconBg: "bg-purple-500/20 text-purple-400",
-    type: "external",
-  },
-  {
     name: "Travel",
     link: "/travel",
     icon: GlobeAltIcon,
@@ -87,6 +80,13 @@ export const NAV_ITEMS: NavItem[] = [
     iconBg: "bg-green-500/20 text-green-400",
     type: "route",
   },
+  {
+    name: "Resume",
+    link: "#resume",
+    icon: DocumentTextIcon,
+    iconBg: "bg-purple-500/20 text-purple-400",
+    type: "external",
+  }
 ] as const;
 
 // CTA button configuration (separate from main nav)
@@ -120,3 +120,7 @@ export const getLinkHash = (link: string): string => {
 // Helper to check if link is a scroll target (starts with /#)
 export const isScrollLink = (link: string): boolean =>
   link.startsWith("/#") && link.includes("#");
+
+export const RESUME_URL = "/andrew-alagna-resume.pdf";
+export const LOGO_LINK = "/#about";
+export const LOGO_SECTION = "#about";

@@ -21,6 +21,9 @@ export {
   scrollWithOffset,
   getLinkHash,
   isScrollLink,
+  RESUME_URL,
+  LOGO_LINK,
+  LOGO_SECTION,
 } from './nav';
 export type { NavItem, NavItemType, IconComponent } from './nav';
 
