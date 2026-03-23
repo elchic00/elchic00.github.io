@@ -4,7 +4,7 @@ import { scrollWithOffset, TIMING } from "../constants";
 
 /**
  * Component that automatically scrolls to hash anchors on page load
- * Handles URLs like /#/#projects when opened directly in browser
+ * Handles URLs like /#projects when opened directly in browser
  */
 export const ScrollToHash = () => {
   const location = useLocation();
