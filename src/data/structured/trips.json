@@ -224,11 +224,6 @@
         "caption": "Up close to the golden temple"
       },
       {
-        "url": "/images/travel/thailand/andrew-alagna-small-temple.webp",
-        "alt": "Andrew Alagna Buddhist temple countryside Thailand",
-        "caption": "A peaceful temple in the countryside"
-      },
-      {
         "url": "/images/travel/thailand/andrew-alagna-elephant.webp",
         "alt": "Andrew Alagna elephant sanctuary Chiang Mai Thailand",
         "caption": "Meeting gentle giants at the elephant sanctuary"
@@ -272,6 +267,11 @@
         "url": "/images/travel/thailand/andrew-alagna-jungle-night.webp",
         "alt": "Andrew Alagna jungle night photography Thailand",
         "caption": "Night time in the jungle"
+      },
+            {
+        "url": "/images/travel/thailand/andrew-alagna-small-temple.webp",
+        "alt": "Andrew Alagna Buddhist temple countryside Thailand",
+        "caption": "A peaceful temple in Bangkok"
       }
     ]
   },
