@@ -16,25 +16,28 @@ export const About = () => {
         <img
           src="/images/nyc-sunset.webp"
           alt=""
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-[center_38%]"
           loading="eager"
           {...({ fetchpriority: "high" } as any)}
         />
-        {/* Base darkening */}
-        <div className="absolute inset-0 bg-slate-950/50" />
-        {/* Top-heavy vertical gradient — kills the bright sky zone specifically */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/85 via-slate-950/40 to-slate-950/10" />
+        {/* Single light overlay — just enough to ground the photo, card does the rest */}
+        <div className="absolute inset-0 bg-slate-950/45" />
       </div>
 
       <div className="container mx-auto flex px-5 sm:px-8 md:px-10 py-20 lg:flex-row flex-col items-center relative z-10">
-        {/* mt-16 pushes the card down, away from the brightest sky */}
         <div className="lg:flex-grow lg:w-1/2 lg:pr-16 flex flex-col lg:items-start lg:text-left mb-16 lg:mb-0 items-center text-center mt-16">
-          <div className="bg-slate-950/85 backdrop-blur-md rounded-2xl p-6 sm:p-8 lg:p-10 ring-1 ring-white/10 shadow-2xl">
-            {/* White heading — no more cyan-vs-orange clash */}
+          {/* 
+            Using inline style for background to bypass any Tailwind JIT issues with /95.
+            No backdrop-blur — it can interfere with bg-color rendering in Chrome.
+          */}
+          <div
+            className="rounded-2xl p-6 sm:p-8 lg:p-10 ring-1 ring-white/10 shadow-2xl"
+            style={{ backgroundColor: "rgba(2, 6, 23, 0.96)" }}
+          >
             <p className="text-xl text-white mb-4 animate-fade-in-delay-2 font-medium tracking-wide">
               Hey there! I'm Drew 👋
             </p>
-            {/* text-white/90 instead of text-slate-100 for max contrast */}
+
             <p className="mb-7 leading-relaxed text-white/90 text-lg animate-fade-in-delay-3 max-w-xl">
               Software engineer at American Express building web applications for
               millions of users. I care deeply about accessibility and performance
@@ -46,7 +49,14 @@ export const About = () => {
               bouldering, traveling, or building side projects.
               <br />
               <br />
-              <span className="text-cyan-300 font-semibold tracking-tight">
+              {/* 
+                Switched from text-cyan-300 to text-white with a cyan text-shadow.
+                Preserves the cyan feel without the blue-on-orange contrast problem.
+              */}
+              <span
+                className="font-semibold tracking-tight text-white"
+                style={{ textShadow: "0 0 12px rgba(103, 232, 249, 0.8)" }}
+              >
                 NYC based. Always learning.
               </span>
             </p>
