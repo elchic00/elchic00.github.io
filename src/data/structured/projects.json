@@ -1,11 +1,11 @@
 [
   {
-    "title": "myPal",
-    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
-    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
-    "image": "/images/projects/mypal-demo.mp4",
-    "link": "https://github.com/myPal-TMS/myPal",
-    "id": "mypal"
+    "title": "Pi-Cloud",
+    "subtitle": "High-Performance Edge Gateway",
+    "description": "A self-hosted Home Lab on a Raspberry Pi 5 (8GB) replacing third-party SaaS with a privacy-first observability stack. Features Zero-Trust Networking via Tailscale Exit Nodes (WireGuard), hardened SSH with ED25519 keys and CrowdSec IPS, recursive DNS shield using Unbound talking directly to Root Nameservers with Pi-hole sinkholing, and automated container lifecycle management via Watchtower with Docker Engine v29+ compatibility.",
+    "image": "/images/projects/pi-cloud.webp",
+    "link": "https://github.com/elchic00/pi-cloud",
+    "id": "pi-cloud"
   },
   {
     "title": "myTeachers",
@@ -15,13 +15,13 @@
     "link": "https://github.com/elchic00/CunyFirst-front",
     "id": "myteachers"
   },
-  {
-    "title": "Macros-for-geeks",
-    "subtitle": "Angular, .Net, SQLite",
-    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
-    "image": "/images/projects/macros-demo.mp4",
-    "link": "https://github.com/elchic00/Macros-for-geeks",
-    "id": "macros-for-geeks"
+    {
+    "title": "myPal",
+    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
+    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
+    "image": "/images/projects/mypal-demo.mp4",
+    "link": "https://github.com/myPal-TMS/myPal",
+    "id": "mypal"
   },
   {
     "title": "Invent0ry",
@@ -49,5 +49,13 @@
     "image": "/images/projects/crime.webp",
     "link": "https://elchic00.github.io/CrimeInQueens",
     "id": "crime-in-queens-nyc"
+  },
+    {
+    "title": "Macros-for-geeks",
+    "subtitle": "Angular, .Net, SQLite",
+    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
+    "image": "/images/projects/macros-demo.mp4",
+    "link": "https://github.com/elchic00/Macros-for-geeks",
+    "id": "macros-for-geeks"
   }
 ]

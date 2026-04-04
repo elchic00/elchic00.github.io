@@ -1,5 +1,21 @@
 [
   {
+    "title": "Pi-Cloud",
+    "subtitle": "High-Performance Edge Gateway",
+    "description": "A self-hosted Home Lab on a Raspberry Pi 5 (8GB) replacing third-party SaaS with a privacy-first observability stack. Features Zero-Trust Networking via Tailscale Exit Nodes (WireGuard), hardened SSH with ED25519 keys and CrowdSec IPS, recursive DNS shield using Unbound talking directly to Root Nameservers with Pi-hole sinkholing, and automated container lifecycle management via Watchtower with Docker Engine v29+ compatibility.",
+    "image": "/images/projects/pi-cloud.webp",
+    "link": "https://github.com/elchic00/pi-cloud",
+    "id": "pi-cloud",
+    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "WireGuard", "Raspberry Pi", "DevOps", "Zero Trust"],
+    "githubStats": {
+      "stars": 0,
+      "forks": 0,
+      "languages": ["Shell", "Dockerfile", "YAML"],
+      "topics": ["homelab", "raspberry-pi", "tailscale", "pihole", "unbound", "self-hosted", "observability"],
+      "lastUpdated": "2026-04-03T00:00:00Z"
+    }
+  },
+  {
     "title": "myPal",
     "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
     "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",

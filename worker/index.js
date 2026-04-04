@@ -542,13 +542,14 @@ Always use the full URL format with markdown link syntax for clickability.
 - Firebase - Real-time databases, authentication
 - Data Science - Pandas, Matplotlib, NumPy (Crime in Queens NYC project)
 
-**DevOps & Tools**:
+**DevOps & Infrastructure**:
 - AWS - Cloud infrastructure and deployment
-- Docker - Containerization
+- Docker - Containerization and container orchestration
 - Git - Version control, branching strategies
 - GitHub Actions - CI/CD pipeline automation (reduced deployment time by 15%)
 - Jenkins - Continuous integration
 - Wrangler - Cloudflare Workers deployment
+- **Pi-Cloud Home Lab** - Self-hosted Raspberry Pi 5 infrastructure (see below)
 
 **Testing & Quality**:
 - Jest - Unit testing, 100% code coverage achievement
@@ -564,14 +565,109 @@ Always use the full URL format with markdown link syntax for clickability.
 - System Design - Scalable architecture for millions of users
 - Performance Optimization - React rendering, API optimization, BFF architecture
 
+**Infrastructure & DevOps Deep-Dive - Pi-Cloud Project**:
+
+Drew built a production-grade home lab infrastructure on a Raspberry Pi 5 (8GB) called "Pi-Cloud" that demonstrates enterprise-level DevOps and security practices:
+
+**Architecture**:
+- Self-hosted "Home Lab" on Raspberry Pi 5 (8GB ARM64)
+- Replaces third-party SaaS with privacy-first observability stack
+- Containerized services via Docker Compose
+- Demonstrates infrastructure-as-code principles
+
+**Security - Zero-Trust Networking**:
+- **Tailscale Exit Nodes** (WireGuard-based mesh VPN) for secure public Wi-Fi traffic routing
+- All devices route through Pi when on untrusted networks
+- Encrypted point-to-point connections, no open ports exposed to internet
+- **SSH Hardening**: ED25519 key-based authentication only, password auth disabled, root login disabled, non-standard port, fail2ban integration
+- **CrowdSec**: Community-driven Intrusion Prevention System (IPS) with local API for automated threat detection and remediation
+- Automated security updates via unattended-upgrades
+
+**DNS - Recursive Shield**:
+- **Unbound** recursive resolver running on bare metal (not containerized for direct hardware access)
+- Talks directly to Root Nameservers (bypassing ISP/third-party DNS)
+- DNSSEC validation for authenticated responses
+- **Pi-hole** network-wide ad/tracker sinkholing
+- DNS Flow: Client → Pi-hole (Filter) → Unbound (Recursive Resolver) → Root Nameservers
+- No DNS queries leave the network unencrypted or logged by third parties
+
+**CI/CD & Automation**:
+- **Watchtower** for automated container lifecycle management
+- Rolling updates with zero-downtime deployments
+- Image digest verification for supply chain security
+- **DOCKER_API_VERSION=1.44** shim for Docker Engine v29+ compatibility (handled breaking API changes)
+- Health checks and automatic rollback on failure
+
+**Observability (TIG/P Stack)**:
+- **Prometheus** - Metrics collection and alerting rules
+- **Grafana** - Visualization dashboards for system metrics
+- **cAdvisor** - Container resource usage and performance metrics
+- **Node Exporter** - Hardware and OS metrics (CPU, memory, disk I/O, network)
+- **Custom alerting scripts**: Bash scripts pushing to ntfy.sh for:
+  - SSH login failures (brute force detection)
+  - Storage health (disk space thresholds)
+  - Container health status changes
+  - Systemd service failures
+
+**Frontend Engineering Connection**:
+Managing this infrastructure deepened Drew's understanding of:
+- **Latency Optimization**: Running services on edge hardware (<1ms latency vs 20-100ms cloud round-trips)
+- **DevOps Automation**: CI/CD pipelines, infrastructure-as-code, observability patterns
+- **Security-First Architecture**: Zero-trust networking, defense in depth, principle of least privilege
+- **Performance at Scale**: Resource constraints (8GB RAM, ARM64) force efficient resource utilization
+- These insights directly inform his frontend architecture decisions, particularly around API design, caching strategies, and user-perceived performance
+
 **Additional Technologies**:
 - React Native - Mobile development (Reps project)
 - Angular - Frontend framework (Macros-for-geeks project)
 - .NET - Backend development with C#
 - ArcGIS Pro - Geographic Information Systems
 - Vite - Modern build tooling
+- Raspberry Pi / ARM64 - Edge computing and embedded systems
+- WireGuard / Tailscale - Modern VPN and zero-trust networking
+- Unbound / Pi-hole - DNS infrastructure and privacy
+- CrowdSec - Modern intrusion prevention
 `;
 const PROJECTS_RAG_DATA = `[
+  {
+    "id": "pi-cloud",
+    "title": "Pi-Cloud",
+    "subtitle": "High-Performance Edge Gateway",
+    "description": "A self-hosted Home Lab on a Raspberry Pi 5 (8GB) replacing third-party SaaS with a privacy-first observability stack. Features Zero-Trust Networking via Tailscale Exit Nodes (WireGuard), hardened SSH with ED25519 keys and CrowdSec IPS, recursive DNS shield using Unbound talking directly to Root Nameservers with Pi-hole sinkholing, and automated container lifecycle management via Watchtower with Docker Engine v29+ compatibility.",
+    "technologies": [
+      "Docker",
+      "Tailscale",
+      "Pi-hole",
+      "Unbound",
+      "CrowdSec",
+      "Prometheus",
+      "Grafana",
+      "WireGuard",
+      "Raspberry Pi",
+      "DevOps",
+      "Zero Trust"
+    ],
+    "link": "https://github.com/elchic00/pi-cloud",
+    "keywords": [
+      "pi-cloud",
+      "pi-cloud",
+      "Docker",
+      "Tailscale",
+      "Pi-hole",
+      "Unbound",
+      "CrowdSec",
+      "Prometheus",
+      "Grafana",
+      "WireGuard",
+      "Raspberry Pi",
+      "DevOps",
+      "Zero Trust",
+      "high",
+      "performance",
+      "edge",
+      "gateway"
+    ]
+  },
   {
     "id": "mypal",
     "title": "myPal",
