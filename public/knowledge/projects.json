@@ -2,16 +2,16 @@
   {
     "title": "Pi-Cloud",
     "subtitle": "High-Performance Edge Gateway",
-    "description": "A self-hosted Home Lab on a Raspberry Pi 5 (8GB) replacing third-party SaaS with a privacy-first observability stack. Features Zero-Trust Networking via Tailscale Exit Nodes (WireGuard), hardened SSH with ED25519 keys and CrowdSec IPS, recursive DNS shield using Unbound talking directly to Root Nameservers with Pi-hole sinkholing, and automated container lifecycle management via Watchtower with Docker Engine v29+ compatibility.",
+    "description": "Production-grade home infrastructure on Raspberry Pi 5. Privacy-first replacement for Google Photos and UptimeRobot with zero-trust networking and automated disaster recovery.",
     "image": "/images/projects/pi-cloud.webp",
     "link": "https://github.com/elchic00/pi-cloud",
     "id": "pi-cloud",
-    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "WireGuard", "Raspberry Pi", "DevOps", "Zero Trust"],
+    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "WireGuard", "Raspberry Pi", "DevOps", "Zero Trust", "Immich", "Uptime Kuma", "OpenCL", "PCIe Gen 3", "NVMe", "DNSSEC", "nftables", "rsync"],
     "githubStats": {
       "stars": 0,
       "forks": 0,
       "languages": ["Shell", "Dockerfile", "YAML"],
-      "topics": ["homelab", "raspberry-pi", "tailscale", "pihole", "unbound", "self-hosted", "observability"],
+      "topics": ["homelab", "raspberry-pi", "tailscale", "pihole", "unbound", "self-hosted", "observability", "immich", "uptime-kuma", "opencl", "disaster-recovery"],
       "lastUpdated": "2026-04-03T00:00:00Z"
     }
   },
@@ -25,17 +25,11 @@
     "githubStats": {
       "stars": 1,
       "forks": 2,
-      "languages": [
-        "JavaScript",
-        "Java",
-        "Objective-C",
-        "Ruby",
-        "Starlark"
-      ],
+      "languages": ["JavaScript", "Java", "Objective-C", "Ruby", "Starlark"],
       "topics": [],
       "lastUpdated": "2021-08-27T13:32:32Z"
     },
-    "readmeSummary": "## <ins>MyPAL (Picture Assisted Language) App<ins>\r\n\r\nAn Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays communicate with the world around them. \r\n\r\nThis app was created with the Picture Exchange Communication System (PECS) theory in mind, the goal of which is to provide children with speech delays with a fast and functional method of communication by using pictures. \r\n\r\nBelow is information on performing some common task..."
+    "readmeSummary": "## MyPAL (Picture Assisted Language) App\\r\\n\\r\\nAn Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays communicate..."
   },
   {
     "title": "myTeachers",
@@ -47,64 +41,27 @@
     "githubStats": {
       "stars": 0,
       "forks": 0,
-      "languages": [
-        "JavaScript",
-        "HTML",
-        "CSS"
-      ],
-      "topics": [
-        "mui",
-        "reactjs"
-      ],
+      "languages": ["JavaScript", "HTML", "CSS"],
+      "topics": ["mui", "reactjs"],
       "lastUpdated": "2025-10-02T17:16:00Z"
     },
-    "readmeSummary": "### A react remake of the cunyfirst website.\n\nSee the backend code here: https://github.com/elchic00/cunyFirst-backend \n\n* Using an Express + PostgreSQL backend to handle the data.\n* MaterialUI for styling components, Swal alert for pop-ups, and RTK Query from the Redux Toolkit to handle API request.\n\nHosted here: https://elchic00.github.io/CunyFirst-front/\n\n![CF](https://user-images.githubusercontent.com/40577932/168820750-f430fb37-d758-4d7c-b0d2-0e4498756b20.gif)"
-  },
-  {
-    "title": "Macros-for-geeks",
-    "subtitle": "Angular, .Net, SQLite",
-    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
-    "image": "/images/projects/macros-demo.mp4",
-    "link": "https://github.com/elchic00/Macros-for-geeks",
-    "id": "macros-for-geeks",
-    "githubStats": {
-      "stars": 2,
-      "forks": 3,
-      "languages": [
-        "TypeScript",
-        "C#",
-        "HTML",
-        "CSS",
-        "JavaScript"
-      ],
-      "topics": [],
-      "lastUpdated": "2022-02-16T16:54:20Z"
-    },
-    "readmeSummary": "This is a nutrition diary to help you keep track of your macronutrients and weight goals. User's can make use of a API from the USDA(https://fdc.nal.usda.gov/) to save nutrition information of food, and then post the data into a SQLite database via a .Net API. We used Angular for the interface to make it easier for CRUD operations (to create, read, update, and delete data).\n\n![](macros.gif)\n\n![](swagger.png)"
+    "readmeSummary": "### A react remake of the cunyfirst website..."
   },
   {
     "title": "Reps",
     "subtitle": "React Native + React Web",
     "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
-    "videos": [
-      "/images/projects/reps-mobile.mp4",
-      "/images/projects/reps-web.mp4"
-    ],
+    "videos": ["/images/projects/reps-mobile.mp4", "/images/projects/reps-web.mp4"],
     "link": "https://github.com/elchic00/reps",
     "id": "reps",
     "githubStats": {
       "stars": 0,
       "forks": 0,
-      "languages": [
-        "TypeScript",
-        "Shell",
-        "CSS",
-        "JavaScript"
-      ],
+      "languages": ["TypeScript", "Shell", "CSS", "JavaScript"],
       "topics": [],
       "lastUpdated": "2026-03-07T16:56:18Z"
     },
-    "readmeSummary": "<div align=\"center\">\n  <h1>🎯 Reps</h1>\n  <p><strong>Daily coding practice for technical interviews</strong></p>\n  <p>Build your reps, one challenge at a time.</p>\n\n  [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue?logo=typescript)](https://www.typescriptlang.org/)\n  [![React](https://img.shields.io/badge/React-19.1-61dafb?logo=react)](https://reactjs.org/)\n  [![Next.js](https://img.shields.io/badge/Next.js-15.5-black?logo=next.js)](https://nextjs.org/)\n  [![React Native](https:/..."
+    "readmeSummary": "# Reps - Daily coding practice for technical interviews..."
   },
   {
     "title": "Invent0ry",
@@ -116,20 +73,11 @@
     "githubStats": {
       "stars": 3,
       "forks": 0,
-      "languages": [
-        "TypeScript",
-        "JavaScript",
-        "HTML",
-        "CSS"
-      ],
-      "topics": [
-        "aws-amplify",
-        "inventory",
-        "reactjs"
-      ],
+      "languages": ["TypeScript", "JavaScript", "HTML", "CSS"],
+      "topics": ["aws-amplify", "inventory", "reactjs"],
       "lastUpdated": "2024-08-29T02:12:56Z"
     },
-    "readmeSummary": "<div align=\"center\">\n    <img src=\"https://raw.githubusercontent.com/elchic00/invent0ry/main/src/assets/inventory-logo.jpg\" width=\"40%\">\n\n<h2><u>Description</u></h2>\n<strong>With this inventory management application, a business owner, manager, or employee can:</strong> <br/>\nKeep track of multiple storage locations for your business. <br/> \nSort items in your inventory by your custom categories. <br/>\nMake sure you have enough inventory to serve your customers.\n\n<h2><u>User Stories</u></h2>\n<h3..."
+    "readmeSummary": "# Invent0ry - Inventory management system..."
   },
   {
     "title": "Crime in Queens NYC",
@@ -138,5 +86,21 @@
     "image": "/images/projects/crime.webp",
     "link": "https://elchic00.github.io/CrimeInQueens",
     "id": "crime-in-queens-nyc"
+  },
+  {
+    "title": "Macros-for-geeks",
+    "subtitle": "Angular, .Net, SQLite",
+    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
+    "image": "/images/projects/macros-demo.mp4",
+    "link": "https://github.com/elchic00/Macros-for-geeks",
+    "id": "macros-for-geeks",
+    "githubStats": {
+      "stars": 2,
+      "forks": 3,
+      "languages": ["TypeScript", "C#", "HTML", "CSS", "JavaScript"],
+      "topics": [],
+      "lastUpdated": "2022-02-16T16:54:20Z"
+    },
+    "readmeSummary": "# Macros-for-geeks - Nutrition tracking app..."
   }
 ]

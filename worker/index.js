@@ -628,12 +628,13 @@ Managing this infrastructure deepened Drew's understanding of:
 - Unbound / Pi-hole - DNS infrastructure and privacy
 - CrowdSec - Modern intrusion prevention
 `;
+
 const PROJECTS_RAG_DATA = `[
   {
     "id": "pi-cloud",
     "title": "Pi-Cloud",
     "subtitle": "High-Performance Edge Gateway",
-    "description": "A self-hosted Home Lab on a Raspberry Pi 5 (8GB) replacing third-party SaaS with a privacy-first observability stack. Features Zero-Trust Networking via Tailscale Exit Nodes (WireGuard), hardened SSH with ED25519 keys and CrowdSec IPS, recursive DNS shield using Unbound talking directly to Root Nameservers with Pi-hole sinkholing, and automated container lifecycle management via Watchtower with Docker Engine v29+ compatibility.",
+    "description": "Production-grade home infrastructure on Raspberry Pi 5. Privacy-first replacement for Google Photos and UptimeRobot with zero-trust networking and automated disaster recovery.",
     "technologies": [
       "Docker",
       "Tailscale",
@@ -645,7 +646,15 @@ const PROJECTS_RAG_DATA = `[
       "WireGuard",
       "Raspberry Pi",
       "DevOps",
-      "Zero Trust"
+      "Zero Trust",
+      "Immich",
+      "Uptime Kuma",
+      "OpenCL",
+      "PCIe Gen 3",
+      "NVMe",
+      "DNSSEC",
+      "nftables",
+      "rsync"
     ],
     "link": "https://github.com/elchic00/pi-cloud",
     "keywords": [
@@ -662,6 +671,14 @@ const PROJECTS_RAG_DATA = `[
       "Raspberry Pi",
       "DevOps",
       "Zero Trust",
+      "Immich",
+      "Uptime Kuma",
+      "OpenCL",
+      "PCIe Gen 3",
+      "NVMe",
+      "DNSSEC",
+      "nftables",
+      "rsync",
       "high",
       "performance",
       "edge",
@@ -701,21 +718,6 @@ const PROJECTS_RAG_DATA = `[
       "express",
       "postgresql",
       "firebase"
-    ]
-  },
-  {
-    "id": "macros-for-geeks",
-    "title": "Macros-for-geeks",
-    "subtitle": "Angular, .Net, SQLite",
-    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
-    "technologies": [],
-    "link": "https://github.com/elchic00/Macros-for-geeks",
-    "keywords": [
-      "macros-for-geeks",
-      "macros-for-geeks",
-      "angular",
-      "net",
-      "sqlite"
     ]
   },
   {
@@ -764,6 +766,21 @@ const PROJECTS_RAG_DATA = `[
       "html",
       "github",
       "md"
+    ]
+  },
+  {
+    "id": "macros-for-geeks",
+    "title": "Macros-for-geeks",
+    "subtitle": "Angular, .Net, SQLite",
+    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
+    "technologies": [],
+    "link": "https://github.com/elchic00/Macros-for-geeks",
+    "keywords": [
+      "macros-for-geeks",
+      "macros-for-geeks",
+      "angular",
+      "net",
+      "sqlite"
     ]
   }
 ]`;

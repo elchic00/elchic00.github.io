@@ -24,6 +24,7 @@ export { VideoPlayer } from "./shared/VideoPlayer";
 export { MonogramOverlap } from "./shared/MonogramLogo";
 export { ScrollToTopButton } from "./shared/ScrollToTopButton";
 export { Modal } from "./shared/Modal";
+export { ProjectModal } from "./shared/ProjectModal";
 export { ConfirmDialog } from "./shared/ConfirmDialog";
 export { ToastContainer } from "./shared/ToastContainer";
 export { ImageWithLoader } from "./shared/ImageWithLoader";
