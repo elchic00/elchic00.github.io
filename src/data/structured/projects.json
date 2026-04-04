@@ -1,13 +1,5 @@
 [
-  {
-    "title": "myPal",
-    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
-    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
-    "image": "/images/projects/mypal-demo.mp4",
-    "link": "https://github.com/myPal-TMS/myPal",
-    "id": "mypal"
-  },
-  {
+    {
     "title": "Pi-Cloud",
     "subtitle": "High-Performance Edge Gateway",
     "description": "Production-grade home infrastructure on Raspberry Pi 5. Privacy-first replacement for Google Photos and UptimeRobot with zero-trust networking and automated disaster recovery.",
@@ -15,6 +7,14 @@
     "link": "https://github.com/elchic00/pi-cloud",
     "id": "pi-cloud",
     "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "WireGuard", "Raspberry Pi", "DevOps", "Zero Trust", "Immich", "Uptime Kuma", "OpenCL", "PCIe Gen 3", "NVMe", "DNSSEC", "nftables", "rsync"]
+  },
+  {
+    "title": "myPal",
+    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
+    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
+    "image": "/images/projects/mypal-demo.mp4",
+    "link": "https://github.com/myPal-TMS/myPal",
+    "id": "mypal"
   },
   {
     "title": "myTeachers",

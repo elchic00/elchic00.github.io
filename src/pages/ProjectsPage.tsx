@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { CodeIcon, ExternalLinkIcon } from "@heroicons/react/solid";
+import { CodeIcon, ExternalLinkIcon, PlayIcon } from "@heroicons/react/solid";
 import projectsData from "../data/structured/projects.json";
 import { Project } from "../types";
 import { VideoPlayer } from "../components/shared/VideoPlayer";
 import { useScrollReveal } from "../hooks";
 import { PiCloudModal } from "@components/shared/PiCloudModal";
+import { Modal } from "@components/shared/Modal";
 
 interface BentoGridProjectProps {
   project: Project;
@@ -13,136 +14,180 @@ interface BentoGridProjectProps {
   onOpenModal?: () => void;
 }
 
+const TechPill: React.FC<{ label: string }> = ({ label }) => (
+  <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25 whitespace-nowrap">
+    {label}
+  </span>
+);
+
 const BentoGridProject: React.FC<BentoGridProjectProps> = ({
   project,
   index,
   featured = false,
   onOpenModal,
 }) => {
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const hasMultipleVideos = project.videos && project.videos.length > 1;
   const isVideo = project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
   const isPiCloud = project.id === "pi-cloud";
+  const techTags = project.subtitle?.split(" + ").filter(Boolean) ?? [];
 
-  // Pi-Cloud uses modal instead of external link
-  const handleClick = (e: React.MouseEvent) => {
-    if (isPiCloud && onOpenModal) {
+  const isTopRowSmallCard = !featured && (index === 1 || index === 2);
+
+  const sharedClasses = [
+    "group flex flex-col w-full rounded-xl overflow-hidden",
+    "bg-slate-900 border border-slate-700/50",
+    "transition-all duration-500 ease-out",
+    "hover:border-cyan-500/40 hover:shadow-[0_0_40px_-10px_rgba(34,211,238,0.2)]",
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400",
+    featured 
+      ? "md:col-span-2 min-h-[400px]" 
+      : isTopRowSmallCard 
+        ? "h-full" 
+        : "min-h-[450px] h-full", 
+  ].join(" ");  
+
+  const mediaHeight = featured ? "h-64 md:h-80" : "h-48 flex-shrink-0"; 
+
+  const handleMediaClick = (e: React.MouseEvent) => {
+    if (hasMultipleVideos) {
       e.preventDefault();
-      onOpenModal();
+      e.stopPropagation();
+      setIsVideoModalOpen(true);
     }
   };
 
-  const CardWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    if (isPiCloud) {
-      return (
-        <article
-          className={`group bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 md:hover:scale-[1.03] md:hover:-translate-y-2 border border-slate-700 hover:border-cyan-500/50 cursor-pointer ${
-            featured ? "md:col-span-2 md:row-span-2" : ""
-          }`}
-          onClick={handleClick}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              onOpenModal?.();
-            }
-          }}
-          aria-label={`View details for ${project.title}`}
-        >
-          {children}
-        </article>
-      );
-    }
-
-    return (
-      <article
-        className={`group bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 md:hover:scale-[1.03] md:hover:-translate-y-2 border border-slate-700 hover:border-cyan-500/50 ${
-          featured ? "md:col-span-2 md:row-span-2" : ""
-        }`}
+  const inner = (
+    <>
+      <div 
+        className={`relative overflow-hidden bg-slate-950 ${mediaHeight} ${hasMultipleVideos ? "cursor-zoom-in" : ""}`}
+        onClick={handleMediaClick}
       >
-        <a href={project.link} target="_blank" rel="noreferrer" className="block h-full">
-          {children}
-        </a>
-      </article>
-    );
-  };
+        {hasMultipleVideos ? (
+          <div className="grid grid-cols-2 h-full opacity-70 group-hover:opacity-100 transition-opacity duration-500">
+            {project.videos?.map((videoSrc, idx) => (
+              <div key={idx} className="relative h-full w-full border-r border-slate-800 last:border-r-0">
+                <VideoPlayer
+                  src={videoSrc}
+                  videoId={`preview-${index}-${idx}`}
+                  projectIndex={index}
+                  containerClassName="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+            <div className="absolute inset-0 flex items-center justify-center bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+  <div className="flex flex-col items-center gap-2">
+    <div className="bg-cyan-500 text-slate-950 p-3 rounded-full shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
+      <PlayIcon className="w-8 h-8" />
+    </div>
+    <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] drop-shadow-md">
+      Watch Preview
+    </span>
+  </div>
+</div>
+          </div>
+        ) : isVideo ? (
+          <VideoPlayer
+            src={project.image!}
+            videoId={`video-${index}-0`}
+            projectIndex={index}
+            containerClassName="w-full h-full"
+          />
+        ) : (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
+            loading={index < 2 ? "eager" : "lazy"}
+          />
+        )}
+        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-slate-900 z-10" />
+      </div>
 
-  return (
-    <CardWrapper>
-      <div className="relative flex flex-col bg-slate-950 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-blue-500/0 group-hover:from-cyan-500/5 group-hover:to-blue-500/5 transition-all duration-500 pointer-events-none z-10"></div>
-        <div
-          className={`px-4 pt-4 pb-2 flex items-center justify-center gap-2 ${
-            featured
-              ? "md:h-96 h-64"
-              : hasMultipleVideos || project.title === "myPal"
-              ? "h-72"
-              : "flex-grow min-h-72"
-          }`}
-        >
-          {hasMultipleVideos ? (
-            project.videos?.map((videoSrc, idx) => (
-              <VideoPlayer
-                key={idx}
-                src={videoSrc}
-                videoId={`video-${index}-${idx}`}
-                projectIndex={index}
-                containerClassName={
-                  featured
-                    ? "md:h-full h-full md:max-w-[48%] max-w-[48%]"
-                    : "h-56 max-w-[48%]"
-                }
-              />
-            ))
-          ) : isVideo ? (
-            <VideoPlayer
-              src={project.image!}
-              videoId={`video-${index}-0`}
-              projectIndex={index}
-              containerClassName="w-full h-full"
-            />
-          ) : (
-            <img
-              src={project.image}
-              alt={`Screenshot of ${project.title}`}
-              className="w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover:scale-105"
-              loading={index < 2 ? "eager" : "lazy"}
-            />
-          )}
-        </div>
-        <div
-          className={`bg-slate-800 relative z-20 ${
-            featured ? "md:px-6 md:py-5 px-4 py-3" : "px-4 py-3"
-          }`}
-        >
-          <div className={featured ? "max-w-2xl" : ""}>
-            <p className="text-emerald-400 text-xs font-medium tracking-wide mb-1 group-hover:text-emerald-300 transition-colors duration-300">
-              {project.subtitle}
-            </p>
-            <h3
-              className={`font-bold text-white group-hover:text-cyan-400 transition-colors duration-300 ${
-                featured ? "md:text-xl text-lg md:mb-3 mb-2" : "text-lg mb-2"
-              }`}
-            >
-              {project.title}
-            </h3>
-            <p
-              className={`text-slate-200 text-sm leading-relaxed line-clamp-3 mb-4 ${
-                featured ? "block" : "md:hidden"
-              }`}
-            >
-              {project.description}
-            </p>
-            <div className="flex items-center gap-2 text-cyan-400 group-hover:text-cyan-300 text-sm font-medium transition-all duration-300">
-              <span className="group-hover:underline">
-                {isPiCloud ? "View Details" : "View Project"}
-              </span>
-              <ExternalLinkIcon className={`w-3 h-3 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300 ${isPiCloud ? "hidden" : ""}`} />
-            </div>
+      <div className="bg-slate-900 flex flex-col flex-grow p-5 justify-between">
+        <div>
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            {techTags.map((tag) => <TechPill key={tag} label={tag} />)}
+          </div>
+
+          <h3 className={`font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-2 ${featured ? "text-2xl" : "text-lg"}`}>
+            {project.title}
+          </h3>
+
+          <div className={`grid transition-all duration-500 ease-in-out ${featured ? "grid-rows-[1fr]" : "grid-rows-[0fr] group-hover:grid-rows-[1fr]"}`}>
+              <div className="overflow-hidden">
+                  <p className={`text-slate-200 text-sm leading-relaxed mb-4 transition-opacity duration-500
+                    ${featured 
+                      ? "opacity-100" 
+                      : "opacity-0 group-hover:opacity-100 line-clamp-4"
+                    }`}
+                  >
+                    {project.description}
+                  </p>
+              </div>
           </div>
         </div>
+
+        <div className="flex items-center gap-1.5 text-sm font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors duration-200 border-t border-slate-800/50 group-hover:border-cyan-500/20 pt-4 mt-4">
+          <span className="tracking-widest uppercase text-[10px]">{isPiCloud ? "View Details" : "View Project"}</span>
+          {!isPiCloud && (
+            <ExternalLinkIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          )}
+        </div>
       </div>
-    </CardWrapper>
+
+      <Modal 
+        isOpen={isVideoModalOpen} 
+        onClose={() => setIsVideoModalOpen(false)} 
+        maxWidth="xl" 
+        ariaLabel={`Demo videos for ${project.title}`}
+      >
+        <div className="bg-slate-950 p-2 md:p-6">
+          <div className="flex flex-col md:flex-row gap-4 min-h-[400px] max-h-[70vh]">
+            {project.videos?.map((videoSrc, idx) => (
+              <div key={idx} className="flex-1 bg-black rounded-lg overflow-hidden border border-slate-800 shadow-2xl">
+                 <VideoPlayer
+                  src={videoSrc}
+                  videoId={`modal-${index}-${idx}`}
+                  projectIndex={index}
+                  containerClassName="w-full h-full object-contain"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex flex-col md:flex-row justify-between items-center gap-4 px-2">
+            <div>
+              <h4 className="text-white text-xl font-bold">{project.title}</h4>
+              <p className="text-slate-400 text-sm">Cross-platform integration showcase</p>
+            </div>
+            <a 
+              href={project.link} 
+              target="_blank" 
+              rel="noreferrer" 
+              className="px-6 py-2 bg-cyan-500 text-slate-950 rounded-full font-bold text-sm uppercase tracking-widest hover:bg-cyan-400 transition-colors flex items-center gap-2"
+            >
+              View Repository <ExternalLinkIcon className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+
+  const articleProps = {
+    className: sharedClasses,
+    ...(isPiCloud 
+      ? { onClick: (e: any) => { e.preventDefault(); onOpenModal?.(); }, role: "button", tabIndex: 0 }
+      : { href: project.link, target: "_blank", rel: "noreferrer" }
+    )
+  };
+
+  const Tag = isPiCloud ? 'article' : 'a';
+
+  return (
+    <Tag {...(articleProps as any)} aria-label={`View ${project.title}`}>
+      {inner}
+    </Tag>
   );
 };
 
@@ -152,44 +197,27 @@ export const ProjectsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    document.title = "Projects - Andrew Alagna";
-    // Scroll to top when navigating to projects page
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    document.title = "Projects | Andrew Alagna";
   }, []);
 
   return (
-    <section id="projects" className="relative min-h-screen body-font bg-slate-950 pt-20">
-      {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
-      {/* Gradient transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-slate-950 pointer-events-none z-0"></div>
-      <div className="container px-5 py-10 mx-auto lg:px-40 relative z-10">
-        <header
-          ref={headerRef}
-          className={`flex flex-col w-full sm:mb-16 text-center scroll-reveal-scale ${
-            headerVisible ? "visible" : ""
-          }`}
-        >
-          <CodeIcon
-            className="mx-auto inline-block w-10 mb-1 text-cyan-400"
-            aria-hidden="true"
-          />
-          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white underline-offset-4 underline decoration-cyan-500 mb-4">
+    <section id="projects" className="relative min-h-screen bg-slate-950 pt-24 pb-20">
+      <div className="container px-6 mx-auto relative z-10">
+        <header ref={headerRef} className={`text-center mb-20 transition-all duration-1000 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <CodeIcon className="mx-auto w-12 h-12 mb-4 text-cyan-500/80" />
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
             Personal Projects
           </h2>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-5 sm:mb-0">
-            Side projects built in my free time to explore new technologies and solve real-world problems
+          <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            Production-grade experiments in accessibility, automation, and full-stack engineering.
           </p>
         </header>
-        <div
-          ref={gridRef}
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 scroll-reveal ${
-            gridVisible ? "visible" : ""
-          }`}
-        >
+
+        <div ref={gridRef} className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-1000 ${gridVisible ? 'opacity-100' : 'opacity-0'}`}>
           {(projectsData as Project[]).map((project, index) => (
             <BentoGridProject
-              key={`${project.title}-${index}`}
+              key={project.id}
               project={project}
               index={index}
               featured={index === 0 || index === 3}
@@ -198,8 +226,6 @@ export const ProjectsPage = () => {
           ))}
         </div>
       </div>
-
-      {/* Pi-Cloud Project Modal */}
       <PiCloudModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
