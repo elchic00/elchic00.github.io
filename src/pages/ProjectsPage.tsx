@@ -3,8 +3,8 @@ import { CodeIcon, ExternalLinkIcon } from "@heroicons/react/solid";
 import projectsData from "../data/structured/projects.json";
 import { Project } from "../types";
 import { VideoPlayer } from "../components/shared/VideoPlayer";
-import { ProjectModal } from "../components/shared/ProjectModal";
 import { useScrollReveal } from "../hooks";
+import { PiCloudModal } from "@components/shared/PiCloudModal";
 
 interface BentoGridProjectProps {
   project: Project;
@@ -200,7 +200,7 @@ export const ProjectsPage = () => {
       </div>
 
       {/* Pi-Cloud Project Modal */}
-      <ProjectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <PiCloudModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </section>
   );
 };
