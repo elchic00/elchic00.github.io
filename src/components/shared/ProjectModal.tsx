@@ -10,25 +10,50 @@ interface ProjectModalProps {
 export const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const previousFocusRef = useRef<HTMLElement | null>(null);
+  const scrollLockStylesRef = useRef<{
+    overflow: string;
+    paddingRight: string;
+    scrollbarGutter: string;
+  } | null>(null);
 
-  // Focus trap and management
+  // Scroll Lock with Layout Shift Prevention
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Store previous styles
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    scrollLockStylesRef.current = {
+      overflow: document.body.style.overflow,
+      paddingRight: document.body.style.paddingRight,
+      scrollbarGutter: document.body.style.scrollbarGutter,
+    };
+
+    // Apply scroll lock with layout shift prevention
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.body.style.scrollbarGutter = "stable";
+
+    return () => {
+      // Restore previous styles
+      if (scrollLockStylesRef.current) {
+        document.body.style.overflow = scrollLockStylesRef.current.overflow;
+        document.body.style.paddingRight = scrollLockStylesRef.current.paddingRight;
+        document.body.style.scrollbarGutter = scrollLockStylesRef.current.scrollbarGutter;
+      }
+    };
+  }, [isOpen]);
+
+  // Focus management
   useEffect(() => {
     if (isOpen) {
       previousFocusRef.current = document.activeElement as HTMLElement;
-      document.body.style.overflow = "hidden";
-      
       setTimeout(() => {
         const title = modalRef.current?.querySelector("h2");
         title?.focus();
       }, 50);
     } else {
-      document.body.style.overflow = "";
       previousFocusRef.current?.focus();
     }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, [isOpen]);
 
   // Handle escape key
