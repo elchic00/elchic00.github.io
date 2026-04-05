@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { XIcon } from "@heroicons/react/solid";
 
@@ -23,6 +23,8 @@ export const Modal: React.FC<ModalProps> = ({
   maxWidth = "lg",
   ariaLabel = "Modal dialog",
 }) => {
+  const scrollYRef = useRef<number>(0);
+
   useEffect(() => {
     if (!isOpen || !closeOnEscape) return;
 
@@ -35,29 +37,52 @@ export const Modal: React.FC<ModalProps> = ({
   }, [isOpen, closeOnEscape, onClose]);
 
   useEffect(() => {
-    if (isOpen) {
-      // Force the body to stay put
-      const scrollY = window.scrollY;
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.width = "100%";
-      document.body.style.overflowY = "scroll"; // Keep scrollbar space to prevent jumping
+  if (isOpen) {
+    // Capture scroll position before locking
+    scrollYRef.current = window.scrollY;
+    
+    // Apply styles to body
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollYRef.current}px`;
+    document.body.style.width = "100%";
+    document.body.style.overflowY = "scroll";
+  } else {
+    // 1. Grab the current top value from the body just in case the ref is stale
+    const scrollY = document.body.style.top;
+    
+    // 2. TEMPORARILY DISABLE SMOOTH SCROLLING
+    const html = document.documentElement;
+    const originalScrollBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto'; // Force instant jump
+
+    // 3. Reset body styles
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflowY = "";
+
+    // 4. Perform the instant scroll
+    if (scrollY) {
+      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
     } else {
-      const scrollY = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflowY = "";
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      window.scrollTo(0, scrollYRef.current);
     }
 
-    return () => {
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      document.body.style.overflowY = "";
-    };
-  }, [isOpen]);
+    // 5. Restore original scroll behavior (put it back to "smooth" if it was there)
+    // We use a tiny timeout or requestAnimationFrame to ensure the scroll happens first
+    requestAnimationFrame(() => {
+      html.style.scrollBehavior = originalScrollBehavior;
+    });
+  }
+
+  return () => {
+    // Basic style cleanup
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflowY = "";
+  };
+}, [isOpen]);
 
   if (!isOpen) return null;
 

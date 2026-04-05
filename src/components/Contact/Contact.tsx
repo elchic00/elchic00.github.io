@@ -89,7 +89,7 @@ export const Contact: React.FC = () => {
           className={`lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0 bg-slate-900 dark:bg-slate-900 light:bg-white rounded-2xl p-8 shadow-2xl border border-slate-800 dark:border-slate-800 light:border-slate-200 scroll-reveal-scale ${contactVisible ? 'visible' : ''}`}
         >
           <div className="flex items-center justify-between mb-2">
-            <h2 className="text-white dark:text-white light:text-gray-900 sm:text-4xl text-3xl font-medium title-font underline-offset-4 underline flex items-center gap-2">
+            <h2 className="text-white dark:text-white light:text-gray-900 sm:text-4xl text-3xl font-medium title-font flex items-center gap-2">
               Contact Me <MailIcon className="w-10 h-10 inline-block text-gray-300 light:text-gray-200" aria-hidden="true" />
             </h2>
             {contactForm.hasDraft && (

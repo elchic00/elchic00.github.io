@@ -350,20 +350,22 @@ export const Navbar = () => {
                   <Link
                     to={item.link}
                     scroll={scrollWithOffset}
-                    className={`relative px-4 py-2 rounded-lg text-base xl:text-lg font-medium transition-all duration-200 ${
+                    className={`relative px-3 xl:px-4 py-2 rounded-lg text-base xl:text-lg font-medium transition-all duration-200 whitespace-nowrap ${
                       active
                         ? "text-cyan-400"
                         : "text-slate-200 hover:text-white hover:bg-slate-800/50"
                     }`}
                     onClick={(e) => handleLinkClick(e, item)}
                   >
-                    {item.name}
-                    {/* Active indicator - underline */}
-                    <span
-                      className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 rounded-full bg-cyan-400 transition-all duration-200 ${
-                        active ? "w-4 opacity-100" : "w-0 opacity-0"
-                      }`}
-                    />
+                    <span className="relative">
+                      {item.name}
+                      {/* Active indicator - underline positioned relative to text */}
+                      <span
+                        className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-0.5 rounded-full bg-cyan-400 transition-all duration-200 ${
+                          active ? "w-5 xl:w-6 opacity-100" : "w-0 opacity-0"
+                        }`}
+                      />
+                    </span>
                   </Link>
                 </li>
               );
@@ -373,7 +375,7 @@ export const Navbar = () => {
           <div className="pl-6 border-l border-slate-700/50">
             <Link
               to={CONTACT_CTA.link}
-              className={`flex items-center px-5 py-2 rounded-full font-bold text-sm transition-all duration-200 ${
+              className={`flex items-center px-5 py-2 rounded-full font-bold text-sm transition-all duration-200 whitespace-nowrap ${
                 isContactActive
                   ? "bg-purple-500 text-white"
                   : "bg-purple-700 text-slate-100 hover:bg-purple-600"
