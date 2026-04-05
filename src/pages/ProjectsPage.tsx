@@ -44,7 +44,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
       ? "md:col-span-2 min-h-[400px]" 
       : isTopRowSmallCard 
         ? "h-full" 
-        : "min-h-[450px] h-full", 
+        : "min-h-[455px] h-full", 
   ].join(" ");  
 
   const mediaHeight = featured ? "h-64 md:h-80" : "h-48 flex-shrink-0"; 
