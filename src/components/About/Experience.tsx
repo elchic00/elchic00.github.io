@@ -154,9 +154,10 @@ export const Experience = () => {
           }`}
         >
           <BriefcaseIcon className="w-10 inline-block mb-2 text-cyan-400" />
-          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-2 underline-offset-4 underline decoration-cyan-500">
+          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4 decoration-cyan-500">
             Professional Experience
           </h2>
+          <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
             Building impactful software at scale and empowering the next
             generation of engineers

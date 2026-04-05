@@ -64,17 +64,17 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
         onClick={handleMediaClick}
       >
         {hasMultipleVideos ? (
-          <div className="grid grid-cols-2 h-full opacity-70 group-hover:opacity-100 transition-opacity duration-500">
-            {project.videos?.map((videoSrc, idx) => (
-              <div key={idx} className="relative h-full w-full border-r border-slate-800 last:border-r-0">
-                <VideoPlayer
-                  src={videoSrc}
-                  videoId={`preview-${index}-${idx}`}
-                  projectIndex={index}
-                  containerClassName="w-full h-full object-cover"
-                />
-              </div>
-            ))}
+          <div className="grid grid-cols-2 h-full bg-black">
+    {project.videos?.map((videoSrc, idx) => (
+      <div key={idx} className="relative h-full w-full border-r border-slate-800 last:border-r-0">
+        <VideoPlayer
+          src={videoSrc}
+          videoId={`preview-${index}-${idx}`}
+          projectIndex={index}
+          containerClassName={`w-full h-full object-cover ${idx === 1 ? "object-top-left" : "object-center"}`}
+        />
+      </div>
+    ))}
             <div className="absolute inset-0 flex items-center justify-center bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
   <div className="flex flex-col items-center gap-2">
     <div className="bg-cyan-500 text-slate-950 p-3 rounded-full shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300">

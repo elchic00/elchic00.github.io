@@ -53,9 +53,10 @@ export const Skills = () => {
           className={`text-center mb-20 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
         >
           <ChipIcon className="w-10 inline-block mb-2 text-cyan-400" />
-          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4 mx-auto underline-offset-4 underline decoration-cyan-500">
+          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4 mx-auto decoration-cyan-500">
             Technical Skills
           </h2>
+          <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
             Specialized in building high-performance, WCAG AAA-compliant web applications with React.js and Node.js. Skilled in accessibility, performance optimization, and delivering measurable impact for millions of users.
           </p>

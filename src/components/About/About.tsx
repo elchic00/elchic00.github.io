@@ -39,7 +39,7 @@ export const About = () => {
             </p>
 
             <p className="mb-7 leading-relaxed text-white/90 text-lg animate-fade-in-delay-3 max-w-xl">
-              Software engineer at American Express building web applications for
+              Software engineer building web applications for
               millions of users. I care deeply about accessibility and performance
               — if your screen reader works and your page loads fast, I'm happy.
               <br />
