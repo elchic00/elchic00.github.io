@@ -15,7 +15,7 @@ interface BentoGridProjectProps {
 }
 
 const TechPill: React.FC<{ label: string }> = ({ label }) => (
-  <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25 whitespace-nowrap">
+  <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25">
     {label}
   </span>
 );
