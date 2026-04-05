@@ -4,7 +4,7 @@ import projectsData from "../data/structured/projects.json";
 import { Project } from "../types";
 import { VideoPlayer } from "../components/shared/VideoPlayer";
 import { useScrollReveal } from "../hooks";
-import { PiCloudModal } from "@components/shared/PiCloudModal";
+import { PiCloudModal } from "@components/Projects/PiCloudModal";
 import { Modal } from "@components/shared/Modal";
 
 interface BentoGridProjectProps {
@@ -65,26 +65,26 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
       >
         {hasMultipleVideos ? (
           <div className="grid grid-cols-2 h-full bg-black">
-    {project.videos?.map((videoSrc, idx) => (
-      <div key={idx} className="relative h-full w-full border-r border-slate-800 last:border-r-0">
-        <VideoPlayer
-          src={videoSrc}
-          videoId={`preview-${index}-${idx}`}
-          projectIndex={index}
-          containerClassName={`w-full h-full object-cover ${idx === 1 ? "object-top-left" : "object-center"}`}
-        />
-      </div>
-    ))}
+            {project.videos?.map((videoSrc, idx) => (
+              <div key={idx} className="relative h-full w-full border-r border-slate-800 last:border-r-0">
+                <VideoPlayer
+                  src={videoSrc}
+                  videoId={`preview-${index}-${idx}`}
+                  projectIndex={index}
+                  containerClassName={`w-full h-full object-cover ${idx === 1 ? "object-top-left" : "object-center"}`}
+                />
+              </div>
+            ))}
             <div className="absolute inset-0 flex items-center justify-center bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-  <div className="flex flex-col items-center gap-2">
-    <div className="bg-cyan-500 text-slate-950 p-3 rounded-full shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
-      <PlayIcon className="w-8 h-8" />
-    </div>
-    <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] drop-shadow-md">
-      Watch Preview
-    </span>
-  </div>
-</div>
+              <div className="flex flex-col items-center gap-2">
+                <div className="bg-cyan-500 text-slate-950 p-3 rounded-full shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                  <PlayIcon className="w-8 h-8" />
+                </div>
+                <span className="text-white text-[10px] font-black uppercase tracking-[0.2em] drop-shadow-md">
+                  Watch Preview
+                </span>
+              </div>
+            </div>
           </div>
         ) : isVideo ? (
           <VideoPlayer
@@ -114,12 +114,12 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
             {project.title}
           </h3>
 
-          <div className={`grid transition-all duration-500 ease-in-out ${featured ? "grid-rows-[1fr]" : "grid-rows-[0fr] group-hover:grid-rows-[1fr]"}`}>
+          <div className={`grid transition-all duration-500 ease-in-out ${featured ? "grid-rows-[1fr]" : "grid-rows-[1fr] md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr]"}`}>
               <div className="overflow-hidden">
                   <p className={`text-slate-200 text-sm leading-relaxed mb-4 transition-opacity duration-500
                     ${featured 
                       ? "opacity-100" 
-                      : "opacity-0 group-hover:opacity-100 line-clamp-4"
+                      : "opacity-100 md:opacity-0 md:group-hover:opacity-100 line-clamp-none md:line-clamp-4"
                     }`}
                   >
                     {project.description}
@@ -142,10 +142,10 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
         maxWidth="xl" 
         ariaLabel={`Demo videos for ${project.title}`}
       >
-        <div className="bg-slate-950 p-2 md:p-6">
-          <div className="flex flex-col md:flex-row gap-4 min-h-[400px] max-h-[70vh]">
+        <div className="bg-slate-950 p-4 md:p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-[80vh] overflow-y-auto custom-scrollbar">
             {project.videos?.map((videoSrc, idx) => (
-              <div key={idx} className="flex-1 bg-black rounded-lg overflow-hidden border border-slate-800 shadow-2xl">
+              <div key={idx} className="bg-black rounded-lg overflow-hidden border border-slate-800 shadow-2xl aspect-video md:aspect-auto md:min-h-[400px]">
                  <VideoPlayer
                   src={videoSrc}
                   videoId={`modal-${index}-${idx}`}
@@ -174,6 +174,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
     </>
   );
 
+  const Tag = isPiCloud ? 'article' : 'a';
   const articleProps = {
     className: sharedClasses,
     ...(isPiCloud 
@@ -181,8 +182,6 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
       : { href: project.link, target: "_blank", rel: "noreferrer" }
     )
   };
-
-  const Tag = isPiCloud ? 'article' : 'a';
 
   return (
     <Tag {...(articleProps as any)} aria-label={`View ${project.title}`}>

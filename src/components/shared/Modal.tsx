@@ -9,7 +9,7 @@ interface ModalProps {
   showCloseButton?: boolean;
   closeOnBackdropClick?: boolean;
   closeOnEscape?: boolean;
-  maxWidth?: "sm" | "md" | "lg" | "xl";
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl";
   ariaLabel?: string;
 }
 
@@ -66,6 +66,7 @@ export const Modal: React.FC<ModalProps> = ({
     md: "sm:max-w-md",
     lg: "sm:max-w-lg",
     xl: "sm:max-w-4xl",
+    "2xl": "sm:max-w-6xl",
   };
 
   return createPortal(

@@ -3,8 +3,8 @@ import {
   ServerIcon, LockClosedIcon, GlobeAltIcon, 
   CloudIcon, ChartBarIcon, DatabaseIcon, ShieldCheckIcon 
 } from "@heroicons/react/solid";
-import { Modal } from "./Modal";
-import { Button } from "./Button";
+import { Modal } from "../shared/Modal";
+import { Button } from "../shared/Button";
 
 interface PiCloudModalProps {
   isOpen: boolean;
@@ -136,7 +136,7 @@ fi`;
     <Modal 
       isOpen={isOpen} 
       onClose={onClose} 
-      maxWidth="xl" 
+      maxWidth="2xl" 
       ariaLabel="Pi-Cloud Details"
     >
       {/* Hero Header */}
