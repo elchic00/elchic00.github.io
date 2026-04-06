@@ -1,8 +1,6 @@
 import React from "react";
-import { 
-  ServerIcon, LockClosedIcon, GlobeAltIcon, 
-  CloudIcon, ChartBarIcon, ShieldCheckIcon,
-  LightBulbIcon
+import {
+  ServerIcon, CloudIcon, ChartBarIcon, ShieldCheckIcon, LightBulbIcon, KeyIcon
 } from "@heroicons/react/solid";
 import { Modal } from "../shared/Modal";
 import { Button } from "../shared/Button";
@@ -34,64 +32,85 @@ const CodeBlock: React.FC<{ code: string; language?: string }> = ({ code, langua
 );
 
 export const PiCloudModal: React.FC<PiCloudModalProps> = ({ isOpen, onClose }) => {
-const dockerComposeSnippet = `services:
-  # Photo Backup & AI Processing
-  immich-server:
-    image: ghcr.io/immich-app/immich-server:release
-    environment:
-      - NODE_ENV=production 
-    volumes:
-      - /mnt/nvme_data/immich:/usr/src/app/upload
-    restart: unless-stopped
+  const dockerComposeSnippet = `services:
+  # --- Identity & Security ---
+  vaultwarden:
+    image: vaultwarden/server:latest
+    volumes: [ './vaultwarden/vw-data:/data' ]
+  pihole:
+    image: pihole/pihole:latest
+    volumes: [ './etc-pihole:/etc/pihole' ]
+  crowdsec:
+    image: crowdsecurity/crowdsec:latest
+    volumes: [ './crowdsec/config:/etc/crowdsec' ]
 
-  # Observability Stack (Prometheus & Grafana)
+  # --- Observability & Dashboards ---
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    volumes: 
+      - ./homepage/config:/app/config
+      - /sys/class/thermal/thermal_zone0/temp:/sys/class/thermal/thermal_zone0/temp:ro # Hardware thermal sensor mapping
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    volumes: [ './uptime-kuma/data:/app/data' ]
   prometheus:
     image: prom/prometheus:latest
-    volumes:
-      - ./prometheus/config:/etc/prometheus
-      - prometheus-data:/prometheus # Persistent metrics storage
-    restart: unless-stopped
-
   grafana:
     image: grafana/grafana:latest
-    ports:
-      - "3000:3000"
-    restart: unless-stopped
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+  node-exporter:
+    image: prom/node-exporter:latest
 
-  # Maintenance & CI/CD
+  # --- Applications & Maintenance ---
+  immich-server:
+    image: ghcr.io/immich-app/immich-server:release
+    volumes: [ '/mnt/nvme_data/immich:/usr/src/app/upload' ]
   watchtower:
     image: containrrr/watchtower:latest
-    environment:
-      - WATCHTOWER_CLEANUP=true # Auto-prune old image layers
-      - DOCKER_API_VERSION=1.44 # Prevents breaks during Engine updates
-      # Active Alerting: Sends push notifications on successful updates
-      - WATCHTOWER_NOTIFICATIONS=shoutrrr
-      - WATCHTOWER_NOTIFICATION_URL=ntfy://ntfy.sh/drew-pi-alerts
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock`;
+    environment: [ 'WATCHTOWER_CLEANUP=true' ]`;
 
-const systemOrchestrationSnippet = `#!/bin/bash
-# High-Performance Sync & Capacity-Aware Alerting
+  const systemOrchestrationSnippet = `#!/bin/bash
+# High-Performance Atomic Sync & Disaster Recovery
 
 SOURCE="/home/drewpi/pi-cloud/"
-DEST="/mnt/sd_backup/pi-cloud-mirror/"
-TOPIC="drew-pi-alerts"
+SD_DEST="/mnt/sd_backup/pi-cloud-mirror/"
+USB_DEST="/mnt/usb_backup/pi-cloud-mirror/"
 
-# 1. Atomic Sync (Exclude volatile logs/cache to keep backup lean)
-rsync -av --delete \\
-  --exclude='*.log' --exclude='cache/' --exclude='tmp/' \\
-  "$SOURCE" "$DEST"
+# 1. Atomic Database State Preservation (SQLite VACUUM + Hot Backup)
+# Prevents corruption during concurrent writes before sync begins
+sqlite3 $SOURCE/uptime-kuma/data/kuma.db "VACUUM;"
+sqlite3 $SOURCE/uptime-kuma/data/kuma.db ".backup '$SOURCE/uptime-kuma/data/kuma.db.bak'"
 
-# 2. Storage Health Check
-USAGE=$(df /mnt/sd_backup | tail -1 | awk '{print $5}' | sed 's/%//')
+sqlite3 $SOURCE/vaultwarden/vw-data/db.sqlite3 "VACUUM;"
+sqlite3 $SOURCE/vaultwarden/vw-data/db.sqlite3 ".backup '$SOURCE/vaultwarden/vw-data/db.sqlite3.bak'"
 
-# 3. Intelligent Push Notification via ntfy.sh
-if [ "$USAGE" -gt 90 ]; then
-    curl -H "Priority: urgent" -H "Tags: warning" \\
-         -d "CRITICAL: SD Card at $USAGE%. Cleanup required!" \\
-         "https://ntfy.sh/$TOPIC"
+sqlite3 $SOURCE/crowdsec/data/crowdsec.db "VACUUM;"
+sqlite3 $SOURCE/crowdsec/data/crowdsec.db ".backup '$SOURCE/crowdsec/data/crowdsec.db.bak'"
+
+# 2. Sync Execution (Excluding live DBs to use the clean .bak files)
+EXCLUDES=(--exclude='*.log' --exclude='cache/' --exclude='tmp/' --exclude='crowdsec.db' --exclude='kuma.db' --exclude='db.sqlite3')
+
+# Pass 1: Primary SD Card Mirror (Full System Clone)
+rsync -av --delete "\${EXCLUDES[@]}" "$SOURCE" "$SD_DEST" > /tmp/pi_backup.log 2>&1
+
+# Pass 2: Emergency USB (Mac Recovery)
+# Excludes heavy ML photo data (Immich) to fit on a portable 16GB ExFAT drive
+mkdir -p "$USB_DEST"
+rsync -av --delete --exclude='immich/' "\${EXCLUDES[@]}" "$SOURCE" "$USB_DEST" >> /tmp/pi_backup.log 2>&1
+
+# 3. Post-Sync Cleanup
+rm $SOURCE/**/*.db.bak
+
+# 4. Telemetry & Alerting
+SD_USAGE=$(df /mnt/sd_backup | tail -1 | awk '{print $5}' | sed 's/%//')
+USB_USAGE=$(df /mnt/usb_backup | tail -1 | awk '{print $5}' | sed 's/%//')
+
+if [ "$SD_USAGE" -gt 90 ]; then
+    curl -H "Priority: urgent" -d "ALERT: SD Card at $SD_USAGE%" "https://ntfy.sh/<REDACTED_TOPIC>"
 else
-    curl -d "Daily Pi Backup Success ($USAGE% used)" "https://ntfy.sh/$TOPIC"
+    curl -d "Daily Backup Complete (SD: $SD_USAGE%, USB: $USB_USAGE%)" "https://ntfy.sh/<REDACTED_TOPIC>"
+    curl -s "http://drewpi:3001/api/push/<REDACTED_TOKEN>?status=up&msg=OK" # Uptime Kuma Heartbeat
 fi`;
 
   return (
@@ -106,105 +125,88 @@ fi`;
             <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-medium rounded-full border border-emerald-500/30">Production-Ready</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Pi-Cloud: High-Performance Edge Gateway</h2>
-          <p className="text-slate-300 mt-2 text-sm sm:text-base">Recursive DNS, Media Backups, and Real-time Observability on Pi 5</p>
+          <p className="text-slate-300 mt-2 text-sm sm:text-base">Identity Vaults, Zero-Trust Networking, and Full-Stack Observability on Pi 5</p>
         </div>
       </div>
 
       <div className="p-6 sm:p-8 space-y-6 max-h-[75vh] overflow-y-auto custom-scrollbar">
-        
+
         {/* Architecture Overview */}
         <SectionCard icon={<ServerIcon className="h-5 w-5 text-cyan-400" />} title="Architecture Overview">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            An <strong>Edge Gateway</strong> built on a <strong className="text-white">Raspberry Pi 5 (8GB)</strong>. By utilizing an <strong className="text-white">NVMe M.2 SSD via USB 3.0 (UASP)</strong>, the stack eliminates the SD-card I/O bottleneck, enabling the high-speed data ingestion required for <strong>Prometheus metrics</strong> and <strong>Immich ML</strong> processing.
+            A self-hosted <strong>Edge Gateway</strong> built on a <strong className="text-white">Raspberry Pi 5 (8GB)</strong>. By booting from an <strong className="text-white">NVMe M.2 SSD (400GB) via UASP</strong>, the stack eliminates standard micro-SD I/O bottlenecks. This enables high-speed data ingestion for 11 integrated Docker services, including real-time telemetry and ML-driven photo processing.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
               <div className="text-cyan-400 font-mono text-lg font-bold">8GB</div>
-              <div className="text-slate-500 text-xs">LPDDR4X RAM</div>
+              <div className="text-slate-500 text-xs text-nowrap">LPDDR4X RAM</div>
             </div>
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-              <div className="text-cyan-400 font-mono text-lg font-bold">UASP</div>
-              <div className="text-slate-500 text-xs text-nowrap">USB 3.0 (PCIe Ready)</div>
+              <div className="text-cyan-400 font-mono text-lg font-bold">400GB</div>
+              <div className="text-slate-500 text-xs text-nowrap">NVMe Storage</div>
             </div>
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-              <div className="text-cyan-400 font-mono text-lg font-bold">2.4GHz</div>
-              <div className="text-slate-500 text-xs">Quad-Core ARM</div>
+              <div className="text-cyan-400 font-mono text-lg font-bold">11</div>
+              <div className="text-slate-500 text-xs">Microservices</div>
             </div>
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
               <div className="text-cyan-400 font-mono text-lg font-bold">&lt;1ms</div>
-              <div className="text-slate-500 text-xs">Internal Latency</div>
+              <div className="text-slate-500 text-xs">Local Latency</div>
             </div>
           </div>
         </SectionCard>
 
-        {/* DNS & Privacy Engineering */}
-        <SectionCard icon={<GlobeAltIcon className="h-5 w-5 text-cyan-400" />} title="Privacy-First DNS (Recursive Shield)">
-          <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            Standard DNS (Google/ISP) logs every site you visit. My <strong>Recursive Shield</strong> architecture uses <strong>Pi-hole</strong> to sinkhole ads and <strong>Unbound</strong> to talk directly to the 13 global Root Nameservers.
-          </p>
-          <div className="bg-slate-950 p-4 rounded-lg border border-slate-800 font-mono text-xs mb-3">
-            <div className="flex items-center gap-2 text-slate-400 mb-2">
-              <span className="text-white">Client</span> → <span className="text-rose-400 font-bold">Pi-hole Sinkhole</span> <span className="text-slate-600">(Blocks 150k+ Ad Domains)</span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-400 mb-2 pl-8">
-              → <span className="text-amber-400 font-bold">Unbound Recursive Resolver</span> <span className="text-slate-600">(Bare-metal)</span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-400 pl-16">
-              → <span className="text-emerald-400 font-bold">Global Root Servers</span>
-            </div>
-          </div>
-          <p className="text-slate-400 text-xs">
-            <strong className="text-cyan-300">Why Unbound on Bare Metal?</strong> Running DNS outside of Docker eliminates the network bridge overhead, ensuring recursive resolution remains responsive even under heavy container load.
-          </p>
-        </SectionCard>
-
-        {/* Security & Observability */}
+        {/* Identity & Network Defense */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <SectionCard icon={<LockClosedIcon className="h-5 w-5 text-cyan-400" />} title="Zero-Trust Network">
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span><span>Tailscale WireGuard tunnel for secure 5G/Public WiFi browsing.</span></li>
-              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span><span>CrowdSec IPS: Real-time packet dropping at the kernel level via <strong>nftables</strong>.</span></li>
-              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span><span>SSH Hardening: ED25519 keys only; password auth disabled.</span></li>
-            </ul>
+          <SectionCard icon={<KeyIcon className="h-5 w-5 text-cyan-400" />} title="Identity & 2FA Vault">
+            <p className="text-slate-300 text-sm leading-relaxed">
+              Full control over credentials using <strong>Vaultwarden</strong>. Manages and autofills TOTP (2FA) codes natively, eliminating reliance on proprietary cloud-based authenticator apps while keeping secrets encrypted at rest.
+            </p>
           </SectionCard>
 
-          <SectionCard icon={<ChartBarIcon className="h-5 w-5 text-cyan-400" />} title="Real-time Observability">
-            <p className="text-slate-300 text-sm leading-relaxed mb-3">
-              Full-stack monitoring via <strong>Prometheus & Grafana</strong> to track I/O throughput and thermal performance.
-            </p>
-            <div className="flex items-center gap-3">
-               <span className="px-2 py-1 bg-slate-800 text-xs rounded text-slate-300">Uptime Kuma Alerting</span>
-               <span className="px-2 py-1 bg-slate-800 text-xs rounded text-slate-300">Grafana Dashboards</span>
-            </div>
+          <SectionCard icon={<ShieldCheckIcon className="h-5 w-5 text-cyan-400" />} title="Zero-Trust Network">
+            <ul className="space-y-2 text-sm text-slate-400">
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span><span><strong>Tailscale:</strong> Secure WireGuard mesh routing.</span></li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span><span><strong>CrowdSec:</strong> IPS for real-time kernel-level packet dropping.</span></li>
+              <li className="flex items-start gap-2"><span className="text-emerald-400 mt-0.5">✓</span><span><strong>Pi-Hole:</strong> Network-wide ad & telemetry sinkhole.</span></li>
+            </ul>
           </SectionCard>
         </div>
 
-        {/* Docker & Maintenance */}
-        <SectionCard icon={<CloudIcon className="h-5 w-5 text-cyan-400" />} title="Modular Infrastructure (Docker)">
-          <p className="text-slate-300 text-sm leading-relaxed mb-2">
-            Services are containerized for isolation. Note the <strong className="text-white">API version lock</strong>—this prevents breaking changes when the Docker Engine auto-updates.
+        {/* Observability Stack */}
+        <SectionCard icon={<ChartBarIcon className="h-5 w-5 text-cyan-400" />} title="Full-Stack Observability & UI">
+          <p className="text-slate-300 text-sm leading-relaxed mb-4">
+            Infrastructure health is monitored via <strong>Prometheus & Grafana</strong>, utilizing <strong>cAdvisor</strong> for container analytics and <strong>Node Exporter</strong> for bare-metal telemetry. The entire lab is orchestrated through a central <strong>Homepage</strong> dashboard, with Pi hardware thermal sensors piped directly into the container UI.
           </p>
+          <div className="flex flex-wrap gap-2">
+            <span className="px-2 py-1 bg-slate-800 text-xs rounded text-slate-300">Uptime Kuma Alerts</span>
+            <span className="px-2 py-1 bg-slate-800 text-xs rounded text-slate-300">ntfy.sh Push Notifications</span>
+            <span className="px-2 py-1 bg-slate-800 text-xs rounded text-slate-300">Watchtower CI/CD</span>
+          </div>
+        </SectionCard>
+
+        {/* Docker & Recovery */}
+        <SectionCard icon={<CloudIcon className="h-5 w-5 text-cyan-400" />} title="Modular Deployment (Docker)">
           <CodeBlock code={dockerComposeSnippet} />
         </SectionCard>
 
-        {/* Recovery Strategy */}
-        <SectionCard icon={<ShieldCheckIcon className="h-5 w-5 text-cyan-400" />} title="Automated Disaster Recovery">
+        <SectionCard icon={<ServerIcon className="h-5 w-5 text-cyan-400" />} title="Triple-Redundant Disaster Recovery">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            Stateful data protection for the Immich library. A custom <strong>rsync</strong> logic creates a bootable clone of the primary NVMe drive onto a high-endurance SD card every 24 hours.
+            A custom Bash script executes a dual-pass synchronization daily. Pass 1 creates a full bootable mirror on an SD card. Pass 2 filters out heavy ML photo payloads and syncs critical SQLite databases to an <strong>ExFAT USB Lifeboat</strong>—allowing immediate data decryption on macOS/Windows if the primary Linux hardware fails.
           </p>
           <CodeBlock code={systemOrchestrationSnippet} language="bash" />
           <div className="grid grid-cols-3 gap-3 mt-4">
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center">
-              <div className="text-emerald-400 font-mono text-lg font-bold">Near-Zero</div>
-              <div className="text-slate-500 text-xs text-nowrap">Recovery Time (RTO)</div>
+              <div className="text-emerald-400 font-mono text-lg font-bold">Cross-OS</div>
+              <div className="text-slate-500 text-xs text-nowrap">ExFAT Portability</div>
             </div>
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center">
-              <div className="text-emerald-400 font-mono text-lg font-bold">90%</div>
-              <div className="text-slate-500 text-xs">Alert Threshold</div>
+              <div className="text-emerald-400 font-mono text-lg font-bold">Hot-Sync</div>
+              <div className="text-slate-500 text-xs text-nowrap">No Service Downtime</div>
             </div>
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center">
-              <div className="text-emerald-400 font-mono text-lg font-bold">Bootable</div>
-              <div className="text-slate-500 text-xs">Ready Clone</div>
+              <div className="text-emerald-400 font-mono text-lg font-bold">Air-Gapped</div>
+              <div className="text-slate-500 text-xs text-nowrap">Physical USB Keys</div>
             </div>
           </div>
         </SectionCard>
@@ -217,15 +219,15 @@ fi`;
           <ul className="space-y-4 text-sm text-slate-400">
             <li className="flex items-start gap-2">
               <span className="text-cyan-400 mt-1">•</span>
-              <span><strong className="text-white">Performance Budgets</strong> — Managing hardware constraints on a Pi (8GB) mirrors the discipline required for mobile-first React performance and bundle size management.</span>
+              <span><strong className="text-white">Performance Budgets</strong> — Managing hardware constraints on a Pi (8GB RAM, 16GB USB limit) mirrors the discipline required for mobile-first React performance and bundle size management.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-cyan-400 mt-1">•</span>
-              <span><strong className="text-white">Real-time Telemetry</strong> — Designing Grafana dashboards for infrastructure informs how I implement frontend error tracking and user-experience monitoring (RUM).</span>
+              <span><strong className="text-white">State Operations</strong> — The backup script's SQLite VACUUM + hot-backup logic mirrors frontend patterns: optimistic UI updates, transaction rollback safety, and preventing sync conflicts during concurrent mutations.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-cyan-400 mt-1">•</span>
-              <span><strong className="text-white">Hardware Acceleration</strong> — Optimizing Immich with OpenCL translates to leveraging WebGPU and Web Workers for computationally heavy browser tasks.</span>
+              <span><strong className="text-white">Real-time Telemetry</strong> — Piping hardware sensors into the containerized Homepage dashboard informs how I implement frontend error tracking and user-experience monitoring.</span>
             </li>
           </ul>
         </div>
