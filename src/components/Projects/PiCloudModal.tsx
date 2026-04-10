@@ -49,7 +49,7 @@ export const PiCloudModal: React.FC<PiCloudModalProps> = ({ isOpen, onClose }) =
     image: ghcr.io/gethomepage/homepage:latest
     volumes: 
       - ./homepage/config:/app/config
-      - /sys/class/thermal/thermal_zone0/temp:/sys/class/thermal/thermal_zone0/temp:ro # Hardware thermal sensor mapping
+      - /sys/class/thermal/thermal_zone0/temp:/sys/class/thermal/thermal_zone0/temp:ro
   uptime-kuma:
     image: louislam/uptime-kuma:latest
     volumes: [ './uptime-kuma/data:/app/data' ]
@@ -72,50 +72,38 @@ export const PiCloudModal: React.FC<PiCloudModalProps> = ({ isOpen, onClose }) =
 
   const systemOrchestrationSnippet = `#!/bin/bash
 # High-Performance Atomic Sync & Disaster Recovery
+# Redacted for Public Portfolio Security
 
-SOURCE="/home/drewpi/pi-cloud/"
+SOURCE="~/pi-cloud/"
 SD_DEST="/mnt/sd_backup/pi-cloud-mirror/"
 USB_DEST="/mnt/usb_backup/pi-cloud-mirror/"
 
 # 1. Atomic Database State Preservation (SQLite VACUUM + Hot Backup)
-# Prevents corruption during concurrent writes before sync begins
-sqlite3 $SOURCE/uptime-kuma/data/kuma.db "VACUUM;"
-sqlite3 $SOURCE/uptime-kuma/data/kuma.db ".backup '$SOURCE/uptime-kuma/data/kuma.db.bak'"
+# Ensures integrity for Vaultwarden, Kuma, CrowdSec, and Pi-hole stats
+databases=("uptime-kuma/data/kuma.db" "vaultwarden/vw-data/db.sqlite3" "crowdsec/data/crowdsec.db" "etc-pihole/pihole-FTL.db")
 
-sqlite3 $SOURCE/vaultwarden/vw-data/db.sqlite3 "VACUUM;"
-sqlite3 $SOURCE/vaultwarden/vw-data/db.sqlite3 ".backup '$SOURCE/vaultwarden/vw-data/db.sqlite3.bak'"
+for db in "\${databases[@]}"; do
+    sqlite3 "$SOURCE/$db" "VACUUM;"
+    sqlite3 "$SOURCE/$db" ".backup '$SOURCE/$db.bak'"
+done
 
-sqlite3 $SOURCE/crowdsec/data/crowdsec.db "VACUUM;"
-sqlite3 $SOURCE/crowdsec/data/crowdsec.db ".backup '$SOURCE/crowdsec/data/crowdsec.db.bak'"
+# 2. Sync Execution
+EXCLUDES=(--exclude='*.log' --exclude='cache/' --exclude='*.db')
 
-# 2. Sync Execution (Excluding live DBs to use the clean .bak files)
-EXCLUDES=(--exclude='*.log' --exclude='cache/' --exclude='tmp/' --exclude='crowdsec.db' --exclude='kuma.db' --exclude='db.sqlite3')
+# Pass 1: Full System Mirror (SSD -> SD)
+rsync -av --delete "\${EXCLUDES[@]}" "$SOURCE" "$SD_DEST"
 
-# Pass 1: Primary SD Card Mirror (Full System Clone)
-rsync -av --delete "\${EXCLUDES[@]}" "$SOURCE" "$SD_DEST" > /tmp/pi_backup.log 2>&1
+# Pass 2: "Lifeboat" (SSD -> ExFAT USB)
+# Critical data only; excludes large Immich assets for portability
+rsync -av --delete --exclude='immich/' "\${EXCLUDES[@]}" "$SOURCE" "$USB_DEST"
 
-# Pass 2: Emergency USB (Mac Recovery)
-# Excludes heavy ML photo data (Immich) to fit on a portable 16GB ExFAT drive
-mkdir -p "$USB_DEST"
-rsync -av --delete --exclude='immich/' "\${EXCLUDES[@]}" "$SOURCE" "$USB_DEST" >> /tmp/pi_backup.log 2>&1
-
-# 3. Post-Sync Cleanup
+# 3. Cleanup & Heartbeat
 rm $SOURCE/**/*.db.bak
-
-# 4. Telemetry & Alerting
-SD_USAGE=$(df /mnt/sd_backup | tail -1 | awk '{print $5}' | sed 's/%//')
-USB_USAGE=$(df /mnt/usb_backup | tail -1 | awk '{print $5}' | sed 's/%//')
-
-if [ "$SD_USAGE" -gt 90 ]; then
-    curl -H "Priority: urgent" -d "ALERT: SD Card at $SD_USAGE%" "https://ntfy.sh/<REDACTED_TOPIC>"
-else
-    curl -d "Daily Backup Complete (SD: $SD_USAGE%, USB: $USB_USAGE%)" "https://ntfy.sh/<REDACTED_TOPIC>"
-    curl -s "http://drewpi:3001/api/push/<REDACTED_TOKEN>?status=up&msg=OK" # Uptime Kuma Heartbeat
-fi`;
+curl -d "Backup Complete" "https://ntfy.sh/<REDACTED_TOPIC>"
+curl -s "http://<LOCAL_IP>:3001/api/push/<TOKEN>?status=up" # Uptime Kuma Heartbeat`;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} maxWidth="2xl" ariaLabel="Pi-Cloud Details">
-      {/* Hero Header */}
+    <Modal isOpen={isOpen} onClose={onClose} maxWidth="2xl" ariaLabel="Pi-Cloud Infrastructure Details">
       <div className="relative h-48 sm:h-64 overflow-hidden">
         <img src="/images/projects/pi-cloud.webp" alt="Pi-Cloud" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
@@ -130,20 +118,18 @@ fi`;
       </div>
 
       <div className="p-6 sm:p-8 space-y-6 max-h-[75vh] overflow-y-auto custom-scrollbar">
-
-        {/* Architecture Overview */}
         <SectionCard icon={<ServerIcon className="h-5 w-5 text-cyan-400" />} title="Architecture Overview">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            A self-hosted <strong>Edge Gateway</strong> built on a <strong className="text-white">Raspberry Pi 5 (8GB)</strong>. By booting from an <strong className="text-white">NVMe M.2 SSD (400GB) via UASP</strong>, the stack eliminates standard micro-SD I/O bottlenecks. This enables high-speed data ingestion for 11 integrated Docker services, including real-time telemetry and ML-driven photo processing.
+            A self-hosted <strong>Edge Gateway</strong> built on a <strong className="text-white">Raspberry Pi 5 (8GB)</strong>. Booting from an <strong className="text-white">NVMe M.2 SSD (500GB) via UASP</strong>, the stack eliminates standard I/O bottlenecks. This enables high-speed data ingestion for 11 integrated Docker services, including real-time telemetry and ML-driven photo processing.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
               <div className="text-cyan-400 font-mono text-lg font-bold">8GB</div>
-              <div className="text-slate-500 text-xs text-nowrap">LPDDR4X RAM</div>
+              <div className="text-slate-500 text-xs">LPDDR4X RAM</div>
             </div>
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
-              <div className="text-cyan-400 font-mono text-lg font-bold">400GB</div>
-              <div className="text-slate-500 text-xs text-nowrap">NVMe Storage</div>
+              <div className="text-cyan-400 font-mono text-lg font-bold">500GB</div>
+              <div className="text-slate-500 text-xs">NVMe Storage</div>
             </div>
             <div className="bg-slate-950 p-3 rounded-lg border border-slate-800">
               <div className="text-cyan-400 font-mono text-lg font-bold">11</div>
@@ -156,7 +142,6 @@ fi`;
           </div>
         </SectionCard>
 
-        {/* Identity & Network Defense */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <SectionCard icon={<KeyIcon className="h-5 w-5 text-cyan-400" />} title="Identity & 2FA Vault">
             <p className="text-slate-300 text-sm leading-relaxed">
@@ -173,10 +158,9 @@ fi`;
           </SectionCard>
         </div>
 
-        {/* Observability Stack */}
         <SectionCard icon={<ChartBarIcon className="h-5 w-5 text-cyan-400" />} title="Full-Stack Observability & UI">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            Infrastructure health is monitored via <strong>Prometheus & Grafana</strong>, utilizing <strong>cAdvisor</strong> for container analytics and <strong>Node Exporter</strong> for bare-metal telemetry. The entire lab is orchestrated through a central <strong>Homepage</strong> dashboard, with Pi hardware thermal sensors piped directly into the container UI.
+            Infrastructure health is monitored via <strong>Prometheus & Grafana</strong>, utilizing <strong>cAdvisor</strong> and <strong>Node Exporter</strong> for telemetry. The entire lab is orchestrated through a central <strong>Homepage</strong> dashboard, with Pi hardware thermal sensors piped directly into the container UI.
           </p>
           <div className="flex flex-wrap gap-2">
             <span className="px-2 py-1 bg-slate-800 text-xs rounded text-slate-300">Uptime Kuma Alerts</span>
@@ -185,33 +169,17 @@ fi`;
           </div>
         </SectionCard>
 
-        {/* Docker & Recovery */}
         <SectionCard icon={<CloudIcon className="h-5 w-5 text-cyan-400" />} title="Modular Deployment (Docker)">
           <CodeBlock code={dockerComposeSnippet} />
         </SectionCard>
 
         <SectionCard icon={<ServerIcon className="h-5 w-5 text-cyan-400" />} title="Triple-Redundant Disaster Recovery">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            A custom Bash script executes a dual-pass synchronization daily. Pass 1 creates a full bootable mirror on an SD card. Pass 2 filters out heavy ML photo payloads and syncs critical SQLite databases to an <strong>ExFAT USB Lifeboat</strong>—allowing immediate data decryption on macOS/Windows if the primary Linux hardware fails.
+            A custom Bash script executes a dual-pass synchronization daily. Pass 1 creates a full bootable mirror on an SD card. Pass 2 syncs critical SQLite databases to an <strong>ExFAT USB Lifeboat</strong>—allowing immediate data decryption on macOS/Windows if the primary Linux hardware fails.
           </p>
           <CodeBlock code={systemOrchestrationSnippet} language="bash" />
-          <div className="grid grid-cols-3 gap-3 mt-4">
-            <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center">
-              <div className="text-emerald-400 font-mono text-lg font-bold">Cross-OS</div>
-              <div className="text-slate-500 text-xs text-nowrap">ExFAT Portability</div>
-            </div>
-            <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center">
-              <div className="text-emerald-400 font-mono text-lg font-bold">Hot-Sync</div>
-              <div className="text-slate-500 text-xs text-nowrap">No Service Downtime</div>
-            </div>
-            <div className="bg-slate-950 p-3 rounded-lg border border-slate-800 text-center">
-              <div className="text-emerald-400 font-mono text-lg font-bold">Air-Gapped</div>
-              <div className="text-slate-500 text-xs text-nowrap">Physical USB Keys</div>
-            </div>
-          </div>
         </SectionCard>
 
-        {/* Engineering Connection */}
         <div className="bg-gradient-to-r from-cyan-950/30 to-blue-950/30 border border-cyan-500/20 rounded-xl p-6">
           <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
             <LightBulbIcon className="h-5 w-5 text-cyan-400" /> Frontend Engineering Connection
@@ -223,16 +191,20 @@ fi`;
             </li>
             <li className="flex items-start gap-2">
               <span className="text-cyan-400 mt-1">•</span>
-              <span><strong className="text-white">State Operations</strong> — The backup script's SQLite VACUUM + hot-backup logic mirrors frontend patterns: optimistic UI updates, transaction rollback safety, and preventing sync conflicts during concurrent mutations.</span>
+              <span><strong className="text-white">State Operations</strong> — The backup script's SQLite VACUUM logic mirrors frontend patterns: optimistic UI updates, transaction rollback safety, and preventing sync conflicts during concurrent mutations.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-cyan-400 mt-1">•</span>
-              <span><strong className="text-white">Real-time Telemetry</strong> — Piping hardware sensors into the containerized Homepage dashboard informs how I implement frontend error tracking and user-experience monitoring.</span>
+              <span>
+                <strong className="text-white">Full-Stack Observability</strong> — Mapping
+                hardware thermals directly into the <strong>Homepage</strong> dashboard mirrors
+                frontend telemetry patterns (e.g., Sentry, OpenTelemetry). It demonstrates a
+                disciplined approach to monitoring system health and identifying bottlenecks before they impact the end-user.
+              </span>
             </li>
           </ul>
         </div>
 
-        {/* Footer Actions */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800">
           <p className="text-slate-500 text-xs italic font-mono tracking-tight">System Status: 100% Operational • Encryption: AES-256-GCM</p>
           <Button variant="primary" onClick={onClose}>Close Technical Deep Dive</Button>
