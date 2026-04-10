@@ -2,7 +2,7 @@
     {
     "title": "Pi-Cloud",
     "subtitle": "High-Performance Edge Gateway",
-    "description": "Production-grade home infrastructure on Raspberry Pi 5. Privacy-first replacement for Google Photos and UptimeRobot with zero-trust networking and automated disaster recovery.",
+    "description": "A high-performance Edge Gateway orchestrating 11 microservices on a Raspberry Pi 5. Engineered for zero-trust security and sub-1ms local latency, featuring atomic disaster recovery and real-time telemetry dashboards.",
     "image": "/images/projects/pi-cloud.webp",
     "link": "https://github.com/elchic00/pi-cloud",
     "id": "pi-cloud",
