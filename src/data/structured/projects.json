@@ -2,7 +2,7 @@
     {
     "title": "Pi-Cloud",
     "subtitle": "High-Performance Edge Gateway",
-    "description": "A high-performance Edge Gateway orchestrating 11 microservices on a Raspberry Pi 5. Engineered for zero-trust security and sub-1ms local latency, featuring atomic disaster recovery and real-time telemetry dashboards.",
+    "description": "A high-performance private cloud orchestrating 11 microservices on a Raspberry Pi 5. This setup replaces Big Tech ecosystems for photo storage and identity management with a zero-trust, invisible infrastructure. It features a recursive Unbound + Pi-hole DNS stack for low-latency ad-filtering, atomic disaster recovery, and a unified 'Single Pane of Glass' telemetry dashboard.",
     "image": "/images/projects/pi-cloud.webp",
     "link": "https://github.com/elchic00/pi-cloud",
     "id": "pi-cloud",
