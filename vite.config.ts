@@ -26,6 +26,20 @@ export default defineConfig({
           // Separate vendor chunks for better caching
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'markdown-vendor': ['marked', 'dompurify'],
+          // Split analytics into separate chunk to reduce main bundle
+          'analytics': ['./src/utils/analytics.ts', './src/hooks/usePageTracking.ts'],
+        },
+        // Add content hash for cache busting
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          // Keep images in their original paths with hashes
+          if (/\.(webp|png|jpe?g|gif|svg)$/.test(assetInfo.name)) {
+            return `images/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
         },
       },
     },
@@ -33,6 +47,10 @@ export default defineConfig({
     chunkSizeWarningLimit: 600,
     // Enable minification (esbuild is faster than terser)
     minify: 'esbuild',
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+    // Target modern browsers for smaller bundles
+    target: 'es2020',
   },
   server: {
     port: 3000,

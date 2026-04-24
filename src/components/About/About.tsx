@@ -11,10 +11,12 @@ export const About = () => {
       id="about"
       className="relative min-h-screen flex items-center overflow-hidden pb-32"
     >
-      {/* Background image layer */}
+      {/* Background image layer - responsive srcset for LCP optimization */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/nyc-sunset.webp"
+          src="/images/nyc-sunset-1280.webp"
+          srcSet="/images/nyc-sunset-640.webp 640w, /images/nyc-sunset-960.webp 960w, /images/nyc-sunset-1280.webp 1280w, /images/nyc-sunset-1920.webp 1920w"
+          sizes="100vw"
           alt=""
           className="w-full h-full object-cover object-[center_38%]"
           loading="eager"
@@ -104,9 +106,14 @@ export const About = () => {
           </div>
         </div>
 
+        {/* Responsive profile image with srcset for optimal LCP */}
         <picture className="animate-fade-in-delay-5 relative">
           <div className="absolute -inset-4 bg-cyan-500/20 blur-3xl rounded-full opacity-50"></div>
-          <source srcSet={SOCIAL_LINKS.PROFILE_IMAGE} type="image/webp" />
+          <source
+            srcSet="/images/profile-320.webp 320w, /images/profile-460.webp 460w, /images/profile-640.webp 640w, /images/profile-920.webp 920w"
+            sizes="(max-width: 640px) 80vw, 460px"
+            type="image/webp"
+          />
           <img
             className="relative object-cover object-center rounded-2xl mx-auto sm:h-80 h-80 border-2 border-white/10 shadow-2xl hover:scale-[1.02] transition-transform duration-500"
             alt="Andrew Alagna - Software Engineer"
