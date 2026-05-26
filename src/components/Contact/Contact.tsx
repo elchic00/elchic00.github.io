@@ -4,6 +4,7 @@
  */
 
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { MailIcon, LightningBoltIcon, TrashIcon } from "@heroicons/react/solid";
 import { Button } from "../shared/Button";
@@ -15,8 +16,12 @@ import { ConfirmDialog } from "../shared/ConfirmDialog";
 import messageTemplates from "../../data/structured/messageTemplates.json";
 
 export const Contact: React.FC = () => {
+  const location = useLocation();
   const { fire: showAlert, AlertComponent } = useAlert();
   const { ref: contactRef, isVisible: contactVisible } = useScrollReveal();
+  // Show immediately when navigated directly to #contact (avoids IntersectionObserver
+  // race with ScrollToHash's smooth scroll landing in the -100px rootMargin dead zone)
+  const formVisible = location.hash === '#contact' || contactVisible;
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showTemplates, setShowTemplates] = useState(false);
   const [showClearDraftDialog, setShowClearDraftDialog] = useState(false);
@@ -86,7 +91,7 @@ export const Contact: React.FC = () => {
             if (el) (contactRef as any).current = el;
           }}
           onSubmit={contactForm.handleSubmit}
-          className={`lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0 bg-slate-900 dark:bg-slate-900 light:bg-white rounded-2xl p-8 shadow-2xl border border-slate-800 dark:border-slate-800 light:border-slate-200 scroll-reveal-scale ${contactVisible ? 'visible' : ''}`}
+          className={`lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0 bg-slate-900 dark:bg-slate-900 light:bg-white rounded-2xl p-8 shadow-2xl border border-slate-800 dark:border-slate-800 light:border-slate-200 scroll-reveal-scale ${formVisible ? 'visible' : ''}`}
         >
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-white dark:text-white light:text-gray-900 sm:text-4xl text-3xl font-medium title-font flex items-center gap-2">
