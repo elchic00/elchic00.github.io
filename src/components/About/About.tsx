@@ -115,7 +115,7 @@ export const About = () => {
             type="image/webp"
           />
           <img
-            className="relative object-contain rounded-2xl mx-auto aspect-square sm:h-80 h-80 border-2 border-white/10 shadow-2xl hover:scale-[1.02] transition-transform duration-500"
+            className="relative object-contain rounded-2xl mx-auto aspect-square sm:h-80 h-80 hover:scale-[1.02] transition-transform duration-500"
             alt="Andrew Alagna - Software Engineer"
             src={SOCIAL_LINKS.PROFILE_IMAGE_FALLBACK}
             loading="eager"
