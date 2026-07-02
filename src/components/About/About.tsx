@@ -107,7 +107,7 @@ export const About = () => {
         </div>
 
         {/* Responsive profile image with srcset for optimal LCP */}
-        <picture className="animate-fade-in-delay-5 relative">
+        <picture className="animate-fade-in-delay-5 relative overflow-hidden rounded-2xl">
           <div className="absolute -inset-4 bg-cyan-500/20 blur-3xl rounded-full opacity-50"></div>
           <source
             srcSet="/images/profile-320.webp 320w, /images/profile-460.webp 460w, /images/profile-640.webp 640w, /images/profile-920.webp 920w"
@@ -115,7 +115,7 @@ export const About = () => {
             type="image/webp"
           />
           <img
-            className="relative object-cover rounded-2xl mx-auto aspect-square sm:h-80 h-80 hover:scale-[1.02] transition-transform duration-500"
+            className="relative object-contain mx-auto aspect-square sm:h-80 h-80 hover:scale-[1.02] transition-transform duration-500"
             alt="Andrew Alagna - Software Engineer"
             src={SOCIAL_LINKS.PROFILE_IMAGE_FALLBACK}
             loading="eager"
