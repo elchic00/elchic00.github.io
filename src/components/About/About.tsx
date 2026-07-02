@@ -107,16 +107,16 @@ export const About = () => {
         </div>
 
         {/* Responsive profile image with srcset for optimal LCP */}
-        <div className="animate-fade-in-delay-5 relative overflow-hidden rounded-2xl">
-          <div className="absolute -inset-4 bg-cyan-500/20 blur-3xl rounded-full opacity-50"></div>
-          <picture>
+        <div className="animate-fade-in-delay-5 relative h-80 w-80 max-w-[80vw] overflow-hidden rounded-2xl">
+          <div className="absolute inset-0 bg-cyan-500/20 blur-3xl rounded-full opacity-50"></div>
+          <picture className="relative block h-full w-full">
             <source
               srcSet="/images/profile-320.webp 320w, /images/profile-460.webp 460w, /images/profile-640.webp 640w, /images/profile-920.webp 920w"
-              sizes="(max-width: 640px) 80vw, 460px"
+              sizes="(max-width: 640px) 80vw, 320px"
               type="image/webp"
             />
             <img
-              className="relative object-contain mx-auto aspect-square sm:h-80 h-80 hover:scale-[1.02] transition-transform duration-500"
+              className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
               alt="Andrew Alagna - Software Engineer"
               src={SOCIAL_LINKS.PROFILE_IMAGE_FALLBACK}
               loading="eager"
