@@ -16,19 +16,19 @@ export const SKILLS = `
 - **TypeScript** - Production experience at American Express, React + TypeScript daily
 - Python - Data structures, algorithms, data science projects, automation
 - SQL - Database queries and management
-- HTML5 & CSS3 - WCAG AAA compliant, semantic markup (core frontend skills)
+- HTML5 & CSS3 - WCAG AA compliant, semantic markup (core frontend skills)
 
 **Frontend** (80% of work - PRIMARY EXPERTISE):
 - **React.js** - 3+ years professional experience at American Express, core specialization
 - **TypeScript** - Daily use with React, production-level expertise
 - **Redux** - State management for enterprise applications
-- **HTML5 & CSS3** - WCAG AAA compliant, semantic markup, accessibility expert
+- **HTML5 & CSS3** - WCAG AA compliant, semantic markup, accessibility expert
 - **Tailwind CSS** - Modern utility-first styling
 - **Component Libraries** - Material UI, custom design systems
 - **Responsive Design** - Mobile-first, cross-browser compatibility
 - **Single Page Applications** - React Router, client-side routing
 - **Performance Optimization** - React rendering, component optimization, bundle optimization
-- **Accessibility (WCAG AAA)** - Improved scores from 72% to 99% for 10M+ users
+- **Accessibility (WCAG AA)** - Improved audit scores from 72% to 100% across enterprise Account Services surfaces
 - **A/B Testing** - Frontend experimentation, analytics integration
 - **UI/UX Implementation** - Translating designs to production code
 
@@ -66,9 +66,9 @@ export const SKILLS = `
 - Quality Assurance - Enterprise-level testing strategies
 
 **Core Expertise**:
-- WCAG AAA Accessibility - Improved scores from 72% to 99% for 10M+ users
+- WCAG AA Accessibility - Improved audit scores from 72% to 100% across enterprise Account Services surfaces
 - Agile/Scrum Methodologies - Enterprise team collaboration
-- A/B Testing - 16+ experiments, 12% completion rate increase
+- A/B Testing - Analytics-backed profile-flow optimization with +18% completion and +16% start-rate lifts
 - State Management - Redux, Context API, complex application state
 - System Design - Scalable architecture for millions of users
 - Performance Optimization - React rendering, API optimization, BFF architecture

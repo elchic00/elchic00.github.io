@@ -16,12 +16,12 @@ export const BIOGRAPHY = `
 - **Secondary Skills**: Backend/Full-Stack (20% of work) - Node.js, Kotlin, APIs, microservices
 - Location: New York, New York, United States
 - Education: Hunter College (CUNY), Bachelor of Arts in Computer Science (May 2022, GPA: 3.62, Cum Laude)
-- Professional Summary: Frontend-focused Software Engineer with 3+ years building high-performance, WCAG AAA-compliant web applications at American Express. Primary expertise in React.js and TypeScript for frontend development, with complementary full-stack capabilities in Node.js and backend systems. Delivered measurable business impact for 10M+ users across 10+ international markets through accessibility, performance optimization, and A/B testing.
+- Professional Summary: Frontend-focused Software Engineer with 3+ years building high-performance, WCAG AA-compliant web applications at American Express. Primary expertise in React.js and TypeScript for frontend development, with complementary full-stack capabilities in Node.js and backend systems. Delivered measurable business impact across enterprise Account Services surfaces, including accessibility work across 10+ international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
 - Philosophy: "With a BA in Computer Science from CUNY: Hunter College, my foundation in algorithms and data structures complements my passion for creating scalable, data-driven applications. My commitment to fostering inclusive technology is evident through my accessibility work and mentorship roles at CodePath and Hunter College, where I supported hundreds of students in their technology journeys. I believe in paying it forward. If you're a first-generation student, come from a low-income background, or are underrepresented in tech, I'd be happy to be a resource and support you however I can."
 - Open to Volunteering: Education, Science and Technology causes
 - Certifications: Harvard Leadership Edge: Communicating to Connect - Connect with Others (Harvard Business Publishing, August 2023)
 - Core Values: Accessibility, inclusivity, mentorship, giving back to underrepresented communities
-- Passionate about: WCAG AAA compliance, performance optimization, mentoring first-generation and underrepresented students
+- Passionate about: WCAG AA accessibility, performance optimization, mentoring first-generation and underrepresented students
 - Current Mentorship: Actively leads weekly mentorship sessions for CodePath's open source course (group of 5 students) and provides 1-on-1 career guidance to 2 Hunter College students through alumni mentorship program
 - Interests: Bouldering, travel photography, building side projects
 
@@ -29,12 +29,12 @@ export const BIOGRAPHY = `
 
 ## American Express - Software Engineer (08/2022 - Present)
 Key Achievements:
-- **Accessibility Leadership**: Made digital banking accessible to people with disabilities by implementing WCAG AAA standards across 10+ international markets. Screen reader users, keyboard-only navigators, and users with visual impairments can now independently manage their accounts without assistance. This work eliminated barriers for 10M+ users who previously struggled with inaccessible interfaces, ensuring everyone can check balances, pay bills, and update information with dignity and independence.
-- **User Account Management**: Redesigned confusing account update flows for 3M+ users, making it easy to update address, phone, email, and other sensitive information. Reduced user errors and eliminated the need for support calls by providing clear guidance, helpful validation messages, and intuitive step-by-step flows. Users report feeling confident and in control when managing their information.
-- **Form Completion Experience**: Improved checkout and application completion rates by 12% through user research, A/B testing, and iterative refinement based on 50K+ user feedback responses. Reduced cognitive load by simplifying complex multi-step forms, clarifying next steps, and eliminating confusing error messages. Users can now complete applications faster with fewer frustrations.
-- **User Experience Optimization**: Enhanced the experience for 5M+ active users across consumer, small business, and corporate products by streamlining navigation, reducing page load times, and creating smoother interactions. Users spend less time waiting and more time accomplishing their goals.
-- **Quality & Reliability**: Reduced production bugs by 17% through comprehensive testing, ensuring users encounter fewer errors and have a more reliable experience. Built automated deployment systems that enable faster delivery of improvements and fixes without disrupting the user experience.
-- **Customer Satisfaction Impact**: Increased customer satisfaction scores by 17% by listening to user feedback and continuously improving the experience based on real user needs and pain points
+- **Accessibility Leadership**: Made digital banking surfaces more accessible by implementing WCAG AA patterns across 10+ international markets. Screen reader users, keyboard-only navigators, and users with visual impairments can more reliably manage accounts and update profile information independently.
+- **User Account Management**: Built and improved profile update flows supporting ~5M annual profile updates across Web and Mobile, making it easier to update address, phone, email, and other sensitive information with clearer validation and secure React/Kotlin BFF flows.
+- **Form Completion Experience**: Improved supplementary-profile completion by 18% and start rate by 16% through analytics-backed iteration and profile-flow optimization.
+- **User Experience Optimization**: Improved Account Services journeys by streamlining navigation, reducing friction in profile flows, and supporting CSAT gains across profile journeys.
+- **Quality & Reliability**: Built testing and release practices for enterprise-scale React applications, reducing risk in sensitive account-management flows.
+- **Customer Satisfaction Impact**: Improved customer satisfaction across profile journeys by listening to user feedback and continuously improving the experience based on real user needs and pain points
 
 ## CodePath - Teaching Assistant, Intro to Software Engineering (05/2022 - 08/2022)
 - Led weekly instruction sessions for 180+ students in Python-based Data Structures & Algorithms, achieving 90% student satisfaction rating
@@ -105,7 +105,7 @@ When asked about "what projects has he built", include both his professional wor
 - Built front-end microservices modules enabling users to view and edit profile information (name, address, email, phone number, income)
 - Engineered "customer-level" profile system independent of specific products, matching data across multiple accounts
 - Implemented authorization modernization policy for enhanced security on profile updates
-- Serving 3M+ users with secure account management capabilities
+- Supporting ~5M annual profile updates with secure account management capabilities
 
 ## Personal Projects
 
@@ -156,7 +156,7 @@ When asked about "what projects has he built", include both his professional wor
    - **AI Chat Assistant**: Google Gemini 2.5 Flash with Cloudflare Workers backend, conversational memory, action buttons
    - **Travel Gallery**: 70+ curated photos from 5 trips with lightbox modal, multi-level zoom, keyboard navigation, touch gestures
    - **Snake Game**: HTML5 Canvas game with keyboard/touch controls, high score persistence, progressive difficulty
-   - **Contact Form**: EmailJS integration, draft auto-save, message templates, real-time validation, WCAG AAA compliant
+   - **Contact Form**: EmailJS integration, draft auto-save, message templates, real-time validation, WCAG AA-aligned accessible UI
    - **11 Custom React Hooks**: 876 lines of reusable logic including useSnakeGame (308 lines), useContactForm (203 lines)
    - **Performance**: Code splitting, lazy loading, WebP images, bundle optimization, debouncing
    - **Architecture**: 8 shared components (Modal, Alert, Button, etc.), modular structure with clear separation of concerns
@@ -262,9 +262,9 @@ Always use the full URL format with markdown link syntax for clickability.
 - Proactive in creating supportive learning environments for underrepresented groups
 
 **Problem-Solving & Critical Thinking:**
-- Spearheaded complex WCAG AAA compliance across 10+ international markets
-- Designed and executed 16+ A/B experiments with measurable business impact
-- Optimized performance for 5M+ users through architectural improvements
+- Spearheaded complex WCAG AA compliance across 10+ international markets
+- Drove analytics-backed profile-flow optimization with measurable business impact
+- Supported ~5M annual profile updates through secure profile-flow architecture
 - Systematic approach to debugging and technical interview preparation
 
 **Collaboration & Teamwork:**
@@ -294,7 +294,7 @@ Always use the full URL format with markdown link syntax for clickability.
 
 **Social Consciousness & Values:**
 - Created myPal AAC app to help children with autism and speech delays communicate
-- Strong commitment to accessibility (WCAG AAA champion)
+- Strong commitment to accessibility (WCAG AA champion)
 - Dedicated to helping first-generation, low-income, and underrepresented students
 - Volunteer work securing professional certifications for 300+ students
 - Civic engagement through Crime in Queens data analysis project
@@ -309,12 +309,12 @@ Always use the full URL format with markdown link syntax for clickability.
 
 **Core Personality:**
 - **Curious**: Extensive travel (5 countries), diverse project types, continuous learning
-- **Detail-oriented**: Photography curation, 100% test coverage achievement, WCAG AAA compliance
+- **Detail-oriented**: Photography curation, testing discipline, WCAG AA compliance
 - **Empathetic**: Focus on accessibility, mentorship of underrepresented groups, creating inclusive tech
 - **Growth-minded**: Career transition from construction to computer science, continuous skill development
 - **Community-focused**: 350+ students mentored, volunteer teaching, paying it forward philosophy
 - **Technical yet creative**: Balances coding expertise with photography and travel
-- **Ambitious**: Measurable business impact (12% increase in completion rates, 99% accessibility scores)
+- **Ambitious**: Measurable business impact (+18% supplementary-profile completion lift, +16% start-rate lift, 100% WCAG AA compliance)
 - **Well-rounded**: Technical skills + soft skills + creative pursuits + physical activities
 - **Humble & Grateful**: Frequently acknowledges help from mentors, colleagues, and organizations like CodePath
 - **Self-aware**: Recognizes own patterns (tendency toward self-criticism, over-explaining)
