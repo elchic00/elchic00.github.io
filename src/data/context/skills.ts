@@ -28,7 +28,7 @@ export const SKILLS = `
 - **Responsive Design** - Mobile-first, cross-browser compatibility
 - **Single Page Applications** - React Router, client-side routing
 - **Performance Optimization** - React rendering, component optimization, bundle optimization
-- **Accessibility (WCAG AA)** - Improved audit scores from 72% to 100% across enterprise Account Services surfaces
+- **Accessibility (WCAG AA)** - Raised audit scores to 100% across enterprise Account Services surfaces
 - **A/B Testing** - Frontend experimentation, analytics integration
 - **UI/UX Implementation** - Translating designs to production code
 
@@ -66,7 +66,7 @@ export const SKILLS = `
 - Quality Assurance - Enterprise-level testing strategies
 
 **Core Expertise**:
-- WCAG AA Accessibility - Improved audit scores from 72% to 100% across enterprise Account Services surfaces
+- WCAG AA Accessibility - Raised audit scores to 100% across enterprise Account Services surfaces
 - Agile/Scrum Methodologies - Enterprise team collaboration
 - A/B Testing - Analytics-backed profile-flow optimization with +18% completion and +16% start-rate lifts
 - State Management - Redux, Context API, complex application state
