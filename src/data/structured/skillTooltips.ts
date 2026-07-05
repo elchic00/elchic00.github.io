@@ -20,7 +20,7 @@ export const skillTooltips: Record<string, string> = {
   "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)": "LLM orchestration and prompt engineering",
   "Edge-side AI": "AI inference and processing at the network edge",
   "Serverless Functions": "Event-driven compute without infrastructure management",
-  "Local LLM Orchestration (Ollama)": "Running and orchestrating LLMs locally for privacy",
+  "Local LLM Orchestration (llama.cpp)": "Running and orchestrating LLMs locally for privacy",
   "Streaming Responses": "Real-time AI response streaming for UX fluidity",
 
   // Databases & Backend

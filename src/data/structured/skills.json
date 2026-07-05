@@ -30,7 +30,7 @@
   ],
     "AI Orchestration": [
     "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)",
-    "Local LLM Orchestration (Ollama)",
+    "Local LLM Orchestration (llama.cpp)",
     "Serverless Functions",
     "RAG Pattern Implementation",
     "Streaming Responses",
