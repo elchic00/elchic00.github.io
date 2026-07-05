@@ -120,14 +120,14 @@ export const Experience = () => {
     role: "Software Engineer — Overview Page",
     period: "August 2022 - Present",
     type: "work",
-    stats: ["72% → 100% WCAG AA", "~5M annual updates", "+18% completion", "+16% start rate"],
+    stats: ["100% WCAG AA", "~5M annual updates", "+18% completion", "+16% start rate"],
     highlights: [
-      "Own frontend architecture on the Overview team — the authenticated landing page every American Express cardholder sees first after logging in — working alongside senior and staff engineers on personalization, analytics, and platform-level rendering logic",
-      "Spearheaded Web Content Accessibility Guidelines (WCAG) AA compliance implementation across Account Services modules using HTML5 and React.js with axe DevTools and screen reader testing, improving accessibility audit scores from 72% to 100% and reducing compliance risk across 10+ international markets",
+      "Own frontend architecture on the Overview team since early 2026 — the landing page every US American Express cardholder sees after logging in, showing account overview, reward balances, personalized offers, and spend-habit insights",
+      "Led a WCAG AA accessibility audit across Account Services profile flows (name, email, address, phone updates) using axe DevTools and screen reader testing, raising accessibility scores to 100% and later extending the same flows to 8-10 international markets",
       "Engineered secure user profile management flows supporting ~5M annual profile updates across Web and Mobile, building React.js forms with real-time validation and Kotlin-based BFF API layers for sensitive data changes",
       "Partnered with analytics and experimentation teams on profile-flow optimization, increasing supplementary-profile completion by 18% and start rate by 16% while improving CSAT across profile journeys",
       "Built automated CI/CD pipelines using GitHub Actions and implemented feature flagging systems for safer releases, reducing deployment friction and enabling real-time toggles",
-      "Established comprehensive testing strategy using Jest/React Testing Library in Agile environment, achieving high test coverage across enterprise-scale applications",
+      "Built the deep-link offers flow — clicking an offer surfaces which of a cardholder's cards are eligible, then routes to that offer's enrollment page for the selected card",
     ],
   };
 

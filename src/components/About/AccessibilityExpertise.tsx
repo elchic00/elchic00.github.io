@@ -41,14 +41,14 @@ export const AccessibilityExpertise = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">Enterprise Scale</h3>
-                <p className="text-cyan-400 text-sm">American Express / 10+ markets</p>
+                <p className="text-cyan-400 text-sm">American Express</p>
               </div>
             </div>
             <div className="space-y-4">
               <div className="border-l-4 border-red-500/50 pl-4">
                 <span className="text-red-400 font-semibold text-sm uppercase tracking-wide"> Problem </span>
                 <p className="text-slate-300 mt-1">
-                  AmEx modules faced a 72% audit score and high user drop-off in flows to update 2FA information, risking compliance and limiting expansion into 10+ international markets.
+                  AmEx's profile and identity-update flows (name, email, address, phone) had accessibility gaps that risked compliance for millions of US cardholders.
                 </p>
               </div>
               <div className="border-l-4 border-cyan-500/50 pl-4">
@@ -61,7 +61,7 @@ export const AccessibilityExpertise = () => {
                 <span className="text-green-400 font-semibold text-sm uppercase tracking-wide"> Impact </span>
                 <p className="text-slate-300 mt-1">
                   <strong className="text-white text-base">100% WCAG AA compliance</strong>
-                  . Supported <strong className="text-white">~5M annual profile updates</strong> with a <strong className="text-white">18% completion lift</strong> and <strong className="text-white">16% start-rate lift</strong> on supplementary-profile flows.
+                  . Supported <strong className="text-white">~5M annual profile updates</strong> with a <strong className="text-white">18% completion lift</strong> and <strong className="text-white">16% start-rate lift</strong> on supplementary-profile flows — later extended to 8-10 international markets.
                 </p>
               </div>
             </div>
