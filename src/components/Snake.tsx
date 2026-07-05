@@ -58,10 +58,10 @@ export const PlaySnake: React.FC<PlaySnakeProps> = ({
       id="snake"
       className="min-h-screen landscape:min-h-0 flex flex-col pt-16"
     >
-      {!mounted && <div>Snake game loading…</div>}
+      {!mounted && <div>Snake loading…</div>}
       <div className="flex-1 flex flex-col items-center justify-center landscape:justify-start py-2">
         <h1 className="text-white text-xl md:text-2xl font-medium landscape:text-lg mb-1 text-center">
-          Snake Game
+          Snake
         </h1>
 
         <div className="w-full max-w-[min(95vw,calc(100vh-320px))] md:max-w-[min(90vw,calc(100vh-300px))] lg:max-w-[min(85vw,calc(100vh-290px))] xl:max-w-[min(80vw,calc(100vh-280px))] landscape:max-w-[calc(100vh-200px)] mx-auto">
@@ -119,8 +119,8 @@ export const PlaySnake: React.FC<PlaySnakeProps> = ({
                 running
                   ? "Pause game"
                   : gameOver
-                  ? "Start new game"
-                  : "Resume game"
+                    ? "Start new game"
+                    : "Resume game"
               }
             >
               {running ? "Pause" : gameOver ? "Start" : "Resume"}
