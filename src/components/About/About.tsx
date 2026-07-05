@@ -9,7 +9,7 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen flex items-center overflow-hidden pb-32"
+      className="relative flex min-h-screen items-center overflow-hidden pb-24 pt-10 sm:pb-32"
     >
       {/* Background image layer - responsive srcset for LCP optimization */}
       <div className="absolute inset-0 z-0">
@@ -26,81 +26,63 @@ export const About = () => {
         <div className="absolute inset-0 bg-slate-950/45" />
       </div>
 
-      <div className="container mx-auto flex px-5 sm:px-8 md:px-10 py-20 lg:flex-row flex-col items-center relative z-10">
-        <div className="lg:flex-grow lg:w-1/2 lg:pr-16 flex flex-col lg:items-start lg:text-left mb-16 lg:mb-0 items-center text-center mt-16">
+      <div className="container relative z-10 mx-auto flex flex-col items-center px-5 py-16 sm:px-8 md:px-10 lg:flex-row lg:py-20">
+        <div className="mb-12 mt-12 flex flex-col items-center text-center lg:mb-0 lg:w-3/5 lg:flex-grow lg:items-start lg:pr-16 lg:text-left">
           {/* 
             Using inline style for background to bypass any Tailwind JIT issues with /95.
             No backdrop-blur — it can interfere with bg-color rendering in Chrome.
           */}
           <div
-            className="rounded-2xl p-6 sm:p-8 lg:p-10 ring-1 ring-white/10 shadow-2xl"
+            className="max-w-3xl rounded-2xl p-6 shadow-2xl ring-1 ring-white/10 sm:p-8 lg:p-10"
             style={{ backgroundColor: "rgba(2, 6, 23, 0.96)" }}
           >
-            <p className="text-xl text-white mb-4 animate-fade-in-delay-2 font-medium tracking-wide">
-              Hey there! I'm Drew 👋
+            <p className="animate-fade-in-delay-2 mb-4 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-200">
+              Drew Alagna · NYC builder · accessibility-first engineer
             </p>
 
-            <p className="mb-7 leading-relaxed text-white/90 text-lg animate-fade-in-delay-3 max-w-xl">
-              Software engineer building web applications for
-              millions of users. I care deeply about accessibility and performance
-              — if your screen reader works and your page loads fast, I'm happy.
-              <br />
-              <br />
-              I mentor students through CodePath and Hunter College (my alma
-              mater) because teaching keeps me sharp. When I'm not coding, I'm
-              bouldering, traveling, or building side projects.
-              <br />
-              <br />
-              {/* 
-                Switched from text-cyan-300 to text-white with a cyan text-shadow.
-                Preserves the cyan feel without the blue-on-orange contrast problem.
-              */}
-              <span
-                className="font-semibold tracking-tight text-white"
-                style={{ textShadow: "0 0 12px rgba(103, 232, 249, 0.8)" }}
-              >
-                NYC based. Always learning.
-              </span>
+            <h1 className="animate-fade-in-delay-3 mb-6 text-4xl font-black leading-[0.98] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              I build accessible web systems — and practical AI workflows.
+            </h1>
+
+            <p className="animate-fade-in-delay-3 mb-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
+              I turn messy product constraints into shipped interfaces that
+              real people use, and self-hosted infrastructure that's actually
+              in production — reliable enough to run my own life on. The work
+              spans AmEx scale and five years of engineering mentorship.
             </p>
+
+            <div className="animate-fade-in-delay-3 mb-7 grid gap-3 text-left sm:grid-cols-3">
+              {[
+                "Enterprise accessibility",
+                "100% WCAG AA compliance",
+                "Self-hosted AI agents",
+              ].map((proof) => (
+                <p
+                  key={proof}
+                  className="rounded-xl border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-2 text-sm font-semibold text-cyan-50"
+                >
+                  {proof}
+                </p>
+              ))}
+            </div>
 
             <nav
               aria-label="Professional links and actions"
               className="animate-fade-in-delay-4 w-full flex flex-col items-center lg:items-start"
             >
-              <div className="flex flex-row gap-6 mb-8 mt-4 justify-center lg:justify-start">
-                <SocialLinks variant="about" />
+              <div className="flex w-full max-w-sm flex-col items-stretch gap-4 xl:w-auto xl:max-w-none xl:flex-row xl:items-center">
+                <Button
+                  onClick={() => navigate("/#featured-systems")}
+                  aria-label="View featured systems section"
+                  className="w-full px-10 py-4 xl:w-auto xl:min-w-[190px] xl:px-8 xl:py-3"
+                  variant="primary"
+                >
+                  View featured systems
+                </Button>
               </div>
 
-              <div className="flex flex-col xl:flex-row gap-4 items-stretch xl:items-center w-full xl:w-auto max-w-sm xl:max-w-none">
-                <Button
-                  onClick={() => navigate("/#accessibility-expertise")}
-                  aria-label="View Accessibility Work section"
-                  className="w-full xl:w-auto xl:min-w-[170px] px-10 xl:px-8 py-4 xl:py-3"
-                  variant="ghost"
-                >
-                  Accessibility Work
-                </Button>
-
-                <Button
-                  onClick={() => {
-                    const experienceSection =
-                      document.getElementById("experience");
-                    if (experienceSection) {
-                      const yCoordinate =
-                        experienceSection.getBoundingClientRect().top +
-                        window.pageYOffset;
-                      window.scrollTo({
-                        top: yCoordinate - 60,
-                        behavior: "smooth",
-                      });
-                    }
-                  }}
-                  aria-label="View Professional Experience section"
-                  className="w-full xl:w-auto xl:min-w-[170px] px-10 xl:px-8 py-4 xl:py-3"
-                  variant="neutral"
-                >
-                  Experience
-                </Button>
+              <div className="mt-7 flex flex-row justify-center gap-6 lg:justify-start">
+                <SocialLinks variant="about" />
               </div>
             </nav>
           </div>
