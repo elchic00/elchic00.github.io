@@ -11,6 +11,8 @@ export { Footer } from "./Footer";
 export { ResumePage } from "./Resume";
 export { AIChatAssistant } from "./AIChatAssistant";
 export { AccessibilityExpertise } from "./About/AccessibilityExpertise";
+export { FeaturedSystems } from "./About/FeaturedSystems";
+export { HomeProofBand } from "./About/HomeProofBand";
 
 // Utility components
 export { ErrorBoundary } from "./ErrorBoundary";

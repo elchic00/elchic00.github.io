@@ -1,5 +1,13 @@
 import { useEffect } from "react";
-import { About, AccessibilityExpertise, Experience, Skills, Contact } from "@components";
+import {
+  About,
+  AccessibilityExpertise,
+  Contact,
+  Experience,
+  FeaturedSystems,
+  HomeProofBand,
+  Skills,
+} from "@components";
 
 export const HomePage = () => {
   useEffect(() => {
@@ -9,6 +17,8 @@ export const HomePage = () => {
   return (
     <>
       <About />
+      <HomeProofBand />
+      <FeaturedSystems />
       <AccessibilityExpertise />
       <Experience />
       <Skills />
