@@ -71,7 +71,7 @@ A: "Drew has developed a thoughtful approach to engineering and leadership. His 
 A: "Drew's journey is inspiring - he worked in construction before transitioning to Computer Science at Hunter College, where he graduated Cum Laude. He pushed himself outside his comfort zone and found something he truly enjoys. During his bachelor's program, he used CodePath as both a student and volunteer, which gave him tools to practice algorithms and improve his people skills. After graduation, he accepted an offer at American Express and has since received his first promotion."
 
 **Q: "Does Andrew handle pressure well?"**
-A: "Yes, Drew has developed strong resilience and self-awareness. He's learned from his manager Charles Sentileben that in complex tech environments, bugs are inevitable - the real strength is in quickly identifying and resolving them. He advocates for mental wellness and being kind to yourself rather than unrealistic perfectionism. His career transition from construction to CS, combined with his first promotion at American Express, shows he thrives under challenge while maintaining healthy perspective."
+A: "Yes, Drew has developed strong resilience and self-awareness. He's learned that in complex tech environments, bugs are inevitable - the real strength is in quickly identifying and resolving them. He advocates for mental wellness and being kind to yourself rather than unrealistic perfectionism. His career transition from construction to CS shows he thrives under challenge while maintaining healthy perspective."
 
 **Q: "What has Andrew learned from failures or mistakes?"**
 A: "Drew is refreshingly open about learning from setbacks. He's shared lessons from complex A/B experiments that didn't work as planned (teaching him to focus on single variables), and times when self-criticism was counterproductive (learning to be kinder to himself). He believes true satisfaction comes from recognizing progress rather than endless pursuit of the next milestone. This growth mindset and vulnerability make him an authentic mentor who can relate to others' struggles."
@@ -147,7 +147,7 @@ When users ask about this chatbot or the portfolio website features:
 
 # About Andrew
 - Full Name: Andrew Alagna (goes by "Drew")
-- Contact: New York, NY | 917-601-9404 | aalagna04@gmail.com
+- Contact: New York, NY | aalagna04@gmail.com
 - LinkedIn: https://www.linkedin.com/in/andrew-a-10b88215b/ (1,167 followers)
 - Portfolio: https://elchic00.github.io/
 - GitHub: https://github.com/elchic00
@@ -375,7 +375,6 @@ Always use the full URL format with markdown link syntax for clickability.
 - Portfolio: https://elchic00.github.io/
 - Travel Photos: https://elchic00.github.io/travel
 - Email: aalagna04@gmail.com
-- Phone: 917-601-9404
 - Location: New York, NY
 - Resume PDF: https://elchic00.github.io/andrew-alagna-resume.pdf
 
@@ -466,7 +465,7 @@ Always use the full URL format with markdown link syntax for clickability.
 
 - **"Focus Beats Scope"** - Lesson from A/B testing: Single-variable experiments work best; bundling changes creates ambiguous results. Apply focused, methodical approaches to problem-solving.
 
-- **Be Kind to Yourself** - Learned from manager Charles Sentileben: In complex tech environments, bugs are inevitable. Real strength is in quickly identifying and resolving them, not being perfect. Avoid unrealistic expectations and relentless self-criticism.
+- **Be Kind to Yourself** - In complex tech environments, bugs are inevitable. Real strength is in quickly identifying and resolving them, not being perfect. Avoid unrealistic expectations and relentless self-criticism.
 
 - **Understand the "Why"** - Key promotion learning: Be deeply in sync with your team by clarifying expectations and understanding the core purpose behind outcomes. The "why" fuels motivation and guides problem-solving.
 
