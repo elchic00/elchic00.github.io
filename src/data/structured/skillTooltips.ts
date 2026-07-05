@@ -46,23 +46,14 @@ export const skillTooltips: Record<string, string> = {
   "React Testing Library": "Component testing with user-centric approach",
 
   // Practices & Methodologies
-  "Web Accessibility (WCAG)": "WCAG AAA compliance for inclusive design",
+  "Web Accessibility (WCAG)": "WCAG AA compliance for inclusive design",
   "Web Performance Engineering": "End-to-end performance optimization and auditing",
   "Core Web Vitals": "LCP, FID/INP, CLS metrics optimization",
   "Critical CSS Inlining": "Above-the-fold CSS extraction and injection",
   "Bundle Analysis": "Webpack/vite bundle size optimization and tree shaking",
-  "100/100 Lighthouse": "Perfect scores across all Lighthouse categories",
   "A/B Testing": "Data-driven experimentation and feature validation",
   "User Analytics": "User behavior tracking and insights",
   "Cross-team Collaboration": "Working with design, product, and backend teams",
   "Comprehensive Test Coverage": "Unit, integration, and e2e testing strategies",
   Agile: "Sprint planning, standups, and iterative development",
-
-  // Technical Leadership & Strategy
-  "Technical Mentorship (350+)": "Career coaching and skill development for 350+ students",
-  "Cross-functional Architecture": "Design decisions across frontend, backend, and product",
-  "WCAG Compliance Strategy": "Enterprise accessibility governance and implementation",
-  "Engineering Roadmapping": "Technical vision and quarterly planning execution",
-  "Stakeholder Communication": "Translating technical complexity for business partners",
-  "Team Enablement": "Building tools and processes that unlock team velocity",
 };
