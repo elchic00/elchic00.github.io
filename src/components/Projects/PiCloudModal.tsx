@@ -34,6 +34,7 @@ export const PiCloudModal: React.FC<PiCloudModalProps> = ({ isOpen, onClose }) =
 ├── homepage/        # Unified Service Dashboard
 ├── immich/          # Local Photo Engine (NVMe Backed)
 ├── monitoring/      # Prometheus & Grafana
+├── paperless-ngx/   # Self-Hosted Document Management
 ├── pihole/          # DNS-level Ad-Blocking
 ├── tailscale/       # WireGuard Mesh & TLS
 ├── uptime-kuma/     # Health & Heartbeat Checks
@@ -86,7 +87,7 @@ curl -s "$KUMA_URL"`;
 {/* 1. Architecture: The Engine */}
         <SectionCard icon={<ServerIcon className="h-5 w-5 text-cyan-400" />} title="Architecture Overview">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            Engineered on a <strong className="text-white">Raspberry Pi 5 (8GB)</strong> backed by a high-end <strong className="text-white">500GB NVMe M.2 SSD</strong>. This hardware stack functions as a <strong>High-Performance Edge Gateway</strong>, delivering sub-1ms local latency for 11 containerized services—effectively eliminating the 'Cloud Lag' associated with traditional SaaS providers.
+            Engineered on a <strong className="text-white">Raspberry Pi 5 (8GB)</strong> backed by a high-end <strong className="text-white">500GB NVMe M.2 SSD</strong>. This hardware stack functions as a <strong>High-Performance Edge Gateway</strong>, delivering sub-1ms local latency for 10 containerized services—effectively eliminating the 'Cloud Lag' associated with traditional SaaS providers.
           </p>
         </SectionCard>
 
@@ -108,6 +109,10 @@ curl -s "$KUMA_URL"`;
               <li className="flex items-start gap-2">
                 <span className="text-cyan-400 mt-0.5">•</span>
                 <span><strong className="text-white">Vaultwarden:</strong> A sovereign instance of the Bitwarden API for encrypted 2FA and credential management.</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-cyan-400 mt-0.5">•</span>
+                <span><strong className="text-white">Paperless-ngx:</strong> Self-hosted document management with OCR search, replacing cloud document scanners.</span>
               </li>
             </ul>
           </SectionCard>
@@ -167,7 +172,7 @@ curl -s "$KUMA_URL"`;
     <li className="flex items-start gap-2">
       <span className="text-cyan-400 mt-1">•</span>
       <span>
-        <strong className="text-white">Invisible UX</strong> — Despite the underlying complexity of 11 microservices and kernel-level IPS, the "Single Pane of Glass" dashboard provides a frictionless, SaaS-like experience for daily use.
+        <strong className="text-white">Invisible UX</strong> — Despite the underlying complexity of 10 microservices and kernel-level IPS, the "Single Pane of Glass" dashboard provides a frictionless, SaaS-like experience for daily use.
       </span>
     </li>
   </ul>
