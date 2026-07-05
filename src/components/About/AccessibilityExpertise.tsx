@@ -25,15 +25,15 @@ export const AccessibilityExpertise = () => {
             Accessibility is a <span className="text-cyan-400">Feature</span>, Not Compliance
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            From enterprise-scale compliance to assistive tech innovation — WCAG AAA expertise applied across professional and personal work.
+            From enterprise-scale compliance to assistive tech innovation — WCAG AA expertise applied across professional and personal work.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-5 gap-8 md:items-start">
           {/* Professional Card: AmEx */}
-          <article 
+          <article
             ref={card1Ref}
-            className={`bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-cyan-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02] scroll-reveal-left ${card1Visible ? 'visible' : ''}`}
+            className={`md:col-span-3 bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-cyan-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02] scroll-reveal-left ${card1Visible ? 'visible' : ''}`}
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-cyan-600/20 p-3 rounded-lg">
@@ -41,7 +41,7 @@ export const AccessibilityExpertise = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">Enterprise Scale</h3>
-                <p className="text-cyan-400 text-sm"> American Express / 10M+ Users </p>
+                <p className="text-cyan-400 text-sm">American Express / 10+ markets</p>
               </div>
             </div>
             <div className="space-y-4">
@@ -54,23 +54,23 @@ export const AccessibilityExpertise = () => {
               <div className="border-l-4 border-cyan-500/50 pl-4">
                 <span className="text-cyan-400 font-semibold text-sm uppercase tracking-wide"> Solution </span>
                 <p className="text-slate-300 mt-1">
-                  Spearheaded WCAG AAA compliance while engineering a <strong>full-stack 2FA system</strong> (React.js/Kotlin BFF) to handle 5M+ sensitive annual updates securely.
+                  Spearheaded WCAG AA compliance while engineering <strong>secure profile update flows</strong> (React.js/Kotlin BFF) supporting ~5M annual profile updates.
                 </p>
               </div>
               <div className="border-l-4 border-green-500/50 pl-4">
                 <span className="text-green-400 font-semibold text-sm uppercase tracking-wide"> Impact </span>
                 <p className="text-slate-300 mt-1">
-                  <strong className="text-white text-base">100% Audit Score</strong>
-                  . Processed <strong className="text-white">4M+ secure updates</strong> with a <strong className="text-white">12% boost in form completion</strong> via A/B tested accessible navigation.
+                  <strong className="text-white text-base">100% WCAG AA compliance</strong>
+                  . Supported <strong className="text-white">~5M annual profile updates</strong> with a <strong className="text-white">18% completion lift</strong> and <strong className="text-white">16% start-rate lift</strong> on supplementary-profile flows.
                 </p>
               </div>
             </div>
           </article>
 
           {/* Personal Card: myPal */}
-          <article 
+          <article
             ref={card2Ref}
-            className={`bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-purple-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02] scroll-reveal-right ${card2Visible ? 'visible' : ''}`}
+            className={`md:col-span-2 md:mt-12 bg-gradient-to-br from-slate-800 to-slate-900 border-2 border-purple-500/30 rounded-2xl p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02] scroll-reveal-right ${card2Visible ? 'visible' : ''}`}
           >
             <div className="flex items-center gap-3 mb-6">
               <div className="bg-purple-600/20 p-3 rounded-lg">
@@ -78,7 +78,7 @@ export const AccessibilityExpertise = () => {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">Assistive Tech</h3>
-                <p className="text-purple-400 text-sm">myPal / AAC App</p>
+                <p className="text-purple-400 text-sm">myPal / AAC App · 2021 prototype</p>
               </div>
             </div>
             <div className="space-y-4">
@@ -97,8 +97,8 @@ export const AccessibilityExpertise = () => {
               <div className="border-l-4 border-green-500/50 pl-4">
                 <span className="text-green-400 font-semibold text-sm uppercase tracking-wide"> Impact </span>
                 <p className="text-slate-300 mt-1">
-                  Functional AAC tool at 0% cost to families.{" "}
-                  <strong className="text-white">Architectural parity with portfolio's 100/100 patterns</strong>. Open-sourced for special needs community adoption.
+                  Functional AAC tool at 0% cost to families —{" "}
+                  <strong className="text-white">held to the same 100/100 accessibility bar as everything else here</strong>, because a broken toggle isn't a minor bug for a kid who can't work around it. Open-sourced for the special-needs community to build on.
                 </p>
               </div>
             </div>

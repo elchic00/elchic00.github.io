@@ -13,6 +13,7 @@ import { useContactForm, useScrollReveal } from "../../hooks";
 import { APP_CONFIG } from "../../constants";
 import { ContactSuccessModal } from "./ContactSuccessModal";
 import { ConfirmDialog } from "../shared/ConfirmDialog";
+import { MonogramOverlap } from "../shared/MonogramLogo";
 import messageTemplates from "../../data/structured/messageTemplates.json";
 
 export const Contact: React.FC = () => {
@@ -84,14 +85,31 @@ export const Contact: React.FC = () => {
       {/* Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
 
-      <div className="container px-5 py-16 mx-auto flex sm:flex-nowrap flex-wrap relative z-10">
+      <div className="container px-5 py-16 mx-auto flex flex-col lg:flex-row items-center lg:items-stretch justify-center gap-8 lg:gap-12 relative z-10">
+        {/* Sidebar: personal sign-off, echoes the Hero's glass-panel + eyebrow-tag language */}
+        <div className="w-full max-w-md lg:max-w-sm lg:w-2/5 flex flex-col justify-center">
+          <div
+            className="rounded-2xl p-6 sm:p-8 ring-1 ring-white/10 shadow-2xl"
+            style={{ backgroundColor: "rgba(2, 6, 23, 0.6)" }}
+          >
+            <MonogramOverlap className="h-9 w-auto text-cyan-400 mb-5" />
+            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300 mb-3">
+              Let's talk
+            </p>
+            <p className="text-2xl font-bold text-white mb-3">Andrew Alagna</p>
+            <p className="text-slate-300 leading-relaxed">
+              Reach out about frontend architecture, accessibility, or the AI systems I run at home — I read every message myself.
+            </p>
+          </div>
+        </div>
+
         <form
           ref={(el) => {
             (contactForm.formRef as React.MutableRefObject<HTMLFormElement | null>).current = el;
             if (el) (contactRef as any).current = el;
           }}
           onSubmit={contactForm.handleSubmit}
-          className={`lg:w-1/2 flex flex-col mx-auto w-full md:py-3 mt-4 md:mt-0 bg-slate-900 dark:bg-slate-900 light:bg-white rounded-2xl p-8 shadow-2xl border border-slate-800 dark:border-slate-800 light:border-slate-200 scroll-reveal-scale ${formVisible ? 'visible' : ''}`}
+          className={`lg:w-1/2 flex flex-col w-full md:py-3 mt-4 md:mt-0 bg-slate-900 dark:bg-slate-900 light:bg-white rounded-2xl p-8 shadow-2xl border border-slate-800 dark:border-slate-800 light:border-slate-200 scroll-reveal-scale ${formVisible ? 'visible' : ''}`}
         >
           <div className="flex items-center justify-between mb-2">
             <h2 className="text-white dark:text-white light:text-gray-900 sm:text-4xl text-3xl font-medium title-font flex items-center gap-2">
@@ -117,10 +135,6 @@ export const Contact: React.FC = () => {
               </p>
             </div>
           )}
-
-          <p className="leading-relaxed mb-3 text-slate-200 dark:text-slate-100 light:text-slate-700">
-            Send me a message with the form below
-          </p>
 
           {/* Message Templates */}
           <div className="mb-5">

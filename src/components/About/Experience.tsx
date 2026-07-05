@@ -12,6 +12,7 @@ interface ExperienceItemProps {
   logo?: string;
   icon?: React.ReactNode;
   highlights: string[];
+  stats?: string[];
   type: "work" | "mentorship";
 }
 
@@ -22,6 +23,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   logo,
   icon,
   highlights,
+  stats,
   type,
 }) => {
   const isWork = type === "work";
@@ -72,6 +74,23 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
         </div>
       </div>
 
+      {stats && stats.length > 0 && (
+        <div className="flex flex-wrap gap-3 mb-6">
+          {stats.map((stat) => (
+            <span
+              key={stat}
+              className={`px-4 py-2 rounded-full text-sm font-semibold border ${
+                isWork
+                  ? "bg-cyan-600/20 text-cyan-400 border-cyan-500/30"
+                  : "bg-purple-600/20 text-purple-400 border-purple-500/30"
+              }`}
+            >
+              {stat}
+            </span>
+          ))}
+        </div>
+      )}
+
       <ul className="space-y-3">
         {highlights.map((highlight, idx) => (
           <li key={idx} className="flex items-start gap-3">
@@ -101,11 +120,12 @@ export const Experience = () => {
     role: "Software Engineer — Overview Page",
     period: "August 2022 - Present",
     type: "work",
+    stats: ["72% → 100% WCAG AA", "~5M annual updates", "+18% completion", "+16% start rate"],
     highlights: [
-      "Currently embedded on the Overview Page team, the highest-traffic surface in the web app serving millions of users, collaborating with senior and staff engineers on frontend architecture",
-      "Spearheaded Web Content Accessibility Guidelines (WCAG) AAA compliance implementation across Account Services modules using HTML5 and React.js with axe DevTools and screen reader testing, improving accessibility audit scores from 72% to 100%, mitigating legal risk and expanding market reach for 10M+ global users",
-      "Engineered secure user profile management flows serving 5M+ users annually, building React.js forms with real-time validation and Kotlin-based BFF API layer for sensitive data updates",
-      "Designed and executed 16+ A/B experiments using JavaScript, analytics APIs, and statistical significance testing to identify revenue-driving UX patterns, increasing form completion rates by 12%, and customer satisfaction scores by 17%",
+      "Own frontend architecture on the Overview team — the authenticated landing page every American Express cardholder sees first after logging in — working alongside senior and staff engineers on personalization, analytics, and platform-level rendering logic",
+      "Spearheaded Web Content Accessibility Guidelines (WCAG) AA compliance implementation across Account Services modules using HTML5 and React.js with axe DevTools and screen reader testing, improving accessibility audit scores from 72% to 100% and reducing compliance risk across 10+ international markets",
+      "Engineered secure user profile management flows supporting ~5M annual profile updates across Web and Mobile, building React.js forms with real-time validation and Kotlin-based BFF API layers for sensitive data changes",
+      "Partnered with analytics and experimentation teams on profile-flow optimization, increasing supplementary-profile completion by 18% and start rate by 16% while improving CSAT across profile journeys",
       "Built automated CI/CD pipelines using GitHub Actions and implemented feature flagging systems for safer releases, reducing deployment friction and enabling real-time toggles",
       "Established comprehensive testing strategy using Jest/React Testing Library in Agile environment, achieving high test coverage across enterprise-scale applications",
     ],
@@ -117,6 +137,7 @@ export const Experience = () => {
       role: "Technical Mentor & Teaching Assistant",
       period: "June 2021 - Present",
       type: "mentorship",
+      stats: ["350+ students mentored", "5+ years"],
       highlights: [
         "Leading weekly mentorship sessions for 5 students in open source contribution, teaching GitHub workflows and utilizing AI to understand codebases",
         "Mentored 350+ students across multiple cohorts in Data Structures & Algorithms and cybersecurity fundamentals",
@@ -159,8 +180,10 @@ export const Experience = () => {
           </h2>
           <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            Building impactful software at scale and empowering the next
-            generation of engineers
+            Four years shipping inside a Fortune-500 web app, five-plus
+            mentoring engineers outside it — both came after years in
+            construction and a couple of false-start semesters in business
+            and chemistry.
           </p>
         </div>
 
