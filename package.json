@@ -57,6 +57,7 @@
     "typescript": "^5.9.3",
     "vite": "^7.1.10",
     "vite-plugin-prerender": "^1.0.8",
+    "vitest": "^4.1.9",
     "wrangler": "^4.43.0"
   },
   "homepage": "https://elchic00.github.io/"

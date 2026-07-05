@@ -3,6 +3,7 @@ import {
   useEffect,
   useRef,
   useCallback,
+  useId,
   TouchEvent,
   MouseEvent,
 } from "react";
@@ -10,18 +11,24 @@ import { createPortal } from "react-dom";
 import { ZoomInIcon, ZoomOutIcon } from "@heroicons/react/solid";
 import { Photo } from "../../types";
 import { ImageWithLoader } from "../shared/ImageWithLoader";
+import { getGalleryItemLayout, getTripPatternOffset } from "./galleryLayout";
 
 interface PhotoGalleryProps {
   photos: Photo[];
+  tripId?: string;
 }
 
-export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
+export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, tripId = "" }) => {
+  const patternOffset = getTripPatternOffset(tripId);
+  const galleryId = useId();
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [zoomLevel, setZoomLevel] = useState<0 | 1 | 2>(0); // 0=fit (100%), 1=125%, 2=175%
   const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
   const triggerButtonRef = useRef<HTMLButtonElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
   const lightboxRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const imageRef = useRef<HTMLImageElement | null>(null);
   const imageContainerRef = useRef<HTMLDivElement | null>(null);
 
@@ -30,6 +37,17 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     1: { scale: 1.25, label: "125% zoom" },
     2: { scale: 1.75, label: "175% zoom" },
   };
+
+  const closePhoto = useCallback(() => {
+    setSelectedPhoto(null);
+    setSelectedIndex(null);
+    setZoomLevel(0);
+    setZoomOrigin({ x: 50, y: 50 });
+    if (triggerButtonRef.current) {
+      triggerButtonRef.current.focus();
+      triggerButtonRef.current = null;
+    }
+  }, []);
 
   const goToNext = useCallback(() => {
     if (selectedIndex === null) return;
@@ -68,21 +86,55 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setSelectedPhoto(null);
-        setSelectedIndex(null);
-        setZoomLevel(0);
-        setZoomOrigin({ x: 50, y: 50 });
+        e.preventDefault();
+        closePhoto();
       } else if (e.key === "ArrowRight") {
+        e.preventDefault();
         goToNext();
       } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
         goToPrevious();
+      } else if (e.key === "Tab" && dialogRef.current) {
+        const focusableElements = Array.from(
+          dialogRef.current.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          )
+        ).filter((element) => !element.hasAttribute("disabled"));
+
+        if (focusableElements.length === 0) {
+          e.preventDefault();
+          return;
+        }
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (!dialogRef.current.contains(document.activeElement)) {
+          e.preventDefault();
+          firstElement.focus();
+        } else if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedIndex, photos]);
+  }, [selectedIndex, closePhoto, goToNext, goToPrevious]);
+
+  useEffect(() => {
+    if (!selectedPhoto) return;
+
+    const timeoutId = window.setTimeout(() => {
+      closeButtonRef.current?.focus({ preventScroll: true });
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [selectedPhoto]);
 
   const openPhoto = (
     photo: Photo,
@@ -94,17 +146,6 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
     }
     setSelectedPhoto(photo);
     setSelectedIndex(index);
-  };
-
-  const closePhoto = () => {
-    setSelectedPhoto(null);
-    setSelectedIndex(null);
-    setZoomLevel(0);
-    setZoomOrigin({ x: 50, y: 50 });
-    if (triggerButtonRef.current) {
-      triggerButtonRef.current.focus();
-      triggerButtonRef.current = null;
-    }
   };
 
   const toggleZoom = (e?: MouseEvent<HTMLImageElement>) => {
@@ -153,34 +194,53 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {photos.map((photo, index) => (
-          <button
-            key={index}
-            onClick={(e) => openPhoto(photo, index, e.currentTarget)}
-            className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus-ring h-64"
-            aria-label={`View ${photo.alt}`}
-          >
-            <ImageWithLoader
-              src={photo.url}
-              alt={photo.alt}
-              loading={index < 3 ? "eager" : "lazy"}
-              className="w-full h-64 object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute bottom-0 left-0 right-0 p-4">
-                <p className="text-white text-sm font-medium">
-                  {photo.caption}
-                </p>
-              </div>
-            </div>
-          </button>
-        ))}
+      <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
+        {photos.map((photo, index) => {
+          const layout = getGalleryItemLayout(index, photos.length, patternOffset);
+          const captionId = `${galleryId}-caption-${index}`;
+
+          return (
+            <button
+              key={index}
+              onClick={(e) => openPhoto(photo, index, e.currentTarget)}
+              className={`
+                group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[1.25rem]
+                bg-slate-900 text-left transition-transform duration-300
+                hover:scale-[1.01] focus-ring
+                ${layout.itemClass}
+              `}
+              aria-label={`View ${photo.alt}`}
+              aria-describedby={captionId}
+            >
+              <figure className="relative w-full">
+                <div className={`relative w-full overflow-hidden ${layout.imageClass}`}>
+                  <ImageWithLoader
+                    src={photo.url}
+                    alt={photo.alt}
+                    loading={index < 3 ? "eager" : "lazy"}
+                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.035] group-focus:scale-[1.035]"
+                  />
+                </div>
+
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100"
+                  aria-hidden="true"
+                />
+                <figcaption className="absolute inset-x-0 bottom-0 p-3 sm:p-4" id={captionId}>
+                  <span className="block max-w-2xl rounded-xl border border-white/10 bg-slate-950/45 px-3 py-2 text-xs font-medium leading-relaxed text-white shadow-lg backdrop-blur-sm sm:text-sm">
+                    {photo.caption}
+                  </span>
+                </figcaption>
+              </figure>
+            </button>
+          );
+        })}
       </div>
 
       {selectedPhoto &&
         createPortal(
           <div
+            ref={dialogRef}
             className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4"
             onClick={closePhoto}
             role="dialog"
@@ -245,6 +305,7 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
                 )}
               </button>
               <button
+                ref={closeButtonRef}
                 onClick={(e: MouseEvent) => {
                   e.stopPropagation();
                   closePhoto();

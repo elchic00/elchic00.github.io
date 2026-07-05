@@ -82,19 +82,25 @@ export const Travel = () => {
   const activeId = useActiveTrip(tripIds);
 
   return (
-    <section id="travel" className="body-font mt-16 min-h-screen">
+    <section
+      id="travel"
+      className="body-font mt-16 min-h-screen [--travel-global-nav-height:4.5rem] [--travel-destination-nav-height:4rem] [--travel-section-offset:calc(var(--travel-global-nav-height)+var(--travel-destination-nav-height)+2rem)]"
+    >
       <div className="container px-5 py-10 mx-auto lg:px-40">
         <header
           ref={headerRef}
-          className={`flex flex-col w-full mb-12 text-center scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
+          className={`flex flex-col w-full mb-10 text-center scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
         >
           <GlobeAltIcon
             className="mx-auto inline-block w-10 mb-4 text-cyan-400"
             aria-hidden="true"
           />
-          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white decoration-cyan-500 mb-4">
-            Travel Adventures
-          </h2>
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-cyan-300">
+            Travel journal
+          </p>
+          <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Cinematic Travel Atlas
+          </h1>
           <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="lg:w-2/3 mx-auto leading-relaxed text-slate-300">
             Exploring the world one trip at a time. Here are some of my favorite

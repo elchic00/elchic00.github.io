@@ -1,5 +1,20 @@
 import { useEffect, useState, useRef } from "react";
 
+const HASH_NAVIGATION_OBSERVER_PAUSE_MS = 700;
+
+const extractTripIdFromHash = (hash: string, tripIds: string[]): string => {
+  const hashParts = hash.split('#');
+
+  for (let i = hashParts.length - 1; i >= 0; i--) {
+    const part = hashParts[i];
+    if (part && part !== "/travel" && !part.startsWith("/") && tripIds.includes(part)) {
+      return part;
+    }
+  }
+
+  return "";
+};
+
 /**
  * Tracks which trip section is currently active based on scroll position and URL hash.
  * Automatically updates the URL hash as users scroll through different trip sections
@@ -10,35 +25,35 @@ import { useEffect, useState, useRef } from "react";
  */
 export const useActiveTrip = (tripIds: string[]): string | null => {
   const [activeId, setActiveId] = useState<string | null>(null);
+  const activeIdRef = useRef<string | null>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
   const intersectingTripsRef = useRef<Map<string, number>>(new Map());
   const isUpdatingRef = useRef(false);
+  const observerPausedUntilRef = useRef(0);
+
+  const setActiveTrip = (tripId: string | null) => {
+    activeIdRef.current = tripId;
+    setActiveId(tripId);
+  };
 
   useEffect(() => {
     // Skip if no trip IDs provided
     if (!tripIds.length) return;
 
     // Set initial active ID from hash (handle both #trip-id and #/travel#trip-id formats)
-    const fullHash = window.location.hash;
-    const hashParts = fullHash.split('#');
-    let tripHash = "";
-    
-    // Get the last valid trip ID from hash
-    for (let i = hashParts.length - 1; i >= 0; i--) {
-      const part = hashParts[i];
-      if (part && part !== "/travel" && !part.startsWith("/")) {
-        tripHash = part;
-        break;
-      }
-    }
+    const tripHash = extractTripIdFromHash(window.location.hash, tripIds);
 
-    if (tripHash && tripIds.includes(tripHash)) {
-      setActiveId(tripHash);
+    if (tripHash) {
+      setActiveTrip(tripHash);
     }
 
     // Create intersection observer
     observerRef.current = new IntersectionObserver(
       (entries) => {
+        if (Date.now() < observerPausedUntilRef.current) {
+          return;
+        }
+
         entries.forEach((entry) => {
           const id = entry.target.id;
 
@@ -60,8 +75,8 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
           }
         });
 
-        if (mostVisibleTrip && mostVisibleTrip !== activeId) {
-          setActiveId(mostVisibleTrip);
+        if (mostVisibleTrip && mostVisibleTrip !== activeIdRef.current) {
+          setActiveTrip(mostVisibleTrip);
           
           // Update URL without triggering navigation (BrowserRouter compatible)
           if (!isUpdatingRef.current) {
@@ -83,7 +98,7 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
       },
       {
         threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
-        rootMargin: "-150px 0px -40% 0px",
+        rootMargin: "-180px 0px -45% 0px",
       }
     );
 
@@ -102,20 +117,16 @@ export const useActiveTrip = (tripIds: string[]): string | null => {
 
     // Handle hash changes from manual navigation
     const handleHashChange = () => {
-      const fullHash = window.location.hash;
-      const hashParts = fullHash.split('#');
-      let tripHash = "";
-      
-      for (let i = hashParts.length - 1; i >= 0; i--) {
-        const part = hashParts[i];
-        if (part && part !== "/travel" && !part.startsWith("/")) {
-          tripHash = part;
-          break;
-        }
-      }
+      const tripHash = extractTripIdFromHash(window.location.hash, tripIds);
 
-      if (tripHash && tripIds.includes(tripHash)) {
-        setActiveId(tripHash);
+      if (tripHash) {
+        // Same-page hash navigation scrolls asynchronously. During that short
+        // window, IntersectionObserver can report ratios from the old scroll
+        // position and overwrite the new URL hash with a stale trip id.
+        observerPausedUntilRef.current = Date.now() + HASH_NAVIGATION_OBSERVER_PAUSE_MS;
+        intersectingTripsRef.current.clear();
+        observerRef.current?.takeRecords();
+        setActiveTrip(tripHash);
       }
     };
 

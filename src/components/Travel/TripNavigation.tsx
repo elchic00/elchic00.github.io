@@ -45,31 +45,40 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
 
   const scrollToTrip = (tripId: string) => {
     const element = document.getElementById(tripId);
-    if (element) {
-      const offset = 124;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - offset;
+    if (!element) return;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+    // Force the nav into its fixed layout before measuring/scrolling. Otherwise
+    // scrollIntoView computes the target against the current (possibly
+    // non-sticky/relative) layout, the nav then flips to fixed mid-scroll once
+    // scrollY crosses STICKY_THRESHOLD, and the final resting position lands
+    // short by the nav's height — heading ends up hidden underneath it.
+    setIsSticky(true);
+    requestAnimationFrame(() => {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
 
-      // Update URL hash for the trip section (BrowserRouter compatible)
-      window.history.replaceState(null, "", `/travel#${tripId}`);
-    }
+    // Update URL hash for the trip section (BrowserRouter compatible)
+    window.history.replaceState(null, "", `/travel#${tripId}`);
   };
 
   return (
     <nav
       className={`${
-        isSticky ? "fixed top-[73px] left-0 right-0 z-40 shadow-lg" : "relative"
-      } bg-slate-800/95 backdrop-blur-sm border-b border-slate-700 transition-all duration-300 ${
-        isSticky ? "" : "border-t border-slate-700/50"
-      }`}
-      aria-label="Trip navigation"
+        isSticky
+          ? "fixed top-[var(--travel-global-nav-height)] left-0 right-0 z-40 shadow-lg"
+          : "relative z-40 border-t border-slate-700/50"
+      } min-h-[var(--travel-destination-nav-height)] bg-slate-900/95 backdrop-blur-sm border-b border-slate-700 transition-all duration-300`}
+      aria-label="Destination navigation"
     >
-      <div className="container mx-auto px-5 lg:px-40">
+      <div className="container relative mx-auto px-5 lg:px-40">
+        {/* Fade hint: the chip row overflows on mobile/tablet with no visual
+            affordance that there's more to scroll — the last chip gets cut
+            off mid-word. lg:hidden since the row is centered/non-overflowing
+            at desktop widths (lg:justify-center below). */}
+        <div
+          className="pointer-events-none absolute bottom-0 right-5 top-0 z-10 w-8 bg-gradient-to-l from-slate-900/95 to-transparent lg:hidden"
+          aria-hidden="true"
+        />
         <div
           ref={navContainerRef}
           className={`flex items-center gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-transparent lg:justify-center ${
