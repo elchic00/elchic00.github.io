@@ -12,19 +12,19 @@ export const AccessibilityExpertise = () => {
   const { ref: ctaRef, isVisible: ctaVisible } = useScrollReveal();
 
   return (
-    <section id="accessibility-expertise" className="relative py-20 bg-slate-900">
+    <section id="accessibility-expertise" className="relative py-20 sm:py-24 bg-slate-900">
       <div className="container mx-auto px-5 sm:px-8 md:px-10">
-        <div 
+        <div
           ref={headerRef}
-          className={`text-center mb-12 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
+          className={`mb-12 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
         >
-          <span className="inline-block px-4 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm font-semibold mb-4">
-            Perfect Lighthouse Score: 100/100
-          </span>
-          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4">
-            Accessibility is a <span className="text-cyan-400">Feature</span>, Not Compliance
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
+            Accessibility
+          </p>
+          <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
+            Accessibility is a <span className="text-cyan-400">feature</span>, not compliance.
           </h2>
-          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+          <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             From enterprise-scale compliance to assistive tech innovation — WCAG AA expertise applied across professional and personal work.
           </p>
         </div>

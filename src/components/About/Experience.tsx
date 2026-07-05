@@ -170,16 +170,17 @@ export const Experience = () => {
       <div className="container mx-auto px-5 sm:px-8 md:px-10 relative z-10">
         <div
           ref={headerRef}
-          className={`text-center mb-16 scroll-reveal ${
+          className={`mb-16 scroll-reveal ${
             headerVisible ? "visible" : ""
           }`}
         >
-          <BriefcaseIcon className="w-10 inline-block mb-2 text-cyan-400" />
-          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4 decoration-cyan-500">
-            Professional Experience
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
+            Experience
+          </p>
+          <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
+            Professional experience
           </h2>
-          <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
-          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+          <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             Four years shipping inside a Fortune-500 web app, five-plus
             mentoring engineers outside it — both came after years in
             construction and a couple of false-start semesters in business

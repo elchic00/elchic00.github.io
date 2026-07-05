@@ -1,4 +1,4 @@
-import { ChipIcon, LightningBoltIcon, DatabaseIcon, CogIcon, ChartBarIcon, SparklesIcon } from "@heroicons/react/solid";
+import { LightningBoltIcon, DatabaseIcon, CogIcon, ChartBarIcon, SparklesIcon } from "@heroicons/react/solid";
 import skillsData from "../../data/structured/skills.json";
 import { skillTooltips } from "../../data/structured/skillTooltips";
 import { useScrollReveal } from "../../hooks";
@@ -39,26 +39,27 @@ export const Skills = () => {
   const categoryVisibility = [category1Visible, category2Visible, category3Visible, category4Visible, category5Visible];
 
   return (
-    <section id="skills" className="relative bg-slate-950">
+    <section id="skills" className="relative py-20 sm:py-24 bg-slate-950">
       {/* Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
 
-      <div className="container px-5 py-10 mx-auto relative z-10">
+      <div className="container px-5 mx-auto relative z-10">
         <div
           ref={headerRef}
-          className={`text-center mb-20 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
+          className={`mb-20 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
         >
-          <ChipIcon className="w-10 inline-block mb-2 text-cyan-400" />
-          <h2 className="sm:text-4xl text-3xl font-bold title-font text-white mb-4 mx-auto decoration-cyan-500">
-            Technical Skills
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
+            Skills
+          </p>
+          <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
+            Technical skills
           </h2>
-          <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
-          <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+          <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             Specialized in building high-performance, WCAG AA-compliant web applications with React.js and Node.js — sharpened across four years of enterprise frontend at American Express and nights spent running a home AI lab that has to stay up.
           </p>
         </div>
 
-        <div className="lg:w-4/5 mx-auto">
+        <div>
           {Object.entries(skillsData).map(([category, skills], idx) => (
             <div
               key={category}
