@@ -97,7 +97,7 @@ export const Contact: React.FC = () => {
 
         <div className="container px-5 py-16 mx-auto flex flex-col lg:flex-row items-center lg:items-stretch justify-center gap-8 lg:gap-12 relative z-10">
           {/* Sidebar: personal sign-off, echoes the Hero's glass-panel + eyebrow-tag language */}
-          <div className="w-full max-w-md lg:max-w-sm lg:w-2/5 flex flex-col justify-center">
+          <div className="w-full max-w-md lg:max-w-sm lg:w-2/5 flex flex-col justify-start">
             <div
               className="rounded-2xl p-6 sm:p-8 ring-1 ring-white/10 shadow-2xl"
               style={{ backgroundColor: "rgba(2, 6, 23, 0.6)" }}
@@ -127,7 +127,7 @@ export const Contact: React.FC = () => {
             className={`lg:w-1/2 flex flex-col w-full md:py-3 mt-4 md:mt-0 bg-slate-900 dark:bg-slate-900 light:bg-white rounded-2xl p-8 shadow-2xl border border-slate-800 dark:border-slate-800 light:border-slate-200 scroll-reveal-scale ${formVisible ? "visible" : ""}`}
           >
             <div className="flex items-center justify-between mb-2">
-              <h2 className="text-white dark:text-white light:text-gray-900 sm:text-4xl text-3xl font-medium title-font flex items-center gap-2">
+              <h2 className="text-white dark:text-white light:text-gray-900 sm:text-4xl text-3xl font-black tracking-tight flex items-center gap-2">
                 Contact Me{" "}
                 <MailIcon
                   className="w-10 h-10 inline-block text-gray-300 light:text-gray-200"
