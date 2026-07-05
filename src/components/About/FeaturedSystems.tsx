@@ -126,7 +126,7 @@ const featuredSystems: FeaturedSystem[] = [
       "High-volume account flows rebuilt around accessibility, safer releases, and measurable completion lift.",
     metric: "100%",
     metricLabel: "WCAG AA compliance",
-    proof: ["~5M annual updates", "18% completion lift", "WCAG AA patterns"],
+    proof: ["~5M annual updates", "18% completion lift", "First production BFF"],
     stack: ["React", "Kotlin BFF", "A/B tests"],
     flow: ["User intent", "Accessible flow", "Secure update"],
     status: "enterprise rollout path",

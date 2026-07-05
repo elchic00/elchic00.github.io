@@ -2,9 +2,9 @@ import { useScrollReveal } from "../../hooks";
 
 const proofMetrics = [
   {
-    value: "10+",
-    label: "markets supported",
-    note: "WCAG AA accessibility work shipped on enterprise surfaces",
+    value: "300+",
+    label: "students coached",
+    note: "Cybersecurity, DS&A, and technical interview-prep classes at CodePath",
   },
   {
     value: "100%",
