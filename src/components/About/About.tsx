@@ -53,9 +53,9 @@ export const About = () => {
 
             <div className="animate-fade-in-delay-3 mb-7 grid gap-3 text-left sm:grid-cols-3">
               {[
-                "Enterprise accessibility",
                 "100% WCAG AA compliance",
                 "Self-hosted AI agents",
+                "Travel photography",
               ].map((proof) => (
                 <p
                   key={proof}
