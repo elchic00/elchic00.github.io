@@ -10,7 +10,6 @@ type FeaturedSystem = {
   metricLabel: string;
   proof: string[];
   stack: string[];
-  flow: [string, string, string];
   status: string;
   href: string;
   linkLabel: string;
@@ -29,7 +28,6 @@ const accentClasses: Record<
   {
     eyebrow: string;
     metric: string;
-    node: string;
     line: string;
     glow: string;
     cta: string;
@@ -38,7 +36,6 @@ const accentClasses: Record<
   cyan: {
     eyebrow: "border-cyan-400/30 bg-cyan-400/[0.06] text-cyan-100",
     metric: "text-cyan-200",
-    node: "border-cyan-300/30 bg-cyan-300/[0.08] text-cyan-50",
     line: "bg-cyan-300/40",
     glow: "from-cyan-400/20",
     cta: "text-cyan-100 group-hover:text-cyan-50",
@@ -46,7 +43,6 @@ const accentClasses: Record<
   purple: {
     eyebrow: "border-purple-400/30 bg-purple-400/[0.07] text-purple-100",
     metric: "text-purple-200",
-    node: "border-purple-300/30 bg-purple-300/[0.08] text-purple-50",
     line: "bg-purple-300/40",
     glow: "from-purple-400/20",
     cta: "text-purple-100 group-hover:text-purple-50",
@@ -54,7 +50,6 @@ const accentClasses: Record<
   emerald: {
     eyebrow: "border-emerald-400/30 bg-emerald-400/[0.07] text-emerald-100",
     metric: "text-emerald-200",
-    node: "border-emerald-300/30 bg-emerald-300/[0.08] text-emerald-50",
     line: "bg-emerald-300/40",
     glow: "from-emerald-400/20",
     cta: "text-emerald-100 group-hover:text-emerald-50",
@@ -62,7 +57,6 @@ const accentClasses: Record<
   amber: {
     eyebrow: "border-amber-300/30 bg-amber-300/[0.08] text-amber-100",
     metric: "text-amber-200",
-    node: "border-amber-200/30 bg-amber-200/[0.08] text-amber-50",
     line: "bg-amber-200/40",
     glow: "from-amber-300/20",
     cta: "text-amber-100 group-hover:text-amber-50",
@@ -79,7 +73,6 @@ const featuredSystems: FeaturedSystem[] = [
     metricLabel: "homelab agent ops",
     proof: ["Langfuse traces + evals", "HITL side-effect gates", "Self-hosted search/RAG (SearXNG, ChromaDB)"],
     stack: ["Local inference", "Hermes", "Langfuse"],
-    flow: ["Prompt", "Policy + eval", "Approved action"],
     status: "dry-run protected",
     href: "#contact",
     linkLabel: "Ask about Hermes",
@@ -94,7 +87,6 @@ const featuredSystems: FeaturedSystem[] = [
     metricLabel: "self-hosted services",
     proof: ["DNS + identity", "Telemetry dashboard", "Recovery playbooks"],
     stack: ["Pi-hole", "Tailscale", "Prometheus"],
-    flow: ["LAN", "Zero-trust edge", "Private services"],
     status: piCloud?.subtitle ?? "High-performance edge gateway",
     // Pi-Cloud is a private headless server, not a public repo — projects.json's
     // `link` field is a placeholder GitHub URL that 404s. Route to the real
@@ -113,7 +105,6 @@ const featuredSystems: FeaturedSystem[] = [
     metricLabel: "first communication",
     proof: ["Large touch targets", "SQLite persistence", "iOS / Android parity"],
     stack: ["React Native", "SQLite", "AAC UX"],
-    flow: ["Caregiver setup", "Local phrases", "Tap-to-speak"],
     // Built 2021, dormant since — unlike the other three systems here.
     status: "2021 prototype, not actively maintained",
     href: myPal?.link ?? "/projects",
@@ -129,7 +120,6 @@ const featuredSystems: FeaturedSystem[] = [
     metricLabel: "WCAG AA compliance",
     proof: ["~5M annual updates", "18% completion lift", "First production BFF"],
     stack: ["React", "Kotlin BFF", "A/B tests"],
-    flow: ["User intent", "Accessible flow", "Secure update"],
     status: "enterprise rollout path",
     href: "#accessibility-expertise",
     linkLabel: "View accessibility proof",
@@ -186,7 +176,7 @@ export const FeaturedSystems = () => {
                 target={isExternalHref(system.href) ? "_blank" : undefined}
                 rel={isExternalHref(system.href) ? "noopener noreferrer" : undefined}
                 aria-label={`${system.linkLabel}: ${system.title}`}
-                className="focus-ring group relative flex h-full min-h-[520px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900/90 p-6 shadow-2xl shadow-slate-950/50 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-slate-900 focus:ring-offset-4 focus:ring-offset-slate-950"
+                className="focus-ring group relative flex h-full min-h-[400px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900/90 p-6 shadow-2xl shadow-slate-950/50 transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-slate-900 focus:ring-offset-4 focus:ring-offset-slate-950"
               >
                 <span
                   className={`absolute inset-x-0 top-0 h-24 bg-gradient-to-b ${
@@ -248,34 +238,6 @@ export const FeaturedSystems = () => {
                     </li>
                   ))}
                 </ul>
-
-                <div className="relative z-10 mb-5 rounded-2xl border border-white/10 bg-slate-950/60 p-3">
-                  <div className="mb-3 flex items-center justify-between text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-slate-500">
-                    <span>system trace</span>
-                    <span>ok</span>
-                  </div>
-                  <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 text-center text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-slate-300">
-                    {system.flow.map((step, index) => (
-                      <div key={step} className="contents">
-                        <span
-                          className={`rounded-lg border px-2 py-2 ${
-                            accentClasses[system.accent].node
-                          }`}
-                        >
-                          {step}
-                        </span>
-                        {index < system.flow.length - 1 && (
-                          <span
-                            className={`h-px w-4 ${
-                              accentClasses[system.accent].line
-                            }`}
-                            aria-hidden="true"
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
 
                 <span
                   data-featured-system-cta
