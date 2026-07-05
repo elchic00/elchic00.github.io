@@ -14,6 +14,16 @@ interface BentoGridProjectProps {
   onOpenModal?: () => void;
 }
 
+// Poster frames for project preview videos, keyed by video src. Without a
+// poster, the video's literal first recorded frame shows before autoplay
+// kicks in (or if autoplay is blocked) — for Reps that was a bare login
+// screen rather than the actual app in use. These are real frames pulled
+// from later in each recording (ffmpeg), not placeholder/stock images.
+const VIDEO_POSTERS: Record<string, string> = {
+  "/images/projects/reps-mobile.mp4": "/images/projects/reps-mobile-poster.png",
+  "/images/projects/reps-web.mp4": "/images/projects/reps-web-poster.png",
+};
+
 const TechPill: React.FC<{ label: string }> = ({ label }) => (
   <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25">
     {label}
@@ -72,6 +82,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
                   videoId={`preview-${index}-${idx}`}
                   projectIndex={index}
                   containerClassName={`w-full h-full object-cover ${idx === 1 ? "object-top-left" : "object-center"}`}
+                  poster={VIDEO_POSTERS[videoSrc]}
                 />
               </div>
             ))}
@@ -92,6 +103,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
             videoId={`video-${index}-0`}
             projectIndex={index}
             containerClassName="w-full h-full"
+            poster={VIDEO_POSTERS[project.image!]}
           />
         ) : (
           <img
@@ -114,14 +126,9 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
             {project.title}
           </h3>
 
-          <div className={`grid transition-all duration-500 ease-in-out ${featured ? "grid-rows-[1fr]" : "grid-rows-[1fr] md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr]"}`}>
+          <div className="grid grid-rows-[1fr] transition-all duration-500 ease-in-out">
               <div className="overflow-hidden">
-                  <p className={`text-slate-200 text-sm leading-relaxed mb-4 transition-opacity duration-500
-                    ${featured 
-                      ? "opacity-100" 
-                      : "opacity-100 md:opacity-0 md:group-hover:opacity-100 line-clamp-none md:line-clamp-4"
-                    }`}
-                  >
+                  <p className="text-slate-200 text-sm leading-relaxed mb-4">
                     {project.description}
                   </p>
               </div>
@@ -151,6 +158,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
                   videoId={`modal-${index}-${idx}`}
                   projectIndex={index}
                   containerClassName="w-full h-full object-contain"
+                  poster={VIDEO_POSTERS[videoSrc]}
                 />
               </div>
             ))}
@@ -204,9 +212,9 @@ export const ProjectsPage = () => {
       <div className="container px-6 mx-auto relative z-10">
         <header ref={headerRef} className={`text-center mb-20 transition-all duration-1000 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <CodeIcon className="mx-auto w-12 h-12 mb-4 text-cyan-500/80" />
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
             Personal Projects
-          </h2>
+          </h1>
           <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
             Production-grade experiments in accessibility, automation, and full-stack engineering.

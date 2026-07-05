@@ -7,6 +7,7 @@ interface VideoPlayerProps {
   projectIndex: number;
   className?: string;
   containerClassName?: string;
+  poster?: string;
 }
 
 interface VideoPlayState {
@@ -20,6 +21,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   projectIndex,
   className = "",
   containerClassName = "",
+  poster,
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [playState, setPlayState] = useState<VideoPlayState>({
@@ -116,6 +118,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         playsInline
         disablePictureInPicture
         disableRemotePlayback
+        poster={poster}
         preload={projectIndex < 2 ? "auto" : "metadata"}
         onCanPlay={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
         onClick={handleVideoClick}
