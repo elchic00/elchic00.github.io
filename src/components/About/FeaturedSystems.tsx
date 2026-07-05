@@ -98,8 +98,9 @@ const featuredSystems: FeaturedSystem[] = [
     status: piCloud?.subtitle ?? "High-performance edge gateway",
     // Pi-Cloud is a private headless server, not a public repo — projects.json's
     // `link` field is a placeholder GitHub URL that 404s. Route to the real
-    // write-up (/projects opens PiCloudModal), same as the Projects page does.
-    href: "/projects",
+    // write-up and auto-open PiCloudModal via the ?open= deep link, matching
+    // what "Inspect Pi-Cloud" actually promises.
+    href: "/projects?open=pi-cloud",
     linkLabel: "Inspect Pi-Cloud",
     accent: "cyan",
   },

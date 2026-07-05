@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { CodeIcon, ExternalLinkIcon, PlayIcon } from "@heroicons/react/solid";
 import projectsData from "../data/structured/projects.json";
 import { Project } from "../types";
@@ -199,6 +200,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
 };
 
 export const ProjectsPage = () => {
+  const location = useLocation();
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -206,6 +208,13 @@ export const ProjectsPage = () => {
   useEffect(() => {
     document.title = "Projects | Andrew Alagna";
   }, []);
+
+  // Deep link from FeaturedSystems' "Inspect Pi-Cloud" CTA (/projects?open=pi-cloud)
+  useEffect(() => {
+    if (new URLSearchParams(location.search).get("open") === "pi-cloud") {
+      setIsModalOpen(true);
+    }
+  }, [location.search]);
 
   return (
     <section id="projects" className="relative min-h-screen bg-slate-950 pt-24 pb-20">
