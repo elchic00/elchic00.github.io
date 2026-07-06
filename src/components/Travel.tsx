@@ -99,7 +99,7 @@ export const Travel = () => {
             Travel journal
           </p>
           <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Cinematic Travel Atlas
+            Where I've Been
           </h1>
           <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="lg:w-2/3 mx-auto leading-relaxed text-slate-300">

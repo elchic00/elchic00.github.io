@@ -182,9 +182,10 @@ export const Experience = () => {
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             Four years shipping inside a Fortune-500 web app, five-plus
-            mentoring engineers outside it — both came after years in
-            construction and a couple of false-start semesters in business
-            and chemistry.
+            mentoring engineers outside it. Both followed a winding path —
+            years in construction, a couple of false-start semesters in
+            business and chemistry, then a CS degree from Hunter College
+            before American Express.
           </p>
         </div>
 
