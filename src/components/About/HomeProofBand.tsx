@@ -46,7 +46,7 @@ export const HomeProofBand = () => {
           </p>
           <h2
             id="homepage-proof-title"
-            className="text-2xl font-bold text-white sm:text-3xl"
+            className="text-3xl font-black tracking-tight text-white sm:text-5xl"
           >
             Real numbers from systems I've shipped and still run.
           </h2>
