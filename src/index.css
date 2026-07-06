@@ -50,51 +50,62 @@
     }
   }
 
-  /* Scroll reveal animations - optimized timing */
+  /* Scroll reveal animations - optimized timing.
+     visibility:hidden keeps content out of the accessibility tree until
+     revealed (opacity:0 alone still lets screen readers announce it early).
+     Reveal is one-shot (see useScrollReveal), so no need to re-hide on exit. */
   .scroll-reveal {
     opacity: 0;
+    visibility: hidden;
     transform: translateY(30px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, visibility 0.5s;
   }
 
   .scroll-reveal.visible {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
   }
 
   /* Slide in from left */
   .scroll-reveal-left {
     opacity: 0;
+    visibility: hidden;
     transform: translateX(-30px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, visibility 0.5s;
   }
 
   .scroll-reveal-left.visible {
     opacity: 1;
+    visibility: visible;
     transform: translateX(0);
   }
 
   /* Slide in from right */
   .scroll-reveal-right {
     opacity: 0;
+    visibility: hidden;
     transform: translateX(30px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, visibility 0.5s;
   }
 
   .scroll-reveal-right.visible {
     opacity: 1;
+    visibility: visible;
     transform: translateX(0);
   }
 
   /* Scale up reveal */
   .scroll-reveal-scale {
     opacity: 0;
+    visibility: hidden;
     transform: scale(0.95);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, visibility 0.5s;
   }
 
   .scroll-reveal-scale.visible {
     opacity: 1;
+    visibility: visible;
     transform: scale(1);
   }
 
@@ -170,6 +181,7 @@ code {
   .scroll-reveal-scale {
     animation: none !important;
     opacity: 1 !important;
+    visibility: visible !important;
     transform: none !important;
     transition: none !important;
   }
