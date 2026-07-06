@@ -112,13 +112,13 @@ const featuredSystems: FeaturedSystem[] = [
     accent: "purple",
   },
   {
-    title: "American Express accessibility system",
-    eyebrow: "Enterprise UX / accessibility at scale",
+    title: "American Express Account Services",
+    eyebrow: "Enterprise fintech / account platform",
     value:
-      "High-volume account flows rebuilt around accessibility, safer releases, and measurable completion lift.",
+      "Profile, identity, and account-overview flows for millions of cardholders — accessible by default, not bolted on.",
     metric: "100%",
     metricLabel: "WCAG AA compliance",
-    proof: ["~5M annual updates", "18% completion lift", "First production BFF"],
+    proof: ["~5M annual updates", "18% completion lift", "Overview BFF aggregation"],
     stack: ["React", "Kotlin BFF", "A/B tests"],
     status: "enterprise rollout path",
     href: "#accessibility-expertise",
