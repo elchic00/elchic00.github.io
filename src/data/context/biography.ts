@@ -6,35 +6,35 @@
 export const BIOGRAPHY = `
 # About Andrew
 - Full Name: Andrew Alagna (goes by "Drew")
-- Contact: New York, NY | 917-601-9404 | aalagna04@gmail.com
-- LinkedIn: https://www.linkedin.com/in/andrew-a-10b88215b/ (1,167 followers)
+- Contact: New York, NY | aalagna04@gmail.com
+- LinkedIn: https://www.linkedin.com/in/andrew-a-10b88215b/
 - Portfolio: https://elchic00.github.io/
 - GitHub: https://github.com/elchic00
-- Title: Frontend Software Engineer | React & TypeScript Specialist | Accessibility & Performance Expert
-- Current Role: Software Engineer at American Express (August 2022 - Present, 3+ years)
-- **Primary Focus**: Frontend Development (80% of work) - React.js, TypeScript, HTML5, CSS3, accessibility
-- **Secondary Skills**: Backend/Full-Stack (20% of work) - Node.js, Kotlin, APIs, microservices
+- Title: Software Engineer | React & TypeScript, with real backend and infrastructure depth
+- Current Role: Software Engineer at American Express (August 2022 - Present, 4 years)
+- Drew leans frontend (React, TypeScript) but has genuine backend depth (Kotlin BFF, GraphQL, Node.js), and runs his own multi-node home infrastructure end-to-end. Don't reduce this to a hard percentage split.
 - Location: New York, New York, United States
 - Education: Hunter College (CUNY), Bachelor of Arts in Computer Science (May 2022, GPA: 3.62, Cum Laude)
-- Professional Summary: Frontend-focused Software Engineer with 3+ years building high-performance, WCAG AA-compliant web applications at American Express. Primary expertise in React.js and TypeScript for frontend development, with complementary full-stack capabilities in Node.js and backend systems. Delivered measurable business impact across enterprise Account Services surfaces, including accessibility work across 10+ international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
+- Professional Summary: Software Engineer with 4 years building high-performance, WCAG AA-compliant web applications at American Express, plus a self-hosted homelab where he builds infrastructure and AI agent systems in his own time. Delivered measurable business impact across enterprise Account Services surfaces, including accessibility work extended to 8-10 international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
 - Philosophy: "With a BA in Computer Science from CUNY: Hunter College, my foundation in algorithms and data structures complements my passion for creating scalable, data-driven applications. My commitment to fostering inclusive technology is evident through my accessibility work and mentorship roles at CodePath and Hunter College, where I supported hundreds of students in their technology journeys. I believe in paying it forward. If you're a first-generation student, come from a low-income background, or are underrepresented in tech, I'd be happy to be a resource and support you however I can."
 - Open to Volunteering: Education, Science and Technology causes
 - Certifications: Harvard Leadership Edge: Communicating to Connect - Connect with Others (Harvard Business Publishing, August 2023)
 - Core Values: Accessibility, inclusivity, mentorship, giving back to underrepresented communities
-- Passionate about: WCAG AA accessibility, performance optimization, mentoring first-generation and underrepresented students
+- Passionate about: WCAG AA accessibility, performance optimization, self-hosted infrastructure and AI agents, mentoring first-generation and underrepresented students
 - Current Mentorship: Actively leads weekly mentorship sessions for CodePath's open source course (group of 5 students) and provides 1-on-1 career guidance to 2 Hunter College students through alumni mentorship program
-- Interests: Bouldering, travel photography, building side projects
+- Interests: Bouldering, travel photography, self-hosted homelab and AI infrastructure
 
 # Professional Experience
 
 ## American Express - Software Engineer (08/2022 - Present)
 Key Achievements:
-- **Accessibility Leadership**: Made digital banking surfaces more accessible by implementing WCAG AA patterns across 10+ international markets. Screen reader users, keyboard-only navigators, and users with visual impairments can more reliably manage accounts and update profile information independently.
+- **Accessibility Leadership**: Made digital banking surfaces more accessible by implementing WCAG AA patterns, starting with the US market and later extending to 8-10 international markets. Screen reader users, keyboard-only navigators, and users with visual impairments can more reliably manage accounts and update profile information independently.
 - **User Account Management**: Built and improved profile update flows supporting ~5M annual profile updates across Web and Mobile, making it easier to update address, phone, email, and other sensitive information with clearer validation and secure React/Kotlin BFF flows.
+- **Deep-Link Offers**: Built the deep-link offers flow - clicking an offer surfaces which of a cardholder's cards are eligible, then routes to that offer's enrollment page for the selected card.
+- **Overview Screen**: Since early 2026, has worked on the account overview screen shown after login - account summary, reward balances, personalized offers, and spend-habit insights.
 - **Form Completion Experience**: Improved supplementary-profile completion by 18% and start rate by 16% through analytics-backed iteration and profile-flow optimization.
-- **User Experience Optimization**: Improved Account Services journeys by streamlining navigation, reducing friction in profile flows, and supporting CSAT gains across profile journeys.
+- **Experimentation**: Runs and analyzes A/B experiments (6 experiment configurations) to validate UX changes before full rollout.
 - **Quality & Reliability**: Built testing and release practices for enterprise-scale React applications, reducing risk in sensitive account-management flows.
-- **Customer Satisfaction Impact**: Improved customer satisfaction across profile journeys by listening to user feedback and continuously improving the experience based on real user needs and pain points
 
 ## CodePath - Teaching Assistant, Intro to Software Engineering (05/2022 - 08/2022)
 - Led weekly instruction sessions for 180+ students in Python-based Data Structures & Algorithms, achieving 90% student satisfaction rating
@@ -58,42 +58,29 @@ Key Achievements:
   - Guided groups of 4-6 students weekly in mastering Data Structures & Algorithms
   - Ensured collaborative progress and effective problem-solving
   - Provided comprehensive career guidance and technical interview preparation
-  - Empowered students for success in their tech careers
 
 - **Technical Coach (Intermediate) - Summer 2023 (June 2023 - August 2023, 3 months)**
   - Guided groups of 4-6 students weekly in mastering Data Structures & Algorithms
   - Ensured collaborative progress and effective problem-solving
-  - Provided comprehensive career guidance and technical interview preparation
   - Certificate issued for coaching students on data structure & algorithm technical interview preparation
 
 - **Teaching Assistant - Intro to Software Engineering (May 2022 - August 2022, 4 months)**
   - Led instruction for over 180 students in Data Structures & Algorithms using Python
   - Developed and presented engaging weekly review lessons to enhance student understanding
   - Facilitated collaborative problem-solving in small groups, monitoring progress on assignments
-  - Fostered a supportive learning environment that improved student performance and engagement (tracked through student satisfaction survey)
 
 - **Tech Fellow (June 2021 - April 2022, 11 months)**
   - Served as an instructor for cybersecurity fundamentals at CUNY: Hunter College
-  - Empowered students with web application security knowledge
   - Beyond preparing and presenting engaging weekly lessons, actively supported students through hands-on debugging during labs and CTF assignments
-  - Ensured their practical understanding and coordinated with logistics team to ensure smooth program delivery
-  - This initiative provided free certification to 100 students, reflecting profound commitment to enhancing the computer science community at my university
+  - This initiative provided free certification to roughly 100 students
 
-**Total Impact:** Mentored 350+ students across multiple cohorts in Data Structures & Algorithms, cybersecurity fundamentals, and career readiness
+**Total Impact:** Mentored 350+ students across multiple cohorts - roughly 100 through the cybersecurity certification track, and about 200 split across two data structures & algorithms / technical interview-prep classes.
 
 ## Hunter College - Alumni Mentor (Present)
 - Provides 1-on-1 career mentorship to 2 current Hunter students through official alumni mentorship program
 - Meets occasionally via video/phone with async communication on LinkedIn between sessions
-- Focuses on preparing students for careers as technologists with practical, actionable advice
-- **Key Areas of Guidance:**
-  - Technical interview preparation (data structures, algorithms, system design, behavioral questions)
-  - Side project ideation and execution (what to build to stand out, how to showcase work)
-  - Resume and portfolio optimization for junior roles
-  - Navigating the tech job market as a college student
-  - Building professional network and personal brand
-  - Strategies to differentiate from other computer science graduates
+- **Key Areas of Guidance:** technical interview preparation, side-project ideation and execution, resume/portfolio optimization for junior roles, navigating the tech job market as a college student, building professional network and personal brand
 - Shares real-world insights from American Express and personal career transition journey
-- Emphasizes accessibility, code quality, and user impact in project work
 
 # Professional Work & Projects
 
@@ -101,34 +88,31 @@ When asked about "what projects has he built", include both his professional wor
 
 ## Professional Work at American Express
 
-**Customer Profile Microservices** (React.js, Node.js, Kotlin, GraphQL)
+**Account Services** (React.js, Node.js, Kotlin BFF, GraphQL)
 - Built front-end microservices modules enabling users to view and edit profile information (name, address, email, phone number, income)
-- Engineered "customer-level" profile system independent of specific products, matching data across multiple accounts
-- Implemented authorization modernization policy for enhanced security on profile updates
+- Built the deep-link offers flow for card eligibility and enrollment
+- Working on the account overview/landing screen (summary, rewards, personalized offers, spend-habit insights)
 - Supporting ~5M annual profile updates with secure account management capabilities
 
 ## Personal Projects
 
-1. **Reps** (React Native + React Web)
+1. **Hermes** (Self-Hosted Multi-Agent AI Platform)
+   - A 3-node local-inference platform Drew built and runs at home, end-to-end: infrastructure through product
+   - Runs scheduled AI agent workflows with multi-model routing, retrieval/memory, execution tracing with an eval loop (Langfuse), and human-in-the-loop approval gates before any side-effecting action executes
+   - Node roles: a Framework Desktop handles local LLM inference (running large open-weight models fully on GPU instead of relying on hosted APIs), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services
+   - Self-hosted search (SearXNG) and vector storage (ChromaDB) in place of hosted equivalents
+
+2. **Pi-Cloud** (Private Edge Gateway)
+   - A Raspberry Pi 5 running 10 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole and Unbound (DNS/ad-blocking), Tailscale (zero-trust networking), CrowdSec (intrusion prevention), Prometheus and Grafana (monitoring), and Watchtower (auto-updates)
+   - Replaces several paid cloud subscriptions with self-hosted, privacy-first infrastructure Drew fully owns and maintains
+   - Not a public GitHub repo - it's a physical private server
+
+3. **Reps** (React Native + React Web)
    - Mobile-first technical interview prep tool
    - Daily coding challenges with streak tracking and gamification
    - React Native mobile app with seamless sync to web editor
    - Social features: leaderboards and friend tracking
-   - Link: https://reps-pink.vercel.app/
-
-2. **myTeachers** (React + Express + PostgreSQL + Firebase)
-   - Modern redesign of CUNY registration system
-   - Track courses and professors
-   - Material UI, Redux Toolkit Query for state management
-   - Firebase authentication, responsive design
-   - Link: https://github.com/elchic00/CunyFirst-front
-
-3. **Macros-for-geeks** (Angular, .NET, SQLite)
-   - Nutrition tracking application
-   - Integrates USDA FoodData Central API
-   - Offline-first architecture with .NET backend
-   - SQLite database, built with Angular
-   - Link: https://github.com/elchic00/Macros-for-geeks
+   - Link: https://github.com/elchic00/reps
 
 4. **Invent0ry** (React and AWS Amplify)
    - Full-stack inventory management system
@@ -143,24 +127,20 @@ When asked about "what projects has he built", include both his professional wor
    - Interactive visualizations on GitHub Pages
    - Link: https://elchic00.github.io/CrimeInQueens
 
-6. **myPal** (React Native, SQLite)
+6. **myPal** (React Native, SQLite) - 2021 prototype, not actively maintained
    - Augmentative and Alternative Communication (AAC) app
    - Implements Picture Exchange Communication System (PECS)
    - Helps children with autism and speech delays communicate
-   - Customizable sentences using pictures
+   - Built in 2021; a meaningful project, but not something Drew actively maintains today
    - Link: https://github.com/myPal-TMS/myPal
 
 7. **This Portfolio Website** (React, TypeScript, Vite, Cloudflare Workers)
-   - **Perfect Lighthouse Score: 100/100** - Performance, Accessibility, Best Practices, SEO ([View Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/))
+   - **100/100 Lighthouse** on Accessibility, Best Practices, and SEO ([View Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/)); Performance varies with lab conditions, typically in the 90s
    - Modern portfolio with AI chat assistant, travel gallery, Snake game, and contact form
-   - **AI Chat Assistant**: Google Gemini 2.5 Flash with Cloudflare Workers backend, conversational memory, action buttons
+   - **AI Chat Assistant**: Google Gemini 2.5 Flash with Cloudflare Workers backend, conversational memory, action buttons - not a full RAG/vector-search system, uses structured context plus simple keyword matching for project relevance
    - **Travel Gallery**: 70+ curated photos from 5 trips with lightbox modal, multi-level zoom, keyboard navigation, touch gestures
    - **Snake Game**: HTML5 Canvas game with keyboard/touch controls, high score persistence, progressive difficulty
    - **Contact Form**: EmailJS integration, draft auto-save, message templates, real-time validation, WCAG AA-aligned accessible UI
-   - **11 Custom React Hooks**: 876 lines of reusable logic including useSnakeGame (308 lines), useContactForm (203 lines)
-   - **Performance**: Code splitting, lazy loading, WebP images, bundle optimization, debouncing
-   - **Architecture**: 8 shared components (Modal, Alert, Button, etc.), modular structure with clear separation of concerns
-   - **SEO**: Schema.org structured data, image sitemap, Open Graph meta tags
    - **Tech Stack**: React 18, TypeScript 5.9, Vite 7.1, Tailwind CSS 3.0, React Router 6
    - Live: https://elchic00.github.io/
    - Code: https://github.com/elchic00/elchic00.github.io
@@ -229,20 +209,18 @@ Replace the trip ID at the end with the appropriate one from the list above:
 Always use the full URL format with markdown link syntax for clickability.
 
 # Contact & Professional Presence
-- LinkedIn: https://www.linkedin.com/in/andrew-a-10b88215b/ (1,167 followers - strong professional network)
+- LinkedIn: https://www.linkedin.com/in/andrew-a-10b88215b/
 - GitHub: https://www.github.com/elchic00/
 - Portfolio: https://elchic00.github.io/
 - Travel Photos: https://elchic00.github.io/travel
 - Email: aalagna04@gmail.com
-- Phone: 917-601-9404
 - Location: New York, NY
 - Resume PDF: https://elchic00.github.io/andrew-alagna-resume.pdf
 
 # Availability & Opportunities
 - **Current Status**: Employed at American Express, open to exploring new opportunities
 - **Location Preference**: Based in New York City, open to remote roles or hybrid positions
-- **Open to**: Full-time Software Engineering roles (Frontend-focused or Full-Stack), contract work, technical consulting
-- **Response Time**: Typically responds to LinkedIn messages and emails within 48 hours during business days
+- **Open to**: Full-time Software Engineering roles, contract work, technical consulting
 - **Best Way to Contact**: LinkedIn DM or email (aalagna04@gmail.com) with subject line mentioning opportunity/role
 - **Mentorship Inquiries**: Open to connecting with first-generation, low-income, and underrepresented students - reach out via contact form or LinkedIn
 - **Coffee Chats**: Available for informational interviews and career discussions with students/early career engineers
@@ -252,8 +230,7 @@ Always use the full URL format with markdown link syntax for clickability.
 **Communication & Public Speaking:**
 - Delivered panels and presentations at Hunter College on "day in the life of a software engineer"
 - Led technical discussions for 180+ students in CodePath teaching roles
-- Strong written communication evidenced by detailed project documentation
-- Active LinkedIn presence with engaged professional network (1,167+ followers)
+- Active, engaged professional presence on LinkedIn
 
 **Leadership & Mentorship:**
 - Led "buddy groups" at American Express for new graduates and interns
@@ -262,29 +239,26 @@ Always use the full URL format with markdown link syntax for clickability.
 - Proactive in creating supportive learning environments for underrepresented groups
 
 **Problem-Solving & Critical Thinking:**
-- Spearheaded complex WCAG AA compliance across 10+ international markets
+- Led WCAG AA compliance work extended to 8-10 international markets
 - Drove analytics-backed profile-flow optimization with measurable business impact
 - Supported ~5M annual profile updates through secure profile-flow architecture
-- Systematic approach to debugging and technical interview preparation
+- Designs, runs, and analyzes A/B experiments to validate changes before rollout
+- Builds and maintains a self-hosted homelab (Hermes, Pi-Cloud) spanning infrastructure, networking, security, and AI agent orchestration
 
 **Collaboration & Teamwork:**
-- Worked in Agile/Scrum teams at American Express on enterprise applications
+- Works in Agile/Scrum teams at American Express on enterprise applications
 - Cross-functional collaboration with design, product, and backend teams
-- Experience coordinating with stakeholders on evolving threat responses (iQ4 internship)
 - Team player evidenced by panel participation and group mentorship sessions
 
 **Creativity & Attention to Detail:**
 - Travel photography portfolio with 70+ curated images across 5 countries
 - Demonstrates aesthetic sense, composition skills, and patience
-- Wildlife photography requires timing and awareness (sea turtles, elephants, marine life)
-- Landscape photography shows appreciation for natural beauty and technical camera skills
-- Cultural documentation reflects curiosity and respect for diverse traditions
+- Wildlife and landscape photography reflect timing, awareness, and appreciation for natural beauty
 
 **Adaptability & Cultural Awareness:**
 - Traveled to diverse regions: Southeast Asia, Latin America, Caribbean, Ecuador
 - Immersed in different cultures through cooking classes, handicraft workshops, local experiences
-- Comfortable in various environments: from corporate American Express to teaching students
-- Multilingual environments (international markets at American Express)
+- Comfortable in various environments: from corporate American Express to teaching students to running his own infrastructure
 
 **Adventure & Physical Activity:**
 - Bouldering (rock climbing) enthusiast
@@ -293,17 +267,10 @@ Always use the full URL format with markdown link syntax for clickability.
 - Demonstrates perseverance, physical fitness, and willingness to take calculated risks
 
 **Social Consciousness & Values:**
-- Created myPal AAC app to help children with autism and speech delays communicate
+- Built myPal AAC app to help children with autism and speech delays communicate
 - Strong commitment to accessibility (WCAG AA champion)
 - Dedicated to helping first-generation, low-income, and underrepresented students
-- Volunteer work securing professional certifications for 300+ students
-- Civic engagement through Crime in Queens data analysis project
-
-**Professional Presence:**
-- LinkedIn posts receive 60+ reactions and multiple comments showing engagement
-- Active in tech community through CodePath volunteer teaching
-- Harvard Leadership certification in Communication
-- Maintains professional portfolio showcasing work
+- Volunteer work securing professional certifications for underrepresented students
 
 # Personality Traits & Professional Philosophy
 
@@ -314,42 +281,28 @@ Always use the full URL format with markdown link syntax for clickability.
 - **Growth-minded**: Career transition from construction to computer science, continuous skill development
 - **Community-focused**: 350+ students mentored, volunteer teaching, paying it forward philosophy
 - **Technical yet creative**: Balances coding expertise with photography and travel
-- **Ambitious**: Measurable business impact (+18% supplementary-profile completion lift, +16% start-rate lift, 100% WCAG AA compliance)
 - **Well-rounded**: Technical skills + soft skills + creative pursuits + physical activities
-- **Humble & Grateful**: Frequently acknowledges help from mentors, colleagues, and organizations like CodePath
-- **Self-aware**: Recognizes own patterns (tendency toward self-criticism, over-explaining)
+- **Hands-on owner**: Runs his own homelab end-to-end rather than just consuming cloud services
 - **Resilient**: Career change from construction to CS shows determination and adaptability
-- **Vulnerable & Authentic**: Openly shares struggles, mistakes, and lessons learned
 
 **Professional Philosophy & Work Principles:**
 
-- **"Focus Beats Scope"** - Lesson from A/B testing: Single-variable experiments work best; bundling changes creates ambiguous results. Apply focused, methodical approaches to problem-solving.
+- **"Focus Beats Scope"** - Lesson from A/B testing: Single-variable experiments work best; bundling changes creates ambiguous results.
 
-- **Be Kind to Yourself** - Learned from manager Charles Sentileben: In complex tech environments, bugs are inevitable. Real strength is in quickly identifying and resolving them, not being perfect. Avoid unrealistic expectations and relentless self-criticism.
+- **Be Kind to Yourself** - In complex tech environments, bugs are inevitable. Real strength is in quickly identifying and resolving them, not being perfect.
 
-- **Understand the "Why"** - Key promotion learning: Be deeply in sync with your team by clarifying expectations and understanding the core purpose behind outcomes. The "why" fuels motivation and guides problem-solving.
+- **Understand the "Why"** - Prefers to clarify the core purpose behind a task before diving into implementation.
 
-- **Invest in Relationships** - Actively get to know colleagues and offer support. Building genuine connections creates a supportive network. Practice the Golden Rule: treat others as you wish to be treated.
+- **Invest in Relationships** - Actively gets to know colleagues and offers support. Practices the Golden Rule: treat others as you wish to be treated.
 
-- **Practice Gratitude** - Take time to appreciate current achievements and progress. True satisfaction comes from recognizing what's going well, not endless pursuit of next milestone. Theodore Roosevelt: "Comparison is the joy of life."
+- **Give Back & Pay Forward** - Actively helps new grads, early career engineers, career switchers. Offers mentorship to underrepresented groups.
 
-- **Clear Communication** - When cold messaging or asking for help, build rapport first and make it easy for others (include job links, specific details). Get to the point quickly - most people want simple explanations.
-
-- **Give Back & Pay Forward** - Actively helps new grads, early career engineers, career switchers. Offers mentorship to underrepresented groups. Uses CodePath's resources and wants others to benefit too.
-
-- **Embrace Continuous Learning** - CodePath gave him tools to practice DS&A effectively, improve presentation skills, and work on people skills. Believes in learning from every experience.
+- **Embrace Continuous Learning** - CodePath gave him tools to practice DS&A effectively and build people skills; he applies the same mindset to learning infrastructure and AI systems on his own time.
 
 **Career Journey:**
-- Worked in construction before pursuing Computer Science
-- Graduated Hunter College Cum Laude (pushed outside comfort zone, achieved goals)
-- Used CodePath as student and volunteer during bachelor's program
-- Accepted American Express offer after graduation (growing interest in financial sector)
-- Received first promotion at American Express
-- Now serves as open source mentor for CodePath, cyber-security Tech Fellow
-
-**Mental Health & Well-being:**
-- Practices gratitude journaling (inspired by Brené Brown)
-- Values work-life balance: family, friends, health, meaningful work
-- Advocates for mental wellness alongside physical exercise
-- Recognizes importance of being kind to yourself in high-pressure environments
+- Followed a couple of semesters each of business and chemistry, then years working in construction, before pursuing Computer Science
+- Graduated Hunter College Cum Laude
+- Used CodePath as both student and volunteer during his bachelor's program
+- Joined American Express after graduation
+- Now serves as open source mentor for CodePath and alumni mentor for Hunter College
 `;

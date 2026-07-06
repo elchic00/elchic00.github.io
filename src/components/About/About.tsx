@@ -28,7 +28,7 @@ export const About = () => {
 
       <div className="container relative z-10 mx-auto flex flex-col items-center px-5 py-16 sm:px-8 md:px-10 lg:flex-row lg:py-20">
         <div className="mb-12 mt-12 flex flex-col items-center text-center lg:mb-0 lg:w-3/5 lg:flex-grow lg:items-start lg:pr-16 lg:text-left">
-          {/* 
+          {/*
             Using inline style for background to bypass any Tailwind JIT issues with /95.
             No backdrop-blur — it can interfere with bg-color rendering in Chrome.
           */}
@@ -45,10 +45,10 @@ export const About = () => {
             </h1>
 
             <p className="animate-fade-in-delay-3 mb-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
-              I turn messy product constraints into shipped interfaces that
-              real people use, and self-hosted infrastructure that's actually
-              in production — reliable enough to run my own life on. The work
-              spans AmEx scale and five years of engineering mentorship.
+              I turn messy product constraints into shipped interfaces that real
+              people use, and self-hosted infrastructure in production reliable
+              enough to run my own life on. The work spans enterprise fintech
+              at American Express and five years of engineering mentorship.
             </p>
 
             <div className="animate-fade-in-delay-3 mb-7 grid gap-3 text-left sm:grid-cols-3">
@@ -72,12 +72,12 @@ export const About = () => {
             >
               <div className="flex w-full max-w-sm flex-col items-stretch gap-4 xl:w-auto xl:max-w-none xl:flex-row xl:items-center">
                 <Button
-                  onClick={() => navigate("/#featured-systems")}
-                  aria-label="View featured systems section"
+                  onClick={() => navigate("/#homepage-proof")}
+                  aria-label="See what I've built"
                   className="w-full px-10 py-4 xl:w-auto xl:min-w-[190px] xl:px-8 xl:py-3"
                   variant="primary"
                 >
-                  View featured systems
+                  See what I've built
                 </Button>
               </div>
 

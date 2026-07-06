@@ -1,24 +1,25 @@
 [
   {
+    "title": "Hermes",
+    "subtitle": "Self-Hosted Multi-Agent AI Platform",
+    "description": "A 3-node local-inference platform running scheduled AI workflows: multi-model routing, retrieval/memory, execution tracing with an eval loop, and human-in-the-loop approval gates for side-effecting actions. End-to-end ownership from infrastructure to product.",
+    "link": "/projects",
+    "id": "hermes",
+    "technologies": ["Local inference", "Langfuse", "SearXNG", "ChromaDB", "Crawl4AI"]
+  },
+  {
     "title": "Pi-Cloud",
     "subtitle": "High-Performance Edge Gateway",
-    "description": "Production-grade home infrastructure on Raspberry Pi 5. Privacy-first replacement for Google Photos and UptimeRobot with zero-trust networking and automated disaster recovery.",
+    "description": "A private edge gateway on a Raspberry Pi 5 running 10 self-hosted services - Immich, Vaultwarden, Paperless-ngx, Pi-hole, Unbound, Tailscale, CrowdSec, Prometheus, Grafana, and Watchtower - replacing several cloud subscriptions with zero-trust, privacy-first infrastructure. Not a public repo - it's a physical private server, not something with a GitHub link.",
     "image": "/images/projects/pi-cloud.webp",
-    "link": "https://github.com/elchic00/pi-cloud",
+    "link": "/projects",
     "id": "pi-cloud",
-    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "WireGuard", "Raspberry Pi", "DevOps", "Zero Trust", "Immich", "Uptime Kuma", "OpenCL", "PCIe Gen 3", "NVMe", "DNSSEC", "nftables", "rsync"],
-    "githubStats": {
-      "stars": 0,
-      "forks": 0,
-      "languages": ["Shell", "Dockerfile", "YAML"],
-      "topics": ["homelab", "raspberry-pi", "tailscale", "pihole", "unbound", "self-hosted", "observability", "immich", "uptime-kuma", "opencl", "disaster-recovery"],
-      "lastUpdated": "2026-04-03T00:00:00Z"
-    }
+    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "Immich", "Vaultwarden", "Paperless-ngx", "Raspberry Pi"]
   },
   {
     "title": "myPal",
-    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
-    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
+    "subtitle": "AAC App Prototype (2021, not actively maintained)",
+    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays. Built in 2021 - a meaningful project, but not something actively maintained today.",
     "image": "/images/projects/mypal-demo.mp4",
     "link": "https://github.com/myPal-TMS/myPal",
     "id": "mypal",
@@ -30,22 +31,6 @@
       "lastUpdated": "2021-08-27T13:32:32Z"
     },
     "readmeSummary": "## MyPAL (Picture Assisted Language) App\\r\\n\\r\\nAn Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays communicate..."
-  },
-  {
-    "title": "myTeachers",
-    "subtitle": "React + Express + PostgreSQL + Firebase",
-    "description": "A modern redesign of the CUNY registration system for tracking courses and professors. Built with a full-stack architecture using React with Material UI, Express backend, PostgreSQL database, and Firebase authentication. Features responsive design, Redux Toolkit Query for state management, and custom alerts.",
-    "image": "/images/projects/myteachers-demo.mp4",
-    "link": "https://github.com/elchic00/CunyFirst-front",
-    "id": "myteachers",
-    "githubStats": {
-      "stars": 0,
-      "forks": 0,
-      "languages": ["JavaScript", "HTML", "CSS"],
-      "topics": ["mui", "reactjs"],
-      "lastUpdated": "2025-10-02T17:16:00Z"
-    },
-    "readmeSummary": "### A react remake of the cunyfirst website..."
   },
   {
     "title": "Reps",
@@ -86,21 +71,5 @@
     "image": "/images/projects/crime.webp",
     "link": "https://elchic00.github.io/CrimeInQueens",
     "id": "crime-in-queens-nyc"
-  },
-  {
-    "title": "Macros-for-geeks",
-    "subtitle": "Angular, .Net, SQLite",
-    "description": "A nutrition tracking application integrating the USDA FoodData Central API to log macronutrients and monitor weight goals. Features offline-first architecture with .NET API backend and SQLite database, built with Angular for seamless CRUD operations.",
-    "image": "/images/projects/macros-demo.mp4",
-    "link": "https://github.com/elchic00/Macros-for-geeks",
-    "id": "macros-for-geeks",
-    "githubStats": {
-      "stars": 2,
-      "forks": 3,
-      "languages": ["TypeScript", "C#", "HTML", "CSS", "JavaScript"],
-      "topics": [],
-      "lastUpdated": "2022-02-16T16:54:20Z"
-    },
-    "readmeSummary": "# Macros-for-geeks - Nutrition tracking app..."
   }
 ]
