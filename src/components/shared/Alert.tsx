@@ -24,9 +24,9 @@ export const Alert: React.FC<AlertProps> = ({ type, title, message, footer, onCl
   };
 
   const iconMap = {
-    success: <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto mb-4" />,
-    error: <ExclamationCircleIcon className="w-16 h-16 text-red-500 mx-auto mb-4" />,
-    warning: <ExclamationIcon className="w-16 h-16 text-yellow-500 mx-auto mb-4" />,
+    success: <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto mb-4" aria-hidden="true" />,
+    error: <ExclamationCircleIcon className="w-16 h-16 text-red-500 mx-auto mb-4" aria-hidden="true" />,
+    warning: <ExclamationIcon className="w-16 h-16 text-yellow-500 mx-auto mb-4" aria-hidden="true" />,
   };
 
   return (
@@ -36,9 +36,13 @@ export const Alert: React.FC<AlertProps> = ({ type, title, message, footer, onCl
       }`}
       onClick={handleClose}
     >
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" aria-hidden="true" />
 
       <div
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="alert-title"
+        aria-describedby="alert-message"
         className={`relative bg-slate-800 rounded-lg shadow-2xl max-w-md w-full p-6 border border-slate-700 transform transition-all duration-200 ${
           isVisible ? "scale-100" : "scale-95"
         }`}
@@ -46,11 +50,11 @@ export const Alert: React.FC<AlertProps> = ({ type, title, message, footer, onCl
       >
         {iconMap[type]}
 
-        <h2 className="text-xl font-bold text-white text-center mb-3">
+        <h2 id="alert-title" className="text-xl font-bold text-white text-center mb-3">
           {title}
         </h2>
 
-        <p className="text-slate-300 text-center mb-6">
+        <p id="alert-message" className="text-slate-300 text-center mb-6">
           {message}
         </p>
 
