@@ -88,10 +88,7 @@ export const Contact: React.FC = () => {
         isOpen={showSuccessModal}
         onClose={() => setShowSuccessModal(false)}
       />
-      <section
-        id="contact"
-        className="relative pb-0 bg-slate-950 dark:bg-slate-950 light:bg-slate-50"
-      >
+      <section id="contact" className="relative pb-0 bg-slate-950">
         {/* Subtle gradient overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
 
@@ -103,7 +100,7 @@ export const Contact: React.FC = () => {
               style={{ backgroundColor: "rgba(2, 6, 23, 0.6)" }}
             >
               <MonogramOverlap className="h-9 w-auto text-cyan-400 mb-5" />
-              <p className="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-300 mb-3">
+              <p className="text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300 mb-3">
                 Let's talk
               </p>
               <p className="text-2xl font-bold text-white mb-3">
@@ -124,24 +121,21 @@ export const Contact: React.FC = () => {
               if (el) (contactRef as any).current = el;
             }}
             onSubmit={contactForm.handleSubmit}
-            className={`lg:w-1/2 flex flex-col w-full md:py-3 mt-4 md:mt-0 bg-slate-900 dark:bg-slate-900 light:bg-white rounded-2xl p-8 shadow-2xl border border-slate-800 dark:border-slate-800 light:border-slate-200 scroll-reveal-scale ${formVisible ? "visible" : ""}`}
+            className={`lg:w-1/2 flex flex-col w-full md:py-3 mt-4 md:mt-0 bg-slate-900 rounded-2xl p-8 shadow-2xl border border-slate-800 scroll-reveal-scale ${formVisible ? "visible" : ""}`}
           >
             <div className="flex items-center justify-between mb-2">
-              <h2 className="text-white dark:text-white light:text-gray-900 sm:text-4xl text-3xl font-black tracking-tight flex items-center gap-2">
+              <h2 className="text-white text-3xl sm:text-5xl font-black tracking-tight flex items-center gap-2">
                 Contact Me{" "}
-                <MailIcon
-                  className="w-10 h-10 inline-block text-gray-300 light:text-gray-200"
-                  aria-hidden="true"
-                />
+                <MailIcon className="w-10 h-10 inline-block text-gray-300" aria-hidden="true" />
               </h2>
               {contactForm.hasDraft && (
                 <button
                   type="button"
                   onClick={() => setShowClearDraftDialog(true)}
-                  className="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600 hover:text-red-400 dark:hover:text-red-400 light:hover:text-red-600 flex items-center gap-1 transition-colors"
+                  className="text-xs text-slate-400 hover:text-red-400 flex items-center gap-1 transition-colors"
                   aria-label="Clear saved draft"
                 >
-                  <TrashIcon className="w-4 h-4" />
+                  <TrashIcon className="w-4 h-4" aria-hidden="true" />
                   Clear Draft
                 </button>
               )}
@@ -149,7 +143,7 @@ export const Contact: React.FC = () => {
 
             {contactForm.hasDraft && (
               <div className="mb-4 p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
-                <p className="text-sm text-cyan-300 dark:text-cyan-300 light:text-cyan-700">
+                <p className="text-sm text-cyan-300">
                   💾 Draft restored from your last visit
                 </p>
               </div>
@@ -160,9 +154,9 @@ export const Contact: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowTemplates(!showTemplates)}
-                className="text-sm text-cyan-300 dark:text-cyan-300 light:text-cyan-600 hover:text-cyan-200 dark:hover:text-cyan-200 light:hover:text-cyan-700 flex items-center gap-1 transition-colors"
+                className="text-sm font-medium text-cyan-300 hover:text-cyan-200 flex items-center gap-1 transition-colors"
               >
-                <LightningBoltIcon className="w-4 h-4" />
+                <LightningBoltIcon className="w-4 h-4" aria-hidden="true" />
                 {showTemplates ? "Hide" : "Use"} Quick Templates
               </button>
 
@@ -173,10 +167,10 @@ export const Contact: React.FC = () => {
                       key={tmpl.id}
                       type="button"
                       onClick={() => handleTemplateSelect(tmpl.template)}
-                      className="text-left p-3 bg-slate-800/50 dark:bg-slate-800/50 light:bg-slate-100 hover:bg-slate-800 dark:hover:bg-slate-800 light:hover:bg-slate-200 border border-slate-700 dark:border-slate-700 light:border-slate-300 rounded-lg transition-colors"
+                      className="text-left p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg transition-colors"
                     >
-                      <span className="text-lg mb-1 block">{tmpl.icon}</span>
-                      <span className="text-sm font-medium text-white dark:text-white light:text-gray-900">
+                      <span className="text-lg mb-1 block" aria-hidden="true">{tmpl.icon}</span>
+                      <span className="text-sm font-medium text-white">
                         {tmpl.label}
                       </span>
                     </button>
@@ -186,10 +180,7 @@ export const Contact: React.FC = () => {
             </div>
 
             <div className="relative mb-4">
-              <label
-                htmlFor="name"
-                className="leading-7 text-sm text-slate-200 dark:text-slate-200 light:text-slate-700"
-              >
+              <label htmlFor="name" className="leading-7 text-sm text-slate-200">
                 Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -220,10 +211,7 @@ export const Contact: React.FC = () => {
             </div>
 
             <div className="relative mb-4">
-              <label
-                htmlFor="email"
-                className="leading-7 text-sm text-slate-200 dark:text-slate-200 light:text-slate-700"
-              >
+              <label htmlFor="email" className="leading-7 text-sm text-slate-200">
                 Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -256,14 +244,11 @@ export const Contact: React.FC = () => {
 
             <div className="relative mb-4">
               <div className="flex items-center justify-between mb-1">
-                <label
-                  htmlFor="message"
-                  className="leading-7 text-sm text-slate-200 dark:text-slate-200 light:text-slate-700"
-                >
+                <label htmlFor="message" className="leading-7 text-sm text-slate-200">
                   Message <span className="text-red-500">*</span>
                 </label>
                 <span
-                  className={`text-xs ${contactForm.characterCount > contactForm.maxCharacters * 0.9 ? "text-yellow-400" : "text-slate-400 dark:text-slate-400 light:text-slate-600"}`}
+                  className={`text-xs ${contactForm.characterCount > contactForm.maxCharacters * 0.9 ? "text-yellow-400" : "text-slate-400"}`}
                 >
                   {contactForm.characterCount}/{contactForm.maxCharacters}
                 </span>
@@ -309,8 +294,8 @@ export const Contact: React.FC = () => {
             </Button>
 
             {contactForm.showMailtoFallback && (
-              <div className="mt-4 p-4 bg-yellow-900/30 dark:bg-yellow-900/30 light:bg-yellow-100 border border-yellow-600 dark:border-yellow-600 light:border-yellow-400 rounded">
-                <p className="text-sm text-yellow-200 dark:text-yellow-200 light:text-yellow-800 mb-3">
+              <div className="mt-4 p-4 bg-yellow-900/30 border border-yellow-600 rounded">
+                <p className="text-sm text-yellow-200 mb-3">
                   Having trouble? This might be due to a VPN or firewall. Click
                   below to open your email client instead:
                 </p>
