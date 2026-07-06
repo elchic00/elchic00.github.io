@@ -11,9 +11,9 @@ interface ChatHeaderProps {
 
 export const ChatHeader = ({ onClose, onClear }: ChatHeaderProps) => {
   return (
-    <div className="bg-gradient-to-r from-cyan-500 to-purple-600 p-4 rounded-t-lg flex items-center justify-between">
+    <div className="bg-gradient-to-r from-cyan-700 to-purple-800 p-4 rounded-t-lg flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <ChatIcon className="w-5 h-5 text-white" />
+        <ChatIcon className="w-5 h-5 text-white" aria-hidden="true" />
         <h3 className="text-white font-semibold">Ask About Andrew</h3>
       </div>
       <div className="flex items-center gap-2">

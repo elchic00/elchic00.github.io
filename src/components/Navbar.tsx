@@ -315,7 +315,7 @@ export const Navbar = () => {
                                 : "bg-slate-700 text-slate-300"
                             }`}
                           >
-                            <Icon className="w-5 h-5" />
+                            <Icon className="w-5 h-5" aria-hidden="true" />
                           </span>
                           {item.name}
                         </Link>
