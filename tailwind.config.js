@@ -2,6 +2,9 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ["Poppins", "system-ui", "sans-serif"],
+      },
       keyframes: {
         'slide-up': {
           '0%': { transform: 'translateY(20px)', opacity: '0' },

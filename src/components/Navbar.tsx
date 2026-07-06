@@ -220,7 +220,7 @@ export const Navbar = () => {
           to={LOGO_LINK}
           scroll={scrollWithOffset}
           aria-label="Andrew Alagna - Home"
-          className={`group font-bold text-xl cursor-pointer inline-flex items-center font-[Poppins] transition-all duration-200 focus-ring whitespace-nowrap px-2 py-1.5 rounded-lg ${
+          className={`group font-bold text-xl cursor-pointer inline-flex items-center font-poppins transition-all duration-200 focus-ring whitespace-nowrap px-2 py-1.5 rounded-lg ${
             isLogoActive
               ? "text-cyan-400 bg-cyan-500/10"
               : "text-slate-200 hover:text-white hover:bg-slate-800/60"
