@@ -13,6 +13,9 @@ interface ModalProps {
   ariaLabel?: string;
 }
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export const Modal: React.FC<ModalProps> = ({
   isOpen,
   onClose,
@@ -24,6 +27,8 @@ export const Modal: React.FC<ModalProps> = ({
   ariaLabel = "Modal dialog",
 }) => {
   const scrollYRef = useRef<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!isOpen || !closeOnEscape) return;
@@ -35,6 +40,46 @@ export const Modal: React.FC<ModalProps> = ({
     document.addEventListener("keydown", handleEscape);
     return () => document.removeEventListener("keydown", handleEscape);
   }, [isOpen, closeOnEscape, onClose]);
+
+  // Move focus into the modal on open, trap Tab within it, and restore
+  // focus to the trigger element on close.
+  useEffect(() => {
+    if (!isOpen) return;
+
+    previouslyFocusedRef.current = document.activeElement as HTMLElement;
+
+    // Focus the dialog container itself, not "the first focusable element" —
+    // DOM order doesn't always match visual/safety order (e.g. ConfirmDialog
+    // puts its destructive button before Cancel to control layout), so
+    // guessing which control to jump to risks auto-focusing a dangerous action.
+    containerRef.current?.focus();
+
+    const handleTab = (e: KeyboardEvent) => {
+      const container = containerRef.current;
+      if (e.key !== "Tab" || !container) return;
+      const focusable = Array.from(
+        container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleTab);
+    return () => {
+      document.removeEventListener("keydown", handleTab);
+      previouslyFocusedRef.current?.focus();
+    };
+  }, [isOpen]);
 
   useEffect(() => {
   if (isOpen) {
@@ -111,7 +156,9 @@ export const Modal: React.FC<ModalProps> = ({
 
       {/* Modal Container: This handles its own internal scroll */}
       <div
-        className={`relative z-[110] w-full ${maxWidthClasses[maxWidth]} mx-4 max-h-[90vh] overflow-y-auto bg-slate-900 rounded-2xl border border-slate-700 shadow-xl animate-slide-up overscroll-contain`}
+        ref={containerRef}
+        tabIndex={-1}
+        className={`relative z-[110] w-full ${maxWidthClasses[maxWidth]} mx-4 max-h-[90vh] overflow-y-auto bg-slate-900 rounded-2xl border border-slate-700 shadow-xl animate-slide-up overscroll-contain focus:outline-none`}
       >
         {showCloseButton && (
           <button
@@ -120,7 +167,7 @@ export const Modal: React.FC<ModalProps> = ({
             onClick={onClose}
             aria-label="Close modal"
           >
-            <XIcon className="h-6 w-6" />
+            <XIcon className="h-6 w-6" aria-hidden="true" />
           </button>
         )}
         {children}
