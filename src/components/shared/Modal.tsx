@@ -52,7 +52,6 @@ export const Modal: React.FC<ModalProps> = ({
     
     // 2. TEMPORARILY DISABLE SMOOTH SCROLLING
     const html = document.documentElement;
-    const originalScrollBehavior = html.style.scrollBehavior;
     html.style.scrollBehavior = 'auto'; // Force instant jump
 
     // 3. Reset body styles
@@ -68,10 +67,12 @@ export const Modal: React.FC<ModalProps> = ({
       window.scrollTo(0, scrollYRef.current);
     }
 
-    // 5. Restore original scroll behavior (put it back to "smooth" if it was there)
-    // We use a tiny timeout or requestAnimationFrame to ensure the scroll happens first
+    // 5. Remove the inline override so the global CSS scroll-behavior (smooth)
+    // takes back over. Removing (rather than restoring a captured value) keeps
+    // this correct even if another Modal instance's effect ran in between.
+    // We use requestAnimationFrame to ensure the scroll happens first.
     requestAnimationFrame(() => {
-      html.style.scrollBehavior = originalScrollBehavior;
+      html.style.removeProperty('scroll-behavior');
     });
   }
 
