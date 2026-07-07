@@ -115,21 +115,35 @@ export const Experience = () => {
   const { ref: mentorshipHeaderRef, isVisible: mentorshipHeaderVisible } =
     useScrollReveal();
 
-  const workExperience: Omit<ExperienceItemProps, "icon"> = {
-    company: "American Express",
-    role: "Software Engineer — Overview Page",
-    period: "August 2022 - Present",
-    type: "work",
-    stats: ["100% WCAG AA", "~5M annual updates", "+18% completion", "+16% start rate"],
-    highlights: [
-      "Own frontend architecture on the Overview team since early 2026 — the landing page every US American Express cardholder sees after logging in, showing account overview, reward balances, personalized offers, and spend-habit insights",
-      "Led a WCAG AA accessibility audit across Account Services profile flows (name, email, address, phone updates) using axe DevTools and screen reader testing, raising accessibility scores to 100% and later extending the same flows to 8-10 international markets",
-      "Engineered secure user profile management flows supporting ~5M annual profile updates across Web and Mobile, building React.js forms with real-time validation and Kotlin-based BFF API layers for sensitive data changes",
-      "Partnered with analytics and experimentation teams on profile-flow optimization, increasing supplementary-profile completion by 18% and start rate by 16% while improving CSAT across profile journeys",
-      "Built automated CI/CD pipelines using GitHub Actions and implemented feature flagging systems for safer releases, reducing deployment friction and enabling real-time toggles",
-      "Built the deep-link offers flow — clicking an offer surfaces which of a cardholder's cards are eligible, then routes to that offer's enrollment page for the selected card",
-    ],
-  };
+  const workExperience: Omit<ExperienceItemProps, "icon">[] = [
+    {
+      company: "American Express",
+      role: "Software Engineer — Overview Team",
+      period: "Early 2026 - Present",
+      type: "work",
+      highlights: [
+        "Owns frontend architecture for the Overview page — an aggregate view of everything a logged-in American Express cardholder has, surfacing account summaries, reward balances, personalized offers, and spend-habit insights as tiles",
+        "Built Ghost Accounts end-to-end: a feature surfacing products a cardholder doesn't yet have but is likely to want, visually distinct from real account tiles",
+        "Built the deep-link offers flow — clicking an offer surfaces which of a cardholder's eligible cards apply, then routes to that offer's enrollment page for the selected card",
+        "Built the logic for splitting business and personal accounts into separate views on the overview page",
+        "Led the Selenium-to-Playwright test migration and monorepo onboarding, writing reusable playbooks for the team",
+      ],
+    },
+    {
+      company: "American Express",
+      role: "Software Engineer — Account Services",
+      period: "August 2022 - Early 2026",
+      type: "work",
+      stats: ["100% WCAG AA", "~5M annual updates", "~650K calls avoided/yr", "+18% completion"],
+      highlights: [
+        "Led a WCAG accessibility audit across profile/identity flows (name, email, address, phone), reaching 100% WCAG AA compliance — many flows AAA — later extended to 8-10 international markets",
+        "Engineered secure profile-management flows (React.js + Kotlin BFF) supporting ~5M annual updates, with analytics-backed iteration lifting supplementary-profile completion 18% and start rate 16%",
+        "Built the first production BFF for updating the phone/email used for two-factor authentication, establishing reusable routing and eligibility patterns for the team",
+        "Co-designed the Qualifiers API, used across card and banking products, replacing a legacy 5-system data layer",
+        "Standardized CI/CD across 15+ shared library modules",
+      ],
+    },
+  ];
 
   const mentorshipExperience: Omit<ExperienceItemProps, "icon">[] = [
     {
@@ -192,14 +206,17 @@ export const Experience = () => {
         {/* Work Experience */}
         <div
           ref={workRef}
-          className={`mb-12 md:mb-16 scroll-reveal ${
+          className={`mb-12 md:mb-16 grid gap-6 md:gap-8 scroll-reveal ${
             workVisible ? "visible" : ""
           }`}
         >
-          <ExperienceItem
-            {...workExperience}
-            icon={<BriefcaseIcon className="w-full h-full" />}
-          />
+          {workExperience.map((exp, idx) => (
+            <ExperienceItem
+              key={idx}
+              {...exp}
+              icon={<BriefcaseIcon className="w-full h-full" />}
+            />
+          ))}
         </div>
 
         {/* Mentorship Section */}
