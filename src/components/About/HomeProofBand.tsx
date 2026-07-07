@@ -2,11 +2,6 @@ import { useScrollReveal } from "../../hooks";
 
 const proofMetrics = [
   {
-    value: "300+",
-    label: "students coached",
-    note: "Cybersecurity, DS&A, and technical interview-prep classes at CodePath",
-  },
-  {
     value: "100%",
     label: "WCAG AA compliance",
     note: "WCAG AA patterns, tested with real assistive tech",
@@ -20,6 +15,11 @@ const proofMetrics = [
     value: "10",
     label: "private-cloud services",
     note: "Pi-Cloud telemetry, identity, DNS, and recovery stack",
+  },
+  {
+    value: "300+",
+    label: "students coached",
+    note: "Cybersecurity, DS&A, and technical interview-prep classes at CodePath",
   },
 ] as const;
 
