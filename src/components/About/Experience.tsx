@@ -138,8 +138,8 @@ export const Experience = () => {
       highlights: [
         "Led a WCAG accessibility audit across profile/identity flows (name, email, address, phone), reaching 100% WCAG AA compliance — many flows AAA — later extended to 8-10 international markets",
         "Engineered secure profile-management flows (React.js + Kotlin BFF) supporting ~5M annual updates, with analytics-backed iteration lifting supplementary-profile completion 18% and start rate 16%",
-        "Built the first production BFF for updating the phone/email used for two-factor authentication, establishing reusable routing and eligibility patterns for the team",
-        "Co-designed the Qualifiers API, used across card and banking products, replacing a legacy 5-system data layer",
+        "Built the Profile section's aggregate 'View All' screens for names, addresses, phone numbers, and email addresses — each showing every card and banking product tied to that piece of info in one place — and added Profile as its own tab in Overview's navigation, making it far more discoverable for multi-product cardholders",
+        "Built the first production BFF for updating the phone/email used for two-factor authentication on the profile landing page, establishing reusable routing and eligibility patterns for the team",
         "Standardized CI/CD across 15+ shared library modules",
       ],
     },
