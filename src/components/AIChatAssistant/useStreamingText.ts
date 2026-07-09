@@ -36,8 +36,9 @@ export const useStreamingText = (fullText: string, isStreaming: boolean) => {
 
     const interval = setInterval(() => {
       if (currentIndex < tokens.length) {
-        setDisplayedText((prev) => prev + tokens[currentIndex]);
+        const token = tokens[currentIndex];
         currentIndex++;
+        setDisplayedText((prev) => prev + token);
       } else {
         clearInterval(interval);
         isRunningRef.current = false;
