@@ -126,6 +126,103 @@
 
     <title>Andrew Alagna - Software Engineer</title>
 
+    <!-- First-paint shell shown only until React mounts. Keep this self-contained. -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #020617;
+      }
+
+      .portfolio-boot {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow: hidden;
+        color: #f8fafc;
+        background:
+          radial-gradient(circle at 50% 42%, rgba(34, 211, 238, 0.14), transparent 34rem),
+          #020617;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        text-align: center;
+      }
+
+      .portfolio-boot__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .portfolio-boot__mark {
+        display: grid;
+        width: 4rem;
+        height: 4rem;
+        place-items: center;
+        border: 1px solid rgba(103, 232, 249, 0.35);
+        border-radius: 1.125rem;
+        background: rgba(8, 145, 178, 0.1);
+        box-shadow: 0 0 2.5rem rgba(34, 211, 238, 0.12);
+        color: #a5f3fc;
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .portfolio-boot__name {
+        margin: 1.25rem 0 0;
+        font-size: clamp(1.35rem, 4vw, 1.75rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+      }
+
+      .portfolio-boot__role {
+        margin: 0.4rem 0 0;
+        color: #94a3b8;
+        font-size: 0.875rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .portfolio-boot__line {
+        position: relative;
+        width: 5rem;
+        height: 2px;
+        margin-top: 1.5rem;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(103, 232, 249, 0.16);
+      }
+
+      .portfolio-boot__line::after {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+        content: "";
+        transform: translateX(-100%);
+        animation: portfolio-boot-line 900ms ease-in-out 150ms infinite;
+      }
+
+      @keyframes portfolio-boot-line {
+        to {
+          transform: translateX(100%);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .portfolio-boot__line::after {
+          animation: none;
+          transform: none;
+        }
+      }
+    </style>
+
     <!-- Enhanced Schema.org structured data for SEO -->
     <script type="application/ld+json">
       {
@@ -309,9 +406,18 @@
       </div>
     </noscript>
     <div id="root">
-      <div style="font-family:sans-serif;text-align:center;padding:2rem;background:#0a0a0a;color:#e5e5e5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0">
-        <h1>Loading Andrew Alagna's Portfolio...</h1>
-        <p>Andrew Alagna - Software Engineer</p>
+      <div
+        class="portfolio-boot"
+        role="status"
+        aria-busy="true"
+        aria-label="Loading Andrew Alagna's portfolio"
+      >
+        <div class="portfolio-boot__content" aria-hidden="true">
+          <div class="portfolio-boot__mark">AA</div>
+          <p class="portfolio-boot__name">Andrew Alagna</p>
+          <p class="portfolio-boot__role">Software Engineer</p>
+          <div class="portfolio-boot__line"></div>
+        </div>
       </div>
     </div>
     <script type="module" src="/src/index.tsx"></script>

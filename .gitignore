@@ -54,3 +54,6 @@ scripts/generate-favicon.html
 .vscode/settings.json
 *.swp
 *.swo
+
+# Local Claude project context
+/CLAUDE.local.md
