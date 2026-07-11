@@ -15,7 +15,7 @@ export const BIOGRAPHY = `
 - Drew leans frontend (React, TypeScript) but has genuine backend depth (Kotlin BFF, GraphQL, Node.js), and runs his own multi-node home infrastructure end-to-end. Don't reduce this to a hard percentage split.
 - Location: New York, New York, United States
 - Education: Hunter College (CUNY), Bachelor of Arts in Computer Science (May 2022, GPA: 3.62, Cum Laude)
-- Professional Summary: Software Engineer with 4 years building high-performance, WCAG AA-compliant web applications at American Express, plus a self-hosted homelab where he builds infrastructure and AI agent systems in his own time. His Amex work spans MYCA Overview - the authenticated landing page for cardholders - and Account Services profile flows, including personalization/analytics work, eligible-card offer deep links, accessibility work extended to 8-10 international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
+- Professional Summary: Software Engineer with 4 years building high-performance, WCAG AA-compliant web applications at American Express, plus a self-hosted homelab where he builds infrastructure and AI agent systems in his own time. His Amex work spans MYCA Overview - the authenticated landing page for cardholders - and Account Services profile flows, including revenue-focused personalization work, routing cardholders to offers on their eligible cards, accessibility work extended to 8-10 international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
 - Philosophy: "With a BA in Computer Science from CUNY: Hunter College, my foundation in algorithms and data structures complements my passion for creating scalable, data-driven applications. My commitment to fostering inclusive technology is evident through my accessibility work and mentorship roles at CodePath and Hunter College, where I supported hundreds of students in their technology journeys. I believe in paying it forward. If you're a first-generation student, come from a low-income background, or are underrepresented in tech, I'd be happy to be a resource and support you however I can."
 - Open to Volunteering: Education, Science and Technology causes
 - Certifications: Harvard Leadership Edge: Communicating to Connect - Connect with Others (Harvard Business Publishing, August 2023)
@@ -30,9 +30,9 @@ export const BIOGRAPHY = `
 Key Achievements:
 - **Accessibility Leadership**: Made digital banking surfaces more accessible by implementing WCAG AA patterns, starting with the US market and later extending to 8-10 international markets. Screen reader users, keyboard-only navigators, and users with visual impairments can more reliably manage accounts and update profile information independently.
 - **User Account Management**: Built and improved profile update flows supporting ~5M annual profile updates across Web and Mobile, making it easier to update address, phone, email, and other sensitive information with clearer validation and secure React/Kotlin BFF flows.
-- **Deep-Link Offers**: Built the deep-link offers flow - clicking an offer surfaces which of a cardholder's cards are eligible, then routes to that offer's enrollment page for the selected card.
-- **MYCA Overview Screen**: Since early 2026, has worked on the authenticated account overview/landing screen cardholders see after login - account summaries, reward balances, personalized offers, spend-habit insights, preferences/personalization, and Ghost Accounts rendering/analytics/routing logic.
-- **Eligible-Card Offer Deep Links**: Built offer flows from Overview that show which cards are eligible for a selected offer and route customers into enrollment with the right card context.
+- **Card Offer Routing**: Built a flow that helps cardholders find offers available to them - clicking an offer surfaces which of their cards are eligible, then routes to that offer's enrollment page for the selected card.
+- **MYCA Overview Screen**: Since early 2026, has worked on the authenticated account overview/landing screen cardholders see after login - account summaries, reward balances, personalized offers, spend-habit insights, and revenue-focused personalization (showing cardholders the products, offers, and insights most relevant to them) across rendering, analytics, and routing logic.
+- **Eligible-Card Offer Routing**: Built offer flows from Overview that show which cards are eligible for a selected offer and route customers into enrollment with the right card context.
 - **Form Completion Experience**: Improved supplementary-profile completion by 18% and start rate by 16% through analytics-backed iteration and profile-flow optimization.
 - **Experimentation**: Runs and analyzes A/B experiments (6 experiment configurations) to validate UX changes before full rollout.
 - **Quality & Reliability**: Built testing and release practices for enterprise-scale React applications, reducing risk in sensitive account-management flows.
@@ -91,8 +91,8 @@ When asked about "what projects has he built", include both his professional wor
 
 **MYCA Overview Team** (early 2026 - Present; React.js, TypeScript, analytics, personalization, routing)
 - Works on the authenticated Overview landing page for existing American Express cardholders
-- Built Ghost Accounts/personalization work across analytics, rendering, routing, and account placement
-- Built eligible-card offer deep links from personalized offers into card selection and enrollment
+- Built revenue-focused personalization work - showing cardholders the products, offers, and insights most relevant to them - across analytics, rendering, routing, and account placement
+- Built offer-to-card routing that shows cardholders which cards are eligible for a personalized offer and enrolls them with the right card
 - Built and debugged account/rewards/offers surfaces and preference-driven account grouping on a high-visibility landing page
 - Led Selenium-to-Playwright migration work, monorepo onboarding, and reusable playbooks on the Overview team
 - Modernized CI workflows across Overview-owned repositories and advocated for practical AI-assisted engineering workflows
