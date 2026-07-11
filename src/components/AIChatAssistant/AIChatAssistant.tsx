@@ -39,21 +39,13 @@ export const AIChatAssistant = () => {
   const shortcutKey = isMac ? "⌘ + D" : "Ctrl + D";
   const [shouldHideMobileToggle, setShouldHideMobileToggle] = useState(false);
 
-  // On narrow viewports, the fixed bottom-right chat toggle can overlap dense
-  // homepage content. Hide it near the hero and while the Featured Systems
-  // cards are in view; desktop keeps the always-visible affordance.
+  // On narrow viewports, the fixed bottom-right chat toggle can overlap the
+  // hero's own CTAs. Hide it only for that initial stretch; desktop keeps
+  // the always-visible affordance.
   useEffect(() => {
     const checkPosition = () => {
       const isMobile = window.innerWidth < 640;
-      const featuredSystems = document.getElementById("featured-systems");
-      const featuredRect = featuredSystems?.getBoundingClientRect();
-      const featuredInViewport = featuredRect
-        ? featuredRect.top < window.innerHeight && featuredRect.bottom > 0
-        : false;
-
-      setShouldHideMobileToggle(
-        isMobile && (window.scrollY < 700 || featuredInViewport)
-      );
+      setShouldHideMobileToggle(isMobile && window.scrollY < 700);
     };
     checkPosition();
     window.addEventListener("scroll", checkPosition, { passive: true });
