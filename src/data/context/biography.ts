@@ -15,14 +15,14 @@ export const BIOGRAPHY = `
 - Drew leans frontend (React, TypeScript) but has genuine backend depth (Kotlin BFF, GraphQL, Node.js), and runs his own multi-node home infrastructure end-to-end. Don't reduce this to a hard percentage split.
 - Location: New York, New York, United States
 - Education: Hunter College (CUNY), Bachelor of Arts in Computer Science (May 2022, GPA: 3.62, Cum Laude)
-- Professional Summary: Software Engineer with 4 years building high-performance, WCAG AA-compliant web applications at American Express, plus a self-hosted homelab where he builds infrastructure and AI agent systems in his own time. Delivered measurable business impact across enterprise Account Services surfaces, including accessibility work extended to 8-10 international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
+- Professional Summary: Software Engineer with 4 years building high-performance, WCAG AA-compliant web applications at American Express, plus a self-hosted homelab where he builds infrastructure and AI agent systems in his own time. His Amex work spans MYCA Overview - the authenticated landing page for cardholders - and Account Services profile flows, including personalization/analytics work, eligible-card offer deep links, accessibility work extended to 8-10 international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
 - Philosophy: "With a BA in Computer Science from CUNY: Hunter College, my foundation in algorithms and data structures complements my passion for creating scalable, data-driven applications. My commitment to fostering inclusive technology is evident through my accessibility work and mentorship roles at CodePath and Hunter College, where I supported hundreds of students in their technology journeys. I believe in paying it forward. If you're a first-generation student, come from a low-income background, or are underrepresented in tech, I'd be happy to be a resource and support you however I can."
 - Open to Volunteering: Education, Science and Technology causes
 - Certifications: Harvard Leadership Edge: Communicating to Connect - Connect with Others (Harvard Business Publishing, August 2023)
 - Core Values: Accessibility, inclusivity, mentorship, giving back to underrepresented communities
 - Passionate about: WCAG AA accessibility, performance optimization, self-hosted infrastructure and AI agents, mentoring first-generation and underrepresented students
 - Current Mentorship: Actively leads weekly mentorship sessions for CodePath's open source course (group of 5 students) and provides 1-on-1 career guidance to 2 Hunter College students through alumni mentorship program
-- Interests: Bouldering, travel photography, self-hosted homelab and AI infrastructure
+- Interests: Travel, bouldering, calisthenics/bodyweight fitness, hiking and exploring nature, self-hosted homelab and AI infrastructure
 
 # Professional Experience
 
@@ -31,7 +31,8 @@ Key Achievements:
 - **Accessibility Leadership**: Made digital banking surfaces more accessible by implementing WCAG AA patterns, starting with the US market and later extending to 8-10 international markets. Screen reader users, keyboard-only navigators, and users with visual impairments can more reliably manage accounts and update profile information independently.
 - **User Account Management**: Built and improved profile update flows supporting ~5M annual profile updates across Web and Mobile, making it easier to update address, phone, email, and other sensitive information with clearer validation and secure React/Kotlin BFF flows.
 - **Deep-Link Offers**: Built the deep-link offers flow - clicking an offer surfaces which of a cardholder's cards are eligible, then routes to that offer's enrollment page for the selected card.
-- **Overview Screen**: Since early 2026, has worked on the account overview screen shown after login - account summary, reward balances, personalized offers, and spend-habit insights.
+- **MYCA Overview Screen**: Since early 2026, has worked on the authenticated account overview/landing screen cardholders see after login - account summaries, reward balances, personalized offers, spend-habit insights, preferences/personalization, and Ghost Accounts rendering/analytics/routing logic.
+- **Eligible-Card Offer Deep Links**: Built offer flows from Overview that show which cards are eligible for a selected offer and route customers into enrollment with the right card context.
 - **Form Completion Experience**: Improved supplementary-profile completion by 18% and start rate by 16% through analytics-backed iteration and profile-flow optimization.
 - **Experimentation**: Runs and analyzes A/B experiments (6 experiment configurations) to validate UX changes before full rollout.
 - **Quality & Reliability**: Built testing and release practices for enterprise-scale React applications, reducing risk in sensitive account-management flows.
@@ -88,10 +89,19 @@ When asked about "what projects has he built", include both his professional wor
 
 ## Professional Work at American Express
 
-**Account Services** (React.js, Node.js, Kotlin BFF, GraphQL)
+**MYCA Overview Team** (early 2026 - Present; React.js, TypeScript, analytics, personalization, routing)
+- Works on the authenticated Overview landing page for existing American Express cardholders
+- Built Ghost Accounts/personalization work across analytics, rendering, routing, and account placement
+- Built eligible-card offer deep links from personalized offers into card selection and enrollment
+- Built and debugged account/rewards/offers surfaces and preference-driven account grouping on a high-visibility landing page
+- Led Selenium-to-Playwright migration work, monorepo onboarding, and reusable playbooks on the Overview team
+- Modernized CI workflows across Overview-owned repositories and advocated for practical AI-assisted engineering workflows
+
+**Account Services / Profile Flows** (August 2022 - early 2026; React.js, Node.js, Kotlin BFF, GraphQL)
 - Built front-end microservices modules enabling users to view and edit profile information (name, address, email, phone number, income)
-- Built the deep-link offers flow for card eligibility and enrollment
-- Working on the account overview/landing screen (summary, rewards, personalized offers, spend-habit insights)
+- Built supplementary profile flows where users can select and persist a chosen supplementary card across profile journeys
+- Led first production BFF/WPS implementation for updating the phone/email used for two-factor authentication
+- Co-designed Qualifiers API integration used across card and banking products
 - Supporting ~5M annual profile updates with secure account management capabilities
 
 ## Personal Projects
@@ -145,9 +155,9 @@ When asked about "what projects has he built", include both his professional wor
    - Live: https://elchic00.github.io/
    - Code: https://github.com/elchic00/elchic00.github.io
 
-# Travel & Photography
+# Travel, Fitness & Nature
 
-Andrew is an avid traveler and photographer who documents his adventures. His travel experiences show creativity, cultural curiosity, and global perspective:
+Andrew is an avid traveler who likes exploring cities, mountains, forests, beaches, and unfamiliar cultures. The travel gallery is a casual collection of trip photos - mostly from his phone or friends' nicer cameras - not a claim that he is a professional photographer. His travel experiences show curiosity, adaptability, and appreciation for nature and culture:
 
 **Recent Trips:**
 
@@ -186,12 +196,12 @@ Andrew is an avid traveler and photographer who documents his adventures. His tr
    - Monteverde cloud forest canopy walks and hanging bridges
    - White-water rafting through rapids
    - Snorkeling in Caribbean waters
-   - Starry night photography on Pacific beaches
+   - Starry nights on Pacific beaches
    - Rainforest wildlife (tropical birds, lizards, bats)
    - Pacific coast sunsets and sunrises
    - Highlights: Biodiversity, adventure sports, rainforest
 
-Andrew's travel photography demonstrates attention to detail, creativity, and appreciation for diverse cultures and natural beauty. These experiences reflect adaptability, curiosity, and a well-rounded personality.
+Andrew's travel experiences reflect adaptability, curiosity, and a well-rounded personality. Outside of work he is also into bouldering, calisthenics/bodyweight training, hiking, and exploring nature.
 
 ## Linking to Specific Trips
 
@@ -251,9 +261,9 @@ Always use the full URL format with markdown link syntax for clickability.
 - Team player evidenced by panel participation and group mentorship sessions
 
 **Creativity & Attention to Detail:**
-- Travel photography portfolio with 70+ curated images across 5 countries
-- Demonstrates aesthetic sense, composition skills, and patience
-- Wildlife and landscape photography reflect timing, awareness, and appreciation for natural beauty
+- Curated a travel gallery with 70+ casual trip photos across 5 countries
+- Demonstrates aesthetic judgment through frontend polish, travel gallery curation, and accessible UI details
+- Builds carefully tested interfaces where small details - focus order, validation, loading states, analytics tags - matter
 
 **Adaptability & Cultural Awareness:**
 - Traveled to diverse regions: Southeast Asia, Latin America, Caribbean, Ecuador
@@ -262,6 +272,7 @@ Always use the full URL format with markdown link syntax for clickability.
 
 **Adventure & Physical Activity:**
 - Bouldering (rock climbing) enthusiast
+- Calisthenics/bodyweight fitness
 - Adventurous activities: snorkeling, white-water rafting, jungle trekking, motorcycling
 - Hiking (inactive volcanoes, cloud forests, mountain summits)
 - Demonstrates perseverance, physical fitness, and willingness to take calculated risks
@@ -276,11 +287,11 @@ Always use the full URL format with markdown link syntax for clickability.
 
 **Core Personality:**
 - **Curious**: Extensive travel (5 countries), diverse project types, continuous learning
-- **Detail-oriented**: Photography curation, testing discipline, WCAG AA compliance
+- **Detail-oriented**: Travel gallery curation, testing discipline, WCAG AA compliance
 - **Empathetic**: Focus on accessibility, mentorship of underrepresented groups, creating inclusive tech
 - **Growth-minded**: Career transition from construction to computer science, continuous skill development
 - **Community-focused**: 350+ students mentored, volunteer teaching, paying it forward philosophy
-- **Technical yet creative**: Balances coding expertise with photography and travel
+- **Technical yet creative**: Balances coding expertise with travel, fitness, and hands-on infrastructure projects
 - **Well-rounded**: Technical skills + soft skills + creative pursuits + physical activities
 - **Hands-on owner**: Runs his own homelab end-to-end rather than just consuming cloud services
 - **Resilient**: Career change from construction to CS shows determination and adaptability

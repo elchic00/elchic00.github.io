@@ -20,8 +20,7 @@ import {
 const INITIAL_MESSAGE: Message = {
   id: generateMessageId(),
   role: "assistant",
-  content:
-    "Hi! I'm Andrew's AI assistant. Ask me anything about his experience, projects, or background!",
+  content: "Hi! Ask me about Andrew's work, projects, or background.",
   timestamp: Date.now(),
 };
 

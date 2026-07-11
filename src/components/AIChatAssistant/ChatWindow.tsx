@@ -79,13 +79,13 @@ export const ChatWindow = ({
   return (
     <div
       ref={chatWindowRef}
-      className="fixed md:bottom-44 md:right-6 md:w-96 md:max-w-[calc(100vw-3rem)] md:max-h-[min(85vh,680px)] md:h-auto md:rounded-lg inset-0 md:inset-auto z-50 bg-slate-800 shadow-2xl flex flex-col border border-slate-700 animate-slide-up"
+      className="fixed inset-0 z-50 flex flex-col border border-slate-700 bg-slate-800 shadow-2xl animate-slide-up md:inset-auto md:bottom-44 md:right-6 md:h-[min(85vh,680px)] md:w-96 md:max-w-[calc(100vw-3rem)] md:rounded-lg"
     >
       <ChatHeader onClose={onClose} onClear={onClear} />
 
       <div
         ref={scrollContainerRef}
-        className={`p-3 space-y-3 ${hasSuggestions ? "" : "flex-1"} overflow-y-auto`}
+        className="flex-1 space-y-3 overflow-y-auto p-3"
         role="log"
         aria-live="polite"
         aria-label="Chat messages"
@@ -102,7 +102,7 @@ export const ChatWindow = ({
         {isLoading && <LoadingIndicator />}
 
         {hasSuggestions && (
-          <div className="space-y-6">
+          <div className="space-y-4">
             <QuickActions onActionClick={onQuickAction} />
             <SuggestedQuestions onQuestionClick={handleSuggestedQuestionClick} />
           </div>

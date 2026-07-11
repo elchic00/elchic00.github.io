@@ -20,7 +20,7 @@ export const ChatInput = forwardRef<HTMLInputElement, ChatInputProps>(
     };
 
     return (
-      <form onSubmit={handleSubmit} className="p-4 border-t border-slate-700">
+      <form onSubmit={handleSubmit} className="border-t border-slate-700 p-3">
         <div className="flex gap-2">
           <input
             ref={ref}

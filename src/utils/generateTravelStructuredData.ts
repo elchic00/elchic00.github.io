@@ -22,9 +22,9 @@ export const generateTravelStructuredData = (trips: Trip[]) => {
   return {
     "@context": "https://schema.org",
     "@type": "ImageGallery",
-    name: "Andrew Alagna Travel Photography",
+    name: "Andrew Alagna Travel Photos",
     description:
-      "Andrew Alagna's travel photography from around the world including Ecuador, Galapagos Islands, Thailand, Laos, Costa Rica, and Puerto Rico. Showcasing wildlife, landscapes, temples, and cultural experiences.",
+      "Andrew Alagna's travel photos from Ecuador, the Galapagos Islands, Thailand, Laos, Costa Rica, and Puerto Rico. Showcasing wildlife, landscapes, temples, hikes, and cultural experiences.",
     author: {
       "@type": "Person",
       name: "Andrew Alagna",

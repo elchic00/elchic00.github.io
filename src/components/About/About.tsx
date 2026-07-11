@@ -55,7 +55,7 @@ export const About = () => {
               {[
                 "100% WCAG AA compliance",
                 "Self-hosted AI agents",
-                "Travel photography",
+                "Travel + bouldering",
               ].map((proof) => (
                 <p
                   key={proof}
