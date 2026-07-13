@@ -164,7 +164,7 @@ export const handleAction = (action: string, onClose?: () => void) => {
       break;
     case "view_experience":
       onClose?.();
-      navigateToSection("accessibility-expertise");
+      navigateToSection("experience");
       break;
     case "play_snake":
       window.location.href = "/snake";
