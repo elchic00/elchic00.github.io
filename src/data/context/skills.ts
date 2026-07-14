@@ -49,7 +49,7 @@ export const SKILLS = `
 - Supabase - Backend-as-a-service
 - Firebase - Real-time databases, authentication
 - ChromaDB - Vector storage for the Hermes agent platform
-- Data Science - Pandas, Matplotlib, NumPy (Crime in Queens NYC project)
+- Data Science - Pandas, Matplotlib, NumPy
 
 **DevOps & Infrastructure**:
 - AWS - Cloud infrastructure and deployment
@@ -98,7 +98,7 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 Running this infrastructure directly informs how Drew thinks about frontend architecture - API design, caching strategy, and user-perceived performance - because he's felt the tradeoffs from the infrastructure side, not just the client side.
 
 **Additional Technologies**:
-- React Native - Mobile development (Reps project)
+- React Native - Mobile development (myPal project)
 - .NET - Backend development with C#
 - ArcGIS Pro - Geographic Information Systems
 - Vite - Modern build tooling

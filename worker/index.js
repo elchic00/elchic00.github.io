@@ -126,7 +126,7 @@ Q: "Show me his resume"
 A: "Here's Drew's resume with his experience, skills, and achievements at American Express. [ACTIONS: view_resume]"
 
 Q: "What projects has he built?"
-A: "Drew has built several projects including Hermes (a self-hosted multi-agent AI platform), Pi-Cloud (a private homelab replacing several cloud subscriptions), Reps (mobile interview prep), and myPal (an AAC app prototype for children with autism), plus his professional work at American Express. [ACTIONS: view_projects]"
+A: "Drew has built several projects including Hermes (a self-hosted agent platform built on Nous Research's open-source hermes-agent), Pi-Cloud (a private homelab replacing several cloud subscriptions), the Inference Engine that serves Hermes its local models, the AI chat assistant on this very site, and myPal (an AAC app prototype for children with autism), plus his professional work at American Express. [ACTIONS: view_projects]"
 
 Q: "I'd like to hire Andrew"
 A: "That's great! Drew is open to exploring new opportunities. You can reach out via the contact form, email him directly, or connect on LinkedIn to discuss the role. [ACTIONS: contact_form, view_resume, view_linkedin]"
@@ -249,45 +249,33 @@ When asked about "what projects has he built", include both his professional wor
 
 ## Personal Projects
 
-1. **Hermes** (Self-Hosted Multi-Agent AI Platform)
-   - A 3-node local-inference platform Drew built and runs at home, end-to-end: infrastructure through product
-   - Runs scheduled AI agent workflows with multi-model routing, retrieval/memory, execution tracing with an eval loop (Langfuse), and human-in-the-loop approval gates before any side-effecting action executes
-   - Node roles: a Framework Desktop handles local LLM inference (running large open-weight models fully on GPU instead of relying on hosted APIs), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services
-   - Self-hosted search (SearXNG) and vector storage (ChromaDB) in place of hosted equivalents
+1. **Hermes** (Self-Hosted Agent Platform, built on Nous Research's open-source hermes-agent)
+   - hermes-agent is Nous Research's open-source (MIT-licensed) agent harness - Drew didn't write the framework itself; he deployed it, routed it entirely to self-hosted local models instead of the cloud providers it ships with (Nous Portal, OpenRouter, OpenAI), and built the observability and safety layer around it
+   - Built and runs the eval loop himself: a nightly Langfuse-traced LLM-judge scoring pass and a weekly self-improvement cron that clusters low-quality turns and proposes prompt edits - one real run produced 3 proposals, 2 applied, 1 correctly rejected as a bad fit for the context
+   - Human-in-the-loop approval gates before any side-effecting action executes - nothing sends or changes automatically
+   - Node roles: a Framework Desktop handles local LLM inference (hand-patched llama.cpp on AMD APU hardware it doesn't officially support), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services
+   - Also built a Voice Relay: an iPhone Shortcut sends voice memos through WhisperX transcription with speaker diarization, writing structured notes straight into Obsidian and confirming over Telegram
 
 2. **Pi-Cloud** (Private Edge Gateway)
    - A Raspberry Pi 5 running 10 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole and Unbound (DNS/ad-blocking), Tailscale (zero-trust networking), CrowdSec (intrusion prevention), Prometheus and Grafana (monitoring), and Watchtower (auto-updates)
    - Replaces several paid cloud subscriptions with self-hosted, privacy-first infrastructure Drew fully owns and maintains
    - Not a public GitHub repo - it's a physical private server
 
-3. **Reps** (React Native + React Web)
-   - Mobile-first technical interview prep tool
-   - Daily coding challenges with streak tracking and gamification
-   - React Native mobile app with seamless sync to web editor
-   - Social features: leaderboards and friend tracking
-   - Link: https://github.com/elchic00/reps
+3. **Inference Engine** (llama.cpp, ROCm, hand-patched local model serving)
+   - A hand-patched llama.cpp build serving 4 local models (2 text, vision, speech-to-text) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
+   - Fixed a GPU memory-allocator bug that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
+   - Real generation speeds on this hardware: ~35 tok/s on the 35B MoE model, ~10-15 tok/s on the 27B dense model with speculative decoding
+   - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault
+   - This is the inference layer Hermes actually runs on - no public repo yet, this is a private homelab build
 
-4. **Invent0ry** (React and AWS Amplify)
-   - Full-stack inventory management system
-   - Track stock across multiple storage locations
-   - Real-time inventory monitoring
-   - AWS Amplify for auth, hosting, and GraphQL API
-   - Link: https://github.com/elchic00/invent0ry
-
-5. **Crime in Queens NYC** (Python, Data Science)
-   - Data analysis of crime trends in Queens, NYC
-   - Python data science libraries (Pandas, Matplotlib, NumPy)
-   - Interactive visualizations on GitHub Pages
-   - Link: https://elchic00.github.io/CrimeInQueens
-
-6. **myPal** (React Native, SQLite) - 2021 prototype, not actively maintained
+4. **myPal** (React Native, SQLite) - 2021 prototype, not actively maintained
    - Augmentative and Alternative Communication (AAC) app
    - Implements Picture Exchange Communication System (PECS)
    - Helps children with autism and speech delays communicate
    - Built in 2021; a meaningful project, but not something Drew actively maintains today
    - Link: https://github.com/myPal-TMS/myPal
 
-7. **This Portfolio Website** (React, TypeScript, Vite, Cloudflare Workers)
+5. **This Portfolio Website** (React, TypeScript, Vite, Cloudflare Workers)
    - **100/100 Lighthouse** on Accessibility, Best Practices, and SEO ([View Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/)); Performance varies with lab conditions, typically in the 90s
    - Modern portfolio with AI chat assistant, travel gallery, Snake game, and contact form
    - **AI Chat Assistant**: Google Gemini 2.5 Flash with Cloudflare Workers backend, conversational memory, action buttons - not a full RAG/vector-search system, uses structured context plus simple keyword matching for project relevance
@@ -507,7 +495,7 @@ Always use the full URL format with markdown link syntax for clickability.
 - Supabase - Backend-as-a-service
 - Firebase - Real-time databases, authentication
 - ChromaDB - Vector storage for the Hermes agent platform
-- Data Science - Pandas, Matplotlib, NumPy (Crime in Queens NYC project)
+- Data Science - Pandas, Matplotlib, NumPy
 
 **DevOps & Infrastructure**:
 - AWS - Cloud infrastructure and deployment
@@ -556,7 +544,7 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 Running this infrastructure directly informs how Drew thinks about frontend architecture - API design, caching strategy, and user-perceived performance - because he's felt the tradeoffs from the infrastructure side, not just the client side.
 
 **Additional Technologies**:
-- React Native - Mobile development (Reps project)
+- React Native - Mobile development (myPal project)
 - .NET - Backend development with C#
 - ArcGIS Pro - Geographic Information Systems
 - Vite - Modern build tooling
@@ -567,30 +555,33 @@ const PROJECTS_RAG_DATA = `[
   {
     "id": "hermes",
     "title": "Hermes",
-    "subtitle": "Self-Hosted Multi-Agent AI Platform",
-    "description": "A 3-node local-inference platform running scheduled AI workflows: multi-model routing, retrieval/memory, execution tracing with an eval loop, and human-in-the-loop approval gates for side-effecting actions. End-to-end ownership from infrastructure to product.",
+    "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
+    "description": "Nous Research's hermes-agent is the open-source (MIT) agent harness - not written by Andrew. What he built is what's wrapped around it: routing every model call to self-hosted local models instead of the cloud providers it ships with, a nightly Langfuse eval loop, a weekly self-improvement cron that clusters its own low-quality turns and proposes prompt edits (one real run: 3 proposals, 2 applied, 1 correctly rejected), and human-in-the-loop approval gates before any side-effecting action executes.",
     "technologies": [
-      "Local inference",
+      "hermes-agent",
       "Langfuse",
-      "SearXNG",
-      "ChromaDB",
-      "Crawl4AI"
+      "LiteLLM",
+      "Telegram",
+      "HITL",
+      "Evals",
+      "WhisperX"
     ],
     "link": "/projects",
     "keywords": [
       "hermes",
       "hermes",
-      "Local inference",
+      "hermes-agent",
       "Langfuse",
-      "SearXNG",
-      "ChromaDB",
-      "Crawl4AI",
-      "self",
-      "hosted",
-      "multi",
+      "LiteLLM",
+      "Telegram",
+      "HITL",
+      "Evals",
+      "WhisperX",
+      "hermes",
       "agent",
-      "ai",
-      "platform"
+      "oss",
+      "langfuse",
+      "hitl"
     ]
   },
   {
@@ -711,38 +702,6 @@ const PROJECTS_RAG_DATA = `[
       "workers",
       "keyword",
       "rag"
-    ]
-  },
-  {
-    "id": "invent0ry",
-    "title": "Invent0ry",
-    "subtitle": "React and AWS (Amplify)",
-    "description": "A full-stack inventory management system enabling businesses to track stock across multiple storage locations with custom categories. Features real-time inventory monitoring to ensure adequate supply levels, built with React and AWS Amplify for authentication, hosting, and GraphQL API.",
-    "technologies": [],
-    "link": "https://github.com/elchic00/invent0ry",
-    "keywords": [
-      "invent0ry",
-      "invent0ry",
-      "react",
-      "and",
-      "aws",
-      "amplify"
-    ]
-  },
-  {
-    "id": "crime-in-queens-nyc",
-    "title": "Crime in Queens NYC",
-    "subtitle": "Python, HTML, Github MD",
-    "description": "A data analysis project examining crime trends in Queens, NYC using Python data science libraries (Pandas, Matplotlib, NumPy) to process and visualize patterns. Interactive visualizations deployed as a GitHub Pages site.",
-    "technologies": [],
-    "link": "https://elchic00.github.io/CrimeInQueens",
-    "keywords": [
-      "crime-in-queens-nyc",
-      "crime in queens nyc",
-      "python",
-      "html",
-      "github",
-      "md"
     ]
   }
 ]`;

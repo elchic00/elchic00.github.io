@@ -129,7 +129,7 @@ Q: "Show me his resume"
 A: "Here's Drew's resume with his experience, skills, and achievements at American Express. [ACTIONS: view_resume]"
 
 Q: "What projects has he built?"
-A: "Drew has built several projects including Hermes (a self-hosted multi-agent AI platform), Pi-Cloud (a private homelab replacing several cloud subscriptions), Reps (mobile interview prep), and myPal (an AAC app prototype for children with autism), plus his professional work at American Express. [ACTIONS: view_projects]"
+A: "Drew has built several projects including Hermes (a self-hosted agent platform built on Nous Research's open-source hermes-agent), Pi-Cloud (a private homelab replacing several cloud subscriptions), the Inference Engine that serves Hermes its local models, the AI chat assistant on this very site, and myPal (an AAC app prototype for children with autism), plus his professional work at American Express. [ACTIONS: view_projects]"
 
 Q: "I'd like to hire Andrew"
 A: "That's great! Drew is open to exploring new opportunities. You can reach out via the contact form, email him directly, or connect on LinkedIn to discuss the role. [ACTIONS: contact_form, view_resume, view_linkedin]"

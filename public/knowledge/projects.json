@@ -1,11 +1,12 @@
 [
   {
     "title": "Hermes",
-    "subtitle": "Self-Hosted Multi-Agent AI Platform",
-    "description": "A 3-node local-inference platform running scheduled AI workflows: multi-model routing, retrieval/memory, execution tracing with an eval loop, and human-in-the-loop approval gates for side-effecting actions. End-to-end ownership from infrastructure to product.",
+    "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
+    "description": "Nous Research's hermes-agent is the open-source (MIT) agent harness - not written by Andrew. What he built is what's wrapped around it: routing every model call to self-hosted local models instead of the cloud providers it ships with, a nightly Langfuse eval loop, a weekly self-improvement cron that clusters its own low-quality turns and proposes prompt edits (one real run: 3 proposals, 2 applied, 1 correctly rejected), and human-in-the-loop approval gates before any side-effecting action executes.",
+    "image": "/images/projects/hermes.svg",
     "link": "/projects",
     "id": "hermes",
-    "technologies": ["Local inference", "Langfuse", "SearXNG", "ChromaDB", "Crawl4AI"]
+    "technologies": ["hermes-agent", "Langfuse", "LiteLLM", "Telegram", "HITL", "Evals", "WhisperX"]
   },
   {
     "title": "Pi-Cloud",
@@ -49,29 +50,5 @@
     "link": "https://github.com/elchic00/elchic00.github.io",
     "id": "elchic00-chatbot",
     "technologies": ["Gemini 2.5 Flash", "Cloudflare Workers", "Keyword RAG", "Serverless"]
-  },
-  {
-    "title": "Invent0ry",
-    "subtitle": "React and AWS (Amplify)",
-    "description": "A full-stack inventory management system enabling businesses to track stock across multiple storage locations with custom categories. Features real-time inventory monitoring to ensure adequate supply levels, built with React and AWS Amplify for authentication, hosting, and GraphQL API.",
-    "image": "/images/projects/inventory-demo.mp4",
-    "link": "https://github.com/elchic00/invent0ry",
-    "id": "invent0ry",
-    "githubStats": {
-      "stars": 3,
-      "forks": 0,
-      "languages": ["TypeScript", "JavaScript", "HTML", "CSS"],
-      "topics": ["aws-amplify", "inventory", "reactjs"],
-      "lastUpdated": "2024-08-29T02:12:56Z"
-    },
-    "readmeSummary": "# Invent0ry - Inventory management system..."
-  },
-  {
-    "title": "Crime in Queens NYC",
-    "subtitle": "Python, HTML, Github MD",
-    "description": "A data analysis project examining crime trends in Queens, NYC using Python data science libraries (Pandas, Matplotlib, NumPy) to process and visualize patterns. Interactive visualizations deployed as a GitHub Pages site.",
-    "image": "/images/projects/crime.webp",
-    "link": "https://elchic00.github.io/CrimeInQueens",
-    "id": "crime-in-queens-nyc"
   }
 ]

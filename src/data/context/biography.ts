@@ -132,7 +132,7 @@ When asked about "what projects has he built", include both his professional wor
    - Built in 2021; a meaningful project, but not something Drew actively maintains today
    - Link: https://github.com/myPal-TMS/myPal
 
-7. **This Portfolio Website** (React, TypeScript, Vite, Cloudflare Workers)
+5. **This Portfolio Website** (React, TypeScript, Vite, Cloudflare Workers)
    - **100/100 Lighthouse** on Accessibility, Best Practices, and SEO ([View Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/)); Performance varies with lab conditions, typically in the 90s
    - Modern portfolio with AI chat assistant, travel gallery, Snake game, and contact form
    - **AI Chat Assistant**: Google Gemini 2.5 Flash with Cloudflare Workers backend, conversational memory, action buttons - not a full RAG/vector-search system, uses structured context plus simple keyword matching for project relevance
