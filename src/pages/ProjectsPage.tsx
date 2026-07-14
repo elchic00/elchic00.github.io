@@ -180,7 +180,17 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
   const articleProps = {
     className: sharedClasses,
     ...(hasCustomModal
-      ? { onClick: (e: any) => { e.preventDefault(); onOpenModal?.(); }, role: "button", tabIndex: 0 }
+      ? {
+          onClick: (e: any) => { e.preventDefault(); onOpenModal?.(); },
+          onKeyDown: (e: React.KeyboardEvent) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onOpenModal?.();
+            }
+          },
+          role: "button",
+          tabIndex: 0,
+        }
       : { href: project.link, target: "_blank", rel: "noreferrer" }
     )
   };
