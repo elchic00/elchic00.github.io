@@ -11,19 +11,13 @@ import { Modal } from "@components/shared/Modal";
 interface BentoGridProjectProps {
   project: Project;
   index: number;
-  featured?: boolean;
   onOpenModal?: () => void;
 }
 
 // Poster frames for project preview videos, keyed by video src. Without a
 // poster, the video's literal first recorded frame shows before autoplay
-// kicks in (or if autoplay is blocked) — for Reps that was a bare login
-// screen rather than the actual app in use. These are real frames pulled
-// from later in each recording (ffmpeg), not placeholder/stock images.
-const VIDEO_POSTERS: Record<string, string> = {
-  "/images/projects/reps-mobile.mp4": "/images/projects/reps-mobile-poster.png",
-  "/images/projects/reps-web.mp4": "/images/projects/reps-web-poster.png",
-};
+// kicks in (or if autoplay is blocked).
+const VIDEO_POSTERS: Record<string, string> = {};
 
 const TechPill: React.FC<{ label: string }> = ({ label }) => (
   <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25">
@@ -34,7 +28,6 @@ const TechPill: React.FC<{ label: string }> = ({ label }) => (
 const BentoGridProject: React.FC<BentoGridProjectProps> = ({
   project,
   index,
-  featured = false,
   onOpenModal,
 }) => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -43,22 +36,16 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
   const isPiCloud = project.id === "pi-cloud";
   const techTags = project.subtitle?.split(" + ").filter(Boolean) ?? [];
 
-  const isTopRowSmallCard = !featured && (index === 1 || index === 2);
-
   const sharedClasses = [
     "group flex flex-col w-full rounded-xl overflow-hidden",
     "bg-slate-900 border border-slate-700/50",
     "transition-all duration-500 ease-out",
     "hover:border-cyan-500/40 hover:shadow-[0_0_40px_-10px_rgba(34,211,238,0.2)]",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400",
-    featured 
-      ? "md:col-span-2 min-h-[400px]" 
-      : isTopRowSmallCard 
-        ? "h-full" 
-        : "min-h-[455px] h-full", 
-  ].join(" ");  
+    "min-h-[455px] h-full",
+  ].join(" ");
 
-  const mediaHeight = featured ? "h-64 md:h-80" : "h-48 flex-shrink-0"; 
+  const mediaHeight = "h-48 flex-shrink-0";
 
   const handleMediaClick = (e: React.MouseEvent) => {
     if (hasMultipleVideos) {
@@ -123,7 +110,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
             {techTags.map((tag) => <TechPill key={tag} label={tag} />)}
           </div>
 
-          <h3 className={`font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-2 ${featured ? "text-2xl" : "text-lg"}`}>
+          <h3 className="font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-2 text-lg">
             {project.title}
           </h3>
 
@@ -222,7 +209,7 @@ export const ProjectsPage = () => {
         <header ref={headerRef} className={`text-center mb-20 transition-all duration-1000 ${headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <CodeIcon className="mx-auto w-12 h-12 mb-4 text-cyan-500/80" />
           <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
-            Personal Projects
+            Projects
           </h1>
           <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
@@ -236,7 +223,6 @@ export const ProjectsPage = () => {
               key={project.id}
               project={project}
               index={index}
-              featured={index === 0 || index === 3}
               onOpenModal={project.id === "pi-cloud" ? () => setIsModalOpen(true) : undefined}
             />
           ))}

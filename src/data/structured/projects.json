@@ -16,17 +16,6 @@
     "link": "https://github.com/myPal-TMS/myPal",
     "id": "mypal"
   },
-    {
-    "title": "Reps",
-    "subtitle": "React Native + React Web",
-    "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
-    "videos": [
-      "/images/projects/reps-mobile.mp4",
-      "/images/projects/reps-web.mp4"
-    ],
-    "link": "https://github.com/elchic00/reps",
-    "id": "reps"
-  },
   {
     "title": "Invent0ry",
     "subtitle": "React and AWS (Amplify)",
