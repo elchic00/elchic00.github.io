@@ -33,20 +33,22 @@
     "readmeSummary": "## MyPAL (Picture Assisted Language) App\\r\\n\\r\\nAn Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays communicate..."
   },
   {
-    "title": "Reps",
-    "subtitle": "React Native + React Web",
-    "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
-    "videos": ["/images/projects/reps-mobile.mp4", "/images/projects/reps-web.mp4"],
-    "link": "https://github.com/elchic00/reps",
-    "id": "reps",
-    "githubStats": {
-      "stars": 0,
-      "forks": 0,
-      "languages": ["TypeScript", "Shell", "CSS", "JavaScript"],
-      "topics": [],
-      "lastUpdated": "2026-03-07T16:56:18Z"
-    },
-    "readmeSummary": "# Reps - Daily coding practice for technical interviews..."
+    "title": "Inference Engine",
+    "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
+    "description": "A hand-patched llama.cpp build serving four local models (two text, vision, speech-to-text) on a Framework Desktop's APU - hardware the project doesn't officially support. Powers every local agentic workflow, reachable remotely over Telegram. Fixed a GPU memory-allocator bug capping offload, found a 5x prefill win by disabling a kernel path that's a regression on this specific chip, and traced a tool-calling regression to a one-line bug in the agent's own code, not the dependency everyone assumed was at fault. Not a public repo for the patches themselves - this write-up is the first public artifact.",
+    "image": "/images/projects/inference-engine.svg",
+    "link": "/projects",
+    "id": "inference-engine",
+    "technologies": ["llama.cpp", "ROCm", "HIP", "GGML", "Speculative Decoding", "LiteLLM", "Langfuse"]
+  },
+  {
+    "title": "AI Chat Assistant",
+    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Keyword RAG",
+    "description": "The chat widget on this site. A serverless Cloudflare Worker rate-limits requests, scores the user's message against a small project corpus with weighted keyword matching (no vector database or embedding service), and calls Gemini 2.5 Flash with the matched context injected into the prompt. Runs on free tiers end to end - $0/month. The model's response can include action markers the frontend turns into real buttons (open resume, jump to a section). Public repo - same one as this site.",
+    "image": "/images/projects/elchic00-chatbot.svg",
+    "link": "https://github.com/elchic00/elchic00.github.io",
+    "id": "elchic00-chatbot",
+    "technologies": ["Gemini 2.5 Flash", "Cloudflare Workers", "Keyword RAG", "Serverless"]
   },
   {
     "title": "Invent0ry",

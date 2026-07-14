@@ -652,19 +652,65 @@ const PROJECTS_RAG_DATA = `[
     ]
   },
   {
-    "id": "reps",
-    "title": "Reps",
-    "subtitle": "React Native + React Web",
-    "description": "A mobile-first technical interview prep tool that helps students build consistency with daily coding challenges, streak tracking, and gamification. Features a React Native mobile app for reading problems on the go with seamless sync to a web editor for practice, plus social features like leaderboards and friend tracking.",
-    "technologies": [],
-    "link": "https://github.com/elchic00/reps",
+    "id": "inference-engine",
+    "title": "Inference Engine",
+    "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
+    "description": "A hand-patched llama.cpp build serving four local models (two text, vision, speech-to-text) on a Framework Desktop's APU - hardware the project doesn't officially support. Powers every local agentic workflow, reachable remotely over Telegram. Fixed a GPU memory-allocator bug capping offload, found a 5x prefill win by disabling a kernel path that's a regression on this specific chip, and traced a tool-calling regression to a one-line bug in the agent's own code, not the dependency everyone assumed was at fault. Not a public repo for the patches themselves - this write-up is the first public artifact.",
+    "technologies": [
+      "llama.cpp",
+      "ROCm",
+      "HIP",
+      "GGML",
+      "Speculative Decoding",
+      "LiteLLM",
+      "Langfuse"
+    ],
+    "link": "/projects",
     "keywords": [
-      "reps",
-      "reps",
-      "react",
-      "native",
-      "react",
-      "web"
+      "inference-engine",
+      "inference engine",
+      "llama.cpp",
+      "ROCm",
+      "HIP",
+      "GGML",
+      "Speculative Decoding",
+      "LiteLLM",
+      "Langfuse",
+      "llama",
+      "cpp",
+      "rocm",
+      "local",
+      "agentic",
+      "workflows"
+    ]
+  },
+  {
+    "id": "elchic00-chatbot",
+    "title": "AI Chat Assistant",
+    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Keyword RAG",
+    "description": "The chat widget on this site. A serverless Cloudflare Worker rate-limits requests, scores the user's message against a small project corpus with weighted keyword matching (no vector database or embedding service), and calls Gemini 2.5 Flash with the matched context injected into the prompt. Runs on free tiers end to end - $0/month. The model's response can include action markers the frontend turns into real buttons (open resume, jump to a section). Public repo - same one as this site.",
+    "technologies": [
+      "Gemini 2.5 Flash",
+      "Cloudflare Workers",
+      "Keyword RAG",
+      "Serverless"
+    ],
+    "link": "https://github.com/elchic00/elchic00.github.io",
+    "keywords": [
+      "elchic00-chatbot",
+      "ai chat assistant",
+      "Gemini 2.5 Flash",
+      "Cloudflare Workers",
+      "Keyword RAG",
+      "Serverless",
+      "gemini",
+      "2",
+      "5",
+      "flash",
+      "cloudflare",
+      "workers",
+      "keyword",
+      "rag"
     ]
   },
   {

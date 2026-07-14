@@ -74,8 +74,10 @@ const featuredSystems: FeaturedSystem[] = [
     proof: ["Langfuse traces + evals", "HITL side-effect gates", "Self-hosted search/RAG (SearXNG, ChromaDB)"],
     stack: ["Local inference", "Hermes", "Langfuse"],
     status: "dry-run protected",
-    href: "#contact",
-    linkLabel: "Ask about Hermes",
+    // Hermes is a real case-study modal now (see Pi-Cloud's identical pattern) —
+    // route to it instead of straight to the contact form.
+    href: "/projects?open=hermes",
+    linkLabel: "Inspect Hermes",
     accent: "amber",
   },
   {

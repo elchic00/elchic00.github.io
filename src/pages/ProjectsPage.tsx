@@ -6,7 +6,13 @@ import { Project } from "../types";
 import { VideoPlayer } from "../components/shared/VideoPlayer";
 import { useScrollReveal } from "../hooks";
 import { PiCloudModal } from "@components/Projects/PiCloudModal";
+import { InferenceModal } from "@components/Projects/InferenceModal";
+import { ChatbotModal } from "@components/Projects/ChatbotModal";
+import { HermesModal } from "@components/Projects/HermesModal";
 import { Modal } from "@components/shared/Modal";
+
+// Projects with a dedicated case-study modal instead of an external repo link.
+const CUSTOM_MODAL_IDS = new Set(["pi-cloud", "inference-engine", "elchic00-chatbot", "hermes"]);
 
 interface BentoGridProjectProps {
   project: Project;
@@ -33,7 +39,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const hasMultipleVideos = project.videos && project.videos.length > 1;
   const isVideo = project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
-  const isPiCloud = project.id === "pi-cloud";
+  const hasCustomModal = CUSTOM_MODAL_IDS.has(project.id);
   const techTags = project.subtitle?.split(" + ").filter(Boolean) ?? [];
 
   const sharedClasses = [
@@ -124,8 +130,8 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
         </div>
 
         <div className="flex items-center gap-1.5 text-sm font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors duration-200 border-t border-slate-800/50 group-hover:border-cyan-500/20 pt-4 mt-4">
-          <span className="tracking-widest uppercase text-[10px]">{isPiCloud ? "View Details" : "View Project"}</span>
-          {!isPiCloud && (
+          <span className="tracking-widest uppercase text-[10px]">{hasCustomModal ? "View Details" : "View Project"}</span>
+          {!hasCustomModal && (
             <ExternalLinkIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
           )}
         </div>
@@ -170,10 +176,10 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
     </>
   );
 
-  const Tag = isPiCloud ? 'article' : 'a';
+  const Tag = hasCustomModal ? 'article' : 'a';
   const articleProps = {
     className: sharedClasses,
-    ...(isPiCloud 
+    ...(hasCustomModal
       ? { onClick: (e: any) => { e.preventDefault(); onOpenModal?.(); }, role: "button", tabIndex: 0 }
       : { href: project.link, target: "_blank", rel: "noreferrer" }
     )
@@ -190,16 +196,17 @@ export const ProjectsPage = () => {
   const location = useLocation();
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { ref: gridRef, isVisible: gridVisible } = useScrollReveal();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [openModalId, setOpenModalId] = useState<string | null>(null);
 
   useEffect(() => {
     document.title = "Projects | Andrew Alagna";
   }, []);
 
-  // Deep link from FeaturedSystems' "Inspect Pi-Cloud" CTA (/projects?open=pi-cloud)
+  // Deep link from FeaturedSystems' CTAs (/projects?open=pi-cloud or ?open=inference-engine)
   useEffect(() => {
-    if (new URLSearchParams(location.search).get("open") === "pi-cloud") {
-      setIsModalOpen(true);
+    const openId = new URLSearchParams(location.search).get("open");
+    if (openId && CUSTOM_MODAL_IDS.has(openId)) {
+      setOpenModalId(openId);
     }
   }, [location.search]);
 
@@ -223,12 +230,15 @@ export const ProjectsPage = () => {
               key={project.id}
               project={project}
               index={index}
-              onOpenModal={project.id === "pi-cloud" ? () => setIsModalOpen(true) : undefined}
+              onOpenModal={CUSTOM_MODAL_IDS.has(project.id) ? () => setOpenModalId(project.id) : undefined}
             />
           ))}
         </div>
       </div>
-      <PiCloudModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <PiCloudModal isOpen={openModalId === "pi-cloud"} onClose={() => setOpenModalId(null)} />
+      <InferenceModal isOpen={openModalId === "inference-engine"} onClose={() => setOpenModalId(null)} />
+      <ChatbotModal isOpen={openModalId === "elchic00-chatbot"} onClose={() => setOpenModalId(null)} />
+      <HermesModal isOpen={openModalId === "hermes"} onClose={() => setOpenModalId(null)} />
     </section>
   );
 };

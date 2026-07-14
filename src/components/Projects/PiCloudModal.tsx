@@ -82,7 +82,7 @@ curl -s "$KUMA_URL"`;
         </div>
       </div>
 
-      <div className="p-6 sm:p-8 space-y-6 max-h-[75vh] overflow-y-auto custom-scrollbar">
+      <div className="p-6 sm:p-8 space-y-6">
         
 {/* 1. Architecture: The Engine */}
         <SectionCard icon={<ServerIcon className="h-5 w-5 text-cyan-400" />} title="Architecture Overview">
@@ -180,7 +180,7 @@ curl -s "$KUMA_URL"`;
 
         {/* Footer */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800">
-          <p className="text-slate-500 text-xs italic font-mono tracking-tight">System Status: 100% Operational • Encryption: AES-256-GCM</p>
+          <p className="text-slate-400 text-xs italic font-mono tracking-tight">System Status: 100% Operational • Encryption: AES-256-GCM</p>
           <Button variant="primary" onClick={onClose}>Close Technical Deep Dive</Button>
         </div>
       </div>

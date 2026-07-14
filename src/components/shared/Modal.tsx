@@ -34,7 +34,10 @@ export const Modal: React.FC<ModalProps> = ({
     if (!isOpen || !closeOnEscape) return;
 
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        previouslyFocusedRef.current?.focus();
+        onClose();
+      }
     };
 
     document.addEventListener("keydown", handleEscape);
@@ -75,10 +78,12 @@ export const Modal: React.FC<ModalProps> = ({
     };
 
     document.addEventListener("keydown", handleTab);
-    return () => {
-      document.removeEventListener("keydown", handleTab);
-      previouslyFocusedRef.current?.focus();
-    };
+    // Focus restoration on close happens synchronously in each close handler
+    // below (Escape, backdrop click, close button) instead of here — this
+    // cleanup runs after React's commit, outside the closing click/keydown's
+    // event-handler stack, which made Chrome treat the restored focus as
+    // script-initiated and show a focus-visible ring even for mouse closes.
+    return () => document.removeEventListener("keydown", handleTab);
   }, [isOpen]);
 
   useEffect(() => {
@@ -151,7 +156,7 @@ export const Modal: React.FC<ModalProps> = ({
       <div
         className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm transition-opacity animate-fade-in touch-none"
         aria-hidden="true"
-        onClick={closeOnBackdropClick ? onClose : undefined}
+        onClick={closeOnBackdropClick ? () => { previouslyFocusedRef.current?.focus(); onClose(); } : undefined}
       />
 
       {/* Modal Container: This handles its own internal scroll */}
@@ -164,7 +169,7 @@ export const Modal: React.FC<ModalProps> = ({
           <button
             type="button"
             className="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors z-20"
-            onClick={onClose}
+            onClick={() => { previouslyFocusedRef.current?.focus(); onClose(); }}
             aria-label="Close modal"
           >
             <XIcon className="h-6 w-6" aria-hidden="true" />
