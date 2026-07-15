@@ -138,7 +138,7 @@ A: "That's a great question! While I can provide general guidance, Drew would be
 
 When users ask about this chatbot or the portfolio website features:
 
-- **Technology**: "I'm powered by Google Gemini 2.5 Flash running on a Cloudflare Workers backend that keeps the API key safe and includes rate limiting. I'm not a full RAG/vector-search system - Drew's background is loaded as structured context, and I do simple keyword matching to pull in relevant project details when needed."
+- **Technology**: "I'm powered by Google Gemini 2.5 Flash running on a Cloudflare Workers backend that keeps the API key safe and includes rate limiting. Drew's background and the complete compact project reference are loaded as structured context for every request, so this small portfolio does not need a vector database or retrieval layer."
 - **Features**: "I have conversational memory (remembers our chat history), action buttons to navigate the site, and I'm loaded with Drew's professional context. I can answer questions about his work, projects, skills, mentorship, and travels."
 - **This Portfolio**: "This portfolio is actually one of Drew's projects! It has a 100/100 Lighthouse score on Accessibility, Best Practices, and SEO (Performance varies with lab conditions, typically 90s), includes this AI chat, a travel gallery, a Snake game, and a contact form with draft auto-save. It showcases his frontend expertise, accessibility work, and full-stack capabilities."
 - **Keyboard Shortcuts**: "You can press Cmd+K (Mac) or Ctrl+K (Windows) to open me quickly, and Esc to close."
@@ -278,7 +278,7 @@ When asked about "what projects has he built", include both his professional wor
 5. **This Portfolio Website** (React, TypeScript, Vite, Cloudflare Workers)
    - **100/100 Lighthouse** on Accessibility, Best Practices, and SEO ([View Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/)); Performance varies with lab conditions, typically in the 90s
    - Modern portfolio with AI chat assistant, travel gallery, Snake game, and contact form
-   - **AI Chat Assistant**: Google Gemini 2.5 Flash with Cloudflare Workers backend, conversational memory, action buttons - not a full RAG/vector-search system, uses structured context plus simple keyword matching for project relevance
+   - **AI Chat Assistant**: Google Gemini 2.5 Flash with a Cloudflare Workers backend, conversational memory, and action buttons. It supplies a compact structured reference for every portfolio project on each request rather than using a vector database or retrieval layer.
    - **Travel Gallery**: 70+ curated photos from 5 trips with lightbox modal, multi-level zoom, keyboard navigation, touch gestures
    - **Snake Game**: HTML5 Canvas game with keyboard/touch controls, high score persistence, progressive difficulty
    - **Contact Form**: EmailJS integration, draft auto-save, message templates, real-time validation, WCAG AA-aligned accessible UI
@@ -551,7 +551,7 @@ Running this infrastructure directly informs how Drew thinks about frontend arch
 - Raspberry Pi / ARM64 - Edge computing and embedded systems
 `;
 
-const PROJECTS_RAG_DATA = `[
+const PROJECTS_CONTEXT_DATA = `[
   {
     "id": "hermes",
     "title": "Hermes",
@@ -587,8 +587,8 @@ const PROJECTS_RAG_DATA = `[
   {
     "id": "pi-cloud",
     "title": "Pi-Cloud",
-    "subtitle": "High-Performance Edge Gateway",
-    "description": "A private edge gateway on a Raspberry Pi 5 running 10 self-hosted services - Immich, Vaultwarden, Paperless-ngx, Pi-hole, Unbound, Tailscale, CrowdSec, Prometheus, Grafana, and Watchtower - replacing several cloud subscriptions with zero-trust, privacy-first infrastructure. Not a public repo - it's a physical private server, not something with a GitHub link.",
+    "subtitle": "Private Infrastructure + Service Operations",
+    "description": "A Raspberry Pi 5 that runs private services for photos, passwords, documents, DNS filtering, remote access, monitoring, and recovery. It is operated with clear service boundaries, no public ports, health checks, and backups designed to be restored when something fails. Not a public repo - it is a physical private server, not something with a GitHub link.",
     "technologies": [
       "Docker",
       "Tailscale",
@@ -617,10 +617,10 @@ const PROJECTS_RAG_DATA = `[
       "Vaultwarden",
       "Paperless-ngx",
       "Raspberry Pi",
-      "high",
-      "performance",
-      "edge",
-      "gateway"
+      "private",
+      "infrastructure",
+      "service",
+      "operations"
     ]
   },
   {
@@ -678,12 +678,12 @@ const PROJECTS_RAG_DATA = `[
   {
     "id": "elchic00-chatbot",
     "title": "AI Chat Assistant",
-    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Keyword RAG",
-    "description": "The chat widget on this site. A serverless Cloudflare Worker rate-limits requests, scores the user's message against a small project corpus with weighted keyword matching (no vector database or embedding service), and calls Gemini 2.5 Flash with the matched context injected into the prompt. Runs on free tiers end to end - $0/month. The model's response can include action markers the frontend turns into real buttons (open resume, jump to a section). Public repo - same one as this site.",
+    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Structured Context",
+    "description": "The chat widget on this site. A serverless Cloudflare Worker rate-limits requests and calls Gemini 2.5 Flash with the complete, compact project reference sheet plus the portfolio context. The corpus is intentionally small enough to fit in the prompt, so there is no vector database or retrieval step. Runs on free tiers end to end - $0/month. The model's response can include action markers the frontend turns into real buttons (open resume, jump to a section). Public repo - same one as this site.",
     "technologies": [
       "Gemini 2.5 Flash",
       "Cloudflare Workers",
-      "Keyword RAG",
+      "Structured Context",
       "Serverless"
     ],
     "link": "https://github.com/elchic00/elchic00.github.io",
@@ -692,7 +692,7 @@ const PROJECTS_RAG_DATA = `[
       "ai chat assistant",
       "Gemini 2.5 Flash",
       "Cloudflare Workers",
-      "Keyword RAG",
+      "Structured Context",
       "Serverless",
       "gemini",
       "2",
@@ -700,8 +700,8 @@ const PROJECTS_RAG_DATA = `[
       "flash",
       "cloudflare",
       "workers",
-      "keyword",
-      "rag"
+      "structured",
+      "context"
     ]
   }
 ]`;
@@ -718,32 +718,13 @@ function checkRateLimit(ip) {
   rateLimitMap.set(ip, recentRequests);
   return true;
 }
-function findRelevantProjects(query, projects) {
-  if (!projects || projects.length === 0) return [];
-  const stopWords = new Set(['a','an','the','is','are','was','were','be','been','being','have','has','had','do','does','did','will','would','could','should','may','might','must','shall','can','need','dare','ought','used','to','of','in','for','on','with','at','by','from','as','into','through','during','before','after','above','below','between','under','and','but','or','yet','so','if','because','although','though','while','where','when','that','which','who','whom','whose','what','whatever','whoever','whomever','whichever','this','these','those','i','me','my','myself','we','our','ours','ourselves','you','your','yours','yourself','yourselves','he','him','his','himself','she','her','hers','herself','it','its','itself','they','them','their','theirs','themselves','am','are','was','were','be','been','being','have','has','had','having','do','does','did','doing','about','against','up','down','out','off','over','under','again','further','then','once','here','there','when','where','why','how','all','each','few','more','most','other','some','such','no','nor','not','only','own','same','than','too','very','just','andrew','drew','he','his','him','project','projects']);
-  const queryWords = query.toLowerCase().replace(/[^\w\s]/g, ' ').split(/\s+/).filter(word => word.length > 2 && !stopWords.has(word));
-  if (queryWords.length === 0) return [];
-  const scored = projects.map(project => {
-    let score = 0;
-    const projectText = `${project.title} ${project.subtitle} ${project.description} ${project.technologies?.join(' ') || ''}`.toLowerCase();
-    for (const word of queryWords) {
-      if (project.title.toLowerCase().includes(word)) score += 10;
-      if (project.technologies?.some(t => t.toLowerCase().includes(word))) score += 5;
-      if (project.description.toLowerCase().includes(word)) score += 2;
-      if (project.keywords?.some(k => k.toLowerCase().includes(word))) score += 3;
-      if (projectText.includes(word)) score += 1;
-    }
-    return { project, score };
-  });
-  return scored.filter(item => item.score > 0).sort((a, b) => b.score - a.score).slice(0, 3).map(item => item.project);
-}
 function formatProjectContext(projects) {
   if (!projects || projects.length === 0) return '';
   const formatted = projects.map(p => {
     const techs = p.technologies?.join(', ') || '';
     return `- **${p.title}**${p.subtitle ? ` (${p.subtitle})` : ''}: ${p.description.slice(0, 300)}${p.description.length > 300 ? '...' : ''}${techs ? ` [Tech: ${techs}]` : ''}${p.link ? ` [Link: ${p.link}]` : ''}`;
   }).join('\n');
-  return `\n\n# Relevant Projects\nThe user's question relates to these specific projects:\n${formatted}\n`;
+  return `\n\n# Project Reference\nUse this complete, compact reference when answering questions about Andrew's projects. Do not imply a project has details that are not listed here.\n${formatted}\n`;
 }
 async function handleChatRequest(request, env) {
   const corsHeaders = {
@@ -767,9 +748,8 @@ async function handleChatRequest(request, env) {
       return new Response(JSON.stringify({ error: "Invalid request" }), { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
     let projects = [];
-    try { projects = JSON.parse(PROJECTS_RAG_DATA); } catch (e) { console.warn("Failed to parse PROJECTS_RAG_DATA:", e); }
-    const relevantProjects = findRelevantProjects(message, projects);
-    const projectContext = formatProjectContext(relevantProjects);
+    try { projects = JSON.parse(PROJECTS_CONTEXT_DATA); } catch (e) { console.warn("Failed to parse PROJECTS_CONTEXT_DATA:", e); }
+    const projectContext = formatProjectContext(projects);
     const conversationHistory = [
       { role: "user", parts: [{ text: PORTFOLIO_CONTEXT + projectContext }] },
       { role: "model", parts: [{ text: "I understand. I'm Andrew's AI assistant and will answer questions about his experience, projects, and skills professionally and conversationally based on the information provided." }] },

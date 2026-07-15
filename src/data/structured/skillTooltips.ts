@@ -16,7 +16,7 @@ export const skillTooltips: Record<string, string> = {
 
   // Edge Computing & AI Orchestration
   "Cloudflare Workers": "Edge-compute platform for serverless functions at the edge",
-  "RAG Pattern Implementation": "Retrieval-Augmented Generation for AI-powered content",
+  "Structured AI Context Design": "Small, auditable prompt context designed to fit the source material",
   "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)": "LLM orchestration and prompt engineering",
   "Edge-side AI": "AI inference and processing at the network edge",
   "Serverless Functions": "Event-driven compute without infrastructure management",

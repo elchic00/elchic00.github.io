@@ -37,7 +37,7 @@ AI data:
 - `src/data/context/skills.ts`: technical skills narrative.
 - `src/data/context/systemPrompt.ts`: assistant behavior, tone, response rules, and action markers.
 - `src/data/context/index.ts`: combined context export.
-- `public/knowledge/projects.json`: keyword-retrieval project corpus. It is intentionally separate from the UI project dataset.
+- `public/knowledge/projects.json`: compact project reference sheet for the AI chat. It is intentionally separate from the UI project dataset.
 
 ## AI Chat Request Flow
 
@@ -45,10 +45,10 @@ AI data:
 2. `src/components/AIChatAssistant/` owns UI state, suggested questions, sanitized Markdown rendering, and action markers.
 3. The frontend POSTs conversation data to the Worker's `/api/chat` endpoint.
 4. `worker/index.js` handles CORS, validates the method and JSON payload, applies IP-based rate limiting, and constructs the Gemini request.
-5. The Worker injects synchronized portfolio context, recent conversation history, and up to three keyword-matched projects.
+5. The Worker injects synchronized portfolio context, recent conversation history, and the complete compact project reference sheet.
 6. The Worker returns a JSON response or a structured error.
 
-Project retrieval is deterministic keyword matching inside the Worker, not vector search. Only response generation requires the external model API.
+The project corpus currently contains five concise records, so the Worker sends all of them rather than ranking a partial subset. This keeps follow-up questions grounded and makes the behavior auditable without a vector database or retrieval layer. Only response generation requires the external model API.
 
 ## Context Synchronization
 

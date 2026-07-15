@@ -70,15 +70,15 @@ curl -s "$KUMA_URL"`;
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="2xl" ariaLabel="Pi-Cloud Infrastructure Details">
       {/* Hero Header */}
       <div className="relative h-48 sm:h-64 overflow-hidden">
-        <img src="/images/projects/pi-cloud.webp" alt="Pi-Cloud Edge Gateway" className="w-full h-full object-cover" />
+        <img src="/images/projects/pi-cloud.svg" alt="Diagram of Pi-Cloud private services, access controls, monitoring, and recovery paths" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <div className="flex items-center gap-2 mb-2">
-            <span className="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-medium rounded-full border border-cyan-500/30">Infrastructure</span>
-            <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-medium rounded-full border border-emerald-500/30">100% Operational</span>
+            <span className="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-medium rounded-full border border-cyan-500/30">Private Infrastructure</span>
+            <span className="px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-medium rounded-full border border-emerald-500/30">Operated, Monitored, Recoverable</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">Pi-Cloud: The Invisible Edge Gateway</h2>
-          <p className="text-slate-300 mt-2 text-sm sm:text-base">Production-Grade Sovereignty & Zero-Trust Networking</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">Pi-Cloud: Private Services, Operated Deliberately</h2>
+          <p className="text-slate-300 mt-2 text-sm sm:text-base">A personal service platform with explicit access, monitoring, and recovery paths</p>
         </div>
       </div>
 
@@ -87,14 +87,14 @@ curl -s "$KUMA_URL"`;
 {/* 1. Architecture: The Engine */}
         <SectionCard icon={<ServerIcon className="h-5 w-5 text-cyan-400" />} title="Architecture Overview">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            Engineered on a <strong className="text-white">Raspberry Pi 5 (8GB)</strong> backed by a high-end <strong className="text-white">500GB NVMe M.2 SSD</strong>. This hardware stack functions as a <strong>High-Performance Edge Gateway</strong>, delivering sub-1ms local latency for 10 containerized services—effectively eliminating the 'Cloud Lag' associated with traditional SaaS providers.
+            A <strong className="text-white">Raspberry Pi 5 (8GB)</strong> with a <strong className="text-white">500GB NVMe M.2 SSD</strong> runs the private services I use for photos, passwords, documents, DNS filtering, remote access, and monitoring. The point is not to recreate a hyperscaler: it is to own the data path, understand the failure modes, and keep the system maintainable at home scale.
           </p>
         </SectionCard>
 
         {/* 2. UX: The Single Pane of Glass */}
-        <SectionCard icon={<ChartBarIcon className="h-5 w-5 text-cyan-400" />} title="The 'Single Pane of Glass'">
+        <SectionCard icon={<ChartBarIcon className="h-5 w-5 text-cyan-400" />} title="The Operational View">
           <p className="text-slate-300 text-sm leading-relaxed">
-            Infrastructure complexity is abstracted into a unified <strong>Homepage</strong> dashboard. This 'Single Pane of Glass' orchestrates real-time telemetry (CPU, Thermals, RAM) and service health, providing a <strong>frictionless command center</strong> for monitoring global traffic and automated maintenance logs.
+            A <strong>Homepage</strong> dashboard puts service health beside the signals that matter when the machine is under load: CPU, thermals, RAM, storage, and recent maintenance. It does not remove complexity; it makes the state visible enough to act on before a small problem becomes a broken service.
           </p>
         </SectionCard>
 
@@ -104,11 +104,11 @@ curl -s "$KUMA_URL"`;
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex items-start gap-2">
                 <span className="text-cyan-400 mt-0.5">•</span>
-                <span><strong className="text-white">Immich:</strong> A high-performance, self-hosted media engine replacing Google Photos with full privacy.</span>
+                <span><strong className="text-white">Immich:</strong> A self-hosted media library that keeps personal photos under my control.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-cyan-400 mt-0.5">•</span>
-                <span><strong className="text-white">Vaultwarden:</strong> A sovereign instance of the Bitwarden API for encrypted 2FA and credential management.</span>
+                <span><strong className="text-white">Vaultwarden:</strong> A self-hosted password manager for credentials and two-factor authentication.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-cyan-400 mt-0.5">•</span>
@@ -121,15 +121,15 @@ curl -s "$KUMA_URL"`;
   <ul className="space-y-3 text-sm text-slate-400">
     <li className="flex items-start gap-2">
       <span className="text-emerald-400 mt-0.5">✓</span>
-      <span><strong className="text-white">Global Exit Node:</strong> Utilizing <strong>Tailscale</strong>, the Pi acts as a secure exit node for mobile devices. This routes all cellular/public traffic through the home gateway, applying Pi-hole ad-blocking and Unbound encryption anywhere in the world.</span>
+                <span><strong className="text-white">Private Access:</strong> <strong>Tailscale</strong> provides remote access without opening services directly to the public internet. When useful, the Pi can also provide a private exit path for mobile devices.</span>
     </li>
     <li className="flex items-start gap-2">
       <span className="text-emerald-400 mt-0.5">✓</span>
-      <span><strong className="text-white">Recursive DNS:</strong> <strong>Unbound</strong> resolves queries at the root level, ensuring DNS requests never touch 3rd-party upstream providers (like Google or Cloudflare).</span>
+                <span><strong className="text-white">Recursive DNS:</strong> <strong>Unbound</strong> resolves DNS directly, while Pi-hole filters known ad and tracking domains across the home network.</span>
     </li>
     <li className="flex items-start gap-2">
       <span className="text-emerald-400 mt-0.5">✓</span>
-      <span><strong className="text-white">Intrusion Prevention:</strong> <strong>CrowdSec</strong> parses service logs in real-time to detect and ban malicious actors at the kernel level before they can pivot within the network.</span>
+                <span><strong className="text-white">Intrusion Prevention:</strong> <strong>CrowdSec</strong> turns service logs into actionable detection and blocking signals for exposed access paths.</span>
     </li>
   </ul>
 </SectionCard>
@@ -138,7 +138,7 @@ curl -s "$KUMA_URL"`;
         {/* 4. DevOps: The Decoupled Model */}
         <SectionCard icon={<CloudIcon className="h-5 w-5 text-cyan-400" />} title="Decoupled Service Model">
           <p className="text-slate-300 text-sm leading-relaxed">
-            Every service is isolated in its own directory with distinct configurations and <code>.env</code> files. This mirrors <strong>enterprise DevOps workflows</strong>, ensuring modular updates and zero cross-contamination between service volumes.
+            Each service keeps its own directory, configuration, and <code>.env</code> file. That separation makes upgrades, restores, and incident investigation smaller: one service can change without turning the rest of the platform into a mystery.
           </p>
           <CodeBlock code={directoryStructure} language="text" />
         </SectionCard>
@@ -146,7 +146,7 @@ curl -s "$KUMA_URL"`;
         {/* 5. Safety: Disaster Recovery */}
         <SectionCard icon={<ServerIcon className="h-5 w-5 text-cyan-400" />} title="Atomic Disaster Recovery">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            A custom Bash script executes a daily <strong>dual-pass sync</strong>. It utilizes SQLite <code>VACUUM</code> and <code>.backup</code> to ensure point-in-time database integrity before mirroring to bootable SD and ExFAT "Lifeboat" media.
+            A custom Bash script executes a daily <strong>dual-pass sync</strong>. SQLite <code>VACUUM</code> and <code>.backup</code> create a consistent snapshot before the data is mirrored to separate recovery media. The valuable property is not the script itself; it is having a recovery path that is tested and understandable.
           </p>
           <CodeBlock code={backupScriptSnippet} language="bash" />
         </SectionCard>
@@ -154,25 +154,25 @@ curl -s "$KUMA_URL"`;
         {/* 6. Professional Connection */}
         <div className="bg-gradient-to-r from-cyan-950/30 to-blue-950/30 border border-cyan-500/20 rounded-xl p-6">
   <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-    <LightBulbIcon className="h-5 w-5 text-cyan-400" /> The Practical Edge: Why Build This?
+    <LightBulbIcon className="h-5 w-5 text-cyan-400" /> What This Demonstrates
   </h3>
   <ul className="space-y-4 text-sm text-slate-400">
     <li className="flex items-start gap-2">
       <span className="text-cyan-400 mt-1">•</span>
       <span>
-        <strong className="text-white">Absolute Digital Autonomy</strong> — Replaces recurring cloud subscriptions (Google Photos, Bitwarden, VPNs) with a high-performance, private alternative that keeps personal data off third-party servers.
+        <strong className="text-white">Ownership with tradeoffs</strong> — Self-hosting trades convenience for responsibility. The value is understanding that trade and choosing it for the services where privacy and control matter.
       </span>
     </li>
     <li className="flex items-start gap-2">
       <span className="text-cyan-400 mt-1">•</span>
       <span>
-        <strong className="text-white">Travel-Ready Security</strong> — By utilizing the Pi as a <strong>Tailscale Exit Node</strong>, mobile devices gain the full protection of Pi-hole ad-blocking and Unbound DNS encryption even on insecure public Wi-Fi networks.
+        <strong className="text-white">Security by design</strong> — Private overlay access, DNS controls, service isolation, and monitoring are layered together instead of being treated as a last-minute add-on.
       </span>
     </li>
     <li className="flex items-start gap-2">
       <span className="text-cyan-400 mt-1">•</span>
       <span>
-        <strong className="text-white">Invisible UX</strong> — Despite the underlying complexity of 10 microservices and kernel-level IPS, the "Single Pane of Glass" dashboard provides a frictionless, SaaS-like experience for daily use.
+        <strong className="text-white">Operational discipline</strong> — Clear boundaries, visible health signals, and recovery media make the platform a useful exercise in running software, not just installing it.
       </span>
     </li>
   </ul>
@@ -180,7 +180,7 @@ curl -s "$KUMA_URL"`;
 
         {/* Footer */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800">
-          <p className="text-slate-400 text-xs italic font-mono tracking-tight">System Status: 100% Operational • Encryption: AES-256-GCM</p>
+          <p className="text-slate-400 text-xs italic font-mono tracking-tight">Private network • monitored services • documented recovery path</p>
           <Button variant="primary" onClick={onClose}>Close Technical Deep Dive</Button>
         </div>
       </div>

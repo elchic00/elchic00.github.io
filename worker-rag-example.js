@@ -1,6 +1,7 @@
 // Example: Minimal worker update for RAG support
 // Just add projectContext to your existing worker
 
+// Legacy minimal example for appending structured project context in a Worker.
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);

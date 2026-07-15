@@ -27,7 +27,7 @@ export const ACTION_CONFIGS: Record<string, ActionButton> = {
   send_email: { label: "Send Email", action: "send_email" },
 };
 
-// RAG-enhanced suggested questions
+// Suggested questions for the structured-context chat assistant
 export const SUGGESTED_QUESTIONS = [
   "What should I know about Andrew in 30 seconds?",
   "What has he built at American Express?",

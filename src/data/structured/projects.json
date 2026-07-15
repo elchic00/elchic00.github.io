@@ -10,9 +10,9 @@
   },
     {
     "title": "Pi-Cloud",
-    "subtitle": "High-Performance Edge Gateway",
-    "description": "A high-performance private cloud orchestrating 10 microservices on a Raspberry Pi 5. This setup replaces Big Tech ecosystems for photo storage and identity management with a zero-trust, invisible infrastructure. It features a recursive Unbound + Pi-hole DNS stack for low-latency ad-filtering, atomic disaster recovery, and a unified 'Single Pane of Glass' telemetry dashboard.",
-    "image": "/images/projects/pi-cloud.webp",
+    "subtitle": "Private Infrastructure + Service Operations",
+    "description": "A Raspberry Pi 5 that runs the private services I rely on for photos, passwords, documents, DNS filtering, remote access, monitoring, and recovery. The interesting work is operating it deliberately: clear service boundaries, no public ports, health checks, and backups that can be restored when something fails.",
+    "image": "/images/projects/pi-cloud.svg",
     "link": "/projects",
     "id": "pi-cloud",
     "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "WireGuard", "Raspberry Pi", "DevOps", "Zero Trust", "Immich", "Uptime Kuma", "OpenCL", "PCIe Gen 3", "NVMe", "DNSSEC", "nftables", "rsync"]
@@ -28,12 +28,12 @@
   },
   {
     "title": "AI Chat Assistant",
-    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Keyword RAG",
-    "description": "The assistant in the corner of this page — ask it about any project and it'll actually know. Deliberately built on keyword-scored retrieval instead of vector search: no embedding service, fully deterministic, and free to run (Cloudflare's 100K req/day plus Gemini's free tier add up to $0/month). Structured output from the model drives real UI — action buttons that open a resume or jump to a section, not just more text.",
+    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Structured Context",
+    "description": "The assistant in the corner of this page. A Cloudflare Worker gives Gemini a compact, structured reference for the whole portfolio on every request—no vector database or unnecessary retrieval layer. The model can also return action markers that become real UI buttons, such as opening the resume or jumping to a section.",
     "image": "/images/projects/elchic00-chatbot.svg",
     "link": "https://github.com/elchic00/elchic00.github.io",
     "id": "elchic00-chatbot",
-    "technologies": ["Gemini 2.5 Flash", "Cloudflare Workers", "Keyword RAG", "DOMPurify", "Rate Limiting", "Serverless", "Wrangler"]
+    "technologies": ["Gemini 2.5 Flash", "Cloudflare Workers", "Structured Context", "DOMPurify", "Rate Limiting", "Serverless", "Wrangler"]
   },
   {
     "title": "myPal",

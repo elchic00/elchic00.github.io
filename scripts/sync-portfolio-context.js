@@ -2,7 +2,7 @@
 
 /**
  * Syncs portfolio context from src/data/context/ and public/knowledge/projects.json to worker/index.js
- * Reads the source files and combines them into worker with RAG-ready project data
+ * Reads the source files and combines them into the Worker with a complete project reference sheet
  */
 
 const fs = require('fs');
@@ -68,14 +68,14 @@ if (!workerContextRegex.test(workerContent)) {
   process.exit(1);
 }
 workerContent = workerContent.replace(workerContextRegex, replacement);
-const projectsDataRegex = /const PROJECTS_RAG_DATA = `[\s\S]*?`;/;
-const projectsReplacement = `const PROJECTS_RAG_DATA = \`${projectsContext}\`;`;
+const projectsDataRegex = /const PROJECTS_CONTEXT_DATA = `[\s\S]*?`;/;
+const projectsReplacement = `const PROJECTS_CONTEXT_DATA = \`${projectsContext}\`;`;
 if (projectsDataRegex.test(workerContent)) {
   workerContent = workerContent.replace(projectsDataRegex, projectsReplacement);
 } else {
   workerContent = workerContent.replace(
     replacement,
-    `${replacement}\n\n// RAG-ready project data for semantic search\nconst PROJECTS_RAG_DATA = \`${projectsContext}\`;`
+    `${replacement}\n\n// Complete structured project reference sheet for each chat request\nconst PROJECTS_CONTEXT_DATA = \`${projectsContext}\`;`
   );
 }
 fs.writeFileSync(WORKER_FILE, workerContent, 'utf8');

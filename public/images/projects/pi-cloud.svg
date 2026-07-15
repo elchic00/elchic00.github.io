@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="pi-title pi-desc">
+  <title id="pi-title">Pi-Cloud private service platform</title>
+  <desc id="pi-desc">System map showing private services on a Raspberry Pi, private Tailscale access, monitoring, and recovery media.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="1" opacity=".35"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect width="1200" height="750" fill="url(#grid)"/>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <rect x="48" y="40" width="326" height="34" rx="17" fill="#0f172a" stroke="#22d3ee" stroke-opacity=".35"/>
+    <text x="211" y="62" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.2" fill="#67e8f9">RASPBERRY PI 5 · NVME STORAGE</text>
+    <rect x="830" y="40" width="322" height="34" rx="17" fill="#0f172a" stroke="#34d399" stroke-opacity=".35"/>
+    <text x="991" y="62" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.2" fill="#6ee7b7">PRIVATE ACCESS · NO PUBLIC PORTS</text>
+    <text x="600" y="118" text-anchor="middle" font-size="14" letter-spacing="2" fill="#94a3b8">PRIVATE SERVICES · OBSERVABILITY · RECOVERY</text>
+
+    <rect x="420" y="210" width="360" height="220" rx="14" fill="#0f172a" stroke="#22d3ee" stroke-opacity=".6" stroke-width="2"/>
+    <rect x="452" y="246" width="78" height="78" rx="12" fill="#083344" stroke="#22d3ee" stroke-opacity=".5"/>
+    <path d="M471 280h40M491 260v40M463 270h56M463 290h56" stroke="#67e8f9" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+    <text x="555" y="274" font-size="20" font-weight="800" fill="#e2e8f0">PI-CLOUD</text>
+    <text x="555" y="300" font-size="12" fill="#94a3b8">isolated services + data</text>
+    <text x="555" y="321" font-size="12" fill="#94a3b8">configuration + volumes</text>
+    <rect x="452" y="354" width="296" height="42" rx="8" fill="#020617" stroke="#334155"/>
+    <text x="600" y="380" text-anchor="middle" font-size="12" fill="#67e8f9">service boundary: one directory, one concern</text>
+
+    <line x1="420" y1="320" x2="276" y2="320" stroke="#22d3ee" stroke-width="2"/>
+    <polygon points="276,320 288,314 288,326" fill="#22d3ee"/>
+    <rect x="55" y="230" width="220" height="82" rx="10" fill="#0f172a" stroke="#334155"/>
+    <text x="165" y="263" text-anchor="middle" font-size="16" font-weight="800" fill="#e2e8f0">PRIVATE ACCESS</text>
+    <text x="165" y="286" text-anchor="middle" font-size="11" fill="#94a3b8">Tailscale overlay network</text>
+    <rect x="55" y="348" width="220" height="82" rx="10" fill="#0f172a" stroke="#334155"/>
+    <text x="165" y="381" text-anchor="middle" font-size="16" font-weight="800" fill="#e2e8f0">DNS + PROTECTION</text>
+    <text x="165" y="404" text-anchor="middle" font-size="11" fill="#94a3b8">Pi-hole · Unbound · CrowdSec</text>
+    <line x1="275" y1="389" x2="420" y2="360" stroke="#22d3ee" stroke-width="2"/>
+    <polygon points="420,360 409,357 412,369" fill="#22d3ee"/>
+
+    <line x1="780" y1="320" x2="924" y2="320" stroke="#34d399" stroke-width="2"/>
+    <polygon points="924,320 912,314 912,326" fill="#34d399"/>
+    <rect x="925" y="230" width="220" height="82" rx="10" fill="#0f172a" stroke="#334155"/>
+    <text x="1035" y="263" text-anchor="middle" font-size="16" font-weight="800" fill="#e2e8f0">PRIVATE SERVICES</text>
+    <text x="1035" y="286" text-anchor="middle" font-size="11" fill="#94a3b8">Immich · Vaultwarden · Paperless</text>
+    <rect x="925" y="348" width="220" height="82" rx="10" fill="#0f172a" stroke="#334155"/>
+    <text x="1035" y="381" text-anchor="middle" font-size="16" font-weight="800" fill="#e2e8f0">OPERATIONS</text>
+    <text x="1035" y="404" text-anchor="middle" font-size="11" fill="#94a3b8">monitoring · health checks</text>
+    <line x1="780" y1="360" x2="925" y2="389" stroke="#34d399" stroke-width="2"/>
+    <polygon points="925,389 913,381 911,393" fill="#34d399"/>
+
+    <line x1="600" y1="430" x2="600" y2="505" stroke="#fbbf24" stroke-width="2"/>
+    <polygon points="600,505 594,493 606,493" fill="#fbbf24"/>
+    <rect x="382" y="510" width="436" height="94" rx="10" fill="#0f172a" stroke="#fbbf24" stroke-opacity=".45"/>
+    <text x="600" y="546" text-anchor="middle" font-size="17" font-weight="800" fill="#fbbf24">RECOVERY PATH</text>
+    <text x="600" y="572" text-anchor="middle" font-size="12" fill="#94a3b8">consistent SQLite backups · dual-pass mirror · separate recovery media</text>
+    <text x="600" y="650" text-anchor="middle" font-size="12" font-style="italic" fill="#64748b">The goal is not a cloud replica — it is a system whose state, boundaries, and failure modes are understood.</text>
+  </g>
+</svg>

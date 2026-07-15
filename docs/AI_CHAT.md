@@ -18,6 +18,7 @@ Your portfolio features a free, high-quality AI chat assistant powered by **Goog
 - ✅ Rate limiting prevents abuse (5 req/min per IP)
 - ✅ Free tier: 1,500 requests/day (Gemini) + 100K requests/day (Cloudflare)
 - ✅ Serverless - no backend maintenance
+- ✅ Complete structured project context on every request; the five-record corpus does not need retrieval or a vector database
 
 ---
 
@@ -38,8 +39,13 @@ src/components/AIChatAssistant/
 ├── utils.ts                  # Utility functions (markdown, actions)
 └── index.ts                  # Barrel export
 
-src/data/
-└── portfolioContext.ts       # AI knowledge base (600+ lines)
+src/data/context/
+├── systemPrompt.ts           # Assistant behavior and action rules
+├── biography.ts              # Biography and project narrative
+└── skills.ts                 # Technical skills narrative
+
+public/knowledge/
+└── projects.json             # Complete compact project reference sheet
 
 worker/
 └── index.js                  # Cloudflare Worker API
@@ -129,10 +135,10 @@ npm run deploy
 
 ### Portfolio Context
 
-The AI's knowledge comes from [src/data/portfolioContext.ts](../src/data/portfolioContext.ts):
+The AI's knowledge comes from [src/data/context/](../src/data/context/) and [public/knowledge/projects.json](../public/knowledge/projects.json). The Worker includes every project record because the portfolio corpus is deliberately small and structured.
 
 ```typescript
-export const PORTFOLIO_CONTEXT = `
+export const SYSTEM_PROMPT = `
 You are Andrew Alagna's AI assistant...
 
 # About Andrew
@@ -143,7 +149,7 @@ You are Andrew Alagna's AI assistant...
 ```
 
 **To update:**
-1. Edit `src/data/portfolioContext.ts`
+1. Edit the relevant `src/data/context/*.ts` file or `public/knowledge/projects.json`
 2. Run `npm run sync-context` (or deploy worker)
 3. Context automatically syncs to `worker/index.js`
 

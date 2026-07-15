@@ -63,7 +63,7 @@ export const InferenceModal: React.FC<InferenceModalProps> = ({
         <img
           src="/images/projects/inference-engine.svg"
           alt="Bar chart: Qwen 35B-A3B generates at 35 tokens/sec vs Qwen 27B with speculative decoding at 12 tokens/sec, on the same GPU"
-          className="w-full h-full object-contain bg-slate-950"
+          className="w-full h-full object-cover bg-slate-950"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-6">

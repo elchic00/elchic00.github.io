@@ -32,7 +32,7 @@
     "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)",
     "Local LLM Orchestration (llama.cpp)",
     "Serverless Functions",
-    "RAG Pattern Implementation",
+    "Structured AI Context Design",
     "Streaming Responses",
     "Cloudflare Workers"
   ]

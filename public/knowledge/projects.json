@@ -10,8 +10,8 @@
   },
   {
     "title": "Pi-Cloud",
-    "subtitle": "High-Performance Edge Gateway",
-    "description": "A private edge gateway on a Raspberry Pi 5 running 10 self-hosted services - Immich, Vaultwarden, Paperless-ngx, Pi-hole, Unbound, Tailscale, CrowdSec, Prometheus, Grafana, and Watchtower - replacing several cloud subscriptions with zero-trust, privacy-first infrastructure. Not a public repo - it's a physical private server, not something with a GitHub link.",
+    "subtitle": "Private Infrastructure + Service Operations",
+    "description": "A Raspberry Pi 5 that runs private services for photos, passwords, documents, DNS filtering, remote access, monitoring, and recovery. It is operated with clear service boundaries, no public ports, health checks, and backups designed to be restored when something fails. Not a public repo - it is a physical private server, not something with a GitHub link.",
     "image": "/images/projects/pi-cloud.webp",
     "link": "/projects",
     "id": "pi-cloud",
@@ -44,11 +44,11 @@
   },
   {
     "title": "AI Chat Assistant",
-    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Keyword RAG",
-    "description": "The chat widget on this site. A serverless Cloudflare Worker rate-limits requests, scores the user's message against a small project corpus with weighted keyword matching (no vector database or embedding service), and calls Gemini 2.5 Flash with the matched context injected into the prompt. Runs on free tiers end to end - $0/month. The model's response can include action markers the frontend turns into real buttons (open resume, jump to a section). Public repo - same one as this site.",
+    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Structured Context",
+    "description": "The chat widget on this site. A serverless Cloudflare Worker rate-limits requests and calls Gemini 2.5 Flash with the complete, compact project reference sheet plus the portfolio context. The corpus is intentionally small enough to fit in the prompt, so there is no vector database or retrieval step. Runs on free tiers end to end - $0/month. The model's response can include action markers the frontend turns into real buttons (open resume, jump to a section). Public repo - same one as this site.",
     "image": "/images/projects/elchic00-chatbot.svg",
     "link": "https://github.com/elchic00/elchic00.github.io",
     "id": "elchic00-chatbot",
-    "technologies": ["Gemini 2.5 Flash", "Cloudflare Workers", "Keyword RAG", "Serverless"]
+    "technologies": ["Gemini 2.5 Flash", "Cloudflare Workers", "Structured Context", "Serverless"]
   }
 ]

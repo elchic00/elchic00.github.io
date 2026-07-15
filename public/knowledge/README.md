@@ -1,20 +1,20 @@
-# RAG for AI Chat - Simplified
+# Structured Project Context for AI Chat
 
-This folder contains project data for the AI chat's RAG (Retrieval-Augmented Generation) system.
+This folder contains the compact, structured project reference sheet for the AI chat.
 
 ## How It Works
 
 1. **projects.json** contains your project information
-2. When a user asks about projects, the chat retrieves relevant project details
-3. These details are appended to your existing worker context
+2. The Worker sends the complete project reference sheet with the existing portfolio context on every request
+3. The model answers from that complete, auditable set of project details
 4. The AI responds with grounded, accurate project information
 
 ## Updating Projects
 
-Simply edit `projects.json` with new project information and redeploy. No embeddings or build scripts needed.
+Simply edit `projects.json`, then run `npm run sync-context` before deploying. No embeddings, vector store, or ranking heuristic is needed while the corpus remains this small.
 
 ## What Changed
 
-- Removed: Complex embedding generation, resume/experience files, build scripts
-- Kept: Simple project JSON with hash-based similarity search
-- Result: ~100 lines of code total, no API keys, works offline
+- Removed: Retrieval, embedding generation, and ranking logic
+- Kept: One complete, reviewable project reference sheet
+- Result: predictable context grounding without extra infrastructure
