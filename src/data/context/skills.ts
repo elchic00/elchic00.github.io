@@ -6,7 +6,7 @@
 export const SKILLS = `
 # Technical Skills
 
-**Role Clarification**: Drew leans frontend (React, TypeScript) but has real backend depth (Kotlin BFF, GraphQL, Node.js) and runs his own multi-node home infrastructure end-to-end. Describe this in terms of what he's actually built, not a hard percentage split.
+**Role Clarification**: Drew leans frontend (React, TypeScript) but has real backend depth in Python, SQL, and Node.js/JavaScript. He's also written Kotlin for the BFF layer at American Express - real experience, but narrower than his primary backend languages, not his main strength. He runs his own multi-node home infrastructure end-to-end. Describe this in terms of what he's actually built, not a hard percentage split.
 
 **Primary Specialization**: Frontend Web Development with React.js and TypeScript
 **Secondary Capabilities**: Backend/Full-Stack Development, self-hosted infrastructure, and AI agent systems
@@ -14,7 +14,7 @@ export const SKILLS = `
 **Languages**:
 - **JavaScript (ES6+)** - Expert level, primary language for 4 years (frontend focus)
 - **TypeScript** - Production experience at American Express, React + TypeScript daily
-- Python - Data structures, algorithms, data science projects, automation
+- Python - Primary backend/automation language: self-hosted AI agent infrastructure (eval scoring, self-improvement scripts, a voice-transcription relay service), data science projects, algorithms
 - SQL - Database queries and management
 - HTML5 & CSS3 - WCAG AA compliant, semantic markup (core frontend skills)
 
@@ -33,11 +33,11 @@ export const SKILLS = `
 - **UI/UX Implementation** - Translating designs to production code
 
 **Backend & APIs**:
+- Python - Backend services and automation for self-hosted infrastructure (see Languages above)
 - Node.js - Full-stack development, API creation
-- Kotlin - American Express backend services
 - GraphQL - API design and implementation
 - REST APIs - Design, consumption, and optimization
-- BFF (Backend for Frontend) Architecture - Production experience at American Express
+- BFF (Backend for Frontend) Architecture - Production experience at American Express, including a Kotlin-based BFF layer
 - Microservices - Enterprise-scale distributed systems
 - Express.js - Server-side JavaScript applications
 

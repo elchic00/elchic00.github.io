@@ -6,6 +6,7 @@ import {
   CodeIcon,
   LightBulbIcon,
   ChipIcon,
+  ClockIcon,
 } from "@heroicons/react/solid";
 import { Modal } from "../shared/Modal";
 import { Button } from "../shared/Button";
@@ -76,11 +77,11 @@ export const InferenceModal: React.FC<InferenceModalProps> = ({
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-white">
-            Four Models, One GPU That Isn't Supposed to Run Any of Them
+            Inference Engine: Four Local Models, One Hand-Patched GPU
           </h2>
           <p className="text-slate-300 mt-2 text-sm sm:text-base">
-            Text, vision, and voice — hand-patched from source on hardware
-            nobody expected to run any of it well
+            Text, vision, and voice, hand-patched from source and served on
+            an APU llama.cpp doesn't officially support
           </p>
         </div>
       </div>
@@ -190,7 +191,7 @@ export const InferenceModal: React.FC<InferenceModalProps> = ({
         {/* Speculative Decoding */}
         <SectionCard
           icon={<LightningBoltIcon className="h-5 w-5 text-cyan-400" />}
-          title="Speculative Decoding — Beating a Physics Limit Instead of Fighting It"
+          title="Speculative Decoding"
         >
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
             The 27B model is dense — every parameter active on every token — so
@@ -225,7 +226,7 @@ export const InferenceModal: React.FC<InferenceModalProps> = ({
         {/* The debugging story */}
         <SectionCard
           icon={<CodeIcon className="h-5 w-5 text-cyan-400" />}
-          title="The Regression That Wasn't What It First Looked Like"
+          title="The Tool-Calling Regression"
         >
           <p className="text-slate-300 text-sm leading-relaxed mb-2">
             Hours after a routine upstream rebase, the 35B model started
@@ -262,21 +263,61 @@ export const InferenceModal: React.FC<InferenceModalProps> = ({
           </p>
         </SectionCard>
 
-        {/* Why this matters */}
-        <div className="bg-gradient-to-r from-cyan-950/30 to-blue-950/30 border border-cyan-500/20 rounded-xl p-5">
-          <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-            <LightBulbIcon className="h-5 w-5 text-cyan-400" />
-            Why This Is the Story Worth Telling
-          </h3>
+        {/* Patch health */}
+        <SectionCard
+          icon={<ClockIcon className="h-5 w-5 text-cyan-400" />}
+          title="Patch Health"
+        >
           <p className="text-slate-300 text-sm leading-relaxed">
-            The first diagnosis wasn't wrong because of sloppy work — it was the
-            best-supported conclusion given what had been checked at the time.
-            What made the difference was treating "pin the old binary" as a
-            workaround, not a closed investigation, and being willing to
-            overturn a week-old conclusion when better evidence pointed
-            somewhere else — including at code I'd written myself, not the
-            third-party dependency we assumed was at fault.
+            A hand-patched dependency is a maintenance liability if nobody's
+            watching it. A weekly check diffs the local patches against new
+            upstream commits before any rebase runs. On one real update, it
+            confirmed a 132-commit upstream pull touched a patched file but
+            not the actual patched lines, clearing the rebase as safe in
+            advance rather than hoping it was fine. The same check separately
+            found that 2 of 4 tracked patches weren't doing anything anymore —
+            one had been superseded by an upstream fix, the other was never
+            actually load-bearing. A patch set that only grows is a patch set
+            nobody's actually verifying.
           </p>
+        </SectionCard>
+
+        {/* What this demonstrates */}
+        <div className="bg-gradient-to-r from-cyan-950/30 to-blue-950/30 border border-cyan-500/20 rounded-xl p-5">
+          <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+            <LightBulbIcon className="h-5 w-5 text-cyan-400" />
+            What This Demonstrates
+          </h3>
+          <ul className="space-y-4 text-sm text-slate-400">
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-1">•</span>
+              <span>
+                <strong className="text-white">Benchmark discipline</strong> —
+                flags and config changes get measured on the actual target
+                chip before being trusted, because a flag's name doesn't tell
+                you what it does on hardware the project doesn't officially
+                support.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-1">•</span>
+              <span>
+                <strong className="text-white">Treating a fix as a workaround, not a close</strong> —
+                pinning the old binary solved the symptom immediately; the
+                investigation stayed open until the real cause turned up a
+                week later.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-1">•</span>
+              <span>
+                <strong className="text-white">Willingness to blame your own code</strong> —
+                the regression was eventually traced to a bug in my own agent
+                code, not the third-party dependency everyone assumed was at
+                fault.
+              </span>
+            </li>
+          </ul>
         </div>
 
         {/* Footer */}

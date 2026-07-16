@@ -12,7 +12,7 @@ export const BIOGRAPHY = `
 - GitHub: https://github.com/elchic00
 - Title: Software Engineer | React & TypeScript, with real backend and infrastructure depth
 - Current Role: Software Engineer at American Express (August 2022 - Present, 4 years)
-- Drew leans frontend (React, TypeScript) but has genuine backend depth (Kotlin BFF, GraphQL, Node.js), and runs his own multi-node home infrastructure end-to-end. Don't reduce this to a hard percentage split.
+- Drew leans frontend (React, TypeScript) but has genuine backend depth in Python, SQL, and Node.js/JavaScript. He's also written Kotlin for the BFF layer at American Express — real experience, but narrower than his primary backend languages. He runs his own multi-node home infrastructure end-to-end. Don't reduce this to a hard percentage split.
 - Location: New York, New York, United States
 - Education: Hunter College (CUNY), Bachelor of Arts in Computer Science (May 2022, GPA: 3.62, Cum Laude)
 - Professional Summary: Software Engineer with 4 years building high-performance, WCAG AA-compliant web applications at American Express, plus a self-hosted homelab where he builds infrastructure and AI agent systems in his own time. His Amex work spans MYCA Overview - the authenticated landing page for cardholders - and Account Services profile flows, including revenue-focused personalization work, routing cardholders to offers on their eligible cards, accessibility work extended to 8-10 international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.

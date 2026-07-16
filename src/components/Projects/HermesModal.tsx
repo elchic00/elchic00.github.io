@@ -29,7 +29,7 @@ export const HermesModal: React.FC<HermesModalProps> = ({ isOpen, onClose }) => 
             <span className="px-3 py-1 bg-amber-500/20 text-amber-300 text-xs font-medium rounded-full border border-amber-500/30">3-Node Homelab</span>
             <span className="px-3 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-medium rounded-full border border-cyan-500/30">Built on Nous Research's hermes-agent</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">I Taught My AI to Grade Its Own Work</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">Hermes: Self-Hosted, Self-Graded, Never Unsupervised</h2>
           <p className="text-slate-300 mt-2 text-sm sm:text-base">hermes-agent is the open-source harness — the eval loop, the infra, and the HITL gates are what I built around it</p>
         </div>
       </div>
@@ -71,7 +71,7 @@ export const HermesModal: React.FC<HermesModalProps> = ({ isOpen, onClose }) => 
         </SectionCard>
 
         {/* Eval loop - the concrete real run */}
-        <SectionCard icon={<BeakerIcon className="h-5 w-5 text-cyan-400" />} title="The Eval Loop, With a Real Run Behind It">
+        <SectionCard icon={<BeakerIcon className="h-5 w-5 text-cyan-400" />} title="The Eval Loop">
           <p className="text-slate-300 text-sm leading-relaxed mb-3">
             This part is mine, not the harness's: a cron job I wrote that pulls every conversation's execution trace
             from <strong className="text-white">Langfuse</strong> and has an LLM judge score it nightly on task
@@ -101,7 +101,7 @@ export const HermesModal: React.FC<HermesModalProps> = ({ isOpen, onClose }) => 
         </SectionCard>
 
         {/* Voice Relay */}
-        <SectionCard icon={<MicrophoneIcon className="h-5 w-5 text-cyan-400" />} title="A Voice Memo Becomes a Note Before I've Put My Phone Away">
+        <SectionCard icon={<MicrophoneIcon className="h-5 w-5 text-cyan-400" />} title="Voice Relay">
           <p className="text-slate-300 text-sm leading-relaxed mb-3">
             An iPhone Shortcut uploads a voice recording to a relay service, which sends it through WhisperX for
             transcription <em>with speaker diarization</em>, structures it with an LLM, writes it straight into the
@@ -116,19 +116,38 @@ export const HermesModal: React.FC<HermesModalProps> = ({ isOpen, onClose }) => 
           </p>
         </SectionCard>
 
-        {/* Why this matters */}
+        {/* What this demonstrates */}
         <div className="bg-gradient-to-r from-cyan-950/30 to-blue-950/30 border border-cyan-500/20 rounded-xl p-5">
-          <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+          <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
             <LightBulbIcon className="h-5 w-5 text-cyan-400" />
-            Why This Is the One Worth Asking About
+            What This Demonstrates
           </h3>
-          <p className="text-slate-300 text-sm leading-relaxed">
-            Most people who've used LLM APIs haven't operated agents in production long enough to need an eval loop,
-            let alone build one that caught its own bad recommendation. This platform runs unattended for weeks,
-            grades its own output, proposes changes to itself, and still asks permission before anything real happens —
-            the debugging discipline, the human-in-the-loop gates, and the willingness to reject a plausible-looking
-            automated fix are the parts of this job that don't show up in a demo.
-          </p>
+          <ul className="space-y-4 text-sm text-slate-400">
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-1">•</span>
+              <span>
+                <strong className="text-white">Operating discipline</strong> — the eval loop scores real usage every
+                night, not just at ship time, so quality regressions get caught in the ordinary course of running
+                the thing, not discovered later.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-1">•</span>
+              <span>
+                <strong className="text-white">Judgment over automation</strong> — the self-improvement loop
+                proposes changes, it doesn't apply them. One real run proposed a fix that sounded right and was
+                wrong for the context; catching that before it landed is the actual point of the human step.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-cyan-400 mt-1">•</span>
+              <span>
+                <strong className="text-white">Consistent trust boundaries</strong> — the same no-silent-actions
+                rule applies everywhere in the platform, from outreach emails to prompt patches to a voice-relay
+                endpoint that briefly slipped it and got fixed the day it was found.
+              </span>
+            </li>
+          </ul>
         </div>
 
         {/* Footer */}
