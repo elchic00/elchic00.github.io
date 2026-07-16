@@ -297,9 +297,9 @@ export const InferenceModal: React.FC<InferenceModalProps> = ({
               <span className="text-cyan-400 mt-1">•</span>
               <span>
                 <strong className="text-white">Willingness to blame your own code</strong> —
-                the regression was eventually traced to a bug in my own agent
-                code, not the third-party dependency everyone assumed was at
-                fault.
+                the well-evidenced first diagnosis pointed at the upstream
+                dependency; the regression was eventually traced to a bug in
+                my own agent code instead.
               </span>
             </li>
           </ul>
