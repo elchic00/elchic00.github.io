@@ -92,7 +92,11 @@ export const InferenceModal: React.FC<InferenceModalProps> = ({
           title="Architecture Overview"
         >
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            Four models resident at once on a{" "}
+            Running models locally instead of calling a hosted API means every
+            one of these calls is free and private, with nothing about how
+            they behave outside my control. The hand-patching is what it took
+            to make that fast enough to actually be worth it. Four models
+            resident at once on a{" "}
             <strong className="text-white">
               Framework Desktop (Ryzen AI Max+ 395, 128GB unified memory, Radeon
               gfx1151)

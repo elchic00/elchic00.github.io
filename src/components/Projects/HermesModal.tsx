@@ -39,11 +39,16 @@ export const HermesModal: React.FC<HermesModalProps> = ({ isOpen, onClose }) => 
         {/* Architecture Overview */}
         <SectionCard icon={<ChipIcon className="h-5 w-5 text-cyan-400" />} title="Architecture Overview">
           <p className="text-slate-300 text-sm leading-relaxed mb-4">
-            The agent runtime itself — <strong className="text-white">hermes-agent</strong> — is Nous Research's
+            None of this started as a plan — a Mac Mini for a new desktop, a Raspberry Pi to stop paying for SaaS,
+            then an inference box to wire it all together, and at some point three unrelated purchases became a
+            homelab running my own AI agents. It's not a demo account either: voice memos become structured notes
+            before I've put my phone away, and none of it needs me checking in on it manually. The agent runtime
+            itself — <strong className="text-white">hermes-agent</strong> — is Nous Research's
             open-source harness (MIT-licensed). I didn't write it; I deployed it, and I built the observability and
-            safety layer around it. It ships with cloud providers built in — Nous Portal, OpenRouter, OpenAI — and
-            I use none of them: every model call routes through LiteLLM to models I patched and serve myself (see
-            the Inference Engine card for that half of the story). Three machines, three jobs: a <strong className="text-white">Mac Mini M4</strong> runs
+            safety layer around it. It ships with cloud providers built in — Nous Portal, OpenRouter, OpenAI.
+            Local is the default: every routine model call goes through LiteLLM to models I patched and serve myself
+            (see the Inference Engine card for that half of the story). Cloud is a deliberate fallback, not an
+            afterthought — for anything sensitive, or when local hits its usage limit. Three machines, three jobs: a <strong className="text-white">Mac Mini M4</strong> runs
             the orchestrator, cron scheduler, and Telegram bot; reasoning routes over the LAN to
             the <strong className="text-white">Framework Desktop</strong>, the hand-patched local inference engine
             this platform actually runs on; a <strong className="text-white">Raspberry Pi 5</strong> handles network
