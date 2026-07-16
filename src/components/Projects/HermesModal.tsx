@@ -94,14 +94,21 @@ export const HermesModal: React.FC<HermesModalProps> = ({ isOpen, onClose }) => 
           </p>
         </SectionCard>
 
-        {/* HITL */}
-        <SectionCard icon={<ShieldCheckIcon className="h-5 w-5 text-cyan-400" />} title="Nothing Sends Without a Human">
-          <p className="text-slate-300 text-sm leading-relaxed">
+        {/* HITL + account isolation */}
+        <SectionCard icon={<ShieldCheckIcon className="h-5 w-5 text-cyan-400" />} title="Trust Boundaries">
+          <p className="text-slate-300 text-sm leading-relaxed mb-3">
             Every side-effecting action — an outreach email, a prompt patch, anything that leaves the system — follows
             the same shape: draft written to disk in a pending-review state, a Telegram prompt to the operator, a
             dry-run shown on approval, then an explicit confirm before it's real. No silent outbound actions,
             anywhere in the platform. It's the trust pattern enterprises actually require before they'll let an agent
             touch anything that matters.
+          </p>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Hermes and every local model it runs also sit under a separate, low-privileged macOS account from mine —
+            not for organization, for containment. If a model is manipulated by something it reads — a webpage, a
+            file, a prompt injection — the damage stops at that account; it can't pivot into my admin login or the
+            rest of the machine. The access only goes one direction: I can reach into the agent's world any time, it
+            can never reach back into mine.
           </p>
         </SectionCard>
 
