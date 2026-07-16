@@ -1,7 +1,6 @@
 import React from "react";
 import {
   ServerIcon,
-  ChartBarIcon,
   LightningBoltIcon,
   CodeIcon,
   LightBulbIcon,
@@ -141,52 +140,38 @@ export const InferenceModal: React.FC<InferenceModalProps> = ({
           </div>
         </SectionCard>
 
-        {/* Two fixes, side by side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <SectionCard
-            icon={<ServerIcon className="h-5 w-5 text-cyan-400" />}
-            title="The GTT Memory Bug"
-          >
-            <p className="text-slate-300 text-sm leading-relaxed">
-              Full GPU offload was capped for months — pushing past it didn't
-              just slow down, it fell off a cliff to a near-hang. Root cause: on
-              an APU there's no dedicated VRAM, so the GPU accesses system RAM
-              through the Graphics Translation Table, and ROCm's default{" "}
-              <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 text-xs">
-                mmap
-              </code>{" "}
-              region-pinning thrashed once the working set crossed a threshold.{" "}
-              <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 text-xs">
-                --direct-io
-              </code>{" "}
-              disables mmap for model loading and sidesteps it entirely — a
-              stable full 99-layer load, not just a faster one.
-            </p>
-          </SectionCard>
-
-          <SectionCard
-            icon={<ChartBarIcon className="h-5 w-5 text-cyan-400" />}
-            title="The rocWMMA Trap"
-          >
-            <p className="text-slate-300 text-sm leading-relaxed mb-3">
-              rocWMMA is usually a beneficial optimization on AMD GPUs — on this
-              specific chip it's a regression. Rebuilding with native tile
-              kernels instead (
-              <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 text-xs">
-                GGML_HIP_ROCWMMA_FATTN=OFF
-              </code>
-              ) gave roughly a{" "}
-              <strong className="text-white">
-                5x prefill (prompt-processing) speedup
-              </strong>{" "}
-              — 278 to 1,495 tok/s at 2k context — on the exact same hardware.
-            </p>
-            <p className="text-slate-400 text-xs italic">
-              The only way to know: benchmark on the actual target chip, not
-              trust a flag's name.
-            </p>
-          </SectionCard>
-        </div>
+        {/* Two GPU-specific fixes, consolidated */}
+        <SectionCard
+          icon={<ServerIcon className="h-5 w-5 text-cyan-400" />}
+          title="Two Fixes, Same Chip"
+        >
+          <p className="text-slate-300 text-sm leading-relaxed mb-3">
+            Two separate bugs were capping this GPU's performance, both fixed
+            with a build flag rather than new hardware. Full GPU offload used
+            to fall off a cliff into a near-hang past a certain point — the
+            cause was a memory-management quirk in how the driver shares
+            system RAM with the GPU on this chip (there's no dedicated VRAM
+            to work with). One flag (
+            <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 text-xs">
+              --direct-io
+            </code>
+            ) fixed it — a stable full-GPU load, not just a faster one.
+          </p>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            Separately, an optimization that helps on most AMD GPUs (
+            <code className="bg-slate-800 px-1.5 py-0.5 rounded text-cyan-300 text-xs">
+              rocWMMA
+            </code>
+            ) turned out to be a regression on this specific one. Disabling it
+            gave roughly a{" "}
+            <strong className="text-white">
+              5x jump in prompt-processing speed
+            </strong>{" "}
+            (278 → 1,495 tok/s at 2k context) on the exact same hardware. The
+            common thread: benchmark on the actual chip, don't trust what
+            "usually" works.
+          </p>
+        </SectionCard>
 
         {/* Speculative Decoding */}
         <SectionCard
