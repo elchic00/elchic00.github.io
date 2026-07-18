@@ -76,7 +76,7 @@ const featuredSystems: FeaturedSystem[] = [
     status: "dry-run protected",
     // Hermes is a real case-study modal now (see Pi-Cloud's identical pattern) —
     // route to it instead of straight to the contact form.
-    href: "/projects?open=hermes",
+    href: "/projects/hermes",
     linkLabel: "Inspect Hermes",
     accent: "amber",
   },
@@ -90,11 +90,9 @@ const featuredSystems: FeaturedSystem[] = [
     proof: ["DNS + identity", "Telemetry dashboard", "Recovery playbooks"],
     stack: ["Pi-hole", "Tailscale", "Prometheus"],
     status: piCloud?.subtitle ?? "High-performance edge gateway",
-    // Pi-Cloud is a private headless server, not a public repo — projects.json's
-    // `link` field is a placeholder GitHub URL that 404s. Route to the real
-    // write-up and auto-open PiCloudModal via the ?open= deep link, matching
-    // what "Inspect Pi-Cloud" actually promises.
-    href: "/projects?open=pi-cloud",
+    // Pi-Cloud is a private headless server, not a public repo — route to its
+    // case-study page instead of a GitHub URL.
+    href: "/projects/pi-cloud",
     linkLabel: "Inspect Pi-Cloud",
     accent: "cyan",
   },
