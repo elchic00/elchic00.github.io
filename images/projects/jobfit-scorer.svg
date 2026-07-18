@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="jobfit-title jobfit-desc">
   <title id="jobfit-title">Job-Fit Scorer — LangGraph scoring pipeline</title>
-  <desc id="jobfit-desc">Flow diagram of the job-fit scoring pipeline: nightly discovery polls 13 companies' ATS boards, thousands of raw postings are filtered to a prioritized queue, each role fans out into parallel requirement-level scoring nodes via LangGraph's Send API, and compiled fit reports sync into the live job-search tracker.</desc>
+  <desc id="jobfit-desc">Flow diagram of the job-fit scoring pipeline: nightly discovery polls 13 companies' ATS boards, thousands of raw postings are filtered to a prioritized queue, each role fans out into parallel requirement-level scoring nodes via LangGraph's Send API, and compiled fit reports sync into a durable, append-only tracker.</desc>
 
   <defs>
     <linearGradient id="bgJ" x1="0" y1="0" x2="1" y2="1">
@@ -68,8 +68,8 @@
     <line x1="905" y1="480" x2="905" y2="540" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrJ)"/>
     <rect x="670" y="545" width="470" height="120" rx="14" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
     <text x="690" y="580" fill="#22d3ee" font-size="14" font-weight="700" letter-spacing="2">SYNC</text>
-    <text x="690" y="610" fill="#e2e8f0" font-size="16">Prioritized queue feeds the live job-search tracker —</text>
-    <text x="690" y="634" fill="#e2e8f0" font-size="16">the same one interviews are run from.</text>
+    <text x="690" y="610" fill="#e2e8f0" font-size="16">Prioritized queue feeds a durable tracker —</text>
+    <text x="690" y="634" fill="#e2e8f0" font-size="16">an append-only log of every scored role.</text>
   </g>
 
   <!-- footer stats -->
