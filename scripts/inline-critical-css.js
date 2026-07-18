@@ -19,10 +19,12 @@ const CASE_STUDIES = projects.filter((p) => p.link.startsWith('/projects/'));
 // Per-project social preview image, for the case studies that have a real
 // screenshot. Anything not listed here keeps the site-wide default
 // (profile.webp) rather than a broken/missing image.
+// Uses .jpg specifically (not the on-page .webp) because LinkedIn's
+// link-preview crawler doesn't reliably render WebP og:image previews.
 const SOCIAL_IMAGES = {
-  hermes: { file: 'hermes-langfuse-traces.webp', width: 1600, height: 818 },
-  'inference-engine': { file: 'inference-grafana.webp', width: 1600, height: 936 },
-  'pi-cloud': { file: 'pi-cloud-homepage.webp', width: 1600, height: 586 },
+  hermes: { file: 'hermes-langfuse-traces.jpg', width: 1600, height: 818 },
+  'inference-engine': { file: 'inference-grafana.jpg', width: 1600, height: 936 },
+  'pi-cloud': { file: 'pi-cloud-homepage.jpg', width: 1600, height: 586 },
 };
 
 // Critical CSS for above-the-fold content (navbar, hero section)
@@ -202,6 +204,7 @@ function createCaseStudyRouteDirectories(html) {
         const imageUrl = `https://elchic00.github.io/images/case-studies/${socialImage.file}`;
         const imageAlt = `${project.title} — ${project.subtitle}`;
         routeHtml = replaceMetaContent(routeHtml, /(property="og:image" content=")[^"]*(")/, imageUrl);
+        routeHtml = replaceMetaContent(routeHtml, /(property="og:image:type" content=")[^"]*(")/, 'image/jpeg');
         routeHtml = replaceMetaContent(routeHtml, /(property="og:image:width" content=")[^"]*(")/, String(socialImage.width));
         routeHtml = replaceMetaContent(routeHtml, /(property="og:image:height" content=")[^"]*(")/, String(socialImage.height));
         routeHtml = replaceMetaContent(routeHtml, /(property="og:image:alt"[\s\S]*?content=")[^"]*(")/, imageAlt);

@@ -26,7 +26,10 @@ const config = {
     // near-native width so text stays legible, unlike the 800px thumbnail tier.
     maxWidth: 1600,
     quality: 85,
-    formats: ["webp"],
+    // jpeg alongside webp: LinkedIn's link-preview crawler doesn't reliably
+    // render WebP og:image previews, so social meta tags use the jpeg while
+    // the on-page <Figure> keeps using the smaller webp.
+    formats: ["webp", "jpeg"],
   },
 };
 
