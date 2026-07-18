@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N3VW9YXQ2K"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      // Only track in production (excludes localhost and 127.0.0.1)
-      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-        gtag('config', 'G-N3VW9YXQ2K');
-      }
+    <!-- Single Page Apps for GitHub Pages - Redirect Handling -->
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // MIT License
+      // https://github.com/rafgraph/spa-github-pages
+      // This script checks to see if a redirect is present in the query string,
+      // converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
     </script>
+
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/logo192.png" />
@@ -100,12 +112,116 @@
     <!-- Performance: Preconnect to external domains -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://unpkg.com" crossorigin />
-    <link rel="dns-prefetch" href="https://unpkg.com" />
+
+    <!-- Logo/wordmark font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet" />
     <link rel="preconnect" href="https://cdn.counter.dev" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.counter.dev" />
 
+    <!-- Preload critical LCP images -->
+    <link rel="preload" as="image" href="/images/nyc-sunset-1280.webp" imagesrcset="/images/nyc-sunset-640.webp 640w, /images/nyc-sunset-960.webp 960w, /images/nyc-sunset-1280.webp 1280w, /images/nyc-sunset-1920.webp 1920w" imagesizes="100vw" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/profile-460.webp" imagesrcset="/images/profile-320.webp 320w, /images/profile-460.webp 460w, /images/profile-640.webp 640w, /images/profile-920.webp 920w" imagesizes="(max-width: 640px) 80vw, 460px" type="image/webp" fetchpriority="high" />
+
     <title>Andrew Alagna - Software Engineer</title>
+
+    <!-- First-paint shell shown only until React mounts. Keep this self-contained. -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #020617;
+      }
+
+      .portfolio-boot {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        min-height: 100dvh;
+        overflow: hidden;
+        color: #f8fafc;
+        background:
+          radial-gradient(circle at 50% 42%, rgba(34, 211, 238, 0.14), transparent 34rem),
+          #020617;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        text-align: center;
+      }
+
+      .portfolio-boot__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      .portfolio-boot__mark {
+        display: grid;
+        width: 4rem;
+        height: 4rem;
+        place-items: center;
+        border: 1px solid rgba(103, 232, 249, 0.35);
+        border-radius: 1.125rem;
+        background: rgba(8, 145, 178, 0.1);
+        box-shadow: 0 0 2.5rem rgba(34, 211, 238, 0.12);
+        color: #a5f3fc;
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+
+      .portfolio-boot__name {
+        margin: 1.25rem 0 0;
+        font-size: clamp(1.35rem, 4vw, 1.75rem);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+      }
+
+      .portfolio-boot__role {
+        margin: 0.4rem 0 0;
+        color: #94a3b8;
+        font-size: 0.875rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .portfolio-boot__line {
+        position: relative;
+        width: 5rem;
+        height: 2px;
+        margin-top: 1.5rem;
+        overflow: hidden;
+        border-radius: 999px;
+        background: rgba(103, 232, 249, 0.16);
+      }
+
+      .portfolio-boot__line::after {
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(90deg, transparent, #22d3ee, transparent);
+        content: "";
+        transform: translateX(-100%);
+        animation: portfolio-boot-line 900ms ease-in-out 150ms infinite;
+      }
+
+      @keyframes portfolio-boot-line {
+        to {
+          transform: translateX(100%);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .portfolio-boot__line::after {
+          animation: none;
+          transform: none;
+        }
+      }
+    </style>
 
     <!-- Enhanced Schema.org structured data for SEO -->
     <script type="application/ld+json">
@@ -182,7 +298,7 @@
       }
     </script>
 
-    <!-- Breadcrumb Schema -->
+    <!-- Breadcrumb Schema - Updated for real routes (no hash URLs) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -198,13 +314,13 @@
             "@type": "ListItem",
             "position": 2,
             "name": "Projects",
-            "item": "https://elchic00.github.io/#/projects"
+            "item": "https://elchic00.github.io/projects"
           },
           {
             "@type": "ListItem",
             "position": 3,
             "name": "Travel Photography",
-            "item": "https://elchic00.github.io/#/travel"
+            "item": "https://elchic00.github.io/travel"
           }
         ]
       }
@@ -251,54 +367,37 @@
       }
     </script>
 
+    <!-- Self-hosted ionicons (eliminates unpkg critical request chain) -->
+    <script type="module" src="/ionicons-esm.js" async></script>
+
+    <!-- Deferred analytics scripts to reduce TBT -->
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-N3VW9YXQ2K"></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // Only track in production (excludes localhost and 127.0.0.1)
+      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        gtag('config', 'G-N3VW9YXQ2K');
+      }
+    </script>
+
     <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-      async
-    ></script>
-    <script
+      defer
       src="https://cdn.counter.dev/script.js"
       data-id="39a7b209-2d53-4a48-a0b9-77ee7f398a83"
       data-utcoffset="-4"
-      async
     ></script>
-    <script type="module" crossorigin src="/assets/index-CN4bCxRS.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/react-vendor-x87M9gX4.js">
-    <link rel="modulepreload" crossorigin href="/assets/markdown-vendor-CE0LcYy3.js">
-    
-<style>
-/* Critical CSS - Inlined for performance */
-*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}
-html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}
-body{margin:0;line-height:inherit}
-#root{min-height:100vh}
-.bg-slate-950{background-color:#020617}
-.text-slate-200{color:#e2e8f0}
-.bg-slate-800/95{background-color:rgba(30,41,59,.95)}
-.backdrop-blur-md{backdrop-filter:blur(12px)}
-.fixed{position:fixed}
-.top-0{top:0}
-.left-0{left:0}
-.z-50{z-index:50}
-.w-full{width:100%}
-.shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1)}
-.flex{display:flex}
-.items-center{align-items:center}
-.justify-between{justify-content:space-between}
-.py-3{padding-top:.75rem;padding-bottom:.75rem}
-.px-4{padding-left:1rem;padding-right:1rem}
-.scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
-.scrollbar-hide::-webkit-scrollbar{display:none}
-/* Loading state */
-#root>div{font-family:sans-serif;text-align:center;padding:2rem}
-</style>
-
-    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin href="/assets/index-BTTOQIey.css">
-    <noscript><link rel="stylesheet" crossorigin href="/assets/index-BTTOQIey.css"></noscript>
+    <script type="module" crossorigin src="/assets/index-C6Ji8Hks.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/react-vendor-CqPR5u_r.js">
+    <link rel="modulepreload" crossorigin href="/assets/markdown-vendor-BtwvP2vC.js">
+    <link rel="modulepreload" crossorigin href="/assets/analytics-CbY8X2g3.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-CNf6qRom.css">
   </head>
   <body>
     <noscript>
-      <div style="font-family: sans-serif; text-align: center; padding: 2rem">
+      <div style="font-family:sans-serif;text-align:center;padding:2rem;background:#0a0a0a;color:#e5e5e5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0">
         <h1>Welcome to Andrew Alagna's Portfolio</h1>
         <p>Andrew Alagna - Software Engineer at American Express</p>
         <p>
@@ -312,9 +411,18 @@ body{margin:0;line-height:inherit}
       </div>
     </noscript>
     <div id="root">
-      <div style="font-family: sans-serif; text-align: center; padding: 2rem">
-        <h1>Loading Andrew Alagna's Portfolio...</h1>
-        <p>Andrew Alagna - Software Engineer</p>
+      <div
+        class="portfolio-boot"
+        role="status"
+        aria-busy="true"
+        aria-label="Loading Andrew Alagna's portfolio"
+      >
+        <div class="portfolio-boot__content" aria-hidden="true">
+          <div class="portfolio-boot__mark">AA</div>
+          <p class="portfolio-boot__name">Andrew Alagna</p>
+          <p class="portfolio-boot__role">Software Engineer</p>
+          <div class="portfolio-boot__line"></div>
+        </div>
       </div>
     </div>
   </body>

@@ -1,0 +1,54 @@
+[
+  {
+    "title": "Hermes",
+    "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
+    "description": "Nous Research's hermes-agent is the open-source (MIT) agent harness - not written by Andrew. What he built is what's wrapped around it: routing every model call to self-hosted local models instead of the cloud providers it ships with, a nightly Langfuse eval loop, a weekly self-improvement cron that clusters its own low-quality turns and proposes prompt edits (one real run: 3 proposals, 2 applied, 1 correctly rejected), and human-in-the-loop approval gates before any side-effecting action executes.",
+    "image": "/images/projects/hermes.svg",
+    "link": "/projects",
+    "id": "hermes",
+    "technologies": ["hermes-agent", "Langfuse", "LiteLLM", "Telegram", "HITL", "Evals", "WhisperX"]
+  },
+  {
+    "title": "Pi-Cloud",
+    "subtitle": "Private Infrastructure + Service Operations",
+    "description": "A Raspberry Pi 5 that runs private services for photos, passwords, documents, DNS filtering, remote access, monitoring, and recovery. It is operated with clear service boundaries, no public ports, health checks, and backups designed to be restored when something fails. Not a public repo - it is a physical private server, not something with a GitHub link.",
+    "image": "/images/projects/pi-cloud.webp",
+    "link": "/projects",
+    "id": "pi-cloud",
+    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "Immich", "Vaultwarden", "Paperless-ngx", "Raspberry Pi"]
+  },
+  {
+    "title": "myPal",
+    "subtitle": "AAC App Prototype (2021, not actively maintained)",
+    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays. Built in 2021 - a meaningful project, but not something actively maintained today.",
+    "image": "/images/projects/mypal-demo.mp4",
+    "link": "https://github.com/myPal-TMS/myPal",
+    "id": "mypal",
+    "githubStats": {
+      "stars": 1,
+      "forks": 2,
+      "languages": ["JavaScript", "Java", "Objective-C", "Ruby", "Starlark"],
+      "topics": [],
+      "lastUpdated": "2021-08-27T13:32:32Z"
+    },
+    "readmeSummary": "## MyPAL (Picture Assisted Language) App\\r\\n\\r\\nAn Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays communicate..."
+  },
+  {
+    "title": "Inference Engine",
+    "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
+    "description": "A hand-patched llama.cpp build serving four local models (two text, vision, speech-to-text) on a Framework Desktop's APU - hardware the project doesn't officially support. Powers every local agentic workflow, reachable remotely over Telegram. Fixed a GPU memory-allocator bug capping offload, found a 5x prefill win by disabling a kernel path that's a regression on this specific chip, and traced a tool-calling regression to a one-line bug in the agent's own code, not the dependency everyone assumed was at fault. Not a public repo for the patches themselves - this write-up is the first public artifact.",
+    "image": "/images/projects/inference-engine.svg",
+    "link": "/projects",
+    "id": "inference-engine",
+    "technologies": ["llama.cpp", "ROCm", "HIP", "GGML", "Speculative Decoding", "LiteLLM", "Langfuse"]
+  },
+  {
+    "title": "AI Chat Assistant",
+    "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Structured Context",
+    "description": "The chat widget on this site. A serverless Cloudflare Worker rate-limits requests and calls Gemini 2.5 Flash with the complete, compact project reference sheet plus the portfolio context. The corpus is intentionally small enough to fit in the prompt, so there is no vector database or retrieval step. Runs on free tiers end to end - $0/month. The model's response can include action markers the frontend turns into real buttons (open resume, jump to a section). Public repo - same one as this site.",
+    "image": "/images/projects/elchic00-chatbot.svg",
+    "link": "https://github.com/elchic00/elchic00.github.io",
+    "id": "elchic00-chatbot",
+    "technologies": ["Gemini 2.5 Flash", "Cloudflare Workers", "Structured Context", "Serverless"]
+  }
+]

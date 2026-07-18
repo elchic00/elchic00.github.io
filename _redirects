@@ -1,0 +1,12 @@
+# GitHub Pages SPA Routing Support
+# This ensures deep links work correctly when users refresh or share URLs
+# Format: source destination status_code
+
+# Redirect trailing slashes to non-trailing (canonical URLs)
+/projects/ /projects 301
+/travel/ /travel 301
+/snake/ /snake 301
+
+# SPA fallback - if a file/directory doesn't exist, serve index.html
+# This handles client-side routing for React Router
+/* /index.html 200

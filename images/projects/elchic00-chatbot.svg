@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="chat-title chat-desc">
+  <title id="chat-title">elchic00 Chat Assistant — request flow from browser to response</title>
+  <desc id="chat-desc">Diagram of the request flow: Browser sends a POST to a Cloudflare Worker, which adds a complete compact portfolio project reference sheet to the prompt sent to Gemini 2.5 Flash. Stats below: 5 requests per minute per IP, 1,500 requests per day on Gemini's free tier, 100,000 requests per day on Cloudflare's free tier, $0 per month.</desc>
+
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </linearGradient>
+    <pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="1" opacity="0.35"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="750" fill="url(#bg2)"/>
+  <rect width="1200" height="750" fill="url(#grid2)"/>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+
+    <!-- eyebrow badges -->
+    <rect x="48" y="40" width="382" height="34" rx="17" fill="#0f172a" stroke="#22d3ee" stroke-opacity="0.35"/>
+    <text x="239" y="62" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.2" fill="#67e8f9">GEMINI 2.5 FLASH &#183; CLOUDFLARE WORKERS</text>
+    <rect x="820" y="40" width="332" height="34" rx="17" fill="#0f172a" stroke="#fbbf24" stroke-opacity="0.35"/>
+    <text x="986" y="62" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.2" fill="#fbbf24">$0 / MONTH &#183; SERVERLESS</text>
+
+    <!-- title -->
+    <text x="600" y="118" text-anchor="middle" font-size="14" letter-spacing="2" fill="#94a3b8">REQUEST FLOW &#8212; BROWSER TO RESPONSE</text>
+
+    <!-- Box 1: Browser -->
+    <rect x="60" y="210" width="230" height="100" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="175" y="255" text-anchor="middle" font-size="18" font-weight="700" fill="#e2e8f0">BROWSER</text>
+    <text x="175" y="278" text-anchor="middle" font-size="11" fill="#64748b">React chat widget</text>
+
+    <!-- Arrow 1 -->
+    <line x1="290" y1="260" x2="480" y2="260" stroke="#22d3ee" stroke-width="2"/>
+    <polygon points="480,260 468,254 468,266" fill="#22d3ee"/>
+    <text x="385" y="243" text-anchor="middle" font-size="11" fill="#67e8f9">POST /api/chat</text>
+
+    <!-- Box 2: Cloudflare Worker -->
+    <rect x="485" y="200" width="230" height="120" rx="8" fill="#0f172a" stroke="#22d3ee" stroke-opacity="0.5"/>
+    <text x="600" y="240" text-anchor="middle" font-size="17" font-weight="700" fill="#67e8f9">CLOUDFLARE</text>
+    <text x="600" y="260" text-anchor="middle" font-size="17" font-weight="700" fill="#67e8f9">WORKER</text>
+    <text x="600" y="285" text-anchor="middle" font-size="11" fill="#94a3b8">rate limit + validation</text>
+    <text x="600" y="300" text-anchor="middle" font-size="11" fill="#64748b">complete project reference</text>
+
+    <!-- Arrow 2 -->
+    <line x1="715" y1="260" x2="895" y2="260" stroke="#22d3ee" stroke-width="2"/>
+    <polygon points="895,260 883,254 883,266" fill="#22d3ee"/>
+    <text x="805" y="235" text-anchor="middle" font-size="11" fill="#67e8f9">structured context</text>
+    <text x="805" y="248" text-anchor="middle" font-size="11" fill="#67e8f9">+ chat history</text>
+
+    <!-- Box 3: Gemini -->
+    <rect x="900" y="210" width="240" height="100" rx="8" fill="#0f172a" stroke="#334155"/>
+    <text x="1020" y="250" text-anchor="middle" font-size="16" font-weight="700" fill="#e2e8f0">GEMINI 2.5</text>
+    <text x="1020" y="270" text-anchor="middle" font-size="16" font-weight="700" fill="#e2e8f0">FLASH</text>
+    <text x="1020" y="292" text-anchor="middle" font-size="11" fill="#64748b">response + actions</text>
+
+    <!-- stat row -->
+    <line x1="60" y1="355" x2="1140" y2="355" stroke="#1e293b" stroke-width="1"/>
+
+    <text x="175" y="392" text-anchor="middle" font-size="22" font-weight="800" fill="#fbbf24">5/min</text>
+    <text x="175" y="410" text-anchor="middle" font-size="11" letter-spacing="1" fill="#64748b">RATE LIMIT PER IP</text>
+
+    <text x="480" y="392" text-anchor="middle" font-size="22" font-weight="800" fill="#67e8f9">1,500/day</text>
+    <text x="480" y="410" text-anchor="middle" font-size="11" letter-spacing="1" fill="#64748b">GEMINI FREE TIER</text>
+
+    <text x="785" y="392" text-anchor="middle" font-size="22" font-weight="800" fill="#67e8f9">100K/day</text>
+    <text x="785" y="410" text-anchor="middle" font-size="11" letter-spacing="1" fill="#64748b">CLOUDFLARE FREE TIER</text>
+
+    <text x="1060" y="392" text-anchor="middle" font-size="22" font-weight="800" fill="#fbbf24">$0</text>
+    <text x="1060" y="410" text-anchor="middle" font-size="11" letter-spacing="1" fill="#64748b">MARGINAL COST</text>
+  </g>
+</svg>
