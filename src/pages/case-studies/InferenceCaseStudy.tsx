@@ -114,6 +114,16 @@ const InferenceCaseStudy = () => (
         close, and being willing to overturn a week-old conclusion when the evidence pointed at my
         own code instead of the dependency everyone had assumed was at fault.
       </p>
+      <p>
+        That fix turned out to be necessary but not sufficient. I switched the 35B model back onto
+        the current build once the fix had one clean production run behind it. Less than 12 hours
+        later, the first long, multi-step tool-calling chain on the new build reproduced the exact
+        same hallucinated-tool-call symptom — <code>reasoning_content</code> was present and
+        growing as expected, so the fix was doing its job, but something else on the current build
+        still breaks under longer chains specifically. I reverted 35B back to the pinned old binary
+        the same day. No further switch-back is planned until a second, still-unidentified factor
+        is actually found — a longer soak alone isn't the bar anymore, a real root cause is.
+      </p>
     </Callout>
 
     <Section title="Observability">
@@ -140,12 +150,16 @@ const InferenceCaseStudy = () => (
 
     <Section title="Honest Limitations">
       <p>
-        This isn't fully closed out. The 35B and vision models are still pinned to the pre-rebase
-        binary, deliberately — I'm gating the move back to the current build on a multi-day soak
-        of the <code>reasoning_content</code> fix under real multi-tool usage, not just a clean
-        smoke test. I never ran a full <code>git bisect</code> across the original 132-commit
-        range; once the root cause traced to my own code, it became moot. And there's no public
-        repo or sanitized patch set yet — this write-up is step one toward that.
+        This isn't fully closed out. The <code>reasoning_content</code> fix is real and
+        necessary — it's why the bug no longer reproduces on short exchanges — but a same-day
+        switch-back attempt proved it isn't sufficient on its own: the hallucinated-tool-call
+        symptom came back on the current build within 12 hours, on a longer tool-calling chain.
+        The 35B and vision models stay pinned to the pre-rebase binary indefinitely now, with no
+        further switch-back planned until a second contributing factor is actually identified —
+        a longer soak alone isn't the bar anymore. I never ran a full <code>git bisect</code>{" "}
+        across the original 132-commit range; once the first root cause traced to my own code it
+        looked moot, and now looks necessary-but-incomplete instead. And there's no public repo or
+        sanitized patch set yet — this write-up is step one toward that.
       </p>
     </Section>
   </CaseStudyLayout>

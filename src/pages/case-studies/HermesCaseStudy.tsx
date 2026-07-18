@@ -96,17 +96,21 @@ const HermesCaseStudy = () => (
     <Section title="Honest Limitations">
       <ul>
         <li>
-          The 27B model is bandwidth-bound at roughly 12 tokens/sec — a memory-bandwidth limit of
-          the hardware, not a config problem I can tune away. A smaller quant would trade quality
-          for speed; I haven't made that trade.
+          The 27B model is bandwidth-bound — plain decode floors at 7.4 tokens/sec. Speculative
+          decoding (MTP, detailed on the Inference Engine page) already recovers most of that gap
+          to roughly 10 tokens/sec average, peaking near 19–24 t/s on structured output; a smaller
+          quant would trade quality for more speed beyond that, and I haven't made that trade.
         </li>
         <li>
           Vector memory (mem0-oss + ChromaDB) didn't work well enough to keep — recall accuracy was
           too low, and I replaced it with the simpler files-first approach above.
         </li>
         <li>
-          A prior MCP bridge between Hermes and other tooling was dropped as redundant once
-          direct vault access and eval scripts covered the same ground — one less moving part.
+          Two Obsidian <code>vault_patch</code> operations caused real data loss: replacing a
+          heading wiped everything nested under it instead of just the next paragraph, and
+          patching frontmatter on a file with empty frontmatter wiped the whole body. Both are
+          fixed and documented now — patches default to append/prepend, and every patch gets
+          verified against a before/after heading count instead of trusting a bare "OK" response.
         </li>
         <li>
           This is a solo homelab project, not a customer deployment: real scale, multi-tenant

@@ -4,7 +4,7 @@ const JobfitCaseStudy = () => (
   <CaseStudyLayout
     title="Job-Fit Scorer"
     subtitle="A LangGraph pipeline that discovers, filters, and scores real job postings against my own portfolio — calibrated to tell me no, not to flatter me."
-    tech={["LangGraph", "Python", "FastAPI", "Pydantic", "Langfuse", "SQLite", "pytest", "Send API", "LLM-as-Judge", "Local Inference"]}
+    tech={["LangGraph", "Python", "FastAPI", "Pydantic", "Langfuse", "SQLite", "pytest", "Codex CLI", "LLM-as-Judge", "Local Inference"]}
   >
     <Section title="The Problem">
       <p>
@@ -38,10 +38,11 @@ const JobfitCaseStudy = () => (
         What's left runs through a LangGraph state graph: <code>fetch_posting</code> →{" "}
         <code>extract_requirements</code> → <code>batch_score_requirements</code> →{" "}
         <code>staged_prose</code> → <code>compile_report</code>, with every stage typed against a
-        Pydantic model — requirements, scores, talking points, final report. Scoring uses
-        LangGraph's <code>Send</code> API to fan work out in parallel rather than looping
-        sequentially through requirements, and every parallel node gets its own span in a
-        dedicated Langfuse project, tagged by ATS provider and company. <code>fetch_posting</code>{" "}
+        Pydantic model — requirements, scores, talking points, final report. Scoring batches
+        every extracted requirement into one call per posting keyed by stable requirement IDs,
+        instead of the original design's one-LLM-call-per-requirement fan-out, and every stage
+        gets its own span in a dedicated Langfuse project, tagged by ATS provider and company.{" "}
+        <code>fetch_posting</code>{" "}
         and <code>compile_report</code> are plain, fully-unit-tested code with no LLM in the loop;
         everything that does touch an LLM is schema-validated, cached by posting-content hash, and
         retried narrowly instead of replayed wholesale on failure. A FastAPI endpoint and CLI sit
@@ -85,6 +86,18 @@ const JobfitCaseStudy = () => (
           actually serve in parallel, and let the queue do its job instead of fighting it.
         </p>
       </Callout>
+      <Callout title="The bug that wasn't the permissions issue everyone assumed">
+        <p>
+          Both live crons crashed one morning with <code>attempt to write a readonly database</code>.
+          The obvious suspect was the dual-account ownership hazard this homelab already has a
+          playbook for — but that wasn't it. The real cause was structural: the database ran
+          unconditional <code>DROP INDEX</code>/<code>CREATE INDEX</code> DDL on every single open,
+          so any permission flip anywhere crashed every entrypoint, including ones that were
+          logically read-only. Fixed by gating all schema work behind{" "}
+          <code>PRAGMA user_version</code> — a healthy database now runs zero DDL on open, so a
+          stray permission flip can't take down a read path again.
+        </p>
+      </Callout>
     </Section>
 
     <Section title="Results & Scale">
@@ -113,11 +126,16 @@ const JobfitCaseStudy = () => (
     <Section title="Honest Limitations">
       <ul>
         <li>
-          <strong>Single-user by design.</strong> The original build hard-coded one evidence
-          document and one set of geography/company rules into module constants. A later rewrite
-          split that into a reusable engine plus per-user config, evidence profile, and state
-          directory with a provider-neutral inference interface — but true multi-tenant support
-          (auth, isolation guarantees for a stranger's data) is still open scope, not shipped.
+          <strong>Portable, not multi-tenant.</strong> The original build hard-coded one evidence
+          document and one set of geography/company rules into module constants. A rewrite split
+          that into a reusable engine with per-user config, evidence profile, and state directory
+          behind a provider-neutral inference interface — including an experimental Codex CLI
+          backend as an alternative to bringing your own API key, which needed a real fix (OpenAI's
+          strict-JSON-schema contract requires <code>additionalProperties: false</code> on every
+          nested object) before a Codex-backed score would complete end to end. That engine now
+          ships in its own private repo with CI and a fresh-install test proving it runs with zero
+          Hermes or Obsidian dependencies. True multi-tenant hosting — auth, isolation guarantees
+          for a stranger's data — is a different, larger project I haven't started.
         </li>
         <li>
           <strong>Repo is private for now.</strong> The original research repo stays that way —
