@@ -19,8 +19,8 @@ export const HomePage = () => {
       <About />
       <HomeProofBand />
       <FeaturedSystems />
-      <AccessibilityExpertise />
       <Experience />
+      <AccessibilityExpertise />
       <Skills />
       <Contact />
     </>

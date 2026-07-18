@@ -67,8 +67,8 @@ const ChatbotCaseStudy = () => (
         actually solves the problem.
       </p>
       <p>
-        That's partly a scale argument. There are five project records. A vector index for
-        five documents is solving a problem I don't have. Keyword scoring over a corpus
+        That's partly a scale argument. There are six project records. A vector index for
+        six documents is solving a problem I don't have. Keyword scoring over a corpus
         that small runs synchronously inside the Worker in microseconds, and because the
         corpus is so small, the scored results and "just include everything" end up looking
         almost identical in practice — which is itself the finding. Embeddings earn their

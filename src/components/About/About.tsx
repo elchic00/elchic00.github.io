@@ -37,24 +37,25 @@ export const About = () => {
             style={{ backgroundColor: "rgba(2, 6, 23, 0.96)" }}
           >
             <p className="animate-fade-in-delay-2 mb-4 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-200">
-              Drew Alagna · NYC builder · accessibility-first engineer
+              Drew Alagna · NYC builder · AI-systems engineer
             </p>
 
             <h1 className="animate-fade-in-delay-3 mb-6 text-4xl font-black leading-[0.98] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              I build accessible web systems — and practical AI workflows.
+              I build practical AI systems — and accessible web experiences.
             </h1>
 
             <p className="animate-fade-in-delay-3 mb-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
-              I turn messy product constraints into shipped interfaces that real
-              people use, and self-hosted infrastructure in production reliable
-              enough to run my own life on. The work spans enterprise fintech
-              at American Express and five years of engineering mentorship.
+              I run self-hosted AI infrastructure in production reliable enough
+              to run my own life on, and turn messy product constraints into
+              shipped interfaces that real people use. The work spans enterprise
+              fintech at American Express and five years of engineering
+              mentorship.
             </p>
 
             <div className="animate-fade-in-delay-3 mb-7 grid gap-3 text-left sm:grid-cols-3">
               {[
-                "100% WCAG AA compliance",
                 "Self-hosted AI agents",
+                "100% WCAG AA compliance",
                 "Travel + bouldering",
               ].map((proof) => (
                 <p

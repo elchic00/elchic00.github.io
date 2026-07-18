@@ -120,9 +120,11 @@ const JobfitCaseStudy = () => (
           (auth, isolation guarantees for a stranger's data) is still open scope, not shipped.
         </li>
         <li>
-          <strong>Repo is private for now.</strong> Its Git history carries real personal evidence
-          content that can't simply be <code>.gitignore</code>d after the fact, so it needs a
-          sanitization pass before it's public. Code is available on request in the meantime.
+          <strong>Repo is private for now.</strong> The original research repo stays that way —
+          its Git history carries real personal evidence content that can't simply be{" "}
+          <code>.gitignore</code>d after the fact. The portable engine was re-seeded into a
+          separate repo with a clean, sanitized history, so opening it up is a decision rather
+          than a cleanup job. Code is available on request in the meantime.
         </li>
         <li>
           <strong>CI is recent, not original.</strong> The portable release now runs the mocked

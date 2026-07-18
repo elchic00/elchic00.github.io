@@ -21,7 +21,6 @@ const findProject = (id: string) =>
   projects.find((project) => project.id === id);
 
 const piCloud = findProject("pi-cloud");
-const myPal = findProject("mypal");
 
 const accentClasses: Record<
   FeaturedSystem["accent"],
@@ -97,18 +96,17 @@ const featuredSystems: FeaturedSystem[] = [
     accent: "cyan",
   },
   {
-    title: myPal?.title ?? "myPal",
-    eyebrow: "Assistive tech / offline-first AAC",
+    title: "Inference Engine",
+    eyebrow: "Local LLM serving / GPU systems",
     value:
-      "AAC support designed around low-resource constraints, limited connectivity, and real motor-access needs.",
-    metric: "Offline",
-    metricLabel: "first communication",
-    proof: ["Large touch targets", "SQLite persistence", "iOS / Android parity"],
-    stack: ["React Native", "SQLite", "AAC UX"],
-    // Built 2021, dormant since — unlike the other three systems here.
-    status: "2021 prototype, not actively maintained",
-    href: myPal?.link ?? "/projects",
-    linkLabel: "Inspect myPal",
+      "A hand-patched llama.cpp build serving four models on GPU hardware the project doesn't officially support — every call traced and nightly graded.",
+    metric: "47.8 t/s",
+    metricLabel: "35B generation, full GPU offload",
+    proof: ["Allocator bug fixed at the source", "Speculative decoding (+81% draft acceptance)", "Nightly LLM-as-judge evals"],
+    stack: ["llama.cpp", "ROCm", "Langfuse"],
+    status: "serving every agent workflow here",
+    href: "/projects/inference-engine",
+    linkLabel: "Inspect the engine",
     accent: "purple",
   },
   {
@@ -153,7 +151,7 @@ export const FeaturedSystems = () => {
             id="featured-systems-title"
             className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl"
           >
-            Four systems, from prototype to production.
+            Four systems, all running in production.
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             Four shipped surfaces that show the same operating pattern:
