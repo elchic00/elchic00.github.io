@@ -93,9 +93,24 @@ curl -s "$KUMA_URL"`;
 
         {/* 2. UX: The Single Pane of Glass */}
         <SectionCard icon={<ChartBarIcon className="h-5 w-5 text-cyan-400" />} title="The Operational View">
-          <p className="text-slate-300 text-sm leading-relaxed">
+          <p className="text-slate-300 text-sm leading-relaxed mb-4">
             A <strong>Homepage</strong> dashboard puts service health beside the signals that matter when the machine is under load: CPU, thermals, RAM, storage, and recent maintenance. It does not remove complexity; it makes the state visible enough to act on before a small problem becomes a broken service.
           </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {[
+              { src: "/images/projects/grafana-homelab-overview.png", alt: "Grafana dashboard showing homelab resource usage across nodes" },
+              { src: "/images/projects/grafana-crowdsec-security.png", alt: "Grafana dashboard showing CrowdSec intrusion-prevention bans and activity" },
+              { src: "/images/projects/grafana-inference-health.png", alt: "Grafana dashboard showing local LLM inference health and throughput" },
+            ].map((img) => (
+              <img
+                key={img.src}
+                src={img.src}
+                alt={img.alt}
+                loading="lazy"
+                className="w-full rounded-lg border border-slate-800 object-cover aspect-video"
+              />
+            ))}
+          </div>
         </SectionCard>
 
         {/* 3. Logic: Pillars */}
