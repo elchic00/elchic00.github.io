@@ -29,7 +29,7 @@
   {
     "title": "Job-Fit Scorer",
     "subtitle": "LangGraph + FastAPI + Langfuse",
-    "description": "A LangGraph pipeline that polls 13 target companies' ATS boards directly, reduces thousands of raw postings to a shortlist of relevant roles, and scores each one against my actual portfolio with a parallel fan-out of requirement-level evaluations — deliberately calibrated to be honest rather than flattering. Every run is traced end-to-end in Langfuse, and results sync into the job-search tracker I run interviews from.",
+    "description": "A LangGraph pipeline that polls 13 companies' ATS boards directly, reduces thousands of raw postings to a shortlist of relevant roles, and scores each one against my actual portfolio with a parallel fan-out of requirement-level evaluations — deliberately calibrated to be honest rather than flattering. Every run is traced end-to-end in Langfuse, and results land in a durable, append-only tracker.",
     "image": "/images/projects/jobfit-scorer.svg",
     "link": "/projects/jobfit",
     "id": "jobfit",

@@ -8,10 +8,10 @@ const JobfitCaseStudy = () => (
   >
     <Section title="The Problem">
       <p>
-        Job searching at any real volume means reading a lot of postings and being honest with
-        yourself about which ones you're actually a fit for. I wanted a pipeline that would do
-        the first pass for me: pull postings straight from target companies' ATS boards, throw
-        out the ones that were never going to be relevant, and score the rest against an evidence
+        Evaluating job postings honestly is harder than it sounds: read enough of them and every
+        role starts to look like a plausible fit. I built a pipeline that does the first pass
+        with discipline instead: pull postings straight from companies' ATS boards, throw out
+        the ones that were never going to be relevant, and score the rest against an evidence
         document that describes what I've actually built — not a résumé's best-case phrasing of it.
       </p>
       <p>
@@ -25,7 +25,7 @@ const JobfitCaseStudy = () => (
 
     <Section title="Architecture">
       <p>
-        Discovery polls each target company's ATS board directly — Greenhouse, Ashby, and Lever —
+        Discovery polls each company's ATS board directly — Greenhouse, Ashby, and Lever —
         and writes new postings into a durable SQLite queue with a pending/scored/failed/closed
         lifecycle, keyed by content fingerprint so a re-posted listing doesn't re-trigger work.
         Before anything reaches an LLM, a plain deterministic classifier rejects postings that were
@@ -45,7 +45,7 @@ const JobfitCaseStudy = () => (
         and <code>compile_report</code> are plain, fully-unit-tested code with no LLM in the loop;
         everything that does touch an LLM is schema-validated, cached by posting-content hash, and
         retried narrowly instead of replayed wholesale on failure. A FastAPI endpoint and CLI sit
-        on top, and results sync into a job-search tracker as an append-only log.
+        on top, and results sync into a durable tracker as an append-only log.
       </p>
     </Section>
 
