@@ -58,7 +58,7 @@ const PiCloudCaseStudy = () => (
         nine other services sharing state.
       </p>
       <Figure
-        src="/images/case-studies/pi-cloud-homepage.png"
+        src="/images/case-studies/pi-cloud-homepage.webp"
         alt="Homepage dashboard showing the self-hosted services grouped by category with live stats: Pi-hole queries blocked, Immich photo counts, CrowdSec alerts, and Uptime Kuma site status"
         caption="The single operational view: every service with its live stats — DNS queries filtered, photos hosted, intrusion alerts, and uptime — on one dashboard."
       />
@@ -106,6 +106,11 @@ const PiCloudCaseStudy = () => (
         into the monitoring stack, so a failed backup is visible the same day, not discovered
         during an actual recovery.
       </p>
+      <Figure
+        src="/images/case-studies/pi-cloud-containers.webp"
+        alt="Grafana dashboard showing per-container CPU, memory, and network metrics for every self-hosted service, collected via cAdvisor and Prometheus"
+        caption="Per-container resource metrics — cAdvisor feeds Prometheus, which feeds this Grafana dashboard, so a resource-hungry container shows up here before it takes down anything else on the Pi."
+      />
     </Section>
 
     <Callout title="Two mismatched filesystems, on purpose">

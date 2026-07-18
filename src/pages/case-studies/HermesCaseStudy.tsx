@@ -92,7 +92,7 @@ const HermesCaseStudy = () => (
     </Callout>
 
     <Figure
-      src="/images/case-studies/hermes-langfuse-traces.png"
+      src="/images/case-studies/hermes-langfuse-traces.webp"
       alt="Langfuse tracing table showing spans for Hermes turns: LiteLLM requests, LLM calls, and tool calls with latencies and a cost column reading $0.00 on every row"
       caption="The trace table behind the eval loop: every turn decomposes into gateway, LLM, and tool spans — and the cost column reads $0.00 all the way down, because every call runs on local hardware."
     />

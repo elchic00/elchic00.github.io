@@ -19,6 +19,15 @@ const config = {
     quality: 80,
     formats: ["webp"],
   },
+  caseStudyImages: {
+    inputDir: path.join(__dirname, "../public/images/case-studies"),
+    outputDir: path.join(__dirname, "../public/images/case-studies"),
+    // Screenshots are text-heavy (dashboards, code, terminal output) — keep
+    // near-native width so text stays legible, unlike the 800px thumbnail tier.
+    maxWidth: 1600,
+    quality: 85,
+    formats: ["webp"],
+  },
 };
 
 // Ensure output directories exist
@@ -171,6 +180,18 @@ async function main() {
       config.projectImages
     );
     allResults.push(...projectResults);
+  }
+
+  // Optimize case-study screenshots (if they exist)
+  if (fs.existsSync(config.caseStudyImages.inputDir)) {
+    console.log("\n\n🖼️  CASE STUDY IMAGES");
+    console.log("=====================================");
+    const caseStudyResults = await optimizeDirectory(
+      config.caseStudyImages.inputDir,
+      config.caseStudyImages.outputDir,
+      config.caseStudyImages
+    );
+    allResults.push(...caseStudyResults);
   }
 
   // Summary
