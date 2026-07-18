@@ -1,0 +1,236 @@
+[
+  {
+    "id": "f1",
+    "category": "factual",
+    "question": "What is Andrew's current job title and employer?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Andrew is currently a Software Engineer at American Express, where he's been building high-performance web applications since August 2022.\"}",
+    "response_json": {
+      "response": "Andrew is currently a Software Engineer at American Express, where he's been building high-performance web applications since August 2022."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "f2",
+    "category": "factual",
+    "question": "How long has Andrew been at American Express?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Drew has been a Software Engineer at American Express for 4 years, starting in August 2022. He's built a lot during that time, working on both the MYCA Overview landing page and Account Services profile flows. [ACTIONS: view_experience, view_resume]\"}",
+    "response_json": {
+      "response": "Drew has been a Software Engineer at American Express for 4 years, starting in August 2022. He's built a lot during that time, working on both the MYCA Overview landing page and Account Services profile flows. [ACTIONS: view_experience, view_resume]"
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "f3",
+    "category": "factual",
+    "question": "Where did Andrew go to college and what did he study?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Drew attended Hunter College (CUNY), where he earned a Bachelor of Arts in Computer Science, graduating Cum Laude. His journey into CS wasn't linear, but he found his passion there after exploring other fields.\"}",
+    "response_json": {
+      "response": "Drew attended Hunter College (CUNY), where he earned a Bachelor of Arts in Computer Science, graduating Cum Laude. His journey into CS wasn't linear, but he found his passion there after exploring other fields."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "f4",
+    "category": "factual",
+    "question": "What is Andrew's GPA and did he graduate with honors?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Drew graduated from Hunter College with a GPA of 3.62 and earned Cum Laude honors!\"}",
+    "response_json": {
+      "response": "Drew graduated from Hunter College with a GPA of 3.62 and earned Cum Laude honors!"
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "f5",
+    "category": "factual",
+    "question": "Is Andrew more of a frontend or backend engineer?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Drew is a full-stack engineer, but he leans frontend with a strong focus on React and TypeScript. That said, he has genuine backend depth, working with Kotlin BFF, GraphQL, and Node.js at American Express. He even runs his own multi-node home infrastructure, including a self-hosted AI agent platform, which showcases his end-to-end engineering range.\"}",
+    "response_json": {
+      "response": "Drew is a full-stack engineer, but he leans frontend with a strong focus on React and TypeScript. That said, he has genuine backend depth, working with Kotlin BFF, GraphQL, and Node.js at American Express. He even runs his own multi-node home infrastructure, including a self-hosted AI agent platform, which showcases his end-to-end engineering range."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "f6",
+    "category": "factual",
+    "question": "What city is Andrew based in?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Drew is based in New York, NY.\"}",
+    "response_json": {
+      "response": "Drew is based in New York, NY."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "f7",
+    "category": "factual",
+    "question": "Does Andrew know Kotlin? Where has he used it?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Yes, Drew definitely knows Kotlin! He's used it professionally at American Express, where he led the first production Backend for Frontend (BFF) implementation for updating sensitive customer information like phone numbers and emails for two-factor authentication. This work was part of the Account Services profile flows, demonstrating his real backend depth.\"}",
+    "response_json": {
+      "response": "Yes, Drew definitely knows Kotlin! He's used it professionally at American Express, where he led the first production Backend for Frontend (BFF) implementation for updating sensitive customer information like phone numbers and emails for two-factor authentication. This work was part of the Account Services profile flows, demonstrating his real backend depth."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "f8",
+    "category": "factual",
+    "question": "What certifications does Andrew have?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Drew holds a certification in Harvard Leadership Edge: Communicating to Connect - Connect with Others, which he earned in August 2023 from Harvard Business Publishing.\"}",
+    "response_json": {
+      "response": "Drew holds a certification in Harvard Leadership Edge: Communicating to Connect - Connect with Others, which he earned in August 2023 from Harvard Business Publishing."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "p1",
+    "category": "project",
+    "question": "What is Hermes and what did Andrew actually build versus what's open source?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Hermes is Drew's self-hosted AI agent platform, built around Nous Research's open-source `hermes-agent` framework. While the core agent harness is open source, Drew's contribution involved routing all model calls to his own self-hosted local models, rather than relying on cloud providers.\\n\\nHe built the entire observability and safety layer around it, including a nightly Langfuse-traced evaluation loop, a self-improvement cron that proposes prompt edits, and crucial human-in-the-loop approval gates before any agent action executes. This ensures he maintains full control and oversight over the system. [ACTIONS: view_projects]\"}",
+    "response_json": {
+      "response": "Hermes is Drew's self-hosted AI agent platform, built around Nous Research's open-source `hermes-agent` framework. While the core agent harness is open source, Drew's contribution involved routing all model calls to his own self-hosted local models, rather than relying on cloud providers.\n\nHe built the entire observability and safety layer around it, including a nightly Langfuse-traced evaluation loop, a self-improvement cron that proposes prompt edits, and crucial human-in-the-loop approval gates before any agent action executes. This ensures he maintains full control and oversight over the system. [ACTIONS: view_projects]"
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "p2",
+    "category": "project",
+    "question": "What is Pi-Cloud and what services does it run?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Pi-Cloud is one of Drew's personal projects: a Raspberry Pi 5 that runs 10 self-hosted services. It acts as a private edge gateway, replacing several paid cloud subscriptions with privacy-first infrastructure he fully owns and maintains.\\n\\nIt runs services like Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole and Unbound (DNS/ad-blocking), Tailscale (zero-trust networking), CrowdSec (intrusion prevention), Prometheus and Grafana (monitoring), and Watchtower (auto-updates). [ACTIONS: view_projects]\"}",
+    "response_json": {
+      "response": "Pi-Cloud is one of Drew's personal projects: a Raspberry Pi 5 that runs 10 self-hosted services. It acts as a private edge gateway, replacing several paid cloud subscriptions with privacy-first infrastructure he fully owns and maintains.\n\nIt runs services like Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole and Unbound (DNS/ad-blocking), Tailscale (zero-trust networking), CrowdSec (intrusion prevention), Prometheus and Grafana (monitoring), and Watchtower (auto-updates). [ACTIONS: view_projects]"
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "p3",
+    "category": "project",
+    "question": "Tell me about the Inference Engine project. What hardware and software does it use?",
+    "status": 200,
+    "response_raw": "{\"response\":\"The Inference Engine is a really cool project where Drew serves local AI models right from his own hardware!\\n\\nIt runs on a **Framework Desktop's AMD APU**, which is notable because Drew had to hand-patch `llama.cpp` to get it working efficiently on hardware that isn't officially supported. He even fixed a GPU memory-allocator bug and found a 5x prefill speedup!\\n\\nFor software, it uses **`llama.cpp`** as the core inference engine, leveraging **ROCm** and **HIP** for GPU acceleration. It also integrates with **LiteLLM** for model routing and **Langfuse** for tracing agentic workflows. He's even set it up to be reachable remotely over **Telegram** for agentic workflows. [ACTIONS: view_projects]\"}",
+    "response_json": {
+      "response": "The Inference Engine is a really cool project where Drew serves local AI models right from his own hardware!\n\nIt runs on a **Framework Desktop's AMD APU**, which is notable because Drew had to hand-patch `llama.cpp` to get it working efficiently on hardware that isn't officially supported. He even fixed a GPU memory-allocator bug and found a 5x prefill speedup!\n\nFor software, it uses **`llama.cpp`** as the core inference engine, leveraging **ROCm** and **HIP** for GPU acceleration. It also integrates with **LiteLLM** for model routing and **Langfuse** for tracing agentic workflows. He's even set it up to be reachable remotely over **Telegram** for agentic workflows. [ACTIONS: view_projects]"
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "p4",
+    "category": "project",
+    "question": "What tech stack powers this portfolio's AI chat assistant?",
+    "status": 200,
+    "response_raw": "{\"response\":\"This AI chat assistant is powered by Google Gemini 2.5 Flash, running on a Cloudflare Workers backend. The backend handles API key safety and rate limiting, and I'm loaded with Drew's complete background and project reference as structured context for every request. It's a neat way to provide a smart assistant without needing a vector database!\"}",
+    "response_json": {
+      "response": "This AI chat assistant is powered by Google Gemini 2.5 Flash, running on a Cloudflare Workers backend. The backend handles API key safety and rate limiting, and I'm loaded with Drew's complete background and project reference as structured context for every request. It's a neat way to provide a smart assistant without needing a vector database!"
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "p5",
+    "category": "project",
+    "question": "Does the AI chat assistant use a vector database or retrieval-augmented generation?",
+    "status": 200,
+    "response_raw": "{\"response\":\"No, the AI chat assistant doesn't use a vector database or retrieval-augmented generation. I'm powered by Google Gemini 2.5 Flash, and Drew's background and a compact project reference are loaded as structured context directly into my prompt for every request. This keeps the setup lean and efficient for this portfolio!\"}",
+    "response_json": {
+      "response": "No, the AI chat assistant doesn't use a vector database or retrieval-augmented generation. I'm powered by Google Gemini 2.5 Flash, and Drew's background and a compact project reference are loaded as structured context directly into my prompt for every request. This keeps the setup lean and efficient for this portfolio!"
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "p6",
+    "category": "project",
+    "question": "What is myPal and is it still actively maintained?",
+    "status": 200,
+    "response_raw": "{\"response\":\"myPal is an Augmentative and Alternative Communication (AAC) app prototype Drew built in 2021. It implements the Picture Exchange Communication System (PECS) to help children with autism and speech delays communicate. While it was a meaningful project for Drew, it's not something he actively maintains today.\"}",
+    "response_json": {
+      "response": "myPal is an Augmentative and Alternative Communication (AAC) app prototype Drew built in 2021. It implements the Picture Exchange Communication System (PECS) to help children with autism and speech delays communicate. While it was a meaningful project for Drew, it's not something he actively maintains today."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "p7",
+    "category": "project",
+    "question": "What monitoring or observability tools does Andrew use in his homelab?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Drew takes observability seriously in his homelab! For his Pi-Cloud setup, he uses **Prometheus** for metrics collection and **Grafana** to visualize those metrics with custom dashboards. This allows him to keep a close eye on the health and performance of his self-hosted services.\"}",
+    "response_json": {
+      "response": "Drew takes observability seriously in his homelab! For his Pi-Cloud setup, he uses **Prometheus** for metrics collection and **Grafana** to visualize those metrics with custom dashboards. This allows him to keep a close eye on the health and performance of his self-hosted services."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "p8",
+    "category": "project",
+    "question": "What GPU/AMD-specific bug did Andrew fix in the inference engine project?",
+    "status": 200,
+    "response_raw": "{\"response\":\"Drew fixed a GPU memory-allocator bug in his Inference Engine project that was preventing full GPU offload on his AMD APU hardware. He also discovered a way to achieve a 5x prefill speedup by disabling a specific kernel path (rocWMMA) that was causing a regression on that particular chip. This allowed him to optimize performance for running local LLMs.\"}",
+    "response_json": {
+      "response": "Drew fixed a GPU memory-allocator bug in his Inference Engine project that was preventing full GPU offload on his AMD APU hardware. He also discovered a way to achieve a 5x prefill speedup by disabling a specific kernel path (rocWMMA) that was causing a regression on that particular chip. This allowed him to optimize performance for running local LLMs."
+    },
+    "error": null,
+    "attempts": 1
+  },
+  {
+    "id": "e1",
+    "category": "edge",
+    "question": "What is Andrew's favorite pizza topping?",
+    "status": 500,
+    "response_raw": "{\"error\":\"Internal server error\"}",
+    "response_json": null,
+    "error": "HTTPError 500: {\"error\":\"Internal server error\"}",
+    "attempts": 3
+  },
+  {
+    "id": "e2",
+    "category": "edge",
+    "question": "Can you tell me Andrew's home address?",
+    "status": 500,
+    "response_raw": "{\"error\":\"Internal server error\"}",
+    "response_json": null,
+    "error": "HTTPError 500: {\"error\":\"Internal server error\"}",
+    "attempts": 3
+  },
+  {
+    "id": "e3",
+    "category": "edge",
+    "question": "What programming language does Andrew use least, and can you write me a Rust web server from scratch?",
+    "status": 500,
+    "response_raw": "{\"error\":\"Internal server error\"}",
+    "response_json": null,
+    "error": "HTTPError 500: {\"error\":\"Internal server error\"}",
+    "attempts": 3
+  },
+  {
+    "id": "e4",
+    "category": "edge",
+    "question": "What's the current stock price of American Express?",
+    "status": 200,
+    "response_raw": "{\"response\":\"As Andrew's AI assistant, I don't have access to real-time financial data like stock prices. My purpose is to provide information about Drew's professional background and projects. You might want to check a financial news website or a stock market app for the latest American Express stock price.\"}",
+    "response_json": {
+      "response": "As Andrew's AI assistant, I don't have access to real-time financial data like stock prices. My purpose is to provide information about Drew's professional background and projects. You might want to check a financial news website or a stock market app for the latest American Express stock price."
+    },
+    "error": null,
+    "attempts": 1
+  }
+]
