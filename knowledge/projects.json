@@ -6,7 +6,15 @@
     "image": "/images/projects/hermes.svg",
     "link": "/projects",
     "id": "hermes",
-    "technologies": ["hermes-agent", "Langfuse", "LiteLLM", "Telegram", "HITL", "Evals", "WhisperX"]
+    "technologies": [
+      "hermes-agent",
+      "Langfuse",
+      "LiteLLM",
+      "Telegram",
+      "HITL",
+      "Evals",
+      "WhisperX"
+    ]
   },
   {
     "title": "Pi-Cloud",
@@ -15,7 +23,19 @@
     "image": "/images/projects/pi-cloud.webp",
     "link": "/projects",
     "id": "pi-cloud",
-    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "Immich", "Vaultwarden", "Paperless-ngx", "Raspberry Pi"]
+    "technologies": [
+      "Docker",
+      "Tailscale",
+      "Pi-hole",
+      "Unbound",
+      "CrowdSec",
+      "Prometheus",
+      "Grafana",
+      "Immich",
+      "Vaultwarden",
+      "Paperless-ngx",
+      "Raspberry Pi"
+    ]
   },
   {
     "title": "myPal",
@@ -27,7 +47,13 @@
     "githubStats": {
       "stars": 1,
       "forks": 2,
-      "languages": ["JavaScript", "Java", "Objective-C", "Ruby", "Starlark"],
+      "languages": [
+        "JavaScript",
+        "Java",
+        "Objective-C",
+        "Ruby",
+        "Starlark"
+      ],
       "topics": [],
       "lastUpdated": "2021-08-27T13:32:32Z"
     },
@@ -40,7 +66,35 @@
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects",
     "id": "inference-engine",
-    "technologies": ["llama.cpp", "ROCm", "HIP", "GGML", "Speculative Decoding", "LiteLLM", "Langfuse"]
+    "technologies": [
+      "llama.cpp",
+      "ROCm",
+      "HIP",
+      "GGML",
+      "Speculative Decoding",
+      "LiteLLM",
+      "Langfuse"
+    ]
+  },
+  {
+    "title": "Job-Fit Scorer",
+    "subtitle": "LangGraph + FastAPI + Langfuse",
+    "description": "A LangGraph pipeline Andrew built that polls 13 target companies' ATS boards (Greenhouse, Ashby, Lever), filters thousands of raw postings down to relevant roles, and scores each one against an evidence document of what he's actually built - deliberately calibrated to be honest rather than flattering. Uses LangGraph's Send API for parallel requirement-level scoring with typed Pydantic state, every parallel node traced in a dedicated Langfuse project. A batching redesign cut LLM calls per posting by 76%. 263 passing tests including live assertions that every ATS board integration is actually alive (one board once silently returned empty results for months - HTTP 200, zero signal - now caught structurally). Runs on his self-hosted inference stack; private repo, code available on request.",
+    "image": "/images/projects/jobfit-scorer.svg",
+    "link": "/projects/jobfit",
+    "id": "jobfit",
+    "technologies": [
+      "LangGraph",
+      "Python",
+      "FastAPI",
+      "Pydantic",
+      "Langfuse",
+      "SQLite",
+      "pytest",
+      "Send API",
+      "LLM-as-Judge",
+      "Local Inference"
+    ]
   },
   {
     "title": "AI Chat Assistant",
@@ -49,6 +103,11 @@
     "image": "/images/projects/elchic00-chatbot.svg",
     "link": "https://github.com/elchic00/elchic00.github.io",
     "id": "elchic00-chatbot",
-    "technologies": ["Gemini 2.5 Flash", "Cloudflare Workers", "Structured Context", "Serverless"]
+    "technologies": [
+      "Gemini 2.5 Flash",
+      "Cloudflare Workers",
+      "Structured Context",
+      "Serverless"
+    ]
   }
 ]
