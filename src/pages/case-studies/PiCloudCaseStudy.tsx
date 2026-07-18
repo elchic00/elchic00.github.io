@@ -1,4 +1,4 @@
-import { CaseStudyLayout, Section, StatRow, Stat, Callout } from "./CaseStudyLayout";
+import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./CaseStudyLayout";
 
 const PiCloudCaseStudy = () => (
   <CaseStudyLayout
@@ -57,6 +57,11 @@ const PiCloudCaseStudy = () => (
         blast radius — if Paperless-ngx breaks, I'm debugging Paperless-ngx, not untangling it from
         nine other services sharing state.
       </p>
+      <Figure
+        src="/images/case-studies/pi-cloud-homepage.png"
+        alt="Homepage dashboard showing the self-hosted services grouped by category with live stats: Pi-hole queries blocked, Immich photo counts, CrowdSec alerts, and Uptime Kuma site status"
+        caption="The single operational view: every service with its live stats — DNS queries filtered, photos hosted, intrusion alerts, and uptime — on one dashboard."
+      />
     </Section>
 
     <Section title="Security model">

@@ -1,4 +1,4 @@
-import { CaseStudyLayout, Section, StatRow, Stat, Callout } from "./CaseStudyLayout";
+import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./CaseStudyLayout";
 
 const HermesCaseStudy = () => (
   <CaseStudyLayout
@@ -86,6 +86,12 @@ const HermesCaseStudy = () => (
         the actual shape of the task is part of the job, not a nice-to-have.
       </p>
     </Callout>
+
+    <Figure
+      src="/images/case-studies/hermes-langfuse-traces.png"
+      alt="Langfuse tracing table showing spans for Hermes turns: LiteLLM requests, LLM calls, and tool calls with latencies and a cost column reading $0.00 on every row"
+      caption="The trace table behind the eval loop: every turn decomposes into gateway, LLM, and tool spans — and the cost column reads $0.00 all the way down, because every call runs on local hardware."
+    />
 
     <Section title="Honest Limitations">
       <ul>

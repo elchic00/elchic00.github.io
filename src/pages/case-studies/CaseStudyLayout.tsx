@@ -92,6 +92,24 @@ export const Stat: React.FC<{ value: string; label: string }> = ({ value, label 
   </div>
 );
 
+export const Figure: React.FC<{ src: string; alt: string; caption: string }> = ({
+  src,
+  alt,
+  caption,
+}) => (
+  <figure>
+    <img
+      src={src}
+      alt={alt}
+      loading="lazy"
+      className="w-full rounded-xl border border-slate-700/50"
+    />
+    <figcaption className="mt-2 text-[13px] text-slate-500 leading-relaxed">
+      {caption}
+    </figcaption>
+  </figure>
+);
+
 export const Callout: React.FC<{ title: string; children: React.ReactNode }> = ({
   title,
   children,

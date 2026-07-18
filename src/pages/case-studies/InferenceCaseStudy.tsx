@@ -1,4 +1,4 @@
-import { CaseStudyLayout, Section, StatRow, Stat, Callout } from "./CaseStudyLayout";
+import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./CaseStudyLayout";
 
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
@@ -131,6 +131,11 @@ const InferenceCaseStudy = () => (
         the original patch set was no longer doing anything — one had been superseded upstream,
         the other was never actually load-bearing.
       </p>
+      <Figure
+        src="/images/case-studies/inference-grafana.png"
+        alt="Grafana dashboard showing all three models up, with live tokens-per-second stats and generation-speed trend lines"
+        caption="Live Grafana view: all three models resident and serving simultaneously. Steady-state generation here (28 t/s on the 35B) is the everyday number — the peak figures above are single-stream benchmark runs."
+      />
     </Section>
 
     <Section title="Honest Limitations">

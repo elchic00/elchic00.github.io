@@ -125,8 +125,10 @@ const JobfitCaseStudy = () => (
           sanitization pass before it's public. Code is available on request in the meantime.
         </li>
         <li>
-          <strong>No CI yet.</strong> The fast, mocked test suite runs locally and on demand; it
-          isn't wired into GitHub Actions on push.
+          <strong>CI is recent, not original.</strong> The portable release now runs the mocked
+          suite in GitHub Actions on push, plus a separate live board-validation workflow. The
+          original research repo still runs its tests locally on demand — the discipline arrived
+          with the split, not on day one.
         </li>
       </ul>
     </Section>
