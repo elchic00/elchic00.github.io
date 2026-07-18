@@ -40,8 +40,12 @@ const HermesCaseStudy = () => (
         profile loaded at every session start. I tried a vector-memory layer (mem0-oss +
         ChromaDB) first and pulled it — recall accuracy came in under the published community
         benchmarks and memories weren't accumulating the way they were supposed to. Markdown files
-        turned out to be the more honest memory layer for this scale. Every call, local or cloud,
-        is traced end-to-end in Langfuse — tool calls, LLM chains, timing, token counts.
+        turned out to be the more honest memory layer for this scale. Vault access itself runs
+        through Obsidian's own resolved link graph rather than a flat file scan or another vector
+        index — agents can pull a note's real backlinks, follow aliases and headings correctly,
+        and query the graph directly (find every note linking to X, spot orphaned notes) the same
+        way I'd navigate it by hand. Every call, local or cloud, is traced end-to-end in Langfuse —
+        tool calls, LLM chains, timing, token counts.
       </p>
     </Section>
 
