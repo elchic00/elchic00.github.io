@@ -23,7 +23,7 @@ const CASE_STUDIES = projects.filter((p) => p.link.startsWith('/projects/'));
 // link-preview crawler doesn't reliably render WebP og:image previews.
 const SOCIAL_IMAGES = {
   hermes: { file: 'hermes-langfuse-traces.jpg', width: 1600, height: 818 },
-  'inference-engine': { file: 'inference-grafana.jpg', width: 1600, height: 936 },
+  'inference-engine': { file: 'inference-grafana.jpg', width: 1598, height: 902 },
   'pi-cloud': { file: 'pi-cloud-homepage.jpg', width: 1600, height: 586 },
 };
 

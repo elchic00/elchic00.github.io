@@ -143,8 +143,8 @@ const InferenceCaseStudy = () => (
       </p>
       <Figure
         src="/images/case-studies/inference-grafana.webp"
-        alt="Grafana dashboard showing all three models up, with live tokens-per-second stats and generation-speed trend lines"
-        caption="Live Grafana view: all three models resident and serving simultaneously. Steady-state generation here (28 t/s on the 35B) is the everyday number — the peak figures above are single-stream benchmark runs."
+        alt="Grafana dashboard showing 7 days of live inference metrics: current tokens/sec for all three models, plus generation-speed, prompt-ingestion, and hourly-throughput trend lines"
+        caption="Live Grafana view, 7-day window: all three models resident and serving simultaneously — steady-state generation here (~29 t/s on the 35B) is the everyday number, not the single-stream peak figures above."
       />
     </Section>
 

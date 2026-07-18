@@ -30,6 +30,10 @@ const config = {
     // render WebP og:image previews, so social meta tags use the jpeg while
     // the on-page <Figure> keeps using the smaller webp.
     formats: ["webp", "jpeg"],
+    // Source screenshots are always png; without this, a prior run's
+    // generated .jpg gets treated as a fresh input on the next run (see note
+    // on the input-matching regex below).
+    inputExtensions: ["png"],
   },
 };
 
@@ -105,10 +109,17 @@ async function optimizeDirectory(inputDir, outputDir, options) {
   const items = fs.readdirSync(inputDir);
   const results = [];
 
-  // Process files in current directory
+  // Process files in current directory. Tiers that output jpeg into the same
+  // directory they read from (caseStudyImages) must restrict input matching
+  // to png only - otherwise a previous run's generated .jpg gets picked up
+  // as a fresh source on the next run and re-derives webp/jpeg from an
+  // already-lossy jpeg instead of the original.
+  const inputPattern = options.inputExtensions
+    ? new RegExp(`\\.(${options.inputExtensions.join("|")})$`, "i")
+    : /\.(jpe?g|png)$/i;
   const files = items.filter(
     (file) =>
-      /\.(jpe?g|png)$/i.test(file) &&
+      inputPattern.test(file) &&
       !file.includes("optimized") &&
       fs.statSync(path.join(inputDir, file)).isFile()
   );
