@@ -399,4 +399,5 @@ export { useSnakeGame } from "./useSnakeGame";
 export { useActiveTrip } from "./useActiveTrip";
 export { useContactForm } from "./useContactForm";
 export { usePageTracking } from "./usePageTracking";
+export { usePrefetchRoutes } from "./usePrefetchRoutes";
 export type { ContactFormValues } from "./useContactForm";

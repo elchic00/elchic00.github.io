@@ -4,7 +4,8 @@
 
 import { memo, useState } from "react";
 import { ClipboardCopyIcon, CheckIcon } from "@heroicons/react/outline";
-import { renderMarkdown, formatRelativeTime } from "./utils";
+import { formatRelativeTime } from "./utils";
+import { renderMarkdown } from "./markdownRenderer";
 import { Message, ACTION_CONFIGS } from "./types";
 import { useStreamingText } from "./useStreamingText";
 

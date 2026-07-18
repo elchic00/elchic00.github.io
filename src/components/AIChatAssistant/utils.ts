@@ -2,10 +2,12 @@
  * Utility functions for AI Chat Assistant
  */
 
-import DOMPurify from "dompurify";
 import type { MarkedOptions } from "marked";
 
-let markedInstance: typeof import("marked").marked | null = null;
+// Exported live binding (not a getter) so markdownRenderer.ts sees updates
+// made here without importing this module's DOMPurify-free surface into a
+// circular dependency.
+export let markedInstance: typeof import("marked").marked | null = null;
 let markedLoading: Promise<typeof import("marked")> | null = null;
 
 /**
@@ -23,16 +25,6 @@ export const loadMarked = async () => {
   } as MarkedOptions);
   markedInstance = marked;
   return marked;
-};
-
-/**
- * Renders markdown content to sanitized HTML
- */
-export const renderMarkdown = (content: string): string => {
-  if (markedInstance) {
-    return DOMPurify.sanitize(markedInstance(content) as string);
-  }
-  return DOMPurify.sanitize(content.replace(/\n/g, "<br/>"));
 };
 
 /**

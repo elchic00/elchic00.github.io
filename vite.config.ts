@@ -25,7 +25,12 @@ export default defineConfig({
         manualChunks: {
           // Separate vendor chunks for better caching
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'markdown-vendor': ['marked', 'dompurify'],
+          // marked and dompurify are NOT grouped together: marked is only
+          // ever dynamically imported (chat markdown rendering) and needs
+          // to stay a genuine async-only chunk; dompurify is also used
+          // eagerly by Alert.tsx (Contact form dialog), so grouping them
+          // dragged marked's ~40KB into every page load via that unrelated
+          // static reachability path.
           // Split analytics into separate chunk to reduce main bundle
           'analytics': ['./src/utils/analytics.ts', './src/hooks/usePageTracking.ts'],
         },

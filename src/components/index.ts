@@ -36,13 +36,5 @@ export { TripCard } from "./Travel/TripCard";
 export { TripNavigation } from "./Travel/TripNavigation";
 export { PhotoGallery } from "./Travel/PhotoGallery";
 
-// AI Chat sub-components (for advanced usage)
-export { ChatWindow } from "./AIChatAssistant/ChatWindow";
-export { ChatMessage } from "./AIChatAssistant/ChatMessage";
-export { ChatInput } from "./AIChatAssistant/ChatInput";
-export { ChatHeader } from "./AIChatAssistant/ChatHeader";
-export { SuggestedQuestions } from "./AIChatAssistant/SuggestedQuestions";
-export { LoadingIndicator } from "./AIChatAssistant/LoadingIndicator";
-
 // Page components
 export { ProjectsPage } from "../pages/ProjectsPage";

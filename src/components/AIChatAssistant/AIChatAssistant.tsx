@@ -1,7 +1,13 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import { XIcon, ChatIcon } from "@heroicons/react/solid";
-import { ChatWindow } from "./ChatWindow";
-import { loadMarked, parseActionsFromContent, handleAction, detectActionsFromQuestion } from "./utils";
+import { parseActionsFromContent, handleAction, detectActionsFromQuestion } from "./utils";
+
+// ChatWindow (and its dependency on marked/dompurify for markdown rendering)
+// only loads once the chat is actually opened, instead of shipping on every
+// page load for a feature most visitors never use.
+const ChatWindow = lazy(() =>
+  import("./ChatWindow").then((module) => ({ default: module.ChatWindow }))
+);
 import type { Message } from "./types";
 import { generateMessageId } from "./types";
 import { useLocalStorage } from "../../hooks";
@@ -61,10 +67,6 @@ export const AIChatAssistant = () => {
     if (isOpen && !sessionStartTimeRef.current) {
       sessionStartTimeRef.current = Date.now();
     }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (isOpen) loadMarked();
   }, [isOpen]);
 
   useEffect(() => {
@@ -373,21 +375,29 @@ export const AIChatAssistant = () => {
         </button>
       </div>
       {isOpen && (
-        <ChatWindow
-          messages={messages}
-          input={input}
-          isLoading={isLoading}
-          showSuggestions={showSuggestions}
-          toggleButtonRef={toggleButtonRef}
-          onClose={handleClose}
-          onClear={handleClearChat}
-          onInputChange={setInput}
-          onSubmit={handleSubmit}
-          onAction={handleActionClick}
-          onRetry={handleRetry}
-          onSuggestedQuestion={handleSuggestedQuestion}
-          onQuickAction={handleQuickAction}
-        />
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 z-50 flex items-center justify-center border border-slate-700 bg-slate-800 shadow-2xl md:inset-auto md:bottom-44 md:right-6 md:h-[min(85vh,680px)] md:w-96 md:max-w-[calc(100vw-3rem)] md:rounded-lg">
+              <div className="h-8 w-8 animate-spin rounded-full border-b-2 border-cyan-500" />
+            </div>
+          }
+        >
+          <ChatWindow
+            messages={messages}
+            input={input}
+            isLoading={isLoading}
+            showSuggestions={showSuggestions}
+            toggleButtonRef={toggleButtonRef}
+            onClose={handleClose}
+            onClear={handleClearChat}
+            onInputChange={setInput}
+            onSubmit={handleSubmit}
+            onAction={handleActionClick}
+            onRetry={handleRetry}
+            onSuggestedQuestion={handleSuggestedQuestion}
+            onQuickAction={handleQuickAction}
+          />
+        </Suspense>
       )}
     </>
   );

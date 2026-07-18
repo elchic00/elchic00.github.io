@@ -9,11 +9,14 @@ import {
   ToastContainer,
 } from "@components";
 import { ToastProvider } from "./contexts/ToastContext";
-import { usePageTracking } from "./hooks";
+import { usePageTracking, usePrefetchRoutes } from "./hooks";
 
 export const App = () => {
   // Track all page/route changes with Google Analytics
   usePageTracking();
+  // Warm the cache for lazy routes (case studies, Travel, Snake) once idle,
+  // so the first navigation to any of them doesn't pay a cold network fetch.
+  usePrefetchRoutes();
 
   return (
     <ErrorBoundary>
