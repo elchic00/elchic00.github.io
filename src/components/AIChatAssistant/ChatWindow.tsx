@@ -48,11 +48,10 @@ export const ChatWindow = ({
 
   const { width } = useWindowSize(200);
 
-  // Warm up the markdown parser as soon as the window mounts (chat just
-  // opened) so the first AI response doesn't flash unformatted text while
-  // marked loads. Lives here rather than in AIChatAssistant so the dynamic
-  // import stays behind this already-lazy boundary instead of being
-  // preloaded from the eagerly-loaded parent.
+  // Warm up the markdown parser as soon as the window mounts, so the first
+  // AI response doesn't flash unformatted text while marked loads. Must
+  // stay in this component (not AIChatAssistant, which is eager) - calling
+  // it from eager code gets the dynamic import preloaded on every page.
   useEffect(() => {
     loadMarked();
   }, []);

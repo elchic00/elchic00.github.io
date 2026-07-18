@@ -138,14 +138,13 @@ function createRouteDirectories(html) {
   }
 }
 
-// Swap in per-project title/description so each case study gets its own
-// preview instead of the generic homepage copy — this is also what unblocks
-// link scrapers (LinkedIn, Slack, etc.) that need a real 200 response with
-// matching metadata, not just a redirect.
 function replaceMetaContent(html, matcher, newContent) {
   return html.replace(matcher, (_match, before, after) => `${before}${newContent}${after}`);
 }
 
+// Real 200 responses per case study, each with its own title/description
+// instead of the generic homepage copy — needed for link scrapers
+// (LinkedIn, Slack, etc.) that require matching metadata, not a redirect.
 function createCaseStudyRouteDirectories(html) {
   try {
     console.log('Creating static route files for case studies...');

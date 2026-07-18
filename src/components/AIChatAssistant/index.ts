@@ -1,7 +1,5 @@
-// Only AIChatAssistant itself is consumed outside this folder (by
-// src/components/index.ts -> App.tsx). Everything else here used to be
-// re-exported "for advanced usage" but had no actual external consumer -
-// and each re-export was a static edge that dragged ChatWindow (and its
-// marked/dompurify dependency) into the eager bundle graph even though
-// AIChatAssistant.tsx itself lazy-loads ChatWindow.
+// Only export what's actually consumed outside this folder. A re-export
+// here is a static import edge - adding ChatWindow/ChatMessage/etc back
+// would defeat AIChatAssistant.tsx's lazy-loading of ChatWindow even if
+// nothing outside this folder ever imports them.
 export { AIChatAssistant } from "./AIChatAssistant";

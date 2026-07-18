@@ -4,9 +4,9 @@
 
 import type { MarkedOptions } from "marked";
 
-// Exported live binding (not a getter) so markdownRenderer.ts sees updates
-// made here without importing this module's DOMPurify-free surface into a
-// circular dependency.
+// Exported directly (not via a getter) so markdownRenderer.ts's import
+// reflects the value loadMarked() assigns below - ES module bindings are
+// live references, not snapshots taken at import time.
 export let markedInstance: typeof import("marked").marked | null = null;
 let markedLoading: Promise<typeof import("marked")> | null = null;
 
