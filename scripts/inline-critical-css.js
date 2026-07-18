@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const projects = require('../src/data/structured/projects.json');
 
 /**
  * Post-build script to inline critical CSS for improved performance
@@ -11,6 +12,9 @@ const INDEX_HTML = path.join(BUILD_DIR, 'index.html');
 
 // Routes that need static HTML files for SEO
 const ROUTES = ['projects', 'travel', 'snake'];
+
+// Internal case-study pages (excludes external links like myPal's GitHub repo)
+const CASE_STUDIES = projects.filter((p) => p.link.startsWith('/projects/'));
 
 // Critical CSS for above-the-fold content (navbar, hero section)
 const CRITICAL_CSS = `
@@ -123,21 +127,95 @@ function createRouteDirectories(html) {
   }
 }
 
+// Swap in per-project title/description so each case study gets its own
+// preview instead of the generic homepage copy — this is also what unblocks
+// link scrapers (LinkedIn, Slack, etc.) that need a real 200 response with
+// matching metadata, not just a redirect.
+function replaceMetaContent(html, matcher, newContent) {
+  return html.replace(matcher, (_match, before, after) => `${before}${newContent}${after}`);
+}
+
+function createCaseStudyRouteDirectories(html) {
+  try {
+    console.log('Creating static route files for case studies...');
+
+    CASE_STUDIES.forEach((project) => {
+      const routeDir = path.join(BUILD_DIR, 'projects', project.id);
+
+      if (!fs.existsSync(routeDir)) {
+        fs.mkdirSync(routeDir, { recursive: true });
+        console.log(`📁 Created directory: projects/${project.id}/`);
+      }
+
+      const pageTitle = `${project.title} | Andrew Alagna`;
+      const socialTitle = `${project.title} — ${project.subtitle} | Andrew Alagna`;
+      const url = `https://elchic00.github.io${project.link}/`;
+
+      let routeHtml = html
+        .replace(/<title>[\s\S]*?<\/title>/, `<title>\n      ${pageTitle}\n    </title>`)
+        .replace(
+          /(rel="canonical" href=")[^"]*(")/,
+          `$1${url}$2`
+        )
+        .replace(
+          /(property="og:url" content=")[^"]*(")/,
+          `$1${url}$2`
+        );
+
+      routeHtml = replaceMetaContent(
+        routeHtml,
+        /(property="og:title"[\s\S]*?content=")[^"]*(")/,
+        socialTitle
+      );
+      routeHtml = replaceMetaContent(
+        routeHtml,
+        /(property="og:description"[\s\S]*?content=")[^"]*(")/,
+        project.description
+      );
+      routeHtml = replaceMetaContent(
+        routeHtml,
+        /(name="description"[\s\S]*?content=")[^"]*(")/,
+        project.description
+      );
+      routeHtml = replaceMetaContent(
+        routeHtml,
+        /(name="twitter:title"[\s\S]*?content=")[^"]*(")/,
+        socialTitle
+      );
+      routeHtml = replaceMetaContent(
+        routeHtml,
+        /(name="twitter:description"[\s\S]*?content=")[^"]*(")/,
+        project.description
+      );
+
+      fs.writeFileSync(path.join(routeDir, 'index.html'), routeHtml, 'utf8');
+      console.log(`📝 Created: projects/${project.id}/index.html`);
+    });
+
+    console.log('✅ Case-study route files created successfully!');
+  } catch (error) {
+    console.error('❌ Error creating case-study route directories:', error);
+    throw error;
+  }
+}
+
 function main() {
   try {
     const html = inlineCriticalCSS();
-    
+
     // Write the modified HTML back to root
     fs.writeFileSync(INDEX_HTML, html, 'utf8');
     console.log('📊 This should improve your mobile performance score');
-    
+
     // Create static files for each route
     createRouteDirectories(html);
-    
+    createCaseStudyRouteDirectories(html);
+
     console.log('\n🎉 Build post-processing complete!');
     console.log('   - Routes now have static HTML files for SEO');
     console.log('   - Critical CSS is inlined for performance');
     console.log('   - GitHub Pages will serve proper URLs: /projects, /travel, /snake');
+    console.log('   - Case studies have their own static URLs + accurate previews');
   } catch (error) {
     console.error('❌ Build post-processing failed:', error);
     process.exit(1);
