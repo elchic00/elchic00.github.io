@@ -16,7 +16,11 @@ const caseStudies = {
   "jobfit": lazy(() => import("./pages/case-studies/JobfitCaseStudy")),
 };
 
-const LoadingFallback = () => <div className="text-center p-8">Loading...</div>;
+const LoadingFallback = () => (
+  <div className="flex min-h-screen items-center justify-center bg-slate-950 pt-24">
+    <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-cyan-500" />
+  </div>
+);
 
 export const AppRoutes = () => {
   return (
