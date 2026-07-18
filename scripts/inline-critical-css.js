@@ -16,6 +16,15 @@ const ROUTES = ['projects', 'travel', 'snake'];
 // Internal case-study pages (excludes external links like myPal's GitHub repo)
 const CASE_STUDIES = projects.filter((p) => p.link.startsWith('/projects/'));
 
+// Per-project social preview image, for the case studies that have a real
+// screenshot. Anything not listed here keeps the site-wide default
+// (profile.webp) rather than a broken/missing image.
+const SOCIAL_IMAGES = {
+  hermes: { file: 'hermes-langfuse-traces.webp', width: 1600, height: 818 },
+  'inference-engine': { file: 'inference-grafana.webp', width: 1600, height: 936 },
+  'pi-cloud': { file: 'pi-cloud-homepage.webp', width: 1600, height: 586 },
+};
+
 // Critical CSS for above-the-fold content (navbar, hero section)
 const CRITICAL_CSS = `
 <style>
@@ -187,6 +196,18 @@ function createCaseStudyRouteDirectories(html) {
         /(name="twitter:description"[\s\S]*?content=")[^"]*(")/,
         project.description
       );
+
+      const socialImage = SOCIAL_IMAGES[project.id];
+      if (socialImage) {
+        const imageUrl = `https://elchic00.github.io/images/case-studies/${socialImage.file}`;
+        const imageAlt = `${project.title} — ${project.subtitle}`;
+        routeHtml = replaceMetaContent(routeHtml, /(property="og:image" content=")[^"]*(")/, imageUrl);
+        routeHtml = replaceMetaContent(routeHtml, /(property="og:image:width" content=")[^"]*(")/, String(socialImage.width));
+        routeHtml = replaceMetaContent(routeHtml, /(property="og:image:height" content=")[^"]*(")/, String(socialImage.height));
+        routeHtml = replaceMetaContent(routeHtml, /(property="og:image:alt"[\s\S]*?content=")[^"]*(")/, imageAlt);
+        routeHtml = replaceMetaContent(routeHtml, /(name="twitter:image" content=")[^"]*(")/, imageUrl);
+        routeHtml = replaceMetaContent(routeHtml, /(name="twitter:image:alt"[\s\S]*?content=")[^"]*(")/, imageAlt);
+      }
 
       fs.writeFileSync(path.join(routeDir, 'index.html'), routeHtml, 'utf8');
       console.log(`📝 Created: projects/${project.id}/index.html`);
