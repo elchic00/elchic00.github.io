@@ -129,9 +129,11 @@ const PiCloudCaseStudy = () => (
 
     <Section title="Honest limitations">
       <p>
-        This is manual, physical infrastructure — there's no infra-as-code or public repo for the
-        configuration yet, so reproducing it means redoing the setup by hand rather than running a
-        script.
+        This is manual, physical infrastructure. The docker-compose configs are mirrored daily into
+        a private repo now, so the compose layer itself doesn't have to be retyped from memory — but
+        that's a config backup, not infra-as-code: there's still no script that takes a bare Pi to a
+        running stack. Reproducing this means restoring from the recovery media above and redoing
+        the physical setup by hand.
       </p>
       <p>
         It's also explicitly not trying to be enterprise infrastructure: one Raspberry Pi running
