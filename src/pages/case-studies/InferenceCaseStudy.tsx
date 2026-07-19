@@ -3,7 +3,7 @@ import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./Case
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
     title="Inference Engine"
-    subtitle="A hand-patched llama.cpp build serving local models on GPU hardware the project doesn't officially support — tuned through a memory-allocator bug and speculative decoding, and debugged through a regression that traced back to my own code, not the dependency everyone assumed was at fault."
+    subtitle="Four models resident on one box, serving every agent I run at $0 marginal cost per call — a hand-patched llama.cpp build on GPU hardware the project doesn't officially support. Unmetered inference changes which workloads are worth building at all."
     tech={[
       "llama.cpp",
       "ROCm",
@@ -20,21 +20,36 @@ const InferenceCaseStudy = () => (
       "Langfuse",
     ]}
   >
-    <Section title="Why Run Inference Locally">
+    <Section title="What Unmetered Inference Buys">
       <p>
-        I run inference locally instead of calling a hosted API because it's the engine behind
-        every local agentic workflow I run — reachable from my phone over Telegram, with every
-        call traced and nightly graded by its own eval loop. Four models sit resident at once on
-        a <strong>Framework Desktop (Ryzen AI Max+ 395, 128GB unified memory, Radeon gfx1151)</strong>{" "}
-        — an APU llama.cpp doesn't officially support: two text models, a vision model for
-        screenshot analysis, and a speech-to-text model doing transcription with speaker
-        diarization.
+        The point of running this locally isn't that it's cheaper than an API bill — it's that a
+        $0 marginal cost per call changes which ideas are worth trying. When every experiment is
+        free, you stop pre-filtering them. I can leave an agent looping overnight on a hunch,
+        re-run a prompt fifty times to see the variance, throw a 100k-token context at a question
+        to find out if it helps, or rewrite a system prompt at 2am and immediately regrade a month
+        of traces against it. On metered inference, most of those get talked out of existence
+        before they're tried — not because they're bad ideas, but because each one has to justify
+        its own line item.
       </p>
       <p>
-        Getting there wasn't a config flag. It meant patching and building the serving engine
-        from source (<code>GGML_HIP=ON</code>, <code>AMDGPU_TARGETS=gfx1151</code>) behind a
-        LiteLLM router that also handles fallback for the clients that consume it — and then
-        finding out the build was the easy part.
+        Whole workloads here only exist because they're free. Every call routes through a gateway
+        that traces it, and a nightly eval loop grades a sample and clusters the low-quality
+        turns — a metering-hostile pattern, since it means paying twice for every request worth
+        keeping. Voice memos get transcribed with speaker diarization the moment they land.
+        Screenshots go to a vision model without me weighing whether this one is worth it. None of
+        it is rented, so none of it can become someone else's outage, someone else's deprecation
+        notice, or someone else's repricing — and nothing sensitive leaves the LAN to get
+        processed.
+      </p>
+      <p>
+        That runs on four models resident at once on a{" "}
+        <strong>Framework Desktop (Ryzen AI Max+ 395, 128GB unified memory, Radeon gfx1151)</strong>{" "}
+        — an APU llama.cpp doesn't officially support: two text models, a vision model, and a
+        speech-to-text model, reachable from my phone over Telegram. Getting there wasn't a config
+        flag. It meant patching and building the serving engine from source (
+        <code>GGML_HIP=ON</code>, <code>AMDGPU_TARGETS=gfx1151</code>) behind a LiteLLM router that
+        handles fallback for the clients that consume it — and then finding out the build was the
+        easy part.
       </p>
     </Section>
 
@@ -88,41 +103,20 @@ const InferenceCaseStudy = () => (
     <Callout title="The Regression That Wasn't What It Looked Like">
       <p>
         Hours after a routine 132-commit upstream rebase, the 35B model started emitting fake
-        tool-call JSON as plain text — wrong <code>finish_reason</code>, occasionally inventing
-        tool names that don't exist. A controlled A/B test reproduced it cleanly: the current
+        tool-call JSON as plain text. A controlled A/B test reproduced it cleanly: the current
         build hallucinated a tool call, the pre-rebase binary ran 28 tool calls clean. Template,
-        flags, and schema were all checked and ruled out. At that point, "somewhere in those 132
-        commits" was the only conclusion the evidence supported, so I pinned the model to the old
-        binary and moved on.
+        flags, and schema all checked out, so "somewhere in those 132 commits" was the only
+        conclusion the evidence supported. I pinned the model to the old binary and moved on.
       </p>
       <p>
-        A week later, while assessing whether to pull more upstream commits, I read the actual
-        GitHub issue tracker instead of re-guessing — and found maintainers describing this exact
-        symptom as a known consequence of how the chat template behaves when a client fails to
-        echo <code>reasoning_content</code> back on a tool-call replay turn. That reframed the
-        whole investigation: the bug had never actually been bisected to a commit.
-      </p>
-      <p>
-        The real root cause was in my own code. A whitelist function in my agent's{" "}
-        <code>run_agent.py</code> decided which models get <code>reasoning_content</code> echoed
-        back on replay — and this model family was never added to it. I fixed the whitelist, then
-        verified it two ways: instrumenting the API call path to watch{" "}
-        <code>reasoning_content</code> go from always-empty to growing turn-over-turn across a
-        forced 7-turn tool-calling chain, and a 3-file sequential test that completed with zero
-        hallucinated tool calls. The first diagnosis wasn't sloppy — it was the best-supported
+        A week later I read the upstream issue tracker instead of re-guessing, and found
+        maintainers describing this exact symptom as a consequence of a client failing to echo{" "}
+        <code>reasoning_content</code> on a tool-call replay turn. The real root cause was in my
+        own code: a whitelist in my agent's <code>run_agent.py</code> that this model family had
+        never been added to. The first diagnosis wasn't sloppy — it was the best-supported
         conclusion at the time. What mattered was treating the pin as a workaround instead of a
-        close, and being willing to overturn a week-old conclusion when the evidence pointed at my
-        own code instead of the dependency everyone had assumed was at fault.
-      </p>
-      <p>
-        That fix turned out to be necessary but not sufficient. I switched the 35B model back onto
-        the current build once the fix had one clean production run behind it. Less than 12 hours
-        later, the first long, multi-step tool-calling chain on the new build reproduced the exact
-        same hallucinated-tool-call symptom — <code>reasoning_content</code> was present and
-        growing as expected, so the fix was doing its job, but something else on the current build
-        still breaks under longer chains specifically. I reverted 35B back to the pinned old binary
-        the same day. No further switch-back is planned until a second, still-unidentified factor
-        is actually found — a longer soak alone isn't the bar anymore, a real root cause is.
+        close, and overturning a week-old conclusion once the evidence pointed at my own code
+        rather than the dependency everyone assumed was at fault.
       </p>
     </Callout>
 
