@@ -98,6 +98,17 @@ const JobfitCaseStudy = () => (
           stray permission flip can't take down a read path again.
         </p>
       </Callout>
+      <Callout title="The deduper that couldn't tell AWS from GCP">
+        <p>
+          A similarity-based deduplicator collapsing near-identical requirements onto one queue
+          slot turned out to be too generous: requirements sharing around 84% string overlap got
+          merged as duplicates even when they weren't — "AWS" and "GCP", "LangChain" and
+          "LangGraph", "backend" and "frontend". It wasn't visible from reading the code; it only
+          showed up once real extracted data ran through it. Fixed by refusing to merge whenever
+          both sides still contain a content word the other side doesn't have, locked in with four
+          regression tests.
+        </p>
+      </Callout>
     </Section>
 
     <Section title="Results & Scale">
@@ -143,12 +154,6 @@ const JobfitCaseStudy = () => (
           <code>.gitignore</code>d after the fact. The portable engine was re-seeded into a
           separate repo with a clean, sanitized history, so opening it up is a decision rather
           than a cleanup job. Code is available on request in the meantime.
-        </li>
-        <li>
-          <strong>CI is recent, not original.</strong> The portable release now runs the mocked
-          suite in GitHub Actions on push, plus a separate live board-validation workflow. The
-          original research repo still runs its tests locally on demand — the discipline arrived
-          with the split, not on day one.
         </li>
       </ul>
     </Section>
