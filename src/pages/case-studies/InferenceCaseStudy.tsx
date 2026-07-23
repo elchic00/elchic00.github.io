@@ -94,9 +94,9 @@ const InferenceCaseStudy = () => (
     </Section>
 
     <StatRow>
-      <Stat value="47.8 t/s" label="35B gen, full GPU offload" />
+      <Stat value="44.4 t/s" label="35B gen, full GPU offload" />
       <Stat value="1,495 t/s" label="Prefill @2k context" />
-      <Stat value="18.9 t/s" label="27B peak w/ MTP, 81% acceptance" />
+      <Stat value="23.7 t/s" label="27B peak w/ MTP, 95% acceptance" />
       <Stat value="~5x" label="Prefill gain, rocWMMA disabled" />
     </StatRow>
 

@@ -100,9 +100,9 @@ const featuredSystems: FeaturedSystem[] = [
     eyebrow: "Local LLM serving / GPU systems",
     value:
       "A hand-patched llama.cpp build serving four models on GPU hardware the project doesn't officially support — every call traced and nightly graded.",
-    metric: "47.8 t/s",
+    metric: "44.4 t/s",
     metricLabel: "35B generation, full GPU offload",
-    proof: ["Allocator bug fixed at the source", "Speculative decoding (+81% draft acceptance)", "Nightly LLM-as-judge evals"],
+    proof: ["Allocator bug fixed at the source", "Speculative decoding (95% draft acceptance)", "Nightly LLM-as-judge evals"],
     stack: ["llama.cpp", "ROCm", "Langfuse"],
     status: "serving every agent workflow here",
     href: "/projects/inference-engine",
