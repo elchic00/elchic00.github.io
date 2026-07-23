@@ -22,24 +22,20 @@ const InferenceCaseStudy = () => (
   >
     <Section title="What Unmetered Inference Buys">
       <p>
-        The point of running this locally isn't that it's cheaper than an API bill — it's that a
-        $0 marginal cost per call changes which ideas are worth trying. When every experiment is
-        free, you stop pre-filtering them. I can leave an agent looping overnight on a hunch,
-        re-run a prompt fifty times to see the variance, throw a 100k-token context at a question
-        to find out if it helps, or rewrite a system prompt at 2am and immediately regrade a month
-        of traces against it. On metered inference, most of those get talked out of existence
-        before they're tried — not because they're bad ideas, but because each one has to justify
-        its own line item.
+        Running locally isn't about a cheaper API bill — it's that $0 per call changes which ideas
+        are worth trying. When every experiment is free, you stop pre-filtering them: leave an
+        agent looping overnight on a hunch, re-run a prompt fifty times for variance, throw a
+        100k-token context at a question to see if it helps, rewrite a system prompt at 2am and
+        regrade a month of traces against it. On metered inference, most of those never happen —
+        not because they're bad ideas, but because each one has to justify a line item.
       </p>
       <p>
-        Whole workloads here only exist because they're free. Every call routes through a gateway
-        that traces it, and a nightly eval loop grades a sample and clusters the low-quality
-        turns — a metering-hostile pattern, since it means paying twice for every request worth
-        keeping. Voice memos get transcribed with speaker diarization the moment they land.
-        Screenshots go to a vision model without me weighing whether this one is worth it. None of
-        it is rented, so none of it can become someone else's outage, someone else's deprecation
-        notice, or someone else's repricing — and nothing sensitive leaves the LAN to get
-        processed.
+        Whole workloads exist only because they're free. Every call is traced, and a nightly eval
+        loop grades a sample and clusters the low-quality turns — a metering-hostile pattern that
+        pays twice for every request worth keeping. Voice memos get transcribed with speaker
+        diarization the moment they land; screenshots go to a vision model without me weighing
+        whether this one's worth it. None of it is rented, so none of it can become someone else's
+        outage, deprecation notice, or repricing — and nothing sensitive leaves the LAN.
       </p>
       <p>
         That runs on four models resident at once on a{" "}

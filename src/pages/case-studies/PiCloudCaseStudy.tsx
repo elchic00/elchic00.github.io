@@ -3,7 +3,7 @@ import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./Case
 const PiCloudCaseStudy = () => (
   <CaseStudyLayout
     title="Pi-Cloud"
-    subtitle="Twelve self-hosted services on a Raspberry Pi 5, run the way I'd want production infrastructure run: clear service boundaries, no public ports, health checks on everything, and backups I've actually restored from."
+    subtitle="Twelve self-hosted services on a Raspberry Pi 5, run like real production infrastructure: clear service boundaries, no public ports, health checks everywhere, and backups I've restored from."
     tech={[
       "Docker",
       "Tailscale",
@@ -35,9 +35,9 @@ const PiCloudCaseStudy = () => (
         sprawl.
       </p>
       <p>
-        Self-hosting trades convenience for responsibility. The value is understanding that trade
-        and choosing it deliberately for the services where privacy and control are worth the
-        operational overhead — not applying it everywhere out of principle.
+        Self-hosting trades convenience for responsibility. The value is choosing that trade
+        deliberately — self-hosting where privacy and control are worth the overhead, not
+        everywhere out of principle.
       </p>
     </Section>
 

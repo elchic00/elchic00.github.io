@@ -19,8 +19,8 @@ const HermesCaseStudy = () => (
         The agent runtime itself, <code>hermes-agent</code>, is Nous Research's open-source harness
         (MIT-licensed). I didn't write it — I deployed it, and I built the observability and safety
         layer around it. That distinction matters: running an agent unattended for weeks is a
-        different problem than running one in a notebook while you watch. You need to know if it's
-        actually doing a good job, not just whether it's still running.
+        different problem than running one in a notebook while you watch. You need to know whether
+        it's doing a good job, not just whether it's still running.
       </p>
     </Section>
 
@@ -85,9 +85,9 @@ const HermesCaseStudy = () => (
       <p>
         The fix was smaller than the symptom suggested: route the judge through the{" "}
         <code>ollama_chat/</code> path with <code>think:false</code> instead of the default
-        endpoint, and the same scoring pass drops from minutes to seconds per trace. It's a good
-        reminder that "smarter mode" isn't free, and that matching the model's reasoning budget to
-        the actual shape of the task is part of the job, not a nice-to-have.
+        endpoint, and the same scoring pass drops from minutes to seconds per trace. The lesson:
+        "smarter mode" isn't free — matching the model's reasoning budget to the shape of the task
+        is part of the job, not a nice-to-have.
       </p>
     </Callout>
 

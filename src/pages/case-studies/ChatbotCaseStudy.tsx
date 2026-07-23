@@ -128,10 +128,9 @@ const ChatbotCaseStudy = () => (
 
     <Section title="Limitations">
       <p>
-        A few honest caveats. The assistant only knows what's in the project corpus and the
-        context files I maintain by hand — it doesn't crawl the rest of the site or reason
-        past what I've written for it, so it can be confidently wrong about anything outside
-        that scope. Conversation memory lives in the browser tab, not a database, so it
+        The assistant only knows what's in the project corpus and the context files I maintain
+        by hand — it doesn't crawl the rest of the site or reason past what I've written for it,
+        so it can be confidently wrong about anything outside that scope. Conversation memory lives in the browser tab, not a database, so it
         resets when you close the chat. And the keyword-scoring approach I'm defending above
         has a shelf life: if the project list grows a lot, or if visitors ask questions that
         don't share vocabulary with how I described a project, lexical matching will start
