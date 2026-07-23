@@ -78,7 +78,7 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 **Nodes**:
 - **Framework Desktop** - Local LLM inference, running large open-weight models fully on GPU instead of relying on hosted APIs
 - **Mac Mini** - Orchestrates Hermes' scheduled agent workflows, multi-model routing, and retrieval/memory
-- **Raspberry Pi 5** - Runs Pi-Cloud, 10 self-hosted services replacing paid cloud subscriptions
+- **Raspberry Pi 5** - Runs Pi-Cloud, 12 self-hosted services (photos, passwords, documents, DNS, search, monitoring, security), several replacing paid SaaS
 
 **Hermes (AI agent platform)**:
 - Multi-model routing across locally-hosted models

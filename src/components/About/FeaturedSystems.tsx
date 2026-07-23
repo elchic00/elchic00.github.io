@@ -84,7 +84,7 @@ const featuredSystems: FeaturedSystem[] = [
     eyebrow: "Private cloud / edge gateway",
     value:
       "A private edge gateway that replaces default cloud habits with observable, zero-trust infrastructure.",
-    metric: "10",
+    metric: "12",
     metricLabel: "self-hosted services",
     proof: ["DNS + identity", "Telemetry dashboard", "Recovery playbooks"],
     stack: ["Pi-hole", "Tailscale", "Prometheus"],

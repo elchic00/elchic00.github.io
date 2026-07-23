@@ -3,7 +3,7 @@ import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./Case
 const PiCloudCaseStudy = () => (
   <CaseStudyLayout
     title="Pi-Cloud"
-    subtitle="Ten self-hosted services on a Raspberry Pi 5, run the way I'd want production infrastructure run: clear service boundaries, no public ports, health checks on everything, and backups I've actually restored from."
+    subtitle="Twelve self-hosted services on a Raspberry Pi 5, run the way I'd want production infrastructure run: clear service boundaries, no public ports, health checks on everything, and backups I've actually restored from."
     tech={[
       "Docker",
       "Tailscale",
@@ -26,8 +26,9 @@ const PiCloudCaseStudy = () => (
   >
     <Section title="Why self-host">
       <p>
-        I run ten private services — photo storage, password management, document search, DNS
-        filtering, remote access, and monitoring — on a Raspberry Pi 5 with 500GB of NVMe storage.
+        I run twelve private services — photo storage, password management, document search, DNS
+        filtering, private web search, remote access, and monitoring — on a Raspberry Pi 5 with
+        500GB of NVMe storage.
         None of it is trying to recreate a hyperscaler. The point is owning the data path for the
         categories where that actually matters, understanding exactly how each piece fails, and
         keeping the whole thing maintainable at home scale instead of accumulating unmanageable
@@ -45,8 +46,9 @@ const PiCloudCaseStudy = () => (
         Each service gets its own directory, its own configuration, and its own environment file:{" "}
         <strong>Immich</strong> for photos, <strong>Vaultwarden</strong> for passwords and 2FA,{" "}
         <strong>Paperless-ngx</strong> for document management with OCR search,{" "}
-        <strong>Pi-hole</strong> for DNS-level ad and tracking filtering, <strong>CrowdSec</strong>{" "}
-        for intrusion detection, <strong>Uptime Kuma</strong> for health and heartbeat checks,{" "}
+        <strong>Pi-hole</strong> for DNS-level ad and tracking filtering, <strong>SearXNG</strong>{" "}
+        for a private metasearch engine, <strong>CrowdSec</strong> for intrusion detection,{" "}
+        <strong>Uptime Kuma</strong> for health and heartbeat checks,{" "}
         <strong>Tailscale</strong> for remote access, a <strong>Prometheus/Grafana</strong>{" "}
         monitoring stack, a <strong>Homepage</strong> dashboard for a single operational view, and{" "}
         <strong>Watchtower</strong> for automated container updates.
@@ -55,7 +57,7 @@ const PiCloudCaseStudy = () => (
         That separation is deliberate, not incidental. It keeps upgrades, restores, and incident
         investigation scoped to one service instead of turning the whole platform into a single
         blast radius — if Paperless-ngx breaks, I'm debugging Paperless-ngx, not untangling it from
-        nine other services sharing state.
+        eleven other services sharing state.
       </p>
       <Figure
         src="/images/case-studies/pi-cloud-homepage.webp"
@@ -81,7 +83,7 @@ const PiCloudCaseStudy = () => (
     </Section>
 
     <StatRow>
-      <Stat value="10" label="Self-hosted services" />
+      <Stat value="12" label="Self-hosted services" />
       <Stat value="0" label="Public ports exposed" />
       <Stat value="4" label="Grafana dashboards" />
       <Stat value="2" label="Independent recovery paths" />
@@ -137,7 +139,7 @@ const PiCloudCaseStudy = () => (
       </p>
       <p>
         It's also explicitly not trying to be enterprise infrastructure: one Raspberry Pi running
-        all ten services, no cluster, no failover node. That's a deliberate scope decision for a
+        all twelve services, no cluster, no failover node. That's a deliberate scope decision for a
         personal platform, not an oversight — but it does mean a hardware failure on the Pi itself
         takes every service down until the recovery media gets restored onto new hardware, which is
         exactly why the recovery path being tested, not just documented, mattered enough to build
