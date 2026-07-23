@@ -48,7 +48,7 @@ export const SKILLS = `
 - MongoDB - NoSQL document databases
 - Supabase - Backend-as-a-service
 - Firebase - Real-time databases, authentication
-- ChromaDB - Vector storage for the Hermes agent platform
+- sqlite-vec - Local vector store backing the Hermes agent's note retrieval (evaluated ChromaDB + mem0-oss first, pulled it)
 - Data Science - Pandas, Matplotlib, NumPy
 
 **DevOps & Infrastructure**:
@@ -84,7 +84,7 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 - Multi-model routing across locally-hosted models
 - Execution tracing and an eval loop via Langfuse
 - Human-in-the-loop approval gates before any side-effecting action executes
-- Self-hosted search (SearXNG) and vector retrieval (ChromaDB) in place of hosted equivalents
+- Self-hosted search (SearXNG) and local vector retrieval (sqlite-vec, Ollama embeddings) in place of hosted equivalents
 
 **Pi-Cloud (edge services, zero-trust networking)**:
 - **Tailscale** (WireGuard-based mesh VPN) for secure remote/public-network access with no open ports exposed to the internet

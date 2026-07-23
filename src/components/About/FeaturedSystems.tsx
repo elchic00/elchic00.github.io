@@ -70,7 +70,7 @@ const featuredSystems: FeaturedSystem[] = [
       "Trustworthy local LLM automation with production-style traces, evals, and approval gates.",
     metric: "3 nodes",
     metricLabel: "homelab agent ops",
-    proof: ["Langfuse traces + evals", "HITL side-effect gates", "Self-hosted search/RAG (SearXNG, ChromaDB)"],
+    proof: ["Langfuse traces + evals", "HITL side-effect gates", "Self-hosted search/RAG (SearXNG, sqlite-vec)"],
     stack: ["Local inference", "Hermes", "Langfuse"],
     status: "dry-run protected",
     // Hermes is a real case-study modal now (see Pi-Cloud's identical pattern) —
