@@ -39,17 +39,17 @@ export interface NavItem {
 // Single source of truth for all navigation items
 export const NAV_ITEMS: NavItem[] = [
   {
-    name: "Accessibility",
-    link: "/#accessibility-expertise",
-    icon: UserGroupIcon,
-    iconBg: "bg-cyan-500/20 text-cyan-400",
-    type: "scroll",
-  },
-  {
     name: "Experience",
     link: "/#experience",
     icon: BriefcaseIcon,
     iconBg: "bg-blue-500/20 text-blue-400",
+    type: "scroll",
+  },
+  {
+    name: "Accessibility",
+    link: "/#accessibility-expertise",
+    icon: UserGroupIcon,
+    iconBg: "bg-cyan-500/20 text-cyan-400",
     type: "scroll",
   },
   {
