@@ -148,13 +148,16 @@ export const Navbar = () => {
       const progress = (window.scrollY / totalHeight) * 100;
       setScrollProgress(progress);
 
-      const sections = sectionIds
+      // Sort by actual page position, not nav order — the loop below assumes
+      // top-to-bottom order, and NAV_ITEMS order doesn't match the DOM.
+      const sections = (sectionIds
         .map((id) => {
           if (!id) return null;
           return document.getElementById(id.replace("#", ""));
         })
-        .filter(Boolean) as HTMLElement[];
-      
+        .filter(Boolean) as HTMLElement[])
+        .sort((a, b) => a.offsetTop - b.offsetTop);
+
       const scrollPosition = window.scrollY + 150; // Offset for navbar height
 
       for (let i = sections.length - 1; i >= 0; i--) {
