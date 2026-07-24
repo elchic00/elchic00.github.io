@@ -11,8 +11,7 @@
     "PostgreSQL",
     "GraphQL",
     "REST APIs",
-    "Microservices",
-    "Supabase"
+    "Microservices"
   ],
   "Platform & DX Architecture": [
     "CI/CD Pipeline Design",

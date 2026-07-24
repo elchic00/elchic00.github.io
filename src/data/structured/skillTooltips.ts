@@ -28,7 +28,6 @@ export const skillTooltips: Record<string, string> = {
   MySQL: "Database management and query optimization",
   SQLite: "Embedded database solutions",
   MongoDB: "NoSQL document-based data storage",
-  Supabase: "Backend-as-a-Service with real-time features",
   GraphQL: "Efficient API queries and data fetching",
   "REST APIs": "RESTful service design and integration",
   Microservices: "Distributed system architecture",

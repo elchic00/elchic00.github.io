@@ -46,7 +46,6 @@ export const SKILLS = `
 - MySQL - Relational database design
 - SQLite - Lightweight database solutions
 - MongoDB - NoSQL document databases
-- Supabase - Backend-as-a-service
 - Firebase - Real-time databases, authentication
 - sqlite-vec - Local vector store backing the Hermes agent's note retrieval (evaluated ChromaDB + mem0-oss first, pulled it)
 - Data Science - Pandas, Matplotlib, NumPy
