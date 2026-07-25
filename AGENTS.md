@@ -35,14 +35,14 @@ Deployment commands intentionally are not part of the normal workflow; see the n
 
 ## Architecture
 
-The frontend renders the global AI chat, which POSTs to the Cloudflare Worker. The Worker validates and rate-limits requests, selects relevant project context with deterministic keyword matching, and calls Gemini. This is lightweight keyword RAG, not vector search.
+The frontend renders the global AI chat, which POSTs to the Cloudflare Worker. The Worker validates and rate-limits requests, adds the complete compact project reference sheet plus recent conversation history, and calls Gemini. The corpus is intentionally small enough that it does not need a retrieval or vector-search layer.
 
-Detailed architecture, component ownership, build behavior, and deployment surfaces are documented in `docs/ARCHITECTURE.md`. AI-specific implementation details are in `docs/AI_CHAT.md` and `docs/RAG-IMPLEMENTATION.md`.
+Detailed architecture, component ownership, build behavior, and deployment surfaces are documented in `docs/ARCHITECTURE.md`. AI-specific implementation details are in `docs/AI_CHAT.md` and `docs/AI-CONTEXT-IMPLEMENTATION.md`.
 
 ## Sources of Truth
 
 - UI project cards: `src/data/structured/projects.json`
-- AI project retrieval corpus: `public/knowledge/projects.json`
+- AI project reference sheet: `public/knowledge/projects.json`
 - AI context sources: `src/data/context/systemPrompt.ts`, `biography.ts`, and `skills.ts`
 - Combined context export: `src/data/context/index.ts`
 - Generated/deployed context destination: `worker/index.js`
@@ -90,7 +90,7 @@ Before finishing:
 
 ## Scoped Rules and References
 
-Claude loads more detailed instructions only for the affected area:
+Detailed per-area rules live in `.claude/rules/`. Claude Code auto-loads them by path; other agents should read the relevant file before working in that area:
 
 - `.claude/rules/frontend.md`
 - `.claude/rules/worker.md`
@@ -104,5 +104,5 @@ Repository references:
 - `docs/COMPONENTS.md`
 - `docs/HOOKS.md`
 - `docs/IMAGE_OPTIMIZATION.md`
-- `docs/RAG-IMPLEMENTATION.md`
+- `docs/AI-CONTEXT-IMPLEMENTATION.md`
 - `docs/DOCUMENTATION_AUDIT.md`
