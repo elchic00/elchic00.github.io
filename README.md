@@ -1,576 +1,71 @@
-# 👋 Andrew Alagna - Software Engineer Portfolio
+# Andrew Alagna
 
-**Welcome to my corner of the internet!** I'm Andrew Alagna, a Software Engineer at American Express who loves building accessible, user-friendly web applications. This portfolio showcases my work, shares my travel photography, features an AI chat assistant, and yes... you can play Snake. 🐍
+[Visit the site](https://elchic00.github.io) · [LinkedIn](https://www.linkedin.com/in/andrew-a-10b88215b/) · [GitHub](https://github.com/elchic00)
 
-[![Live Site](https://img.shields.io/badge/Live-elchic00.github.io-blue?style=for-the-badge)](https://elchic00.github.io)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/andrew-a-10b88215b/)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/elchic00)
+Hey, I’m Drew. I’m a New York software engineer who found my way to computer science through business, chemistry, and construction. That path left me with a bias for accessible, practical products—and for understanding the systems behind them, not just the UI in front of them. This repository powers my portfolio: professional work, personal projects, travel photos, and a few playful details because a portfolio should still feel like a person made it.
 
----
+## What’s here
 
-## 🌟 Features
+- A React and TypeScript portfolio focused on accessible, responsive frontend work.
+- Project case studies for Hermes, local AI inference, Pi-Cloud, and the portfolio chat itself.
+- A travel gallery, contact form, and a small Canvas Snake game.
+- An AI chat assistant backed by a Cloudflare Worker and Gemini. It uses a compact, structured reference for the whole portfolio—no vector database where one is not needed.
 
-### 💼 Professional Work & Experience
+## Stack
 
-- **Experience Timeline** - Professional journey at American Express + mentorship roles
-- **6 Featured Projects** - Full-stack applications showcasing React, Python, TypeScript, and more
-- **Skills Matrix** - Technical skills organized by category with interactive tooltips
-- **Resume** - Downloadable PDF with complete work history
+- **Frontend:** React, TypeScript, Vite, Tailwind CSS, React Router
+- **Services:** Cloudflare Workers, Gemini, EmailJS
+- **Quality:** semantic HTML, keyboard-friendly interactions, DOMPurify, responsive media, and a small set of reusable components
+- **Hosting:** GitHub Pages for the site; Cloudflare Workers for chat
 
-### 🤖 AI Chat Assistant
-
-- **Interactive AI-powered chat** answering questions about my experience, projects, and skills
-- **Powered by Google Gemini 2.5 Flash** with secure Cloudflare Workers backend
-- **Rate-limited and optimized** for natural conversations (free tier: 1,500 req/day)
-- **Action buttons** - Navigate to sections, download resume, open LinkedIn
-- **Conversational memory** - Remembers context for better responses
-
-[📖 AI Chat Documentation](docs/AI_CHAT.md)
-
-### 🌍 Travel Photography Gallery
-
-- **Interactive photo galleries** from adventures around the world
-- **6 major trips** - Japan, Ecuador/Galapagos, Puerto Rico, Thailand, Laos, Costa Rica
-- **78+ curated photos** - Wildlife, landscapes, and cultural moments
-- **Lightbox modal** with keyboard navigation (←/→ arrows, ESC to close)
-- **Multi-level zoom** - 3 zoom levels (100%, 125%, 175%) with click-to-zoom positioning
-- **Touch-optimized** - Swipe gestures for mobile devices
-
-### 🎮 Snake Game
-
-- **Fully functional retro game** built with HTML5 Canvas
-- **Keyboard controls** - Arrow keys or WASD, Space to pause
-- **Touch controls** - Swipe gestures for mobile
-- **High score persistence** - Saved to localStorage
-- **Progressive difficulty** - Speed increases as you score
-
-[🎮 Play Snake](https://elchic00.github.io/#/snake)
-
-### 📬 Contact Form
-
-- **EmailJS integration** - Serverless email delivery
-- **Real-time validation** - Name, email, message with error messages
-- **Draft auto-save** - Automatic localStorage persistence with debouncing
-- **Draft restoration** - Resumes unsent messages on page revisit
-- **Custom modals** - Themed confirmation dialogs (success, clear draft)
-- **Mailto fallback** - Alternative for VPN/firewall issues
-- **Message templates** - Quick-fill templates for common inquiries
-- **Character counter** - Real-time feedback with 1000-character limit
-- **Accessibility** - WCAG AAA compliant with proper ARIA labels
-- **Loading states** - Visual feedback during submission
-
-### ⚡ Performance & Accessibility
-
-[![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=for-the-badge&logo=lighthouse)](https://pagespeed.web.dev/analysis/https-elchic00-github-io/8av5etqmba?form_factor=mobile)
-
-- **Perfect Lighthouse Score: 100/100** - Performance, Accessibility, Best Practices, SEO
-  - 🚀 **Performance: 100** - 0.3s First Contentful Paint, 0s Cumulative Layout Shift
-  - ♿ **Accessibility: 100** - WCAG AAA compliant with semantic HTML, ARIA labels, keyboard navigation
-  - ✅ **Best Practices: 100** - Secure, modern web standards
-  - 📊 **SEO: 100** - Optimized meta tags, structured data, mobile-friendly
-- **Lazy Loading** - Code splitting and lazy-loaded routes
-- **Responsive Design** - Mobile-first with Tailwind CSS
-- **Image Optimization** - WebP format with optimized dimensions
-- **Scroll Animations** - Intersection Observer for smooth reveals
-
-[📊 View Full PageSpeed Report](https://pagespeed.web.dev/analysis/https-elchic00-github-io/8av5etqmba?form_factor=mobile)
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend
-
-- **[React 18](https://reactjs.org/)** - UI framework with hooks and TypeScript
-- **[TypeScript 5.9](https://www.typescriptlang.org/)** - Type-safe JavaScript
-- **[Vite 7.1](https://vitejs.dev/)** - Next-generation build tool with HMR
-- **[Tailwind CSS 3.0](https://tailwindcss.com/)** - Utility-first styling
-- **[React Router 6](https://reactrouter.com/)** - Client-side routing with hash support
-
-### Backend & APIs
-
-- **[Google Gemini 2.5 Flash](https://ai.google.dev/)** - AI chat assistant
-- **[Cloudflare Workers](https://workers.cloudflare.com/)** - Serverless API proxy
-- **[EmailJS](https://www.emailjs.com/)** - Contact form email delivery
-
-### Development & Build
-
-- **[ESLint + TypeScript](https://typescript-eslint.io/)** - Code quality and type checking
-- **[PostCSS + Autoprefixer](https://postcss.org/)** - CSS processing
-- **[Sharp](https://sharp.pixelplumbing.com/)** - Image optimization scripts
-
-### Deployment & Hosting
-
-- **[GitHub Pages](https://pages.github.com/)** - Static site hosting
-- **[Wrangler](https://developers.cloudflare.com/workers/wrangler/)** - Cloudflare Workers CLI
-- **[gh-pages](https://www.npmjs.com/package/gh-pages)** - Automated deployment
-
-### Additional Libraries
-
-- **[Heroicons](https://heroicons.com/)** - Beautiful SVG icons
-- **[marked](https://marked.js.org/)** - Markdown parser for AI chat
-- **[DOMPurify](https://github.com/cure53/DOMPurify)** - XSS sanitization
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- **Node.js 16+** and npm
-- **Git** for version control
-- **(Optional)** Cloudflare account for AI chat deployment
-
-### Installation
+## Run it locally
 
 ```bash
-# Clone the repository
 git clone https://github.com/elchic00/elchic00.github.io.git
-
-# Navigate to the project
 cd elchic00.github.io
-
-# Install dependencies
 npm install
-
-# Start development server
 npm start
-
-# Open http://localhost:3000 in your browser
 ```
 
-### Environment Variables
+The site runs at [http://localhost:3000](http://localhost:3000).
 
-Create a `.env.local` file:
+To enable the contact form, copy `.env.example` to `.env.local` and add your EmailJS public values. The rest of the site works without them.
 
 ```bash
-VITE_EMAIL_SERVICE_ID=your_emailjs_service_id
-VITE_EMAIL_TEMPLATE_ID=your_emailjs_template_id
-VITE_EMAIL_PUBLIC_KEY=your_emailjs_public_key
+cp .env.example .env.local
 ```
 
-Get EmailJS credentials at [emailjs.com](https://www.emailjs.com/)
-
----
-
-## 📂 Project Structure
-
-```
-elchic00.github.io/
-├── public/
-│   ├── images/
-│   │   ├── projects/           # Project screenshots
-│   │   └── travel/             # Travel photography (70+ photos)
-│   ├── andrew-alagna-resume.pdf
-│   ├── sitemap.xml             # SEO sitemap
-│   └── image-sitemap.xml       # Image SEO
-├── src/
-│   ├── components/
-│   │   ├── AIChatAssistant/    # AI chat (8 subcomponents)
-│   │   │   ├── AIChatAssistant.tsx
-│   │   │   ├── ChatWindow.tsx
-│   │   │   ├── ChatMessage.tsx
-│   │   │   ├── ChatInput.tsx
-│   │   │   ├── ChatHeader.tsx
-│   │   │   ├── SuggestedQuestions.tsx
-│   │   │   ├── LoadingIndicator.tsx
-│   │   │   ├── types.ts
-│   │   │   ├── utils.ts
-│   │   │   └── index.ts
-│   │   ├── Travel/             # Gallery components
-│   │   │   ├── TripCard.tsx
-│   │   │   ├── TripNavigation.tsx
-│   │   │   └── PhotoGallery.tsx
-│   │   ├── shared/             # Reusable components
-│   │   │   ├── Button.tsx
-│   │   │   ├── Alert.tsx
-│   │   │   ├── Modal.tsx
-│   │   │   ├── ConfirmDialog.tsx
-│   │   │   ├── SocialLinks.tsx
-│   │   │   ├── VideoPlayer.tsx
-│   │   │   └── ...
-│   │   ├── About.tsx
-│   │   ├── Contact.tsx         # Contact form
-│   │   ├── Experience.tsx      # Work timeline
-│   │   ├── Projects.tsx        # Project showcase
-│   │   ├── Skills.tsx          # Skills matrix
-│   │   ├── Travel.tsx          # Travel gallery
-│   │   ├── Snake.tsx           # Snake game
-│   │   ├── Navbar.tsx
-│   │   ├── Footer.tsx
-│   │   └── ...
-│   ├── hooks/
-│   │   ├── index.ts            # 7 general hooks
-│   │   ├── useSnakeGame.ts     # Game logic (308 lines)
-│   │   ├── useActiveTrip.ts    # Gallery navigation
-│   │   └── useContactForm.ts   # Form management (203 lines)
-│   ├── data/
-│   │   ├── portfolioContext.ts # AI chat knowledge base (600+ lines)
-│   │   ├── projects.json       # Project data
-│   │   ├── skills.json         # Skills data
-│   │   ├── trips.json          # Travel data
-│   │   └── skillTooltips.ts    # Skill descriptions
-│   ├── types/
-│   │   └── index.ts            # TypeScript definitions
-│   ├── constants/
-│   │   └── index.ts            # App configuration
-│   ├── utils/
-│   │   └── generateTravelStructuredData.ts
-│   ├── pages/
-│   │   └── HomePage.tsx
-│   ├── App.tsx
-│   ├── routes.tsx              # Route configuration
-│   ├── index.tsx               # Entry point
-│   └── index.css               # Global styles
-├── worker/
-│   └── index.js                # Cloudflare Worker for AI chat
-├── scripts/
-│   ├── sync-portfolio-context.js  # Sync AI context
-│   ├── optimize-images.js         # WebP conversion
-│   ├── generate-logos.js          # Favicon generation
-│   └── compress-videos.js         # Video optimization
-├── docs/
-│   ├── AI_CHAT.md              # AI chat setup guide
-│   └── HOOKS.md                # Custom hooks documentation
-├── package.json
-├── vite.config.ts
-├── wrangler.toml               # Cloudflare configuration
-├── tsconfig.json
-├── tailwind.config.js
-├── postcss.config.js
-└── README.md
-```
-
----
-
-## 🎯 Available Scripts
-
-### Development
+The chat worker is optional for local UI work. To run it locally, set `GEMINI_API_KEY` as a Wrangler secret and use:
 
 ```bash
-npm start              # Start Vite dev server (port 3000)
-npm run dev            # Same as npm start
-npm run worker:dev     # Run Cloudflare Worker locally
+npm run worker:dev
 ```
 
-### Build & Deploy
+## Useful commands
 
 ```bash
-npm run build          # Build for production (TypeScript + Vite)
-npm run preview        # Preview production build locally
-npm run deploy         # Deploy to GitHub Pages
-npm run worker:deploy  # Deploy AI chat worker to Cloudflare
+npm start             # Vite development server
+npm run build         # TypeScript check, production build, critical CSS inlining
+npm run preview       # Preview the production build
+npm run worker:dev    # Run the Cloudflare Worker locally
+npm run sync-context  # Sync AI context sources into worker/index.js
 ```
 
-### Utilities
+Deployment commands are intentionally not listed as everyday setup steps. They publish the site or worker and should be used deliberately.
 
-```bash
-npm run sync-context      # Sync AI portfolio context to worker
-npm run optimize-images   # Convert images to WebP format
-npm run generate-logos    # Generate favicon variants
-```
+## Where to look
 
----
+- `src/pages/` and `src/components/` — routes and UI
+- `src/data/structured/` — visible project, skill, and travel data
+- `src/data/context/` + `public/knowledge/projects.json` — source material for the chat assistant
+- `worker/index.js` — Cloudflare Worker for chat requests
+- `docs/ARCHITECTURE.md` — current architecture and source-of-truth map
+- `docs/AI_CHAT.md` — chat setup and behavior
 
-## 🤖 AI Chat Setup
+## A note on reuse
 
-The AI chat assistant requires minimal setup:
+This is a personal portfolio, not a starter template—but you’re welcome to look around, learn from it, or borrow an idea with attribution. If you build something inspired by it, I’d genuinely enjoy seeing it.
 
-### 1. Get API Key
+## Say hello
 
-Visit [Google AI Studio](https://aistudio.google.com/app/apikey) and create a free API key.
-
-### 2. Login to Cloudflare
-
-```bash
-npx wrangler login
-```
-
-### 3. Set API Key as Secret
-
-```bash
-npx wrangler secret put GEMINI_API_KEY
-# Paste your API key when prompted
-```
-
-### 4. Deploy Worker
-
-```bash
-npm run worker:deploy
-```
-
-**That's it!** The AI chat is now live on your site.
-
-For detailed setup, troubleshooting, and customization, see [docs/AI_CHAT.md](docs/AI_CHAT.md).
-
----
-
-## 📚 Documentation
-
-- **[AI Chat Guide](docs/AI_CHAT.md)** - Complete setup, customization, and troubleshooting
-- **[Custom Hooks](docs/HOOKS.md)** - Documentation for 11 reusable React hooks
-- **[Shared Components](docs/COMPONENTS.md)** - Modal system, alerts, and reusable UI components
-- **[Image Optimization](docs/IMAGE_OPTIMIZATION.md)** - Guide for optimizing photos
-
----
-
-## ✨ Key Features Breakdown
-
-### 1. **Modular Architecture**
-
-Components are organized by feature with clear separation of concerns:
-
-```
-components/
-├── AIChatAssistant/    # 8 focused sub-components
-├── Travel/             # 3 gallery components
-└── shared/             # 8 reusable UI components
-```
-
-### 2. **Custom React Hooks** (11 Total)
-
-Encapsulate complex logic for reusability:
-
-- `useLocalStorage` - State persistence with JSON serialization
-- `useFormValidation` - Form management with multi-rule validation
-- `useAsync` - Async operation with loading/error states
-- `useDebounce` - Value debouncing for performance
-- `useClickOutside` - Click detection for modals/dropdowns
-- `useWindowSize` - Responsive breakpoint tracking
-- `useScrollReveal` - Intersection Observer animations
-- `useSnakeGame` - Complete game logic (308 lines!)
-- `useContactForm` - Contact form + draft persistence (300 lines)
-- `useActiveTrip` - Gallery navigation tracking
-- `usePageTracking` - Google Analytics integration
-
-[📖 View Full Hook Documentation](docs/HOOKS.md)
-
-### 3. **Performance Optimizations**
-
-- ⚡ **Code Splitting** - Lazy-loaded routes (Resume, Travel, Snake)
-- ⚡ **Image Optimization** - WebP format with JPEG fallback
-- ⚡ **Bundle Optimization** - Manual chunks for React, Router, Markdown
-- ⚡ **Debouncing** - Window resize, form validation
-- ⚡ **Lazy Loading** - Images and markdown library
-
-### 4. **Reusable Component Library**
-
-8 shared components for consistency:
-
-- `Modal` - Portal-rendered base modal with scroll locking
-- `ConfirmDialog` - Themed confirmation dialogs (danger/warning/info)
-- `Alert` - Toast notification system with auto-dismiss
-- `Button` - Variants, sizes, and loading states
-- `SocialLinks` - Social media icon links
-- `VideoPlayer` - Lazy-loaded video with controls
-- And more...
-
-[📖 View Component Documentation](docs/COMPONENTS.md)
-
-### 5. **Accessibility (WCAG AAA)**
-
-- ✅ Semantic HTML structure
-- ✅ Proper heading hierarchy
-- ✅ ARIA labels and roles
-- ✅ Keyboard navigation support
-- ✅ Focus management in modals
-- ✅ Color contrast ratios
-- ✅ Alt text for all images
-- ✅ Form accessibility with aria-describedby
-
-### 6. **SEO Optimization**
-
-- Schema.org structured data (Person, ImageGallery, ImageObject)
-- Image sitemap for Google Images
-- Open Graph and Twitter Card meta tags
-- Semantic URLs with hash routing
-- Descriptive alt text and file names
-
----
-
-## 🌐 Deployment
-
-### Deploy Main Site
-
-```bash
-npm run deploy
-```
-
-This builds the site and deploys to GitHub Pages via the `gh-pages` branch.
-
-### Deploy AI Chat Worker
-
-```bash
-npm run worker:deploy
-```
-
-This syncs the portfolio context and deploys to Cloudflare Workers.
-
-### Custom Domain (Optional)
-
-Add a `CNAME` file to `/public`:
-
-```
-yourdomain.com
-```
-
-Then configure DNS in your domain registrar.
-
----
-
-## 📸 Featured Projects
-
-### 🏋️ **Reps** - Technical Interview Prep
-
-Mobile-first app with React Native + web version for daily coding challenges.
-[🔗 Live Demo](https://reps-pink.vercel.app/)
-
-### 👨‍🏫 **myTeachers** - Education Platform
-
-Student management system with React, Express, PostgreSQL, and Firebase auth.
-[📂 View Code](https://github.com/elchic00/CunyFirst-front)
-
-### 🍎 **Macros-for-geeks** - Nutrition Tracker
-
-Food diary app built with Angular, .NET, and SQLite, integrating USDA FoodData API.
-[📂 View Code](https://github.com/elchic00/Macros-for-geeks)
-
-### 📊 **Crime in Queens NYC** - Data Visualization
-
-Python data analysis with interactive visualizations using Pandas and Matplotlib.
-[🔗 Live Demo](https://elchic00.github.io/CrimeInQueens)
-
-### 🏢 **Invent0ry** - AWS Inventory Management
-
-Full-stack inventory tracking with React and AWS Amplify.
-[📂 View Code](https://github.com/elchic00/invent0ry)
-
-### 🗣️ **myPal** - AAC Mobile App
-
-React Native communication app for children with special needs using PECS.
-[📂 View Code](https://github.com/myPal-TMS/myPal)
-
-[**→ View All Projects Live**](https://elchic00.github.io/#projects)
-
----
-
-## 🌍 Travel Photography
-
-Explore my [travel photo galleries](https://elchic00.github.io/#/travel) featuring:
-
-- �🇵 **Japan (2024)** - Temples, neon cityscapes, onsen towns, Mt. Fuji
-- 🇪🇨 **Ecuador/Galapagos (2025)** - Marine life, tortoises, volcanic landscapes
-- 🇵🇷 **Puerto Rico (2024)** - Colonial architecture, El Yunque rainforest
-- 🇹🇭 **Thailand (2024)** - Temples, elephant sanctuaries, jungle trekking
-- 🇱🇦 **Laos (2024)** - Buddhist culture, Kuang Si Falls, Mekong River
-- 🇨🇷 **Costa Rica (2023)** - Cloud forests, white-water rafting, wildlife
-
-**78+ curated photos** with interactive lightbox and keyboard navigation.
-
----
-
-## 🤝 Contributing
-
-This is a personal portfolio, but feel free to:
-
-- ⭐ **Star this repo** if you find it helpful
-- 🍴 **Fork it** as inspiration for your own portfolio
-- 🐛 **Report issues** via GitHub Issues
-- 💡 **Suggest improvements** via Pull Requests
-
-If you use this code, I'd love to see what you create - drop me a link!
-
----
-
-## 📜 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
-
-## 🙏 Acknowledgments
-
-- **React Team** - For an amazing framework
-- **Tailwind CSS** - Making styling actually enjoyable
-- **Google Gemini** - Powerful free AI API
-- **Cloudflare** - Generous Workers free tier
-- **Open Source Community** - Endless inspiration
-- **CUNY Hunter College** - Education foundation
-- **CodePath** - Teaching and mentorship opportunities
-
----
-
-## 🤝 Let's Connect!
-
-I'm always open to interesting conversations about:
-
-- 💻 Software engineering and web development
-- 🎨 UI/UX design and accessibility
-- 🤖 AI integration and serverless architecture
-- 🌏 Travel and photography
-- 🚀 New opportunities and collaborations
-
-**Find me on:**
-
-- 🌐 Portfolio: [elchic00.github.io](https://elchic00.github.io)
-- 💼 LinkedIn: [Andrew Alagna](https://www.linkedin.com/in/andrew-a-10b88215b/)
-- 🐙 GitHub: [@elchic00](https://github.com/elchic00)
-- 📧 Email: Via [contact form](https://elchic00.github.io/#/#contact)
-
----
-
-## 💡 What This Project Demonstrates
-
-For recruiters and potential employers:
-
-### Frontend Engineering
-
-- ✅ React 18 with TypeScript and modern hooks
-- ✅ Component architecture with proper separation of concerns
-- ✅ Custom hook library (11 hooks, 876 lines of reusable code)
-- ✅ Responsive design with mobile-first approach
-- ✅ Performance optimization (lazy loading, code splitting)
-
-### Full-Stack Capabilities
-
-- ✅ Serverless backend with Cloudflare Workers
-- ✅ API integration (Google Gemini, EmailJS)
-- ✅ Secure secrets management
-- ✅ Rate limiting and error handling
-
-### Accessibility & UX
-
-- ✅ **Perfect Lighthouse Score: 100/100** across all categories
-- ✅ WCAG AAA compliance throughout
-- ✅ Keyboard navigation support
-- ✅ Screen reader optimization
-- ✅ Focus management in modals
-- ✅ Semantic HTML and ARIA labels
-
-### DevOps & Tooling
-
-- ✅ CI/CD with GitHub Actions
-- ✅ Automated deployment scripts
-- ✅ Image optimization pipeline
-- ✅ Environment variable management
-- ✅ TypeScript for type safety
-
-### Software Engineering Practices
-
-- ✅ Modular, maintainable architecture
-- ✅ Comprehensive documentation
-- ✅ Git best practices
-- ✅ Code reusability
-- ✅ Performance monitoring
-
----
-
-<div align="center">
-
-**Built with ❤️ by Andrew Alagna**
-
-⭐ Star this repo if you find it helpful!
-
-[🌐 Visit Live Site](https://elchic00.github.io) | [📧 Get in Touch](https://elchic00.github.io/#/#contact) | [📖 Documentation](docs/)
-
-</div>
+The best way to reach me is through the [contact form](https://elchic00.github.io/#contact), [LinkedIn](https://www.linkedin.com/in/andrew-a-10b88215b/), or the live site above.
