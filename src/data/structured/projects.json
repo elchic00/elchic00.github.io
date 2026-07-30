@@ -20,7 +20,7 @@
   {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "The engine behind every local agentic workflow I run, reachable from my phone over Telegram, with every call traced and nightly graded by its own eval loop. A hand-patched llama.cpp build on GPU hardware the project doesn't officially support: fixed a memory-allocator bug that was capping GPU offload, and traced a week-long regression through a wrong first diagnosis to a one-line bug in my own code, not the dependency everyone assumed was at fault.",
+    "description": "The engine behind every local agentic workflow I run, reachable from my phone over Telegram, with every call traced and nightly graded by its own eval loop. A hand-patched llama.cpp build on GPU hardware the project doesn't officially support: fixed a memory-allocator bug that was capping GPU offload, and traced a week-long regression through a wrong first diagnosis to a one-line bug in my own code, not the dependency I initially suspected.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",

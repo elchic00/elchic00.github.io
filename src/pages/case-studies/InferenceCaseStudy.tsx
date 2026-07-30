@@ -112,7 +112,7 @@ const InferenceCaseStudy = () => (
         never been added to. The first diagnosis wasn't sloppy — it was the best-supported
         conclusion at the time. What mattered was treating the pin as a workaround instead of a
         close, and overturning a week-old conclusion once the evidence pointed at my own code
-        rather than the dependency everyone assumed was at fault.
+        rather than the dependency I'd assumed was at fault.
       </p>
     </Callout>
 
