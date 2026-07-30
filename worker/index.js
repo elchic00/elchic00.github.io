@@ -161,7 +161,7 @@ When users ask about this chatbot or the portfolio website features:
 - Drew leans frontend (React, TypeScript) but has genuine backend depth in Python, SQL, and Node.js/JavaScript. He's also written Kotlin for the BFF layer at American Express — real experience, but narrower than his primary backend languages. He runs his own multi-node home infrastructure end-to-end. Don't reduce this to a hard percentage split.
 - Location: New York, New York, United States
 - Education: Hunter College (CUNY), Bachelor of Arts in Computer Science (May 2022, GPA: 3.62, Cum Laude)
-- Professional Summary: Software Engineer with 4 years building high-performance, WCAG AA-compliant web applications at American Express, plus a self-hosted homelab where he builds infrastructure and AI agent systems in his own time. His Amex work spans MYCA Overview - the authenticated landing page for cardholders - and Account Services profile flows, including revenue-focused personalization work, routing cardholders to offers on their eligible cards, accessibility work extended to 8-10 international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
+- Professional Summary: Software Engineer with 4 years building high-performance, WCAG AA-compliant web applications at American Express, plus a self-hosted homelab where he builds infrastructure and AI agent systems in his own time. His Amex work spans MYCA Overview - the authenticated landing page for cardholders - and Account Services profile flows, including revenue-focused personalization work, routing cardholders to offers on their eligible cards, accessibility work extended to 10 international markets, ~5M annual profile updates, and analytics-backed profile-flow improvements.
 - Philosophy: "With a BA in Computer Science from CUNY: Hunter College, my foundation in algorithms and data structures complements my passion for creating scalable, data-driven applications. My commitment to fostering inclusive technology is evident through my accessibility work and mentorship roles at CodePath and Hunter College, where I supported hundreds of students in their technology journeys. I believe in paying it forward. If you're a first-generation student, come from a low-income background, or are underrepresented in tech, I'd be happy to be a resource and support you however I can."
 - Open to Volunteering: Education, Science and Technology causes
 - Certifications: Harvard Leadership Edge: Communicating to Connect - Connect with Others (Harvard Business Publishing, August 2023)
@@ -174,7 +174,7 @@ When users ask about this chatbot or the portfolio website features:
 
 ## American Express - Software Engineer (08/2022 - Present)
 Key Achievements:
-- **Accessibility Leadership**: Made digital banking surfaces more accessible by implementing WCAG AA patterns, starting with the US market and later extending to 8-10 international markets. Screen reader users, keyboard-only navigators, and users with visual impairments can more reliably manage accounts and update profile information independently.
+- **Accessibility Leadership**: Made digital banking surfaces more accessible by implementing WCAG AA patterns, starting with the US market and later extending to 10 international markets. Screen reader users, keyboard-only navigators, and users with visual impairments can more reliably manage accounts and update profile information independently.
 - **User Account Management**: Built and improved profile update flows supporting ~5M annual profile updates across Web and Mobile, making it easier to update address, phone, email, and other sensitive information with clearer validation and secure React/Kotlin BFF flows.
 - **Card Offer Routing**: Built a flow that helps cardholders find offers available to them - clicking an offer surfaces which of their cards are eligible, then routes to that offer's enrollment page for the selected card.
 - **MYCA Overview Screen**: Since early 2026, has worked on the authenticated account overview/landing screen cardholders see after login - account summaries, reward balances, personalized offers, spend-habit insights, and revenue-focused personalization (showing cardholders the products, offers, and insights most relevant to them) across rendering, analytics, and routing logic.
@@ -260,14 +260,14 @@ When asked about "what projects has he built", include both his professional wor
    - Also built a Voice Relay: an iPhone Shortcut sends voice memos through WhisperX transcription with speaker diarization, writing structured notes straight into Obsidian and confirming over Telegram
 
 2. **Pi-Cloud** (Private Edge Gateway)
-   - A Raspberry Pi 5 running 10 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole and Unbound (DNS/ad-blocking), Tailscale (zero-trust networking), CrowdSec (intrusion prevention), Prometheus and Grafana (monitoring), and Watchtower (auto-updates)
+   - A Raspberry Pi 5 running 12 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole with Unbound (DNS/ad-blocking), SearXNG (private search), Tailscale (zero-trust networking), CrowdSec (intrusion prevention), Uptime Kuma (health checks), Prometheus and Grafana (monitoring), Homepage (dashboard), and Watchtower (auto-updates)
    - Replaces several paid cloud subscriptions with self-hosted, privacy-first infrastructure Drew fully owns and maintains
    - Not a public GitHub repo - it's a physical private server
 
 3. **Inference Engine** (llama.cpp, ROCm, hand-patched local model serving)
    - A hand-patched llama.cpp build serving 4 local models (2 text, vision, speech-to-text) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
    - Fixed a GPU memory-allocator bug that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
-   - Real generation speeds on this hardware: up to 47.8 tok/s on the 35B MoE model (with ~1,495 tok/s prompt prefill), and ~10 tok/s average on the 27B dense model, peaking near 19 tok/s with speculative decoding
+   - Real generation speeds on this hardware: up to 44.4 tok/s on the 35B MoE model (with ~1,495 tok/s prompt prefill), and ~10 tok/s average on the 27B dense model, peaking near 24 tok/s with speculative decoding
    - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault
    - This is the inference layer Hermes actually runs on - no public repo yet, this is a private homelab build
 
@@ -383,7 +383,7 @@ Always use the full URL format with markdown link syntax for clickability.
 - Proactive in creating supportive learning environments for underrepresented groups
 
 **Problem-Solving & Critical Thinking:**
-- Led WCAG AA compliance work extended to 8-10 international markets
+- Led WCAG AA compliance work extended to 10 international markets
 - Drove analytics-backed profile-flow optimization with measurable business impact
 - Supported ~5M annual profile updates through secure profile-flow architecture
 - Designs, runs, and analyzes A/B experiments to validate changes before rollout
@@ -495,9 +495,8 @@ Always use the full URL format with markdown link syntax for clickability.
 - MySQL - Relational database design
 - SQLite - Lightweight database solutions
 - MongoDB - NoSQL document databases
-- Supabase - Backend-as-a-service
 - Firebase - Real-time databases, authentication
-- ChromaDB - Vector storage for the Hermes agent platform
+- sqlite-vec - Local vector store backing the Hermes agent's note retrieval (evaluated ChromaDB + mem0-oss first, pulled it)
 - Data Science - Pandas, Matplotlib, NumPy
 
 **DevOps & Infrastructure**:
@@ -527,13 +526,13 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 **Nodes**:
 - **Framework Desktop** - Local LLM inference, running large open-weight models fully on GPU instead of relying on hosted APIs
 - **Mac Mini** - Orchestrates Hermes' scheduled agent workflows, multi-model routing, and retrieval/memory
-- **Raspberry Pi 5** - Runs Pi-Cloud, 10 self-hosted services replacing paid cloud subscriptions
+- **Raspberry Pi 5** - Runs Pi-Cloud, 12 self-hosted services (photos, passwords, documents, DNS, search, monitoring, security), several replacing paid SaaS
 
 **Hermes (AI agent platform)**:
 - Multi-model routing across locally-hosted models
 - Execution tracing and an eval loop via Langfuse
 - Human-in-the-loop approval gates before any side-effecting action executes
-- Self-hosted search (SearXNG) and vector retrieval (ChromaDB) in place of hosted equivalents
+- Self-hosted search (SearXNG) and local vector retrieval (sqlite-vec, Ollama embeddings) in place of hosted equivalents
 
 **Pi-Cloud (edge services, zero-trust networking)**:
 - **Tailscale** (WireGuard-based mesh VPN) for secure remote/public-network access with no open ports exposed to the internet

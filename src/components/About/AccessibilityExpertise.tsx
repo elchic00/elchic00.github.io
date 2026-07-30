@@ -61,7 +61,7 @@ export const AccessibilityExpertise = () => {
                 <span className="text-green-400 font-semibold text-sm uppercase tracking-wide"> Impact </span>
                 <p className="text-slate-300 mt-1">
                   <strong className="text-white text-base">100% WCAG AA compliance</strong>
-                  . Supported <strong className="text-white">~5M annual profile updates</strong> with a <strong className="text-white">18% completion lift</strong> and <strong className="text-white">16% start-rate lift</strong> on supplementary-profile flows — later extended to 8-10 international markets.
+                  . Supported <strong className="text-white">~5M annual profile updates</strong> with a <strong className="text-white">18% completion lift</strong> and <strong className="text-white">16% start-rate lift</strong> on supplementary-profile flows — later extended to 10 international markets.
                 </p>
               </div>
             </div>
