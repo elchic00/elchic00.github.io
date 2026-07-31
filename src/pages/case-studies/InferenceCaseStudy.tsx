@@ -131,12 +131,52 @@ const InferenceCaseStudy = () => (
         the original patch set was no longer doing anything — one had been superseded upstream,
         the other was never actually load-bearing.
       </p>
+      <p>
+        The eval loop had a subtler problem than latency: the judge alias was pointing at the
+        same model the agent runs on. <code>qwen-35b-a3b</code> was grading{" "}
+        <code>qwen-35b-a3b</code> — the maximal case of LLM-as-judge self-preference bias, and
+        worse, a judge that shares the agent's blind spots will forgive exactly the turns you
+        most need it to flag. I moved the alias to the 27B: different architecture, same box,
+        still $0. That's a floor, not a solution — the Hermes page has what happened when I
+        actually calibrated both judges against frontier labels, and the answer wasn't
+        flattering.
+      </p>
       <Figure
         src="/images/case-studies/inference-grafana.webp"
         alt="Grafana dashboard showing 7 days of live inference metrics: current tokens/sec for all three models, plus generation-speed, prompt-ingestion, and hourly-throughput trend lines"
         caption="Live Grafana view, 7-day window: all three models resident and serving simultaneously — steady-state generation here (~29 t/s on the 35B) is the everyday number, not the single-stream peak figures above."
       />
     </Section>
+
+    <Callout title="The Alert That Fired Because Inference Was Working">
+      <p>
+        Grafana started firing critical <code>target down</code> alerts on both text models
+        while both were serving traffic normally. The endpoint was the problem, not the service.
+        Prometheus scrapes <code>/metrics</code>, and llama.cpp's <code>/metrics</code> handler
+        needs the same task-queue lock the inference loop holds, so it blocks while the model
+        generates. Measured under load: <code>/health</code> returned 200 in <strong>3ms</strong>{" "}
+        while <code>/metrics</code> timed out at <strong>10s</strong>. The scrape job had no{" "}
+        <code>scrape_timeout</code>, so Prometheus fell back to its 10-second default and marked
+        the target down every time the box was busy. The alert was firing precisely because
+        inference was working hard.
+      </p>
+      <p>
+        Underneath the false positive there was a real fault. The 35B was genuinely wedged,
+        separately: Hermes had aborted several turns and llama.cpp kept generating for cancelled
+        tasks, the journal filling with <code>srv stop: cancel task</code> and load average
+        sitting at 30 with nothing legitimately running. A restart took <code>/metrics</code>{" "}
+        from a 12-second timeout to <strong>1.8ms</strong> and load from{" "}
+        <strong>30.3 to 7.2</strong> — which is how I know it was stuck rather than merely busy.
+      </p>
+      <p>
+        Widening the scrape to 60s with a 30s timeout stopped the noise, and it cost real
+        sensitivity: the alert now tolerates busy periods, so it's slower to catch an actual
+        outage. The correct fix is a blackbox HTTP probe against <code>/health</code> for
+        availability, with <code>/metrics</code> kept for stats only. That isn't built. If these
+        alerts recur while the services are healthy, that's the next step rather than widening
+        the timeout again.
+      </p>
+    </Callout>
 
     <Section title="The Silent Failure Mode: GPU Layers Loading Onto CPU After Reboot">
       <p>

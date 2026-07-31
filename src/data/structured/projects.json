@@ -2,7 +2,7 @@
   {
     "title": "Hermes",
     "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
-    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly self-improvement cron that clusters its own low-quality turns and proposes fixes to its own prompt, running on a 3-node homelab with a hand-patched local inference layer. One real run: 11 low-quality turns, 3 proposed fixes, 2 applied, 1 correctly rejected as wrong for the context — nothing changes without my approval.",
+    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a hand-patched local inference layer. The most useful thing I found was the loop reporting last_status: ok for 13 days while completely frozen, because Hermes had declared a crashed run \"completed — 2 proposals sent\"; the fix was taking the LLM out of its own success reporting and making the scheduler read the exit code instead. Proposals still wait on me in Telegram: one real run clustered 11 low-quality turns into 3 fixes, 2 applied, 1 correctly rejected as wrong for the context.",
     "image": "/images/projects/hermes.svg",
     "link": "/projects/hermes",
     "id": "hermes",
@@ -11,7 +11,7 @@
     {
     "title": "Pi-Cloud",
     "subtitle": "Private Infrastructure + Service Operations",
-    "description": "A Raspberry Pi 5 that runs the private services I rely on for photos, passwords, documents, DNS filtering, remote access, monitoring, and recovery. The interesting work is operating it deliberately: clear service boundaries, no public ports, health checks, and backups that can be restored when something fails.",
+    "description": "A Raspberry Pi 5 running 23 containers across 12 Compose projects — photos, passwords, document search, DNS filtering, private search, remote access, monitoring — with zero public ports and two recovery paths kept on deliberately different filesystems. Three of those services aren't just mine: SearXNG, ChromaDB, and Crawl4AI are the search, memory, and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified 2026-07-25: every container carries a restart policy, so a reboot brings the whole stack back with no manual intervention.",
     "image": "/images/projects/pi-cloud.svg",
     "link": "/projects/pi-cloud",
     "id": "pi-cloud",
@@ -20,7 +20,7 @@
   {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "The engine behind every local agentic workflow I run, reachable from my phone over Telegram, with every call traced and nightly graded by its own eval loop. A hand-patched llama.cpp build on GPU hardware the project doesn't officially support: fixed a memory-allocator bug that was capping GPU offload, and traced a week-long regression through a wrong first diagnosis to a one-line bug in my own code, not the dependency I initially suspected.",
+    "description": "Four models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, hitting 44.4 tokens/sec on a full 99-layer GPU offload that took finding a memory-allocator bug, not a config flag. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",
@@ -29,7 +29,7 @@
   {
     "title": "Job-Fit Scorer",
     "subtitle": "LangGraph + FastAPI + Langfuse",
-    "description": "A LangGraph pipeline that polls 13 companies' ATS boards directly, reduces thousands of raw postings to a shortlist of relevant roles, and scores each one against my actual portfolio with a parallel fan-out of requirement-level evaluations — deliberately calibrated to be honest rather than flattering. Every run is traced end-to-end in Langfuse, and results land in a durable, append-only tracker.",
+    "description": "A LangGraph pipeline that polls 13 companies' ATS boards, throws out the postings that were never going to be relevant before an LLM ever sees one, and scores the rest against an evidence document of what I've actually built — calibrated to tell me no. A real week: 21 postings scored, 2 worth applying to, 19 skipped, with recurring blockers tallied so the rejections double as a study list. Every run is traced in Langfuse, results append to a durable tracker, and the weekly report carries a deterministic health section rather than an LLM grading its own homework.",
     "image": "/images/projects/jobfit-scorer.svg",
     "link": "/projects/jobfit",
     "id": "jobfit",

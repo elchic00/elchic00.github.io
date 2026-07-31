@@ -3,7 +3,7 @@ import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./Case
 const PiCloudCaseStudy = () => (
   <CaseStudyLayout
     title="Pi-Cloud"
-    subtitle="Twelve self-hosted services on a Raspberry Pi 5, run like real production infrastructure: clear service boundaries, no public ports, health checks everywhere, and backups I've restored from."
+    subtitle="Thirteen self-hosted services on a Raspberry Pi 5, run like real production infrastructure: clear service boundaries, no public ports, health checks everywhere, and backups I've restored from."
     tech={[
       "Docker",
       "Tailscale",
@@ -22,13 +22,15 @@ const PiCloudCaseStudy = () => (
       "DNSSEC",
       "nftables",
       "rsync",
+      "ChromaDB",
+      "Crawl4AI",
     ]}
   >
     <Section title="Why self-host">
       <p>
-        I run twelve private services — photo storage, password management, document search, DNS
-        filtering, private web search, remote access, and monitoring — on a Raspberry Pi 5 with
-        500GB of NVMe storage.
+        I run thirteen private services — photo storage, password management, document search,
+        DNS filtering, private web search, remote access, monitoring, and the retrieval backend
+        for an AI agent — on a Raspberry Pi 5 with 500GB of NVMe storage.
         None of it is trying to recreate a hyperscaler. The point is owning the data path for the
         categories where that actually matters, understanding exactly how each piece fails, and
         keeping the whole thing maintainable at home scale instead of accumulating unmanageable
@@ -50,8 +52,9 @@ const PiCloudCaseStudy = () => (
         for a private metasearch engine, <strong>CrowdSec</strong> for intrusion detection,{" "}
         <strong>Uptime Kuma</strong> for health and heartbeat checks,{" "}
         <strong>Tailscale</strong> for remote access, a <strong>Prometheus/Grafana</strong>{" "}
-        monitoring stack, a <strong>Homepage</strong> dashboard for a single operational view, and{" "}
-        <strong>Watchtower</strong> for automated container updates.
+        monitoring stack, a <strong>Homepage</strong> dashboard for a single operational view,{" "}
+        <strong>Watchtower</strong> for automated container updates, and — the two most recent
+        additions — <strong>ChromaDB</strong> and <strong>Crawl4AI</strong>, described below.
       </p>
       <p>
         That separation is deliberate, not incidental. It keeps upgrades, restores, and incident
@@ -82,8 +85,26 @@ const PiCloudCaseStudy = () => (
       </p>
     </Section>
 
+    <Section title="It's Also Backend Infrastructure, Not Just My Services">
+      <p>
+        Three of these aren't only mine — they're dependencies of an always-on agent.{" "}
+        <strong>SearXNG</strong> is Hermes's default search backend, so every web lookup the
+        agent makes resolves through the Pi instead of a search API. <strong>ChromaDB</strong> is
+        the vector store behind retrieval over my notes. <strong>Crawl4AI</strong> does full-page
+        extraction behind a bearer token: submit a URL, poll for the result.
+      </p>
+      <p>
+        That raises the reliability bar in a specific way. A personal service that's down is an
+        annoyance I discover when I go to use it. A service an unattended agent calls at 2am is a
+        silent failure in somebody else's workflow — the agent gets an empty result and carries on
+        as if it had searched. It's also the reason nothing in the agent's retrieval path calls a
+        paid API for search, embeddings, or page extraction: that path terminates on hardware I
+        own, on a LAN, at no marginal cost per call.
+      </p>
+    </Section>
+
     <StatRow>
-      <Stat value="12" label="Self-hosted services" />
+      <Stat value="13" label="Self-hosted services" />
       <Stat value="0" label="Public ports exposed" />
       <Stat value="4" label="Grafana dashboards" />
       <Stat value="2" label="Independent recovery paths" />
@@ -114,6 +135,25 @@ const PiCloudCaseStudy = () => (
         caption="Per-container resource metrics — cAdvisor feeds Prometheus, which feeds this Grafana dashboard, so a resource-hungry container shows up here before it takes down anything else on the Pi."
       />
     </Section>
+
+    <Callout title="The backup alert that was wrong about the backup">
+      <p>
+        The nightly job started pushing "USB backup failed" alerts to my phone, and every time,
+        the backup data was completely intact. rsync was exiting 23 — partial transfer — because{" "}
+        <code>crowdsec/data/</code> contains symlinks to container-internal <code>/staging/</code>{" "}
+        paths that don't resolve on the host. Everything that mattered copied fine; the run
+        reported failure anyway. The script now treats exit codes 23 and 24 as success and alerts
+        only on real failures.
+      </p>
+      <p>
+        It's a two-line patch with a lesson I keep relearning here: monitoring is code, it has
+        bugs, and a check you've never watched fail correctly isn't a check yet — it's a source of
+        alerts you'll start ignoring. The same reasoning is why I confirm a restart with the
+        Prometheus <code>up</code> query or Uptime Kuma rather than <code>docker ps</code>.{" "}
+        ChromaDB in particular will sit there reporting "running" while every request into it
+        times out.
+      </p>
+    </Callout>
 
     <Callout title="Two mismatched filesystems, on purpose">
       <p>

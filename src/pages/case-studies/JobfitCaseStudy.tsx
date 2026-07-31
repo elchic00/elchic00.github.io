@@ -114,7 +114,7 @@ const JobfitCaseStudy = () => (
     <Section title="Results & Scale">
       <StatRow>
         <Stat value="13" label="ATS boards polled" />
-        <Stat value="263" label="passing tests" />
+        <Stat value="315" label="passing tests (portable engine)" />
         <Stat value="76%" label="fewer LLM calls (V4)" />
         <Stat value="65%" label="faster end-to-end (V4)" />
       </StatRow>
@@ -131,6 +131,44 @@ const JobfitCaseStudy = () => (
         postings end-to-end at two to three calls each and produced three sensible apply
         recommendations. I never ran the full formal three-way benchmark the original plan called
         for — that's a known, documented gap, not something I'm hiding.
+      </p>
+    </Section>
+
+    <Section title="What It Actually Produces">
+      <p>
+        A real week (2026-W30): <strong>21 postings scored</strong>,{" "}
+        <strong>2 flagged apply/referral-first</strong>, <strong>19 skipped</strong>. I read that
+        report on Sunday and it feeds the only three decisions I make — apply, monitor, skip.
+        It's not advisory: on 2026-07-12 the pipeline put two Ramp roles at the top of the queue,
+        and I applied to both through their ATS the same day.
+      </p>
+      <p>
+        The skip pile turned out to be the part I undervalued. The report tallies why things get
+        skipped, so "Apache Spark and distributed computing" appearing as a blocker on 7 of 21
+        postings, and a Databricks certification on 3, is a study list I didn't have to assemble.
+        A scorer calibrated to tell me no produces something a flattering one can't: the same
+        rejection, in the same words, often enough to be a plan.
+      </p>
+    </Section>
+
+    <Section title="Observability, Without an LLM Judge">
+      <p>
+        The obvious next move here is to cron an LLM critic over the pipeline's own output. I
+        considered it and decided against it: jobfit pushes traces to Langfuse, not scores, the
+        offline golden benchmark was saturated at 100%, and a scheduled critic would have been
+        burning a run every week to produce a signal I couldn't point to. What the weekly report
+        actually needed was deterministic and had no LLM in it at all — a Health section
+        reporting newly-scored counts per day against the pending backlog, warning on any day
+        that scored zero while the backlog was nonzero, plus retry and batch-repair counts and
+        the golden benchmark flagged whenever a metric drops under 100%.
+      </p>
+      <p>
+        It paid for itself immediately. The 2026-07-20 line reads{" "}
+        <em>"0 newly scored — cron may have failed"</em> — a silent cron failure surfaced the same
+        week, rather than the way I found the dead ATS board, which was noticing months later
+        that a number never moved. The saturated benchmark is a real limitation and gets its own
+        fix: recorded outcomes now export into new golden cases, so real decisions grow the
+        benchmark instead of a fixture I wrote myself.
       </p>
     </Section>
 

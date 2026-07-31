@@ -60,7 +60,10 @@ const HermesCaseStudy = () => (
       <p>
         A second, weekly cron closes the loop: it pulls the last 30 days of low-scoring turns,
         clusters them by theme, and proposes specific edits to the agent's own system prompt —
-        sent to Telegram, never applied automatically.
+        sent to Telegram, never applied automatically. Approval is a real command, not a vague
+        yes: <code>apply 1 2</code> lands specific proposals, <code>apply all</code> takes the
+        whole batch, <code>skip improvements</code> declines it — the same message thread I use
+        for everything else this system sends me.
       </p>
       <p>
         One real run: <strong>11 low-quality turns</strong> clustered into{" "}
@@ -72,22 +75,40 @@ const HermesCaseStudy = () => (
         wrong fix for it. Catching that before it landed is the actual point of keeping a human in
         the loop — the system proposes, it doesn't decide.
       </p>
+      <p>
+        The honest postscript is that I can't show those two edits made the agent better. KPI
+        scores declined over the following 16 days, and the sample is too small and too
+        confounded — model swaps, judge changes — to attribute the drop to the patches or clear
+        them of it. "The human caught the bad one" is the claim I can defend; "the good ones
+        worked" isn't.
+      </p>
     </Section>
 
-    <Callout title="What Broke: The Judge Was Overthinking It">
+    <Callout title="What Broke: The Loop Reported Healthy While Frozen">
       <p>
-        The nightly judge is a pure classification task — three small scores, no open-ended
-        reasoning required. I first ran it through the judge model's default thinking mode, and it
-        started timing out at around three minutes per trace. The model wasn't wrong, it was just
-        reasoning its way through a decision that didn't need reasoning, burning tokens on a task
-        that should have taken seconds.
+        An audit of the self-improvement loop found it had applied patches{" "}
+        <strong>exactly once ever</strong> — 2026-07-02 — and that{" "}
+        <code>improvement_checkpoint.json</code> had sat at <code>saved_at: 2026-07-05</code>,
+        untouched, for <strong>13 days</strong>. The weekly cron reported{" "}
+        <code>last_status: ok</code> the entire time. The loop I built to catch quality
+        regressions had quietly stopped running, and the monitoring around it said fine.
       </p>
       <p>
-        The fix was smaller than the symptom suggested: route the judge through the{" "}
-        <code>ollama_chat/</code> path with <code>think:false</code> instead of the default
-        endpoint, and the same scoring pass drops from minutes to seconds per trace. The lesson:
-        "smarter mode" isn't free — matching the model's reasoning budget to the shape of the task
-        is part of the job, not a nice-to-have.
+        The mechanism was worse than a crash would have been. Hermes had reported{" "}
+        <em>"Status: completed — 2 proposals sent"</em> for a run where{" "}
+        <code>analyze_patterns.py</code> exited 1 on{" "}
+        <code>ModuleNotFoundError: langgraph</code>. The agent pip-installed the missing
+        dependency, never re-ran the script, and reported success anyway. It wasn't lying so much
+        as answering a question it should never have been asked: the LLM was inside its own
+        reporting path, so "did this job succeed" was a judgment call it got to make about
+        itself.
+      </p>
+      <p>
+        The fix is structural, not a better prompt. <code>selfimprove01</code> is now a{" "}
+        <code>no_agent</code> script job — the scheduler derives success from the child
+        process's exit code before any agent machinery loads. The failure mode isn't discouraged
+        now, it's unreachable: the wrapper can't install a missing module and then declare
+        victory, because it doesn't get to decide what victory means.
       </p>
     </Callout>
 
@@ -121,14 +142,26 @@ const HermesCaseStudy = () => (
           load, and adversarial inputs are things I'd want to pressure-test before claiming this
           generalizes past one operator's use.
         </li>
+        <li>
+          <strong>The judge scores aren't trustworthy yet, and I measured that instead of
+          assuming it.</strong> Opus 5 labeled 63 prepared traces blind — teacher labels, not
+          human ground truth — and against them neither local judge clears the bar: the 35B
+          judge lands at Cohen's kappa <strong>0.0469</strong> with failure precision/recall of{" "}
+          <strong>0.11 / 0.40</strong>, the 27B at <strong>0.0919</strong>, both with bootstrap
+          intervals crossing zero. That's near chance at the one thing that matters most, catching
+          failures. The nightly loop is still worth running as trace clustering and triage, but
+          any claim that it measures quality is on hold until calibration improves. I'm now
+          labeling by hand the traces where Opus and a prior independent reference disagree, to
+          work out whether the gap is the rubric or my own preference.
+        </li>
       </ul>
     </Section>
 
     <StatRow>
       <Stat value="3" label="Homelab Nodes" />
       <Stat value="$0" label="Marginal Cost / Call" />
-      <Stat value="11" label="Low-Quality Turns Clustered" />
-      <Stat value="2 of 3" label="Prompt Edits Applied" />
+      <Stat value="173" label="Sessions / 21 Days" />
+      <Stat value="54" label="Via Telegram" />
     </StatRow>
   </CaseStudyLayout>
 );
