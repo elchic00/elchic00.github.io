@@ -138,6 +138,29 @@ const InferenceCaseStudy = () => (
       />
     </Section>
 
+    <Section title="The Silent Failure Mode: GPU Layers Loading Onto CPU After Reboot">
+      <p>
+        Twice — once on 2026-07-27, again two days later — a reboot brought all three
+        llama-server services back up reporting healthy while silently running fully on CPU.
+        Nothing failed loudly: <code>/health</code> returned 200, the services started, and
+        generation just happened to be catastrophically slow until I noticed and manually
+        restarted them.
+      </p>
+      <p>
+        The root cause was a boot-order race: <code>amdgpu</code>/KFD registers the GPU{" "}
+        <em>after</em> the systemd units start under <code>After=network.target</code>. When
+        llama.cpp starts before the GPU node exists, it silently discards{" "}
+        <code>--n-gpu-layers 99</code> and falls back to CPU — no error, no warning, nothing
+        for <code>/health</code> to surface, because the process itself is running fine.
+      </p>
+      <p>
+        The fix is an <code>ExecStartPre</code> systemd drop-in that blocks each unit from
+        starting until a KFD topology node reports a non-zero <code>gpu_id</code> — the boot
+        sequence now waits for the GPU to actually exist before handing it work, instead of
+        assuming it will be there in time.
+      </p>
+    </Section>
+
     <Section title="Honest Limitations">
       <p>
         This isn't fully closed out. The <code>reasoning_content</code> fix is real and
