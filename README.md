@@ -2,7 +2,7 @@
 
 [Visit the site](https://elchic00.github.io) · [LinkedIn](https://www.linkedin.com/in/andrew-a-10b88215b/) · [GitHub](https://github.com/elchic00)
 
-Hey, I’m Drew. I’m a New York software engineer who found my way to computer science through business, chemistry, and construction. That path left me with a bias for accessible, practical products—and for understanding the systems behind them, not just the UI in front of them. This repository powers my portfolio: professional work, personal projects, travel photos, and a few playful details because a portfolio should still feel like a person made it.
+Hey, I’m Drew. I’m a New York software engineer with a BA in computer science—though I got there by way of business, chemistry, and construction first. That path left me with a bias for accessible, practical products, and for understanding the systems behind them, not just the UI in front of them. This repository powers my portfolio: professional work, personal projects, travel photos, and a few playful details because a portfolio should still feel like a person made it.
 
 ## What’s here
 
