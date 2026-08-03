@@ -41,7 +41,6 @@ export const ChatWindow = ({
   onSuggestedQuestion,
   onQuickAction,
 }: ChatWindowProps) => {
-  const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const chatWindowRef = useRef<HTMLDivElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -61,6 +60,53 @@ export const ChatWindow = ({
       inputRef.current.focus();
     }
   }, []);
+
+  // Auto-scroll to bottom on content growth, including the word-by-word
+  // streaming reveal in ChatMessage, which updates its own local state and
+  // never touches the `messages` prop this component receives. Only follows
+  // along while the visitor is already near the bottom, so scrolling up to
+  // reread earlier messages during a response isn't interrupted.
+  const isPinnedToBottomRef = useRef(true);
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const NEAR_BOTTOM_PX = 80;
+
+    const updatePinned = () => {
+      const distanceFromBottom =
+        container.scrollHeight - container.scrollTop - container.clientHeight;
+      isPinnedToBottomRef.current = distanceFromBottom <= NEAR_BOTTOM_PX;
+    };
+
+    const scrollToBottom = () => {
+      container.scrollTop = container.scrollHeight;
+    };
+
+    scrollToBottom();
+    container.addEventListener("scroll", updatePinned, { passive: true });
+
+    const observer = new MutationObserver(() => {
+      if (isPinnedToBottomRef.current) scrollToBottom();
+    });
+    observer.observe(container, { childList: true, subtree: true, characterData: true });
+
+    return () => {
+      container.removeEventListener("scroll", updatePinned);
+      observer.disconnect();
+    };
+  }, []);
+
+  // A new message — the visitor's own, or the assistant's next turn starting
+  // — is always worth snapping to, the same way ChatGPT/Slack/Discord do,
+  // even if they'd scrolled up mid-read.
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container || messages.length === 0) return;
+    container.scrollTop = container.scrollHeight;
+    isPinnedToBottomRef.current = true;
+  }, [messages.length]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -116,8 +162,6 @@ export const ChatWindow = ({
             <SuggestedQuestions onQuestionClick={handleSuggestedQuestionClick} />
           </div>
         )}
-
-        <div ref={messagesEndRef} />
       </div>
 
       <ChatInput
