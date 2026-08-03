@@ -14,21 +14,12 @@ const InferenceCaseStudy = () => (
       "Unified Memory",
       "LiteLLM",
       "Systemd",
-      "Debugging",
       "MiniCPM-V",
       "WhisperX",
       "Langfuse",
     ]}
   >
     <Section title="What Unmetered Inference Buys">
-      <p>
-        Running locally isn't about a cheaper API bill — it's that $0 per call changes which ideas
-        are worth trying. When every experiment is free, you stop pre-filtering them: leave an
-        agent looping overnight on a hunch, re-run a prompt fifty times for variance, throw a
-        100k-token context at a question to see if it helps, rewrite a system prompt at 2am and
-        regrade a month of traces against it. On metered inference, most of those never happen —
-        not because they're bad ideas, but because each one has to justify a line item.
-      </p>
       <p>
         Whole workloads exist only because they're free. Every call is traced, and a nightly eval
         loop grades a sample and clusters the low-quality turns — a metering-hostile pattern that
@@ -74,11 +65,11 @@ const InferenceCaseStudy = () => (
     <Section title="Speculative Decoding: Beating a Bandwidth Wall Instead of Fighting It">
       <p>
         The 27B model is dense — every parameter active on every token — which makes it
-        bandwidth-bound instead of compute-bound: at Q8 (~28GB), the unified-memory ceiling caps
-        plain decoding at a hard floor. I confirmed it was a hardware limit and not a config
-        problem by checking that llama.cpp without speculative decoding performs identically to
-        Ollama on the same model. No amount of GPU-layer tuning moves that number — it's a
-        different bottleneck than the 35B's.
+        bandwidth-bound instead of compute-bound: at Q8 (~28GB), the ~200GB/s LPDDR5X
+        memory-bandwidth ceiling caps plain decoding at ~7.4 t/s. I confirmed it was a hardware
+        limit and not a config problem by checking that llama.cpp without speculative decoding
+        performs identically to Ollama on the same model. No amount of GPU-layer tuning moves that
+        number — it's a different bottleneck than the 35B's.
       </p>
       <p>
         MTP (multi-token prediction) sidesteps the wall instead of fighting it: the model's own
@@ -116,20 +107,15 @@ const InferenceCaseStudy = () => (
       </p>
     </Callout>
 
-    <Section title="Observability">
+    <Section title="The Judge Was Grading Itself">
       <p>
-        Every call through this stack routes through a LiteLLM gateway that handles fallback and
-        traces every request into Langfuse. Nightly, an eval loop grades a sample of those traces
-        and clusters low-quality turns; a weekly review proposes prompt fixes that go through
-        human approval before anything changes.
-      </p>
-      <p>
-        The patched dependency gets the same discipline. A standing weekly check diffs the local
-        source patches against new upstream commits before any rebase runs. On one real run it
-        confirmed a 132-commit pull touched a patched file but not the patched lines, clearing the
-        rebase as safe in advance rather than hoping it was fine. The same check found that half
-        the original patch set was no longer doing anything — one had been superseded upstream,
-        the other was never actually load-bearing.
+        The patched dependency gets the same discipline as the eval loop itself. A standing
+        weekly check diffs the local source patches against new upstream commits before any
+        rebase runs. On one real run it confirmed a 132-commit pull touched a patched file but not
+        the patched lines, clearing the rebase as safe in advance rather than hoping it was fine.
+        The same check found that half the original patch set was no longer doing anything — one
+        had been superseded upstream, the other was never actually load-bearing. Prompt fixes get
+        the same treatment: proposed changes go through human approval before anything ships.
       </p>
       <p>
         The eval loop had a subtler problem than latency: the judge alias was pointing at the
@@ -207,6 +193,8 @@ const InferenceCaseStudy = () => (
         necessary — it's why the bug no longer reproduces on short exchanges — but a same-day
         switch-back attempt proved it isn't sufficient on its own: the hallucinated-tool-call
         symptom came back on the current build within 12 hours, on a longer tool-calling chain.
+      </p>
+      <p>
         The 35B and vision models stay pinned to the pre-rebase binary indefinitely now, with no
         further switch-back planned until a second contributing factor is actually identified —
         a longer soak alone isn't the bar anymore. I never ran a full <code>git bisect</code>{" "}

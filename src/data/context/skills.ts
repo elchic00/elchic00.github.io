@@ -77,7 +77,7 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 **Nodes**:
 - **Framework Desktop** - Local LLM inference, running large open-weight models fully on GPU instead of relying on hosted APIs
 - **Mac Mini** - Orchestrates Hermes' scheduled agent workflows, multi-model routing, and retrieval/memory
-- **Raspberry Pi 5** - Runs Pi-Cloud, 12 self-hosted services (photos, passwords, documents, DNS, search, monitoring, security), several replacing paid SaaS
+- **Raspberry Pi 5** - Runs Pi-Cloud, 13 self-hosted services (photos, passwords, documents, DNS, search, monitoring, security), several replacing paid SaaS
 
 **Hermes (AI agent platform)**:
 - Multi-model routing across locally-hosted models
@@ -86,11 +86,11 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 - Self-hosted search (SearXNG) and local vector retrieval (sqlite-vec, Ollama embeddings) in place of hosted equivalents
 
 **Pi-Cloud (edge services, zero-trust networking)**:
-- **Tailscale** (WireGuard-based mesh VPN) for secure remote/public-network access with no open ports exposed to the internet
 - **CrowdSec** - community-driven intrusion prevention with automated threat detection
 - **Pi-hole + Unbound** - network-wide ad/tracker blocking backed by a recursive DNS resolver that talks directly to root nameservers, bypassing third-party DNS
 - **Prometheus + Grafana** - metrics collection and dashboards
-- **Watchtower** - automated container updates with rolling, zero-downtime deploys
+- **Watchtower** - monitors running containers for available updates and sends alerts; does not auto-apply them
+- **ChromaDB + Crawl4AI** - vector store and page-extraction backend an always-on agent calls unattended
 - **Immich, Vaultwarden, Paperless-ngx** - self-hosted photo library, password manager, and document management, replacing their paid SaaS equivalents
 
 **Frontend Engineering Connection**:

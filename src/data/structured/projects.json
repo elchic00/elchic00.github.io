@@ -33,7 +33,7 @@
     "image": "/images/projects/jobfit-scorer.svg",
     "link": "/projects/jobfit",
     "id": "jobfit",
-    "technologies": ["LangGraph", "Python", "FastAPI", "Pydantic", "Langfuse", "SQLite", "pytest", "Send API", "LLM-as-Judge", "Local Inference"]
+    "technologies": ["LangGraph", "Python", "FastAPI", "Pydantic", "Langfuse", "SQLite", "pytest", "LLM-as-Judge", "Local Inference"]
   },
   {
     "title": "AI Chat Assistant",

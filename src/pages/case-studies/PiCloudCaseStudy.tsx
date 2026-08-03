@@ -3,7 +3,7 @@ import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./Case
 const PiCloudCaseStudy = () => (
   <CaseStudyLayout
     title="Pi-Cloud"
-    subtitle="Thirteen self-hosted services on a Raspberry Pi 5, run like real production infrastructure: clear service boundaries, no public ports, health checks everywhere, and backups I've restored from."
+    subtitle="Thirteen self-hosted services on a Raspberry Pi 5, run like real production infrastructure: clear service boundaries, no public ports, health checks everywhere, and disaster recovery tested, not just documented."
     tech={[
       "Docker",
       "Tailscale",
@@ -18,7 +18,7 @@ const PiCloudCaseStudy = () => (
       "Zero Trust",
       "Immich",
       "Uptime Kuma",
-      "NVMe",
+      "SSD",
       "DNSSEC",
       "nftables",
       "rsync",
@@ -30,37 +30,34 @@ const PiCloudCaseStudy = () => (
       <p>
         I run thirteen private services — photo storage, password management, document search,
         DNS filtering, private web search, remote access, monitoring, and the retrieval backend
-        for an AI agent — on a Raspberry Pi 5 with 500GB of NVMe storage.
+        for an AI agent — on a Raspberry Pi 5 with a 500GB USB SSD.
         None of it is trying to recreate a hyperscaler. The point is owning the data path for the
         categories where that actually matters, understanding exactly how each piece fails, and
         keeping the whole thing maintainable at home scale instead of accumulating unmanageable
         sprawl.
       </p>
-      <p>
-        Self-hosting trades convenience for responsibility. The value is choosing that trade
-        deliberately — self-hosting where privacy and control are worth the overhead, not
-        everywhere out of principle.
-      </p>
     </Section>
 
     <Section title="Architecture &amp; service boundaries">
       <p>
-        Each service gets its own directory, its own configuration, and its own environment file:{" "}
-        <strong>Immich</strong> for photos, <strong>Vaultwarden</strong> for passwords and 2FA,{" "}
-        <strong>Paperless-ngx</strong> for document management with OCR search,{" "}
-        <strong>Pi-hole</strong> for DNS-level ad and tracking filtering, <strong>SearXNG</strong>{" "}
-        for a private metasearch engine, <strong>CrowdSec</strong> for intrusion detection,{" "}
-        <strong>Uptime Kuma</strong> for health and heartbeat checks,{" "}
-        <strong>Tailscale</strong> for remote access, a <strong>Prometheus/Grafana</strong>{" "}
-        monitoring stack, a <strong>Homepage</strong> dashboard for a single operational view,{" "}
-        <strong>Watchtower</strong> for automated container updates, and — the two most recent
-        additions — <strong>ChromaDB</strong> and <strong>Crawl4AI</strong>, described below.
+        Each service gets its own directory, its own configuration, and its own environment file,
+        grouped by what it does: storage and productivity (<strong>Immich</strong> for photos,{" "}
+        <strong>Vaultwarden</strong> for passwords and 2FA, <strong>Paperless-ngx</strong> for
+        document management with OCR search), network ({" "}
+        <strong>Pi-hole</strong> and <strong>Unbound</strong> for DNS, <strong>SearXNG</strong>{" "}
+        for a private metasearch engine, <strong>Tailscale</strong> for remote access),
+        observability and security (<strong>Prometheus/Grafana</strong>,{" "}
+        <strong>Uptime Kuma</strong> for health and heartbeat checks, <strong>CrowdSec</strong>{" "}
+        for intrusion detection, <strong>Watchtower</strong> for update monitoring and alerts, a{" "}
+        <strong>Homepage</strong> dashboard for a single operational view), and — the two most
+        recent additions — <strong>ChromaDB</strong> and <strong>Crawl4AI</strong>, described
+        below.
       </p>
       <p>
         That separation is deliberate, not incidental. It keeps upgrades, restores, and incident
         investigation scoped to one service instead of turning the whole platform into a single
         blast radius — if Paperless-ngx breaks, I'm debugging Paperless-ngx, not untangling it from
-        eleven other services sharing state.
+        twelve other services sharing state.
       </p>
       <Figure
         src="/images/case-studies/pi-cloud-homepage.webp"
@@ -77,15 +74,17 @@ const PiCloudCaseStudy = () => (
         mobile devices. <strong>Unbound</strong> handles recursive DNS resolution directly, with{" "}
         <strong>Pi-hole</strong> filtering known ad and tracking domains across the home network in
         front of it. <strong>CrowdSec</strong> turns service logs into active detection and
-        blocking signals for the access paths that are exposed.
+        blocking signals for the access paths that are exposed — it typically holds 1,500 to 2,000
+        active IP bans at any given time, mostly SSH bruteforce and port-scan attempts.
       </p>
       <p>
-        The result is zero-trust by default: services aren't reachable unless you're already
-        inside the private network.
+        One alert rule watches CrowdSec itself rather than just the services it protects: it fires
+        if the active-ban cache drops near zero — the signature of a restart that silently lost its
+        decision history and would reopen the door without anyone noticing.
       </p>
     </Section>
 
-    <Section title="It's Also Backend Infrastructure, Not Just My Services">
+    <Section title="It's also backend infrastructure, not just my services">
       <p>
         Three of these aren't only mine — they're dependencies of an always-on agent.{" "}
         <strong>SearXNG</strong> is Hermes's default search backend, so every web lookup the
@@ -107,7 +106,7 @@ const PiCloudCaseStudy = () => (
       <Stat value="13" label="Self-hosted services" />
       <Stat value="0" label="Public ports exposed" />
       <Stat value="4" label="Grafana dashboards" />
-      <Stat value="2" label="Independent recovery paths" />
+      <Stat value="3" label="Independent recovery paths" />
     </StatRow>
 
     <Section title="Operations: monitoring, health checks, backups">
@@ -121,7 +120,7 @@ const PiCloudCaseStudy = () => (
       </p>
       <p>
         Backups run nightly as a scripted dual-pass job. Before anything is copied, the SQLite
-        databases behind Uptime Kuma and Vaultwarden get a <code>VACUUM</code> and an atomic{" "}
+        databases behind Uptime Kuma, Vaultwarden, and CrowdSec get a <code>VACUUM</code> and an atomic{" "}
         <code>.backup</code> snapshot rather than a raw file copy — a raw copy can catch a database
         mid-write and be silently unusable on restore, which defeats the point of having a backup
         at all. The snapshot is then synced to two separate recovery destinations, excluding logs
@@ -164,8 +163,9 @@ const PiCloudCaseStudy = () => (
         same time.
       </p>
       <p>
-        It's a small decision, but it's the difference between having a backup strategy and having
-        one that's actually been thought through for how it could fail.
+        The USB drive stays exFAT on purpose, not just for the filesystem mismatch: macOS reads
+        exFAT natively, so if the Pi itself dies, recovery means plugging that drive straight into
+        the Mac Mini — no reformatting, no intermediate machine, no waiting.
       </p>
     </Callout>
 
@@ -179,7 +179,7 @@ const PiCloudCaseStudy = () => (
       </p>
       <p>
         It's also explicitly not trying to be enterprise infrastructure: one Raspberry Pi running
-        all twelve services, no cluster, no failover node. That's a deliberate scope decision for a
+        all thirteen services, no cluster, no failover node. That's a deliberate scope decision for a
         personal platform, not an oversight — but it does mean a hardware failure on the Pi itself
         takes every service down until the recovery media gets restored onto new hardware, which is
         exactly why the recovery path being tested, not just documented, mattered enough to build

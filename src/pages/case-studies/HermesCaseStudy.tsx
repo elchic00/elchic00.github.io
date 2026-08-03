@@ -4,16 +4,15 @@ const HermesCaseStudy = () => (
   <CaseStudyLayout
     title="Hermes"
     subtitle="hermes-agent, Nous Research's open-source harness, running self-hosted with a nightly eval loop and a weekly self-improvement cron built around it — nothing changes without my approval."
-    tech={["hermes-agent", "Langfuse", "LiteLLM", "Telegram", "HITL", "Evals", "WhisperX", "Obsidian", "Cron", "LLM-as-Judge"]}
+    tech={["hermes-agent", "Langfuse", "LiteLLM", "Telegram", "HITL", "Evals", "Obsidian", "Cron", "LLM-as-Judge"]}
     repoLink={{ href: "https://github.com/NousResearch/hermes-agent", label: "hermes-agent on GitHub (Nous Research)" }}
   >
     <Section title="Why This Exists">
       <p>
         None of this started as a plan. A Mac Mini bought for a desktop, a Raspberry Pi to stop
         paying for SaaS, then an inference box to wire it all together — at some point three
-        unrelated purchases became a homelab running my own AI agents. Voice memos turn into
-        structured notes before I've put my phone away, and none of it needs me checking in on it
-        manually.
+        unrelated purchases became a homelab running my own AI agents, and none of it needs me
+        checking in on it manually.
       </p>
       <p>
         The agent runtime itself, <code>hermes-agent</code>, is Nous Research's open-source harness
@@ -40,12 +39,11 @@ const HermesCaseStudy = () => (
         profile loaded at every session start. I tried a vector-memory layer (mem0-oss +
         ChromaDB) first and pulled it — recall accuracy came in under the published community
         benchmarks and memories weren't accumulating the way they were supposed to. Markdown files
-        turned out to be the more honest memory layer for this scale. Vault access itself runs
-        through Obsidian's own resolved link graph rather than a flat file scan or another vector
-        index — agents can pull a note's real backlinks, follow aliases and headings correctly,
-        and query the graph directly (find every note linking to X, spot orphaned notes) the same
-        way I'd navigate it by hand. Every call, local or cloud, is traced end-to-end in Langfuse —
-        tool calls, LLM chains, timing, token counts.
+        turned out to be the more honest memory layer for this scale. Vault access runs through
+        Obsidian's own resolved link graph rather than a flat file scan, so agents get real
+        backlinks and headings instead of guesses — though that same patching path is where the
+        vault came closest to real damage (below). Every call, local or cloud, is traced
+        end-to-end in Langfuse — tool calls, LLM chains, timing, token counts.
       </p>
     </Section>
 
@@ -118,30 +116,29 @@ const HermesCaseStudy = () => (
       caption="The trace table behind the eval loop: every turn decomposes into gateway, LLM, and tool spans — and the cost column reads $0.00 all the way down, because every call runs on local hardware."
     />
 
+    <Callout title="What Broke: Two Ways to Lose a Document With One API Call">
+      <p>
+        Two separate <code>vault_patch</code> calls against the Obsidian vault caused real data
+        loss before I caught the pattern.
+      </p>
+      <p>
+        First: patching a heading with <code>operation: "replace"</code> doesn't touch just the
+        next paragraph — it wipes everything nested under that heading, and for an H1 that's the
+        entire document. Second: patching <code>frontmatter</code> with{" "}
+        <code>createTargetIfMissing: true</code> on a file whose frontmatter was already empty
+        (<code>{"{}"}</code>) wiped the whole body, not just the frontmatter block.
+      </p>
+      <p>
+        The fix is procedural, not a config flag: <code>append</code>/<code>prepend</code> instead
+        of <code>replace</code> whenever the target is a heading, read the full file before any
+        frontmatter patch instead of trusting <code>createTargetIfMissing</code>, and verify every
+        patch against <code>vault_get_document_map</code>'s heading count before trusting a bare
+        "OK" response.
+      </p>
+    </Callout>
+
     <Section title="Honest Limitations">
       <ul>
-        <li>
-          The 27B model is bandwidth-bound — plain decode floors at 7.4 tokens/sec. Speculative
-          decoding (MTP, detailed on the Inference Engine page) already recovers most of that gap
-          to roughly 10 tokens/sec average, peaking near 19–24 t/s on structured output; a smaller
-          quant would trade quality for more speed beyond that, and I haven't made that trade.
-        </li>
-        <li>
-          Vector memory (mem0-oss + ChromaDB) didn't work well enough to keep — recall accuracy was
-          too low, and I replaced it with the simpler files-first approach above.
-        </li>
-        <li>
-          Two Obsidian <code>vault_patch</code> operations caused real data loss: replacing a
-          heading wiped everything nested under it instead of just the next paragraph, and
-          patching frontmatter on a file with empty frontmatter wiped the whole body. Both are
-          fixed and documented now — patches default to append/prepend, and every patch gets
-          verified against a before/after heading count instead of trusting a bare "OK" response.
-        </li>
-        <li>
-          This is a solo homelab project, not a customer deployment: real scale, multi-tenant
-          load, and adversarial inputs are things I'd want to pressure-test before claiming this
-          generalizes past one operator's use.
-        </li>
         <li>
           <strong>The judge scores aren't trustworthy yet, and I measured that instead of
           assuming it.</strong> Opus 5 labeled 63 prepared traces blind — teacher labels, not
@@ -154,6 +151,12 @@ const HermesCaseStudy = () => (
           labeling by hand the traces where Opus and a prior independent reference disagree, to
           work out whether the gap is the rubric or my own preference.
         </li>
+        <li>
+          The 27B model is bandwidth-bound — plain decode floors at 7.4 tokens/sec. Speculative
+          decoding (MTP, detailed on the Inference Engine page) already recovers most of that gap
+          to roughly 10 tokens/sec average, peaking near 19–24 t/s on structured output; a smaller
+          quant would trade quality for more speed beyond that, and I haven't made that trade.
+        </li>
       </ul>
     </Section>
 
@@ -161,7 +164,7 @@ const HermesCaseStudy = () => (
       <Stat value="3" label="Homelab Nodes" />
       <Stat value="$0" label="Marginal Cost / Call" />
       <Stat value="173" label="Sessions / 21 Days" />
-      <Stat value="54" label="Via Telegram" />
+      <Stat value="54 of 173" label="Via Telegram" />
     </StatRow>
   </CaseStudyLayout>
 );

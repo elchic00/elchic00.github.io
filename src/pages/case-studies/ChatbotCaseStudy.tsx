@@ -37,11 +37,29 @@ const ChatbotCaseStudy = () => (
       <p>
         The Worker is also where I drew the line on cost and abuse: 5 requests per minute
         per IP, comfortably inside Gemini's free tier and Cloudflare's, so the whole thing
-        runs at zero marginal cost regardless of how much a visitor pokes at it. There's no
-        server to patch, scale, or keep warm — it's serverless in the literal sense, no
-        process exists between requests.
+        runs at zero marginal cost regardless of how much a visitor pokes at it. Generation
+        is capped the same way — temperature 0.7, max 1,100 output tokens — enough room for
+        a real answer without letting a reply run long. There's no server to patch, scale,
+        or keep warm — it's serverless in the literal sense, no process exists between
+        requests.
       </p>
     </Section>
+
+    <Callout title="A Bug the Eval Caught, and a Fix That Held">
+      <p>
+        The context assembly above isn't just plumbing — it's also where a real accuracy
+        bug lived. One eval question asked about primary backend language, and the
+        assistant answered by faithfully summarizing <code>skills.ts</code>, which was
+        itself wrong: it led with Kotlin, GraphQL, and Node, and dropped Python — the
+        language actually behind most of the backend work I describe. The model wasn't
+        hallucinating, it was accurately reporting bad source data. I rewrote the skills
+        context to put Python first and cut Kotlin down to what it actually is, a narrower
+        BFF-layer skill from one job (commit <code>5eb33f2</code>), and re-ran the question
+        live today to confirm the fix held. That's the payoff of grounding this in files I
+        maintain instead of a model's memory: when the assistant is wrong, the fix is a
+        content edit, not a prompt-engineering guess.
+      </p>
+    </Callout>
 
     <StatRow>
       <Stat value="5/min" label="Rate Limit / IP" />
@@ -50,7 +68,7 @@ const ChatbotCaseStudy = () => (
       <Stat value="$0" label="Marginal Cost / Call" />
     </StatRow>
 
-    <Section title="The Retrieval Decision">
+    <Section title="The Retrieval Decision (And Un-Decision)">
       <p>
         The interesting decision here isn't the model, it's the retrieval. When someone
         asks about a project, the Worker has to ground Gemini's answer in the right details
@@ -59,24 +77,26 @@ const ChatbotCaseStudy = () => (
         matches. I didn't build that.
       </p>
       <p>
-        Instead the Worker tokenizes the query, strips stop words, and scores each record
-        in the project corpus by keyword overlap against its title, technologies,
-        description, and tags — plain string matching, no embedding model, no external API
-        call, no extra network hop. It's the same idea behind RAG, retrieve relevant
-        context and inject it into the prompt, implemented with the cheapest tool that
-        actually solves the problem.
+        My first pass didn't skip retrieval either, though — it tokenized the query,
+        stripped stop words, and scored each project record by keyword overlap against its
+        title, technologies, description, and tags, then injected only the top matches.
+        Plain string matching, no embedding model, no external API call. It worked. Then I
+        deleted it.
       </p>
       <p>
-        That's partly a scale argument. There are six project records. A vector index for
-        six documents is solving a problem I don't have. Keyword scoring over a corpus
-        that small runs synchronously inside the Worker in microseconds, and because the
-        corpus is so small, the scored results and "just include everything" end up looking
-        almost identical in practice — which is itself the finding. Embeddings earn their
-        keep once a corpus is large or fuzzy enough that lexical matching starts missing the
-        point; at this size, the boring approach is strictly better. It's free, it's
-        deterministic — the same query scores the same way every time — and I can read the
-        entire scoring function in thirty seconds instead of debugging why a similarity
-        threshold quietly excluded the right document.
+        There are six project records. A vector index for six documents is solving a
+        problem I don't have, and it turns out keyword scoring was solving one too:
+        when the whole corpus fits in the prompt with room to spare, "top-scoring
+        matches" and "just include everything" produce the same context. The scoring
+        function wasn't wrong, it was answering a question — which records are relevant?
+        — that a six-record corpus doesn't need asked. So the Worker now calls a single{" "}
+        <code>formatProjectContext()</code> that hands Gemini every record unconditionally,
+        labeled as the complete reference. Fewer moving parts, nothing to tune, no
+        threshold that can quietly exclude the right document. The real lesson wasn't
+        "build retrieval," it was noticing the retrieval I'd already built wasn't earning
+        its keep and cutting it. That's the trade-off that gets more interesting if the
+        project list ever grows past what fits comfortably in a prompt — this is a decision
+        for the current corpus size, not a permanent one.
       </p>
     </Section>
 
@@ -108,6 +128,15 @@ const ChatbotCaseStudy = () => (
         plus 4 out-of-scope questions where the correct behavior is declining, graded
         strictly — an unsupported claim counts as wrong.
       </p>
+      <p>
+        The eval didn't even run cleanly on the first try. My test script hit
+        Cloudflare's bot protection — error 1010, request blocked — because Python's
+        default <code>urllib</code> User-Agent reads as a bot to Cloudflare, which is
+        exactly the kind of thing Cloudflare is supposed to catch. The test tooling broke
+        before the thing being tested did. Setting a real browser User-Agent and a
+        matching <code>Origin</code> header fixed it in a couple of minutes, and the actual
+        eval could start.
+      </p>
       <StatRow>
         <Stat value="14/17" label="Fully Correct" />
         <Stat value="0" label="Fabrications" />
@@ -122,7 +151,7 @@ const ChatbotCaseStudy = () => (
         declining gracefully, reproducible on retry. Only one edge question got the
         graceful "I don't have access to that" it should have. That's exactly what evals
         are for: the happy path was fine, and the failure mode was hiding where nobody
-        had looked. The fix is on the list below.
+        had looked.
       </p>
     </Section>
 
@@ -130,17 +159,25 @@ const ChatbotCaseStudy = () => (
       <p>
         The assistant only knows what's in the project corpus and the context files I maintain
         by hand — it doesn't crawl the rest of the site or reason past what I've written for it,
-        so it can be confidently wrong about anything outside that scope. Conversation memory lives in the browser tab, not a database, so it
-        resets when you close the chat. And the keyword-scoring approach I'm defending above
-        has a shelf life: if the project list grows a lot, or if visitors ask questions that
-        don't share vocabulary with how I described a project, lexical matching will start
-        missing things that semantic search wouldn't. That's the point where I'd actually
-        reach for embeddings — not before.
+        so it can be confidently wrong about anything outside that scope. Conversation memory lives in the browser tab, not a database — capped at
+        the last 8 messages, with greeting messages filtered out of what gets sent as
+        context — so it resets when you close the chat. And the "just include everything"
+        approach I'm defending above has a shelf life: it's a bet on the corpus staying
+        small enough to fit in a prompt. If the project list grows a lot, that's the point
+        where retrieval — keyword scoring, or embeddings if the vocabulary gets fuzzy
+        enough — earns its keep again. Not before.
       </p>
       <p>
-        And one known bug, courtesy of the eval above: certain out-of-scope questions
-        currently crash the Worker with a 500 instead of a graceful decline. Fixing that
-        error path is the next change this project gets.
+        And an update on the crash the eval above found: retesting those same three
+        questions live just now, all of them return a clean decline instead of a 500. I
+        didn't fix that — nothing changed in the Worker's error handling. What changed is
+        Gemini's own safety behavior upstream, which now declines those prompts cleanly on
+        Google's side instead of returning something the Worker choked on. The underlying
+        code hasn't gotten any safer: the Worker still has an unguarded{" "}
+        <code>throw new Error("Failed to get response from AI")</code> in its catch path,
+        untouched since the eval found the bug. It's not crashing today, but it's not
+        hardened either — if the model's behavior shifts again, this can resurface exactly
+        the way it did the first time.
       </p>
     </Section>
   </CaseStudyLayout>

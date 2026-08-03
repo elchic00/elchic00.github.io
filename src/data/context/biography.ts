@@ -114,7 +114,7 @@ When asked about "what projects has he built", include both his professional wor
    - Also built a Voice Relay: an iPhone Shortcut sends voice memos through WhisperX transcription with speaker diarization, writing structured notes straight into Obsidian and confirming over Telegram
 
 2. **Pi-Cloud** (Private Edge Gateway)
-   - A Raspberry Pi 5 running 12 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole with Unbound (DNS/ad-blocking), SearXNG (private search), Tailscale (zero-trust networking), CrowdSec (intrusion prevention), Uptime Kuma (health checks), Prometheus and Grafana (monitoring), Homepage (dashboard), and Watchtower (auto-updates)
+   - A Raspberry Pi 5 running 13 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole with Unbound (DNS/ad-blocking), SearXNG (private search), ChromaDB (notes-retrieval vector store), Crawl4AI (page-extraction backend), CrowdSec (intrusion prevention), Uptime Kuma (health checks), Prometheus and Grafana (monitoring), Homepage (dashboard), and Watchtower (update monitoring and alerts, not auto-applied)
    - Replaces several paid cloud subscriptions with self-hosted, privacy-first infrastructure Drew fully owns and maintains
    - Not a public GitHub repo - it's a physical private server
 

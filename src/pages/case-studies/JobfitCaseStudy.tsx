@@ -4,7 +4,7 @@ const JobfitCaseStudy = () => (
   <CaseStudyLayout
     title="Job-Fit Scorer"
     subtitle="A LangGraph pipeline that discovers, filters, and scores real job postings against my own portfolio — calibrated to tell me no, not to flatter me."
-    tech={["LangGraph", "Python", "FastAPI", "Pydantic", "Langfuse", "SQLite", "pytest", "Codex CLI", "LLM-as-Judge", "Local Inference"]}
+    tech={["LangGraph", "Python", "FastAPI", "Pydantic", "Langfuse", "SQLite", "pytest", "LLM-as-Judge", "Local Inference"]}
   >
     <Section title="The Problem">
       <p>
@@ -31,8 +31,7 @@ const JobfitCaseStudy = () => (
         Before anything reaches an LLM, a plain deterministic classifier rejects postings that were
         never going to be relevant — generic solutions-architecture, management, ops, security,
         and foreign-only-remote roles — and collapses duplicate location variants onto one queue
-        slot. Cost discipline as an architectural decision, not something bolted on after the bill
-        arrives.
+        slot.
       </p>
       <p>
         What's left runs through a LangGraph state graph: <code>fetch_posting</code> →{" "}
@@ -40,8 +39,8 @@ const JobfitCaseStudy = () => (
         <code>staged_prose</code> → <code>compile_report</code>, with every stage typed against a
         Pydantic model — requirements, scores, talking points, final report. Scoring batches
         every extracted requirement into one call per posting keyed by stable requirement IDs,
-        instead of the original design's one-LLM-call-per-requirement fan-out, and every stage
-        gets its own span in a dedicated Langfuse project, tagged by ATS provider and company.{" "}
+        instead of the original design's one-LLM-call-per-requirement fan-out. Every stage
+        gets its own span in a dedicated Langfuse project, tagged by ATS provider and company, and{" "}
         <code>fetch_posting</code>{" "}
         and <code>compile_report</code> are plain, fully-unit-tested code with no LLM in the loop;
         everything that does touch an LLM is schema-validated, cached by posting-content hash, and
@@ -130,16 +129,17 @@ const JobfitCaseStudy = () => (
         than a systemic bias. The first live production run under the new code scored ten real
         postings end-to-end at two to three calls each and produced three sensible apply
         recommendations. I never ran the full formal three-way benchmark the original plan called
-        for — that's a known, documented gap, not something I'm hiding.
+        for — that's a known, documented gap.
       </p>
     </Section>
 
     <Section title="What It Actually Produces">
       <p>
         A real week (2026-W30): <strong>21 postings scored</strong>,{" "}
-        <strong>2 flagged apply/referral-first</strong>, <strong>19 skipped</strong>. That's the
-        report a weekly cron produces unattended — three decision buckets, not a dashboard number
-        nobody acts on.
+        <strong>2 flagged apply/referral-first</strong>, <strong>19 skipped</strong>. That's one
+        week of a weekly cron running unattended — every posting lands in exactly one of three
+        buckets, apply / monitor / skip, so the report ends in a decision instead of a score. It
+        has produced one every Sunday since 2026-W28 without a hand-run.
       </p>
       <p>
         The skip pile turned out to be the part I undervalued. The report tallies why things get
@@ -182,8 +182,13 @@ const JobfitCaseStudy = () => (
           strict-JSON-schema contract requires <code>additionalProperties: false</code> on every
           nested object) before a Codex-backed score would complete end to end. That engine now
           ships in its own private repo with CI and a fresh-install test proving it runs with zero
-          Hermes or Obsidian dependencies. True multi-tenant hosting — auth, isolation guarantees
-          for a stranger's data — is a different, larger project I haven't started.
+          Hermes or Obsidian dependencies. It now runs as a second, fully isolated deployment —
+          separate config, state, and environment from the original — and that isolated
+          deployment runs the same production crons in parallel against the live system, with
+          cutover gated on seven clean days and ≥90% recommendation agreement on shared postings:
+          a migration validated by diffing real output, not just by tests. True multi-tenant
+          hosting — auth, isolation guarantees for a stranger's data — is a different, larger
+          project I haven't started.
         </li>
         <li>
           <strong>Repo is private for now.</strong> The original research repo stays that way —

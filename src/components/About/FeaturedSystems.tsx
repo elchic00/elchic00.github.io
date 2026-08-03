@@ -70,7 +70,7 @@ const featuredSystems: FeaturedSystem[] = [
       "Trustworthy local LLM automation with production-style traces, evals, and approval gates.",
     metric: "3 nodes",
     metricLabel: "homelab agent ops",
-    proof: ["Langfuse traces + evals", "HITL side-effect gates", "Self-hosted search/RAG (SearXNG, sqlite-vec)"],
+    proof: ["Langfuse traces + evals", "HITL side-effect gates", "Self-hosted search + notes RAG (SearXNG, sqlite-vec)"],
     stack: ["Local inference", "Hermes", "Langfuse"],
     status: "dry-run protected",
     // Hermes is a real case-study modal now (see Pi-Cloud's identical pattern) —
@@ -84,7 +84,7 @@ const featuredSystems: FeaturedSystem[] = [
     eyebrow: "Private cloud / edge gateway",
     value:
       "A private edge gateway that replaces default cloud habits with observable, zero-trust infrastructure.",
-    metric: "12",
+    metric: "13",
     metricLabel: "self-hosted services",
     proof: ["DNS + identity", "Telemetry dashboard", "Recovery playbooks"],
     stack: ["Pi-hole", "Tailscale", "Prometheus"],

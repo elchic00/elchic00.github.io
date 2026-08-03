@@ -18,7 +18,7 @@ Your portfolio features a free, high-quality AI chat assistant powered by **Goog
 - ✅ Rate limiting prevents abuse (5 req/min per IP)
 - ✅ Free tier: 1,500 requests/day (Gemini) + 100K requests/day (Cloudflare)
 - ✅ Serverless - no backend maintenance
-- ✅ Complete structured project context on every request; the five-record corpus does not need retrieval or a vector database
+- ✅ Complete structured project context on every request; the six-record corpus does not need retrieval or a vector database
 
 ---
 
