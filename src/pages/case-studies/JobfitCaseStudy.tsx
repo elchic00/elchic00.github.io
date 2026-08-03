@@ -137,10 +137,9 @@ const JobfitCaseStudy = () => (
     <Section title="What It Actually Produces">
       <p>
         A real week (2026-W30): <strong>21 postings scored</strong>,{" "}
-        <strong>2 flagged apply/referral-first</strong>, <strong>19 skipped</strong>. I read that
-        report on Sunday and it feeds the only three decisions I make — apply, monitor, skip.
-        It's not advisory: on 2026-07-12 the pipeline put two Ramp roles at the top of the queue,
-        and I applied to both through their ATS the same day.
+        <strong>2 flagged apply/referral-first</strong>, <strong>19 skipped</strong>. That's the
+        report a weekly cron produces unattended — three decision buckets, not a dashboard number
+        nobody acts on.
       </p>
       <p>
         The skip pile turned out to be the part I undervalued. The report tallies why things get
