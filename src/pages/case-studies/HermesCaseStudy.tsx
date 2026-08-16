@@ -154,7 +154,7 @@ const HermesCaseStudy = () => (
         <li>
           The 27B model is bandwidth-bound — plain decode floors at 7.4 tokens/sec. Speculative
           decoding (MTP, detailed on the Inference Engine page) already recovers most of that gap
-          to roughly 10 tokens/sec average, peaking near 19–24 t/s on structured output; a smaller
+          to roughly 10 tokens/sec average, peaking near 22.4 t/s on structured output; a smaller
           quant would trade quality for more speed beyond that, and I haven't made that trade.
         </li>
       </ul>

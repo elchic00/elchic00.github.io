@@ -260,14 +260,14 @@ When asked about "what projects has he built", include both his professional wor
    - Also built a Voice Relay: an iPhone Shortcut sends voice memos through WhisperX transcription with speaker diarization, writing structured notes straight into Obsidian and confirming over Telegram
 
 2. **Pi-Cloud** (Private Edge Gateway)
-   - A Raspberry Pi 5 running 12 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole with Unbound (DNS/ad-blocking), SearXNG (private search), Tailscale (zero-trust networking), CrowdSec (intrusion prevention), Uptime Kuma (health checks), Prometheus and Grafana (monitoring), Homepage (dashboard), and Watchtower (auto-updates)
+   - A Raspberry Pi 5 running 13 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole with Unbound (DNS/ad-blocking), SearXNG (private search), ChromaDB (notes-retrieval vector store), Crawl4AI (page-extraction backend), CrowdSec (intrusion prevention), Uptime Kuma (health checks), Prometheus and Grafana (monitoring), Homepage (dashboard), and Watchtower (update monitoring and alerts, not auto-applied)
    - Replaces several paid cloud subscriptions with self-hosted, privacy-first infrastructure Drew fully owns and maintains
    - Not a public GitHub repo - it's a physical private server
 
 3. **Inference Engine** (llama.cpp, ROCm, hand-patched local model serving)
    - A hand-patched llama.cpp build serving 4 local models (2 text, vision, speech-to-text) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
    - Fixed a GPU memory-allocator bug that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
-   - Real generation speeds on this hardware: up to 44.4 tok/s on the 35B MoE model (with ~1,495 tok/s prompt prefill), and ~10 tok/s average on the 27B dense model, peaking near 24 tok/s with speculative decoding
+   - Real generation speeds on this hardware: up to 44.4 tok/s on the 35B MoE model (with ~1,495 tok/s prompt prefill), and ~10 tok/s average on the 27B dense model, peaking near 22.4 tok/s with speculative decoding
    - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault
    - This is the inference layer Hermes actually runs on - no public repo yet, this is a private homelab build
 
@@ -526,7 +526,7 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 **Nodes**:
 - **Framework Desktop** - Local LLM inference, running large open-weight models fully on GPU instead of relying on hosted APIs
 - **Mac Mini** - Orchestrates Hermes' scheduled agent workflows, multi-model routing, and retrieval/memory
-- **Raspberry Pi 5** - Runs Pi-Cloud, 12 self-hosted services (photos, passwords, documents, DNS, search, monitoring, security), several replacing paid SaaS
+- **Raspberry Pi 5** - Runs Pi-Cloud, 13 self-hosted services (photos, passwords, documents, DNS, search, monitoring, security), several replacing paid SaaS
 
 **Hermes (AI agent platform)**:
 - Multi-model routing across locally-hosted models
@@ -535,11 +535,11 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 - Self-hosted search (SearXNG) and local vector retrieval (sqlite-vec, Ollama embeddings) in place of hosted equivalents
 
 **Pi-Cloud (edge services, zero-trust networking)**:
-- **Tailscale** (WireGuard-based mesh VPN) for secure remote/public-network access with no open ports exposed to the internet
 - **CrowdSec** - community-driven intrusion prevention with automated threat detection
 - **Pi-hole + Unbound** - network-wide ad/tracker blocking backed by a recursive DNS resolver that talks directly to root nameservers, bypassing third-party DNS
 - **Prometheus + Grafana** - metrics collection and dashboards
-- **Watchtower** - automated container updates with rolling, zero-downtime deploys
+- **Watchtower** - monitors running containers for available updates and sends alerts; does not auto-apply them
+- **ChromaDB + Crawl4AI** - vector store and page-extraction backend an always-on agent calls unattended
 - **Immich, Vaultwarden, Paperless-ngx** - self-hosted photo library, password manager, and document management, replacing their paid SaaS equivalents
 
 **Frontend Engineering Connection**:
