@@ -82,6 +82,15 @@ const PiCloudCaseStudy = () => (
         if the active-ban cache drops near zero — the signature of a restart that silently lost its
         decision history and would reopen the door without anyone noticing.
       </p>
+      <p>
+        Automated access gets less trust than I do. The key my always-on agent uses can't open a
+        shell at all — it's pinned to a restricted command set (a handful of read-only
+        diagnostics, plus rsync backup receive into one specific directory), so a leaked
+        automation key can't do anything beyond exactly what it's allowed to. Remote firewall
+        changes go through a dead-man's switch: a scheduled <code>ufw disable</code> fires
+        automatically a couple minutes after any change unless I cancel it, so a mid-change SSH
+        lockout heals itself instead of requiring a trip to the physical hardware.
+      </p>
     </Section>
 
     <Section title="It's also backend infrastructure, not just my services">

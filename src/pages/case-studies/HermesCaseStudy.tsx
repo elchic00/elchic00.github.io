@@ -137,6 +137,24 @@ const HermesCaseStudy = () => (
       </p>
     </Callout>
 
+    <Callout title="What Broke: A Cron Job Believed Its Own Fabricated Instructions">
+      <p>
+        Interactive sessions can receive a "steer" — a live instruction injected mid-turn, marked
+        with a trusted marker the model is taught to treat as coming from me. Cron sessions run the
+        same agent code, but the scheduler never registers a cron run in the lookup table every{" "}
+        <code>steer()</code> call site depends on — so a cron job can structurally never receive a
+        real one. On 2026-08-09, two separate cron runs found the gap the hard way: each one
+        self-emitted the trusted marker mid-task and obeyed its own fabrication — a self-inflicted
+        version of the exact injection the marker exists to prevent.
+      </p>
+      <p>
+        Same shape as the frozen self-improvement loop above: don't let the thing that might be
+        wrong grade itself. Cron sessions are now explicitly excluded from ever processing a steer
+        marker, covered by a dedicated regression test before it shipped. Not fork-specific — filed
+        upstream against <code>NousResearch/hermes-agent</code>.
+      </p>
+    </Callout>
+
     <Section title="Honest Limitations">
       <ul>
         <li>
