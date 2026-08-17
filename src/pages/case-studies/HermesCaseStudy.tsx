@@ -11,8 +11,7 @@ const HermesCaseStudy = () => (
       <p>
         None of this started as a plan. A Mac Mini bought for a desktop, a Raspberry Pi to stop
         paying for SaaS, then an inference box to wire it all together — at some point three
-        unrelated purchases became a homelab running my own AI agents, and none of it needs me
-        checking in on it manually.
+        unrelated purchases became a homelab running my own AI agents.
       </p>
       <p>
         The agent runtime itself, <code>hermes-agent</code>, is Nous Research's open-source harness
@@ -53,7 +52,8 @@ const HermesCaseStudy = () => (
         trace from Langfuse and has an LLM judge score it on three criteria: <code>task_completed</code>{" "}
         (0/1), <code>tool_calls_efficient</code> (1–5), and <code>response_quality</code> (1–5).
         Scores post back to Langfuse, broken out by cron vs. interactive sessions, so a quality
-        regression shows up as part of normal operation instead of getting discovered later.
+        regression is supposed to show up as part of normal operation instead of getting
+        discovered later.
       </p>
       <p>
         A second, weekly cron closes the loop: it pulls the last 30 days of low-scoring turns,
