@@ -189,18 +189,22 @@ const InferenceCaseStudy = () => (
 
     <Section title="Honest Limitations">
       <p>
-        This isn't fully closed out. The <code>reasoning_content</code> fix is real and
-        necessary — it's why the bug no longer reproduces on short exchanges — but a same-day
-        switch-back attempt proved it isn't sufficient on its own: the hallucinated-tool-call
-        symptom came back on the current build within 12 hours, on a longer tool-calling chain.
+        The <code>reasoning_content</code> fix was real but not the whole story. A same-day
+        switch-back attempt proved it wasn't sufficient alone: the hallucinated-tool-call symptom
+        came back within 12 hours, on a longer tool-calling chain, and the model went back to the
+        pinned binary for weeks while I looked for a second cause.
       </p>
       <p>
-        The 35B and vision models stay pinned to the pre-rebase binary indefinitely now, with no
-        further switch-back planned until a second contributing factor is actually identified —
-        a longer soak alone isn't the bar anymore. I never ran a full <code>git bisect</code>{" "}
-        across the original 132-commit range; once the first root cause traced to my own code it
-        looked moot, and now looks necessary-but-incomplete instead. And there's no public repo or
-        sanitized patch set yet — this write-up is step one toward that.
+        The actual resolution came from re-testing the assumption behind the pin, not from finding
+        that second cause. A controlled A/B against the <em>old, pinned</em> binary — using the
+        real failing production payload, not a synthetic one — found it reproduced the same
+        fabrication just as badly, deterministically. The 132-commit rebase was never the cause.
+        Once that was confirmed, all three models moved off the pinned binary — 35B first, vision
+        and the 27B within two days — and they're still on a current build. I never ran a full{" "}
+        <code>git bisect</code> across the original commit range; once the regression was shown to
+        not be build-specific at all, one would have been chasing a commit that was never
+        guilty. There's still no public repo or sanitized patch set — this write-up is step one
+        toward that.
       </p>
     </Section>
   </CaseStudyLayout>
