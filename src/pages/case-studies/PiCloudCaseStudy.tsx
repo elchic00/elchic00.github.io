@@ -95,11 +95,14 @@ const PiCloudCaseStudy = () => (
 
     <Section title="It's also backend infrastructure, not just my services">
       <p>
-        Three of these aren't only mine — they're dependencies of an always-on agent.{" "}
+        Two of these aren't only mine — they're dependencies of an always-on agent.{" "}
         <strong>SearXNG</strong> is Hermes's default search backend, so every web lookup the
-        agent makes resolves through the Pi instead of a search API. <strong>ChromaDB</strong> is
-        the vector store behind retrieval over my notes. <strong>Crawl4AI</strong> does full-page
-        extraction behind a bearer token: submit a URL, poll for the result.
+        agent makes resolves through the Pi instead of a search API. <strong>Crawl4AI</strong>{" "}
+        does full-page extraction behind a bearer token: submit a URL, poll for the result.{" "}
+        <strong>ChromaDB</strong> backed an early long-term-memory experiment (recall accuracy
+        came in under published benchmarks, detailed on the Hermes page) — the experiment got
+        pulled, and the container's still here, running and unused, until I either reclaim the
+        resources or find it a real job.
       </p>
       <p>
         That raises the reliability bar in a specific way. A personal service that's down is an

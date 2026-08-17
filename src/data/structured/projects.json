@@ -20,7 +20,7 @@
   {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Four models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, hitting 44.4 tokens/sec on a full 99-layer GPU offload that took finding a memory-allocator bug, not a config flag. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
+    "description": "Four models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, hitting 46.5 tokens/sec on a full 99-layer GPU offload that took finding a memory-allocator bug, not a config flag. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",

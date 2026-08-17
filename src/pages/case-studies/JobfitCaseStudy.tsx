@@ -113,7 +113,7 @@ const JobfitCaseStudy = () => (
     <Section title="Results & Scale">
       <StatRow>
         <Stat value="13" label="ATS boards polled" />
-        <Stat value="315" label="passing tests (portable engine)" />
+        <Stat value="324" label="passing tests (portable engine)" />
         <Stat value="76%" label="fewer LLM calls (V4)" />
         <Stat value="65%" label="faster end-to-end (V4)" />
       </StatRow>
