@@ -52,7 +52,7 @@ export const skillTooltips: Record<string, string> = {
   "Bundle Analysis": "Webpack/vite bundle size optimization and tree shaking",
   "A/B Testing": "Data-driven experimentation and feature validation",
   "User Analytics": "User behavior tracking and insights",
-  "Cross-team Collaboration": "Working with design, product, and backend teams",
+  "Cross-team Collaboration": "Working with design, product, backend, and analytics teams",
   "Comprehensive Test Coverage": "Unit, integration, and e2e testing strategies",
   Agile: "Sprint planning, standups, and iterative development",
 };
