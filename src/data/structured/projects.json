@@ -24,7 +24,7 @@
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",
-    "technologies": ["llama.cpp", "ROCm", "HIP", "GGML", "Speculative Decoding", "AMD Radeon", "Unified Memory", "LiteLLM", "Systemd", "Debugging", "MiniCPM-V", "WhisperX", "Langfuse"]
+    "technologies": ["llama.cpp", "ROCm", "HIP", "GGML", "Speculative Decoding", "AMD Radeon", "Unified Memory", "LiteLLM", "Systemd", "Debugging", "Qwen3-VL", "WhisperX", "Langfuse"]
   },
   {
     "title": "Job-Fit Scorer",

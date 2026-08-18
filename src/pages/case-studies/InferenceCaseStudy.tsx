@@ -14,7 +14,7 @@ const InferenceCaseStudy = () => (
       "Unified Memory",
       "LiteLLM",
       "Systemd",
-      "MiniCPM-V",
+      "Qwen3-VL",
       "WhisperX",
       "Langfuse",
     ]}
@@ -81,7 +81,7 @@ const InferenceCaseStudy = () => (
     </Section>
 
     <StatRow>
-      <Stat value="46.5 t/s" label="35B gen, full GPU offload" />
+      <Stat value="47.8 t/s" label="35B gen, full GPU offload" />
       <Stat value="1,495 t/s" label="Prefill @2k context" />
       <Stat value="22.4 t/s" label="27B peak w/ MTP, 87% acceptance" />
       <Stat value="~5x" label="Prefill gain, rocWMMA disabled" />
@@ -104,6 +104,28 @@ const InferenceCaseStudy = () => (
         conclusion at the time. What mattered was treating the pin as a workaround instead of a
         close, and overturning a week-old conclusion once the evidence pointed at my own code
         rather than the dependency I'd assumed was at fault.
+      </p>
+    </Callout>
+
+    <Callout title="What Broke: A Shared Cache Restored Someone Else's Conversation">
+      <p>
+        Found as a side effect of investigating the fabrication bug above: llama.cpp's{" "}
+        <code>server_prompt_cache</code> keeps a RAM-resident pool of full KV-state snapshots
+        shared across every slot and every conversation, on by default (8GB, never explicitly set
+        on any of the three services). Under concurrent slot eviction, a fresh request could
+        restore an unrelated, already-finished conversation into its slot instead of starting
+        clean. Reproduced deterministically once the pool was seeded: 20 of 20, then 8 of 8
+        corrupted rounds in back-to-back test batches — and the API's own cache-accounting field
+        reported <code>cached_tokens: 0</code> every time, no warning it had happened.
+      </p>
+      <p>
+        Journal analysis of real traffic put the trigger condition — both slots evicted within a
+        second of each other — at roughly once a day, and once it fired the contamination stuck:
+        the same stale text kept surfacing as the answer across 19 straight, unrelated requests.
+        Filed upstream with the full mechanism trace (<code>ggml-org/llama.cpp#27148</code>); the
+        fix (<code>--no-cache-idle-slots --cache-ram 0</code>) verified clean across 18 real-scale
+        trials and is live on both text models. The vision model's single-slot config was never
+        exposed to begin with — no other idle slot for the pool to draw from.
       </p>
     </Callout>
 
