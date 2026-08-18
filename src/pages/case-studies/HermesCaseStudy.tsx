@@ -18,7 +18,10 @@ const HermesCaseStudy = () => (
         (MIT-licensed). I didn't write it — I deployed it, and I built the observability and safety
         layer around it. That distinction matters: running an agent unattended for weeks is a
         different problem than running one in a notebook while you watch. You need to know whether
-        it's doing a good job, not just whether it's still running.
+        it's doing a good job, not just whether it's still running. It's not purely one-directional,
+        either — a tiered tool-disclosure feature I built for it (defer MCP/plugin tools by default,
+        scale the listing with catalog size instead of dumping every tool into every prompt) merged
+        upstream into the harness itself.
       </p>
     </Section>
 
