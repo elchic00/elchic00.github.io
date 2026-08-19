@@ -2,9 +2,9 @@
   {
     "title": "Hermes",
     "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
-    "description": "Nous Research's hermes-agent is the open-source (MIT) agent harness - not written by Andrew. What he built is what's wrapped around it: routing every model call to self-hosted local models instead of the cloud providers it ships with, a nightly Langfuse eval loop, a weekly self-improvement cron that clusters its own low-quality turns and proposes prompt edits (one real run: 3 proposals, 2 applied, 1 correctly rejected), and human-in-the-loop approval gates before any side-effecting action executes.",
+    "description": "Nous Research's hermes-agent is the open-source (MIT) agent harness - not written by Andrew. What he built is what's wrapped around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a hand-patched local inference layer. The most useful thing he found was the loop reporting last_status: ok for 13 days while completely frozen, because Hermes had declared a crashed run \"completed — 2 proposals sent\"; the fix was taking the LLM out of its own success reporting and making the scheduler read the exit code instead. Proposals still wait on him in Telegram: one real run clustered 11 low-quality turns into 3 fixes, 2 applied, 1 correctly rejected as wrong for the context.",
     "image": "/images/projects/hermes.svg",
-    "link": "/projects",
+    "link": "/projects/hermes",
     "id": "hermes",
     "technologies": [
       "hermes-agent",
@@ -13,15 +13,18 @@
       "Telegram",
       "HITL",
       "Evals",
-      "WhisperX"
+      "WhisperX",
+      "Obsidian",
+      "Cron",
+      "LLM-as-Judge"
     ]
   },
   {
     "title": "Pi-Cloud",
     "subtitle": "Private Infrastructure + Service Operations",
-    "description": "A Raspberry Pi 5 that runs private services for photos, passwords, documents, DNS filtering, remote access, monitoring, and recovery. It is operated with clear service boundaries, no public ports, health checks, and backups designed to be restored when something fails. Not a public repo - it is a physical private server, not something with a GitHub link.",
-    "image": "/images/projects/pi-cloud.webp",
-    "link": "/projects",
+    "description": "A Raspberry Pi 5 running 23 containers across 12 Compose projects - photos, passwords, document search, DNS filtering, private search, remote access, monitoring - with zero public ports and two recovery paths kept on deliberately different filesystems. Three of those services aren't just his: SearXNG, ChromaDB, and Crawl4AI are the search, memory, and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified 2026-07-25: every container carries a restart policy, so a reboot brings the whole stack back with no manual intervention. Not a public repo - it is a physical private server, not something with a GitHub link.",
+    "image": "/images/projects/pi-cloud.svg",
+    "link": "/projects/pi-cloud",
     "id": "pi-cloud",
     "technologies": [
       "Docker",
@@ -31,40 +34,26 @@
       "CrowdSec",
       "Prometheus",
       "Grafana",
+      "WireGuard",
+      "Raspberry Pi",
+      "DevOps",
+      "Zero Trust",
       "Immich",
-      "Vaultwarden",
-      "Paperless-ngx",
-      "Raspberry Pi"
+      "Uptime Kuma",
+      "OpenCL",
+      "PCIe Gen 3",
+      "NVMe",
+      "DNSSEC",
+      "nftables",
+      "rsync"
     ]
-  },
-  {
-    "title": "myPal",
-    "subtitle": "AAC App Prototype (2021, not actively maintained)",
-    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays. Built in 2021 - a meaningful project, but not something actively maintained today.",
-    "image": "/images/projects/mypal-demo.mp4",
-    "link": "https://github.com/myPal-TMS/myPal",
-    "id": "mypal",
-    "githubStats": {
-      "stars": 1,
-      "forks": 2,
-      "languages": [
-        "JavaScript",
-        "Java",
-        "Objective-C",
-        "Ruby",
-        "Starlark"
-      ],
-      "topics": [],
-      "lastUpdated": "2021-08-27T13:32:32Z"
-    },
-    "readmeSummary": "## MyPAL (Picture Assisted Language) App\\r\\n\\r\\nAn Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays communicate..."
   },
   {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "A hand-patched llama.cpp build serving four local models (two text, vision, speech-to-text) on a Framework Desktop's APU - hardware the project doesn't officially support. Powers every local agentic workflow, reachable remotely over Telegram. Fixed a GPU memory-allocator bug capping offload, found a 5x prefill win by disabling a kernel path that's a regression on this specific chip, and traced a tool-calling regression to a one-line bug in the agent's own code, not the dependency everyone assumed was at fault. Not a public repo for the patches themselves - this write-up is the first public artifact.",
+    "description": "Four models resident on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, hitting 47.8 tokens/sec on a full 99-layer GPU offload that took finding a memory-allocator bug, not a config flag. Reachable from his phone over Telegram, every call traced, and nothing sensitive leaves the LAN. Not a public repo for the patches themselves - this write-up is the first public artifact.",
     "image": "/images/projects/inference-engine.svg",
-    "link": "/projects",
+    "link": "/projects/inference-engine",
     "id": "inference-engine",
     "technologies": [
       "llama.cpp",
@@ -72,14 +61,20 @@
       "HIP",
       "GGML",
       "Speculative Decoding",
+      "AMD Radeon",
+      "Unified Memory",
       "LiteLLM",
+      "Systemd",
+      "Debugging",
+      "Qwen3-VL",
+      "WhisperX",
       "Langfuse"
     ]
   },
   {
     "title": "Job-Fit Scorer",
     "subtitle": "LangGraph + FastAPI + Langfuse",
-    "description": "A LangGraph pipeline Andrew built that polls 13 companies' ATS boards (Greenhouse, Ashby, Lever), filters thousands of raw postings down to relevant roles, and scores each one against an evidence document of what he's actually built - deliberately calibrated to be honest rather than flattering. Uses LangGraph's Send API for parallel requirement-level scoring with typed Pydantic state, every parallel node traced in a dedicated Langfuse project. A batching redesign cut LLM calls per posting by 76%. 263 passing tests including live assertions that every ATS board integration is actually alive (one board once silently returned empty results for months - HTTP 200, zero signal - now caught structurally). Runs on his self-hosted inference stack; private repo, code available on request.",
+    "description": "A LangGraph pipeline that polls 13 companies' ATS boards (Greenhouse, Ashby, Lever), throws out the postings that were never going to be relevant before an LLM ever sees one, and scores the rest against an evidence document of what he's actually built - calibrated to tell him no. A real week: 21 postings scored, 2 worth applying to, 19 skipped, with recurring blockers tallied so the rejections double as a study list. Uses LangGraph's Send API for parallel requirement-level scoring with typed Pydantic state, every parallel node traced in a dedicated Langfuse project. A batching redesign cut LLM calls per posting by 76%. Every run is traced in Langfuse, results append to a durable tracker, and the weekly report carries a deterministic health section rather than an LLM grading its own homework. Runs on his self-hosted inference stack; private repo, code available on request.",
     "image": "/images/projects/jobfit-scorer.svg",
     "link": "/projects/jobfit",
     "id": "jobfit",
@@ -99,15 +94,40 @@
   {
     "title": "AI Chat Assistant",
     "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Structured Context",
-    "description": "The chat widget on this site. A serverless Cloudflare Worker rate-limits requests and calls Gemini 2.5 Flash with the complete, compact project reference sheet plus the portfolio context. The corpus is intentionally small enough to fit in the prompt, so there is no vector database or retrieval step. Runs on free tiers end to end - $0/month. The model's response can include action markers the frontend turns into real buttons (open resume, jump to a section). Public repo - same one as this site.",
+    "description": "The assistant in the corner of this page. A Cloudflare Worker rate-limits requests and gives Gemini 2.5 Flash a compact, structured reference for the whole portfolio on every request - no vector database or unnecessary retrieval layer. The corpus is intentionally small enough to fit in the prompt, and it runs on free tiers end to end - $0/month. The model can also return action markers that become real UI buttons, such as opening the resume or jumping to a section. Public repo - same one as this site.",
     "image": "/images/projects/elchic00-chatbot.svg",
-    "link": "https://github.com/elchic00/elchic00.github.io",
+    "link": "/projects/elchic00-chatbot",
     "id": "elchic00-chatbot",
     "technologies": [
       "Gemini 2.5 Flash",
       "Cloudflare Workers",
       "Structured Context",
-      "Serverless"
+      "DOMPurify",
+      "Rate Limiting",
+      "Serverless",
+      "Wrangler"
     ]
+  },
+  {
+    "title": "myPal",
+    "subtitle": "AAC App Prototype (2021, not actively maintained)",
+    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions. Built in 2021 - a meaningful project, but not something actively maintained today.",
+    "image": "/images/projects/mypal-demo.mp4",
+    "link": "https://github.com/myPal-TMS/myPal",
+    "id": "mypal",
+    "githubStats": {
+      "stars": 1,
+      "forks": 2,
+      "languages": [
+        "JavaScript",
+        "Java",
+        "Objective-C",
+        "Ruby",
+        "Starlark"
+      ],
+      "topics": [],
+      "lastUpdated": "2021-08-27T13:32:32Z"
+    },
+    "readmeSummary": "## MyPAL (Picture Assisted Language) App\r\n\r\nAn Augmentative and Alternative Communication (AAC) app created to help children with autism, special needs, or verbal delays communicate..."
   }
 ]

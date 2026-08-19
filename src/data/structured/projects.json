@@ -20,7 +20,7 @@
   {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Four models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, hitting 46.5 tokens/sec on a full 99-layer GPU offload that took finding a memory-allocator bug, not a config flag. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
+    "description": "Four models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, hitting 47.8 tokens/sec on a full 99-layer GPU offload that took finding a memory-allocator bug, not a config flag. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",
@@ -46,7 +46,7 @@
   },
   {
     "title": "myPal",
-    "subtitle": "Rapid Prototyping Case Study for Assistive Tech",
+    "subtitle": "AAC App Prototype (2021, not actively maintained)",
     "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
     "image": "/images/projects/mypal-demo.mp4",
     "link": "https://github.com/myPal-TMS/myPal",
