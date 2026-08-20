@@ -47,7 +47,7 @@ export const About = () => {
             <p className="animate-fade-in-delay-3 mb-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
               I run self-hosted AI infrastructure in production reliable enough
               to run my own life on, and turn messy product constraints into
-              shipped interfaces that real people use. The work spans enterprise
+              shipped interfaces that millions of people use. The work spans enterprise
               fintech at American Express and five years of engineering
               mentorship.
             </p>
