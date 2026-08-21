@@ -89,15 +89,17 @@ const InferenceCaseStudy = () => (
       <p>
         Multi-Token Prediction (MTP) and speculative decoding bypass this
         bandwidth ceiling by proposing draft candidate tokens verified by the
-        main model in a single forward pass. On Qwen 3.8 27B, MTP elevates
-        sustained generation throughput from the 7.4 t/s memory-bound floor to
-        ~20 t/s — providing real-time responsiveness for interactive agent loops
-        without inducing thermal throttling.
+        main model in a single forward pass. On Qwen 3.8 27B, MTP lifts
+        generation throughput off the 7.4 t/s memory-bound floor to a measured
+        22.35 t/s peak on structured, tool-calling prompts (81% draft
+        acceptance), holding a sustained ~10 t/s on everyday mixed traffic —
+        real-time responsiveness for interactive agent loops without thermal
+        throttling.
       </p>
     </Section>
 
     <StatRow>
-      <Stat value="~20 t/s" label="Qwen 3.8 27B gen w/ MTP" />
+      <Stat value="22.35 t/s" label="Qwen 3.8 27B gen w/ MTP (structured peak)" />
       <Stat value="1,495 t/s" label="Prefill @2k context" />
       <Stat value="7.4 t/s" label="Dense Q8 LPDDR5X baseline" />
       <Stat value="~5x" label="Prefill gain, rocWMMA disabled" />
