@@ -225,8 +225,22 @@ const InferenceCaseStudy = () => (
         and the 27B within two days — and they're still on a current build. I never ran a full{" "}
         <code>git bisect</code> across the original commit range; once the regression was shown to
         not be build-specific at all, one would have been chasing a commit that was never
-        guilty. There's still no public repo or sanitized patch set — this write-up is step one
-        toward that.
+        guilty.
+      </p>
+      <p>
+        The operational consequence of that saga is the real limit, though. Retiring the 35B —
+        which held the RAM the 27B needed for a third parallel slot and ~196k context per slot —
+        meant its fallback hop came with it. A 27B outage now falls straight to a finite prepaid
+        cloud credit instead of a second local backend. The box runs one text model at a time:
+        there's no local redundancy, only a cheaper, less capable escape hatch.
+      </p>
+      <p>
+        What's still open upstream: the <code>enable_thinking</code> template leak that the
+        August rebase regression traced to a specific commit (<code>ggml-org/llama.cpp#26781</code>)
+        is filed but unresolved, and a maintainer disputes the mechanism — the bisect evidence
+        stands, but the tree is deliberately held 80 commits behind <code>origin/master</code>
+        rather than riding on an unmerged fix. And there's still no public repo or sanitized patch
+        set for the local Strix Halo build; this write-up is step one toward that.
       </p>
     </Section>
   </CaseStudyLayout>
