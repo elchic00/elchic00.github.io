@@ -22,7 +22,7 @@ const InferenceCaseStudy = () => (
       "LiteLLM",
       "Systemd",
       "Qwen 3.8 27B",
-      "Qwen2-VL",
+      "Qwen3-VL",
       "WhisperX",
       "Langfuse",
     ]}
@@ -48,7 +48,7 @@ const InferenceCaseStudy = () => (
         Standardizing solely on <strong>Qwen 3.8 27B</strong> as the primary
         text backbone provides strong reasoning capability and reliable
         tool-calling while keeping memory utilization optimized. This leaves
-        enough VRAM for parallel text slots, a resident vision model (Qwen2-VL),
+        enough VRAM for parallel text slots, a resident vision model (Qwen3-VL),
         and a speech-to-text pipeline (WhisperX). Getting there meant patching
         and building the serving engine from source (<code>GGML_HIP=ON</code>,{" "}
         <code>AMDGPU_TARGETS=gfx1151</code>) behind a LiteLLM router that
@@ -207,19 +207,24 @@ const InferenceCaseStudy = () => (
 
     <Section title="Honest Limitations">
       <p>
-        A 128GB unified memory architecture provides impressive flexibility for
-        an always-on host, but it defines clear physical boundaries.
-        Standardizing on Qwen 3.8 27B while reserving VRAM for parallel
-        execution slots, a vision model, and a speech-to-text service consumes
-        nearly the full working memory of the system.
+        A 128GB unified memory architecture is flexible, but it defines a
+        physical budget, and every model on the box draws from it. When I
+        retired the 35B MoE model in August 2026 and made Qwen 3.8 27B the
+        sole primary, the RAM it freed went to the 27B itself — a third
+        parallel slot and 196k of context each, instead of a second, faster
+        MoE sitting alongside it. That was a deliberate trade: one dense model
+        with deep context and concurrency over two models that each had less
+        headroom.
       </p>
       <p>
-        Attempting to run larger 35B+ models requires sacrificing parallel
-        execution slots or offloading resident auxiliary models, collapsing the
-        system back into a single-stream pipeline. Operating Qwen 3.8 27B
-        strikes the ideal balance between single-query reasoning performance and
-        the multi-slot concurrency required to drive autonomous agent workflows
-        locally.
+        The cost of that trade is the fallback chain. With no second local text
+        model, a 27B outage no longer drops to another local backend — it
+        falls straight to a cloud provider with a finite prepaid balance. That
+        is an accepted regression for now, and the real open work: a second
+        local fallback (or a hot-restart path) that restores a zero-cost
+        safety net, plus the upstream items still open against this stack —
+        the <code>server_prompt_cache</code> race (#27148) and the gfx1151
+        allocator behavior that made <code>--direct-io</code> mandatory.
       </p>
     </Section>
   </CaseStudyLayout>
