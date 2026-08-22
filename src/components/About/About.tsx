@@ -37,7 +37,7 @@ export const About = () => {
             style={{ backgroundColor: "rgba(2, 6, 23, 0.96)" }}
           >
             <p className="animate-fade-in-delay-2 mb-4 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-200">
-              Drew Alagna · NYC builder · AI-systems engineer
+              Drew Alagna · NYC builder · agent-orchestration enthusiast
             </p>
 
             <h1 className="animate-fade-in-delay-3 mb-6 text-4xl font-black leading-[0.98] tracking-tight text-white sm:text-5xl lg:text-6xl">
