@@ -19,9 +19,9 @@ const HermesCaseStudy = () => (
         layer around it. That distinction matters: running an agent unattended for weeks is a
         different problem than running one in a notebook while you watch. You need to know whether
         it's doing a good job, not just whether it's still running. It's not purely one-directional,
-        either — a tiered tool-disclosure feature I built for it (defer MCP/plugin tools by default,
-        scale the listing with catalog size instead of dumping every tool into every prompt) merged
-        upstream into the harness itself.
+        either — running it unattended surfaces real gaps in the harness itself: traces were
+        shipping full turn inputs and outputs to Langfuse's cloud with no redaction step, so I filed
+        it upstream (<code>NousResearch/hermes-agent#67544</code>) and opened a PR closing the gap.
       </p>
     </Section>
 
@@ -171,7 +171,7 @@ const HermesCaseStudy = () => (
         Same shape as the frozen self-improvement loop above: don't let the thing that might be
         wrong grade itself. Cron sessions are now explicitly excluded from ever processing a steer
         marker, covered by a dedicated regression test before it shipped. Not fork-specific — filed
-        upstream against <code>NousResearch/hermes-agent</code>.
+        upstream as <code>NousResearch/hermes-agent#82877</code>, root cause and fix included.
       </p>
     </Callout>
 
