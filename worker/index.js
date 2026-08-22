@@ -651,7 +651,7 @@ const PROJECTS_CONTEXT_DATA = `[
     "id": "inference-engine",
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Four models resident on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, hitting 47.8 tokens/sec on a full 99-layer GPU offload that took finding a memory-allocator bug, not a config flag. Reachable from his phone over Telegram, every call traced, and nothing sensitive leaves the LAN. Not a public repo for the patches themselves - this write-up is the first public artifact.",
+    "description": "Three models resident on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, where the sole primary is a dense Qwen 3.8 27B whose 7.4 tokens/sec memory-bandwidth floor becomes a 22.35 tokens/sec peak on a full 99-layer GPU offload once Multi-Token Prediction self-speculation kicks in. Reachable from his phone over Telegram, every call traced, and nothing sensitive leaves the LAN. Not a public repo for the patches themselves - this write-up is the first public artifact.",
     "technologies": [
       "llama.cpp",
       "ROCm",
