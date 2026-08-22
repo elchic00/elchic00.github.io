@@ -9,15 +9,6 @@
     "technologies": ["hermes-agent", "Langfuse", "LiteLLM", "Telegram", "HITL", "Evals", "WhisperX", "Obsidian", "Cron", "LLM-as-Judge"]
   },
     {
-    "title": "Pi-Cloud",
-    "subtitle": "Private Infrastructure + Service Operations",
-    "description": "A Raspberry Pi 5 running 23 containers across 12 Compose projects — photos, passwords, document search, DNS filtering, private search, remote access, monitoring — with zero public ports and two recovery paths kept on deliberately different filesystems. Three of those services aren't just mine: SearXNG, ChromaDB, and Crawl4AI are the search, memory, and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified 2026-07-25: every container carries a restart policy, so a reboot brings the whole stack back with no manual intervention.",
-    "image": "/images/projects/pi-cloud.svg",
-    "link": "/projects/pi-cloud",
-    "id": "pi-cloud",
-    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "WireGuard", "Raspberry Pi", "DevOps", "Zero Trust", "Immich", "Uptime Kuma", "OpenCL", "PCIe Gen 3", "NVMe", "DNSSEC", "nftables", "rsync"]
-  },
-  {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
     "description": "Three models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support: the dense 27B model should be capped at 7.4 tokens/sec by memory bandwidth alone. It isn't. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
@@ -25,6 +16,15 @@
     "link": "/projects/inference-engine",
     "id": "inference-engine",
     "technologies": ["llama.cpp", "ROCm", "HIP", "GGML", "Speculative Decoding", "AMD Radeon", "Unified Memory", "LiteLLM", "Systemd", "Debugging", "Qwen3-VL", "WhisperX", "Langfuse"]
+  },
+  {
+    "title": "Pi-Cloud",
+    "subtitle": "Private Infrastructure + Service Operations",
+    "description": "A Raspberry Pi 5 running 23 containers across 12 Compose projects — photos, passwords, document search, DNS filtering, private search, remote access, monitoring — with zero public ports and two recovery paths kept on deliberately different filesystems. Three of those services aren't just mine: SearXNG, ChromaDB, and Crawl4AI are the search, memory, and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified 2026-07-25: every container carries a restart policy, so a reboot brings the whole stack back with no manual intervention.",
+    "image": "/images/projects/pi-cloud.svg",
+    "link": "/projects/pi-cloud",
+    "id": "pi-cloud",
+    "technologies": ["Docker", "Tailscale", "Pi-hole", "Unbound", "CrowdSec", "Prometheus", "Grafana", "WireGuard", "Raspberry Pi", "DevOps", "Zero Trust", "Immich", "Uptime Kuma", "OpenCL", "PCIe Gen 3", "NVMe", "DNSSEC", "nftables", "rsync"]
   },
   {
     "title": "Job-Fit Scorer",
