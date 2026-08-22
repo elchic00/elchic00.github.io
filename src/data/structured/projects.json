@@ -2,7 +2,7 @@
   {
     "title": "Hermes",
     "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
-    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a hand-patched local inference layer. The most useful thing I found was the loop reporting last_status: ok for 13 days while completely frozen, because Hermes had declared a crashed run \"completed — 2 proposals sent\"; the fix was taking the LLM out of its own success reporting and making the scheduler read the exit code instead. Proposals still wait on me in Telegram: one real run clustered 11 low-quality turns into 3 fixes, 2 applied, 1 correctly rejected as wrong for the context.",
+    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a hand-patched local inference layer. For 13 straight days the loop reported last_status: ok — while completely frozen the entire time. Proposals still wait on me in Telegram before anything touches the live prompt.",
     "image": "/images/projects/hermes.svg",
     "link": "/projects/hermes",
     "id": "hermes",
@@ -20,7 +20,7 @@
   {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Four models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, where the sole primary is a dense Qwen 3.8 27B whose 7.4 tokens/sec memory-bandwidth floor becomes a 22.35 tokens/sec peak on a full 99-layer GPU offload once Multi-Token Prediction self-speculation kicks in. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
+    "description": "Three models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support: the dense 27B model should be capped at 7.4 tokens/sec by memory bandwidth alone. It isn't. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",
@@ -38,7 +38,7 @@
   {
     "title": "AI Chat Assistant",
     "subtitle": "Gemini 2.5 Flash + Cloudflare Workers + Structured Context",
-    "description": "The assistant in the corner of this page. A Cloudflare Worker gives Gemini a compact, structured reference for the whole portfolio on every request—no vector database or unnecessary retrieval layer. The model can also return action markers that become real UI buttons, such as opening the resume or jumping to a section.",
+    "description": "The assistant in the corner of this page — try it, that's the whole demo. A Cloudflare Worker feeds Gemini a compact, structured reference for the whole portfolio on every request, skipping the vector database the obvious build reaches for. It can also turn a reply into a real UI action — opening the resume, jumping to a section. One eval question caught it confidently repeating a wrong answer: not a hallucination, a bad source file.",
     "image": "/images/projects/elchic00-chatbot.svg",
     "link": "/projects/elchic00-chatbot",
     "id": "elchic00-chatbot",
