@@ -115,6 +115,15 @@ const InferenceCaseStudy = () => (
         prompting a temporary commit pin.
       </p>
       <p>
+        A git bisect narrowed it to one specific upstream commit — a
+        capability-probe change that looked like it was leaking a
+        DeepSeek-specific flag into unrelated chat templates — and I filed it
+        with the full bisect evidence (<code>ggml-org/llama.cpp#26781</code>).
+        A maintainer read the flagged code path closer than I had and refuted
+        it within days: the variable never actually reached the prompt that
+        broke. Back to an open question.
+      </p>
+      <p>
         A week later, upstream discussions revealed that this specific
         hallucination occurs when a client fails to echo{" "}
         <code>reasoning_content</code> back during a multi-turn tool replay. The
@@ -225,8 +234,10 @@ const InferenceCaseStudy = () => (
         is an accepted regression for now, and the real open work: a second
         local fallback (or a hot-restart path) that restores a zero-cost
         safety net, plus the upstream items still open against this stack —
-        the <code>server_prompt_cache</code> race (#27148) and the gfx1151
-        allocator behavior that made <code>--direct-io</code> mandatory.
+        the <code>server_prompt_cache</code> race (#27148), the gfx1151
+        allocator behavior that made <code>--direct-io</code> mandatory, and a
+        slot that silently stops dispatching mid-session with no log line to
+        explain why (#27185).
       </p>
     </Section>
   </CaseStudyLayout>
