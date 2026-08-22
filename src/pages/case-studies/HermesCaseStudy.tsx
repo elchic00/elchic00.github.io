@@ -84,7 +84,10 @@ const HermesCaseStudy = () => (
         scores declined over the following 16 days, and the sample is too small and too
         confounded — model swaps, judge changes — to attribute the drop to the patches or clear
         them of it. "The human caught the bad one" is the claim I can defend; "the good ones
-        worked" isn't.
+        worked" isn't. Some of that confounding turned out to be real rather than just caution:
+        a later audit found the benchmark's own replay traffic leaking into the same production
+        metrics this trend is built from — trace-level filtering alone had missed it, and it only
+        surfaced once the score-level numbers got checked too.
       </p>
     </Section>
 
@@ -113,6 +116,17 @@ const HermesCaseStudy = () => (
         process's exit code before any agent machinery loads. The failure mode isn't discouraged
         now, it's unreachable: the wrapper can't install a missing module and then declare
         victory, because it doesn't get to decide what victory means.
+      </p>
+      <p>
+        A month later, the identical shape of failure reappeared one step downstream. The apply
+        path had never gotten the same fix: asked to prune <code>SOUL.md</code> and apply two
+        pending proposals, Hermes reported success against the correct trusted hash — and the
+        edits had never actually been written. The discrepancy only surfaced because I checked
+        the file against the claim; challenged with the evidence, Hermes re-verified, confirmed
+        its own report was wrong, then stalled retrying the same read until its own
+        repeated-failure guardrail cut it off. Finishing the edit meant breaking a rule this
+        homelab otherwise holds — a separate account stepping in to write the fix directly,
+        a one-time exception rather than trusting the stuck loop to recover itself.
       </p>
     </Callout>
 
