@@ -30,8 +30,11 @@ const HermesCaseStudy = () => (
         Three machines, three jobs. A <strong>Mac Mini (16GB)</strong> runs the orchestrator: the
         cron scheduler and the Telegram bot. It doesn't have the RAM to host a capable model
         itself, so every reasoning call routes over the LAN through <strong>LiteLLM</strong> to
-        the <strong>Framework Desktop</strong>, whose unified-memory GPU serves local models
-        (qwen-27b and qwen-35b-a3b) over a hand-patched llama.cpp build. A{" "}
+        the <strong>Framework Desktop</strong>, whose unified-memory GPU serves three resident
+        models over a hand-patched llama.cpp build: a <strong>27B dense Qwen</strong> (sole
+        primary text model, MTP self-speculation) for the agentic work, <strong>Qwen3-VL-8B</strong>{" "}
+        for vision (screenshot analysis powering computer use), and <strong>WhisperX</strong>{" "}
+        (whisper-large-v3 + speaker diarization) for the voice-note pipeline. A{" "}
         <strong>Raspberry Pi</strong> handles monitoring. Cloud providers (Nous Portal, OpenRouter,
         OpenAI) are wired in as a deliberate fallback — for anything sensitive, or when local hits
         its usage limit — not the default path.
