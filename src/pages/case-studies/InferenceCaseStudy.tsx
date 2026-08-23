@@ -118,7 +118,9 @@ const InferenceCaseStudy = () => (
         A git bisect narrowed it to one specific upstream commit — a
         capability-probe change that looked like it was leaking a
         DeepSeek-specific flag into unrelated chat templates — and I filed it
-        with the full bisect evidence (<code>ggml-org/llama.cpp#26781</code>).
+        with the full bisect evidence (
+        <a href="https://github.com/ggml-org/llama.cpp/issues/26781" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#26781</a>
+        ).
         A maintainer read the flagged code path closer than I had and refuted
         it within days: the variable never actually reached the prompt that
         broke. Back to an open question.
@@ -150,8 +152,9 @@ const InferenceCaseStudy = () => (
         Traffic logs revealed this race condition triggered about once a day
         during high-concurrency bursts, causing persistent context pollution
         across unrelated requests. The fix (
-        <code>--no-cache-idle-slots --cache-ram 0</code>) was submitted upstream
-        (<code>ggml-org/llama.cpp#27148</code>) and deployed across all resident
+        <code>--no-cache-idle-slots --cache-ram 0</code>) was submitted upstream (
+        <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#27148</a>
+        ) and deployed across all resident
         services, completely eliminating unprompted cache restoration.
       </p>
     </Callout>
@@ -234,10 +237,14 @@ const InferenceCaseStudy = () => (
         is an accepted regression for now, and the real open work: a second
         local fallback (or a hot-restart path) that restores a zero-cost
         safety net, plus the upstream items still open against this stack —
-        the <code>server_prompt_cache</code> race (#27148), the gfx1151
+        the <code>server_prompt_cache</code> race (
+        <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27148</a>
+        ), the gfx1151
         allocator behavior that made <code>--direct-io</code> mandatory, and a
         slot that silently stops dispatching mid-session with no log line to
-        explain why (#27185).
+        explain why (
+        <a href="https://github.com/ggml-org/llama.cpp/issues/27185" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27185</a>
+        ).
       </p>
     </Section>
   </CaseStudyLayout>

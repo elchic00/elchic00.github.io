@@ -21,7 +21,9 @@ const HermesCaseStudy = () => (
         it's doing a good job, not just whether it's still running. It's not purely one-directional,
         either — running it unattended surfaces real gaps in the harness itself: traces were
         shipping full turn inputs and outputs to Langfuse's cloud with no redaction step, so I filed
-        it upstream (<code>NousResearch/hermes-agent#67544</code>) and opened a PR closing the gap.
+        it upstream (
+        <a href="https://github.com/NousResearch/hermes-agent/issues/67544" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-agent#67544</a>
+        ) and opened a PR closing the gap.
       </p>
     </Section>
 
@@ -171,7 +173,9 @@ const HermesCaseStudy = () => (
         Same shape as the frozen self-improvement loop above: don't let the thing that might be
         wrong grade itself. Cron sessions are now explicitly excluded from ever processing a steer
         marker, covered by a dedicated regression test before it shipped. Not fork-specific — filed
-        upstream as <code>NousResearch/hermes-agent#82877</code>, root cause and fix included.
+        upstream (
+        <a href="https://github.com/NousResearch/hermes-agent/issues/82877" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-agent#82877</a>
+        ), root cause and fix included.
       </p>
     </Callout>
 
