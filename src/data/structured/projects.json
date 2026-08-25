@@ -20,7 +20,7 @@
   {
     "title": "Pi-Cloud",
     "subtitle": "Private Infrastructure + Service Operations",
-    "description": "A Raspberry Pi 5 running 23 containers across 12 Compose projects — photos, passwords, document search, DNS filtering, private search, remote access, monitoring — with zero public ports and two recovery paths kept on deliberately different filesystems. Three of those services aren't just mine: SearXNG, ChromaDB, and Crawl4AI are the search, memory, and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified with an actual off-network test, not just a green firewall status: a routine audit had found roughly fifteen of those services one layer short of the isolation the design assumed.",
+    "description": "A Raspberry Pi 5 running 23 containers across 12 Compose projects — photos, passwords, document search, DNS filtering, private search, remote access, monitoring — with zero public ports and two recovery paths kept on deliberately different filesystems. Three of those services aren't just mine: SearXNG, ChromaDB, and Crawl4AI are the search, memory, and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified with an actual off-network test, not just a green firewall status: a routine audit had found roughly fifteen of those services one layer short of the isolation intended.",
     "image": "/images/projects/pi-cloud.svg",
     "link": "/projects/pi-cloud",
     "id": "pi-cloud",
