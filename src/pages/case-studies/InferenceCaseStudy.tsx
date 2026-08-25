@@ -56,6 +56,18 @@ const InferenceCaseStudy = () => (
       </p>
     </Section>
 
+    <Callout title="Two whisper paths, not one">
+      <p>
+        WhisperX on this box isn't what Hermes uses to hear a voice message sent straight to it —
+        that goes through a separate, in-process <code>faster-whisper</code> model inside the
+        agent gateway itself, no network hop required. WhisperX is reserved for the heavier job:
+        the iPhone-shortcut note pipeline, where a recording gets transcribed with speaker
+        diarization and turned into an Obsidian note before anything reaches Telegram. Splitting
+        them keeps a live conversation's turnaround independent of a model that might also be
+        diarizing a half-hour meeting recording in the background.
+      </p>
+    </Callout>
+
     <Section title="The Hardware Problem: An Allocator Bug Disguised as a VRAM Limit">
       <p>
         Early testing on high-parameter models hit a ceiling where offloading
