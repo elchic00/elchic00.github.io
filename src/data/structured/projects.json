@@ -47,7 +47,7 @@
   {
     "title": "myPal",
     "subtitle": "AAC App Prototype (2021, not actively maintained)",
-    "description": "An AAC (Augmentative and Alternative Communication) tool designed for rapid deployment in low-resource environments. Architected with an offline-first SQLite schema for reliable data persistence without network dependency, paired with React Native cross-platform synchronization to enable seamless iOS/Android parity. Focused on assistive tech accessibility for children with autism and speech delays, demonstrating how technical constraints (limited connectivity, diverse devices) can drive scalable architectural decisions.",
+    "description": "An AAC app for kids with autism and speech delays, built for classrooms and homes where the wifi can't be counted on: every card and phrase lives in SQLite on the device first, syncing across iOS and Android only once a connection shows up. The offline-first requirement wasn't a nice-to-have bolted on later — it was the actual constraint the rest of the app had to work around.",
     "image": "/images/projects/mypal-demo.mp4",
     "link": "https://github.com/myPal-TMS/myPal",
     "id": "mypal"
