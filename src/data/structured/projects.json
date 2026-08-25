@@ -2,7 +2,7 @@
   {
     "title": "Hermes",
     "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
-    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a hand-patched local inference layer. For 13 straight days the loop reported last_status: ok — while completely frozen the entire time. Proposals still wait on me in Telegram before anything touches the live prompt.",
+    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a hand-patched local inference layer. Proposals still wait on me in Telegram before anything touches the live prompt.",
     "image": "/images/projects/hermes.svg",
     "link": "/projects/hermes",
     "id": "hermes",

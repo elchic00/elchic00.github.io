@@ -93,6 +93,33 @@ const PiCloudCaseStudy = () => (
       </p>
     </Section>
 
+    <Callout title="The LAN gap Tailscale never closed">
+      <p>
+        A routine audit turned "nothing is exposed" into a narrower claim than I'd been treating
+        it as. Around fifteen Docker-published ports on the Pi were bound to <code>0.0.0.0</code>{" "}
+        — reachable from anything on the home network, Tailscale-connected or not — because there
+        was no host firewall behind them at all. Docker writes its own <code>iptables</code> rules
+        ahead of the OS firewall's own chain when it publishes a port, so installing{" "}
+        <code>ufw</code> after the fact does nothing for those ports on its own; it has to be
+        wired into Docker's <code>DOCKER-USER</code> hook specifically, a step most setup guides
+        skip entirely.
+      </p>
+      <p>
+        Fixed with the same default-deny, LAN-plus-Tailscale policy already running on the other
+        node, plus the Docker-specific chain patch — installed with an explicit subnet list rather
+        than the tool's own default, since that default excludes Tailscale's own address range and
+        would have quietly cut off remote access while reporting a clean install. The tailnet's
+        device-to-device policy had the identical shape of gap one layer up: allow-all by default,
+        meaning the one machine that processes untrusted content could reach every other device
+        the moment it's compromised. That's now scoped down to exactly the ports other devices
+        need from it, nothing back out.
+      </p>
+      <p>
+        Verified with an actual off-network probe — wifi off, cellular only — rather than trusting
+        a green firewall status, since that's the one claim a config file can't make for itself.
+      </p>
+    </Callout>
+
     <Section title="It's also backend infrastructure, not just my services">
       <p>
         Two of these aren't only mine — they're dependencies of an always-on agent.{" "}
