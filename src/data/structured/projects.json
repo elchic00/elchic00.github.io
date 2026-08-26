@@ -29,7 +29,7 @@
   {
     "title": "Job-Fit Scorer",
     "subtitle": "LangGraph + FastAPI + Langfuse",
-    "description": "A LangGraph pipeline that polls 13 companies' ATS boards, throws out the postings that were never going to be relevant before an LLM ever sees one, and scores the rest against an evidence document of what I've actually built — calibrated to tell me no. A real week: 21 postings scored, 2 worth applying to, 19 skipped, with recurring blockers tallied so the rejections double as a study list. Every run is traced in Langfuse, results append to a durable tracker, and the weekly report carries a deterministic health section rather than an LLM grading its own homework.",
+    "description": "A LangGraph pipeline that scores a job posting against an evidence document of what I've actually built — calibrated to tell me no, not just yes. A cheap pre-filter throws out postings that were never going to be relevant before an LLM ever sees one. A real week: 21 postings scored, 2 worth applying to, 19 skipped, with recurring blockers tallied so the rejections double as a study list. Every run is traced in Langfuse, results append to a durable tracker, and the weekly report carries a deterministic health section rather than an LLM grading its own homework.",
     "image": "/images/projects/jobfit-scorer.svg",
     "link": "/projects/jobfit",
     "id": "jobfit",

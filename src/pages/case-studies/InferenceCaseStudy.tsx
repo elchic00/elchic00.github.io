@@ -64,7 +64,7 @@ const InferenceCaseStudy = () => (
         the iPhone-shortcut note pipeline, where a recording gets transcribed with speaker
         diarization and turned into an Obsidian note before anything reaches Telegram. Splitting
         them keeps a live conversation's turnaround independent of a model that might also be
-        diarizing a half-hour meeting recording in the background.
+        diarizing a long, multi-speaker recording in the background.
       </p>
     </Callout>
 
