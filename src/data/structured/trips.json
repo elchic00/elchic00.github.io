@@ -42,14 +42,35 @@
         "caption": "Meiji Jingu Gaien Ginkgo Avenue"
       },
       {
-        "url": "/images/travel/japan/kinosaki-onsen-night.webp",
-        "alt": "Traditional Japanese onsen town at night with lanterns and wooden buildings in Kinosaki Onsen",
-        "caption": "Kinosaki Onsen night lights"
+        "url": "/images/travel/japan/shinjuku-skyline-aerial-poster.webp",
+        "video": "/images/travel/japan/shinjuku-skyline-aerial.mp4",
+        "alt": "Aerial view of the Shinjuku skyline sprawling toward the horizon in Tokyo, Japan",
+        "caption": "Shinjuku skyline from above"
       },
       {
         "url": "/images/travel/japan/nara-deer-selfie.webp",
         "alt": "A friendly deer photo-bombing a selfie in Nara, Japan",
         "caption": "Deer selfie in Nara"
+      },
+      {
+        "url": "/images/travel/japan/nara-todaiji-temple.webp",
+        "alt": "Todai-ji temple's Great Buddha Hall framed by its grounds in Nara, Japan",
+        "caption": "Todai-ji's Great Buddha Hall in Nara"
+      },
+      {
+        "url": "/images/travel/japan/arashiyama-macaque-fence.webp",
+        "alt": "A red-faced macaque perched on a wooden fence at the Arashiyama Monkey Park",
+        "caption": "Macaque keeping watch at Arashiyama"
+      },
+      {
+        "url": "/images/travel/japan/uji-river-boats.webp",
+        "alt": "Traditional boats moored along the Uji River lined with autumn maples near Kyoto, Japan",
+        "caption": "Autumn colors along the Uji River"
+      },
+      {
+        "url": "/images/travel/japan/kinosaki-crab-kaiseki.webp",
+        "alt": "A chef showing a diner how to eat matsuba crab during a kaiseki dinner at Kinosaki Onsen",
+        "caption": "Crab kaiseki dinner in Kinosaki"
       }
     ]
   },

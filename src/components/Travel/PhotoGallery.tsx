@@ -8,7 +8,7 @@ import {
   MouseEvent,
 } from "react";
 import { createPortal } from "react-dom";
-import { ZoomInIcon, ZoomOutIcon } from "@heroicons/react/solid";
+import { ZoomInIcon, ZoomOutIcon, PlayIcon } from "@heroicons/react/solid";
 import { Photo } from "../../types";
 import { ImageWithLoader } from "../shared/ImageWithLoader";
 import { getGalleryItemLayout, getTripPatternOffset } from "./galleryLayout";
@@ -220,6 +220,13 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, tripId = "" 
                     loading={index < 3 ? "eager" : "lazy"}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.035] group-focus:scale-[1.035]"
                   />
+                  {photo.video && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="rounded-full bg-black/50 p-3">
+                        <PlayIcon className="h-8 w-8 text-white" />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 <div
@@ -283,27 +290,29 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, tripId = "" 
           >
             {/* Control buttons positioned relative to photo */}
             <div className="absolute top-2 right-2 flex gap-2 z-20">
-              <button
-                onClick={(e: MouseEvent) => {
-                  e.stopPropagation();
-                  toggleZoom();
-                }}
-                className="text-white p-2 bg-black/50 hover:bg-black/70 rounded-full focus-ring transition-colors"
-                aria-label={zoomLevel > 0 ? ZOOM_LEVELS[zoomLevel].label : "Zoom in"}
-                title={
-                  zoomLevel === 0
-                    ? "Click to zoom (125%)"
-                    : zoomLevel === 1
-                    ? "Click to zoom (175%)"
-                    : "Click to reset zoom"
-                }
-              >
-                {zoomLevel > 0 ? (
-                  <ZoomOutIcon className="w-6 h-6" />
-                ) : (
-                  <ZoomInIcon className="w-6 h-6" />
-                )}
-              </button>
+              {!selectedPhoto.video && (
+                <button
+                  onClick={(e: MouseEvent) => {
+                    e.stopPropagation();
+                    toggleZoom();
+                  }}
+                  className="text-white p-2 bg-black/50 hover:bg-black/70 rounded-full focus-ring transition-colors"
+                  aria-label={zoomLevel > 0 ? ZOOM_LEVELS[zoomLevel].label : "Zoom in"}
+                  title={
+                    zoomLevel === 0
+                      ? "Click to zoom (125%)"
+                      : zoomLevel === 1
+                      ? "Click to zoom (175%)"
+                      : "Click to reset zoom"
+                  }
+                >
+                  {zoomLevel > 0 ? (
+                    <ZoomOutIcon className="w-6 h-6" />
+                  ) : (
+                    <ZoomInIcon className="w-6 h-6" />
+                  )}
+                </button>
+              )}
               <button
                 ref={closeButtonRef}
                 onClick={(e: MouseEvent) => {
@@ -349,29 +358,42 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, tripId = "" 
                 }
               }}
             >
-              <img
-                ref={imageRef}
-                src={selectedPhoto.url}
-                alt={selectedPhoto.alt}
-                className={`transition-all duration-300 ${
-                  zoomLevel > 0
-                    ? "cursor-zoom-out w-auto h-auto"
-                    : "w-full h-auto max-h-[85vh] object-contain cursor-zoom-in rounded-lg"
-                }`}
-                style={
-                  zoomLevel > 0
-                    ? {
-                        minWidth: `${ZOOM_LEVELS[zoomLevel].scale * 100}%`,
-                        minHeight: `${ZOOM_LEVELS[zoomLevel].scale * 100}%`,
-                        transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
-                      }
-                    : {}
-                }
-                onClick={(e: MouseEvent<HTMLImageElement>) => {
-                  e.stopPropagation();
-                  toggleZoom(e);
-                }}
-              />
+              {selectedPhoto.video ? (
+                <video
+                  src={selectedPhoto.video}
+                  poster={selectedPhoto.url}
+                  controls
+                  autoPlay
+                  loop
+                  playsInline
+                  className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+                  onClick={(e: MouseEvent<HTMLVideoElement>) => e.stopPropagation()}
+                />
+              ) : (
+                <img
+                  ref={imageRef}
+                  src={selectedPhoto.url}
+                  alt={selectedPhoto.alt}
+                  className={`transition-all duration-300 ${
+                    zoomLevel > 0
+                      ? "cursor-zoom-out w-auto h-auto"
+                      : "w-full h-auto max-h-[85vh] object-contain cursor-zoom-in rounded-lg"
+                  }`}
+                  style={
+                    zoomLevel > 0
+                      ? {
+                          minWidth: `${ZOOM_LEVELS[zoomLevel].scale * 100}%`,
+                          minHeight: `${ZOOM_LEVELS[zoomLevel].scale * 100}%`,
+                          transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
+                        }
+                      : {}
+                  }
+                  onClick={(e: MouseEvent<HTMLImageElement>) => {
+                    e.stopPropagation();
+                    toggleZoom(e);
+                  }}
+                />
+              )}
             </div>
             {zoomLevel === 0 && (
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">

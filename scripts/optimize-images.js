@@ -1,6 +1,8 @@
 const sharp = require("sharp");
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
+const { execSync } = require("child_process");
 
 // Configuration
 const config = {
@@ -11,6 +13,8 @@ const config = {
     quality: 85,
     formats: ["webp"],
     processSubdirectories: true,
+    // Phone photos land as HEIC; sharp decodes it natively, no conversion step needed.
+    inputExtensions: ["jpg", "jpeg", "png", "heic"],
   },
   projectImages: {
     inputDir: path.join(__dirname, "../public/images/projects"),
@@ -52,8 +56,21 @@ async function optimizeImage(inputPath, outputDir, options) {
   console.log(`\n📸 Processing: ${filename}`);
   console.log(`   Original size: ${originalSize} KB`);
 
+  // sharp's bundled libheif has no HEVC decoder (patent licensing), which is
+  // how nearly every iPhone photo is encoded. Decode via macOS's own `sips`
+  // into a temp PNG first, then hand that to sharp as usual.
+  let sharpInput = inputPath;
+  let tempPngPath = null;
+  if (/\.heic$/i.test(inputPath)) {
+    tempPngPath = path.join(os.tmpdir(), `${filename}-${Date.now()}.png`);
+    execSync(`sips -s format png "${inputPath}" --out "${tempPngPath}"`, {
+      stdio: "pipe",
+    });
+    sharpInput = tempPngPath;
+  }
+
   try {
-    const image = sharp(inputPath);
+    const image = sharp(sharpInput);
     let pipeline = image.rotate();
     const metadata = await image.metadata();
 
@@ -102,6 +119,8 @@ async function optimizeImage(inputPath, outputDir, options) {
   } catch (error) {
     console.error(`   ❌ Error processing ${filename}:`, error.message);
     return null;
+  } finally {
+    if (tempPngPath && fs.existsSync(tempPngPath)) fs.unlinkSync(tempPngPath);
   }
 }
 

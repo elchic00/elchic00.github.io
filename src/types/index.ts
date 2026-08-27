@@ -12,6 +12,8 @@ export interface Photo {
   url: string;
   alt: string;
   caption: string;
+  // When set, `url` is used as the poster frame and this is the clip to play.
+  video?: string;
 }
 
 export interface Trip {
