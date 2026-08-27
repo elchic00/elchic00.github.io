@@ -72,7 +72,16 @@ export function countLayoutsByCategory(): Record<LayoutCategory, number> {
  * reproducible (same trip always gets the same offset, no randomness at
  * render time).
  */
+// Trips whose opening photo is a deliberate hero shot get offset 0, so the
+// pattern's own "large — hero shot to open the gallery" slot lands on it
+// instead of wherever the hash happens to fall.
+const OFFSET_OVERRIDES: Record<string, number> = {
+  "japan-2024": 0,
+};
+
 export function getTripPatternOffset(tripId: string): number {
+  if (tripId in OFFSET_OVERRIDES) return OFFSET_OVERRIDES[tripId];
+
   let hash = 0;
   for (let i = 0; i < tripId.length; i++) {
     hash = (hash * 31 + tripId.charCodeAt(i)) | 0;
