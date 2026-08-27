@@ -87,9 +87,9 @@
     "description": "Island-hopping through volcanic landscapes and fearless endemic wildlife in the Galapagos Islands, Ecuador",
     "photos": [
       {
-        "url": "/images/travel/ecuador/andrew-alagna-turtle-snorkle.webp",
-        "alt": "Andrew Alagna swimming with sea turtles underwater Galapagos Ecuador",
-        "caption": "Swimming alongside sea turtles"
+        "url": "/images/travel/ecuador/andrew-alagna-sea-lions.webp",
+        "alt": "Andrew Alagna Galapagos sea lions colony beach Ecuador",
+        "caption": "Sea lions relaxing on the beach"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-blue-foot-boobie.webp",
@@ -97,14 +97,14 @@
         "caption": "Blue-footed booby on the rocks"
       },
       {
-        "url": "/images/travel/ecuador/andrew-alagna-sea-lions.webp",
-        "alt": "Andrew Alagna Galapagos sea lions colony beach Ecuador",
-        "caption": "Sea lions relaxing on the beach"
+        "url": "/images/travel/ecuador/andrew-alagna-turtle-snorkle.webp",
+        "alt": "Andrew Alagna swimming with sea turtles underwater Galapagos Ecuador",
+        "caption": "Swimming alongside sea turtles"
       },
       {
-        "url": "/images/travel/ecuador/andrew-alagna-isabella-island.webp",
-        "alt": "Andrew Alagna at Isabela Island welcome sign Galapagos Ecuador",
-        "caption": "Isabela Island welcome sign"
+        "url": "/images/travel/ecuador/andrew-alagna-inactive-volcano.webp",
+        "alt": "Andrew Alagna hiking inactive volcano rim Galapagos Islands Ecuador",
+        "caption": "Hiking the inactive volcano rim"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-sunset-boats.webp",
@@ -117,14 +117,14 @@
         "caption": "Seahorse clinging to coral structure"
       },
       {
-        "url": "/images/travel/ecuador/andrew-alagna-inactive-volcano.webp",
-        "alt": "Andrew Alagna hiking inactive volcano rim Galapagos Islands Ecuador",
-        "caption": "Hiking the inactive volcano rim"
-      },
-      {
         "url": "/images/travel/ecuador/andrew-alagna-land-turtles.webp",
         "alt": "Andrew Alagna with Galapagos giant tortoise Ecuador",
         "caption": "Galápagos giant tortoise"
+      },
+      {
+        "url": "/images/travel/ecuador/andrew-alagna-isabella-island.webp",
+        "alt": "Andrew Alagna at Isabela Island welcome sign Galapagos Ecuador",
+        "caption": "Isabela Island welcome sign"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-stingray.webp",
@@ -142,14 +142,14 @@
         "caption": "Vibrant red crabs scattered across volcanic rocks by the shore"
       },
       {
-        "url": "/images/travel/ecuador/andrew-alagna-mountain-valley.webp",
-        "alt": "Andrew Alagna mountain valley clouds Ecuador Andes",
-        "caption": "Mountain valley draped in clouds deep in the Andes"
-      },
-      {
         "url": "/images/travel/ecuador/andrew-alagna-virgin-of-quito.webp",
         "alt": "Andrew Alagna Virgin of Quito statue El Panecillo Ecuador",
         "caption": "The towering Virgin of Quito statue at El Panecillo"
+      },
+      {
+        "url": "/images/travel/ecuador/andrew-alagna-mountain-valley.webp",
+        "alt": "Andrew Alagna mountain valley clouds Ecuador Andes",
+        "caption": "Mountain valley draped in clouds deep in the Andes"
       }
     ]
   },
@@ -171,19 +171,9 @@
         "caption": "Historic Spanish colonial architecture with balconies"
       },
       {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan3.webp",
-        "alt": "Andrew Alagna Old San Juan vibrant painted buildings Puerto Rico",
-        "caption": "Vibrant painted buildings in the old town"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan4.webp",
-        "alt": "Andrew Alagna Old San Juan cobblestone streets colorful facades Puerto Rico",
-        "caption": "Cobblestone streets and colorful facades"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan5.webp",
-        "alt": "Andrew Alagna Old San Juan historic plaza colonial architecture Puerto Rico",
-        "caption": "Historic plaza in Old San Juan"
+        "url": "/images/travel/puerto-rico/andrew-alagna-castle.webp",
+        "alt": "Andrew Alagna El Yunque rainforest watchtower mist Puerto Rico",
+        "caption": "Watchtower shrouded in mist at El Yunque rainforest"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan-historical.webp",
@@ -191,19 +181,29 @@
         "caption": "Castillo San Felipe del Morro entrance sign"
       },
       {
-        "url": "/images/travel/puerto-rico/andrew-alagna-castle.webp",
-        "alt": "Andrew Alagna El Yunque rainforest watchtower mist Puerto Rico",
-        "caption": "Watchtower shrouded in mist at El Yunque rainforest"
-      },
-      {
-        "url": "/images/travel/puerto-rico/andrew-alagna-beach2.webp",
-        "alt": "Andrew Alagna Puerto Rico Caribbean coastline panoramic beach view",
-        "caption": "Wide panoramic view of the Caribbean coastline"
-      },
-      {
         "url": "/images/travel/puerto-rico/andrew-alagna-clear-waters.webp",
         "alt": "Andrew Alagna crystal clear turquoise Caribbean beach waters Puerto Rico",
         "caption": "Crystal clear turquoise Caribbean waters"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan4.webp",
+        "alt": "Andrew Alagna Old San Juan cobblestone streets colorful facades Puerto Rico",
+        "caption": "Cobblestone streets and colorful facades"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan3.webp",
+        "alt": "Andrew Alagna Old San Juan vibrant painted buildings Puerto Rico",
+        "caption": "Vibrant painted buildings in the old town"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-sunrise.webp",
+        "alt": "Andrew Alagna Caribbean beach sunrise sunlight tropical foliage Puerto Rico",
+        "caption": "Sunlight streaming through tropical foliage on the beach at sunrise"
+      },
+      {
+        "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan5.webp",
+        "alt": "Andrew Alagna Old San Juan historic plaza colonial architecture Puerto Rico",
+        "caption": "Historic plaza in Old San Juan"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-mosquitos.webp",
@@ -216,9 +216,9 @@
         "caption": "Welcome to Vieques island sign"
       },
       {
-        "url": "/images/travel/puerto-rico/andrew-alagna-sunrise.webp",
-        "alt": "Andrew Alagna Caribbean beach sunrise sunlight tropical foliage Puerto Rico",
-        "caption": "Sunlight streaming through tropical foliage on the beach at sunrise"
+        "url": "/images/travel/puerto-rico/andrew-alagna-beach2.webp",
+        "alt": "Andrew Alagna Puerto Rico Caribbean coastline panoramic beach view",
+        "caption": "Wide panoramic view of the Caribbean coastline"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-sunset.webp",
@@ -235,9 +235,9 @@
     "description": "Exploring the temples, jungles, and vibrant culture of Northern Thailand. From cooking traditional food to elephant sanctuaries, an unforgettable journey.",
     "photos": [
       {
-        "url": "/images/travel/thailand/andrew-alagna-white-temple2.webp",
-        "alt": "Andrew Alagna White Temple intricate details Chiang Rai Thailand",
-        "caption": "Intricate details of the White Temple"
+        "url": "/images/travel/thailand/andrew-alagna-jungle.webp",
+        "alt": "Andrew Alagna jungle trekking Northern Thailand",
+        "caption": "Trekking through lush jungle"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-gold-temple2.webp",
@@ -260,19 +260,19 @@
         "caption": "Water buffalo in the rice fields"
       },
       {
-        "url": "/images/travel/thailand/andrew-alagna-rice-field.webp",
-        "alt": "Andrew Alagna rice terraces Northern Thailand photography",
-        "caption": "Scenic rice terraces in Northern Thailand"
-      },
-      {
         "url": "/images/travel/thailand/andrew-alagna-bamboo-raft.webp",
         "alt": "Andrew Alagna bamboo rafting river Thailand adventure",
         "caption": "Bamboo rafting down the river"
       },
       {
-        "url": "/images/travel/thailand/andrew-alagna-jungle.webp",
-        "alt": "Andrew Alagna jungle trekking Northern Thailand",
-        "caption": "Trekking through lush jungle"
+        "url": "/images/travel/thailand/andrew-alagna-rice-field.webp",
+        "alt": "Andrew Alagna rice terraces Northern Thailand photography",
+        "caption": "Scenic rice terraces in Northern Thailand"
+      },
+      {
+        "url": "/images/travel/thailand/andrew-alagna-small-temple.webp",
+        "alt": "Andrew Alagna Buddhist temple countryside Thailand",
+        "caption": "A peaceful temple in Bangkok"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-waterfall.webp",
@@ -280,14 +280,14 @@
         "caption": "Refreshing waterfall in the jungle"
       },
       {
-        "url": "/images/travel/thailand/andrew-alagna-cooking.webp",
-        "alt": "Andrew Alagna Thai cooking class Chiang Mai Thailand",
-        "caption": "Learning to cook authentic Thai cuisine"
-      },
-      {
         "url": "/images/travel/thailand/andrew-alagna-creating-traditional.webp",
         "alt": "Andrew Alagna traditional Thai handicrafts cultural experience",
         "caption": "Creating traditional Thai handicrafts"
+      },
+      {
+        "url": "/images/travel/thailand/andrew-alagna-cooking.webp",
+        "alt": "Andrew Alagna Thai cooking class Chiang Mai Thailand",
+        "caption": "Learning to cook authentic Thai cuisine"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-jungle-night.webp",
@@ -295,9 +295,9 @@
         "caption": "Night time in the jungle"
       },
       {
-        "url": "/images/travel/thailand/andrew-alagna-small-temple.webp",
-        "alt": "Andrew Alagna Buddhist temple countryside Thailand",
-        "caption": "A peaceful temple in Bangkok"
+        "url": "/images/travel/thailand/andrew-alagna-white-temple2.webp",
+        "alt": "Andrew Alagna White Temple intricate details Chiang Rai Thailand",
+        "caption": "Intricate details of the White Temple"
       }
     ]
   },
@@ -334,9 +334,9 @@
         "caption": "Interior of stone sculpture park with intricate carved reliefs and statues"
       },
       {
-        "url": "/images/travel/laos/andrew-alagna-temple5.webp",
-        "alt": "Andrew Alagna stone statue sculpture Buddha Park Vientiane Laos",
-        "caption": "Outdoor stone statue sculpture with figure raising arms beneath large disc"
+        "url": "/images/travel/laos/andrew-alagna-springs1.webp",
+        "alt": "Andrew Alagna Kuang Si Falls waterfall pools Luang Prabang Laos",
+        "caption": "Multi-tiered turquoise waterfall pools at Kuang Si Falls"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-temple6.webp",
@@ -349,14 +349,14 @@
         "caption": "White and red pavilion with golden Buddha statues"
       },
       {
-        "url": "/images/travel/laos/andrew-alagna-springs1.webp",
-        "alt": "Andrew Alagna Kuang Si Falls waterfall pools Luang Prabang Laos",
-        "caption": "Multi-tiered turquoise waterfall pools at Kuang Si Falls"
+        "url": "/images/travel/laos/andrew-alagna-temple5.webp",
+        "alt": "Andrew Alagna stone statue sculpture Buddha Park Vientiane Laos",
+        "caption": "Outdoor stone statue sculpture with figure raising arms beneath large disc"
       },
       {
-        "url": "/images/travel/laos/andrew-alagna-springs2.webp",
-        "alt": "Andrew Alagna limestone waterfall Kuang Si Falls Laos",
-        "caption": "Cascading limestone waterfall formations"
+        "url": "/images/travel/laos/andrew-alagna-bear-sanctuary.webp",
+        "alt": "Andrew Alagna moon bear sanctuary Laos wildlife conservation",
+        "caption": "Moon bear relaxing on wooden platform at rescue sanctuary"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-sunset.webp",
@@ -374,9 +374,9 @@
         "caption": "Motorcycle and Laos flag on top of mountain"
       },
       {
-        "url": "/images/travel/laos/andrew-alagna-bear-sanctuary.webp",
-        "alt": "Andrew Alagna moon bear sanctuary Laos wildlife conservation",
-        "caption": "Moon bear relaxing on wooden platform at rescue sanctuary"
+        "url": "/images/travel/laos/andrew-alagna-springs2.webp",
+        "alt": "Andrew Alagna limestone waterfall Kuang Si Falls Laos",
+        "caption": "Cascading limestone waterfall formations"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-golden-temple.webp",
@@ -398,19 +398,19 @@
     "description": "Exploring the rainforests, beaches, and incredible biodiversity of Costa Rica. From cloud forests to white-water rafting, experiencing the true Pura Vida!",
     "photos": [
       {
-        "url": "/images/travel/costa-rica/andrew-alagna-beach.webp",
-        "alt": "Andrew Alagna Costa Rica Pacific coast beach palm trees photography",
-        "caption": "Beautiful Pacific coast beach with palm trees"
+        "url": "/images/travel/costa-rica/andrew-alagna-bird.webp",
+        "alt": "Andrew Alagna colorful tropical bird wildlife Costa Rica rainforest",
+        "caption": "Colorful tropical bird in the rainforest"
       },
       {
-        "url": "/images/travel/costa-rica/andrew-alagna-sunrise1.webp",
-        "alt": "Andrew Alagna Costa Rica beach sunrise golden light palm trees",
-        "caption": "Golden sunrise through the palm trees"
+        "url": "/images/travel/costa-rica/andrew-alagna-hanging-bridge.webp",
+        "alt": "Andrew Alagna hanging suspension bridge rainforest canopy Costa Rica",
+        "caption": "Crossing a hanging suspension bridge in the rainforest canopy"
       },
       {
-        "url": "/images/travel/costa-rica/andrew-alagna-sunset1.webp",
-        "alt": "Andrew Alagna Costa Rica Pacific Ocean sunset vibrant colors",
-        "caption": "Vibrant Costa Rican sunset over the Pacific Ocean"
+        "url": "/images/travel/costa-rica/andrew-alagna-bat.webp",
+        "alt": "Andrew Alagna bat hanging rainforest wildlife Costa Rica",
+        "caption": "Bat hanging in the rainforest"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-starry-night-beach.webp",
@@ -423,24 +423,9 @@
         "caption": "Walking through the cloud forest canopy at Monteverde"
       },
       {
-        "url": "/images/travel/costa-rica/andrew-alagna-white-water-rafting.webp",
-        "alt": "Andrew Alagna white water rafting adventure Costa Rica river rapids",
-        "caption": "White-water rafting adventure through Costa Rican rapids"
-      },
-      {
-        "url": "/images/travel/costa-rica/andrew-alagna-cloud-forest.webp",
-        "alt": "Andrew Alagna Costa Rica cloud forest lush vegetation Monteverde",
-        "caption": "Lush cloud forest scenery in Monteverde"
-      },
-      {
-        "url": "/images/travel/costa-rica/andrew-alagna-hanging-bridge.webp",
-        "alt": "Andrew Alagna hanging suspension bridge rainforest canopy Costa Rica",
-        "caption": "Crossing a hanging suspension bridge in the rainforest canopy"
-      },
-      {
-        "url": "/images/travel/costa-rica/andrew-alagna-waterfall.webp",
-        "alt": "Andrew Alagna Costa Rica jungle waterfall rainforest photography",
-        "caption": "Majestic waterfall cascading through the jungle"
+        "url": "/images/travel/costa-rica/andrew-alagna-sunrise1.webp",
+        "alt": "Andrew Alagna Costa Rica beach sunrise golden light palm trees",
+        "caption": "Golden sunrise through the palm trees"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-snorkel1.webp",
@@ -448,9 +433,24 @@
         "caption": "Snorkeling in crystal clear Caribbean waters"
       },
       {
-        "url": "/images/travel/costa-rica/andrew-alagna-bird.webp",
-        "alt": "Andrew Alagna colorful tropical bird wildlife Costa Rica rainforest",
-        "caption": "Colorful tropical bird in the rainforest"
+        "url": "/images/travel/costa-rica/andrew-alagna-white-water-rafting.webp",
+        "alt": "Andrew Alagna white water rafting adventure Costa Rica river rapids",
+        "caption": "White-water rafting adventure through Costa Rican rapids"
+      },
+      {
+        "url": "/images/travel/costa-rica/andrew-alagna-waterfall.webp",
+        "alt": "Andrew Alagna Costa Rica jungle waterfall rainforest photography",
+        "caption": "Majestic waterfall cascading through the jungle"
+      },
+      {
+        "url": "/images/travel/costa-rica/andrew-alagna-cloud-forest.webp",
+        "alt": "Andrew Alagna Costa Rica cloud forest lush vegetation Monteverde",
+        "caption": "Lush cloud forest scenery in Monteverde"
+      },
+      {
+        "url": "/images/travel/costa-rica/andrew-alagna-beach.webp",
+        "alt": "Andrew Alagna Costa Rica Pacific coast beach palm trees photography",
+        "caption": "Beautiful Pacific coast beach with palm trees"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-lizard-rainforest.webp",
@@ -458,9 +458,9 @@
         "caption": "Camouflaged lizard spotted on a tree trunk in the rainforest"
       },
       {
-        "url": "/images/travel/costa-rica/andrew-alagna-bat.webp",
-        "alt": "Andrew Alagna bat hanging rainforest wildlife Costa Rica",
-        "caption": "Bat hanging in the rainforest"
+        "url": "/images/travel/costa-rica/andrew-alagna-sunset1.webp",
+        "alt": "Andrew Alagna Costa Rica Pacific Ocean sunset vibrant colors",
+        "caption": "Vibrant Costa Rican sunset over the Pacific Ocean"
       }
     ]
   }
