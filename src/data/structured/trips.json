@@ -7,21 +7,6 @@
     "description": "From Kyoto’s iconic torii gates to neon-lit Tokyo streets and serene Mount Fuji views, this trip captured the best of Japan’s culture and landscapes.",
     "photos": [
       {
-        "url": "/images/travel/japan/mt-fuji-view.webp",
-        "alt": "Mount Fuji rising above the landscape with clear blue skies",
-        "caption": "Mount Fuji in all its glory"
-      },
-      {
-        "url": "/images/travel/japan/nara-todaiji-temple.webp",
-        "alt": "Todai-ji temple's Great Buddha Hall framed by its grounds in Nara, Japan",
-        "caption": "Todai-ji's Great Buddha Hall in Nara"
-      },
-      {
-        "url": "/images/travel/japan/kyoto-shrine-entrance.webp",
-        "alt": "Entrance gate of a Kyoto shrine with traditional woodwork",
-        "caption": "Kyoto shrine entrance"
-      },
-      {
         "url": "/images/travel/japan/arashiyama-monkey-sanctuary.webp",
         "alt": "A macaque at the Arashiyama Monkey Park behind mesh fencing",
         "caption": "Monkey at Arashiyama Monkey Park"
@@ -32,9 +17,9 @@
         "caption": "Lanterns at a forest shrine"
       },
       {
-        "url": "/images/travel/japan/arashiyama-macaque-fence.webp",
-        "alt": "A red-faced macaque perched on a wooden fence at the Arashiyama Monkey Park",
-        "caption": "Macaque keeping watch at Arashiyama"
+        "url": "/images/travel/japan/kyoto-shrine-entrance.webp",
+        "alt": "Entrance gate of a Kyoto shrine with traditional woodwork",
+        "caption": "Kyoto shrine entrance"
       },
       {
         "url": "/images/travel/japan/fox-statue.webp",
@@ -42,9 +27,19 @@
         "caption": "Fox guardian statue"
       },
       {
+        "url": "/images/travel/japan/mt-fuji-view.webp",
+        "alt": "Mount Fuji rising above the landscape with clear blue skies",
+        "caption": "Mount Fuji in all its glory"
+      },
+      {
         "url": "/images/travel/japan/uji-river-boats.webp",
         "alt": "Traditional boats moored along the Uji River lined with autumn maples near Kyoto, Japan",
         "caption": "Autumn colors along the Uji River"
+      },
+      {
+        "url": "/images/travel/japan/nara-todaiji-temple.webp",
+        "alt": "Todai-ji temple's Great Buddha Hall framed by its grounds in Nara, Japan",
+        "caption": "Todai-ji's Great Buddha Hall in Nara"
       },
       {
         "url": "/images/travel/japan/shinjuku-skyline-aerial-poster.webp",
@@ -58,24 +53,24 @@
         "caption": "Senso-ji temple pagoda in Asakusa"
       },
       {
-        "url": "/images/travel/japan/kyoto-temple-gate.webp",
-        "alt": "Gate of a temple complex in Kyoto, Japan",
-        "caption": "A temple stop in Kyoto"
-      },
-      {
         "url": "/images/travel/japan/nara-deer-selfie.webp",
         "alt": "A friendly deer photo-bombing a selfie in Nara, Japan",
         "caption": "Deer selfie in Nara"
       },
       {
-        "url": "/images/travel/japan/wagyu-kaiseki-dinner.webp",
-        "alt": "Sliced wagyu beef plated for tableside grilling during a Japanese kaiseki dinner",
-        "caption": "Wagyu ready for the tabletop grill"
+        "url": "/images/travel/japan/kyoto-temple-gate.webp",
+        "alt": "Gate of a temple complex in Kyoto, Japan",
+        "caption": "A temple stop in Kyoto"
       },
       {
         "url": "/images/travel/japan/kinosaki-crab-kaiseki.webp",
         "alt": "A chef showing a diner how to eat matsuba crab during a kaiseki dinner at Kinosaki Onsen",
         "caption": "Crab kaiseki dinner in Kinosaki"
+      },
+      {
+        "url": "/images/travel/japan/wagyu-kaiseki-dinner.webp",
+        "alt": "Sliced wagyu beef plated for tableside grilling during a Japanese kaiseki dinner",
+        "caption": "Wagyu ready for the tabletop grill"
       }
     ]
   },
