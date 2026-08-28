@@ -26,7 +26,7 @@
     <text x="555" y="300" font-size="12" fill="#94a3b8">isolated services + data</text>
     <text x="555" y="321" font-size="12" fill="#94a3b8">configuration + volumes</text>
     <rect x="452" y="354" width="296" height="42" rx="8" fill="#020617" stroke="#334155"/>
-    <text x="600" y="380" text-anchor="middle" font-size="12" fill="#67e8f9">service boundary: one directory, one concern</text>
+    <text x="600" y="380" text-anchor="middle" font-size="10" fill="#67e8f9">service boundary: one directory, one concern</text>
 
     <line x1="420" y1="320" x2="276" y2="320" stroke="#22d3ee" stroke-width="2"/>
     <polygon points="276,320 288,314 288,326" fill="#22d3ee"/>
@@ -54,7 +54,7 @@
     <polygon points="600,505 594,493 606,493" fill="#fbbf24"/>
     <rect x="382" y="510" width="436" height="94" rx="10" fill="#0f172a" stroke="#fbbf24" stroke-opacity=".45"/>
     <text x="600" y="546" text-anchor="middle" font-size="17" font-weight="800" fill="#fbbf24">RECOVERY PATH</text>
-    <text x="600" y="572" text-anchor="middle" font-size="12" fill="#94a3b8">consistent SQLite backups · dual-pass mirror · separate recovery media</text>
+    <text x="600" y="572" text-anchor="middle" font-size="10" fill="#94a3b8">consistent SQLite backups · dual-pass mirror · separate recovery media</text>
     <text x="600" y="650" text-anchor="middle" font-size="12" font-style="italic" fill="#64748b">The goal is not a cloud replica — it is a system whose state, boundaries, and failure modes are understood.</text>
   </g>
 </svg>
