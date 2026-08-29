@@ -156,7 +156,7 @@ export const Experience = () => {
       role: "Technical Mentor & Teaching Assistant",
       period: "June 2021 - Present",
       type: "mentorship",
-      stats: ["350+ students mentored", "5+ years"],
+      stats: ["350+ students mentored", "4+ years"],
       highlights: [
         "Leading weekly mentorship sessions for 5 students in open source contribution, teaching GitHub workflows and utilizing AI to understand codebases",
         "Mentored 350+ students across multiple cohorts in Data Structures & Algorithms and cybersecurity fundamentals",

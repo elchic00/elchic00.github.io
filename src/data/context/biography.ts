@@ -95,7 +95,8 @@ When asked about "what projects has he built", include both his professional wor
 - Built offer-to-card routing that shows cardholders which cards are eligible for a personalized offer and enrolls them with the right card
 - Built and debugged account/rewards/offers surfaces and preference-driven account grouping on a high-visibility landing page
 - Led Selenium-to-Playwright migration work, monorepo onboarding, and reusable playbooks on the Overview team
-- Modernized CI workflows across Overview-owned repositories and advocated for practical AI-assisted engineering workflows
+- Modernized CI workflows across Overview-owned repositories
+- Builds the coding-agent workflows his team develops with: shared instruction sets for how agents delegate to sub-agents, verify their own work without assuming, and ask for clarification when they can't confirm something themselves; documentation and Obsidian-vault practices for tracking feature work and long-term context; instruction files committed into the repos they apply to; and reusable skills pushed to an org-wide skills repository so teammates get the same benefit. This is agent enablement and operations, not building AI products - the systems-building is his personal work at home.
 
 **Account Services / Profile Flows** (August 2022 - early 2026; React.js, Node.js, Kotlin BFF, GraphQL)
 - Built front-end microservices modules enabling users to view and edit profile information (name, address, email, phone number, income)
