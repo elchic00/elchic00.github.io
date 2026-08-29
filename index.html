@@ -109,8 +109,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Performance: Preconnect to external domains -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <!-- Analytics domains: dns-prefetch only. Connections open post-load (see analytics snippet below), so preconnect here would just compete with the LCP fetch. -->
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
 
     <!-- Logo/wordmark font -->
@@ -126,7 +125,6 @@
         unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
       }
     </style>
-    <link rel="preconnect" href="https://cdn.counter.dev" crossorigin />
     <link rel="dns-prefetch" href="https://cdn.counter.dev" />
 
     <!-- Preload critical LCP images -->
@@ -382,25 +380,39 @@
     <!-- Self-hosted ionicons (eliminates unpkg critical request chain) -->
     <script type="module" src="/ionicons-esm.js" async></script>
 
-    <!-- Deferred analytics scripts to reduce TBT -->
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-N3VW9YXQ2K"></script>
-    <script defer>
+    <!--
+      Analytics: gtag stub + config run now so window.gtag() calls from React
+      queue into dataLayer immediately, but the ~160 KiB gtag/js and counter.dev
+      network fetches are held until after load + idle so they don't compete
+      with the LCP image on slow connections. GA4 events flush once it arrives.
+    -->
+    <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      // Only track in production (excludes localhost and 127.0.0.1)
-      if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+      if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
         gtag('config', 'G-N3VW9YXQ2K');
+
+        var loadAnalytics = function () {
+          var g = document.createElement('script');
+          g.async = true;
+          g.src = 'https://www.googletagmanager.com/gtag/js?id=G-N3VW9YXQ2K';
+          document.head.appendChild(g);
+
+          var c = document.createElement('script');
+          c.src = 'https://cdn.counter.dev/script.js';
+          c.setAttribute('data-id', '39a7b209-2d53-4a48-a0b9-77ee7f398a83');
+          c.setAttribute('data-utcoffset', '-4');
+          document.head.appendChild(c);
+        };
+        var schedule = function () {
+          (window.requestIdleCallback || window.setTimeout)(loadAnalytics, 1);
+        };
+        if (document.readyState === 'complete') schedule();
+        else window.addEventListener('load', schedule);
       }
     </script>
-
-    <script
-      defer
-      src="https://cdn.counter.dev/script.js"
-      data-id="39a7b209-2d53-4a48-a0b9-77ee7f398a83"
-      data-utcoffset="-4"
-    ></script>
   </head>
   <body>
     <noscript>
