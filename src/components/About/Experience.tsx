@@ -60,9 +60,9 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
         </div>
 
         <div className="flex-grow">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">
+          <h4 className="text-2xl md:text-3xl font-bold text-white mb-1">
             {role}
-          </h3>
+          </h4>
           <p
             className={`text-lg md:text-xl font-semibold mb-1 ${
               isWork ? "text-cyan-400" : "text-purple-400"
@@ -134,7 +134,12 @@ export const Experience = () => {
       role: "Software Engineer — Account Services",
       period: "August 2022 - Early 2026",
       type: "work",
-      stats: ["100% WCAG AA", "~5M annual updates", "~650K calls avoided/yr", "+18% completion"],
+      stats: [
+        "100% WCAG AA",
+        "~5M annual updates",
+        "~650K calls avoided/yr",
+        "+18% completion",
+      ],
       highlights: [
         "Led a WCAG accessibility audit across profile/identity flows (name, email, address, phone), reaching 100% WCAG AA compliance — many flows AAA — later extended to 10 international markets",
         "Engineered secure profile-management flows (React.js + Kotlin BFF) supporting ~5M annual updates, with analytics-backed iteration lifting supplementary-profile completion 18% and start rate 16%",
@@ -184,9 +189,7 @@ export const Experience = () => {
       <div className="container mx-auto px-5 sm:px-8 md:px-10 relative z-10">
         <div
           ref={headerRef}
-          className={`mb-16 scroll-reveal ${
-            headerVisible ? "visible" : ""
-          }`}
+          className={`mb-16 scroll-reveal ${headerVisible ? "visible" : ""}`}
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
             Experience
@@ -196,10 +199,10 @@ export const Experience = () => {
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             Four years shipping inside a Fortune-500 web app, five-plus
-            mentoring engineers outside it. Both followed a winding path —
-            years in construction, a couple of false-start semesters in
-            business and chemistry, then a CS degree from Hunter College
-            before American Express.
+            mentoring engineers outside it. Both followed a winding path — years
+            in construction, a couple of false-start semesters in business and
+            chemistry, then a CS degree from Hunter College before American
+            Express.
           </p>
         </div>
 
