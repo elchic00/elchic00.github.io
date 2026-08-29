@@ -34,7 +34,7 @@ const HermesCaseStudy = () => (
         itself, so every reasoning call routes over the LAN through <strong>LiteLLM</strong> to
         the <strong>Framework Desktop</strong>, whose unified-memory GPU serves three resident
         models over a hand-patched llama.cpp build: a <strong>27B dense Qwen</strong> (sole
-        primary text model, MTP self-speculation) for the agentic work, <strong>Qwen3-VL-8B</strong>{" "}
+        primary text model, DFlash2 speculative decoding) for the agentic work, <strong>Qwen3-VL-8B</strong>{" "}
         for vision (screenshot analysis powering computer use), and <strong>WhisperX</strong>{" "}
         (whisper-large-v3 + speaker diarization) for the voice-note pipeline. A{" "}
         <strong>Raspberry Pi</strong> handles monitoring. Cloud providers (Nous Portal, OpenRouter,
@@ -195,8 +195,8 @@ const HermesCaseStudy = () => (
         </li>
         <li>
           The 27B model is bandwidth-bound — plain decode floors at 7.4 tokens/sec. Speculative
-          decoding (MTP, detailed on the Inference Engine page) already recovers most of that gap
-          to roughly 10 tokens/sec average, peaking near 22.4 t/s on structured output; a smaller
+          decoding (DFlash2, detailed on the Inference Engine page) recovers most of that gap —
+          roughly 33 tokens/sec on structured output, though free-form prose stays near 15; a smaller
           quant would trade quality for more speed beyond that, and I haven't made that trade.
         </li>
       </ul>

@@ -119,9 +119,9 @@ When asked about "what projects has he built", include both his professional wor
    - Not a public GitHub repo - it's a physical private server
 
 3. **Inference Engine** (llama.cpp, ROCm, hand-patched local model serving)
-   - A hand-patched llama.cpp build serving 4 local models (2 text, vision, speech-to-text) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
+   - A hand-patched llama.cpp build serving local models (dense text primary, vision, speech-to-text, plus a speculative-decoding draft model) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
    - Fixed a GPU memory-allocator bug that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
-   - Real generation speeds on this hardware: up to 47.8 tok/s on the 35B MoE model (with ~1,495 tok/s prompt prefill), and ~10 tok/s average on the 27B dense model, peaking near 22.4 tok/s with speculative decoding
+   - Real generation speeds on this hardware: roughly 33 tok/s on structured and reasoning output from the 27B dense model with DFlash2 speculative decoding (up from ~22 tok/s on the earlier Multi-Token Prediction draft path, against a 7.4 tok/s plain-decode floor); free-form prose is roughly flat at ~15 tok/s, and uncached prefill runs ~369 tok/s
    - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault
    - This is the inference layer Hermes actually runs on - no public repo yet, this is a private homelab build
 

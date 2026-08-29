@@ -99,20 +99,23 @@ const InferenceCaseStudy = () => (
         decoding.
       </p>
       <p>
-        Multi-Token Prediction (MTP) and speculative decoding bypass this
-        bandwidth ceiling by proposing draft candidate tokens verified by the
-        main model in a single forward pass. On Qwen 3.8 27B, MTP lifts
-        generation throughput off the 7.4 t/s memory-bound floor to a measured
-        22.35 t/s peak on structured, tool-calling prompts (81% draft
-        acceptance), holding a sustained ~10 t/s on everyday mixed traffic —
-        real-time responsiveness for interactive agent loops without thermal
-        throttling.
+        Speculative decoding bypasses this bandwidth ceiling by proposing draft
+        candidate tokens that the main model verifies in a single forward pass.
+        The first working version used Qwen's own Multi-Token Prediction (MTP)
+        head, which lifted structured, tool-calling generation off the 7.4 t/s
+        floor to a measured 22.4 t/s. Swapping the draft path to DFlash2 — a
+        block-diffusion drafter that proposes a full 8-token block per step —
+        raised that to a measured 33 t/s on structured and reasoning output
+        (+48%), landing 3–5 tokens per block at ~75% acceptance and verified
+        lossless against greedy decode. Free-form prose is roughly flat between
+        the two (~15 t/s): block-diffusion drafting loses on high-entropy text,
+        and that's the minority of the agent's workload.
       </p>
     </Section>
 
     <StatRow>
-      <Stat value="22.35 t/s" label="Qwen 3.8 27B gen w/ MTP (structured peak)" />
-      <Stat value="1,495 t/s" label="Prefill @2k context" />
+      <Stat value="33 t/s" label="Qwen 3.8 27B gen w/ DFlash2 (structured)" />
+      <Stat value="369 t/s" label="Prefill, uncached @3k" />
       <Stat value="7.4 t/s" label="Dense Q8 LPDDR5X baseline" />
       <Stat value="~5x" label="Prefill gain, rocWMMA disabled" />
     </StatRow>

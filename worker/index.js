@@ -265,9 +265,9 @@ When asked about "what projects has he built", include both his professional wor
    - Not a public GitHub repo - it's a physical private server
 
 3. **Inference Engine** (llama.cpp, ROCm, hand-patched local model serving)
-   - A hand-patched llama.cpp build serving 4 local models (2 text, vision, speech-to-text) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
+   - A hand-patched llama.cpp build serving local models (dense text primary, vision, speech-to-text, plus a speculative-decoding draft model) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
    - Fixed a GPU memory-allocator bug that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
-   - Real generation speeds on this hardware: up to 47.8 tok/s on the 35B MoE model (with ~1,495 tok/s prompt prefill), and ~10 tok/s average on the 27B dense model, peaking near 22.4 tok/s with speculative decoding
+   - Real generation speeds on this hardware: roughly 33 tok/s on structured and reasoning output from the 27B dense model with DFlash2 speculative decoding (up from ~22 tok/s on the earlier Multi-Token Prediction draft path, against a 7.4 tok/s plain-decode floor); free-form prose is roughly flat at ~15 tok/s, and uncached prefill runs ~369 tok/s
    - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault
    - This is the inference layer Hermes actually runs on - no public repo yet, this is a private homelab build
 
@@ -651,7 +651,7 @@ const PROJECTS_CONTEXT_DATA = `[
     "id": "inference-engine",
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Three models resident on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, where the sole primary is a dense Qwen 3.8 27B whose 7.4 tokens/sec memory-bandwidth floor becomes a 22.35 tokens/sec peak on a full 99-layer GPU offload once Multi-Token Prediction self-speculation kicks in. Reachable from his phone over Telegram, every call traced, and nothing sensitive leaves the LAN. Not a public repo for the patches themselves - this write-up is the first public artifact.",
+    "description": "Three models resident on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, where the sole primary is a dense Qwen 3.8 27B whose 7.4 tokens/sec plain-decode floor becomes roughly 33 tokens/sec on structured output once DFlash2 speculative decoding kicks in on a full 99-layer GPU offload - it started on Qwen's own Multi-Token Prediction head at ~22 tokens/sec, then moved to a faster block-diffusion drafter. Reachable from his phone over Telegram, every call traced, and nothing sensitive leaves the LAN. Not a public repo for the patches themselves - this write-up is the first public artifact.",
     "technologies": [
       "llama.cpp",
       "ROCm",
