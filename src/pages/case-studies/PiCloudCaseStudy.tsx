@@ -133,9 +133,9 @@ const PiCloudCaseStudy = () => (
       </p>
       <p>
         That raises the reliability bar in a specific way. A personal service that's down is an
-        annoyance I discover when I go to use it. A service an unattended agent calls at 2am is a
-        silent failure in somebody else's workflow — the agent gets an empty result and carries on
-        as if it had searched. It's also the reason nothing in the agent's retrieval path calls a
+        annoyance I discover when I go to use it. A service an unattended agent calls at 2am fails
+        silently — the agent gets an empty result and carries on as if it had searched, and I only
+        find out later from the traces. It's also the reason nothing in the agent's retrieval path calls a
         paid API for search, embeddings, or page extraction: that path terminates on hardware I
         own, on a LAN, at no marginal cost per call.
       </p>
