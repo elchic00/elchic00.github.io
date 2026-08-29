@@ -407,7 +407,10 @@
           document.head.appendChild(c);
         };
         var schedule = function () {
-          (window.requestIdleCallback || window.setTimeout)(loadAnalytics, 1);
+          // rIC's 2nd arg must be an options dict, not a number — don't share
+          // the call signature with setTimeout.
+          if (window.requestIdleCallback) window.requestIdleCallback(loadAnalytics);
+          else window.setTimeout(loadAnalytics, 1);
         };
         if (document.readyState === 'complete') schedule();
         else window.addEventListener('load', schedule);
