@@ -45,7 +45,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
     "min-h-[455px] h-full",
   ].join(" ");
 
-  const mediaHeight = "h-48 flex-shrink-0";
+  const mediaHeight = "h-56 flex-shrink-0";
 
   const handleMediaClick = (e: React.MouseEvent) => {
     if (hasMultipleVideos) {
@@ -58,7 +58,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
   const inner = (
     <>
       <div 
-        className={`relative overflow-hidden bg-slate-950 ${mediaHeight} ${hasMultipleVideos ? "cursor-zoom-in" : ""}`}
+        className={`relative overflow-hidden bg-[#050a15] ${mediaHeight} ${hasMultipleVideos ? "cursor-zoom-in" : ""}`}
         onClick={handleMediaClick}
       >
         {hasMultipleVideos ? (
@@ -97,11 +97,11 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-110"
+            className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
             loading={index < 2 ? "eager" : "lazy"}
           />
         )}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-b from-transparent to-slate-900 z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-9 bg-gradient-to-b from-transparent to-slate-900 z-10" />
       </div>
 
       <div className="bg-slate-900 flex flex-col flex-grow p-5 justify-between">

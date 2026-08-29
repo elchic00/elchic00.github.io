@@ -1,82 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img" aria-labelledby="jobfit-title jobfit-desc">
-  <title id="jobfit-title">Job-Fit Scorer — LangGraph scoring pipeline</title>
-  <desc id="jobfit-desc">Flow diagram of the job-fit scoring pipeline: nightly discovery polls 13 companies' ATS boards, thousands of raw postings are filtered to a prioritized queue, each role fans out into parallel requirement-level scoring nodes via LangGraph's Send API, and compiled fit reports sync into a durable, append-only tracker.</desc>
-
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="jf-t jf-d">
+  <title id="jf-t">Job-Fit Scorer — 21 postings scored in a week, 2 worth applying to</title>
+  <desc id="jf-d">A LangGraph pipeline that scores a job posting against an evidence document of what the candidate has actually built, calibrated to say no as readily as yes. In one real week a cheap pre-filter dropped 63 postings before an LLM saw them; 21 reached scoring and 2 were worth applying to. The other 19 had their recurring blockers logged so the rejections double as a study list. Every run traced in Langfuse.</desc>
   <defs>
-    <linearGradient id="bgJ" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#020617"/>
-      <stop offset="1" stop-color="#0b1220"/>
-    </linearGradient>
-    <pattern id="gridJ" width="40" height="40" patternUnits="userSpaceOnUse">
-      <path d="M40 0H0V40" fill="none" stroke="#1e293b" stroke-width="1" opacity="0.35"/>
-    </pattern>
-    <marker id="arrJ" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0L10 5L0 10z" fill="#22d3ee"/>
-    </marker>
+    <linearGradient id="jfBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#0a1220"/></linearGradient>
+    <pattern id="jfScan" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="1" fill="#ffffff" opacity="0.02"/></pattern>
+    <filter id="jfGlow" x="-50%" y="-80%" width="200%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="jfBand" x="-15%" y="-70%" width="130%" height="240%"><feGaussianBlur stdDeviation="16" result="b"/><feComponentTransfer in="b" result="bt"><feFuncA type="linear" slope="0.30"/></feComponentTransfer><feMerge><feMergeNode in="bt"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
+  <rect width="1200" height="720" fill="url(#jfBg)"/>
+  <rect width="1200" height="720" fill="url(#jfScan)"/>
+  <g font-family="'SF Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'Liberation Mono',monospace">
+    <circle cx="112" cy="50" r="8" fill="#2b3a4f"/><circle cx="140" cy="50" r="8" fill="#2b3a4f"/><circle cx="168" cy="50" r="8" fill="#2b3a4f"/>
+    <text x="1112" y="57" text-anchor="end" font-size="19" fill="#3b485d" letter-spacing="0.5">mac-mini : jobfit</text>
+    <line x1="72" y1="82" x2="1128" y2="82" stroke="#161f2e" stroke-width="1"/>
 
-  <rect width="1200" height="750" fill="url(#bgJ)"/>
-  <rect width="1200" height="750" fill="url(#gridJ)"/>
+    <text x="118" y="150" font-size="25" fill="#3f4d63">$</text>
+    <text x="150" y="150" font-size="25" fill="#f1f5f9">jobfit <tspan fill="#67e8f9">score</tspan> <tspan fill="#7c8aa3">--week</tspan> <tspan fill="#cbd5e1">2026-08-18</tspan></text>
 
-  <text x="60" y="80" fill="#f8fafc" font-family="Poppins, system-ui, sans-serif" font-size="34" font-weight="800">Job-Fit Scorer</text>
-  <text x="60" y="114" fill="#94a3b8" font-family="Poppins, system-ui, sans-serif" font-size="18">LangGraph pipeline · discover → filter → parallel score → sync</text>
+    <text x="150" y="200" font-size="22" fill="#6b7c94">pre-filter dropped 63 postings before an LLM saw them</text>
+    <text x="150" y="236" font-size="22" fill="#6b7c94">21 reached scoring against the evidence doc</text>
 
-  <!-- Stage 1: discover -->
-  <g font-family="Poppins, system-ui, sans-serif">
-    <rect x="60" y="180" width="240" height="130" rx="14" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-    <text x="80" y="215" fill="#22d3ee" font-size="14" font-weight="700" letter-spacing="2">DISCOVER</text>
-    <text x="80" y="245" fill="#e2e8f0" font-size="16">13 companies' ATS</text>
-    <text x="80" y="268" fill="#e2e8f0" font-size="16">boards polled nightly</text>
-    <text x="80" y="294" fill="#64748b" font-size="13">Greenhouse · Ashby · Lever</text>
+    <g filter="url(#jfBand)">
+      <rect x="112" y="262" width="988" height="168" rx="9" fill="#0b2a34"/>
+      <rect x="112" y="262" width="6" height="168" fill="#22d3ee"/>
+    </g>
+    <text x="152" y="364" font-size="32" fill="#94a3b8">worth applying to</text>
+    <text x="1058" y="384" text-anchor="end" font-size="116" font-weight="800" letter-spacing="-4" fill="#67e8f9" filter="url(#jfGlow)">2<tspan font-size="52" font-weight="700" fill="#8fa3bd"> / 21</tspan></text>
 
-    <line x1="300" y1="245" x2="360" y2="245" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrJ)"/>
+    <text x="152" y="500" font-size="23" fill="#22d3ee" opacity=".9">&#9650;  19 no's, each with a logged reason</text>
 
-    <!-- Stage 2: filter -->
-    <rect x="365" y="180" width="240" height="130" rx="14" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-    <text x="385" y="215" fill="#22d3ee" font-size="14" font-weight="700" letter-spacing="2">FILTER</text>
-    <text x="385" y="245" fill="#e2e8f0" font-size="16">3,126 raw postings</text>
-    <text x="385" y="268" fill="#e2e8f0" font-size="16">→ 56 relevant roles</text>
-    <text x="385" y="294" fill="#64748b" font-size="13">dedupe · location · relevance</text>
+    <text x="118" y="576" font-size="25" fill="#3f4d63">$</text>
+    <rect x="150" y="554" width="16" height="30" fill="#22d3ee"><animate attributeName="opacity" values="1;1;0;0" dur="1.15s" repeatCount="indefinite"/></rect>
 
-    <line x1="605" y1="245" x2="665" y2="245" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrJ)"/>
-
-    <!-- Stage 3: parallel scoring fan-out -->
-    <rect x="670" y="150" width="470" height="330" rx="14" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5" opacity="0.95"/>
-    <text x="690" y="185" fill="#22d3ee" font-size="14" font-weight="700" letter-spacing="2">SCORE · LANGGRAPH SEND FAN-OUT</text>
-
-    <rect x="690" y="205" width="200" height="52" rx="10" fill="#1e293b"/>
-    <text x="705" y="237" fill="#e2e8f0" font-size="14">requirement 1 → 62/100</text>
-    <rect x="690" y="267" width="200" height="52" rx="10" fill="#1e293b"/>
-    <text x="705" y="299" fill="#e2e8f0" font-size="14">requirement 2 → 88/100</text>
-    <rect x="690" y="329" width="200" height="52" rx="10" fill="#1e293b"/>
-    <text x="705" y="361" fill="#e2e8f0" font-size="14">requirement N → 74/100</text>
-
-    <line x1="890" y1="231" x2="940" y2="290" stroke="#475569" stroke-width="1.5"/>
-    <line x1="890" y1="293" x2="940" y2="300" stroke="#475569" stroke-width="1.5"/>
-    <line x1="890" y1="355" x2="940" y2="310" stroke="#475569" stroke-width="1.5"/>
-
-    <rect x="945" y="265" width="175" height="70" rx="10" fill="#164e63"/>
-    <text x="965" y="295" fill="#a5f3fc" font-size="14" font-weight="700">fit 90 · priority 78</text>
-    <text x="965" y="318" fill="#67e8f9" font-size="13">recommendation: apply</text>
-
-    <text x="690" y="430" fill="#64748b" font-size="13">honest scoring — calibrated against documented gaps,</text>
-    <text x="690" y="452" fill="#64748b" font-size="13">not tuned to flatter · every run traced in Langfuse</text>
-  </g>
-
-  <!-- Stage 4: sync -->
-  <g font-family="Poppins, system-ui, sans-serif">
-    <line x1="905" y1="480" x2="905" y2="540" stroke="#22d3ee" stroke-width="2" marker-end="url(#arrJ)"/>
-    <rect x="670" y="545" width="470" height="120" rx="14" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-    <text x="690" y="580" fill="#22d3ee" font-size="14" font-weight="700" letter-spacing="2">SYNC</text>
-    <text x="690" y="610" fill="#e2e8f0" font-size="16">Prioritized queue feeds a durable tracker —</text>
-    <text x="690" y="634" fill="#e2e8f0" font-size="16">an append-only log of every scored role.</text>
-  </g>
-
-  <!-- footer stats -->
-  <g font-family="Poppins, system-ui, sans-serif">
-    <text x="60" y="560" fill="#f8fafc" font-size="26" font-weight="800">76% fewer LLM calls</text>
-    <text x="60" y="586" fill="#64748b" font-size="13">per scoring run after the batching redesign</text>
-    <text x="60" y="640" fill="#f8fafc" font-size="26" font-weight="800">263 passing tests</text>
-    <text x="60" y="666" fill="#64748b" font-size="13">incl. live assertions that every ATS board is alive</text>
+    <text x="118" y="640" font-size="20" fill="#36445a"># calibrated to say no &#183; every run traced in Langfuse</text>
   </g>
 </svg>
