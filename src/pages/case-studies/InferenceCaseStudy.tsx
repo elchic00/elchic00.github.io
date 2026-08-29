@@ -254,6 +254,8 @@ const InferenceCaseStudy = () => (
         safety net, plus the upstream items still open against this stack —
         the <code>server_prompt_cache</code> race (
         <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27148</a>
+        , which has since drawn an independent fix attempt upstream,{" "}
+        <a href="https://github.com/ggml-org/llama.cpp/pull/27624" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27624</a>
         ), the gfx1151
         allocator behavior that made <code>--direct-io</code> mandatory, and a
         slot that silently stops dispatching mid-session with no log line to

@@ -23,7 +23,9 @@ const HermesCaseStudy = () => (
         shipping full turn inputs and outputs to Langfuse's cloud with no redaction step, so I filed
         it upstream (
         <a href="https://github.com/NousResearch/hermes-agent/issues/67544" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-agent#67544</a>
-        ) and opened a PR closing the gap.
+        ) and opened{" "}
+        <a href="https://github.com/NousResearch/hermes-agent/pull/88608" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">the PR</a>{" "}
+        closing the gap.
       </p>
     </Section>
 
