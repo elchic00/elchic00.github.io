@@ -40,9 +40,9 @@ export const About = () => {
               Drew Alagna · NYC · accessible web engineering · self-hosted AI
             </p>
 
-            <h1 className="animate-fade-in-delay-3 mb-6 text-4xl font-black leading-[0.98] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              I build accessible web interfaces used by millions — and the
-              self-hosted AI systems I run at home.
+            <h1 className="animate-fade-in-delay-3 mb-6 text-4xl font-black leading-[1.03] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Accessible web interfaces, used by millions. Self-hosted AI
+              systems, built at home.
             </h1>
 
             <p className="animate-fade-in-delay-3 mb-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
