@@ -7,6 +7,11 @@
     "description": "From Kyoto’s iconic torii gates to neon-lit Tokyo streets and serene Mount Fuji views, this trip captured the best of Japan’s culture and landscapes.",
     "photos": [
       {
+        "url": "/images/travel/japan/mt-fuji-view.webp",
+        "alt": "Mount Fuji rising above the landscape with clear blue skies",
+        "caption": "Mount Fuji in all its glory"
+      },
+      {
         "url": "/images/travel/japan/arashiyama-monkey-sanctuary.webp",
         "alt": "A macaque at the Arashiyama Monkey Park behind mesh fencing",
         "caption": "Monkey at Arashiyama Monkey Park"
@@ -25,11 +30,6 @@
         "url": "/images/travel/japan/fox-statue.webp",
         "alt": "Stone fox statue wearing a bib at a Shinto shrine",
         "caption": "Fox guardian statue"
-      },
-      {
-        "url": "/images/travel/japan/mt-fuji-view.webp",
-        "alt": "Mount Fuji rising above the landscape with clear blue skies",
-        "caption": "Mount Fuji in all its glory"
       },
       {
         "url": "/images/travel/japan/uji-river-boats.webp",
