@@ -1,37 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="pc-t pc-d">
-  <title id="pc-t">Pi-Cloud — firewall reported 0 exposed, an off-network probe found 15</title>
-  <desc id="pc-d">A Raspberry Pi 5 running 23 self-hosted services across 12 Docker Compose projects, meant to be reachable only over Tailscale. The local firewall status reported zero services exposed. A probe run from off-network found 15 of the 23 one layer short of the isolation intended. All 15 were closed and re-verified from outside.</desc>
+  <title id="pc-t">Pi-Cloud — firewall reported 0 exposed, an off-network probe found 15 of 23</title>
+  <desc id="pc-d">A Raspberry Pi 5 runs 23 self-hosted services meant to be reachable only over Tailscale. The local firewall status reported zero exposed. A probe from off-network found 15 of the 23 one layer short of the isolation intended — shown as a grid where 15 tiles light up. All 15 were closed and re-verified from outside.</desc>
   <defs>
-    <linearGradient id="pcBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#0a1220"/></linearGradient>
+    <linearGradient id="pcBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#131008"/></linearGradient>
     <pattern id="pcScan" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="1" fill="#ffffff" opacity="0.02"/></pattern>
-    <filter id="pcGlow" x="-50%" y="-80%" width="200%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="pcBand" x="-15%" y="-70%" width="130%" height="240%"><feGaussianBlur stdDeviation="16" result="b"/><feComponentTransfer in="b" result="bt"><feFuncA type="linear" slope="0.28"/></feComponentTransfer><feMerge><feMergeNode in="bt"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="pcGlow" x="-60%" y="-80%" width="220%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
   <rect width="1200" height="720" fill="url(#pcBg)"/>
   <rect width="1200" height="720" fill="url(#pcScan)"/>
   <g font-family="'SF Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'Liberation Mono',monospace">
-    <circle cx="112" cy="50" r="8" fill="#2b3a4f"/><circle cx="140" cy="50" r="8" fill="#2b3a4f"/><circle cx="168" cy="50" r="8" fill="#2b3a4f"/>
-    <text x="1112" y="57" text-anchor="end" font-size="19" fill="#3b485d" letter-spacing="0.5">laptop : off-network</text>
-    <line x1="72" y1="82" x2="1128" y2="82" stroke="#161f2e" stroke-width="1"/>
+    <text x="118" y="58" font-size="20" letter-spacing="2.5" fill="#9a7f48">OFF-NETWORK EXPOSURE AUDIT</text>
+    <text x="1082" y="58" text-anchor="end" font-size="19" fill="#52493a">laptop : off-network</text>
+    <line x1="118" y1="82" x2="1082" y2="82" stroke="#332714" stroke-width="1"/>
 
-    <text x="118" y="150" font-size="25" fill="#3f4d63">$</text>
-    <text x="150" y="150" font-size="25" fill="#f1f5f9">audit-exposure <tspan fill="#7c8aa3">--from</tspan> <tspan fill="#fbbf24">off-network</tspan></text>
+    <text x="120" y="140" font-size="22" fill="#8a8272">firewall status:  <tspan fill="#56a066">&#10003; 0 of 23 exposed</tspan></text>
+    <text x="120" y="176" font-size="22" fill="#8a8272">probe from outside the tailnet:</text>
 
-    <text x="150" y="200" font-size="22" fill="#6b7c94">23 services &#183; Tailscale-only by design</text>
-    <text x="150" y="236" font-size="22" fill="#6b7c94">local firewall status &#8230; 0 exposed</text>
-
-    <g filter="url(#pcBand)">
-      <rect x="112" y="262" width="988" height="168" rx="9" fill="#2e2410"/>
-      <rect x="112" y="262" width="6" height="168" fill="#fbbf24"/>
+    <g>
+      <rect x="120" y="206" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="206" y="206" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="292" y="206" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="378" y="206" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="464" y="206" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="550" y="206" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="636" y="206" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="722" y="206" width="74" height="50" rx="6" fill="#fbbf24"/>
+      <rect x="120" y="268" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="206" y="268" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="292" y="268" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="378" y="268" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="464" y="268" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="550" y="268" width="74" height="50" rx="6" fill="#fbbf24"/><rect x="636" y="268" width="74" height="50" rx="6" fill="#fbbf24"/>
+      <rect x="722" y="268" width="74" height="50" rx="6" fill="none" stroke="#4e3f1c" stroke-width="2.5"/>
+      <rect x="120" y="330" width="74" height="50" rx="6" fill="none" stroke="#4e3f1c" stroke-width="2.5"/><rect x="206" y="330" width="74" height="50" rx="6" fill="none" stroke="#4e3f1c" stroke-width="2.5"/><rect x="292" y="330" width="74" height="50" rx="6" fill="none" stroke="#4e3f1c" stroke-width="2.5"/><rect x="378" y="330" width="74" height="50" rx="6" fill="none" stroke="#4e3f1c" stroke-width="2.5"/><rect x="464" y="330" width="74" height="50" rx="6" fill="none" stroke="#4e3f1c" stroke-width="2.5"/><rect x="550" y="330" width="74" height="50" rx="6" fill="none" stroke="#4e3f1c" stroke-width="2.5"/><rect x="636" y="330" width="74" height="50" rx="6" fill="none" stroke="#4e3f1c" stroke-width="2.5"/>
     </g>
-    <text x="152" y="364" font-size="32" fill="#94a3b8">reachable off-network</text>
-    <text x="1058" y="384" text-anchor="end" font-size="116" font-weight="800" letter-spacing="-4" fill="#fde047" filter="url(#pcGlow)">15<tspan font-size="52" font-weight="700" fill="#8fa3bd"> / 23</tspan></text>
 
-    <text x="152" y="500" font-size="23" fill="#fbbf24" opacity=".9">&#9650;  the green status said zero</text>
+    <text x="118" y="466" font-size="116" font-weight="800" letter-spacing="-4" fill="#fde047" filter="url(#pcGlow)">15<tspan font-size="46" font-weight="700" fill="#867a5c"> / 23 reachable</tspan></text>
 
-    <text x="118" y="576" font-size="25" fill="#3f4d63">$</text>
-    <rect x="150" y="554" width="16" height="30" fill="#22d3ee"><animate attributeName="opacity" values="1;1;0;0" dur="1.15s" repeatCount="indefinite"/></rect>
+    <text x="120" y="512" font-size="22" fill="#f5cf6a">the green checkmark was the wrong thing to trust</text>
 
-    <text x="118" y="640" font-size="20" fill="#36445a"># all 15 closed &#183; re-verified from outside the tailnet</text>
+    <text x="120" y="596" font-size="18" fill="#5a4e30"># all 15 closed &#183; re-verified from off-network, not from a status page</text>
   </g>
 </svg>

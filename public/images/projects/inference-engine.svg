@@ -1,37 +1,34 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="ie-t ie-d">
-  <title id="ie-t">Inference Engine — llama-bench: 33.2 t/s decode, 4.5x the bandwidth floor</title>
-  <desc id="ie-d">A llama-bench run against the dense Qwen 3.8 27B model with DFlash2 speculative decoding on unsupported gfx1151 hardware. Decode measures about 33.2 tokens per second — roughly 4.5 times the 7.4 t/s memory-bandwidth floor for this model. Three models resident on one box, every call traced, zero marginal cost per call.</desc>
+  <title id="ie-t">Inference Engine — decode throughput 33.2 t/s, 4.5x past the bandwidth ceiling</title>
+  <desc id="ie-d">A throughput gauge for the dense Qwen 3.8 27B model. Memory bandwidth alone caps plain decode at 7.4 tokens per second, drawn as a hatched wall. With DFlash2 speculative decoding on unsupported gfx1151 hardware, measured decode reaches about 33.2 tokens per second — the bar runs straight through the ceiling. Three models on one box, every call traced, zero marginal cost.</desc>
   <defs>
     <linearGradient id="ieBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#0a1220"/></linearGradient>
     <pattern id="ieScan" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="1" fill="#ffffff" opacity="0.02"/></pattern>
-    <filter id="ieGlow" x="-50%" y="-80%" width="200%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="ieBand" x="-15%" y="-70%" width="130%" height="240%"><feGaussianBlur stdDeviation="16" result="b"/><feComponentTransfer in="b" result="bt"><feFuncA type="linear" slope="0.30"/></feComponentTransfer><feMerge><feMergeNode in="bt"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="ieHatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#f87171" stroke-width="3" opacity=".5"/></pattern>
+    <filter id="ieGlow" x="-60%" y="-80%" width="220%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
   <rect width="1200" height="720" fill="url(#ieBg)"/>
   <rect width="1200" height="720" fill="url(#ieScan)"/>
   <g font-family="'SF Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'Liberation Mono',monospace">
-    <circle cx="112" cy="50" r="8" fill="#2b3a4f"/><circle cx="140" cy="50" r="8" fill="#2b3a4f"/><circle cx="168" cy="50" r="8" fill="#2b3a4f"/>
-    <text x="1112" y="57" text-anchor="end" font-size="19" fill="#3b485d" letter-spacing="0.5">framework-node : llama-prod</text>
-    <line x1="72" y1="82" x2="1128" y2="82" stroke="#161f2e" stroke-width="1"/>
+    <text x="118" y="58" font-size="20" letter-spacing="2.5" fill="#5f849c">DECODE THROUGHPUT &#183; DENSE 27B</text>
+    <text x="1082" y="58" text-anchor="end" font-size="19" fill="#3b4653">framework-node : llama-prod</text>
+    <line x1="118" y1="82" x2="1082" y2="82" stroke="#143440" stroke-width="1"/>
 
-    <text x="118" y="150" font-size="25" fill="#3f4d63">$</text>
-    <text x="150" y="150" font-size="25" fill="#f1f5f9">llama-bench <tspan fill="#7c8aa3">-m</tspan> <tspan fill="#cbd5e1">qwen3.8-27b-q8</tspan> <tspan fill="#7c8aa3">--draft</tspan> <tspan fill="#67e8f9">dflash2</tspan></text>
+    <text x="118" y="216" font-size="120" font-weight="800" letter-spacing="-4" fill="#67e8f9" filter="url(#ieGlow)">33.2<tspan font-size="46" font-weight="700" fill="#7f93aa"> t/s</tspan></text>
+    <text x="120" y="260" font-size="22" fill="#66788e">measured &#183; DFlash2 speculative decoding</text>
 
-    <text x="150" y="200" font-size="22" fill="#6b7c94">gfx1151 APU &#183; unsupported &#183; 99/99 layers on GPU &#8230; ok</text>
-    <text x="150" y="236" font-size="22" fill="#6b7c94">plain-decode ceiling for this model &#8776; 7.4 t/s</text>
+    <rect x="118" y="316" width="964" height="62" rx="8" fill="#0d2a33"/>
+    <rect x="118" y="316" width="772" height="62" rx="8" fill="#22d3ee"/>
+    <rect x="118" y="316" width="772" height="62" rx="8" fill="#22d3ee" opacity=".25"/>
+    <rect x="290" y="300" width="16" height="94" fill="url(#ieHatch)"/>
+    <rect x="290" y="300" width="16" height="94" fill="none" stroke="#f87171" stroke-opacity=".7" stroke-width="2"/>
+    <path d="M306 334l30-8M306 350l34 3M306 366l28 12" stroke="#f87171" stroke-opacity=".85" stroke-width="3" fill="none"/>
+    <text x="118" y="418" font-size="19" fill="#66788e">0</text>
+    <text x="298" y="418" text-anchor="middle" font-size="19" fill="#e78b8b">7.4  ceiling</text>
+    <text x="1082" y="418" text-anchor="end" font-size="19" fill="#66788e">40</text>
 
-    <g filter="url(#ieBand)">
-      <rect x="112" y="262" width="988" height="168" rx="9" fill="#0b2a34"/>
-      <rect x="112" y="262" width="6" height="168" fill="#22d3ee"/>
-    </g>
-    <text x="152" y="364" font-size="32" fill="#94a3b8">decode</text>
-    <text x="1058" y="384" text-anchor="end" font-size="116" font-weight="800" letter-spacing="-4" fill="#67e8f9" filter="url(#ieGlow)">33.2<tspan font-size="48" font-weight="700" fill="#8fa3bd"> t/s</tspan></text>
+    <text x="120" y="502" font-size="22" fill="#7fe4f4">4.5&#215; the LPDDR5X bandwidth floor &#183; three models on one box</text>
 
-    <text x="152" y="500" font-size="23" fill="#22d3ee" opacity=".9">&#9650;  4.5&#215; the memory-bandwidth floor</text>
-
-    <text x="118" y="576" font-size="25" fill="#3f4d63">$</text>
-    <rect x="150" y="554" width="16" height="30" fill="#22d3ee"><animate attributeName="opacity" values="1;1;0;0" dur="1.15s" repeatCount="indefinite"/></rect>
-
-    <text x="118" y="640" font-size="20" fill="#36445a"># three models &#183; one box &#183; every call traced &#183; $0 per call</text>
+    <text x="120" y="596" font-size="18" fill="#33424f"># every call traced &#183; $0 marginal cost per call</text>
   </g>
 </svg>

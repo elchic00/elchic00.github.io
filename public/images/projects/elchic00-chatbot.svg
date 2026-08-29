@@ -1,37 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="cb-t cb-d">
-  <title id="cb-t">AI Chat Assistant — zero vector databases, one structured context file</title>
-  <desc id="cb-d">The assistant in the corner of the portfolio. A Cloudflare Worker sends Gemini 2.5 Flash one compact structured reference for the whole site on every request, with no vector store, no chunking and no embeddings. It can also turn a reply into a real UI action. An eval question still caught a confidently wrong answer, traced to a bad source file rather than the model.</desc>
+  <title id="cb-t">AI Chat Assistant — no retrieval, one whole context file per request</title>
+  <desc id="cb-d">The assistant in the corner of the portfolio. The obvious build chunks, embeds, and runs a vector search before the model sees anything. What ships instead: a Cloudflare Worker sends Gemini 2.5 Flash one whole structured reference file on every request — zero vector databases. An eval question still caught a confidently wrong answer, traced to a bad source file rather than the model.</desc>
   <defs>
     <linearGradient id="cbBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#0a1220"/></linearGradient>
     <pattern id="cbScan" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="1" fill="#ffffff" opacity="0.02"/></pattern>
-    <filter id="cbGlow" x="-50%" y="-80%" width="200%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="cbBand" x="-15%" y="-70%" width="130%" height="240%"><feGaussianBlur stdDeviation="16" result="b"/><feComponentTransfer in="b" result="bt"><feFuncA type="linear" slope="0.30"/></feComponentTransfer><feMerge><feMergeNode in="bt"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="cbGlow" x="-60%" y="-80%" width="220%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
   <rect width="1200" height="720" fill="url(#cbBg)"/>
   <rect width="1200" height="720" fill="url(#cbScan)"/>
   <g font-family="'SF Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'Liberation Mono',monospace">
-    <circle cx="112" cy="50" r="8" fill="#2b3a4f"/><circle cx="140" cy="50" r="8" fill="#2b3a4f"/><circle cx="168" cy="50" r="8" fill="#2b3a4f"/>
-    <text x="1112" y="57" text-anchor="end" font-size="19" fill="#3b485d" letter-spacing="0.5">cloudflare : elchic00-chat</text>
-    <line x1="72" y1="82" x2="1128" y2="82" stroke="#161f2e" stroke-width="1"/>
+    <text x="118" y="58" font-size="20" letter-spacing="2.5" fill="#5f849c">REQUEST PATH &#183; EVERY MESSAGE</text>
+    <text x="1082" y="58" text-anchor="end" font-size="19" fill="#3b4653">cloudflare : elchic00-chat</text>
+    <line x1="118" y1="82" x2="1082" y2="82" stroke="#143440" stroke-width="1"/>
 
-    <text x="118" y="150" font-size="25" fill="#3f4d63">$</text>
-    <text x="150" y="150" font-size="25" fill="#f1f5f9">wrangler <tspan fill="#67e8f9">tail</tspan> <tspan fill="#7c8aa3">--format</tspan> <tspan fill="#cbd5e1">pretty</tspan></text>
+    <text x="120" y="140" font-size="18" letter-spacing="1.5" fill="#4d6070">THE OBVIOUS BUILD</text>
+    <text x="120" y="184" font-size="24" fill="#4e6072">query &#8594; chunk &#8594; embed &#8594; vector search &#8594; Gemini</text>
+    <line x1="114" y1="176" x2="836" y2="176" stroke="#67e8f9" stroke-width="3" opacity=".55"/>
 
-    <text x="150" y="200" font-size="22" fill="#6b7c94">ctx: 1 structured file &#183; sent whole &#183; every request</text>
-    <text x="150" y="236" font-size="22" fill="#6b7c94">reply &#8594; UI action: open r&#233;sum&#233;, jump to a section</text>
+    <text x="120" y="266" font-size="18" letter-spacing="1.5" fill="#3f8698">WHAT SHIPS</text>
+    <rect x="114" y="286" width="742" height="56" rx="8" fill="#0b2a34" stroke="#1f4f5e"/>
+    <text x="136" y="323" font-size="25" fill="#a9dced">query &#8594; <tspan fill="#eaf7fb">one whole context file</tspan> &#8594; Gemini</text>
 
-    <g filter="url(#cbBand)">
-      <rect x="112" y="262" width="988" height="168" rx="9" fill="#0b2a34"/>
-      <rect x="112" y="262" width="6" height="168" fill="#22d3ee"/>
-    </g>
-    <text x="152" y="364" font-size="32" fill="#94a3b8">vector databases</text>
-    <text x="1058" y="386" text-anchor="end" font-size="128" font-weight="800" letter-spacing="-4" fill="#67e8f9" filter="url(#cbGlow)">0</text>
+    <text x="118" y="478" font-size="126" font-weight="800" letter-spacing="-4" fill="#67e8f9" filter="url(#cbGlow)">0<tspan font-size="46" font-weight="700" fill="#7f93aa"> vector databases</tspan></text>
 
-    <text x="152" y="500" font-size="23" fill="#22d3ee" opacity=".9">&#9650;  no chunking, no embeddings, no index</text>
+    <text x="120" y="524" font-size="22" fill="#7fe4f4">no index to drift &#8212; but an eval still caught a bad source file</text>
 
-    <text x="118" y="576" font-size="25" fill="#3f4d63">$</text>
-    <rect x="150" y="554" width="16" height="30" fill="#22d3ee"><animate attributeName="opacity" values="1;1;0;0" dur="1.15s" repeatCount="indefinite"/></rect>
-
-    <text x="118" y="640" font-size="20" fill="#36445a"># an eval still caught a wrong answer &#8212; bad source file, not the model</text>
+    <text x="120" y="600" font-size="18" fill="#33424f"># the whole portfolio ships as one structured file, every request</text>
   </g>
 </svg>

@@ -1,37 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="jf-t jf-d">
-  <title id="jf-t">Job-Fit Scorer — 21 postings scored in a week, 2 worth applying to</title>
-  <desc id="jf-d">A LangGraph pipeline that scores a job posting against an evidence document of what the candidate has actually built, calibrated to say no as readily as yes. In one real week a cheap pre-filter dropped 63 postings before an LLM saw them; 21 reached scoring and 2 were worth applying to. The other 19 had their recurring blockers logged so the rejections double as a study list. Every run traced in Langfuse.</desc>
+  <title id="jf-t">Job-Fit Scorer — one real week: 21 postings scored, 2 worth applying to</title>
+  <desc id="jf-d">A LangGraph pipeline scores job postings against an evidence document of what the candidate has actually built, tuned to say no as readily as yes. In one real week 21 postings reached the scorer; 2 were flagged apply or referral-first and 19 were skipped, shown as a split bar. The most common blocker — Spark and distributed computing — hit 7 of the 21. Every rejection logs its reason.</desc>
   <defs>
-    <linearGradient id="jfBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#0a1220"/></linearGradient>
+    <linearGradient id="jfBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#08160f"/></linearGradient>
     <pattern id="jfScan" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="1" fill="#ffffff" opacity="0.02"/></pattern>
-    <filter id="jfGlow" x="-50%" y="-80%" width="200%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="jfBand" x="-15%" y="-70%" width="130%" height="240%"><feGaussianBlur stdDeviation="16" result="b"/><feComponentTransfer in="b" result="bt"><feFuncA type="linear" slope="0.30"/></feComponentTransfer><feMerge><feMergeNode in="bt"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="jfGlow" x="-60%" y="-80%" width="220%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
   <rect width="1200" height="720" fill="url(#jfBg)"/>
   <rect width="1200" height="720" fill="url(#jfScan)"/>
   <g font-family="'SF Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'Liberation Mono',monospace">
-    <circle cx="112" cy="50" r="8" fill="#2b3a4f"/><circle cx="140" cy="50" r="8" fill="#2b3a4f"/><circle cx="168" cy="50" r="8" fill="#2b3a4f"/>
-    <text x="1112" y="57" text-anchor="end" font-size="19" fill="#3b485d" letter-spacing="0.5">mac-mini : jobfit</text>
-    <line x1="72" y1="82" x2="1128" y2="82" stroke="#161f2e" stroke-width="1"/>
+    <text x="118" y="58" font-size="20" letter-spacing="2.5" fill="#5f9a80">SCORING &#183; ONE REAL WEEK (2026-W30)</text>
+    <text x="1082" y="58" text-anchor="end" font-size="19" fill="#3c4d44">mac-mini : jobfit</text>
+    <line x1="118" y1="82" x2="1082" y2="82" stroke="#143a2c" stroke-width="1"/>
 
-    <text x="118" y="150" font-size="25" fill="#3f4d63">$</text>
-    <text x="150" y="150" font-size="25" fill="#f1f5f9">jobfit <tspan fill="#67e8f9">score</tspan> <tspan fill="#7c8aa3">--week</tspan> <tspan fill="#cbd5e1">2026-08-18</tspan></text>
+    <text x="120" y="150" font-size="23" fill="#8fb3a4">21 postings reached the scorer. It is tuned to say no.</text>
 
-    <text x="150" y="200" font-size="22" fill="#6b7c94">pre-filter dropped 63 postings before an LLM saw them</text>
-    <text x="150" y="236" font-size="22" fill="#6b7c94">21 reached scoring against the evidence doc</text>
+    <rect x="118" y="188" width="964" height="62" rx="8" fill="#1a4536"/>
+    <rect x="118" y="188" width="92" height="62" rx="8" fill="#34d399"/>
+    <text x="122" y="300" font-size="21" fill="#6ee7b7">2 apply / referral</text>
+    <text x="560" y="300" font-size="21" fill="#6f9284">19 skipped</text>
 
-    <g filter="url(#jfBand)">
-      <rect x="112" y="262" width="988" height="168" rx="9" fill="#0b2a34"/>
-      <rect x="112" y="262" width="6" height="168" fill="#22d3ee"/>
-    </g>
-    <text x="152" y="364" font-size="32" fill="#94a3b8">worth applying to</text>
-    <text x="1058" y="384" text-anchor="end" font-size="116" font-weight="800" letter-spacing="-4" fill="#67e8f9" filter="url(#jfGlow)">2<tspan font-size="52" font-weight="700" fill="#8fa3bd"> / 21</tspan></text>
+    <text x="118" y="470" font-size="120" font-weight="800" letter-spacing="-4" fill="#6ee7b7" filter="url(#jfGlow)">2<tspan font-size="46" font-weight="700" fill="#5f7a6f"> / 21 apply</tspan></text>
 
-    <text x="152" y="500" font-size="23" fill="#22d3ee" opacity=".9">&#9650;  19 no's, each with a logged reason</text>
+    <text x="120" y="518" font-size="22" fill="#7fd8b8">every no logs its reason &#8212; the rejections double as a study list</text>
 
-    <text x="118" y="576" font-size="25" fill="#3f4d63">$</text>
-    <rect x="150" y="554" width="16" height="30" fill="#22d3ee"><animate attributeName="opacity" values="1;1;0;0" dur="1.15s" repeatCount="indefinite"/></rect>
-
-    <text x="118" y="640" font-size="20" fill="#36445a"># calibrated to say no &#183; every run traced in Langfuse</text>
+    <text x="120" y="600" font-size="18" fill="#37564a"># top blocker: Spark / distributed computing &#8212; 7 of 21 postings</text>
   </g>
 </svg>

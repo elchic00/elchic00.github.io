@@ -1,37 +1,33 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="hm-t hm-d">
-  <title id="hm-t">Hermes — weekly self-improvement run: 3 prompt edits proposed, 2 merged</title>
-  <desc id="hm-d">A weekly cron clustered 11 low-scoring conversation turns from 30 days of traces and drafted 3 edits to the agent's own system prompt. After review, 2 were merged and 1 was rejected in Telegram as a bad fit for cron-only deliveries. Nightly Langfuse evals build the material; nothing touches the live prompt without approval.</desc>
+  <title id="hm-t">Hermes — I graded my own eval judge: it caught 2 of 5 real failures, kappa 0.05</title>
+  <desc id="hm-d">A nightly LLM judge scores every turn the agent takes. Graded against 63 traces with blind reference labels from Opus 5, the judge caught 2 of 5 genuine failures and flagged 13 of 58 clean turns as failures — Cohen's kappa 0.05, near chance. The score is on hold as a quality metric; the human approval gate in Telegram carries the load.</desc>
   <defs>
-    <linearGradient id="hmBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#0a1220"/></linearGradient>
+    <linearGradient id="hmBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#0c0a1e"/></linearGradient>
     <pattern id="hmScan" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="1" fill="#ffffff" opacity="0.02"/></pattern>
-    <filter id="hmGlow" x="-50%" y="-80%" width="200%" height="260%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-    <filter id="hmBand" x="-15%" y="-70%" width="130%" height="240%"><feGaussianBlur stdDeviation="16" result="b"/><feComponentTransfer in="b" result="bt"><feFuncA type="linear" slope="0.30"/></feComponentTransfer><feMerge><feMergeNode in="bt"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="hmGlow" x="-60%" y="-80%" width="220%" height="260%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
   <rect width="1200" height="720" fill="url(#hmBg)"/>
   <rect width="1200" height="720" fill="url(#hmScan)"/>
   <g font-family="'SF Mono','SFMono-Regular',ui-monospace,Menlo,Consolas,'Liberation Mono',monospace">
-    <circle cx="112" cy="50" r="8" fill="#2b3a4f"/><circle cx="140" cy="50" r="8" fill="#2b3a4f"/><circle cx="168" cy="50" r="8" fill="#2b3a4f"/>
-    <text x="1112" y="57" text-anchor="end" font-size="19" fill="#3b485d" letter-spacing="0.5">mac-mini : hermes-cron</text>
-    <line x1="72" y1="82" x2="1128" y2="82" stroke="#161f2e" stroke-width="1"/>
+    <text x="118" y="58" font-size="20" letter-spacing="2.5" fill="#8878b8">JUDGE CALIBRATION &#183; vs OPUS-5 LABELS</text>
+    <text x="1082" y="58" text-anchor="end" font-size="19" fill="#403a5c">hermes-agent</text>
+    <line x1="118" y1="82" x2="1082" y2="82" stroke="#211c3d" stroke-width="1"/>
 
-    <text x="118" y="150" font-size="25" fill="#3f4d63">$</text>
-    <text x="150" y="150" font-size="25" fill="#f1f5f9">hermes <tspan fill="#67e8f9">self-improve</tspan> <tspan fill="#7c8aa3">--week</tspan></text>
+    <text x="120" y="138" font-size="23" fill="#9a9ab8">I built a judge to score the agent.</text>
+    <text x="120" y="174" font-size="23" fill="#9a9ab8">Then I graded the judge &#8212; 63 traces, blind labels.</text>
 
-    <text x="150" y="200" font-size="22" fill="#6b7c94">clustered 11 low-scoring turns from 30 days of traces</text>
-    <text x="150" y="236" font-size="22" fill="#6b7c94">&#8594; drafted 3 edits to the system prompt</text>
+    <text x="120" y="252" font-size="21" fill="#7a7a9c">genuine failures it should have flagged</text>
+    <rect x="120" y="268" width="86" height="64" rx="7" fill="#a78bfa"/>
+    <rect x="222" y="268" width="86" height="64" rx="7" fill="#a78bfa"/>
+    <rect x="324" y="268" width="86" height="64" rx="7" fill="none" stroke="#4c4470" stroke-width="2.5"/>
+    <rect x="426" y="268" width="86" height="64" rx="7" fill="none" stroke="#4c4470" stroke-width="2.5"/>
+    <rect x="528" y="268" width="86" height="64" rx="7" fill="none" stroke="#4c4470" stroke-width="2.5"/>
+    <text x="644" y="309" font-size="26" fill="#c4b5fd">caught 2 of 5</text>
 
-    <g filter="url(#hmBand)">
-      <rect x="112" y="262" width="988" height="168" rx="9" fill="#0b2a34"/>
-      <rect x="112" y="262" width="6" height="168" fill="#22d3ee"/>
-    </g>
-    <text x="152" y="364" font-size="32" fill="#94a3b8">merged after review</text>
-    <text x="1058" y="384" text-anchor="end" font-size="116" font-weight="800" letter-spacing="-4" fill="#67e8f9" filter="url(#hmGlow)">2<tspan font-size="52" font-weight="700" fill="#8fa3bd"> / 3</tspan></text>
+    <text x="118" y="452" font-size="112" font-weight="800" letter-spacing="-3" fill="#a78bfa" filter="url(#hmGlow)">&#954; 0.05<tspan font-size="40" font-weight="700" fill="#6a6a8c">  near chance</tspan></text>
 
-    <text x="152" y="500" font-size="23" fill="#22d3ee" opacity=".9">&#9650;  1 rejected in Telegram &#8212; nothing auto-applies</text>
+    <text x="120" y="502" font-size="22" fill="#b3a0e8">the score is on hold &#8212; the Telegram approval gate carries the load</text>
 
-    <text x="118" y="576" font-size="25" fill="#3f4d63">$</text>
-    <rect x="150" y="554" width="16" height="30" fill="#22d3ee"><animate attributeName="opacity" values="1;1;0;0" dur="1.15s" repeatCount="indefinite"/></rect>
-
-    <text x="118" y="640" font-size="20" fill="#36445a"># nightly Langfuse evals build the material</text>
+    <text x="120" y="596" font-size="18" fill="#4a4568"># it also flagged 13 of 58 clean turns &#183; recalibrating with fresh labels</text>
   </g>
 </svg>

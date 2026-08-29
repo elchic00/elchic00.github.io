@@ -101,7 +101,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
             loading={index < 2 ? "eager" : "lazy"}
           />
         )}
-        <div className="absolute bottom-0 left-0 right-0 h-9 bg-gradient-to-b from-transparent to-slate-900 z-10" />
+        <div className="absolute bottom-0 left-0 right-0 h-4 bg-gradient-to-b from-transparent to-slate-950/60 z-10" />
       </div>
 
       <div className="bg-slate-900 flex flex-col flex-grow p-5 justify-between">
