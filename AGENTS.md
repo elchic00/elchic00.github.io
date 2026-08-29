@@ -90,19 +90,22 @@ Before finishing:
 
 ## Scoped Rules and References
 
-Detailed per-area rules live in `.claude/rules/`. Claude Code auto-loads them by path; other agents should read the relevant file before working in that area:
+Detailed per-area rules live in `.claude/rules/`. Claude Code auto-loads a rule when it reads a file the rule's `paths:` frontmatter matches (`documentation.md` has no `paths:`, so it loads every session); other agents should read the relevant file before working in that area:
 
-- `.claude/rules/frontend.md`
-- `.claude/rules/worker.md`
-- `.claude/rules/travel.md`
-- `.claude/rules/documentation.md`
+- `.claude/rules/frontend.md` — `src/**` TypeScript, React, CSS, and structured data
+- `.claude/rules/worker.md` — `worker/**`, `src/data/context/**`, project knowledge, sync script
+- `.claude/rules/travel.md` — travel components, `trips.json`, travel images and tests
+- `.claude/rules/documentation.md` — any `.md` change
 
-Repository references:
+Repository references (read the one that matches the task; treat the code as the final authority if a doc disagrees):
 
-- `docs/ARCHITECTURE.md`
-- `docs/AI_CHAT.md`
-- `docs/COMPONENTS.md`
-- `docs/HOOKS.md`
-- `docs/IMAGE_OPTIMIZATION.md`
-- `docs/AI-CONTEXT-IMPLEMENTATION.md`
-- `docs/DOCUMENTATION_AUDIT.md`
+- `docs/ARCHITECTURE.md` — surfaces, source-of-truth map, request flow, build/deploy
+- `docs/AI_CHAT.md` — chat setup, context sources, deployment, troubleshooting
+- `docs/COMPONENTS.md` — shared component behavior and patterns
+- `docs/HOOKS.md` — custom hook APIs and usage
+- `docs/IMAGE_OPTIMIZATION.md` — image pipeline and `npm run optimize-images`
+- `docs/AI-CONTEXT-IMPLEMENTATION.md` — why the chat uses full-context prompting instead of retrieval
+
+## Keeping This Guide Accurate
+
+These instruction files are only useful while they match the code. When you work in an area and find that `AGENTS.md`, `CLAUDE.md`, a `.claude/rules/` file, or a `docs/` file is wrong, stale, or contradicts what you just saw (renamed path, removed file, changed behavior, hardcoded count that has drifted), fix it in the same change. If the correction is genuinely outside the current scope, note it in your summary instead of leaving it silently wrong. Prefer pointing at a source file over restating a volatile value.

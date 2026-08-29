@@ -12,6 +12,7 @@
 # production
 /build
 /dist
+build-old-*/
 
 # Vite
 .vite
@@ -54,6 +55,9 @@ scripts/generate-favicon.html
 .vscode/settings.json
 *.swp
 *.swo
+
+# Tooling caches
+.serena/
 
 # Local Claude project context
 /CLAUDE.local.md

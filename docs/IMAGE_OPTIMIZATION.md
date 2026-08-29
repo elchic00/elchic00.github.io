@@ -195,21 +195,22 @@ import Image from 'next/image';
 
 Update these components to use optimized images:
 
-- [ ] `src/components/Travel.jsx` - Update all photo URLs
-- [ ] `src/components/Projects.jsx` - Update project images
-- [ ] `src/content.js` - Update image paths in trips array
+- [ ] `src/data/structured/trips.json` - travel photo URLs, alt text, and captions
+- [ ] `src/data/structured/projects.json` - project card media (files live under `public/images/projects/`)
 
-### Example Update for Travel.jsx:
+### Example Update for trips.json:
 
 **Before:**
-```javascript
-url: "/images/travel/andrew-alagna-turtle-friend.jpeg"
+```json
+"url": "/images/travel/costa-rica/turtle-friend.jpeg"
 ```
 
 **After:**
-```javascript
-url: "/images/travel/optimized/andrew-alagna-turtle-friend.webp"
+```json
+"url": "/images/travel/costa-rica/turtle-friend.webp"
 ```
+
+Optimized WebP photos live under `public/images/travel/<trip-folder>/`.
 
 ---
 

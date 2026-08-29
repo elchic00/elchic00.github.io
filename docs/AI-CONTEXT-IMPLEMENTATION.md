@@ -1,6 +1,6 @@
 # AI Context Implementation Summary
 
-The portfolio chat uses a small, structured prompt context rather than a retrieval pipeline. The five project records fit comfortably in the request alongside the portfolio context, so the Cloudflare Worker sends the complete reference sheet to Gemini on every request.
+The portfolio chat uses a small, structured prompt context rather than a retrieval pipeline. The project records (see `public/knowledge/projects.json` for the current set) fit comfortably in the request alongside the portfolio context, so the Cloudflare Worker sends the complete reference sheet to Gemini on every request.
 
 ## Why this design fits
 

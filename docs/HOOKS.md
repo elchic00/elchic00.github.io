@@ -1,16 +1,17 @@
 # 🪝 Custom React Hooks Documentation
 
-This portfolio uses **11 custom React hooks** to encapsulate complex logic and promote code reusability. All hooks are fully typed with TypeScript and include JSDoc documentation.
+This portfolio uses custom React hooks to encapsulate complex logic and promote code reusability. All hooks are fully typed with TypeScript and include JSDoc documentation. `src/hooks/` and its `index.ts` re-exports are the source of truth for what exists.
 
 ## 📁 Location
 
 ```
 src/hooks/
-├── index.ts              # 7 general-purpose hooks
+├── index.ts              # general-purpose hooks + re-exports of the feature hooks below
 ├── useSnakeGame.ts       # Snake game logic
 ├── useActiveTrip.ts      # Travel gallery navigation
 ├── useContactForm.ts     # Contact form management
-└── usePageTracking.ts    # Analytics tracking
+├── usePageTracking.ts    # Analytics tracking
+└── usePrefetchRoutes.ts  # Warms lazy-route chunks when the browser is idle
 ```
 
 ---
@@ -571,23 +572,22 @@ export const useMyHook = (param1: string, param2: number) => {
 
 ## Summary
 
-This portfolio demonstrates advanced React patterns through **11 custom hooks**:
+This portfolio demonstrates advanced React patterns through its custom hooks:
 
-| Hook               | Lines   | Complexity    | Purpose               |
-| ------------------ | ------- | ------------- | --------------------- |
-| useLocalStorage    | ~35     | Low           | State persistence     |
-| useClickOutside    | ~25     | Low           | Click detection       |
-| useDebounce        | ~15     | Low           | Value debouncing      |
-| useWindowSize      | ~40     | Medium        | Responsive tracking   |
-| useFormValidation  | ~95     | High          | Form management       |
-| useAsync           | ~45     | Medium        | Async operations      |
-| useScrollReveal    | ~35     | Medium        | Scroll animations     |
-| **useSnakeGame**   | **308** | **Very High** | Game logic            |
-| useActiveTrip      | ~75     | Medium        | Navigation tracking   |
-| **useContactForm** | **300** | **Very High** | Form + email + drafts |
-| usePageTracking    | ~30     | Low           | GA4 integration       |
-
-**Total:** ~1000+ lines of reusable, tested, documented hook code!
+| Hook               | Complexity    | Purpose               |
+| ------------------ | ------------- | --------------------- |
+| useLocalStorage    | Low           | State persistence     |
+| useClickOutside    | Low           | Click detection       |
+| useDebounce        | Low           | Value debouncing      |
+| useWindowSize      | Medium        | Responsive tracking   |
+| useFormValidation  | High          | Form management       |
+| useAsync           | Medium        | Async operations      |
+| useScrollReveal    | Medium        | Scroll animations     |
+| **useSnakeGame**   | **Very High** | Game logic            |
+| useActiveTrip      | Medium        | Navigation tracking   |
+| **useContactForm** | **Very High** | Form + email + drafts |
+| usePageTracking    | Low           | GA4 integration       |
+| usePrefetchRoutes  | Low           | Lazy-route prefetch   |
 
 **Note:** `useContactForm` internally implements validation and async patterns, but these are encapsulated within the hook rather than exposed as separate utilities.
 

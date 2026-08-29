@@ -18,7 +18,7 @@ Your portfolio features a free, high-quality AI chat assistant powered by **Goog
 - ✅ Rate limiting prevents abuse (5 req/min per IP)
 - ✅ Free tier: 1,500 requests/day (Gemini) + 100K requests/day (Cloudflare)
 - ✅ Serverless - no backend maintenance
-- ✅ Complete structured project context on every request; the six-record corpus does not need retrieval or a vector database
+- ✅ Complete structured project context on every request; the small corpus does not need retrieval or a vector database
 
 ---
 
@@ -247,7 +247,7 @@ export const SUGGESTED_QUESTIONS = [
 
 ### Update AI Personality
 
-Edit the system prompt in [portfolioContext.ts](../src/data/portfolioContext.ts):
+Edit the system prompt in [systemPrompt.ts](../src/data/context/systemPrompt.ts):
 
 ```typescript
 # Instructions for Responses
@@ -310,7 +310,7 @@ npx wrangler secret list
 
 ### Context Out of Sync
 
-If you updated [portfolioContext.ts](../src/data/portfolioContext.ts) but worker has old data:
+If you updated the context sources in [src/data/context/](../src/data/context/) but the worker has old data:
 
 ```bash
 npm run sync-context
@@ -370,7 +370,7 @@ npm start
 
 **1. Update Portfolio Context:**
 ```bash
-# Edit src/data/portfolioContext.ts
+# Edit the context sources in src/data/context/ (systemPrompt.ts, biography.ts, skills.ts)
 npm run sync-context
 npm run worker:deploy
 ```
@@ -406,7 +406,7 @@ npm run worker:deploy
 
 ### 1. Keep Context Updated
 
-Update [portfolioContext.ts](../src/data/portfolioContext.ts) when you:
+Update the context sources in [src/data/context/](../src/data/context/) when you:
 - Add new projects
 - Update work experience
 - Change skills

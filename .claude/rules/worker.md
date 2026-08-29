@@ -10,7 +10,7 @@ paths:
 # Worker and AI Context Rules
 
 - The frontend POSTs chat requests to the Worker at `/api/chat`; the Worker owns CORS, method and payload validation, rate limiting, context selection, and the Gemini request.
-- `public/knowledge/projects.json` supplies deterministic keyword retrieval. Keep retrieval behavior deterministic unless the task explicitly changes the architecture.
+- `public/knowledge/projects.json` is the complete project reference sheet. The Worker sends every record on every request; there is no retrieval, ranking, or keyword filtering. Do not add one unless the task explicitly changes the architecture.
 - Source context lives in `src/data/context/systemPrompt.ts`, `biography.ts`, and `skills.ts`.
 - `worker/index.js` contains both handwritten Worker logic and generated context. Edit handwritten logic when required, but never hand-edit synchronized context.
 - After changing AI context or project knowledge, run `npm run sync-context`, inspect the generated `worker/index.js` diff, and run `npm run build`.

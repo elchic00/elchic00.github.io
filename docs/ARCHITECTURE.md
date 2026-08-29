@@ -48,7 +48,7 @@ AI data:
 5. The Worker injects synchronized portfolio context, recent conversation history, and the complete compact project reference sheet.
 6. The Worker returns a JSON response or a structured error.
 
-The project corpus currently contains five concise records, so the Worker sends all of them rather than ranking a partial subset. This keeps follow-up questions grounded and makes the behavior auditable without a vector database or retrieval layer. Only response generation requires the external model API.
+The project corpus is a handful of concise records, so the Worker sends all of them rather than ranking a partial subset. This keeps follow-up questions grounded and makes the behavior auditable without a vector database or retrieval layer. Only response generation requires the external model API. `public/knowledge/projects.json` is the source of truth for the count.
 
 ## Context Synchronization
 

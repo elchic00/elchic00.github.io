@@ -1,6 +1,6 @@
 # 🧩 Shared Components Documentation
 
-This portfolio uses **10 reusable shared components** to maintain consistency and reduce code duplication. All components are fully typed with TypeScript and follow React best practices.
+This portfolio keeps shared UI in `src/components/shared/` to maintain consistency and reduce code duplication. All components are fully typed with TypeScript and follow React best practices. The directory listing below is the source of truth for what exists.
 
 ## 📁 Location
 
@@ -12,6 +12,7 @@ src/components/shared/
 ├── ImageWithLoader.tsx # Image component with skeleton loader + lazy loading
 ├── Modal.tsx           # Base modal with Portal rendering
 ├── MonogramLogo.tsx    # Brand logo SVG component
+├── ProjectModal.tsx    # Featured-systems detail modal
 ├── ScrollToTopButton.tsx # Floating scroll-to-top button
 ├── SocialLinks.tsx     # Social media links
 ├── ToastContainer.tsx  # Toast notification container
@@ -568,7 +569,7 @@ const MyComponent = () => {
 
 ## Summary
 
-The shared components library provides **8 reusable, accessible components** that maintain consistency across the portfolio:
+The shared components library maintains consistency across the portfolio. A sample of the most-reused pieces:
 
 | Component | Purpose | Lines | Key Feature |
 |-----------|---------|-------|-------------|
