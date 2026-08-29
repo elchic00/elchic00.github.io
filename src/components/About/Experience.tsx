@@ -60,9 +60,9 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
         </div>
 
         <div className="flex-grow">
-          <h4 className="text-2xl md:text-3xl font-bold text-white mb-1">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">
             {role}
-          </h4>
+          </h3>
           <p
             className={`text-lg md:text-xl font-semibold mb-1 ${
               isWork ? "text-cyan-400" : "text-purple-400"
