@@ -122,7 +122,7 @@ const PiCloudCaseStudy = () => (
 
     <Section title="It's also backend infrastructure, not just my services">
       <p>
-        Two of these aren't only mine — they're dependencies of an always-on agent.{" "}
+        Three of these were stood up as backends for an always-on agent, not for me.{" "}
         <strong>SearXNG</strong> is Hermes's default search backend, so every web lookup the
         agent makes resolves through the Pi instead of a search API. <strong>Crawl4AI</strong>{" "}
         does full-page extraction behind a bearer token: submit a URL, poll for the result.{" "}
@@ -133,11 +133,13 @@ const PiCloudCaseStudy = () => (
       </p>
       <p>
         That raises the reliability bar in a specific way. A personal service that's down is an
-        annoyance I discover when I go to use it. A service an unattended agent calls at 2am fails
-        silently — the agent gets an empty result and carries on as if it had searched, and I only
-        find out later from the traces. It's also the reason nothing in the agent's retrieval path calls a
-        paid API for search, embeddings, or page extraction: that path terminates on hardware I
-        own, on a LAN, at no marginal cost per call.
+        annoyance I hit when I go to use it, and only I'm affected. A backend an unattended agent
+        depends on sits in the path of every lookup and extraction it runs, at hours I'm not
+        watching — so the same outage takes out a whole run's work, and I'm reading about it in
+        the trace or the run summary after the fact instead of catching it live. It's also the
+        reason nothing in the agent's retrieval path calls a paid API for search, embeddings, or
+        page extraction: that path terminates on hardware I own, on a LAN, at no marginal cost
+        per call.
       </p>
     </Section>
 
