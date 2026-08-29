@@ -95,7 +95,7 @@ export const About = () => {
           <picture className="relative block h-full w-full">
             <source
               srcSet="/images/profile-320.webp 320w, /images/profile-460.webp 460w, /images/profile-640.webp 640w, /images/profile-920.webp 920w"
-              sizes="(max-width: 640px) 80vw, 320px"
+              sizes="(max-width: 400px) 80vw, 320px"
               type="image/webp"
             />
             <img
