@@ -34,6 +34,9 @@ export interface NavItem {
   icon: IconComponent;
   iconBg: string;
   type: NavItemType;
+  // Kept in the mobile menu for casual exploration, hidden from the desktop
+  // top bar so the recruiter-facing nav stays focused.
+  desktopHidden?: boolean;
 }
 
 // Single source of truth for all navigation items
@@ -79,6 +82,7 @@ export const NAV_ITEMS: NavItem[] = [
     icon: PuzzleIcon,
     iconBg: "bg-green-500/20 text-green-400",
     type: "route",
+    desktopHidden: true,
   },
   {
     name: "Resume",
