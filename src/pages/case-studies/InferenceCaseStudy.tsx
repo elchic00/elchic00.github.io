@@ -229,11 +229,11 @@ const InferenceCaseStudy = () => (
         A 128GB unified memory architecture is flexible, but it defines a
         physical budget, and every model on the box draws from it. When I
         retired the 35B MoE model in August 2026 and made Qwen 3.8 27B the
-        sole primary, the RAM it freed went to the 27B itself — a third
-        parallel slot and 196k of context each, instead of a second, faster
-        MoE sitting alongside it. That was a deliberate trade: one dense model
-        with deep context and concurrency over two models that each had less
-        headroom.
+        sole primary, the RAM it freed went to the 27B itself — two parallel
+        slots at the model's full 262k native context each, plus burst
+        headroom, instead of a second, faster MoE sitting alongside it. That
+        was a deliberate trade: one dense model with deep context over two
+        models that each had less headroom.
       </p>
       <p>
         The cost of that trade is the fallback chain. With no second local text
