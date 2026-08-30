@@ -319,7 +319,7 @@ export const AIChatAssistant = () => {
     <>
       <style>{`@keyframes ai-glow-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0), 0 0 16px 4px rgba(34, 211, 238, 0.25), 0 0 32px 8px rgba(147, 51, 234, 0.15); } 50% { box-shadow: 0 0 0 6px rgba(34, 211, 238, 0.08), 0 0 24px 8px rgba(34, 211, 238, 0.35), 0 0 48px 16px rgba(147, 51, 234, 0.2); } } @keyframes ai-label-fade-in { from { opacity: 0; transform: translateX(6px); } to { opacity: 1; transform: translateX(0); } } @keyframes ai-label-fade-out { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(6px); } } .ai-chat-btn-glow { animation: ai-glow-pulse 2.8s ease-in-out infinite; } .ai-chat-btn-glow:hover { animation: none; box-shadow: 0 0 0 0 rgba(34, 211, 238, 0), 0 0 28px 10px rgba(34, 211, 238, 0.4), 0 0 56px 20px rgba(147, 51, 234, 0.25); } .ai-label-auto-show { animation: ai-label-fade-in 0.35s ease forwards; } .ai-label-auto-hide { animation: ai-label-fade-out 0.4s ease forwards; }`}</style>
       <div
-        className={`fixed bottom-24 right-6 z-50 transition-opacity duration-300 ${
+        className={`fixed bottom-6 right-4 z-50 transition-opacity duration-300 md:bottom-24 md:right-6 ${
           isOpen ? "md:block hidden" : "block"
         } ${
           !isOpen && shouldHideMobileToggle
@@ -345,7 +345,7 @@ export const AIChatAssistant = () => {
         <button
           ref={toggleButtonRef}
           onClick={handleToggle}
-          className={`group relative p-4 rounded-full shadow-lg transition-all duration-300 focus-ring focus:ring-offset-2 focus:ring-offset-slate-900 ${
+          className={`group relative p-3.5 md:p-4 rounded-full shadow-lg transition-all duration-300 focus-ring focus:ring-offset-2 focus:ring-offset-slate-900 ${
             isOpen
               ? "bg-slate-700 hover:bg-slate-600"
               : "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 hover:scale-110 ai-chat-btn-glow"
