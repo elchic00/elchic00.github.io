@@ -237,7 +237,7 @@ export const Experience = () => {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-8">
           {mentorshipExperience.map((exp, idx) => (
             <ExperienceItem
               key={idx}
