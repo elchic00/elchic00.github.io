@@ -23,7 +23,6 @@ const InferenceCaseStudy = () => (
       "Systemd",
       "Qwen 3.8 27B",
       "Qwen3-VL",
-      "WhisperX",
       "Langfuse",
     ]}
   >
@@ -48,25 +47,26 @@ const InferenceCaseStudy = () => (
         Standardizing solely on <strong>Qwen 3.8 27B</strong> as the primary
         text backbone provides strong reasoning capability and reliable
         tool-calling while keeping memory utilization optimized. This leaves
-        enough VRAM for parallel text slots, a resident vision model (Qwen3-VL),
-        and a speech-to-text pipeline (WhisperX). Getting there meant patching
-        and building the serving engine from source (<code>GGML_HIP=ON</code>,{" "}
+        enough VRAM for parallel text slots and a resident vision model
+        (Qwen3-VL). Getting there meant patching and building the serving engine
+        from source (<code>GGML_HIP=ON</code>,{" "}
         <code>AMDGPU_TARGETS=gfx1151</code>) behind a LiteLLM router that
         handles failover to cloud fallbacks when required.
       </p>
-    </Section>
-
-    <Callout title="Two whisper paths, not one">
       <p>
-        WhisperX on this box isn't what Hermes uses to hear a voice message sent straight to it —
-        that goes through a separate, in-process <code>faster-whisper</code> model inside the
-        agent gateway itself, no network hop required. WhisperX is reserved for the heavier job:
-        the iPhone-shortcut note pipeline, where a recording gets transcribed with speaker
-        diarization and turned into an Obsidian note before anything reaches Telegram. Splitting
-        them keeps a live conversation's turnaround independent of a model that might also be
-        diarizing a long, multi-speaker recording in the background.
+        The build is a patched fork of a fast-moving upstream, so a standing
+        weekly check diffs the local patches against new upstream commits before
+        any rebase — treating the fork as a maintenance liability, not a
+        one-time hack. One run cleared a rebase as safe in advance (six commits
+        touched a patched file, none on the patched lines) and found two of the
+        four tracked patches had gone dead and could be dropped.
       </p>
-    </Callout>
+      <Figure
+        src="/images/case-studies/inference-grafana.webp"
+        alt="Grafana dashboard showing 7-day inference metrics"
+        caption="Live Grafana telemetry across a 7-day window. The panels monitor real-time token generation rates across parallel Qwen 3.8 27B slots alongside unified VRAM allocation, thermals, and request queue depths."
+      />
+    </Section>
 
     <Section title="The Hardware Problem: An Allocator Bug Disguised as a VRAM Limit">
       <p>
@@ -123,32 +123,43 @@ const InferenceCaseStudy = () => (
     <Callout title="The Regression That Wasn't What It Looked Like">
       <p>
         Hours after a routine 132-commit upstream rebase, the text backend
-        started emitting fake tool-call JSON as plain text. A controlled A/B
-        test reproduced it cleanly: the fresh build hallucinated tool calls
-        while the pre-rebase binary ran 28 tool calls cleanly. Because templates
-        and schemas were unchanged, the rebase appeared to be the sole culprit,
-        prompting a temporary commit pin.
+        started emitting fake tool-call JSON as plain text instead of structured{" "}
+        <code>tool_calls</code>. A controlled A/B test looked conclusive: the
+        fresh build hallucinated tool calls while the pre-rebase binary ran 28
+        cleanly. Templates, flags, and schemas were all unchanged, so the rebase
+        looked like the only thing that could have broken it. I pinned the
+        affected services back to the old binary and kept investigating rather
+        than calling it closed.
       </p>
       <p>
-        A git bisect narrowed it to one specific upstream commit — a
-        capability-probe change that looked like it was leaking a
-        DeepSeek-specific flag into unrelated chat templates — and I filed it
-        with the full bisect evidence (
+        Digging through the 132 commits, I filed a bisected capability-probe
+        theory upstream with evidence (
         <a href="https://github.com/ggml-org/llama.cpp/issues/26781" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#26781</a>
-        ).
-        A maintainer read the flagged code path closer than I had and refuted
-        it within days: the variable never actually reached the prompt that
-        broke. Back to an open question.
+        ) — and a maintainer refuted it within days, reading the code path closer
+        than I had. What actually fit was a different discussion entirely:
+        maintainers describing this exact symptom as a structural consequence of
+        the interleaved-thinking chat template when a client fails to echo{" "}
+        <code>reasoning_content</code> back on a tool-call replay turn. The bug
+        had never really been bisected to a commit at all. The root cause was in
+        my own code — an internal
+        whitelist in <code>run_agent.py</code> that decides which model families
+        need <code>reasoning_content</code> echoed back, and had never been
+        updated for Qwen. Every replay call was silently stripping it, so the
+        template rendered an empty <code>&lt;think&gt;&lt;/think&gt;</code> block
+        on every turn after the first.
       </p>
       <p>
-        A week later, upstream discussions revealed that this specific
-        hallucination occurs when a client fails to echo{" "}
-        <code>reasoning_content</code> back during a multi-turn tool replay. The
-        root cause was in my agent framework: an internal whitelist in{" "}
-        <code>run_agent.py</code> had omitted the new model family. Treating the
-        binary pin as a temporary workaround rather than a closed issue made it
-        easy to overturn the initial assumption once the evidence pointed back
-        to client-side code.
+        The client-side fix was one function, verified two ways — instrumenting
+        the live call path to watch <code>reasoning_content</code> grow turn
+        over turn, and a forced multi-turn tool-calling test with zero
+        fabrications. It was necessary but not sufficient: a later A/B run
+        directly against the old pinned binary, on the real captured failing
+        payload, reproduced the fabrication just as deterministically — proving
+        the rebase was never the cause on either build. The underlying failure
+        is a model- and template-layer issue that persists on every build at a
+        residual ~2.5–3.3% rate, mitigated at the prompt layer rather than
+        eliminated. Knowing exactly where I still don't have full control is
+        worth more than a clean-sounding resolution.
       </p>
     </Callout>
 
@@ -174,45 +185,6 @@ const InferenceCaseStudy = () => (
       </p>
     </Callout>
 
-    <Section title="Eval Loops & Autonomous Feedback">
-      <p>
-        Patched dependencies are audited alongside agent performance. A weekly
-        automated check diffs local source patches against upstream changes
-        before rebasing, ensuring patch compatibility in advance and stripping
-        obsolete modifications.
-      </p>
-      <p>
-        The evaluation pipeline previously suffered from self-preference bias
-        when evaluating model outputs. Pointing evaluation tasks to a distinct
-        model configuration broke the self-grading feedback loop, providing
-        objective error detection for agent reasoning traces without introducing
-        cloud API costs.
-      </p>
-      <Figure
-        src="/images/case-studies/inference-grafana.webp"
-        alt="Grafana dashboard showing 7-day inference metrics"
-        caption="Live Grafana telemetry across a 7-day window. The panels monitor real-time token generation rates across parallel Qwen 3.8 27B slots alongside unified VRAM allocation, thermals, and request queue depths."
-      />
-    </Section>
-
-    <Callout title="The Alert That Fired Because Inference Was Working">
-      <p>
-        Grafana began triggering critical <code>target down</code> alerts during
-        heavy inference loads despite services functioning normally. Prometheus
-        was configured to scrape <code>/metrics</code>, but llama.cpp's metric
-        handler acquires the primary task-queue lock during generation. Under
-        load, <code>/health</code> responded in 3ms while <code>/metrics</code>{" "}
-        timed out after 10 seconds, causing Prometheus to mark the service down
-        simply because it was processing queries.
-      </p>
-      <p>
-        Widening the Prometheus scrape interval to 60 seconds with a 30-second
-        timeout eliminated false alarms, though the long-term fix is decoupling
-        availability monitoring via dedicated blackbox probes on{" "}
-        <code>/health</code>.
-      </p>
-    </Callout>
-
     <Section title="The Silent Failure Mode: GPU Layers Loading Onto CPU After Reboot">
       <p>
         Reboots occasionally caused all model daemons to come back up reporting
@@ -233,6 +205,24 @@ const InferenceCaseStudy = () => (
         starting inference daemons.
       </p>
     </Section>
+
+    <Callout title="The Alert That Fired Because Inference Was Working">
+      <p>
+        Grafana began triggering critical <code>target down</code> alerts during
+        heavy inference loads despite services functioning normally. Prometheus
+        was configured to scrape <code>/metrics</code>, but llama.cpp's metric
+        handler acquires the primary task-queue lock during generation. Under
+        load, <code>/health</code> responded in 3ms while <code>/metrics</code>{" "}
+        timed out after 10 seconds, causing Prometheus to mark the service down
+        simply because it was processing queries.
+      </p>
+      <p>
+        Widening the Prometheus scrape interval to 60 seconds with a 30-second
+        timeout eliminated false alarms, though the long-term fix is decoupling
+        availability monitoring via dedicated blackbox probes on{" "}
+        <code>/health</code>.
+      </p>
+    </Callout>
 
     <Section title="Honest Limitations">
       <p>
