@@ -36,13 +36,13 @@ export const About = () => {
             className="max-w-3xl rounded-2xl p-6 shadow-2xl ring-1 ring-white/10 sm:p-8 lg:p-10"
             style={{ backgroundColor: "rgba(2, 6, 23, 0.96)" }}
           >
-            <p className="animate-fade-in-delay-2 mb-4 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-200">
-              Drew Alagna · NYC · accessible web engineering · self-hosted AI
+            <p className="animate-fade-in-delay-2 mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200 sm:text-sm sm:tracking-[0.32em]">
+              Drew Alagna · NYC · Accessible web + self-hosted AI
             </p>
 
-            <h1 className="animate-fade-in-delay-3 mb-6 text-4xl font-black leading-[1.03] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Accessible web interfaces, used by millions. Self-hosted AI
-              systems, built at home.
+            <h1 className="animate-fade-in-delay-3 mb-6 text-balance text-4xl font-black leading-[1.03] tracking-tight text-white sm:text-5xl lg:text-6xl">
+              Accessible web interfaces used by millions. Self&#8209;hosted AI,
+              built at home.
             </h1>
 
             <p className="animate-fade-in-delay-3 mb-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
