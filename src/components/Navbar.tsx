@@ -345,7 +345,7 @@ export const Navbar = () => {
         {/* Desktop nav - clean text-only with underline indicator */}
         <div className="hidden lg:flex items-center flex-1 justify-end">
           <ul className="flex items-center space-x-1 mr-6">
-            {NAV_ITEMS.filter((item) => !item.desktopHidden).map((item) => {
+            {NAV_ITEMS.map((item) => {
               const active = isItemActive(item);
 
               return (
