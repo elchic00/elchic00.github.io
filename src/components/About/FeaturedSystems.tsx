@@ -118,7 +118,7 @@ const featuredSystems: FeaturedSystem[] = [
     metricLabel: "WCAG AA compliance",
     proof: ["~5M annual updates", "18% completion lift", "Overview BFF aggregation"],
     stack: ["React", "Kotlin BFF", "A/B tests"],
-    status: "enterprise rollout path",
+    status: "live · US + 10 international markets",
     href: "#accessibility-expertise",
     linkLabel: "View accessibility proof",
     accent: "emerald",
@@ -154,9 +154,9 @@ export const FeaturedSystems = () => {
             Four systems, all running in production.
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
-            Four shipped surfaces that show the same operating pattern:
-            clarify the constraint, instrument the system, ship the useful
-            path, and keep humans safe when trust matters.
+            Two homelab platforms I built and operate, the local inference
+            stack they run on, and the cardholder account surfaces I ship at
+            American Express.
           </p>
         </div>
 

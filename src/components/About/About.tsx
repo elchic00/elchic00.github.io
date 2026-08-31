@@ -46,13 +46,13 @@ export const About = () => {
             </h1>
 
             <p className="animate-fade-in-delay-3 mb-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
-              At American Express I turn complex product constraints into shipped
-              fintech interfaces at enterprise scale, and I build the agent
-              workflows my team codes with — instruction sets for how agents
-              delegate, verify their own work, and ask before assuming, plus
-              shared skills pushed org-wide. At home I run self-hosted AI
-              infrastructure in production, reliable enough to run my own life
-              on. Four years of engineering mentorship underneath all of it.
+              At American Express I build account, profile, and overview
+              interfaces for millions of cardholders, plus the agent workflows
+              my team codes with — instruction sets for how agents delegate,
+              verify their own work, and ask before assuming, and shared skills
+              pushed org-wide. At home I run self-hosted AI infrastructure I
+              depend on day to day. I've mentored engineers at CodePath since
+              2021.
             </p>
 
             <div className="animate-fade-in-delay-3 mb-7 grid gap-3 text-left sm:grid-cols-3">
