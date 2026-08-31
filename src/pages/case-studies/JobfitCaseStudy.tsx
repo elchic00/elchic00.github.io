@@ -64,25 +64,20 @@ const JobfitCaseStudy = () => (
           broken if you're hand-testing with a bare <code>curl</code>.)
         </p>
       </Callout>
-      <Callout title="The 401 with a correct API key">
+      <Callout title="The 14% disagreement that was identical code">
         <p>
-          Auth and Langfuse tracing both started failing with 401s, and the API key was correct —
-          I'd checked it three times. The cause was a gap between two libraries: <code>pydantic-settings</code>'s{" "}
-          <code>env_file</code> loading populates its own <code>Settings</code> model but never
-          touches <code>os.environ</code>, and the auth and tracing code read the raw environment
-          directly instead of going through <code>Settings</code>. The key was right; the process
-          just never saw it. Fixed by making the environment load explicit instead of assumed.
-        </p>
-      </Callout>
-      <Callout title="Twenty-five minutes instead of two">
-        <p>
-          The first version of the parallel scoring stage used LangGraph's <code>Send</code> API to
-          fan every requirement's scoring call out at once. That's correct LangGraph, but it queued
-          every call simultaneously against a local inference server configured for two concurrent
-          slots — turning what should have been a two-minute run into a twenty-five-minute one as
-          requests piled up waiting for a slot. The fix wasn't more hardware, it was{" "}
-          <code>RunnableConfig.max_concurrency</code>: cap the fan-out at what the server can
-          actually serve in parallel, and let the queue do its job instead of fighting it.
+          The portability rewrite spent four weeks running as a second, isolated deployment scoring
+          the same postings as the live one, so cutover could be judged on real output rather than
+          tests alone. The two engines disagreed on the recommendation for about 14% of shared
+          postings, and I went looking for the divergence in the new code. There wasn't one — the
+          configs were byte-identical and so was the decision logic. The disagreement was each
+          deployment's own scoring cache: per-requirement LLM results were cached with no seed and
+          no expiry, so the two sides had independently frozen different draws of the same
+          non-deterministic call. The <code>≥90% recommendation agreement</code> gate I'd written
+          for cutover was measuring cache noise, not correctness. I replaced it with one that
+          compares the actual decision — pursue / watch / drop — and flags any open role the new
+          engine would newly miss; the underlying flakiness gets a real fix separately (score each
+          cache miss three times, take the median).
         </p>
       </Callout>
       <Callout title="The bug that wasn't the permissions issue everyone assumed">
@@ -118,12 +113,16 @@ const JobfitCaseStudy = () => (
         <Stat value="65%" label="faster end-to-end (V4)" />
       </StatRow>
       <p>
-        The original scoring stage made one LLM call per extracted requirement — seven to eleven
-        calls per posting, each re-sending the full evidence document. A rewrite (V4) replaced that
-        with one batched call per posting, keyed by stable requirement IDs, with narrow per-ID
-        retry instead of whole-batch replay. On three postings scored both ways, the batched
-        version cut the run from 25 calls / 117.6K tokens / 53.2 minutes to 6 calls / 33.8K tokens
-        / 18.5 minutes. A separate controlled test scored identical extracted requirements both
+        The first version of the scoring stage fanned every requirement's call out at once with
+        LangGraph's <code>Send</code> API — correct LangGraph, but it queued seven to eleven
+        simultaneous calls against a local inference server with two slots, turning a two-minute
+        run into twenty-five. Capping the fan-out at what the server could actually serve
+        (<code>RunnableConfig.max_concurrency</code>) fixed the stall but not the waste: every one
+        of those calls still re-sent the full evidence document. The real rewrite (V4) replaced the
+        per-requirement fan-out with one batched call per posting, keyed by stable requirement IDs,
+        with narrow per-ID retry instead of whole-batch replay. On three postings scored both ways,
+        the batched version cut the run from 25 calls / 117.6K tokens / 53.2 minutes to 6 calls /
+        33.8K tokens / 18.5 minutes. A separate controlled test scored identical extracted requirements both
         ways and found the fit score moved by only 4 points — inside a self-imposed 5-point
         tolerance, with the one real disagreement being a single borderline judgment call rather
         than a systemic bias. The first live production run under the new code scored ten real
@@ -176,19 +175,14 @@ const JobfitCaseStudy = () => (
         <li>
           <strong>Portable, not multi-tenant.</strong> The original build hard-coded one evidence
           document and one set of geography/company rules into module constants. A rewrite split
-          that into a reusable engine with per-user config, evidence profile, and state directory
-          behind a provider-neutral inference interface — including an experimental Codex CLI
-          backend as an alternative to bringing your own API key, which needed a real fix (OpenAI's
-          strict-JSON-schema contract requires <code>additionalProperties: false</code> on every
-          nested object) before a Codex-backed score would complete end to end. That engine now
-          ships in its own private repo with CI and a fresh-install test proving it runs with zero
-          Hermes or Obsidian dependencies. It now runs as a second, fully isolated deployment —
-          separate config, state, and environment from the original — and that isolated
-          deployment runs the same production crons in parallel against the live system, with
-          cutover gated on seven clean days and ≥90% recommendation agreement on shared postings:
-          a migration validated by diffing real output, not just by tests. True multi-tenant
-          hosting — auth, isolation guarantees for a stranger's data — is a different, larger
-          project I haven't started.
+          that into a reusable engine — per-user config, evidence profile, and state directory
+          behind a provider-neutral inference interface — shipping in its own repo with CI and a
+          fresh-install test that proves it runs with zero Hermes or Obsidian dependencies. It ran
+          four weeks as an isolated second deployment scoring the same postings as the live one;
+          discovery and scoring cut over to it on 2026-08-31, once the decision-level agreement
+          held and it stopped missing roles the old engine caught. The weekly-report path is the
+          last piece still on the old checkout. True multi-tenant hosting — auth, isolation
+          guarantees for a stranger's data — is a different, larger project I haven't started.
         </li>
         <li>
           <strong>Repo is private for now.</strong> The original research repo stays that way —
