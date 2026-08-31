@@ -45,7 +45,7 @@ export const About = () => {
               built at home.
             </h1>
 
-            <p className="animate-fade-in-delay-3 mb-6 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
+            <p className="animate-fade-in-delay-3 mb-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
               At American Express I build account, profile, and overview
               interfaces for millions of cardholders, plus the agent workflows
               my team codes with — instruction sets for how agents delegate,
@@ -54,21 +54,6 @@ export const About = () => {
               depend on day to day. I've mentored engineers at CodePath since
               2021.
             </p>
-
-            <div className="animate-fade-in-delay-3 mb-7 grid gap-3 text-left sm:grid-cols-3">
-              {[
-                "100% WCAG AA compliance",
-                "Agent workflows, shared team-wide",
-                "Self-hosted AI in production",
-              ].map((proof) => (
-                <p
-                  key={proof}
-                  className="rounded-xl border border-cyan-300/20 bg-cyan-300/[0.06] px-3 py-2 text-sm font-semibold text-cyan-50"
-                >
-                  {proof}
-                </p>
-              ))}
-            </div>
 
             <nav
               aria-label="Professional links and actions"
