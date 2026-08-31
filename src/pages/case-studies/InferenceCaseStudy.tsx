@@ -64,7 +64,7 @@ const InferenceCaseStudy = () => (
       <Figure
         src="/images/case-studies/inference-grafana.webp"
         alt="Grafana dashboard showing 7-day inference metrics"
-        caption="Live Grafana telemetry across a 7-day window. The panels monitor real-time token generation rates across parallel Qwen 3.8 27B slots alongside unified VRAM allocation, thermals, and request queue depths."
+        caption="Live Grafana telemetry across a 7-day window — token generation and prompt-ingestion rates for the Qwen 3.8 27B text slots and the resident vision model, plus per-model queue depth, hourly token volume, and the voice-transcription path."
       />
     </Section>
 

@@ -74,14 +74,20 @@ const PiCloudCaseStudy = () => (
         mobile devices. <strong>Unbound</strong> handles recursive DNS resolution directly, with{" "}
         <strong>Pi-hole</strong> filtering known ad and tracking domains across the home network in
         front of it. <strong>CrowdSec</strong> turns service logs into active detection and
-        blocking signals for the access paths that are exposed — it typically holds 1,500 to 2,000
-        active IP bans at any given time, mostly SSH bruteforce and port-scan attempts.
+        blocking signals for the access paths that are exposed — it typically holds one to two
+        thousand active IP bans at any given time, mostly SSH bruteforce with port scans and
+        exploit probes behind it.
       </p>
       <p>
         One alert rule watches CrowdSec itself rather than just the services it protects: it fires
         if the active-ban cache drops near zero — the signature of a restart that silently lost its
         decision history and would reopen the door without anyone noticing.
       </p>
+      <Figure
+        src="/images/case-studies/pi-cloud-crowdsec.webp"
+        alt="CrowdSec Grafana dashboard: total IPs currently banned, bans broken out by trigger (SSH bruteforce, port scan, SSH exploit), active bans over time by reason, CrowdSec uptime, and bouncer request rate"
+        caption="CrowdSec's active bans broken out by trigger — SSH bruteforce dominates, with port scans and exploit probes behind it — plus the uptime panel that's really there to catch the restart that silently drops the ban cache."
+      />
       <p>
         Automated access gets less trust than I do. The key my always-on agent uses can't open a
         shell at all — it's pinned to a restricted command set (a handful of read-only

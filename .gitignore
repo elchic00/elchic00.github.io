@@ -61,3 +61,6 @@ scripts/generate-favicon.html
 
 # Local Claude project context
 /CLAUDE.local.md
+
+# Case-study screenshot sources (webp/jpg are committed, png is the raw capture)
+/public/images/case-studies/*.png
