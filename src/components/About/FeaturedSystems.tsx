@@ -102,7 +102,7 @@ const featuredSystems: FeaturedSystem[] = [
       "A hand-patched llama.cpp build serving three models on GPU hardware the project doesn't officially support — every call traced and nightly graded.",
     metric: "33 t/s",
     metricLabel: "27B structured gen, DFlash2 speculative decode",
-    proof: ["Allocator bug fixed at the source", "DFlash2 speculative decoding beats the bandwidth floor 4x", "Nightly LLM-as-judge evals"],
+    proof: ["Allocator bug fixed at the source", "DFlash2 speculative decoding, +48% structured throughput over the prior draft path", "Nightly LLM-as-judge evals"],
     stack: ["llama.cpp", "ROCm", "Langfuse"],
     status: "serving every agent workflow here",
     href: "/projects/inference-engine",
