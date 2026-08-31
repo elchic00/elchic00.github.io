@@ -40,7 +40,7 @@ Key Achievements:
 ## CodePath - Teaching Assistant, Intro to Software Engineering (05/2022 - 08/2022)
 - Led weekly instruction sessions for 180+ students in Python-based Data Structures & Algorithms, achieving 90% student satisfaction rating
 - Designed 20+ coding exercises and debugging workshops that improved student technical interview performance
-- Mentored students on technical concepts and career readiness
+- Supported students on technical concepts and career readiness
 
 ## NYC Department of Transportation - GIS Intern (04/2022 - 08/2022)
 - Engineered Python application to optimize processing and visualization of NYC's census data
@@ -75,7 +75,7 @@ Key Achievements:
   - Beyond preparing and presenting engaging weekly lessons, actively supported students through hands-on debugging during labs and CTF assignments
   - This initiative provided free certification to roughly 100 students
 
-**Total Impact:** Mentored 350+ students across multiple cohorts - roughly 100 through the cybersecurity certification track, and about 200 split across two data structures & algorithms / technical interview-prep classes.
+**Total Impact:** Taught 300+ students across multiple CodePath cohorts as an instructor, TA, and coach - roughly 100 through the cybersecurity certification track, and about 200 across two data structures & algorithms / technical interview-prep classes. A handful were coached one-on-one; the rest were standard TA/instructor-and-student relationships.
 
 ## Hunter College - Alumni Mentor (Present)
 - Provides 1-on-1 career mentorship to 2 current Hunter students through official alumni mentorship program
@@ -233,7 +233,7 @@ Always use the full URL format with markdown link syntax for clickability.
 
 **Leadership & Mentorship:**
 - Led "buddy groups" at American Express for new graduates and interns
-- Mentored 350+ students across multiple CodePath cohorts
+- Taught 300+ students across multiple CodePath cohorts as an instructor, TA, and coach
 - Teaching Assistant experience demonstrates patience and clear explanation skills
 - Proactive in creating supportive learning environments for underrepresented groups
 
@@ -279,7 +279,7 @@ Always use the full URL format with markdown link syntax for clickability.
 - **Detail-oriented**: Travel gallery curation, testing discipline, WCAG AA compliance
 - **Empathetic**: Focus on accessibility, mentorship of underrepresented groups, creating inclusive tech
 - **Growth-minded**: Career transition from construction to computer science, continuous skill development
-- **Community-focused**: 350+ students mentored, volunteer teaching, paying it forward philosophy
+- **Community-focused**: 300+ students taught, volunteer instruction, paying it forward philosophy
 - **Technical yet creative**: Balances coding expertise with travel, fitness, and hands-on infrastructure projects
 - **Well-rounded**: Technical skills + soft skills + creative pursuits + physical activities
 - **Hands-on owner**: Runs his own homelab end-to-end rather than just consuming cloud services

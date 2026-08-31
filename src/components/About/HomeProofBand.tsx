@@ -17,9 +17,9 @@ const proofMetrics = [
     note: "Pi-Cloud telemetry, identity, DNS, and recovery stack",
   },
   {
-    value: "350+",
-    label: "students coached",
-    note: "Cybersecurity, DS&A, and technical interview-prep classes at CodePath",
+    value: "300+",
+    label: "students taught",
+    note: "Cybersecurity, DS&A, and interview-prep cohorts at CodePath — as instructor, TA, and coach",
   },
 ] as const;
 

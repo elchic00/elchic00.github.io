@@ -156,11 +156,11 @@ export const Experience = () => {
       role: "Technical Mentor & Teaching Assistant",
       period: "June 2021 - Present",
       type: "mentorship",
-      stats: ["350+ students mentored", "4+ years"],
+      stats: ["300+ students taught", "5+ years"],
       highlights: [
         "Leading weekly mentorship sessions for 5 students in open source contribution, teaching GitHub workflows and utilizing AI to understand codebases",
-        "Mentored 350+ students across multiple cohorts in Data Structures & Algorithms and cybersecurity fundamentals",
-        "Guided students through technical interview preparation, securing free certifications for 300+ students",
+        "Taught 300+ students total — as a cybersecurity-fundamentals instructor, a Data Structures & Algorithms TA, and a technical interview-prep coach",
+        "Secured free industry certifications for roughly 100 students through the cybersecurity track",
       ],
     },
     {
@@ -199,10 +199,10 @@ export const Experience = () => {
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             Four years shipping inside a Fortune-500 web app, five-plus
-            mentoring engineers outside it. Both followed a winding path — years
-            in construction, a couple of false-start semesters in business and
-            chemistry, then a CS degree from Hunter College before American
-            Express.
+            teaching and mentoring students outside it. Both followed a winding
+            path — years in construction, a couple of false-start semesters in
+            business and chemistry, then a CS degree from Hunter College before
+            American Express.
           </p>
         </div>
 

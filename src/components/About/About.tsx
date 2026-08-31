@@ -51,7 +51,7 @@ export const About = () => {
               my team codes with — instruction sets for how agents delegate,
               verify their own work, and ask before assuming, and shared skills
               pushed org-wide. At home I run self-hosted AI infrastructure I
-              depend on day to day. I've mentored engineers at CodePath since
+              depend on day to day. I've taught and mentored at CodePath since
               2021.
             </p>
 
