@@ -132,7 +132,7 @@ const InferenceCaseStudy = () => (
         than calling it closed.
       </p>
       <p>
-        Digging through the 132 commits, I filed a bisected capability-probe
+        Digging through the 132 commits, I filed a capability-probe
         theory upstream with evidence (
         <a href="https://github.com/ggml-org/llama.cpp/issues/26781" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#26781</a>
         ) — and a maintainer refuted it within days, reading the code path closer
