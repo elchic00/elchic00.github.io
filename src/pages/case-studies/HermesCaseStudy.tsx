@@ -40,8 +40,10 @@ const HermesCaseStudy = () => (
         for vision (screenshot analysis powering computer use), and <strong>WhisperX</strong>{" "}
         (whisper-large-v3 + speaker diarization) for the voice-note pipeline. A{" "}
         <strong>Raspberry Pi</strong> handles monitoring. Cloud providers (Nous Portal, OpenRouter,
-        OpenAI) are wired in as a deliberate fallback — for anything sensitive, or when local hits
-        its usage limit — not the default path.
+        OpenAI) are wired in as a fallback that almost never fires in practice — originally a way
+        to experiment with cloud APIs (Kimi) while building the lab. Sensitive data deliberately
+        stays on the LAN and never routes through them; the cloud path is a safety net for a local
+        outage, not the default.
       </p>
       <p>
         Memory is files-first: an Obsidian vault the agents read directly, with a quick-context
