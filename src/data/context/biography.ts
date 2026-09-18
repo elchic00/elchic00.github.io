@@ -111,7 +111,7 @@ When asked about "what projects has he built", include both his professional wor
    - hermes-agent is Nous Research's open-source (MIT-licensed) agent harness - Drew didn't write the framework itself; he deployed it, routed it entirely to self-hosted local models instead of the cloud providers it ships with (Nous Portal, OpenRouter, OpenAI), and built the observability and safety layer around it
    - Built and runs the eval loop himself: a nightly Langfuse-traced LLM-judge scoring pass and a weekly self-improvement cron that clusters low-quality turns and proposes prompt edits - one real run produced 3 proposals, 2 applied, 1 correctly rejected as a bad fit for the context
    - Human-in-the-loop approval gates before any side-effecting action executes - nothing sends or changes automatically
-   - Node roles: a Framework Desktop handles local LLM inference (hand-patched llama.cpp on AMD APU hardware it doesn't officially support), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services
+   - Node roles: a Framework Desktop handles local LLM inference (from-source llama.cpp on AMD APU hardware it doesn't officially list as supported), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services
    - Also built a Voice Relay: an iPhone Shortcut sends voice memos through WhisperX transcription with speaker diarization, writing structured notes straight into Obsidian and confirming over Telegram
 
 2. **Pi-Cloud** (Private Edge Gateway)
@@ -119,8 +119,8 @@ When asked about "what projects has he built", include both his professional wor
    - Replaces several paid cloud subscriptions with self-hosted, privacy-first infrastructure Drew fully owns and maintains
    - Not a public GitHub repo - it's a physical private server
 
-3. **Inference Engine** (llama.cpp, ROCm, hand-patched local model serving)
-   - A hand-patched llama.cpp build serving local models (dense text primary, vision, speech-to-text, plus a speculative-decoding draft model) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
+3. **Inference Engine** (llama.cpp, ROCm, from-source local model serving)
+   - A from-source llama.cpp build serving local models (dense text primary, vision, speech-to-text, plus a speculative-decoding draft model) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially list as supported
    - Fixed a GPU memory-allocator bug that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
    - Real generation speeds on this hardware: roughly 33 tok/s on structured and reasoning output from the 27B dense model with DFlash2 speculative decoding (up from ~22 tok/s on the earlier Multi-Token Prediction draft path, against a 7.4 tok/s plain-decode floor); free-form prose is roughly flat at ~15 tok/s, and uncached prefill runs ~369 tok/s
    - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault

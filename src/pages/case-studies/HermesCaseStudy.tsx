@@ -35,7 +35,7 @@ const HermesCaseStudy = () => (
         cron scheduler and the Telegram bot. It doesn't have the RAM to host a capable model
         itself, so every reasoning call routes over the LAN through <strong>LiteLLM</strong> to
         the <strong>Framework Desktop</strong>, whose unified-memory GPU serves three resident
-        models over a hand-patched llama.cpp build: a <strong>27B dense Qwen</strong> (sole
+        models over a from-source llama.cpp build: a <strong>27B dense Qwen</strong> (sole
         primary text model, DFlash2 speculative decoding) for the agentic work, <strong>Qwen3-VL-8B</strong>{" "}
         for vision (screenshot analysis powering computer use), and <strong>WhisperX</strong>{" "}
         (whisper-large-v3 + speaker diarization) for the voice-note pipeline. A{" "}

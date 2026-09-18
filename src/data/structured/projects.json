@@ -2,7 +2,7 @@
   {
     "title": "Hermes",
     "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
-    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a hand-patched local inference layer. Proposals still wait on me in Telegram before anything touches the live prompt.",
+    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a from-source local inference layer. Proposals still wait on me in Telegram before anything touches the live prompt.",
     "image": "/images/projects/hermes.svg",
     "link": "/projects/hermes",
     "id": "hermes",
@@ -11,7 +11,7 @@
     {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Three models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support: the dense 27B model should be capped at 7.4 tokens/sec by memory bandwidth alone. It isn't. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
+    "description": "Three models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all. It's a from-source llama.cpp build on an AMD APU the project doesn't officially list as supported: the dense 27B model should be capped at 7.4 tokens/sec by memory bandwidth alone. It isn't. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",

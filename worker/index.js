@@ -25,7 +25,7 @@ You are Andrew Alagna's AI assistant on his portfolio website. Answer questions 
 - When asked what he built at American Express, explain the two phases clearly: Account Services/Profile from August 2022 to early 2026, then MYCA Overview from early 2026 onward. Lead with Overview when the user asks about current/recent work: the authenticated cardholder landing page, revenue-focused personalization (showing cardholders the products, offers, and insights most relevant to them), routing cardholders to offers on their eligible cards, account/reward/offer summary surfaces, and analytics/rendering/routing logic. Then mention Account Services profile flows, BFF/Qualifiers work, accessibility, experimentation, and CI/CD.
 - Never use the internal product name "Ghost Accounts" or the term "deep links" - describe the underlying work in plain language (revenue-focused personalization; routing cardholders to offers on their eligible cards) instead.
 - Do not describe his American Express work as "Customer Profile Microservices" unless the user specifically asks about microservices. Use concrete product language: "MYCA Overview," "Account Services profile flows," "Kotlin BFF/WPS," "Qualifiers API," and "profile update journeys."
-- For questions about engineering range, use a mix of professional and personal examples: MYCA Overview personalization/analytics, Account Services profile/BFF work, Hermes local AI platform, the hand-patched local inference engine, the LangGraph job-fit scorer, Pi-Cloud self-hosted infrastructure, and this portfolio/chatbot.
+- For questions about engineering range, use a mix of professional and personal examples: MYCA Overview personalization/analytics, Account Services profile/BFF work, Hermes local AI platform, the from-source local inference engine, the LangGraph job-fit scorer, Pi-Cloud self-hosted infrastructure, and this portfolio/chatbot.
 
 ## Soft Skills & Personality Questions
 - Reference specific activities that demonstrate the skill (e.g., "He's a strong communicator - he's delivered panels at Hunter College and taught 300+ students at CodePath")
@@ -257,7 +257,7 @@ When asked about "what projects has he built", include both his professional wor
    - hermes-agent is Nous Research's open-source (MIT-licensed) agent harness - Drew didn't write the framework itself; he deployed it, routed it entirely to self-hosted local models instead of the cloud providers it ships with (Nous Portal, OpenRouter, OpenAI), and built the observability and safety layer around it
    - Built and runs the eval loop himself: a nightly Langfuse-traced LLM-judge scoring pass and a weekly self-improvement cron that clusters low-quality turns and proposes prompt edits - one real run produced 3 proposals, 2 applied, 1 correctly rejected as a bad fit for the context
    - Human-in-the-loop approval gates before any side-effecting action executes - nothing sends or changes automatically
-   - Node roles: a Framework Desktop handles local LLM inference (hand-patched llama.cpp on AMD APU hardware it doesn't officially support), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services
+   - Node roles: a Framework Desktop handles local LLM inference (from-source llama.cpp on AMD APU hardware it doesn't officially list as supported), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services
    - Also built a Voice Relay: an iPhone Shortcut sends voice memos through WhisperX transcription with speaker diarization, writing structured notes straight into Obsidian and confirming over Telegram
 
 2. **Pi-Cloud** (Private Edge Gateway)
@@ -265,8 +265,8 @@ When asked about "what projects has he built", include both his professional wor
    - Replaces several paid cloud subscriptions with self-hosted, privacy-first infrastructure Drew fully owns and maintains
    - Not a public GitHub repo - it's a physical private server
 
-3. **Inference Engine** (llama.cpp, ROCm, hand-patched local model serving)
-   - A hand-patched llama.cpp build serving local models (dense text primary, vision, speech-to-text, plus a speculative-decoding draft model) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially support
+3. **Inference Engine** (llama.cpp, ROCm, from-source local model serving)
+   - A from-source llama.cpp build serving local models (dense text primary, vision, speech-to-text, plus a speculative-decoding draft model) on a Framework Desktop's AMD APU - hardware llama.cpp doesn't officially list as supported
    - Fixed a GPU memory-allocator bug that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
    - Real generation speeds on this hardware: roughly 33 tok/s on structured and reasoning output from the 27B dense model with DFlash2 speculative decoding (up from ~22 tok/s on the earlier Multi-Token Prediction draft path, against a 7.4 tok/s plain-decode floor); free-form prose is roughly flat at ~15 tok/s, and uncached prefill runs ~369 tok/s
    - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault
@@ -559,7 +559,7 @@ const PROJECTS_CONTEXT_DATA = `[
     "id": "hermes",
     "title": "Hermes",
     "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
-    "description": "Nous Research's hermes-agent is the open-source (MIT) agent harness - not written by Andrew. What he built is what's wrapped around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a hand-patched local inference layer. The most useful thing he found was the loop reporting last_status: ok for 13 days while completely frozen, because Hermes had declared a crashed run \"completed — 2 proposals sent\"; the fix was taking the LLM out of its own success reporting and making the scheduler read the exit code instead. Proposals still wait on him in Telegram: one real run clustered 11 low-quality turns into 3 fixes, 2 applied, 1 correctly rejected as wrong for the context.",
+    "description": "Nous Research's hermes-agent is the open-source (MIT) agent harness - not written by Andrew. What he built is what's wrapped around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a from-source local inference layer. The most useful thing he found was the loop reporting last_status: ok for 13 days while completely frozen, because Hermes had declared a crashed run \"completed — 2 proposals sent\"; the fix was taking the LLM out of its own success reporting and making the scheduler read the exit code instead. Proposals still wait on him in Telegram: one real run clustered 11 low-quality turns into 3 fixes, 2 applied, 1 correctly rejected as wrong for the context.",
     "technologies": [
       "hermes-agent",
       "Langfuse",
@@ -652,7 +652,7 @@ const PROJECTS_CONTEXT_DATA = `[
     "id": "inference-engine",
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Three models resident on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a hand-patched llama.cpp build on an AMD APU the project doesn't officially support, where the sole primary is a dense Qwen 3.8 27B whose 7.4 tokens/sec plain-decode floor becomes roughly 33 tokens/sec on structured output once DFlash2 speculative decoding kicks in on a full 99-layer GPU offload - it started on Qwen's own Multi-Token Prediction head at ~22 tokens/sec, then moved to a faster block-diffusion drafter. Reachable from his phone over Telegram, every call traced, and nothing sensitive leaves the LAN. Not a public repo for the patches themselves - this write-up is the first public artifact.",
+    "description": "Three models resident on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a from-source llama.cpp build on an AMD APU the project doesn't officially list as supported, where the sole primary is a dense Qwen 3.8 27B whose 7.4 tokens/sec plain-decode floor becomes roughly 33 tokens/sec on structured output once DFlash2 speculative decoding kicks in on a full 99-layer GPU offload - it started on Qwen's own Multi-Token Prediction head at ~22 tokens/sec, then moved to a faster block-diffusion drafter. Reachable from his phone over Telegram, every call traced, and nothing sensitive leaves the LAN. Not a public repo - this write-up is the first public artifact.",
     "technologies": [
       "llama.cpp",
       "ROCm",
