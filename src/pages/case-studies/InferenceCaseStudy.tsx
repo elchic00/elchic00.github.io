@@ -10,7 +10,7 @@ import {
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
     title="Inference Engine"
-    subtitle="Three models resident on one box, serving every agent I run at $0 marginal cost per call — a hand-patched llama.cpp build on GPU hardware the project doesn't officially support. Standardizing on Qwen 3.8 27B delivers high-tier reasoning depth across parallel execution slots."
+    subtitle="Three models resident on one box, serving every agent I run at $0 marginal cost per call — a from-source llama.cpp build on GPU hardware the project doesn't officially list as supported. Standardizing on Qwen 3.8 27B delivers high-tier reasoning depth across parallel execution slots."
     tech={[
       "llama.cpp",
       "ROCm",
@@ -48,18 +48,22 @@ const InferenceCaseStudy = () => (
         text backbone provides strong reasoning capability and reliable
         tool-calling while keeping memory utilization optimized. This leaves
         enough VRAM for parallel text slots and a resident vision model
-        (Qwen3-VL). Getting there meant patching and building the serving engine
-        from source (<code>GGML_HIP=ON</code>,{" "}
-        <code>AMDGPU_TARGETS=gfx1151</code>) behind a LiteLLM router that
-        handles failover to cloud fallbacks when required.
+        (Qwen3-VL). Getting there meant building the serving engine from source
+        (<code>GGML_HIP=ON</code>, <code>AMDGPU_TARGETS=gfx1151</code>) behind a
+        LiteLLM router that handles failover to cloud fallbacks when required.
       </p>
       <p>
-        The build is a patched fork of a fast-moving upstream, so a standing
-        weekly check diffs the local patches against new upstream commits before
-        any rebase — treating the fork as a maintenance liability, not a
-        one-time hack. One run cleared a rebase as safe in advance (six commits
-        touched a patched file, none on the patched lines) and found two of the
-        four tracked patches had gone dead and could be dropped.
+        The build itself carries no local patches — it's a clean branch off
+        upstream master, plain HIP flags and nothing else. What replaced patch
+        maintenance is a standing weekly check that reads new upstream commits
+        before landing them, because upstream moves fast enough to break this
+        exact hardware path: one catch-up deliberately stayed a day behind HEAD
+        to dodge a commit reverting the HIP flag the vision service's
+        GPU-memory detection depends on; a later one was built clean,
+        benchmarked well, and still held back in production after the live
+        server failed to initialize its speculative-decoding context on every
+        request. Landing on schedule isn't the goal — landing without breaking
+        anything is.
       </p>
       <Figure
         src="/images/case-studies/inference-grafana.webp"
