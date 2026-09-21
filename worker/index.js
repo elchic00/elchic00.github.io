@@ -261,7 +261,7 @@ When asked about "what projects has he built", include both his professional wor
    - Also built a Voice Relay: an iPhone Shortcut sends voice memos through WhisperX transcription with speaker diarization, writing structured notes straight into Obsidian and confirming over Telegram
 
 2. **Pi-Cloud** (Private Edge Gateway)
-   - A Raspberry Pi 5 running 13 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole with Unbound (DNS/ad-blocking), SearXNG (private search), ChromaDB (notes-retrieval vector store), Crawl4AI (page-extraction backend), CrowdSec (intrusion prevention), Uptime Kuma (health checks), Prometheus and Grafana (monitoring), Homepage (dashboard), and Watchtower (update monitoring and alerts, not auto-applied)
+   - A Raspberry Pi 5 running 12 self-hosted services - Immich (photos), Vaultwarden (passwords), Paperless-ngx (documents), Pi-hole with Unbound (DNS/ad-blocking), SearXNG (private search), Crawl4AI (page-extraction backend), CrowdSec (intrusion prevention), Uptime Kuma (health checks), Prometheus and Grafana (monitoring), Homepage (dashboard), and Watchtower (update monitoring and alerts, not auto-applied) - ChromaDB briefly ran here too, backing a long-term-memory experiment, retired and removed once it underperformed
    - Replaces several paid cloud subscriptions with self-hosted, privacy-first infrastructure Drew fully owns and maintains
    - Not a public GitHub repo - it's a physical private server
 
@@ -527,7 +527,7 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 **Nodes**:
 - **Framework Desktop** - Local LLM inference, running large open-weight models fully on GPU instead of relying on hosted APIs
 - **Mac Mini** - Orchestrates Hermes' scheduled agent workflows, multi-model routing, and retrieval/memory
-- **Raspberry Pi 5** - Runs Pi-Cloud, 13 self-hosted services (photos, passwords, documents, DNS, search, monitoring, security), several replacing paid SaaS
+- **Raspberry Pi 5** - Runs Pi-Cloud, 12 self-hosted services (photos, passwords, documents, DNS, search, monitoring, security), several replacing paid SaaS
 
 **Hermes (AI agent platform)**:
 - Multi-model routing across locally-hosted models
@@ -540,7 +540,7 @@ Drew runs a 3-node home infrastructure spanning self-hosted services and a self-
 - **Pi-hole + Unbound** - network-wide ad/tracker blocking backed by a recursive DNS resolver that talks directly to root nameservers, bypassing third-party DNS
 - **Prometheus + Grafana** - metrics collection and dashboards
 - **Watchtower** - monitors running containers for available updates and sends alerts; does not auto-apply them
-- **ChromaDB + Crawl4AI** - vector store and page-extraction backend an always-on agent calls unattended
+- **Crawl4AI** - page-extraction backend an always-on agent calls unattended (ChromaDB ran here too as a vector-store experiment, retired and removed after underperforming)
 - **Immich, Vaultwarden, Paperless-ngx** - self-hosted photo library, password manager, and document management, replacing their paid SaaS equivalents
 
 **Frontend Engineering Connection**:
@@ -597,7 +597,7 @@ const PROJECTS_CONTEXT_DATA = `[
     "id": "pi-cloud",
     "title": "Pi-Cloud",
     "subtitle": "Private Infrastructure + Service Operations",
-    "description": "A Raspberry Pi 5 running 23 containers across 12 Compose projects - photos, passwords, document search, DNS filtering, private search, remote access, monitoring - with zero public ports and two recovery paths kept on deliberately different filesystems. Three of those services aren't just his: SearXNG, ChromaDB, and Crawl4AI are the search, memory, and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified 2026-07-25: every container carries a restart policy, so a reboot brings the whole stack back with no manual intervention. Not a public repo - it is a physical private server, not something with a GitHub link.",
+    "description": "A Raspberry Pi 5 running 22 containers across 11 Compose projects - photos, passwords, document search, DNS filtering, private search, remote access, monitoring - with zero public ports and two recovery paths kept on deliberately different filesystems. Two of those services aren't just his: SearXNG and Crawl4AI are the search and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified 2026-07-25: every container carries a restart policy, so a reboot brings the whole stack back with no manual intervention. Not a public repo - it is a physical private server, not something with a GitHub link.",
     "technologies": [
       "Docker",
       "Tailscale",

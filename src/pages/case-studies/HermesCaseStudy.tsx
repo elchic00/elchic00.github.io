@@ -39,9 +39,9 @@ const HermesCaseStudy = () => (
         primary text model, DFlash2 speculative decoding) for the agentic work, <strong>Qwen3-VL-8B</strong>{" "}
         for vision (screenshot analysis powering computer use), and <strong>WhisperX</strong>{" "}
         (whisper-large-v3 + speaker diarization) for the voice-note pipeline. A{" "}
-        <strong>Raspberry Pi</strong> handles monitoring. Cloud providers (Nous Portal, OpenRouter,
-        OpenAI) are wired in as a fallback that almost never fires in practice — originally a way
-        to experiment with cloud APIs (Kimi) while building the lab. Sensitive data deliberately
+        <strong>Raspberry Pi</strong> handles monitoring. A two-hop cloud fallback chain — Kimi,
+        then OpenRouter's free tier as the last resort — is wired in for when local inference is
+        down, and almost never fires in practice. Sensitive data deliberately
         stays on the LAN and never routes through them; the cloud path is a safety net for a local
         outage, not the default.
       </p>
@@ -100,7 +100,7 @@ const HermesCaseStudy = () => (
     <Callout title="What Broke: The Loop Reported Healthy While Frozen">
       <p>
         An audit of the self-improvement loop found it had applied patches{" "}
-        <strong>exactly once ever</strong> — 2026-07-02 — and that{" "}
+        <strong>exactly once as of that audit</strong> — 2026-07-02 — and that{" "}
         <code>improvement_checkpoint.json</code> had sat at <code>saved_at: 2026-07-05</code>,
         untouched, for <strong>13 days</strong>. The weekly cron reported{" "}
         <code>last_status: ok</code> the entire time. The loop I built to catch quality

@@ -22,13 +22,12 @@ const PiCloudCaseStudy = () => (
       "DNSSEC",
       "nftables",
       "rsync",
-      "ChromaDB",
       "Crawl4AI",
     ]}
   >
     <Section title="Why self-host">
       <p>
-        I run thirteen private services — photo storage, password management, document search,
+        I run twelve private services — photo storage, password management, document search,
         DNS filtering, private web search, remote access, monitoring, and the retrieval backend
         for an AI agent — on a Raspberry Pi 5 with a 500GB USB SSD.
         None of it is trying to recreate a hyperscaler. The point is owning the data path for the
@@ -49,9 +48,8 @@ const PiCloudCaseStudy = () => (
         observability and security (<strong>Prometheus/Grafana</strong>,{" "}
         <strong>Uptime Kuma</strong> for health and heartbeat checks, <strong>CrowdSec</strong>{" "}
         for intrusion detection, <strong>Watchtower</strong> for update monitoring and alerts, a{" "}
-        <strong>Homepage</strong> dashboard for a single operational view), and — the two most
-        recent additions — <strong>ChromaDB</strong> and <strong>Crawl4AI</strong>, described
-        below.
+        <strong>Homepage</strong> dashboard for a single operational view), and{" "}
+        <strong>Crawl4AI</strong>, the most recent addition, described below.
       </p>
       <p>
         That separation is deliberate, not incidental. It keeps upgrades, restores, and incident
@@ -128,14 +126,13 @@ const PiCloudCaseStudy = () => (
 
     <Section title="It's also backend infrastructure, not just my services">
       <p>
-        Three of these were stood up as backends for an always-on agent, not for me.{" "}
+        Two of these were stood up as backends for an always-on agent, not for me.{" "}
         <strong>SearXNG</strong> is Hermes's default search backend, so every web lookup the
         agent makes resolves through the Pi instead of a search API. <strong>Crawl4AI</strong>{" "}
-        does full-page extraction behind a bearer token: submit a URL, poll for the result.{" "}
-        <strong>ChromaDB</strong> backed an early long-term-memory experiment (recall accuracy
-        came in under published benchmarks, detailed on the Hermes page) — the experiment got
-        pulled, and the container's still here, running and unused, until I either reclaim the
-        resources or find it a real job.
+        does full-page extraction behind a bearer token: submit a URL, poll for the result. A
+        third, <strong>ChromaDB</strong>, backed an early long-term-memory experiment (recall
+        accuracy came in under published benchmarks, detailed on the Hermes page) — retired and
+        removed from the Pi once the experiment ended, rather than left running unused.
       </p>
       <p>
         That raises the reliability bar in a specific way. A personal service that's down is an
@@ -150,7 +147,7 @@ const PiCloudCaseStudy = () => (
     </Section>
 
     <StatRow>
-      <Stat value="13" label="Self-hosted services" />
+      <Stat value="12" label="Self-hosted services" />
       <Stat value="0" label="Public ports exposed" />
       <Stat value="4" label="Grafana dashboards" />
       <Stat value="3" label="Independent recovery paths" />
@@ -195,9 +192,8 @@ const PiCloudCaseStudy = () => (
         It's a two-line patch with a lesson I keep relearning here: monitoring is code, it has
         bugs, and a check you've never watched fail correctly isn't a check yet — it's a source of
         alerts you'll start ignoring. The same reasoning is why I confirm a restart with the
-        Prometheus <code>up</code> query or Uptime Kuma rather than <code>docker ps</code>.{" "}
-        ChromaDB in particular will sit there reporting "running" while every request into it
-        times out.
+        Prometheus <code>up</code> query or Uptime Kuma rather than <code>docker ps</code> — a
+        container can report "running" while every request into it times out.
       </p>
     </Callout>
 

@@ -12,7 +12,7 @@ const proofMetrics = [
     note: "Profile and 2FA flows built for sensitive account data",
   },
   {
-    value: "13",
+    value: "12",
     label: "private-cloud services",
     note: "Pi-Cloud telemetry, identity, DNS, and recovery stack",
   },

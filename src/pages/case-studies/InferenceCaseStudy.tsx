@@ -184,8 +184,14 @@ const InferenceCaseStudy = () => (
         across unrelated requests. The fix (
         <code>--no-cache-idle-slots --cache-ram 0</code>) was submitted upstream (
         <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#27148</a>
-        ) and deployed across all resident
-        services, completely eliminating unprompted cache restoration.
+        ) and deployed across both services, eliminating unprompted cache
+        restoration immediately. The vision service still runs cache-disabled
+        — it's low-traffic enough that the cold-prefill cost never mattered.
+        The 27B re-enabled a larger RAM cache in September, once upstream
+        fixes had landed and a fresh 90-pair contamination probe against the
+        rebuilt server came back clean: 262k-context prefill is the one thing
+        worth re-paying a small correctness risk to avoid, and the probe said
+        the risk was gone.
       </p>
     </Callout>
 
@@ -233,11 +239,16 @@ const InferenceCaseStudy = () => (
         A 128GB unified memory architecture is flexible, but it defines a
         physical budget, and every model on the box draws from it. When I
         retired the 35B MoE model in August 2026 and made Qwen 3.8 27B the
-        sole primary, the RAM it freed went to the 27B itself — two parallel
-        slots at the model's full 262k native context each, plus burst
-        headroom, instead of a second, faster MoE sitting alongside it. That
-        was a deliberate trade: one dense model with deep context over two
-        models that each had less headroom.
+        sole primary, the RAM it freed went to the 27B itself — the model's
+        full 262k native context, plus burst headroom, instead of a second,
+        faster MoE sitting alongside it. I first split that into two parallel
+        slots at 262k each, until benchmarking showed speculative decoding and
+        continuous batching don't compose on this build: the moment a second
+        slot goes active, DFlash2 draft acceptance collapses from ~24% to
+        ~1%, so two concurrent requests each decode at roughly a third the
+        speed of one. A single slot means every request runs at full speed
+        and a second one queues behind it — a deliberate trade of concurrency
+        for per-request speed over the two-MoE alternative.
       </p>
       <p>
         The cost of that trade is the fallback chain. With no second local text
