@@ -24,6 +24,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   poster,
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  // Respect reduced-motion: no autoplaying loop, just the play button.
+  const reduceMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
   const [playState, setPlayState] = useState<VideoPlayState>({
     showButton: false,
     playing: false,
@@ -46,6 +50,10 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+    if (reduceMotion) {
+      setPlayState({ showButton: true, playing: false });
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -67,7 +75,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return () => {
       observer.unobserve(video);
     };
-  }, [videoId]);
+  }, [videoId, reduceMotion]);
 
   const handleVideoClick = (e: MouseEvent<HTMLVideoElement>) => {
     e.preventDefault();
@@ -112,7 +120,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
       <video
         ref={videoRef}
         className={`w-full h-full object-contain rounded-lg cursor-pointer ${className}`}
-        autoPlay
+        autoPlay={!reduceMotion}
         loop
         muted
         playsInline
@@ -120,7 +128,9 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         disableRemotePlayback
         poster={poster}
         preload={projectIndex < 2 ? "auto" : "metadata"}
-        onCanPlay={(e) => (e.target as HTMLVideoElement).play().catch(() => {})}
+        onCanPlay={(e) => {
+          if (!reduceMotion) (e.target as HTMLVideoElement).play().catch(() => {});
+        }}
         onClick={handleVideoClick}
       >
         <source src={src} type="video/mp4" />
