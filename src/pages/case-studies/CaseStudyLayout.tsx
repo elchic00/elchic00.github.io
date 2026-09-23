@@ -107,8 +107,8 @@ export const Figure: React.FC<{ src: string; alt: string; caption: string }> = (
         className="w-full rounded-xl border border-slate-700/50 transition-colors hover:border-cyan-400/50"
       />
     </a>
-    <figcaption className="mt-2 text-[13px] text-slate-500 leading-relaxed">
-      {caption} <span className="text-slate-400">(opens full size)</span>
+    <figcaption className="mt-2 text-[13px] text-slate-400 leading-relaxed">
+      {caption} (opens full size)
     </figcaption>
   </figure>
 );

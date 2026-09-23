@@ -110,9 +110,9 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
             {techTags.map((tag) => <TechPill key={tag} label={tag} />)}
           </div>
 
-          <h3 className="font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-2 text-lg">
+          <h2 className="font-bold text-white group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-2 text-lg">
             {project.title}
-          </h3>
+          </h2>
 
           <div className="grid grid-rows-[1fr] transition-all duration-500 ease-in-out">
               <div className="overflow-hidden">

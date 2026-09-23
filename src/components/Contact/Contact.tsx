@@ -247,6 +247,7 @@ export const Contact: React.FC = () => {
                   Message <span className="text-red-500">*</span>
                 </label>
                 <span
+                  id="message-counter"
                   className={`text-xs ${contactForm.characterCount > contactForm.maxCharacters * 0.9 ? "text-yellow-400" : "text-slate-400"}`}
                 >
                   {contactForm.characterCount}/{contactForm.maxCharacters}
