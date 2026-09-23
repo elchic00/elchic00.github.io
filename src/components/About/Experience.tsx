@@ -1,98 +1,49 @@
-import {
-  BriefcaseIcon,
-  AcademicCapIcon,
-} from "@heroicons/react/solid";
+import { BriefcaseIcon, AcademicCapIcon } from "@heroicons/react/solid";
 import { useScrollReveal } from "../../hooks";
 
-interface ExperienceItemProps {
+interface Role {
   company: string;
   role: string;
   period: string;
-  logo?: string;
-  icon?: React.ReactNode;
   highlights: string[];
   stats?: string[];
 }
 
-const ExperienceItem: React.FC<ExperienceItemProps> = ({
-  company,
-  role,
-  period,
-  logo,
-  icon,
-  highlights,
-  stats,
-}) => {
-
-  return (
-    <article
-      className="rounded-2xl border border-white/10 bg-slate-900/70 p-6 md:p-8"
-    >
-      <div className="flex items-start gap-4 mb-6">
-        <div
-          className="flex-shrink-0 w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center"
+const Stats: React.FC<{ stats?: string[] }> = ({ stats }) =>
+  stats && stats.length > 0 ? (
+    <ul className="mb-5 flex flex-wrap gap-2" aria-label="Highlights">
+      {stats.map((stat) => (
+        <li
+          key={stat}
+          className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm font-medium text-slate-200"
         >
-          {logo ? (
-            <img
-              src={logo}
-              alt={`${company} logo`}
-              className="w-7 h-7 object-contain"
-            />
-          ) : (
-            <div className="text-cyan-300 w-6 h-6">
-              {icon}
-            </div>
-          )}
-        </div>
+          {stat}
+        </li>
+      ))}
+    </ul>
+  ) : null;
 
-        <div className="flex-grow">
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
-            {role}
-          </h3>
-          <p className="text-base md:text-lg font-semibold text-cyan-300 mb-1">
-            {company}
-          </p>
-          <p className="text-slate-400 text-sm">{period}</p>
-        </div>
-      </div>
-
-      {stats && stats.length > 0 && (
-        <div className="flex flex-wrap gap-3 mb-6">
-          {stats.map((stat) => (
-            <span
-              key={stat}
-              className="px-3 py-1 rounded-full text-sm font-medium border border-white/10 bg-white/[0.04] text-slate-200"
-            >
-              {stat}
-            </span>
-          ))}
-        </div>
-      )}
-
-      <ul className="space-y-3">
-        {highlights.map((highlight, idx) => (
-          <li key={idx} className="flex items-start gap-3">
-            <span
-              className="mt-[0.6rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400/70"
-              aria-hidden="true"
-            />
-            <span className="text-slate-300 leading-relaxed">
-              {highlight}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </article>
-  );
-};
+const Highlights: React.FC<{ items: string[] }> = ({ items }) => (
+  <ul className="space-y-3">
+    {items.map((item) => (
+      <li key={item} className="flex items-start gap-3">
+        <span
+          className="mt-[0.6rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400/70"
+          aria-hidden="true"
+        />
+        <span className="leading-relaxed text-slate-300">{item}</span>
+      </li>
+    ))}
+  </ul>
+);
 
 export const Experience = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
   const { ref: workRef, isVisible: workVisible } = useScrollReveal();
-  const { ref: mentorshipHeaderRef, isVisible: mentorshipHeaderVisible } =
+  const { ref: mentorshipRef, isVisible: mentorshipVisible } =
     useScrollReveal();
 
-  const workExperience: Omit<ExperienceItemProps, "icon">[] = [
+  const workExperience: Role[] = [
     {
       company: "American Express",
       role: "Software Engineer — Overview Team",
@@ -125,7 +76,7 @@ export const Experience = () => {
     },
   ];
 
-  const mentorshipExperience: Omit<ExperienceItemProps, "icon">[] = [
+  const mentorshipExperience: Role[] = [
     {
       company: "CodePath",
       role: "Technical Mentor & Teaching Assistant",
@@ -150,19 +101,11 @@ export const Experience = () => {
   ];
 
   return (
-    <section
-      id="experience"
-      className="relative pt-20 pb-20 bg-slate-950"
-    >
-      {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
-      {/* Gradient transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-slate-950 pointer-events-none z-0"></div>
-
-      <div className="container mx-auto px-5 sm:px-8 md:px-10 relative z-10">
+    <section id="experience" className="relative bg-slate-950 py-20">
+      <div className="container relative z-10 mx-auto px-5 sm:px-8 md:px-10">
         <div
           ref={headerRef}
-          className={`mb-16 scroll-reveal ${headerVisible ? "visible" : ""}`}
+          className={`mb-14 scroll-reveal ${headerVisible ? "visible" : ""}`}
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
             Experience
@@ -179,42 +122,75 @@ export const Experience = () => {
           </p>
         </div>
 
-        {/* Work Experience */}
+        {/* The AmEx roles are one career in sequence, so they share a timeline */}
         <div
           ref={workRef}
-          className={`mb-12 md:mb-16 grid max-w-4xl gap-6 scroll-reveal ${
-            workVisible ? "visible" : ""
-          }`}
+          className={`mb-20 lg:grid lg:grid-cols-[15rem_minmax(0,48rem)] lg:gap-12 scroll-reveal ${workVisible ? "visible" : ""}`}
         >
-          {workExperience.map((exp, idx) => (
-            <ExperienceItem
-              key={idx}
-              {...exp}
-              icon={<BriefcaseIcon className="w-full h-full" />}
-            />
-          ))}
+          <div className="mb-8 flex items-center gap-4 lg:sticky lg:top-28 lg:mb-0 lg:flex-col lg:items-start lg:self-start">
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-cyan-500/10">
+              <BriefcaseIcon className="h-6 w-6 text-cyan-300" aria-hidden="true" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-white">American Express</h3>
+              <p className="text-sm text-slate-400">
+                Software Engineer · August 2022 - Present
+              </p>
+            </div>
+          </div>
+
+          <ol className="ml-6 space-y-12 border-l border-white/10 lg:ml-0">
+            {workExperience.map((exp, idx) => (
+              <li key={exp.role} className="relative pl-8 md:pl-10">
+                <span
+                  className={`absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full ring-4 ring-slate-950 ${
+                    idx === 0 ? "bg-cyan-400" : "border-2 border-cyan-400/60 bg-slate-950"
+                  }`}
+                  aria-hidden="true"
+                />
+                <p className="mb-1 text-sm font-medium text-slate-400">
+                  {exp.period}
+                  {idx === 0 && (
+                    <span className="ml-2 rounded-full bg-cyan-400/10 px-2 py-0.5 text-xs font-semibold text-cyan-200">
+                      Current
+                    </span>
+                  )}
+                </p>
+                <h4 className="mb-4 text-xl font-bold text-white md:text-2xl">
+                  {exp.role.replace(/^Software Engineer — /, "")}
+                </h4>
+                <Stats stats={exp.stats} />
+                <Highlights items={exp.highlights} />
+              </li>
+            ))}
+          </ol>
         </div>
 
-        {/* Mentorship Section */}
         <div
-          ref={mentorshipHeaderRef}
-          className={`mb-8 scroll-reveal ${
-            mentorshipHeaderVisible ? "visible" : ""
-          }`}
+          ref={mentorshipRef}
+          className={`lg:grid lg:grid-cols-[15rem_minmax(0,48rem)] lg:gap-12 scroll-reveal ${mentorshipVisible ? "visible" : ""}`}
         >
-          <h3 className="text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
-            Mentorship & teaching
-          </h3>
-        </div>
+          <div className="mb-8 flex items-center gap-4 lg:sticky lg:top-28 lg:mb-0 lg:flex-col lg:items-start lg:self-start">
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-cyan-500/10">
+              <AcademicCapIcon className="h-6 w-6 text-cyan-300" aria-hidden="true" />
+            </div>
+            <h3 className="text-2xl font-bold text-white">Mentorship & teaching</h3>
+          </div>
 
-        <div className="grid max-w-4xl gap-6 md:grid-cols-2 md:items-start">
-          {mentorshipExperience.map((exp, idx) => (
-            <ExperienceItem
-              key={idx}
-              {...exp}
-              icon={<AcademicCapIcon className="w-full h-full" />}
-            />
-          ))}
+          <div className="grid gap-6 md:grid-cols-2 md:items-start">
+            {mentorshipExperience.map((exp) => (
+              <article
+                key={exp.company}
+                className="rounded-2xl border border-white/10 bg-slate-900/70 p-6"
+              >
+                <h4 className="text-xl font-bold text-white">{exp.role}</h4>
+                <p className="font-semibold text-cyan-300">{exp.company}</p>
+                <p className="mb-5 text-sm text-slate-400">{exp.period}</p>
+                <Stats stats={exp.stats} />
+                <Highlights items={exp.highlights} />
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
