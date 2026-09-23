@@ -9,6 +9,7 @@
   ],
   "Databases & Backend": [
     "PostgreSQL",
+    "SQLite + sqlite-vec",
     "GraphQL",
     "REST APIs",
     "Microservices"
