@@ -41,7 +41,7 @@ export const CaseStudyLayout: React.FC<CaseStudyLayoutProps> = ({
             {tech.map((t) => (
               <span
                 key={t}
-                className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25"
+                className="inline-block px-2 py-0.5 text-[11px] font-bold tracking-wider uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25"
               >
                 {t}
               </span>
@@ -98,14 +98,17 @@ export const Figure: React.FC<{ src: string; alt: string; caption: string }> = (
   caption,
 }) => (
   <figure>
-    <img
-      src={src}
-      alt={alt}
-      loading="lazy"
-      className="w-full rounded-xl border border-slate-700/50"
-    />
+    {/* Screenshots are wider than the text column; link to the full-size image */}
+    <a href={src} target="_blank" rel="noreferrer" className="block focus-ring rounded-xl">
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="w-full rounded-xl border border-slate-700/50 transition-colors hover:border-cyan-400/50"
+      />
+    </a>
     <figcaption className="mt-2 text-[13px] text-slate-500 leading-relaxed">
-      {caption}
+      {caption} <span className="text-slate-400">(opens full size)</span>
     </figcaption>
   </figure>
 );

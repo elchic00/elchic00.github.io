@@ -21,7 +21,7 @@ interface BentoGridProjectProps {
 const VIDEO_POSTERS: Record<string, string> = {};
 
 const TechPill: React.FC<{ label: string }> = ({ label }) => (
-  <span className="inline-block px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25">
+  <span className="inline-block px-2 py-0.5 text-[11px] font-bold tracking-wider uppercase rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/25">
     {label}
   </span>
 );
@@ -124,7 +124,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
         </div>
 
         <div className="flex items-center gap-1.5 text-sm font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors duration-200 border-t border-slate-800/50 group-hover:border-cyan-500/20 pt-4 mt-4">
-          <span className="tracking-widest uppercase text-[10px]">{hasCaseStudy ? "Read Case Study" : "View Project"}</span>
+          <span className="tracking-widest uppercase text-xs">{hasCaseStudy ? "Read Case Study" : "View Project"}</span>
           {!hasCaseStudy && (
             <ExternalLinkIcon className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
           )}
