@@ -133,8 +133,8 @@ export const AIChatAssistant = () => {
     }
     setIsOpen(false);
     if (input) setInput("");
-    if (document.activeElement instanceof HTMLElement)
-      document.activeElement.blur();
+    // Return focus to the toggle so keyboard users aren't dropped on <body>
+    toggleButtonRef.current?.focus({ preventScroll: true });
   }, [messages, input]);
 
   const handleToggle = useCallback(() => {
@@ -351,6 +351,7 @@ export const AIChatAssistant = () => {
               : "bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 hover:scale-110 ai-chat-btn-glow"
           }`}
           aria-label={isOpen ? "Close chat" : "Open AI chat assistant"}
+          aria-expanded={isOpen}
         >
           {isOpen ? (
             <XIcon className="w-6 h-6 text-white" />
