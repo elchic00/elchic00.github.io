@@ -27,7 +27,7 @@ export const ResumePage = () => {
           <a
             href={pdfPath}
             download="andrew-alagna-resume.pdf"
-            className="inline-block py-2 px-6 rounded font-bold transition-colors duration-150 bg-cyan-600 hover:bg-cyan-500 text-white"
+            className="inline-block py-2 px-6 rounded font-bold transition-colors duration-150 bg-cyan-400 hover:bg-cyan-300 text-slate-950"
           >
             Download PDF
           </a>

@@ -36,12 +36,12 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
     warning: {
       iconBg: "bg-amber-500/10",
       iconColor: "text-amber-500",
-      button: "bg-amber-600 hover:bg-amber-700 focus:ring-amber-500",
+      button: "bg-amber-700 hover:bg-amber-800 focus:ring-amber-500",
     },
     info: {
       iconBg: "bg-cyan-500/10",
       iconColor: "text-cyan-500",
-      button: "bg-cyan-600 hover:bg-cyan-700 focus:ring-cyan-500",
+      button: "bg-cyan-700 hover:bg-cyan-800 focus:ring-cyan-500",
     },
     neutral: {
       iconBg: "bg-slate-500/10",

@@ -278,7 +278,7 @@ export const Navbar = () => {
                 </span>
                 <button
                   onClick={handleOpenChat}
-                  className="shrink-0 px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-lg text-sm font-semibold transition-colors"
+                  className="shrink-0 px-4 py-2 bg-cyan-400 hover:bg-cyan-300 text-slate-950 rounded-lg text-sm font-semibold transition-colors"
                 >
                   Chat
                 </button>

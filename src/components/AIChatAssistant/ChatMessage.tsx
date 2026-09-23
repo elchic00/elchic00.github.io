@@ -85,7 +85,7 @@ export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProp
                     <button
                       key={idx}
                       onClick={() => onAction(action)}
-                      className="text-xs bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-1.5 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
+                      className="text-xs bg-cyan-400 hover:bg-cyan-300 text-slate-950 px-3 py-1.5 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-400"
                     >
                       {config.label}
                     </button>

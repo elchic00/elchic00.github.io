@@ -62,7 +62,7 @@ export const ContactSuccessModal: React.FC<ContactSuccessModalProps> = ({
       <div className="bg-slate-800 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse gap-3">
         <button
           type="button"
-          className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-cyan-600 text-base font-medium text-white hover:bg-cyan-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-cyan-500 sm:w-auto sm:text-sm transition-colors"
+          className="w-full inline-flex justify-center rounded-lg border border-transparent shadow-sm px-4 py-2 bg-cyan-400 text-base font-semibold text-slate-950 hover:bg-cyan-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-cyan-500 sm:w-auto sm:text-sm transition-colors"
           onClick={onClose}
         >
           Got it!
