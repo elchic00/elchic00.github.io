@@ -45,7 +45,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
     "min-h-[455px] h-full",
   ].join(" ");
 
-  const mediaHeight = "h-56 flex-shrink-0";
+  const mediaHeight = "aspect-[7/4] flex-shrink-0";
 
   const handleMediaClick = (e: React.MouseEvent) => {
     if (hasMultipleVideos) {
