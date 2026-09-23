@@ -9,7 +9,7 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="relative flex min-h-screen items-center overflow-hidden pb-24 pt-10 sm:pb-32"
+      className="relative flex items-center overflow-hidden pb-16 pt-10 lg:min-h-[92vh] lg:pb-24"
     >
       {/* Background image layer - responsive srcset for LCP optimization */}
       <div className="absolute inset-0 z-0">
@@ -22,72 +22,21 @@ export const About = () => {
           loading="eager"
           {...({ fetchpriority: "high" } as any)}
         />
-        {/* Single light overlay — just enough to ground the photo, card does the rest */}
-        <div className="absolute inset-0 bg-slate-950/45" />
+        {/* Dark on the text side, photo shows through on the right */}
+        <div className="absolute inset-0 bg-slate-950/80 lg:bg-transparent lg:bg-gradient-to-r lg:from-slate-950 lg:via-slate-950/85 lg:to-slate-950/20" />
       </div>
 
-      <div className="container relative z-10 mx-auto flex flex-col items-center px-5 py-16 sm:px-8 md:px-10 lg:flex-row lg:py-20">
-        <div className="mb-12 mt-12 flex flex-col items-center text-center lg:mb-0 lg:w-3/5 lg:flex-grow lg:items-start lg:pr-16 lg:text-left">
-          {/*
-            Using inline style for background to bypass any Tailwind JIT issues with /95.
-            No backdrop-blur — it can interfere with bg-color rendering in Chrome.
-          */}
-          <div
-            className="max-w-3xl rounded-2xl p-6 shadow-2xl ring-1 ring-white/10 sm:p-8 lg:p-10"
-            style={{ backgroundColor: "rgba(2, 6, 23, 0.96)" }}
-          >
-            <p className="animate-fade-in-delay-2 mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200 sm:text-sm sm:tracking-[0.32em]">
-              Drew Alagna · NYC · Accessible web + self-hosted AI
-            </p>
-
-            <h1 className="animate-fade-in-delay-3 mb-6 text-balance text-4xl font-black leading-[1.03] tracking-tight text-white sm:text-5xl lg:text-6xl">
-              Accessible web interfaces used by millions. Self&#8209;hosted AI,
-              built at home.
-            </h1>
-
-            <p className="animate-fade-in-delay-3 mb-8 max-w-2xl text-lg leading-relaxed text-white/90 sm:text-xl">
-              At American Express I build account, profile, and overview
-              interfaces for millions of cardholders, plus the agent workflows
-              my team codes with — instruction sets for how agents delegate,
-              verify their own work, and ask before assuming, and shared skills
-              pushed org-wide. At home I run self-hosted AI infrastructure I
-              depend on day to day. I've taught and mentored at CodePath since
-              2021.
-            </p>
-
-            <nav
-              aria-label="Professional links and actions"
-              className="animate-fade-in-delay-4 w-full flex flex-col items-center lg:items-start"
-            >
-              <div className="flex w-full max-w-sm flex-col items-stretch gap-4 xl:w-auto xl:max-w-none xl:flex-row xl:items-center">
-                <Button
-                  onClick={() => navigate("/#homepage-proof")}
-                  aria-label="See what I've built"
-                  className="w-full px-10 py-4 xl:w-auto xl:min-w-[190px] xl:px-8 xl:py-3"
-                  variant="primary"
-                >
-                  See what I've built
-                </Button>
-              </div>
-
-              <div className="mt-7 flex flex-row justify-center gap-6 lg:justify-start">
-                <SocialLinks variant="about" />
-              </div>
-            </nav>
-          </div>
-        </div>
-
+      <div className="container relative z-10 mx-auto flex flex-col items-center gap-10 px-5 py-24 sm:px-8 md:px-10 lg:flex-row lg:justify-between lg:gap-16 lg:py-20">
         {/* Responsive profile image with srcset for optimal LCP */}
-        <div className="animate-fade-in-delay-5 relative h-80 w-80 max-w-[80vw] overflow-hidden rounded-2xl">
-          <div className="absolute inset-0 bg-cyan-500/20 blur-3xl rounded-full opacity-50"></div>
-          <picture className="relative block h-full w-full">
+        <div className="animate-fade-in-delay-2 relative h-28 w-28 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-white/15 lg:order-last lg:h-80 lg:w-80 lg:rounded-2xl">
+          <picture className="block h-full w-full">
             <source
               srcSet="/images/profile-320.webp 320w, /images/profile-460.webp 460w, /images/profile-640.webp 640w, /images/profile-920.webp 920w"
-              sizes="(max-width: 400px) 80vw, 320px"
+              sizes="(max-width: 1023px) 112px, 320px"
               type="image/webp"
             />
             <img
-              className="h-full w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+              className="h-full w-full object-cover"
               alt="Andrew Alagna - Software Engineer"
               src={SOCIAL_LINKS.PROFILE_IMAGE_FALLBACK}
               loading="eager"
@@ -97,6 +46,41 @@ export const About = () => {
               {...({ fetchpriority: "high" } as any)}
             />
           </picture>
+        </div>
+
+        <div className="flex max-w-2xl flex-col items-center text-center lg:flex-grow lg:items-start lg:text-left">
+          <p className="animate-fade-in-delay-2 mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200 sm:text-sm">
+            Drew Alagna<span className="hidden sm:inline"> · Software engineer</span> · NYC
+          </p>
+
+          <h1 className="animate-fade-in-delay-3 mb-6 text-balance text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Accessible web interfaces used by millions. Self&#8209;hosted AI,
+            built at home.
+          </h1>
+
+          <p className="animate-fade-in-delay-3 mb-9 max-w-xl text-lg leading-relaxed text-slate-200 sm:text-xl">
+            At American Express I build the account, profile, and overview
+            pages cardholders use, plus the agent workflows my team codes
+            with. At home I run the AI infrastructure I depend on every day,
+            and I've taught at CodePath since 2021.
+          </p>
+
+          <nav
+            aria-label="Professional links and actions"
+            className="animate-fade-in-delay-4 flex flex-col items-center gap-6 sm:flex-row lg:items-center"
+          >
+            <Button
+              onClick={() => navigate("/#featured-systems")}
+              aria-label="See what I've built"
+              className="px-8"
+              variant="primary"
+            >
+              See what I've built
+            </Button>
+            <div className="flex flex-row gap-4">
+              <SocialLinks variant="about" />
+            </div>
+          </nav>
         </div>
       </div>
 
