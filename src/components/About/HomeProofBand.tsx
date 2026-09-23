@@ -12,9 +12,9 @@ const proofMetrics = [
     note: "Profile and 2FA flows built for sensitive account data",
   },
   {
-    value: "12",
-    label: "private-cloud services",
-    note: "Pi-Cloud telemetry, identity, DNS, and recovery stack",
+    value: "+18%",
+    label: "profile completion",
+    note: "Supplementary-profile completion lift from analytics-backed iteration",
   },
   {
     value: "300+",
@@ -42,13 +42,13 @@ export const HomeProofBand = () => {
           }`}
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
-            Proof before promises
+            By the numbers
           </p>
           <h2
             id="homepage-proof-title"
             className="text-3xl font-black tracking-tight text-white sm:text-5xl"
           >
-            Real numbers from systems I've shipped and still run.
+            From the day job and the classroom.
           </h2>
         </div>
 
@@ -62,12 +62,12 @@ export const HomeProofBand = () => {
             <article
               key={metric.label}
               data-proof-metric
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 shadow-xl shadow-slate-950/40 transition-colors duration-300 hover:border-cyan-300/40 hover:bg-cyan-400/[0.04]"
+              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
             >
               <p className="mb-2 text-4xl font-black tracking-tight text-white sm:text-5xl">
                 {metric.value}
               </p>
-              <h3 className="mb-2 text-sm font-semibold uppercase tracking-[0.22em] text-cyan-200">
+              <h3 className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
                 {metric.label}
               </h3>
               <p className="text-sm leading-relaxed text-slate-300">
