@@ -14,8 +14,8 @@ interface PlaySnakeProps {
 export const PlaySnake: React.FC<PlaySnakeProps> = ({
   percentageWidth = 100,
   startSnakeSize = 4,
-  appleColor = "red",
-  snakeColor = "green",
+  appleColor = "#fb7185",
+  snakeColor = "#22d3ee",
   gridSize = 20,
   speed = 67,
 }) => {
@@ -60,20 +60,20 @@ export const PlaySnake: React.FC<PlaySnakeProps> = ({
     >
       {!mounted && <div>Snake loading…</div>}
       <div className="flex-1 flex flex-col items-center justify-center landscape:justify-start py-2">
-        <h1 className="text-white text-xl md:text-2xl font-medium landscape:text-lg mb-1 text-center">
+        <h1 className="text-white text-2xl md:text-3xl font-black tracking-tight landscape:text-lg mb-2 text-center">
           Snake
         </h1>
 
         <div className="w-full max-w-[min(95vw,calc(100vh-320px))] md:max-w-[min(90vw,calc(100vh-300px))] lg:max-w-[min(85vw,calc(100vh-290px))] xl:max-w-[min(80vw,calc(100vh-280px))] landscape:max-w-[calc(100vh-200px)] mx-auto">
           <div className="flex justify-between items-center mb-1 px-2 text-sm md:text-base">
             <div className="text-white font-semibold">Score: {score}</div>
-            <div className="text-teal-400 font-semibold">High: {highScore}</div>
+            <div className="text-cyan-300 font-semibold">High: {highScore}</div>
           </div>
           <div className="aspect-square w-full">
             <div ref={containerRef} className="w-full h-full">
               <canvas
                 ref={canvasRef}
-                className="block w-full h-full border-4 border-white rounded-md shadow-lg bg-[#0f172a]"
+                className="block w-full h-full border-2 border-slate-700 rounded-md shadow-lg bg-[#0f172a]"
               />
             </div>
           </div>
