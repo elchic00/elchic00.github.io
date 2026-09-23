@@ -13,7 +13,7 @@ import { useContactForm, useScrollReveal } from "../../hooks";
 import { APP_CONFIG } from "../../constants";
 import { ContactSuccessModal } from "./ContactSuccessModal";
 import { ConfirmDialog } from "../shared/ConfirmDialog";
-import { MonogramOverlap } from "../shared/MonogramLogo";
+import { SocialLinks } from "../shared/SocialLinks";
 import messageTemplates from "../../data/structured/messageTemplates.json";
 
 export const Contact: React.FC = () => {
@@ -92,24 +92,20 @@ export const Contact: React.FC = () => {
         {/* Subtle gradient overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
 
-        <div className="container px-5 py-16 mx-auto flex flex-col lg:flex-row items-center lg:items-stretch justify-center gap-8 lg:gap-12 relative z-10">
-          {/* Sidebar: personal sign-off, echoes the Hero's glass-panel + eyebrow-tag language */}
-          <div className="w-full max-w-md lg:max-w-sm lg:w-2/5 flex flex-col justify-start">
-            <div
-              className="rounded-2xl p-6 sm:p-8 ring-1 ring-white/10 shadow-2xl"
-              style={{ backgroundColor: "rgba(2, 6, 23, 0.6)" }}
-            >
-              <MonogramOverlap className="h-9 w-auto text-cyan-400 mb-5" />
-              <p className="text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300 mb-3">
-                Let's talk
-              </p>
-              <p className="text-2xl font-bold text-white mb-3">
-                Andrew Alagna
-              </p>
-              <p className="text-slate-300 leading-relaxed">
-                Reach out about frontend architecture, accessibility, or the AI
-                systems I run at home — I read every message.
-              </p>
+        <div className="container relative z-10 mx-auto grid gap-10 px-5 py-20 sm:px-8 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,36rem)] lg:gap-16 sm:py-24">
+          <div className="lg:pt-2">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
+              Contact
+            </p>
+            <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
+              Let's talk.
+            </h2>
+            <p className="mb-8 max-w-md text-lg leading-relaxed text-slate-300">
+              Reach out about frontend architecture, accessibility, or the AI
+              systems I run at home — I read every message.
+            </p>
+            <div className="flex gap-4">
+              <SocialLinks variant="about" />
             </div>
           </div>
 
@@ -121,12 +117,12 @@ export const Contact: React.FC = () => {
               if (el) (contactRef as any).current = el;
             }}
             onSubmit={contactForm.handleSubmit}
-            className={`lg:w-1/2 flex flex-col w-full md:py-3 mt-4 md:mt-0 bg-slate-900 rounded-2xl p-8 shadow-2xl border border-slate-800 scroll-reveal-scale ${formVisible ? "visible" : ""}`}
+            className={`flex w-full flex-col rounded-2xl border border-white/10 bg-slate-900 p-6 sm:p-8 scroll-reveal-scale ${formVisible ? "visible" : ""}`}
           >
             <div className="flex items-center justify-between mb-2">
-              <h2 className="text-white text-2xl sm:text-3xl font-bold tracking-tight">
+              <h3 className="text-white text-xl sm:text-2xl font-bold tracking-tight">
                 Send a message
-              </h2>
+              </h3>
               {contactForm.hasDraft && (
                 <button
                   type="button"
