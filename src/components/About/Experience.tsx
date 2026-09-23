@@ -117,7 +117,7 @@ export const Experience = () => {
             Four years shipping inside a Fortune-500 web app, five-plus
             teaching and mentoring students outside it. Both followed a winding
             path — years in construction, a couple of false-start semesters in
-            business and chemistry, then a CS degree from Hunter College before
+            business and chemistry, then a CS degree from CUNY: Hunter College before
             American Express.
           </p>
         </div>
