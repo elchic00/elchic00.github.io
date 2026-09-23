@@ -53,7 +53,7 @@ body{margin:0;line-height:inherit}
 .scrollbar-hide{-ms-overflow-style:none;scrollbar-width:none}
 .scrollbar-hide::-webkit-scrollbar{display:none}
 /* Loading state */
-#root>div{font-family:sans-serif;text-align:center;padding:2rem}
+#root>.portfolio-boot{font-family:sans-serif;text-align:center;padding:2rem}
 </style>
 `;
 
