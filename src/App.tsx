@@ -21,15 +21,23 @@ export const App = () => {
   return (
     <ErrorBoundary>
       <ToastProvider>
-        <main className="text-slate-200 bg-slate-950 body-font scrollbar-hide">
+        <div className="text-slate-200 bg-slate-950 body-font scrollbar-hide">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-cyan-400 focus:px-4 focus:py-2 focus:font-semibold focus:text-slate-950"
+          >
+            Skip to content
+          </a>
           <Navbar />
-          <ScrollToHash />
-          <AppRoutes />
+          <main id="main-content" tabIndex={-1} className="outline-none">
+            <ScrollToHash />
+            <AppRoutes />
+          </main>
           {/* <ScrollToTopButton /> */}
           <Footer />
           <AIChatAssistant />
           <ToastContainer />
-        </main>
+        </div>
       </ToastProvider>
     </ErrorBoundary>
   );
