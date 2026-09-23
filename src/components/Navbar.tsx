@@ -213,7 +213,7 @@ export const Navbar = () => {
     >
       {/* Scroll progress bar */}
       <div
-        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-cyan-500 to-purple-500 transition-all duration-150 ease-out"
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-cyan-500 to-cyan-300 transition-all duration-150 ease-out"
         style={{ width: `${scrollProgress}%` }}
       />
 
@@ -332,7 +332,7 @@ export const Navbar = () => {
               <div className="mt-4 pb-20">
                 <Link
                   to={CONTACT_CTA.link}
-                  className="block w-full py-3 bg-purple-600 hover:bg-purple-500 text-white text-center rounded-xl font-bold text-base transition-colors"
+                  className="block w-full py-3 bg-cyan-400 hover:bg-cyan-300 text-slate-950 text-center rounded-xl font-bold text-base transition-colors"
                   onClick={handleContactClick}
                 >
                   {CONTACT_CTA.name} Me
@@ -380,8 +380,8 @@ export const Navbar = () => {
               to={CONTACT_CTA.link}
               className={`flex items-center px-5 py-2 rounded-full font-bold text-sm transition-all duration-200 whitespace-nowrap ${
                 isContactActive
-                  ? "bg-purple-500 text-white"
-                  : "bg-purple-700 text-slate-100 hover:bg-purple-600"
+                  ? "bg-cyan-300 text-slate-950"
+                  : "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
               }`}
               onClick={handleContactClick}
             >

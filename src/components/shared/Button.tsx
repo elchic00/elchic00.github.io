@@ -16,7 +16,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantClasses: Record<ButtonVariant, string> = {
     // Primary: High-contrast call to action with a subtle outer glow on hover
-    primary: 'text-white bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 shadow-lg hover:shadow-cyan-500/40 hover:scale-[1.03] active:scale-95 disabled:opacity-50',
+    primary: 'text-slate-950 font-semibold bg-cyan-400 hover:bg-cyan-300 shadow-lg shadow-cyan-500/10 active:scale-95 disabled:opacity-50',
     
     secondary: 'text-white bg-slate-800 hover:bg-slate-700 hover:scale-[1.03] active:scale-95 border border-slate-700',
     
@@ -44,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       {loading ? (
-        <span className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+        <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
       ) : (
         children
       )}
