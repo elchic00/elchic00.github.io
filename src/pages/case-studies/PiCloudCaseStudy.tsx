@@ -3,7 +3,7 @@ import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./Case
 const PiCloudCaseStudy = () => (
   <CaseStudyLayout
     title="Pi-Cloud"
-    subtitle="Thirteen self-hosted services on a Raspberry Pi 5, run like real production infrastructure: clear service boundaries, no public ports, health checks everywhere, and disaster recovery tested, not just documented."
+    subtitle="Twelve self-hosted services on a Raspberry Pi 5, run like real production infrastructure: clear service boundaries, no public ports, health checks everywhere, and disaster recovery tested, not just documented."
     tech={[
       "Docker",
       "Tailscale",
@@ -222,7 +222,7 @@ const PiCloudCaseStudy = () => (
       </p>
       <p>
         It's also explicitly not trying to be enterprise infrastructure: one Raspberry Pi running
-        all thirteen services, no cluster, no failover node. That's a deliberate scope decision for a
+        all twelve services, no cluster, no failover node. That's a deliberate scope decision for a
         personal platform, not an oversight — but it does mean a hardware failure on the Pi itself
         takes every service down until the recovery media gets restored onto new hardware, which is
         exactly why the recovery path being tested, not just documented, mattered enough to build
