@@ -1,117 +1,103 @@
-export type LayoutCategory = "large" | "wide" | "tall" | "small";
-
-export interface GalleryItemLayout {
-  itemClass: string;
-  imageClass: string;
-  category: LayoutCategory;
-}
+import type { Photo } from "../../types";
 
 /**
- * Editorial gallery layout pattern — 12 items for varied visual rhythm.
+ * Gallery tiles use each photo's own aspect ratio (from width/height in
+ * trips.json), so nothing gets cropped into a shape it wasn't shot in.
+ * PhotoGallery lays tiles out in justified rows (see justifyRows), so
+ * mixed portrait and landscape shots share rows at equal height.
  *
- * Layout mechanism: CSS multi-column masonry (`columns-*` on the container,
- * `break-inside-avoid` per item), NOT CSS Grid. Grid with mixed row/col
- * spans in row-major auto-flow can leave real, unfillable gaps when spans
- * don't tile perfectly (confirmed: `grid-flow-dense` alone doesn't fix this
- * — dense packing can only reorder items into existing gaps, it can't
- * manufacture content to fill a gap shape nothing else fits). Masonry
- * columns flow top-to-bottom per column and pack tightly by construction,
- * so variety here comes from aspect ratio per item, not grid span.
- *
- * Categories (aspect ratio, all columns equal width):
- *   large — 4:5, prominent vertical presence
- *   wide  — 16:9, landscape breather
- *   tall  — 2:3, most vertical emphasis
- *   small — 1:1, compact
- *
- * Distribution: 3 large, 2 wide, 3 tall, 4 small (balanced, no category > 50%)
- * — same distribution as the original grid-based design, carried over.
+ * Ratios are clamped so a panorama doesn't take a whole row as a thin strip
+ * and a very tall shot doesn't dwarf its row. Photos past the clamp crop a little.
  */
-export const EDITORIAL_GALLERY_LAYOUTS: readonly GalleryItemLayout[] = [
-  // 0: large — hero shot to open the gallery
-  { itemClass: "", imageClass: "aspect-[4/5]", category: "large" },
-  // 1: small
-  { itemClass: "", imageClass: "aspect-square", category: "small" },
-  // 2: tall
-  { itemClass: "", imageClass: "aspect-[2/3]", category: "tall" },
-  // 3: wide — landscape breather
-  { itemClass: "", imageClass: "aspect-[16/9]", category: "wide" },
-  // 4: tall
-  { itemClass: "", imageClass: "aspect-[2/3]", category: "tall" },
-  // 5: small
-  { itemClass: "", imageClass: "aspect-square", category: "small" },
-  // 6: wide — landscape breather
-  { itemClass: "", imageClass: "aspect-[16/9]", category: "wide" },
-  // 7: large
-  { itemClass: "", imageClass: "aspect-[4/5]", category: "large" },
-  // 8: small
-  { itemClass: "", imageClass: "aspect-square", category: "small" },
-  // 9: tall
-  { itemClass: "", imageClass: "aspect-[2/3]", category: "tall" },
-  // 10: large
-  { itemClass: "", imageClass: "aspect-[4/5]", category: "large" },
-  // 11: small
-  { itemClass: "", imageClass: "aspect-square", category: "small" },
-];
+export const MIN_TILE_ASPECT = 2 / 3;
+export const MAX_TILE_ASPECT = 2.5;
+// Used only if a photo is missing dimensions: a neutral portrait-ish tile.
+export const FALLBACK_TILE_ASPECT = 4 / 5;
 
-export function countLayoutsByCategory(): Record<LayoutCategory, number> {
-  const counts: Record<LayoutCategory, number> = { large: 0, wide: 0, tall: 0, small: 0 };
-  for (const layout of EDITORIAL_GALLERY_LAYOUTS) {
-    counts[layout.category] += 1;
-  }
-  return counts;
-}
-
-/**
- * Deterministic per-trip starting offset into the pattern, derived from the
- * trip id. Without this, every trip's gallery opens with the exact same
- * rhythm (large, small, tall, wide, ...) — identical across all six trips
- * reads as a stamped-out template, not a composed page. A stable per-trip
- * offset means each gallery starts at a different point in the same
- * balanced cycle, so the rhythm varies trip to trip while staying
- * reproducible (same trip always gets the same offset, no randomness at
- * render time).
- */
-// Trips whose opening photo is a deliberate hero shot get offset 0, so the
-// pattern's own "large — hero shot to open the gallery" slot lands on it
-// instead of wherever the hash happens to fall.
-const OFFSET_OVERRIDES: Record<string, number> = {
-  "japan-2024": 0,
+export const getTileAspect = (photo: Pick<Photo, "width" | "height">): number => {
+  const { width, height } = photo;
+  if (!width || !height) return FALLBACK_TILE_ASPECT;
+  return Math.min(MAX_TILE_ASPECT, Math.max(MIN_TILE_ASPECT, width / height));
 };
 
-export function getTripPatternOffset(tripId: string): number {
-  if (tripId in OFFSET_OVERRIDES) return OFFSET_OVERRIDES[tripId];
 
-  let hash = 0;
-  for (let i = 0; i < tripId.length; i++) {
-    hash = (hash * 31 + tripId.charCodeAt(i)) | 0;
-  }
-  return Math.abs(hash) % EDITORIAL_GALLERY_LAYOUTS.length;
+export interface JustifiedRow {
+  indices: number[];
+  height: number;
+  // The final row keeps its natural size instead of stretching to full width.
+  partial: boolean;
 }
 
 /**
- * Get the layout configuration for a gallery item by its index.
- * Deterministic, cycle-based — no metadata needed in trips.json.
- *
- * `total` (the gallery's actual photo count) is required to map the index
- * proportionally into the 12-item pattern rather than slicing/wrapping it
- * raw. Without this, a short gallery (e.g. 8 photos) just gets a truncated
- * prefix of the pattern, and a long gallery (e.g. 15 photos) wraps and
- * abruptly restarts the pattern from index 0. Proportional remapping
- * (`floor(index * patternLength / total)`) keeps every gallery length
- * sampling the full, balanced rhythm instead of an arbitrary slice.
- *
- * `offset` (see getTripPatternOffset) shifts the starting point per trip
- * so the rhythm doesn't repeat identically across every gallery.
+ * Packs photos into rows that exactly fill `width`, each row as close to
+ * `targetHeight` as the photos allow. A short final row is folded into the
+ * row above it, so a gallery never ends on one stranded photo; one that can
+ * stretch to the edge without getting much taller does.
  */
-export const getGalleryItemLayout = (
-  index: number,
-  total: number = EDITORIAL_GALLERY_LAYOUTS.length,
-  offset: number = 0,
-): GalleryItemLayout => {
-  const patternLength = EDITORIAL_GALLERY_LAYOUTS.length;
-  const mappedIndex = total > 0 ? Math.floor((index * patternLength) / total) : index;
-  const safeIndex = ((mappedIndex + offset) % patternLength + patternLength) % patternLength;
+export const justifyRows = (
+  aspects: number[],
+  width: number,
+  targetHeight: number,
+  gap: number,
+): JustifiedRow[] => {
+  if (width <= 0) return [];
+  const heightFor = (indices: number[]) =>
+    (width - gap * (indices.length - 1)) / indices.reduce((sum, i) => sum + aspects[i], 0);
 
-  return EDITORIAL_GALLERY_LAYOUTS[safeIndex];
+  const rows: number[][] = [];
+  let current: number[] = [];
+  aspects.forEach((_, i) => {
+    current.push(i);
+    const height = heightFor(current);
+    if (height > targetHeight) return;
+    // Row is full: close it with or without this photo, whichever lands nearer the target.
+    const withoutLast = current.slice(0, -1);
+    if (withoutLast.length && Math.abs(heightFor(withoutLast) - targetHeight) < targetHeight - height) {
+      rows.push(withoutLast);
+      current = [i];
+    } else {
+      rows.push(current);
+      current = [];
+    }
+  });
+
+  const naturalWidth = (indices: number[]) =>
+    indices.reduce((sum, i) => sum + aspects[i], 0) * targetHeight + gap * (indices.length - 1);
+
+  // Short final row: first try pulling photos down from the row above until
+  // both rows are full, as long as the row above doesn't get too tall.
+  if (current.length && rows.length) {
+    const prev = [...rows[rows.length - 1]];
+    const last = [...current];
+    while (prev.length > 1 && naturalWidth(last) < width * 0.8) {
+      last.unshift(prev.pop()!);
+    }
+    if (naturalWidth(last) >= width * 0.8 && heightFor(prev) <= targetHeight * 1.5) {
+      rows[rows.length - 1] = prev;
+      current = last;
+    }
+  }
+
+  let partial = false;
+  if (current.length) {
+    const lastWidth = naturalWidth(current);
+    const merged = rows.length ? [...rows[rows.length - 1], ...current] : [];
+    // Too short to stand alone, as long as folding it in doesn't squash the row above.
+    if (merged.length && lastWidth < width * 0.6 && heightFor(merged) >= targetHeight * 0.6) {
+      rows[rows.length - 1] = merged;
+    } else {
+      rows.push(current);
+      // Stretch to the edge unless that would make the row much taller than the rest.
+      partial = heightFor(current) > targetHeight * 1.5;
+    }
+  }
+
+  return rows.map((indices, r) => {
+    const isPartial = partial && r === rows.length - 1;
+    return {
+      indices,
+      height: isPartial ? Math.min(targetHeight, heightFor(indices)) : heightFor(indices),
+      partial: isPartial,
+    };
+  });
 };

@@ -77,7 +77,7 @@ export const TripCard: React.FC<TripCardProps> = ({ trip, isFirst = false }) => 
 
       <p className="text-slate-200 leading-relaxed mb-6">{trip.description}</p>
 
-      <PhotoGallery photos={galleryPhotos} tripId={trip.id} />
+      <PhotoGallery photos={galleryPhotos} />
     </article>
   );
 };

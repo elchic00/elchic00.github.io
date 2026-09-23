@@ -10,6 +10,9 @@ export interface Project {
 
 export interface Photo {
   url: string;
+  // Intrinsic pixel size; the gallery sizes each tile to this aspect ratio.
+  width?: number;
+  height?: number;
   alt: string;
   caption: string;
   // When set, `url` is used as the poster frame and this is the clip to play.

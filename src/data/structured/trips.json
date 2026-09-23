@@ -8,67 +8,93 @@
     "photos": [
       {
         "url": "/images/travel/japan/mt-fuji-view.webp",
+        "width": 1920,
+        "height": 1081,
         "alt": "Mount Fuji rising above the landscape with clear blue skies",
         "caption": "Mount Fuji in all its glory"
       },
       {
         "url": "/images/travel/japan/arashiyama-monkey-sanctuary.webp",
+        "width": 1920,
+        "height": 2560,
         "alt": "A macaque at the Arashiyama Monkey Park behind mesh fencing",
         "caption": "Monkey at Arashiyama Monkey Park"
       },
       {
         "url": "/images/travel/japan/shrine-lanterns.webp",
+        "width": 1920,
+        "height": 1080,
         "alt": "Illuminated shrine lanterns glowing softly in a forested shrine path",
         "caption": "Lanterns at a forest shrine"
       },
       {
         "url": "/images/travel/japan/kyoto-shrine-entrance.webp",
+        "width": 1920,
+        "height": 1080,
         "alt": "Entrance gate of a Kyoto shrine with traditional woodwork",
         "caption": "Kyoto shrine entrance"
       },
       {
         "url": "/images/travel/japan/fox-statue.webp",
+        "width": 1920,
+        "height": 1080,
         "alt": "Stone fox statue wearing a bib at a Shinto shrine",
         "caption": "Fox guardian statue"
       },
       {
         "url": "/images/travel/japan/uji-river-boats.webp",
+        "width": 1920,
+        "height": 1080,
         "alt": "Traditional boats moored along the Uji River lined with autumn maples near Kyoto, Japan",
         "caption": "Autumn colors along the Uji River"
       },
       {
         "url": "/images/travel/japan/nara-todaiji-temple.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Todai-ji temple's Great Buddha Hall framed by its grounds in Nara, Japan",
         "caption": "Todai-ji's Great Buddha Hall in Nara"
       },
       {
         "url": "/images/travel/japan/shinjuku-skyline-aerial-poster.webp",
+        "width": 1920,
+        "height": 1080,
         "video": "/images/travel/japan/shinjuku-skyline-aerial.mp4",
         "alt": "Aerial view of the Shinjuku skyline sprawling toward the horizon in Tokyo, Japan",
         "caption": "Shinjuku skyline from above"
       },
       {
         "url": "/images/travel/japan/sensoji-pagoda-selfie.webp",
+        "width": 640,
+        "height": 480,
         "alt": "Selfie in front of the five-story pagoda at Senso-ji temple in Tokyo, Japan",
         "caption": "Senso-ji temple pagoda in Asakusa"
       },
       {
         "url": "/images/travel/japan/nara-deer-selfie.webp",
+        "width": 640,
+        "height": 544,
         "alt": "A friendly deer photo-bombing a selfie in Nara, Japan",
         "caption": "Deer selfie in Nara"
       },
       {
         "url": "/images/travel/japan/kyoto-temple-gate.webp",
+        "width": 1920,
+        "height": 1080,
         "alt": "Gate of a temple complex in Kyoto, Japan",
         "caption": "A temple stop in Kyoto"
       },
       {
         "url": "/images/travel/japan/kinosaki-crab-kaiseki.webp",
+        "width": 1920,
+        "height": 1080,
         "alt": "A chef showing a diner how to eat matsuba crab during a kaiseki dinner at Kinosaki Onsen",
         "caption": "Crab kaiseki dinner in Kinosaki"
       },
       {
         "url": "/images/travel/japan/wagyu-kaiseki-dinner.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Sliced wagyu beef plated for tableside grilling during a Japanese kaiseki dinner",
         "caption": "Wagyu ready for the tabletop grill"
       }
@@ -83,66 +109,92 @@
     "photos": [
       {
         "url": "/images/travel/ecuador/andrew-alagna-sea-lions.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna Galapagos sea lions colony beach Ecuador",
         "caption": "Sea lions relaxing on the beach"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-blue-foot-boobie.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna photographing blue-footed booby in Galapagos Islands",
         "caption": "Blue-footed booby on the rocks"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-turtle-snorkle.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna swimming with sea turtles underwater Galapagos Ecuador",
         "caption": "Swimming alongside sea turtles"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-inactive-volcano.webp",
+        "width": 1920,
+        "height": 472,
         "alt": "Andrew Alagna hiking inactive volcano rim Galapagos Islands Ecuador",
         "caption": "Hiking the inactive volcano rim"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-sunset-boats.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Andrew Alagna Galapagos sunset photography over boats Ecuador",
         "caption": "Beautiful Galapagos sunset"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-sea-horse.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna underwater seahorse photography Galapagos Islands",
         "caption": "Seahorse clinging to coral structure"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-land-turtles.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna with Galapagos giant tortoise Ecuador",
         "caption": "Galápagos giant tortoise"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-isabella-island.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna at Isabela Island welcome sign Galapagos Ecuador",
         "caption": "Isabela Island welcome sign"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-stingray.webp",
+        "width": 1896,
+        "height": 1659,
         "alt": "Andrew Alagna snorkeling with stingray underwater Galapagos Islands Ecuador",
         "caption": "Gliding above a stingray in crystal-clear waters"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-iguana.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna marine iguana on beach Galapagos Islands Ecuador",
         "caption": "Marine iguana basking in the sun"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-marine-crabs.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Andrew Alagna red crabs volcanic rocks Galapagos Islands Ecuador",
         "caption": "Vibrant red crabs scattered across volcanic rocks by the shore"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-virgin-of-quito.webp",
+        "width": 752,
+        "height": 1046,
         "alt": "Andrew Alagna Virgin of Quito statue El Panecillo Ecuador",
         "caption": "The towering Virgin of Quito statue at El Panecillo"
       },
       {
         "url": "/images/travel/ecuador/andrew-alagna-mountain-valley.webp",
+        "width": 1450,
+        "height": 542,
         "alt": "Andrew Alagna mountain valley clouds Ecuador Andes",
         "caption": "Mountain valley draped in clouds deep in the Andes"
       }
@@ -157,66 +209,92 @@
     "photos": [
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan1.webp",
+        "width": 3771,
+        "height": 2122,
         "alt": "Andrew Alagna Old San Juan colorful colonial buildings streets Puerto Rico",
         "caption": "Colorful streets of Old San Juan"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan2.webp",
+        "width": 3771,
+        "height": 2122,
         "alt": "Andrew Alagna Old San Juan colonial architecture balconies Puerto Rico",
         "caption": "El Morro fortress courtyard"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-castle.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna El Yunque rainforest watchtower mist Puerto Rico",
         "caption": "Watchtower shrouded in mist at El Yunque rainforest"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan-historical.webp",
+        "width": 1182,
+        "height": 665,
         "alt": "Andrew Alagna Castillo San Felipe del Morro fortress sign Puerto Rico",
         "caption": "Castillo San Felipe del Morro entrance sign"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-clear-waters.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna crystal clear turquoise Caribbean beach waters Puerto Rico",
         "caption": "Crystal clear turquoise Caribbean waters"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan4.webp",
+        "width": 3771,
+        "height": 2122,
         "alt": "Andrew Alagna Old San Juan cobblestone streets colorful facades Puerto Rico",
         "caption": "Cobblestone streets and colorful facades"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan3.webp",
+        "width": 2364,
+        "height": 1330,
         "alt": "Andrew Alagna Old San Juan vibrant painted buildings Puerto Rico",
         "caption": "Vibrant old San Juan"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-sunrise.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna Caribbean beach sunrise sunlight tropical foliage Puerto Rico",
         "caption": "Sunlight streaming through tropical foliage on the beach at sunrise"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-old-san-juan5.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Old San Juan historic plaza colonial architecture Puerto Rico",
         "caption": "Historic plaza in Old San Juan"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-mosquitos.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna colorful welcome sign Maunabo town Puerto Rico",
         "caption": "Colorful welcome sign to the town of Mosquitos"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-vieques.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna Welcome to Vieques island sign Puerto Rico Caribbean",
         "caption": "Welcome to Vieques island sign"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-beach2.webp",
+        "width": 3648,
+        "height": 862,
         "alt": "Andrew Alagna Puerto Rico Caribbean coastline panoramic beach view",
         "caption": "Wide panoramic view of the Caribbean coastline"
       },
       {
         "url": "/images/travel/puerto-rico/andrew-alagna-sunset.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna stunning Caribbean sunset orange sky Puerto Rico",
         "caption": "Stunning Caribbean sunset over the ocean"
       }
@@ -231,66 +309,92 @@
     "photos": [
       {
         "url": "/images/travel/thailand/andrew-alagna-jungle.webp",
+        "width": 1920,
+        "height": 443,
         "alt": "Andrew Alagna jungle trekking Northern Thailand",
         "caption": "Trekking through lush jungle"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-gold-temple2.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Golden Temple interior Northern Thailand",
         "caption": "The magnificent golden temple"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-gold-temple.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna Golden Temple Chiang Mai Thailand photography",
         "caption": "Up close to the golden temple"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-elephant.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna elephant sanctuary Chiang Mai Thailand",
         "caption": "Meeting gentle giants at the elephant sanctuary"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-buffalo.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna water buffalo rice fields Thailand",
         "caption": "Water buffalo in the rice fields"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-bamboo-raft.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna bamboo rafting river Thailand adventure",
         "caption": "Bamboo rafting down the river"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-rice-field.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Andrew Alagna rice terraces Northern Thailand photography",
         "caption": "Scenic rice terraces in Northern Thailand"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-small-temple.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna Buddhist temple countryside Thailand",
         "caption": "A peaceful temple in Bangkok"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-waterfall.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna jungle waterfall Northern Thailand",
         "caption": "Refreshing waterfall in the jungle"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-creating-traditional.webp",
+        "width": 665,
+        "height": 1182,
         "alt": "Andrew Alagna traditional Thai handicrafts cultural experience",
         "caption": "Creating traditional Thai handicrafts"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-cooking.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Thai cooking class Chiang Mai Thailand",
         "caption": "Learning to cook authentic Thai cuisine"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-jungle-night.webp",
+        "width": 360,
+        "height": 480,
         "alt": "Andrew Alagna jungle night photography Thailand",
         "caption": "Night time in the jungle"
       },
       {
         "url": "/images/travel/thailand/andrew-alagna-white-temple2.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Andrew Alagna White Temple intricate details Chiang Rai Thailand",
         "caption": "Intricate details of the White Temple"
       }
@@ -305,81 +409,113 @@
     "photos": [
       {
         "url": "/images/travel/laos/andrew-alagna-reclining-buddha.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna reclining Buddha statue temple garden Laos",
         "caption": "Reclining Buddha statue in a peaceful temple garden"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-temple.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Laotian temple ornate ceiling Luang Prabang",
         "caption": "Ornate temple ceiling with intricate pink and blue traditional paintings"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-temple2.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna ancient stone temple tower Laos",
         "caption": "Ancient weathered stone temple tower surrounded by tropical plants"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-temple3.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna Buddha Park sculpture Laos Vientiane",
         "caption": "Giant stone demon head"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-temple4.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Buddha Park interior stone sculptures Laos",
         "caption": "Interior of stone sculpture park with intricate carved reliefs and statues"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-springs1.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Kuang Si Falls waterfall pools Luang Prabang Laos",
         "caption": "Multi-tiered turquoise waterfall pools at Kuang Si Falls"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-temple6.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna Naga serpent fountain sculpture Laos",
         "caption": "Stone Naga serpent fountain sculpture with multiple heads"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-temple8.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Andrew Alagna Buddha pavilion golden statues Luang Prabang Laos",
         "caption": "White and red pavilion with golden Buddha statues"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-temple5.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna stone statue sculpture Buddha Park Vientiane Laos",
         "caption": "Outdoor stone statue sculpture with figure raising arms beneath large disc"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-bear-sanctuary.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna moon bear sanctuary Laos wildlife conservation",
         "caption": "Moon bear relaxing on wooden platform at rescue sanctuary"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-sunset.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Mekong River sunset photography Luang Prabang Laos",
         "caption": "Golden sunset over Mekong River and mountains"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-night-market.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna night market Luang Prabang Laos street photography",
         "caption": "Evening street market in Luang Prabang"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-bike-mountain.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna motorcycle mountain summit Laos flag",
         "caption": "Motorcycle and Laos flag on top of mountain"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-springs2.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna limestone waterfall Kuang Si Falls Laos",
         "caption": "Cascading limestone waterfall formations"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-golden-temple.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Andrew Alagna golden Buddhist temple Luang Prabang Laos",
         "caption": "Golden temple architecture gleaming in the afternoon light"
       },
       {
         "url": "/images/travel/laos/andrew-alagna-monks.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Buddhist monks orange robes Luang Prabang Laos",
         "caption": "Monks in traditional orange robes walking in procession"
       }
@@ -394,66 +530,92 @@
     "photos": [
       {
         "url": "/images/travel/costa-rica/andrew-alagna-sunset1.webp",
+        "width": 2048,
+        "height": 1536,
         "alt": "Andrew Alagna Costa Rica Pacific Ocean sunset vibrant colors",
         "caption": "Vibrant Costa Rican sunset over the Pacific Ocean"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-bird.webp",
+        "width": 900,
+        "height": 1600,
         "alt": "Andrew Alagna colorful tropical bird wildlife Costa Rica rainforest",
         "caption": "Colorful tropical bird in the rainforest"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-hanging-bridge.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna hanging suspension bridge rainforest canopy Costa Rica",
         "caption": "Crossing a hanging suspension bridge in the rainforest canopy"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-bat.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna bat hanging rainforest wildlife Costa Rica",
         "caption": "Bat hanging in the rainforest"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-starry-night-beach.webp",
+        "width": 1920,
+        "height": 1440,
         "alt": "Andrew Alagna starry night sky palm trees Pacific beach Costa Rica",
         "caption": "Starry night sky over the Pacific coast with palm trees silhouetted against the stars"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-cloud-forest-canopy.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna Monteverde cloud forest canopy walkway Costa Rica",
         "caption": "Walking through the cloud forest canopy at Monteverde"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-sunrise1.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Costa Rica beach sunrise golden light palm trees",
         "caption": "Golden sunrise through the palm trees"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-snorkel1.webp",
+        "width": 360,
+        "height": 480,
         "alt": "Andrew Alagna snorkeling crystal clear Caribbean waters Costa Rica",
         "caption": "Snorkeling in crystal clear Caribbean waters"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-white-water-rafting.webp",
+        "width": 512,
+        "height": 341,
         "alt": "Andrew Alagna white water rafting adventure Costa Rica river rapids",
         "caption": "White-water rafting adventure through Costa Rican rapids"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-waterfall.webp",
+        "width": 1536,
+        "height": 2048,
         "alt": "Andrew Alagna Costa Rica jungle waterfall rainforest photography",
         "caption": "Majestic waterfall cascading through the jungle"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-cloud-forest.webp",
+        "width": 1024,
+        "height": 768,
         "alt": "Andrew Alagna Costa Rica cloud forest lush vegetation Monteverde",
         "caption": "Lush cloud forest scenery in Monteverde"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-beach.webp",
+        "width": 2048,
+        "height": 1536,
         "alt": "Andrew Alagna Costa Rica Pacific coast beach palm trees photography",
         "caption": "Beautiful Pacific coast beach with palm trees"
       },
       {
         "url": "/images/travel/costa-rica/andrew-alagna-lizard-rainforest.webp",
+        "width": 768,
+        "height": 1024,
         "alt": "Andrew Alagna lizard gecko tree trunk rainforest wildlife Costa Rica",
         "caption": "Camouflaged lizard spotted on a tree trunk in the rainforest"
       }

@@ -10,7 +10,7 @@ paths:
 # Travel Rules
 
 - Put optimized WebP photos under `public/images/travel/<trip-folder>/`.
-- Keep every photo URL, alt text, and caption in `src/data/structured/trips.json`.
+- Keep every photo URL, width, height, alt text, and caption in `src/data/structured/trips.json`. The gallery sizes each tile from width/height, and `scripts/gallery-layout.test.mjs` fails if a photo is missing them (`ffprobe -v error -show_entries stream=width,height -of csv=p=0 <file>`).
 - Keep trip IDs stable because URL hashes and AI chat links depend on them.
 - Reuse the existing gallery, lightbox, image-loading, keyboard, and reduced-motion patterns.
 - If chat should mention a new destination, update `src/data/context/biography.ts` and run `npm run sync-context`.

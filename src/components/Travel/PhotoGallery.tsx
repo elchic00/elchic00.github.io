@@ -4,6 +4,8 @@ import {
   useRef,
   useCallback,
   useId,
+  useLayoutEffect,
+  useMemo,
   TouchEvent,
   MouseEvent,
 } from "react";
@@ -11,15 +13,33 @@ import { createPortal } from "react-dom";
 import { ZoomInIcon, ZoomOutIcon, PlayIcon } from "@heroicons/react/solid";
 import { Photo } from "../../types";
 import { ImageWithLoader } from "../shared/ImageWithLoader";
-import { getGalleryItemLayout, getTripPatternOffset } from "./galleryLayout";
+import { getTileAspect, justifyRows } from "./galleryLayout";
 
 interface PhotoGalleryProps {
   photos: Photo[];
-  tripId?: string;
 }
 
-export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, tripId = "" }) => {
-  const patternOffset = getTripPatternOffset(tripId);
+export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos }) => {
+  const galleryRef = useRef<HTMLDivElement | null>(null);
+  const [galleryWidth, setGalleryWidth] = useState(0);
+
+  useLayoutEffect(() => {
+    const el = galleryRef.current;
+    if (!el) return;
+    const update = () => setGalleryWidth(el.clientWidth);
+    update();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const gap = galleryWidth < 640 ? 12 : 16;
+  const targetRowHeight = galleryWidth < 640 ? 170 : galleryWidth < 900 ? 220 : 260;
+  const rows = useMemo(
+    () => justifyRows(photos.map(getTileAspect), galleryWidth, targetRowHeight, gap),
+    [photos, galleryWidth, targetRowHeight, gap]
+  );
   const galleryId = useId();
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -194,26 +214,41 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, tripId = "" 
 
   return (
     <>
-      <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-4">
-        {photos.map((photo, index) => {
-          const layout = getGalleryItemLayout(index, photos.length, patternOffset);
+      {/*
+        Justified rows: tiles in a row share one height and fill the width
+        exactly (flex-grow = aspect ratio), so nothing is cropped and there
+        are no ragged edges. Visual order matches DOM and lightbox order.
+      */}
+      <div ref={galleryRef} className="flex flex-col" style={{ gap }}>
+        {rows.map((row, rowIndex) => (
+        <div key={rowIndex} className="flex" style={{ gap }}>
+        {row.indices.map((index) => {
+          const photo = photos[index];
+          const aspect = getTileAspect(photo);
           const captionId = `${galleryId}-caption-${index}`;
 
           return (
             <button
               key={index}
               onClick={(e) => openPhoto(photo, index, e.currentTarget)}
+              style={
+                row.partial
+                  ? { width: aspect * row.height, flex: "none" }
+                  : { flex: `${aspect} 1 0%` }
+              }
               className={`
-                group relative mb-4 block w-full break-inside-avoid overflow-hidden rounded-[1.25rem]
+                group relative block min-w-0 overflow-hidden rounded-[1.25rem]
                 bg-slate-900 text-left transition-transform duration-300
                 hover:scale-[1.01] focus-ring
-                ${layout.itemClass}
               `}
               aria-label={`View ${photo.alt}`}
               aria-describedby={captionId}
             >
               <figure className="relative w-full">
-                <div className={`relative w-full overflow-hidden ${layout.imageClass}`}>
+                <div
+                  className="relative w-full overflow-hidden"
+                  style={{ aspectRatio: aspect }}
+                >
                   <ImageWithLoader
                     src={photo.url}
                     alt={photo.alt}
@@ -230,18 +265,21 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ photos, tripId = "" 
                 </div>
 
                 <div
-                  className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-85 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100"
+                  className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-slate-950/85 to-transparent"
                   aria-hidden="true"
                 />
-                <figcaption className="absolute inset-x-0 bottom-0 p-3 sm:p-4" id={captionId}>
-                  <span className="block max-w-2xl rounded-xl border border-white/10 bg-slate-950/45 px-3 py-2 text-xs font-medium leading-relaxed text-white shadow-lg backdrop-blur-sm sm:text-sm">
-                    {photo.caption}
-                  </span>
+                <figcaption
+                  className="absolute inset-x-0 bottom-0 px-3 pb-2.5 text-xs font-medium leading-snug text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8)] sm:px-4 sm:pb-3 sm:text-sm"
+                  id={captionId}
+                >
+                  {photo.caption}
                 </figcaption>
               </figure>
             </button>
           );
         })}
+        </div>
+        ))}
       </div>
 
       {selectedPhoto &&

@@ -1,50 +1,37 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import {
-  EDITORIAL_GALLERY_LAYOUTS,
-  countLayoutsByCategory,
-  getGalleryItemLayout,
-  getTripPatternOffset,
+  getTileAspect,
+  justifyRows,
+  MIN_TILE_ASPECT,
+  MAX_TILE_ASPECT,
+  FALLBACK_TILE_ASPECT,
 } from "../src/components/Travel/galleryLayout.ts";
 
-assert.ok(EDITORIAL_GALLERY_LAYOUTS.length > 6);
+assert.ok(Math.abs(getTileAspect({ width: 1920, height: 1080 }) - 16 / 9) < 1e-9);
+assert.equal(getTileAspect({ width: 4000, height: 900 }), MAX_TILE_ASPECT);
+assert.equal(getTileAspect({ width: 500, height: 2000 }), MIN_TILE_ASPECT);
+assert.equal(getTileAspect({}), FALLBACK_TILE_ASPECT);
 
-const categoryCounts = countLayoutsByCategory();
-assert.deepEqual(Object.keys(categoryCounts).sort(), ["large", "small", "tall", "wide"]);
-assert.equal(
-  Object.values(categoryCounts).reduce((sum, count) => sum + count, 0),
-  EDITORIAL_GALLERY_LAYOUTS.length
-);
-
-for (const layout of EDITORIAL_GALLERY_LAYOUTS) {
-  assert.match(layout.imageClass, /aspect-/);
-  assert.doesNotMatch(layout.itemClass, /col-span|row-span/);
-  assert.doesNotMatch(layout.imageClass, /col-span|row-span/);
+// Justified rows: every photo once and in order, full rows fill the width,
+// and a lone trailing photo is folded into the row above.
+const aspects = [0.75, 1.78, 0.75, 1.33, 0.67, 1.78, 0.75, 1.33, 1.78, 0.75, 1.5];
+const rows = justifyRows(aspects, 960, 260, 16);
+assert.deepEqual(rows.flatMap((r) => r.indices), aspects.map((_, i) => i));
+for (const row of rows.filter((r) => !r.partial)) {
+  const w = row.indices.reduce((s, i) => s + aspects[i] * row.height, 0) + 16 * (row.indices.length - 1);
+  assert.ok(Math.abs(w - 960) < 1e-6, "full rows fill the width");
 }
+assert.ok(!justifyRows([1.78, 1.78, 1.78, 0.75], 960, 260, 16).some((r) => r.partial && r.indices.length === 1));
 
-assert.equal(getGalleryItemLayout(-1), EDITORIAL_GALLERY_LAYOUTS[EDITORIAL_GALLERY_LAYOUTS.length - 1]);
-
-const patternLength = EDITORIAL_GALLERY_LAYOUTS.length;
-assert.equal(getGalleryItemLayout(patternLength), getGalleryItemLayout(0));
-assert.equal(getGalleryItemLayout(patternLength + 1), getGalleryItemLayout(1));
-
-const rhythm = new Set(
-  Array.from({ length: 8 }, (_, index) => getGalleryItemLayout(index, 8).category)
+// Every photo needs real dimensions, or its tile falls back to a guessed shape.
+const trips = JSON.parse(
+  readFileSync(new URL("../src/data/structured/trips.json", import.meta.url), "utf8")
 );
-assert.ok(rhythm.size >= 3, "short galleries should sample a varied editorial rhythm");
-
-const offsetA = getTripPatternOffset("japan-2024");
-const offsetB = getTripPatternOffset("ecuador-2024");
-assert.ok(offsetA >= 0 && offsetA < patternLength);
-assert.ok(offsetB >= 0 && offsetB < patternLength);
-if (offsetA !== offsetB) {
-  const layoutsA = Array.from({ length: 4 }, (_, index) => getGalleryItemLayout(index, 12, offsetA).category);
-  const layoutsB = Array.from({ length: 4 }, (_, index) => getGalleryItemLayout(index, 12, offsetB).category);
-  assert.notDeepEqual(layoutsA, layoutsB);
+for (const trip of trips) {
+  for (const photo of trip.photos) {
+    assert.ok(photo.width > 0 && photo.height > 0, `missing dimensions: ${photo.url}`);
+  }
 }
-
-const fallback = getGalleryItemLayout(47);
-assert.equal(typeof fallback.itemClass, "string");
-assert.equal(typeof fallback.imageClass, "string");
-assert.ok(["large", "wide", "tall", "small"].includes(fallback.category));
 
 console.log("gallery layout helper checks passed");

@@ -1,175 +1,64 @@
 import { describe, it, expect } from "vitest";
 import {
-  getGalleryItemLayout,
-  getTripPatternOffset,
-  EDITORIAL_GALLERY_LAYOUTS,
-  countLayoutsByCategory,
+  getTileAspect,
+  justifyRows,
+  MIN_TILE_ASPECT,
+  MAX_TILE_ASPECT,
+  FALLBACK_TILE_ASPECT,
 } from "./galleryLayout";
+import trips from "../../data/structured/trips.json";
 
-describe("galleryLayout", () => {
-  describe("EDITORIAL_GALLERY_LAYOUTS", () => {
-    it("has more than 6 layouts for varied rhythm", () => {
-      expect(EDITORIAL_GALLERY_LAYOUTS.length).toBeGreaterThan(6);
-    });
-
-    it("includes all four layout categories: large, wide, tall, small", () => {
-      const categories = countLayoutsByCategory();
-      expect(categories.large).toBeGreaterThan(0);
-      expect(categories.wide).toBeGreaterThan(0);
-      expect(categories.tall).toBeGreaterThan(0);
-      expect(categories.small).toBeGreaterThan(0);
-    });
-
-    it("has a balanced distribution - no single category dominates", () => {
-      const categories = countLayoutsByCategory();
-      const total = EDITORIAL_GALLERY_LAYOUTS.length;
-      const values = Object.values(categories);
-      for (const count of values) {
-        expect(count / total).toBeLessThanOrEqual(0.5);
-      }
-    });
-
-    // Masonry columns (CSS `columns-*` + `break-inside-avoid`), not CSS Grid —
-    // variety comes from aspect ratio per item, not col/row spans. Grid with
-    // mixed spans in row-major auto-flow left real, unfillable gaps even with
-    // grid-flow-dense (confirmed visually 2026-07-04); masonry columns pack
-    // tightly by construction.
-    it("every layout has an aspect-ratio image class, no grid span classes", () => {
-      for (const layout of EDITORIAL_GALLERY_LAYOUTS) {
-        expect(layout.imageClass).toMatch(/aspect-/);
-        expect(layout.itemClass).not.toMatch(/col-span|row-span/);
-        expect(layout.imageClass).not.toMatch(/col-span|row-span/);
-      }
-    });
-
-    it("large layouts use a taller-than-square aspect ratio", () => {
-      for (const layout of EDITORIAL_GALLERY_LAYOUTS) {
-        if (layout.category === "large") {
-          expect(layout.imageClass).toBe("aspect-[4/5]");
-        }
-      }
-    });
-
-    it("wide layouts use a landscape aspect ratio", () => {
-      for (const layout of EDITORIAL_GALLERY_LAYOUTS) {
-        if (layout.category === "wide") {
-          expect(layout.imageClass).toBe("aspect-[16/9]");
-        }
-      }
-    });
-
-    it("tall layouts use the most vertical aspect ratio", () => {
-      for (const layout of EDITORIAL_GALLERY_LAYOUTS) {
-        if (layout.category === "tall") {
-          expect(layout.imageClass).toBe("aspect-[2/3]");
-        }
-      }
-    });
-
-    it("small layouts are square", () => {
-      for (const layout of EDITORIAL_GALLERY_LAYOUTS) {
-        if (layout.category === "small") {
-          expect(layout.imageClass).toBe("aspect-square");
-        }
-      }
-    });
+describe("getTileAspect", () => {
+  it("uses the photo's own ratio when it's inside the clamp", () => {
+    expect(getTileAspect({ width: 1920, height: 1080 })).toBeCloseTo(16 / 9);
+    expect(getTileAspect({ width: 1536, height: 2048 })).toBeCloseTo(3 / 4);
   });
 
-  describe("getGalleryItemLayout", () => {
-    it("returns a GalleryItemLayout with required fields", () => {
-      const layout = getGalleryItemLayout(0);
-      expect(layout).toHaveProperty("itemClass");
-      expect(layout).toHaveProperty("imageClass");
-      expect(layout).toHaveProperty("category");
-    });
+  it("clamps panoramas and very tall shots", () => {
+    expect(getTileAspect({ width: 4000, height: 900 })).toBe(MAX_TILE_ASPECT);
+    expect(getTileAspect({ width: 500, height: 2000 })).toBe(MIN_TILE_ASPECT);
+  });
 
-    it("cycles through layouts deterministically", () => {
-      const layoutA = getGalleryItemLayout(0);
-      const layoutB = getGalleryItemLayout(0);
-      expect(layoutA).toEqual(layoutB);
-    });
+  it("falls back when dimensions are missing", () => {
+    expect(getTileAspect({})).toBe(FALLBACK_TILE_ASPECT);
+    expect(getTileAspect({ width: 0, height: 100 })).toBe(FALLBACK_TILE_ASPECT);
+  });
 
-    it("handles negative indices gracefully", () => {
-      expect(() => getGalleryItemLayout(-1)).not.toThrow();
-      expect(getGalleryItemLayout(-1)).toEqual(
-        EDITORIAL_GALLERY_LAYOUTS[EDITORIAL_GALLERY_LAYOUTS.length - 1]
-      );
-    });
-
-    it("wraps around after the pattern length when total equals pattern length", () => {
-      const length = EDITORIAL_GALLERY_LAYOUTS.length;
-      expect(getGalleryItemLayout(length)).toEqual(getGalleryItemLayout(0));
-      expect(getGalleryItemLayout(length + 1)).toEqual(getGalleryItemLayout(1));
-    });
-
-    it("handles very large indices without crashing", () => {
-      expect(() => getGalleryItemLayout(9999)).not.toThrow();
-    });
-
-    // Regression coverage for the real bug found 2026-07-04: a short gallery
-    // (8 photos) was getting a raw truncated slice of the 12-item pattern,
-    // landing on 2 of the 2 "wide" beats by chance; a long gallery (15
-    // photos) wrapped and abruptly restarted the pattern from index 0.
-    it("maps proportionally across the full pattern for a short gallery (does not just truncate)", () => {
-      const total = 8;
-      const seenCategories = new Set(
-        Array.from({ length: total }, (_, i) => getGalleryItemLayout(i, total).category)
-      );
-      // A representative proportional sample of 8 items across a balanced
-      // 12-item pattern should still surface at least 3 of the 4 categories,
-      // not collapse onto 1-2 from a truncated prefix.
-      expect(seenCategories.size).toBeGreaterThanOrEqual(3);
-    });
-
-    it("does not abruptly reset to index 0's category right after the pattern length for a long gallery", () => {
-      const total = 15;
-      const patternLength = EDITORIAL_GALLERY_LAYOUTS.length;
-      const lastOfFirstCycle = getGalleryItemLayout(patternLength - 1, total);
-      const firstOfSecondCycle = getGalleryItemLayout(patternLength, total);
-      // With proportional mapping these should not necessarily be identical
-      // to the raw index-0 layout (that would indicate a hard reset).
-      expect(firstOfSecondCycle).not.toBe(getGalleryItemLayout(0, total));
-      expect(lastOfFirstCycle).toBeDefined();
-    });
-
-    it("applies a per-trip offset so two trips don't share an identical opening rhythm", () => {
-      const offsetA = getTripPatternOffset("japan-2024");
-      const offsetB = getTripPatternOffset("ecuador-2024");
-      const layoutsA = Array.from({ length: 4 }, (_, i) => getGalleryItemLayout(i, 12, offsetA).category);
-      const layoutsB = Array.from({ length: 4 }, (_, i) => getGalleryItemLayout(i, 12, offsetB).category);
-      // Not a strict guarantee for every possible pair (hash collisions are
-      // possible), but this specific pair should differ given the offsets.
-      if (offsetA !== offsetB) {
-        expect(layoutsA).not.toEqual(layoutsB);
+  it("every trip photo has dimensions, so no tile relies on the fallback", () => {
+    for (const trip of trips) {
+      for (const photo of trip.photos) {
+        expect(photo.width, photo.url).toBeGreaterThan(0);
+        expect(photo.height, photo.url).toBeGreaterThan(0);
       }
-    });
+    }
+  });
+});
+
+
+describe("justifyRows", () => {
+  const aspects = [0.75, 1.78, 0.75, 1.33, 0.67, 1.78, 0.75, 1.33, 1.78, 0.75, 1.5];
+  const width = 960;
+  const gap = 16;
+  const rowWidth = (indices: number[], height: number) =>
+    indices.reduce((sum, i) => sum + aspects[i] * height, 0) + gap * (indices.length - 1);
+
+  it("places every photo exactly once, in order", () => {
+    const rows = justifyRows(aspects, width, 260, gap);
+    expect(rows.flatMap((r) => r.indices)).toEqual(aspects.map((_, i) => i));
   });
 
-  describe("getTripPatternOffset", () => {
-    it("is deterministic for the same trip id", () => {
-      expect(getTripPatternOffset("japan-2024")).toBe(getTripPatternOffset("japan-2024"));
-    });
-
-    it("returns a value within the pattern length range", () => {
-      const offset = getTripPatternOffset("costarica-2023");
-      expect(offset).toBeGreaterThanOrEqual(0);
-      expect(offset).toBeLessThan(EDITORIAL_GALLERY_LAYOUTS.length);
-    });
+  it("makes every full row exactly fill the width", () => {
+    for (const row of justifyRows(aspects, width, 260, gap).filter((r) => !r.partial)) {
+      expect(rowWidth(row.indices, row.height)).toBeCloseTo(width);
+    }
   });
 
-  describe("countLayoutsByCategory", () => {
-    it("returns counts that sum to the total number of layouts", () => {
-      const counts = countLayoutsByCategory();
-      const total = Object.values(counts).reduce((sum: number, n: number) => sum + n, 0);
-      expect(total).toBe(EDITORIAL_GALLERY_LAYOUTS.length);
-    });
+  it("folds a lone trailing photo into the row above", () => {
+    const rows = justifyRows([1.78, 1.78, 1.78, 0.75], width, 260, gap);
+    expect(rows.some((r) => r.partial && r.indices.length === 1)).toBe(false);
+  });
 
-    it("returns an object with keys for each category", () => {
-      const counts = countLayoutsByCategory();
-      expect(counts).toHaveProperty("large");
-      expect(counts).toHaveProperty("wide");
-      expect(counts).toHaveProperty("tall");
-      expect(counts).toHaveProperty("small");
-    });
+  it("returns no rows before the container is measured", () => {
+    expect(justifyRows(aspects, 0, 260, gap)).toEqual([]);
   });
 });
