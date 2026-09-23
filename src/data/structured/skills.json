@@ -2,7 +2,7 @@
   "Frontend Architecture & Systems": [
     "React.js",
     "TypeScript",
-    "Custom Hooks (11+)",
+    "Custom React Hooks",
     "Design Systems",
     "Vite",
     "Component Libraries"
@@ -25,8 +25,7 @@
     "Web Accessibility (WCAG)",
     "Web Performance Engineering",
     "A/B Testing",
-    "Cross-team Collaboration",
-    "Comprehensive Test Coverage"
+    "Automated Testing (Playwright, pytest)"
   ],
     "AI Orchestration": [
     "Cloud AI Integration (Gemini, OpenAI, Anthropic, Kimi)",
