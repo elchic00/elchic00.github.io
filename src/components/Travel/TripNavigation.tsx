@@ -81,7 +81,7 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
         />
         <div
           ref={navContainerRef}
-          className={`flex items-center gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-transparent lg:justify-center ${
+          className={`flex items-center gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-transparent lg:flex-wrap lg:justify-center ${
             isSticky ? "py-2 lg:py-1.5" : "py-3"
           }`}
         >
@@ -115,7 +115,7 @@ export const TripNavigation: React.FC<TripNavigationProps> = ({
                   transition-all duration-300 flex items-center gap-1.5
                   ${
                     isActive
-                      ? "bg-cyan-600 text-white shadow-lg scale-105"
+                      ? "bg-cyan-400 text-slate-950 shadow-lg scale-105"
                       : "bg-slate-700/50 text-slate-300 hover:bg-slate-700 hover:text-white hover:scale-105"
                   }
                   focus-ring
