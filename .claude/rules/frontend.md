@@ -21,7 +21,7 @@ paths:
 - Visible projects live in `src/data/structured/projects.json`; project media belongs under `public/images/projects/`.
 - If chat should know a project fact, update `public/knowledge/projects.json` as well.
 - If a project changes the broader portfolio narrative, update the relevant source under `src/data/context/` and run `npm run sync-context`.
-- UI skill categories live in `src/data/structured/skills.json`; tooltip copy lives in `skillTooltips.ts`; AI skill context lives in `src/data/context/skills.ts`.
+- UI skill categories live in `src/data/structured/skills.json`; AI skill context lives in `src/data/context/skills.ts`.
 
 ## Failure Boundaries
 

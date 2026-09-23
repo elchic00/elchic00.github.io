@@ -1,104 +1,49 @@
-import { LightningBoltIcon, DatabaseIcon, CogIcon, ChartBarIcon, SparklesIcon } from "@heroicons/react/solid";
 import skillsData from "../../data/structured/skills.json";
-import { skillTooltips } from "../../data/structured/skillTooltips";
 import { useScrollReveal } from "../../hooks";
-
-const categoryColors: Record<string, string> = {
-  "Frontend Architecture & Systems": "bg-cyan-600/20 text-cyan-400 border-cyan-500/30 hover:bg-cyan-600/30 hover:border-cyan-400/50 hover:shadow-cyan-500/20",
-  "Databases & Backend": "bg-emerald-600/20 text-emerald-400 border-emerald-500/30 hover:bg-emerald-600/30 hover:border-emerald-400/50 hover:shadow-emerald-500/20",
-  "Platform & DX Architecture": "bg-purple-600/20 text-purple-400 border-purple-500/30 hover:bg-purple-600/30 hover:border-purple-400/50 hover:shadow-purple-500/20",
-  "Practices & Methodologies": "bg-orange-600/20 text-orange-400 border-orange-500/30 hover:bg-orange-600/30 hover:border-orange-400/50 hover:shadow-orange-500/20",
-  "AI Orchestration": "bg-rose-600/20 text-rose-400 border-rose-500/30 hover:bg-rose-600/30 hover:border-rose-400/50 hover:shadow-rose-500/20",
-};
-
-const categoryBorderColors: Record<string, string> = {
-  "Frontend Architecture & Systems": "border-cyan-500",
-  "Databases & Backend": "border-emerald-500",
-  "Platform & DX Architecture": "border-purple-500",
-  "Practices & Methodologies": "border-orange-500",
-  "AI Orchestration": "border-rose-500",
-};
-
-const categoryIcons: Record<string, React.FC<{ className?: string }>> = {
-  "Frontend Architecture & Systems": LightningBoltIcon,
-  "Databases & Backend": DatabaseIcon,
-  "Platform & DX Architecture": CogIcon,
-  "Practices & Methodologies": ChartBarIcon,
-  "AI Orchestration": SparklesIcon,
-};
 
 export const Skills = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
-  const { ref: category1Ref, isVisible: category1Visible } = useScrollReveal();
-  const { ref: category2Ref, isVisible: category2Visible } = useScrollReveal();
-  const { ref: category3Ref, isVisible: category3Visible } = useScrollReveal();
-  const { ref: category4Ref, isVisible: category4Visible } = useScrollReveal();
-  const { ref: category5Ref, isVisible: category5Visible } = useScrollReveal();
-
-  const categoryRefs = [category1Ref, category2Ref, category3Ref, category4Ref, category5Ref];
-  const categoryVisibility = [category1Visible, category2Visible, category3Visible, category4Visible, category5Visible];
+  const { ref: listRef, isVisible: listVisible } = useScrollReveal();
 
   return (
     <section id="skills" className="relative py-20 sm:py-24 bg-slate-950">
-      {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
-
-      <div className="container px-5 mx-auto relative z-10">
+      <div className="container mx-auto px-5 sm:px-8 md:px-10">
         <div
           ref={headerRef}
-          className={`mb-20 scroll-reveal-scale ${headerVisible ? 'visible' : ''}`}
+          className={`mb-10 scroll-reveal ${headerVisible ? "visible" : ""}`}
         >
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
             Skills
           </p>
-          <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
+          <h2 className="text-3xl font-black tracking-tight text-white sm:text-5xl">
             Technical skills
           </h2>
-          <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
-            Specialized in building high-performance, WCAG AA-compliant web applications with React.js and Node.js — sharpened across four years of enterprise frontend at American Express and nights spent running a home AI lab that has to stay up.
-          </p>
         </div>
 
-        <div>
-          {Object.entries(skillsData).map(([category, skills], idx) => (
-            <div
-              key={category}
-              ref={categoryRefs[idx]}
-              className={`mb-12 scroll-reveal ${categoryVisibility[idx] ? 'visible' : ''}`}
-            >
-              <div className={`flex items-center gap-3 mb-5 border-l-4 ${categoryBorderColors[category]} pl-4`}>
-                {(() => {
-                  const IconComponent = categoryIcons[category];
-                  return IconComponent ? (
-                    <IconComponent className="w-6 h-6 text-current" aria-hidden="true" />
-                  ) : null;
-                })()}
-                <h3 className="text-xl font-bold text-white">
-                  {category}
-                </h3>
+        <div
+          ref={listRef}
+          className={`scroll-reveal ${listVisible ? "visible" : ""}`}
+        >
+          <dl className="max-w-5xl divide-y divide-white/10 border-y border-white/10">
+            {Object.entries(skillsData).map(([category, skills]) => (
+              <div
+                key={category}
+                className="grid gap-2 py-5 md:grid-cols-[16rem_1fr] md:gap-8"
+              >
+                <dt className="font-semibold text-white">{category}</dt>
+                <dd className="flex flex-wrap gap-2">
+                  {skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-md border border-white/10 bg-white/[0.04] px-2.5 py-1 text-sm text-slate-200"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </dd>
               </div>
-
-              <div className="flex flex-wrap gap-3">
-                {skills.map((skill, skillIdx) => (
-                  <span
-                    key={skill}
-                    className={`group relative px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:scale-110 hover:shadow-xl scroll-reveal-delay-${Math.min(skillIdx % 4 + 1, 4)} ${
-                      categoryColors[category] || "bg-slate-700/20 text-slate-300 border-slate-600/30"
-                    }`}
-                    title={skillTooltips[skill] || skill}
-                  >
-                    {skill}
-                    {skillTooltips[skill] && (
-                      <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-2 bg-slate-800 text-white text-xs rounded-lg whitespace-nowrap opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none shadow-xl border border-slate-700 z-50">
-                        {skillTooltips[skill]}
-                        <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-800"></span>
-                      </span>
-                    )}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+            ))}
+          </dl>
         </div>
       </div>
     </section>

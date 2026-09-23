@@ -48,7 +48,7 @@ Detailed architecture, component ownership, build behavior, and deployment surfa
 - Generated/deployed context destination: `worker/index.js`
 - Context sync script: `scripts/sync-portfolio-context.js`
 - Travel data: `src/data/structured/trips.json`
-- UI skills: `src/data/structured/skills.json` and `skillTooltips.ts`
+- UI skills: `src/data/structured/skills.json`
 
 The UI and AI project datasets are intentionally separate and are not identical. When project facts change, check both and update each one that should expose the change.
 

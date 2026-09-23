@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import emailjs from "@emailjs/browser";
-import { MailIcon, LightningBoltIcon, TrashIcon } from "@heroicons/react/solid";
+import { LightningBoltIcon, TrashIcon } from "@heroicons/react/solid";
 import { Button } from "../shared/Button";
 import { useAlert } from "../shared/Alert";
 import { useContactForm, useScrollReveal } from "../../hooks";
@@ -124,9 +124,8 @@ export const Contact: React.FC = () => {
             className={`lg:w-1/2 flex flex-col w-full md:py-3 mt-4 md:mt-0 bg-slate-900 rounded-2xl p-8 shadow-2xl border border-slate-800 scroll-reveal-scale ${formVisible ? "visible" : ""}`}
           >
             <div className="flex items-center justify-between mb-2">
-              <h2 className="text-white text-3xl sm:text-5xl font-black tracking-tight flex items-center gap-2">
-                Contact Me{" "}
-                <MailIcon className="w-10 h-10 inline-block text-gray-300" aria-hidden="true" />
+              <h2 className="text-white text-2xl sm:text-3xl font-bold tracking-tight">
+                Send a message
               </h2>
               {contactForm.hasDraft && (
                 <button

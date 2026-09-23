@@ -27,7 +27,6 @@ Visible portfolio data:
 
 - `src/data/structured/projects.json`: project cards, media, links, IDs, and technologies.
 - `src/data/structured/skills.json`: displayed skill categories.
-- `src/data/structured/skillTooltips.ts`: extra skill descriptions.
 - `src/data/structured/trips.json`: trip metadata, photo URLs, alt text, and captions.
 - `src/data/structured/messageTemplates.json`: contact-form quick-fill templates.
 

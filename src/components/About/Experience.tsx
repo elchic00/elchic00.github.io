@@ -1,7 +1,6 @@
 import {
   BriefcaseIcon,
   AcademicCapIcon,
-  CheckCircleIcon,
 } from "@heroicons/react/solid";
 import { useScrollReveal } from "../../hooks";
 
@@ -13,7 +12,6 @@ interface ExperienceItemProps {
   icon?: React.ReactNode;
   highlights: string[];
   stats?: string[];
-  type: "work" | "mentorship";
 }
 
 const ExperienceItem: React.FC<ExperienceItemProps> = ({
@@ -24,53 +22,37 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
   icon,
   highlights,
   stats,
-  type,
 }) => {
-  const isWork = type === "work";
 
   return (
     <article
-      className={`bg-gradient-to-br ${
-        isWork
-          ? "from-slate-800 to-slate-900 border-cyan-500/30"
-          : "from-slate-800/80 to-slate-900/80 border-purple-500/30"
-      } border-2 rounded-2xl p-6 md:p-8 shadow-xl hover:shadow-2xl hover:shadow-cyan-500/20 transition-all duration-500 hover:scale-[1.02]`}
+      className="rounded-2xl border border-white/10 bg-slate-900/70 p-6 md:p-8"
     >
       <div className="flex items-start gap-4 mb-6">
         <div
-          className={`flex-shrink-0 w-12 h-12 md:w-16 md:h-16 rounded-xl ${
-            isWork ? "bg-cyan-600/20" : "bg-purple-600/20"
-          } flex items-center justify-center`}
+          className="flex-shrink-0 w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center"
         >
           {logo ? (
             <img
               src={logo}
               alt={`${company} logo`}
-              className="w-8 h-8 md:w-10 md:h-10 object-contain"
+              className="w-7 h-7 object-contain"
             />
           ) : (
-            <div
-              className={`${
-                isWork ? "text-cyan-400" : "text-purple-400"
-              } w-8 h-8 md:w-10 md:h-10`}
-            >
+            <div className="text-cyan-300 w-6 h-6">
               {icon}
             </div>
           )}
         </div>
 
         <div className="flex-grow">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-1">
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-1">
             {role}
           </h3>
-          <p
-            className={`text-lg md:text-xl font-semibold mb-1 ${
-              isWork ? "text-cyan-400" : "text-purple-400"
-            }`}
-          >
+          <p className="text-base md:text-lg font-semibold text-cyan-300 mb-1">
             {company}
           </p>
-          <p className="text-slate-400 text-sm md:text-base">{period}</p>
+          <p className="text-slate-400 text-sm">{period}</p>
         </div>
       </div>
 
@@ -79,11 +61,7 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
           {stats.map((stat) => (
             <span
               key={stat}
-              className={`px-4 py-2 rounded-full text-sm font-semibold border ${
-                isWork
-                  ? "bg-cyan-600/20 text-cyan-400 border-cyan-500/30"
-                  : "bg-purple-600/20 text-purple-400 border-purple-500/30"
-              }`}
+              className="px-3 py-1 rounded-full text-sm font-medium border border-white/10 bg-white/[0.04] text-slate-200"
             >
               {stat}
             </span>
@@ -94,12 +72,11 @@ const ExperienceItem: React.FC<ExperienceItemProps> = ({
       <ul className="space-y-3">
         {highlights.map((highlight, idx) => (
           <li key={idx} className="flex items-start gap-3">
-            <CheckCircleIcon
-              className={`w-5 h-5 md:w-6 md:h-6 flex-shrink-0 mt-0.5 ${
-                isWork ? "text-cyan-500" : "text-purple-500"
-              }`}
+            <span
+              className="mt-[0.6rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400/70"
+              aria-hidden="true"
             />
-            <span className="text-slate-300 text-base md:text-lg leading-relaxed">
+            <span className="text-slate-300 leading-relaxed">
               {highlight}
             </span>
           </li>
@@ -120,7 +97,6 @@ export const Experience = () => {
       company: "American Express",
       role: "Software Engineer — Overview Team",
       period: "Early 2026 - Present",
-      type: "work",
       highlights: [
         "Owns frontend architecture for the Overview page — an aggregate view of everything a logged-in American Express cardholder has, surfacing account summaries, reward balances, personalized offers, and spend-habit insights as tiles",
         "Built Ghost Accounts end-to-end: a feature surfacing products a cardholder doesn't yet have but is likely to want, visually distinct from real account tiles",
@@ -133,7 +109,6 @@ export const Experience = () => {
       company: "American Express",
       role: "Software Engineer — Account Services",
       period: "August 2022 - Early 2026",
-      type: "work",
       stats: [
         "100% WCAG AA",
         "~5M annual updates",
@@ -155,7 +130,6 @@ export const Experience = () => {
       company: "CodePath",
       role: "Technical Mentor & Teaching Assistant",
       period: "June 2021 - Present",
-      type: "mentorship",
       stats: ["300+ students taught", "5+ years"],
       highlights: [
         "Leading weekly mentorship sessions for 5 students in open source contribution, teaching GitHub workflows and utilizing AI to understand codebases",
@@ -167,7 +141,6 @@ export const Experience = () => {
       company: "CUNY: Hunter College",
       role: "Alumni Mentor",
       period: "2025 - Present",
-      type: "mentorship",
       highlights: [
         "Providing 1-on-1 career mentorship to current students on side project ideation and resume optimization",
         "Guiding students through technical interviews and navigating the tech job market",
@@ -179,7 +152,7 @@ export const Experience = () => {
   return (
     <section
       id="experience"
-      className="relative min-h-screen pt-20 pb-12 bg-slate-950"
+      className="relative pt-20 pb-20 bg-slate-950"
     >
       {/* Subtle gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
@@ -209,7 +182,7 @@ export const Experience = () => {
         {/* Work Experience */}
         <div
           ref={workRef}
-          className={`mb-12 md:mb-16 grid gap-6 md:gap-8 scroll-reveal ${
+          className={`mb-12 md:mb-16 grid max-w-4xl gap-6 scroll-reveal ${
             workVisible ? "visible" : ""
           }`}
         >
@@ -229,15 +202,12 @@ export const Experience = () => {
             mentorshipHeaderVisible ? "visible" : ""
           }`}
         >
-          <div className="flex items-center gap-3 mb-8">
-            <AcademicCapIcon className="w-8 h-8 md:w-10 md:h-10 text-purple-400" />
-            <h3 className="text-3xl md:text-4xl font-bold text-white">
-              Mentorship & Teaching
-            </h3>
-          </div>
+          <h3 className="text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
+            Mentorship & teaching
+          </h3>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 md:items-start md:gap-8">
+        <div className="grid max-w-4xl gap-6 md:grid-cols-2 md:items-start">
           {mentorshipExperience.map((exp, idx) => (
             <ExperienceItem
               key={idx}
