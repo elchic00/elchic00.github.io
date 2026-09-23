@@ -15,7 +15,7 @@ const ChatbotCaseStudy = () => (
     ]}
     repoLink={{ href: "https://github.com/elchic00/elchic00.github.io", label: "View Source" }}
   >
-    <Section title="What It Is">
+    <Section title="What it is">
       <p>
         It's the chat button in the bottom-right corner of this page — try it while you're
         here, that's the whole demo. I built an assistant that answers questions about my
@@ -68,7 +68,7 @@ const ChatbotCaseStudy = () => (
       <Stat value="$0" label="Marginal Cost / Call" />
     </StatRow>
 
-    <Section title="The Retrieval Decision (And Un-Decision)">
+    <Section title="The retrieval decision (and un-decision)">
       <p>
         The interesting decision here isn't the model, it's the retrieval. When someone
         asks about a project, the Worker has to ground Gemini's answer in the right details
@@ -100,16 +100,7 @@ const ChatbotCaseStudy = () => (
       </p>
     </Section>
 
-    <Callout title="Why This Is the Story Worth Telling">
-      <p>
-        This is the one project on this site you can verify without trusting a repo — the
-        chat box in the corner is the whole demo. It's also a concrete engineering
-        decision, not a default: match the retrieval strategy to the actual size and shape
-        of the content, and don't reach for infrastructure the problem doesn't need.
-      </p>
-    </Callout>
-
-    <Section title="From Free Text to Real UI">
+    <Section title="From free text to real UI">
       <p>
         Gemini's response isn't just prose — it can end with an action marker like{" "}
         <code>[ACTIONS: view_resume]</code>, and the frontend parses that into a real

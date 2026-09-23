@@ -7,7 +7,7 @@ const HermesCaseStudy = () => (
     tech={["hermes-agent", "Langfuse", "LiteLLM", "Telegram", "HITL", "Evals", "Obsidian", "Cron", "LLM-as-Judge"]}
     repoLink={{ href: "https://github.com/NousResearch/hermes-agent", label: "hermes-agent on GitHub (Nous Research)" }}
   >
-    <Section title="Why This Exists">
+    <Section title="Why this exists">
       <p>
         None of this started as a plan. A Mac Mini bought for a desktop, a Raspberry Pi to stop
         paying for SaaS, then an inference box to wire it all together — at some point three
@@ -58,7 +58,7 @@ const HermesCaseStudy = () => (
       </p>
     </Section>
 
-    <Section title="The Eval Loop and Self-Improvement">
+    <Section title="The eval loop and self-improvement">
       <p>
         This part is mine, not the harness's. A nightly cron pulls every conversation's execution
         trace from Langfuse and has an LLM judge score it on three criteria: <code>task_completed</code>{" "}
@@ -183,7 +183,7 @@ const HermesCaseStudy = () => (
       </p>
     </Callout>
 
-    <Section title="Honest Limitations">
+    <Section title="Limitations">
       <ul>
         <li>
           <strong>The judge scores aren't trustworthy yet, and I measured that instead of

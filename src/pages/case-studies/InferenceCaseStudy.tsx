@@ -10,7 +10,7 @@ import {
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
     title="Inference Engine"
-    subtitle="Three models resident on one box, serving every agent I run at $0 marginal cost per call — a from-source llama.cpp build on GPU hardware the project doesn't officially list as supported. Standardizing on Qwen 3.8 27B delivers high-tier reasoning depth across parallel execution slots."
+    subtitle="Three models resident on one box, serving every agent I run at $0 marginal cost per call — a from-source llama.cpp build on GPU hardware the project doesn't officially list as supported."
     tech={[
       "llama.cpp",
       "ROCm",
@@ -26,12 +26,11 @@ const InferenceCaseStudy = () => (
       "Langfuse",
     ]}
   >
-    <Section title="What Unmetered Inference Buys">
+    <Section title="What unmetered inference buys">
       <p>
         Whole workloads exist only because they're free. Every call is traced,
         and a nightly eval loop grades a sample and clusters low-quality turns —
-        a metering-hostile pattern that pays twice for every request worth
-        keeping. Voice memos get transcribed with speaker diarization the moment
+        a pattern that would double the bill on any metered API. Voice memos get transcribed with speaker diarization the moment
         they land; screenshots go to a vision model without me weighing whether
         this one is worth it. None of it is rented, so none of it can become
         someone else's outage, deprecation notice, or repricing — and nothing
@@ -43,11 +42,9 @@ const InferenceCaseStudy = () => (
           Framework Desktop (Ryzen AI Max+ 395, 128GB unified memory, Radeon
           gfx1151)
         </strong>{" "}
-        — an APU architecture llama.cpp doesn't officially support.
-        Standardizing solely on <strong>Qwen 3.8 27B</strong> as the primary
-        text backbone provides strong reasoning capability and reliable
-        tool-calling while keeping memory utilization optimized. This leaves
-        enough VRAM for parallel text slots and a resident vision model
+        — an APU architecture llama.cpp doesn't officially support. One text
+        model, <strong>Qwen 3.8 27B</strong>, handles all reasoning and tool
+        calls, which leaves enough memory for a resident vision model
         (Qwen3-VL). Getting there meant building the serving engine from source
         (<code>GGML_HIP=ON</code>, <code>AMDGPU_TARGETS=gfx1151</code>) behind a
         LiteLLM router that handles failover to cloud fallbacks when required.
@@ -72,7 +69,7 @@ const InferenceCaseStudy = () => (
       />
     </Section>
 
-    <Section title="The Hardware Problem: An Allocator Bug Disguised as a VRAM Limit">
+    <Section title="The hardware problem: an allocator bug disguised as a VRAM limit">
       <p>
         Early testing on high-parameter models hit a ceiling where offloading
         additional GPU layers caused generation speed to plummet to ~0.01
@@ -94,7 +91,7 @@ const InferenceCaseStudy = () => (
       </p>
     </Section>
 
-    <Section title="Speculative Decoding: Beating a Bandwidth Wall">
+    <Section title="Speculative decoding: beating a bandwidth wall">
       <p>
         Because Qwen 3.8 27B is a dense model where every parameter executes on
         every token, inference is strictly bandwidth-bound during generation. At
@@ -162,8 +159,7 @@ const InferenceCaseStudy = () => (
         the rebase was never the cause on either build. The underlying failure
         is a model- and template-layer issue that persists on every build at a
         residual ~2.5–3.3% rate, mitigated at the prompt layer rather than
-        eliminated. Knowing exactly where I still don't have full control is
-        worth more than a clean-sounding resolution.
+        eliminated.
       </p>
     </Callout>
 
@@ -195,7 +191,7 @@ const InferenceCaseStudy = () => (
       </p>
     </Callout>
 
-    <Section title="The Silent Failure Mode: GPU Layers Loading Onto CPU After Reboot">
+    <Section title="The silent failure: GPU layers loading onto CPU after reboot">
       <p>
         Reboots occasionally caused all model daemons to come back up reporting
         healthy while silently running strictly on CPU. The service returned
@@ -234,7 +230,7 @@ const InferenceCaseStudy = () => (
       </p>
     </Callout>
 
-    <Section title="Honest Limitations">
+    <Section title="Limitations">
       <p>
         A 128GB unified memory architecture is flexible, but it defines a
         physical budget, and every model on the box draws from it. When I

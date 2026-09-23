@@ -6,7 +6,7 @@ const JobfitCaseStudy = () => (
     subtitle="A LangGraph pipeline that discovers, filters, and scores real job postings against my own portfolio — calibrated to tell me no, not to flatter me."
     tech={["LangGraph", "Python", "FastAPI", "Pydantic", "Langfuse", "SQLite", "pytest", "LLM-as-Judge", "Local Inference"]}
   >
-    <Section title="The Problem">
+    <Section title="The problem">
       <p>
         Evaluating job postings honestly is harder than it sounds: read enough of them and every
         role starts to look like a plausible fit. I built a pipeline that does the first pass
@@ -49,7 +49,7 @@ const JobfitCaseStudy = () => (
       </p>
     </Section>
 
-    <Section title="What Broke, and How I Found It">
+    <Section title="What broke, and how I found it">
       <Callout title="The board that looked healthy for months">
         <p>
           One ATS board silently migrated from one provider to another. The old integration kept
@@ -105,7 +105,7 @@ const JobfitCaseStudy = () => (
       </Callout>
     </Section>
 
-    <Section title="Results & Scale">
+    <Section title="Results and scale">
       <StatRow>
         <Stat value="13" label="ATS boards polled" />
         <Stat value="324" label="passing tests (portable engine)" />
@@ -132,7 +132,7 @@ const JobfitCaseStudy = () => (
       </p>
     </Section>
 
-    <Section title="What It Actually Produces">
+    <Section title="What it actually produces">
       <p>
         A real week (2026-W30): <strong>21 postings scored</strong>,{" "}
         <strong>2 flagged apply/referral-first</strong>, <strong>19 skipped</strong>. That's one
@@ -149,7 +149,7 @@ const JobfitCaseStudy = () => (
       </p>
     </Section>
 
-    <Section title="Observability, Without an LLM Judge">
+    <Section title="Observability, without an LLM judge">
       <p>
         The obvious next move here is to cron an LLM critic over the pipeline's own output. I
         considered it and decided against it: jobfit pushes traces to Langfuse, not scores, the
@@ -170,7 +170,7 @@ const JobfitCaseStudy = () => (
       </p>
     </Section>
 
-    <Section title="Honest Limitations">
+    <Section title="Limitations">
       <ul>
         <li>
           <strong>Portable, not multi-tenant.</strong> The original build hard-coded one evidence

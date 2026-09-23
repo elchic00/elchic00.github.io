@@ -212,7 +212,7 @@ const PiCloudCaseStudy = () => (
       </p>
     </Callout>
 
-    <Section title="Honest limitations">
+    <Section title="Limitations">
       <p>
         This is manual, physical infrastructure. The docker-compose configs are mirrored daily into
         a private repo now, so the compose layer itself doesn't have to be retyped from memory — but
