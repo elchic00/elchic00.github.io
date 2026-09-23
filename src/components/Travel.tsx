@@ -103,8 +103,8 @@ export const Travel = () => {
           </h1>
           <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="lg:w-2/3 mx-auto leading-relaxed text-slate-300">
-            Exploring the world one trip at a time. Here are some of my favorite
-            moments and places I've been lucky enough to visit.
+            Favorite moments from the places I've been lucky enough to
+            visit.
           </p>
         </header>
 

@@ -232,7 +232,7 @@ export const ProjectsPage = () => {
           </h1>
           <div className="h-1.5 w-24 bg-cyan-500 mx-auto mb-6 rounded-full" />
           <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-            Production-grade experiments in AI systems, automation, and accessible full-stack engineering.
+            Side projects I build and keep running, each written up with real numbers.
           </p>
         </header>
 

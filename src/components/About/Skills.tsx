@@ -16,7 +16,7 @@ export const Skills = () => {
             Skills
           </p>
           <h2 className="text-3xl font-black tracking-tight text-white sm:text-5xl">
-            Technical skills
+            What I build with.
           </h2>
         </div>
 

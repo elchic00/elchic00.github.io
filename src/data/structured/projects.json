@@ -2,7 +2,7 @@
   {
     "title": "Hermes",
     "subtitle": "hermes-agent (OSS) + Langfuse + HITL",
-    "description": "Nous Research's hermes-agent is the open-source harness (MIT-licensed) — what's here is what I built around it: a nightly Langfuse eval loop and a weekly cron that clusters the agent's own low-quality turns and proposes edits to its own system prompt, on a 3-node homelab with a from-source local inference layer. Proposals still wait on me in Telegram before anything touches the live prompt.",
+    "description": "Built around Nous Research's open-source hermes-agent: a nightly eval loop in Langfuse, plus a weekly job that clusters the agent's weakest turns and proposes edits to its own prompt. It runs on a 3-node homelab with local inference, and every proposed edit waits for my approval in Telegram.",
     "image": "/images/projects/hermes.svg",
     "link": "/projects/hermes",
     "id": "hermes",
@@ -11,7 +11,7 @@
     {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Three models resident on one box, serving every agent I run at $0 marginal cost per call — which changes which experiments are worth running at all. It's a from-source llama.cpp build on an AMD APU the project doesn't officially list as supported: the dense 27B model should be capped at 7.4 tokens/sec by memory bandwidth alone. It isn't. Reachable from my phone over Telegram, every call traced, and nothing sensitive leaves the LAN.",
+    "description": "Three models on one box serve every agent I run at $0 per call, which changes which experiments are worth running. It's a from-source llama.cpp build on an AMD APU the project doesn't officially support, where memory bandwidth alone should cap the dense 27B model at 7.4 tokens/sec. It doesn't. Every call is traced, and nothing sensitive leaves the LAN.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",
@@ -20,7 +20,7 @@
   {
     "title": "Pi-Cloud",
     "subtitle": "Private Infrastructure + Service Operations",
-    "description": "A Raspberry Pi 5 running 22 containers across 11 Compose projects — photos, passwords, document search, DNS filtering, private search, remote access, monitoring — with zero public ports and two recovery paths kept on deliberately different filesystems. Two of those services aren't just mine: SearXNG and Crawl4AI are the search and page-extraction backends an always-on agent calls unattended, which sets a higher bar than personal infra would. Verified with an actual off-network test, not just a green firewall status: a routine audit had found roughly fifteen of those services one layer short of the isolation intended.",
+    "description": "A Raspberry Pi 5 running 22 containers — photos, passwords, document search, DNS filtering, private search, monitoring — with zero public ports and two recovery paths on different filesystems. Two of its services also back an agent that calls them unattended. An off-network audit, not the green firewall status, is what found 15 services one layer short of the isolation I intended.",
     "image": "/images/projects/pi-cloud.svg",
     "link": "/projects/pi-cloud",
     "id": "pi-cloud",
@@ -29,7 +29,7 @@
   {
     "title": "Job-Fit Scorer",
     "subtitle": "LangGraph + FastAPI + Langfuse",
-    "description": "A LangGraph pipeline that scores a job posting against an evidence document of what I've actually built — calibrated to tell me no, not just yes. A cheap pre-filter throws out postings that were never going to be relevant before an LLM ever sees one. A real week: 21 postings scored, 2 worth applying to, 19 skipped, with recurring blockers tallied so the rejections double as a study list. Every run is traced in Langfuse, results append to a durable tracker, and the weekly report carries a deterministic health section rather than an LLM grading its own homework.",
+    "description": "A LangGraph pipeline that scores job postings against evidence of what I've actually built, tuned to say no as readily as yes. A cheap pre-filter drops irrelevant postings before any LLM sees them. One real week: 21 scored, 2 worth applying to, 19 skipped, with recurring blockers tallied into a study list. Every run is traced in Langfuse, and the weekly health check is deterministic rather than an LLM grading its own homework.",
     "image": "/images/projects/jobfit-scorer.svg",
     "link": "/projects/jobfit",
     "id": "jobfit",
@@ -47,7 +47,7 @@
   {
     "title": "myPal",
     "subtitle": "AAC App Prototype (2021, not actively maintained)",
-    "description": "An AAC app for kids with autism and speech delays, built for classrooms and homes where the wifi can't be counted on: every card and phrase lives in SQLite on the device first, syncing across iOS and Android only once a connection shows up. The offline-first requirement wasn't a nice-to-have bolted on later — it was the actual constraint the rest of the app had to work around.",
+    "description": "An AAC (picture-based communication) app for kids with autism and speech delays, built for classrooms and homes where the wifi can't be counted on. Every card and phrase lives in SQLite on the device first and syncs across iOS and Android once a connection shows up. Offline-first wasn't bolted on later; it was the constraint the rest of the app was built around.",
     "image": "/images/projects/mypal-demo.mp4",
     "link": "https://github.com/myPal-TMS/myPal",
     "id": "mypal"

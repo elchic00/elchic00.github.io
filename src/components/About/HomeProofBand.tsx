@@ -14,7 +14,7 @@ const proofMetrics = [
   {
     value: "+18%",
     label: "profile completion",
-    note: "Supplementary-profile completion lift from analytics-backed iteration",
+    note: "Completion lift on supplementary profiles, from analytics-driven iteration",
   },
   {
     value: "300+",
