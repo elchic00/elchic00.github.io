@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CodeIcon, ExternalLinkIcon, PlayIcon } from "@heroicons/react/solid";
 import projectsData from "../data/structured/projects.json";
@@ -31,6 +31,7 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
   index,
 }) => {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const previewRef = useRef<HTMLVideoElement>(null);
   const hasMultipleVideos = project.videos && project.videos.length > 1;
   const isVideo = project.image?.endsWith(".mp4") || project.image?.endsWith(".webm");
   const hasCaseStudy = CASE_STUDY_IDS.has(project.id);
@@ -54,6 +55,19 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
       setIsVideoModalOpen(true);
     }
   };
+
+  const reduceMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  const previewHandlers =
+    isVideo && !reduceMotion
+      ? {
+          onMouseEnter: () => previewRef.current?.play().catch(() => {}),
+          onMouseLeave: () => previewRef.current?.pause(),
+          onFocus: () => previewRef.current?.play().catch(() => {}),
+          onBlur: () => previewRef.current?.pause(),
+        }
+      : {};
 
   const inner = (
     <>
@@ -86,12 +100,17 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
             </div>
           </div>
         ) : isVideo ? (
-          <VideoPlayer
-            src={project.image!}
-            videoId={`video-${index}-0`}
-            projectIndex={index}
-            containerClassName="w-full h-full"
-            poster={VIDEO_POSTERS[project.image!]}
+          // Plays only while the card is hovered or focused (WCAG 2.2.2:
+          // nothing moves on its own, so no pause control is needed); #t= shows a still frame.
+          <video
+            ref={previewRef}
+            src={`${project.image}#t=0.5`}
+            className="h-full w-full object-contain"
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden="true"
           />
         ) : (
           <img
@@ -172,14 +191,14 @@ const BentoGridProject: React.FC<BentoGridProjectProps> = ({
 
   if (hasCaseStudy) {
     return (
-      <Link to={`/projects/${project.id}`} className={sharedClasses} aria-label={`Read the ${project.title} case study`}>
+      <Link to={`/projects/${project.id}`} className={sharedClasses} aria-label={`Read the ${project.title} case study`} {...previewHandlers}>
         {inner}
       </Link>
     );
   }
 
   return (
-    <a href={project.link} target="_blank" rel="noreferrer" className={sharedClasses} aria-label={`View ${project.title}`}>
+    <a href={project.link} target="_blank" rel="noreferrer" className={sharedClasses} aria-label={`View ${project.title}`} {...previewHandlers}>
       {inner}
     </a>
   );
