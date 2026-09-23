@@ -393,6 +393,11 @@
     "description": "Exploring the rainforests, beaches, and incredible biodiversity of Costa Rica. From cloud forests to white-water rafting, experiencing the true Pura Vida!",
     "photos": [
       {
+        "url": "/images/travel/costa-rica/andrew-alagna-sunset1.webp",
+        "alt": "Andrew Alagna Costa Rica Pacific Ocean sunset vibrant colors",
+        "caption": "Vibrant Costa Rican sunset over the Pacific Ocean"
+      },
+      {
         "url": "/images/travel/costa-rica/andrew-alagna-bird.webp",
         "alt": "Andrew Alagna colorful tropical bird wildlife Costa Rica rainforest",
         "caption": "Colorful tropical bird in the rainforest"
@@ -451,11 +456,6 @@
         "url": "/images/travel/costa-rica/andrew-alagna-lizard-rainforest.webp",
         "alt": "Andrew Alagna lizard gecko tree trunk rainforest wildlife Costa Rica",
         "caption": "Camouflaged lizard spotted on a tree trunk in the rainforest"
-      },
-      {
-        "url": "/images/travel/costa-rica/andrew-alagna-sunset1.webp",
-        "alt": "Andrew Alagna Costa Rica Pacific Ocean sunset vibrant colors",
-        "caption": "Vibrant Costa Rican sunset over the Pacific Ocean"
       }
     ]
   }
