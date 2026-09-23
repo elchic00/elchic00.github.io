@@ -46,13 +46,13 @@ export const Experience = () => {
   const workExperience: Role[] = [
     {
       company: "American Express",
-      role: "Software Engineer — Overview Team",
+      role: "Software Engineer — Account Overview",
       period: "Early 2026 - Present",
       highlights: [
-        "Owns frontend architecture for the Overview page — an aggregate view of everything a logged-in American Express cardholder has, surfacing account summaries, reward balances, personalized offers, and spend-habit insights as tiles",
-        "Built Ghost Accounts end-to-end: a feature surfacing products a cardholder doesn't yet have but is likely to want, visually distinct from real account tiles",
-        "Built the deep-link offers flow — clicking an offer surfaces which of a cardholder's eligible cards apply, then routes to that offer's enrollment page for the selected card",
-        "Built the logic for splitting business and personal accounts into separate views on the overview page",
+        "Own the frontend architecture of the account overview page: the one screen that brings a cardholder's accounts, rewards, offers, and spending insights together",
+        "Built personalized product suggestions end-to-end: cards a cardholder doesn't have yet but is likely to want, shown clearly apart from their real accounts",
+        "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
+        "Split business and personal accounts into separate views on the overview page",
         "Led the Selenium-to-Playwright test migration and monorepo onboarding, writing reusable playbooks for the team",
       ],
     },
@@ -67,10 +67,10 @@ export const Experience = () => {
         "+18% completion",
       ],
       highlights: [
-        "Led a WCAG accessibility audit across profile/identity flows (name, email, address, phone), reaching 100% WCAG AA compliance — many flows AAA — later extended to 10 international markets",
-        "Engineered secure profile-management flows (React.js + Kotlin BFF) supporting ~5M annual updates, with analytics-backed iteration lifting supplementary-profile completion 18% and start rate 16%",
-        "Built the Profile section's aggregate 'View All' screens for names, addresses, phone numbers, and email addresses — each showing every card and banking product tied to that piece of info in one place — and added Profile as its own tab in Overview's navigation, making it far more discoverable for multi-product cardholders",
-        "Built the first production BFF for updating the phone/email used for two-factor authentication on the profile landing page, establishing reusable routing and eligibility patterns for the team",
+        "Led the accessibility audit of the profile flows (name, email, address, phone) to 100% WCAG AA, many of them AAA, later rolled out to 10 international markets",
+        "Built the secure profile-update flows (React + Kotlin BFF) behind ~5M updates a year; analytics-driven iteration lifted supplementary-profile completion 18% and starts 16%",
+        "Built the profile 'View All' screens, which show every card and bank account tied to a name, address, phone, or email in one place, and gave Profile its own tab so multi-product cardholders can actually find it",
+        "Built the team's first production BFF, for updating the phone and email used for two-factor authentication, with routing and eligibility patterns built to be reused",
         "Standardized CI/CD across 15+ shared library modules",
       ],
     },
@@ -83,7 +83,7 @@ export const Experience = () => {
       period: "June 2021 - Present",
       stats: ["300+ students taught", "5+ years"],
       highlights: [
-        "Leading weekly mentorship sessions for 5 students in open source contribution, teaching GitHub workflows and utilizing AI to understand codebases",
+        "Lead weekly sessions for 5 students making their first open-source contributions: GitHub workflows, and using AI to find their way around unfamiliar codebases",
         "Taught 300+ students total — as a cybersecurity-fundamentals instructor, a Data Structures & Algorithms TA, and a technical interview-prep coach",
         "Secured free industry certifications for roughly 100 students through the cybersecurity track",
       ],
@@ -93,9 +93,8 @@ export const Experience = () => {
       role: "Alumni Mentor",
       period: "2025 - Present",
       highlights: [
-        "Providing 1-on-1 career mentorship to current students on side project ideation and resume optimization",
-        "Guiding students through technical interviews and navigating the tech job market",
-        "Supporting students via video sessions and async LinkedIn messaging",
+        "1-on-1 career mentoring for current students: choosing side projects and sharpening resumes",
+        "Prep for technical interviews and the job search, over video calls and LinkedIn messages",
       ],
     },
   ];
@@ -111,14 +110,13 @@ export const Experience = () => {
             Experience
           </p>
           <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
-            Professional experience
+            Shipping at American Express, teaching on the side.
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
-            Four years shipping inside a Fortune-500 web app, five-plus
-            teaching and mentoring students outside it. Both followed a winding
-            path — years in construction, a couple of false-start semesters in
-            business and chemistry, then a CS degree from CUNY: Hunter College before
-            American Express.
+            Four years building cardholder-facing features at American Express,
+            and five-plus teaching at CodePath. The route here wasn't straight:
+            years in construction and false starts in business and chemistry
+            came before a CS degree from CUNY: Hunter College.
           </p>
         </div>
 
