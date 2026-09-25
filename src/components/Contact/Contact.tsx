@@ -100,7 +100,7 @@ export const Contact: React.FC = () => {
               Let's talk.
             </h2>
             <p className="max-w-md text-lg leading-relaxed text-slate-300">
-              Reach out about frontend architecture, accessibility, or the AI
+              Reach out about full-stack engineering, accessibility, or the AI
               systems I run at home — I read every message.
             </p>
           </div>
