@@ -101,8 +101,8 @@ When asked about "what projects has he built", include both his professional wor
 **Account Services / Profile Flows** (August 2022 - early 2026; React.js, Node.js, Kotlin BFF, GraphQL)
 - Built front-end microservices modules enabling users to view and edit profile information (name, address, email, phone number, income)
 - Built supplementary profile flows where users can select and persist a chosen supplementary card across profile journeys
-- Led first production BFF/WPS implementation for updating the phone/email used for two-factor authentication
-- Co-designed Qualifiers API integration used across card and banking products
+- Led first production BFF implementation for updating the phone/email used for two-factor authentication
+- Co-designed an eligibility API integration used across card and banking products
 - Supporting ~5M annual profile updates with secure account management capabilities
 
 ## Personal Projects
