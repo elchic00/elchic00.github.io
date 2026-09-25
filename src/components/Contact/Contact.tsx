@@ -13,7 +13,6 @@ import { useContactForm, useScrollReveal } from "../../hooks";
 import { APP_CONFIG } from "../../constants";
 import { ContactSuccessModal } from "./ContactSuccessModal";
 import { ConfirmDialog } from "../shared/ConfirmDialog";
-import { SocialLinks } from "../shared/SocialLinks";
 import messageTemplates from "../../data/structured/messageTemplates.json";
 
 export const Contact: React.FC = () => {
@@ -100,13 +99,10 @@ export const Contact: React.FC = () => {
             <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
               Let's talk.
             </h2>
-            <p className="mb-8 max-w-md text-lg leading-relaxed text-slate-300">
+            <p className="max-w-md text-lg leading-relaxed text-slate-300">
               Reach out about frontend architecture, accessibility, or the AI
               systems I run at home — I read every message.
             </p>
-            <div className="flex gap-4">
-              <SocialLinks variant="about" />
-            </div>
           </div>
 
           <form
