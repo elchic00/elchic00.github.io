@@ -92,7 +92,7 @@ export const Contact: React.FC = () => {
         {/* Subtle gradient overlay for depth */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-950/98 to-slate-950 pointer-events-none z-0"></div>
 
-        <div className="container relative z-10 mx-auto grid gap-10 px-5 py-20 sm:px-8 md:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,36rem)] lg:gap-16 sm:py-24">
+        <div className="container relative z-10 mx-auto grid gap-10 px-5 py-20 sm:px-8 md:px-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,34rem)] lg:gap-20 sm:py-24">
           <div className="lg:pt-2">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
               Contact
