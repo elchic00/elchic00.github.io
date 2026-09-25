@@ -1,0 +1,95 @@
+<!-- Source for public/andrew-alagna-resume.pdf. Render (must stay one page):
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --no-pdf-header-footer --virtual-time-budget=8000 --print-to-pdf=public/andrew-alagna-resume.pdf docs/resume/resume.html
+  Public surface: no internal Amex names (see the chat-prompt rule). -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Andrew Alagna — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  @page { size: Letter; margin: 0.4in 0.5in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Inter, -apple-system, sans-serif; font-size: 9.2pt; line-height: 1.36; color: #1a1a1a; }
+  a { color: inherit; text-decoration: none; }
+  header { text-align: center; margin-bottom: 7pt; }
+  h1 { font-size: 20pt; font-weight: 700; letter-spacing: -0.2pt; }
+  .contact { color: #555; font-size: 8.8pt; margin-top: 2pt; }
+  .contact span + span::before { content: "  |  "; color: #aaa; white-space: pre; }
+  .tagline { color: #1d6f8a; font-weight: 600; font-size: 8.8pt; letter-spacing: 0.6pt; margin-top: 4pt; text-transform: uppercase; }
+  .summary { margin: 6pt 0 2pt; }
+  h2 { color: #1d6f8a; font-size: 9.2pt; font-weight: 700; letter-spacing: 0.8pt; text-transform: uppercase;
+       border-bottom: 1px solid #c9d6dc; padding-bottom: 1.5pt; margin: 7pt 0 3.5pt; }
+  .role { display: flex; justify-content: space-between; align-items: baseline; margin-top: 3pt; }
+  .role .org { font-weight: 700; }
+  .role .title { font-style: italic; color: #333; }
+  .role .dates { color: #555; font-size: 8.8pt; white-space: nowrap; }
+  .sub { font-weight: 600; color: #333; font-size: 8.8pt; margin: 3pt 0 1pt; }
+  ul { padding-left: 13pt; }
+  li { margin: 1.4pt 0; }
+  b { font-weight: 600; }
+  .skills { display: grid; grid-template-columns: 88pt 1fr; row-gap: 1.5pt; }
+  .skills div:nth-child(odd) { font-weight: 600; }
+  .edu { display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Andrew Alagna</h1>
+  <div class="contact">
+    <span>New York, NY</span><span>aalagna04@gmail.com</span><span>linkedin.com/in/andrew-a-10b88215b</span><span>github.com/elchic00</span><span>elchic00.github.io</span>
+  </div>
+  <div class="tagline">Full-Stack Product Engineer · Consumer Web at Scale · AI-Assisted Delivery</div>
+</header>
+
+<p class="summary">Full-stack engineer with 4 years at American Express shipping consumer features on the authenticated web experience used by millions of cardholders, with design, product, and analytics partners. Leads AI-assisted development on the team; builds and runs self-hosted AI systems (agents, evals, local inference).</p>
+
+<h2>Professional Experience</h2>
+<div class="role"><div><span class="org">American Express</span> — <span class="title">Software Engineer</span></div><div class="dates">08/2022 – Present</div></div>
+
+<div class="sub">Account Overview (cardholder landing page) · 2026–present</div>
+<ul>
+  <li>Shipped personalized Overview features — targeted product recommendations beside existing accounts, grouped Personal/Business accounts, and routing to offers on eligible cards — plus the impression/click analytics</li>
+  <li>Owned drag-and-drop account reordering from proof of concept to implementation: accessible POC, feasibility report, the five-PR plan the team executed, state model, and keyboard-accessible interaction</li>
+  <li>Drove AI-assisted delivery: <b>127 of 176</b> PRs I merged (Mar–Sep 2026) were co-authored with Devin/Copilot under my scoping/review; made AI review the team's first pass, led enablement for two teams, and published 2 shared agent skills</li>
+  <li>Migrated 10 test suites from Selenium to Playwright and wrote the playbook later suites followed, reducing a module migration from ~5 days to ~2; modernized CI across 16 team repos</li>
+</ul>
+
+<div class="sub">Profile / Account Services · 2022–2025</div>
+<ul>
+  <li>Engineered supplementary-card profile flows (React, routing/state management) and defined success metrics with analytics partners, driving <b>+18% completion</b> and <b>+16% start rate</b> and reducing support calls by <b>~650K/year</b></li>
+  <li>Delivered the team's first production BFF (identity profile updates) and its reusable routing/eligibility patterns; co-designed an eligibility API for card and banking; integrated the new customer-data platform (<b>~5M updates/year</b>)</li>
+  <li>Ran experimentation for profile journeys: <b>6</b> experiment configurations to ramp the customer-data migration, customer-level profile A/B tests, and a documented same-route, two-module experiment setup for other teams</li>
+  <li>Standardized CI/CD across <b>15+</b> modules with GitHub Actions and contributed automated releases to the org-wide workflow codemod; led a WCAG AA audit of profile flows to a 100% audit score (axe, screen readers)</li>
+  <li>Mentored 5+ engineers, onboarded 6, led an 8-person new-grad cohort, and hosted a biweekly team technical forum</li>
+</ul>
+
+<div class="role"><div><span class="org">NYC Department of Transportation</span> — <span class="title">GIS Intern</span></div><div class="dates">04/2022 – 08/2022</div></div>
+<ul><li>Built Python automation for annual census data in ArcGIS Pro, cutting manual processing from weeks to seconds</li></ul>
+
+<h2>Projects</h2>
+<ul>
+  <li><b>Hermes — self-hosted AI agent platform.</b> Runs Nous Research's open-source hermes-agent on local models across 3 nodes; built the eval loop (nightly Langfuse LLM-judge scoring, a LangGraph job that proposes prompt fixes behind human approval) and a from-source llama.cpp/ROCm inference layer (GPU allocator fix, 5× prefill speedup)</li>
+  <li><b>jobfit — LangGraph job-fit scorer.</b> Scores Greenhouse/Ashby/Lever postings requirement-by-requirement in parallel (Send fan-out with concurrency limits); FastAPI + CLI, Langfuse tracing, live checks for silently empty boards</li>
+  <li><b>elchic00.github.io</b> — portfolio site with a Gemini chat assistant on Cloudflare Workers; 100/100 Lighthouse a11y</li>
+</ul>
+
+<h2>Leadership</h2>
+<ul>
+  <li><b>CodePath</b> (2021–present): TA for 180+ students in Python DS&amp;A (2022, 85% satisfaction); mentored 350+ students in DS&amp;A, cybersecurity, and careers; leads a weekly open-source contribution course. <b>Hunter College</b> alumni mentor</li>
+</ul>
+
+<h2>Education</h2>
+<div class="edu"><div><b>Hunter College (CUNY)</b> — B.A., Computer Science, Cum Laude · GPA 3.62</div><div class="dates" style="color:#555;font-size:8.8pt">May 2022</div></div>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+  <div>Languages</div><div>TypeScript, JavaScript, Python, Kotlin, SQL</div>
+  <div>Frontend</div><div>React, Next.js, Redux, Tailwind, HTML/CSS, WCAG AA accessibility</div>
+  <div>Backend</div><div>Node.js, GraphQL, REST, FastAPI, BFF architecture</div>
+  <div>AI / LLM</div><div>LangGraph, Langfuse, LiteLLM, llama.cpp, LLM evals, Claude Code, Copilot, Devin</div>
+  <div>Delivery</div><div>GitHub Actions, Docker, AWS, Playwright, Jest/RTL, A/B testing, feature flags</div>
+</div>
+</body>
+</html>
