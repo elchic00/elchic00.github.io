@@ -1,5 +1,6 @@
 import { HeartIcon, ExternalLinkIcon } from "@heroicons/react/solid";
 import { useScrollReveal } from "../../hooks";
+import { ScreenReaderDemo } from "./ScreenReaderDemo";
 
 const MyPalScreen = () => (
   <img
@@ -74,15 +75,16 @@ export const AccessibilityExpertise = () => {
 
         <div
           ref={gridRef}
-          className={`max-w-4xl scroll-reveal ${gridVisible ? "visible" : ""}`}
+          className={`space-y-6 scroll-reveal ${gridVisible ? "visible" : ""}`}
         >
+          <ScreenReaderDemo />
           {cases.map(
             ({ title, context, Icon, Visual, problem, solution, impact }) => (
               <article
                 key={title}
                 className="gap-8 rounded-2xl border border-white/10 bg-slate-950/50 p-6 sm:flex md:p-8"
               >
-                <div className="flex-1">
+                <div className="max-w-2xl flex-1">
                   <div className="mb-6 flex items-center gap-3">
                     <div className="rounded-xl bg-cyan-500/10 p-3">
                       <Icon
@@ -113,7 +115,7 @@ export const AccessibilityExpertise = () => {
                   </dl>
                 </div>
                 {Visual && (
-                  <div className="mt-8 flex-shrink-0 sm:mt-0">
+                  <div className="mt-8 flex-shrink-0 sm:mt-0 sm:flex sm:flex-1 sm:items-center sm:justify-center">
                     <Visual />
                   </div>
                 )}
