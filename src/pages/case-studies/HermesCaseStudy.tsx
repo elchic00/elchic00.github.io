@@ -1,4 +1,5 @@
 import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./CaseStudyLayout";
+import HermesArchitectureDiagram from "./HermesArchitectureDiagram";
 
 const HermesCaseStudy = () => (
   <CaseStudyLayout
@@ -45,6 +46,7 @@ const HermesCaseStudy = () => (
         stays on the LAN and never routes through them; the cloud path is a safety net for a local
         outage, not the default.
       </p>
+      <HermesArchitectureDiagram />
       <p>
         Memory is files-first: an Obsidian vault the agents read directly, with a quick-context
         profile loaded at every session start. I tried a vector-memory layer (mem0-oss +
