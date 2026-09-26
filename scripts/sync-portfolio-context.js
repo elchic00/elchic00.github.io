@@ -58,7 +58,13 @@ function formatProjectsContext(projectsJsonPath) {
 const systemPrompt = extractConstFromFile(SYSTEM_PROMPT_FILE, 'SYSTEM_PROMPT');
 const biography = extractConstFromFile(BIOGRAPHY_FILE, 'BIOGRAPHY');
 const skills = extractConstFromFile(SKILLS_FILE, 'SKILLS');
-const projectsContext = formatProjectsContext(PROJECTS_JSON_FILE);
+// Escaped for embedding in a template literal: unescaped, a \" inside the JSON
+// collapses to a bare quote at runtime and JSON.parse fails.
+const projectsJson = formatProjectsContext(PROJECTS_JSON_FILE);
+const projectsContext = projectsJson
+  .replace(/\\/g, '\\\\')
+  .replace(/`/g, '\\`')
+  .replace(/\$\{/g, '\\${');
 const portfolioContext = `${systemPrompt}\n\n${biography}\n\n${skills}`;
 let workerContent = fs.readFileSync(WORKER_FILE, 'utf8');
 const workerContextRegex = /const PORTFOLIO_CONTEXT = `[\s\S]*?`;/;
@@ -67,17 +73,26 @@ if (!workerContextRegex.test(workerContent)) {
   console.error('❌ Could not find PORTFOLIO_CONTEXT in worker file');
   process.exit(1);
 }
-workerContent = workerContent.replace(workerContextRegex, replacement);
+workerContent = workerContent.replace(workerContextRegex, () => replacement);
 const projectsDataRegex = /const PROJECTS_CONTEXT_DATA = `[\s\S]*?`;/;
 const projectsReplacement = `const PROJECTS_CONTEXT_DATA = \`${projectsContext}\`;`;
 if (projectsDataRegex.test(workerContent)) {
-  workerContent = workerContent.replace(projectsDataRegex, projectsReplacement);
+  workerContent = workerContent.replace(projectsDataRegex, () => projectsReplacement);
 } else {
   workerContent = workerContent.replace(
     replacement,
     `${replacement}\n\n// Complete structured project reference sheet for each chat request\nconst PROJECTS_CONTEXT_DATA = \`${projectsContext}\`;`
   );
 }
+// Guard: evaluate the embedded literal the way the Worker will and make sure it parses
+const embedded = workerContent.match(/const PROJECTS_CONTEXT_DATA = (`[\s\S]*?`);/)[1];
+try {
+  JSON.parse(new Function(`return ${embedded};`)());
+} catch (e) {
+  console.error(`❌ PROJECTS_CONTEXT_DATA does not parse at runtime: ${e.message}`);
+  process.exit(1);
+}
 fs.writeFileSync(WORKER_FILE, workerContent, 'utf8');
+
 console.log('✅ Portfolio context synced successfully!');
-console.log(`   Projects indexed: ${JSON.parse(projectsContext).length} projects`);
+console.log(`   Projects indexed: ${JSON.parse(projectsJson).length} projects`);
