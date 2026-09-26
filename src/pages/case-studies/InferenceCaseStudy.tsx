@@ -6,6 +6,7 @@ import {
   Callout,
   Figure,
 } from "./CaseStudyLayout";
+import SpecDecodeDemo from "./SpecDecodeDemo";
 
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
@@ -112,6 +113,7 @@ const InferenceCaseStudy = () => (
         the two (~15 t/s): block-diffusion drafting loses on high-entropy text,
         and that's the minority of the agent's workload.
       </p>
+      <SpecDecodeDemo />
     </Section>
 
     <StatRow>
