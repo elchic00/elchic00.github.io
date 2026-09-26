@@ -848,7 +848,9 @@ async function handleChatRequest(request, env) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: conversationHistory,
-        generationConfig: { temperature: 0.7, maxOutputTokens: 1100, topP: 0.8, topK: 40 },
+        // thinkingBudget 0: 2.5 Flash counts thinking against maxOutputTokens, which
+        // cut answers off mid-sentence; grounded Q&A over supplied context doesn't need it
+        generationConfig: { temperature: 0.7, maxOutputTokens: 1100, topP: 0.8, topK: 40, thinkingConfig: { thinkingBudget: 0 } },
         safetySettings: [
           { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
           { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_MEDIUM_AND_ABOVE" },
@@ -866,6 +868,9 @@ async function handleChatRequest(request, env) {
       return new Response(JSON.stringify({ response: aiResponse }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
     const candidate = data.candidates[0];
+    if (candidate.finishReason !== "STOP") {
+      console.warn("Gemini finished early:", candidate.finishReason, JSON.stringify(data.usageMetadata));
+    }
     if (candidate.finishReason === "SAFETY" || !candidate.content) {
       const aiResponse = "I apologize, but I couldn't generate a response for that. Try asking about Andrew's work at American Express, his technical projects, or his travel experiences!";
       return new Response(JSON.stringify({ response: aiResponse }), { headers: { ...corsHeaders, "Content-Type": "application/json" } });
