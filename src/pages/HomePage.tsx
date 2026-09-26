@@ -5,7 +5,6 @@ import {
   Contact,
   Experience,
   FeaturedSystems,
-  HomeProofBand,
   Skills,
 } from "@components";
 
@@ -17,7 +16,6 @@ export const HomePage = () => {
   return (
     <>
       <About />
-      <HomeProofBand />
       <FeaturedSystems />
       <Experience />
       <AccessibilityExpertise />

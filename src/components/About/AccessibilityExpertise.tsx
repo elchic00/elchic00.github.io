@@ -1,8 +1,4 @@
-import {
-  BriefcaseIcon,
-  HeartIcon,
-  ExternalLinkIcon,
-} from "@heroicons/react/solid";
+import { HeartIcon, ExternalLinkIcon } from "@heroicons/react/solid";
 import { useScrollReveal } from "../../hooks";
 
 const MyPalScreen = () => (
@@ -17,36 +13,6 @@ const MyPalScreen = () => (
 );
 
 const cases = [
-  {
-    title: "Enterprise scale",
-    context: "American Express",
-    Icon: BriefcaseIcon,
-    Visual: null,
-    problem: (
-      <>
-        AmEx's profile and identity-update flows (name, email, address, phone)
-        had accessibility gaps that risked compliance for millions of US
-        cardholders.
-      </>
-    ),
-    solution: (
-      <>
-        Led WCAG AA compliance work while building the secure profile update
-        flows (React.js/Kotlin BFF).
-      </>
-    ),
-    impact: (
-      <>
-        <strong className="text-white">100% WCAG AA compliance</strong> across
-        flows handling{" "}
-        <strong className="text-white">~5M updates a year</strong>, with an{" "}
-        <strong className="text-white">18% completion lift</strong> and{" "}
-        <strong className="text-white">16% start-rate lift</strong> on
-        supplementary-profile flows — later extended to 10 international
-        markets.
-      </>
-    ),
-  },
   {
     title: "Assistive tech",
     context: "myPal / AAC app · 2021 prototype",
@@ -108,7 +74,7 @@ export const AccessibilityExpertise = () => {
 
         <div
           ref={gridRef}
-          className={`grid gap-6 lg:grid-cols-2 scroll-reveal ${gridVisible ? "visible" : ""}`}
+          className={`max-w-4xl scroll-reveal ${gridVisible ? "visible" : ""}`}
         >
           {cases.map(
             ({ title, context, Icon, Visual, problem, solution, impact }) => (
