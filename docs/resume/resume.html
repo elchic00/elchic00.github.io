@@ -71,7 +71,7 @@
 <h2>Projects</h2>
 <ul>
   <li><b>Hermes — self-hosted AI agent platform.</b> Runs Nous Research's open-source hermes-agent on local models across 3 nodes; built the eval loop (nightly Langfuse LLM-judge scoring, a LangGraph job that proposes prompt fixes behind human approval) and a from-source llama.cpp/ROCm inference layer (GPU allocator fix, 5× prefill speedup)</li>
-  <li><b>jobfit — LangGraph job-fit scorer.</b> Scores Greenhouse/Ashby/Lever postings requirement-by-requirement in parallel (Send fan-out with concurrency limits); FastAPI + CLI, Langfuse tracing, live checks for silently empty boards</li>
+  <li><b>jobfit — LangGraph job-fit scorer.</b> Deterministic role, location, and pay filters, then grounded, batched, schema-validated LLM scoring (a measured rewrite cut tokens 71%); FastAPI + CLI, Langfuse tracing, CI</li>
   <li><b>elchic00.github.io</b> — portfolio site with a Gemini chat assistant on Cloudflare Workers; 100/100 Lighthouse a11y</li>
 </ul>
 
