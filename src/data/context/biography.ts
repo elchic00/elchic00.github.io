@@ -94,13 +94,16 @@ When asked about "what projects has he built", include both his professional wor
 - Built revenue-focused personalization work - showing cardholders the products, offers, and insights most relevant to them - across analytics, rendering, routing, and account placement
 - Built offer-to-card routing that shows cardholders which cards are eligible for a personalized offer and enrolls them with the right card
 - Built and debugged account/rewards/offers surfaces and preference-driven account grouping on a high-visibility landing page
-- Led Selenium-to-Playwright migration work, monorepo onboarding, and reusable playbooks on the Overview team
-- Modernized CI workflows across Overview-owned repositories
+- Led keyboard-accessible drag-and-drop account reordering from proof of concept (feasibility report, validation log) through the five-PR plan the team executed, the state model, and the reorder interaction; in QA as of late September 2026, not yet released
+- Migrated 10 test suites from Selenium to Playwright and wrote the playbook later suites followed, cutting a module migration from about 5 days to about 2; also led monorepo onboarding
+- Modernized CI workflows across the team's 16 repositories
+- Leads AI-assisted delivery on the team: 127 of the 176 PRs he merged from March to September 2026 were co-authored with Devin or Copilot, with Drew scoping the work, splitting the PRs, and verifying every diff before merge. He treats model output as a lead, not a decision
+- Made AI review the team's first pass on pull requests (a human still approves), ran Copilot CLI and Devin enablement sessions for his team and a sister team, and published 2 shared agent skills teammates use
 - Builds the coding-agent workflows his team develops with: shared instruction sets for how agents delegate to sub-agents, verify their own work without assuming, and ask for clarification when they can't confirm something themselves; documentation and Obsidian-vault practices for tracking feature work and long-term context; instruction files committed into the repos they apply to; and reusable skills pushed to an org-wide skills repository so teammates get the same benefit. This is agent enablement and operations, not building AI products - the systems-building is his personal work at home.
 
 **Account Services / Profile Flows** (August 2022 - early 2026; React.js, Node.js, Kotlin BFF, GraphQL)
 - Built front-end microservices modules enabling users to view and edit profile information (name, address, email, phone number, income)
-- Built supplementary profile flows where users can select and persist a chosen supplementary card across profile journeys
+- Built supplementary profile flows where users can select and persist a chosen supplementary card across profile journeys - lifted completion 18% and starts 16%, and reduced support calls by about 650K a year
 - Led first production BFF implementation for updating the phone/email used for two-factor authentication
 - Co-designed an eligibility API integration used across card and banking products
 - Supporting ~5M annual profile updates with secure account management capabilities
