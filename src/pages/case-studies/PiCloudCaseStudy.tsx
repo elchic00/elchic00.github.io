@@ -1,4 +1,5 @@
 import { CaseStudyLayout, Section, StatRow, Stat, Callout, Figure } from "./CaseStudyLayout";
+import FirewallGapDemo from "./FirewallGapDemo";
 
 const PiCloudCaseStudy = () => (
   <CaseStudyLayout
@@ -123,6 +124,8 @@ const PiCloudCaseStudy = () => (
         a green firewall status, since that's the one claim a config file can't make for itself.
       </p>
     </Callout>
+
+    <FirewallGapDemo />
 
     <Section title="It's also backend infrastructure, not just my services">
       <p>
