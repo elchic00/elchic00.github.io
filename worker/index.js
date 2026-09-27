@@ -261,7 +261,7 @@ When asked about "what projects has he built", include both his professional wor
    - hermes-agent is Nous Research's open-source (MIT-licensed) agent harness - Drew didn't write the framework itself; he deployed it, routed it entirely to self-hosted local models instead of the cloud providers it ships with (Nous Portal, OpenRouter, OpenAI), and built the observability and safety layer around it
    - Built and runs the eval loop himself: a nightly Langfuse-traced LLM-judge scoring pass and a weekly self-improvement cron that clusters low-quality turns and proposes prompt edits - one real run produced 3 proposals, 2 applied, 1 correctly rejected as a bad fit for the context
    - Human-in-the-loop approval gates before any side-effecting action executes - nothing sends or changes automatically
-   - Node roles: a Framework Desktop handles local LLM inference (from-source llama.cpp on AMD APU hardware it doesn't officially list as supported), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services
+   - Node roles: a Framework Desktop handles local LLM inference (from-source llama.cpp on AMD APU hardware it doesn't officially list as supported), a Mac Mini orchestrates the agent workflows and scheduling, and a Raspberry Pi hosts supporting services, including the SearXNG web search and Crawl4AI page-extraction backends Hermes calls through its own search and crawl skills
    - Also built a Voice Relay: an iPhone Shortcut sends voice memos through WhisperX transcription with speaker diarization, writing structured notes straight into Obsidian and confirming over Telegram
 
 2. **Pi-Cloud** (Private Edge Gateway)

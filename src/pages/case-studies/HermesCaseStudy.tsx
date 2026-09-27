@@ -40,7 +40,9 @@ const HermesCaseStudy = () => (
         primary text model, DFlash2 speculative decoding) for the agentic work, <strong>Qwen3-VL-8B</strong>{" "}
         for vision (screenshot analysis powering computer use), and <strong>WhisperX</strong>{" "}
         (whisper-large-v3 + speaker diarization) for the voice-note pipeline. A{" "}
-        <strong>Raspberry Pi</strong> handles monitoring. A two-hop cloud fallback chain — Kimi,
+        <strong>Raspberry Pi</strong> handles monitoring and hosts the agent's own tools:
+        <strong>SearXNG</strong> for web search and <strong>Crawl4AI</strong> for page extraction, which
+        Hermes calls through its search and crawl skills. A two-hop cloud fallback chain — Kimi,
         then OpenRouter's free tier as the last resort — is wired in for when local inference is
         down, and almost never fires in practice. Sensitive data deliberately
         stays on the LAN and never routes through them; the cloud path is a safety net for a local
