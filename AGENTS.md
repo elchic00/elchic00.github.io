@@ -72,6 +72,8 @@ Run the smallest relevant checks below. For code changes, also run `npm run buil
   - `node scripts/gallery-layout.test.mjs`
   - `node scripts/test-travel-hash-sync.mjs`
   - `node scripts/test-travel-lightbox-a11y.mjs`
+- AI chat UI or action-button changes:
+  - `node scripts/test-chat-actions.mjs` (stubs the Worker; set `PUPPETEER_EXECUTABLE_PATH` if Puppeteer's bundled Chrome isn't installed)
 - AI context or project-knowledge changes:
   - `npm run sync-context`
   - inspect the resulting `worker/index.js` diff

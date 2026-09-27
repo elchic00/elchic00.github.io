@@ -30,33 +30,6 @@ export const Contact: React.FC = () => {
     emailjs.init(APP_CONFIG.EMAIL_PUBLIC_KEY);
   }, []);
 
-  useEffect(() => {
-    const handlePreFill = (event: CustomEvent<{ message: string }>) => {
-      const preFillMessage =
-        event.detail.message || sessionStorage.getItem("preFillMessage");
-      if (preFillMessage) {
-        // Focus the message textarea after a short delay
-        setTimeout(() => {
-          const messageTextarea = document.getElementById(
-            "message",
-          ) as HTMLTextAreaElement;
-          if (messageTextarea) {
-            messageTextarea.value = preFillMessage;
-            messageTextarea.focus();
-            // Trigger change event to update form state
-            const changeEvent = new Event("input", { bubbles: true });
-            messageTextarea.dispatchEvent(changeEvent);
-          }
-        }, 400);
-        sessionStorage.removeItem("preFillMessage");
-      }
-    };
-
-    window.addEventListener("preFillContactForm" as any, handlePreFill);
-    return () =>
-      window.removeEventListener("preFillContactForm" as any, handlePreFill);
-  }, []);
-
   const contactForm = useContactForm(
     () => {
       setShowSuccessModal(true);
@@ -74,6 +47,24 @@ export const Contact: React.FC = () => {
       });
     },
   );
+
+  // Prefill from the chat's "Ask Andrew Directly": a live event when this page
+  // is already mounted, or sessionStorage after navigating here from another page.
+  // Goes through form state; writing the textarea's DOM value doesn't stick.
+  useEffect(() => {
+    const apply = (message?: string | null) => {
+      if (!message) return;
+      contactForm.applyTemplate(message);
+      sessionStorage.removeItem("preFillMessage");
+      setTimeout(() => document.getElementById("message")?.focus(), 400);
+    };
+    apply(sessionStorage.getItem("preFillMessage"));
+    const handlePreFill = (event: Event) =>
+      apply((event as CustomEvent<{ message: string }>).detail?.message);
+    window.addEventListener("preFillContactForm", handlePreFill);
+    return () => window.removeEventListener("preFillContactForm", handlePreFill);
+    // applyTemplate only calls a state setter, so the first render's copy is safe to keep
+  }, []);
 
   const handleTemplateSelect = (template: string) => {
     contactForm.applyTemplate(template);

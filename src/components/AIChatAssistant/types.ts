@@ -25,6 +25,7 @@ export const ACTION_CONFIGS: Record<string, ActionButton> = {
   view_travel: { label: "Travel Photos", action: "view_travel" },
   view_experience: { label: "View Experience", action: "view_experience" },
   send_email: { label: "Send Email", action: "send_email" },
+  play_snake: { label: "Play Snake", action: "play_snake" },
 };
 
 // Suggested questions for the structured-context chat assistant

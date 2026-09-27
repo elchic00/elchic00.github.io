@@ -3,6 +3,7 @@
  */
 
 import type { MarkedOptions } from "marked";
+import { ACTION_CONFIGS } from "./types";
 
 // Exported directly (not via a getter) so markdownRenderer.ts's import
 // reflects the value loadMarked() assigns below - ES module bindings are
@@ -30,16 +31,22 @@ export const loadMarked = async () => {
 /**
  * Parses action buttons from assistant response content
  */
+// The prompt shows the tag in backticks, so the model sometimes wraps it in them
+const ACTION_TAG = /`?\[ACTIONS:\s*([^\]]*)\]`?/;
+
 export const parseActionsFromContent = (
   content: string
 ): { cleanContent: string; actions: string[] } => {
-  const actionMatch = content.match(/\[ACTIONS:\s*([^\]]+)\]/);
-  if (actionMatch) {
-    const actions = actionMatch[1].split(",").map((a) => a.trim());
-    const cleanContent = content.replace(/\[ACTIONS:\s*[^\]]+\]/, "").trim();
-    return { cleanContent, actions };
-  }
-  return { cleanContent: content, actions: [] };
+  const match = content.match(ACTION_TAG);
+  // Drop names without a button so an unknown-only tag still gets the keyword fallback
+  const actions = match
+    ? match[1].split(",").map((a) => a.trim()).filter((a) => a in ACTION_CONFIGS)
+    : [];
+  const cleanContent = content
+    .replace(ACTION_TAG, "")
+    .replace(/`?\[ACTIONS:[^\]]*$/, "") // unterminated tag from a cut-off reply
+    .trim();
+  return { cleanContent, actions };
 };
 
 /**

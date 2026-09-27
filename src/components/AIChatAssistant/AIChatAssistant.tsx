@@ -283,26 +283,17 @@ export const AIChatAssistant = () => {
           .reverse()
           .find((msg) => msg.role === "user");
         if (lastUserMessage) {
-          const contactSection = document.getElementById("contact");
-          if (contactSection) {
-            handleClose();
-            sessionStorage.setItem(
-              "preFillMessage",
-              lastUserMessage.content
-            );
-            setTimeout(() => {
-              contactSection.scrollIntoView({ behavior: "smooth" });
-              window.dispatchEvent(
-                new CustomEvent("preFillContactForm", {
-                  detail: { message: lastUserMessage.content },
-                })
-              );
-            }, 300);
-          }
+          // Contact applies the event if it's mounted; otherwise it reads
+          // sessionStorage after handleAction navigates to /#contact
+          sessionStorage.setItem("preFillMessage", lastUserMessage.content);
+          window.dispatchEvent(
+            new CustomEvent("preFillContactForm", {
+              detail: { message: lastUserMessage.content },
+            })
+          );
         }
-      } else {
-        handleAction(action, handleClose);
       }
+      handleAction(action, handleClose);
     },
     [messages, handleClose]
   );

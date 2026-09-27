@@ -177,7 +177,7 @@ generationConfig: {
 
 ### Action Buttons
 
-When the AI includes `[ACTIONS: view_resume, contact_form]` in responses, buttons appear automatically.
+The prompt asks the model to end every reply with `[ACTIONS: view_resume, contact_form]`. The frontend strips the tag (including a backtick-wrapped or cut-off one), keeps only names with a button, and falls back to keyword detection on the question when none remain.
 
 **Available Actions** (in [types.ts](../src/components/AIChatAssistant/types.ts)):
 - `view_resume` - Opens PDF resume
@@ -185,10 +185,11 @@ When the AI includes `[ACTIONS: view_resume, contact_form]` in responses, button
 - `view_github` - Opens GitHub profile
 - `contact_form` - Scrolls to contact section
 - `ask_directly` - Pre-fills contact form with chat message
-- `view_projects` - Scrolls to projects
+- `view_projects` - Opens the Projects page
 - `view_travel` - Opens travel gallery
 - `view_experience` - Scrolls to experience
 - `send_email` - Opens email client
+- `play_snake` - Opens the Snake game
 
 ---
 
@@ -394,7 +395,7 @@ npm run worker:deploy
 - [ ] Chat opens/closes smoothly
 - [ ] Messages send and receive
 - [ ] Markdown renders correctly
-- [ ] Action buttons work
+- [ ] Action buttons work (automated: `node scripts/test-chat-actions.mjs`)
 - [ ] Suggested questions work
 - [ ] Rate limiting triggers at 6th request
 - [ ] Error states display properly
