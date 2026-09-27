@@ -54,6 +54,21 @@ The UI and AI project datasets are intentionally separate and are not identical.
 
 If an AI context source or `public/knowledge/projects.json` changes, run `npm run sync-context` and include the resulting `worker/index.js` diff.
 
+## Public Claims
+
+The site is recruiter-facing, and a wrong claim is worse than a missing one. The most common failure is a number or phrase that gets fixed in one place and left stale in the others.
+
+- A project fact usually appears in several places: `src/data/structured/projects.json`, `src/components/About/FeaturedSystems.tsx`, other homepage components under `src/components/About/`, the case study in `src/pages/case-studies/`, the meta tags in `index.html`, the AI context under `src/data/context/`, and `public/knowledge/projects.json`, which is synced to `worker/index.js`. When you change a claim, grep the repo for the old value and fix every copy. If a copy is out of scope, flag it instead of leaving the site contradicting itself.
+- A page's own copy is not the source for a number. Take figures from the owner's canonical project notes or a measurement, and quote the exact value. If you round, say which measurement you rounded.
+- Never use internal employer product names, team names, or acronyms in public copy or chat context. Describe the feature by what it does for users. Keep this rule generic in `systemPrompt.ts`, because listing the banned terms makes the model repeat them.
+- Match the case studies' plain register: say what broke and what was measured, and don't inflate counts, relationships, or scope.
+
+## Commits and Deploys
+
+- Every push to `main` deploys the site through `.github/workflows/deploy.yml`, so treat a push as publishing.
+- The live chat changes only when the Worker is redeployed. After running `npm run sync-context`, say in your summary that a Worker deploy is still pending.
+- Use Conventional Commits (`feat:`, `fix:`, `docs:`, and so on) with imperative subjects. Only write a body when the diff doesn't explain why the change was made. This repository is public, so don't add `Claude-Session:` trailers.
+
 ## Change Discipline
 
 - Make the smallest change that fully satisfies the request.

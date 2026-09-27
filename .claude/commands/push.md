@@ -7,10 +7,10 @@ Analyze all uncommitted changes and create descriptive, well-structured git comm
 Instructions:
 
 1. **Check for portfolio context changes:**
-   - Check if any context files changed: `git diff --name-only | grep -E "src/data/context/(biography|systemPrompt|skills|index)\.ts"`
+   - Check if any context files changed: `git diff --name-only | grep -E "src/data/context/(biography|systemPrompt|skills|index)\.ts|public/knowledge/projects\.json"`
    - If any changed, run `npm run sync-context` to sync to `worker/index.js`
    - Stage the synced worker file: `git add worker/index.js`
-   - Set flag to deploy worker after push: `DEPLOY_WORKER=true`
+   - Note that a Worker deploy will be pending
 
 2. **Review all changes:**
    - Run `git status` to see all modified/untracked files
@@ -33,11 +33,7 @@ Instructions:
    - Use conventional commits format: `type(optional-scope): description`
    - **Types:** feat, fix, refactor, docs, style, test, perf, chore, build, ci
    - **Summary line:** 50-72 characters, imperative mood (e.g., "add", not "added" or "adds")
-   - **Body (2-5 concise bullet points):**
-     - What changed at a high level (not line-by-line)
-     - Why the change was made (motivation/context)
-     - Impact or benefit (performance, UX, maintainability)
-     - Non-obvious implementation decisions
+   - **Body only when the diff doesn't explain itself:** the why — motivation, a non-obvious decision, the bug it prevents. Never restate the diff.
    - **Avoid:** File paths, line numbers, exhaustive details (visible in diff), implementation minutiae
    - **Focus on:** The "why" and business/technical context
 
@@ -45,16 +41,14 @@ Instructions:
    - Push all commits to remote using `git done` (alias for `git push origin main`)
    - Verify push was successful
 
-6. **Deploy worker (if context changed):**
-   - If `DEPLOY_WORKER=true` flag was set in step 1, run `npm run worker:deploy`
-   - This deploys the updated AI context to Cloudflare Workers
-   - Verify deployment was successful
-   - Note: This ensures the chatbot uses the latest context immediately
+6. **Worker deploy (if context changed):**
+   - Do not run `npm run worker:deploy`; it needs Drew's Cloudflare auth and explicit request
+   - Report that the live chatbot keeps the old context until he deploys
 
 7. **Report summary:**
    - List each commit with its hash and message
    - Summarize what was accomplished overall
-   - Note if worker was deployed
+   - Note if a Worker deploy is pending
    - Note: GitHub Actions will automatically deploy to GitHub Pages
 
 **Pre-flight checks:**
@@ -91,9 +85,7 @@ update stuff
 
 **Critical guidelines:**
 
-- **CRITICAL**: Do NOT include any co-author lines, attribution to Claude, or "Generated with Claude Code" text in commit messages
-- **CRITICAL**: Use ONLY the user's git identity - never add yourself (Claude) as author or co-author
-- **CRITICAL**: Commit messages should contain ONLY: type, optional scope, subject, and body - nothing else
+- Commit as the user's git identity; a `Co-Authored-By:` model attribution trailer is fine, but never a `Claude-Session:` trailer (public repo)
 - Never include sensitive information or credentials in commit messages
 - Always use descriptive, professional language
 - Use imperative mood in subject line ("add feature", not "added feature" or "adds feature")
