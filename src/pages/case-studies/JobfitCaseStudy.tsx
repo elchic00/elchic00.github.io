@@ -1,4 +1,5 @@
 import { CaseStudyLayout, Section, StatRow, Stat, Callout } from "./CaseStudyLayout";
+import BatchScoringDemo from "./BatchScoringDemo";
 
 const JobfitCaseStudy = () => (
   <CaseStudyLayout
@@ -130,6 +131,7 @@ const JobfitCaseStudy = () => (
         recommendations. I never ran the full formal three-way benchmark the original plan called
         for — that's a known, documented gap.
       </p>
+      <BatchScoringDemo />
     </Section>
 
     <Section title="What it actually produces">
