@@ -270,7 +270,7 @@ When asked about "what projects has he built", include both his professional wor
    - Not a public GitHub repo - it's a physical private server
 
 3. **Inference Engine** (llama.cpp, ROCm, from-source local model serving)
-   - A from-source llama.cpp build serving local models (dense text primary, vision, speech-to-text, plus a speculative-decoding draft model) on a Framework Desktop's AMD APU
+   - A from-source llama.cpp build serving the local dense text primary (plus its speculative-decoding draft model) and vision model on a Framework Desktop's AMD APU, with speech-to-text on a WhisperX server on the same box
    - Fixed a GPU memory-allocator bug that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
    - Real generation speeds on this hardware: roughly 33 tok/s on structured and reasoning output from the 27B dense model with DFlash2 speculative decoding (up from ~22 tok/s on the earlier Multi-Token Prediction draft path, against a 7.4 tok/s plain-decode floor); free-form prose is roughly flat at ~15 tok/s, and uncached prefill runs ~369 tok/s
    - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault

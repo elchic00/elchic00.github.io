@@ -46,7 +46,7 @@ const InferenceCaseStudy = () => (
         . One text
         model, <strong>Qwen 3.8 27B</strong>, handles all reasoning and tool
         calls, which leaves enough memory for a resident vision model
-        (Qwen3-VL). Getting there meant building the serving engine from source
+        (Qwen3-VL) and a WhisperX speech-to-text server. Getting there meant building the serving engine from source
         (<code>GGML_HIP=ON</code>, <code>AMDGPU_TARGETS=gfx1151</code>) behind a
         LiteLLM router that handles failover to cloud fallbacks when required.
       </p>
