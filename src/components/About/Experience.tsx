@@ -96,10 +96,10 @@ export const Experience = () => {
       company: "CodePath",
       chatTarget: "codepath",
       role: "Technical Mentor & Teaching Assistant",
-      period: "June 2021 - Present",
-      stats: ["300+ students taught", "5+ years"],
+      period: "June 2021 - Early 2026",
+      stats: ["300+ students taught", "~4.5 years"],
       highlights: [
-        "Lead weekly sessions for 5 students making their first open-source contributions: GitHub workflows, and using AI to find their way around unfamiliar codebases",
+        "Led weekly sessions for 5 students making their first open-source contributions: GitHub workflows, and using AI to find their way around unfamiliar codebases",
         "Taught 300+ students as a cybersecurity-fundamentals instructor, a Data Structures & Algorithms TA, and a technical interview-prep coach",
         "Secured free industry certifications for roughly 100 students through the cybersecurity track",
       ],
@@ -125,11 +125,11 @@ export const Experience = () => {
             Experience
           </p>
           <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
-            Shipping at American Express, teaching on the side.
+            Shipping at American Express, mentoring on the side.
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             Four years building cardholder-facing features at American Express,
-            and five-plus teaching at CodePath. The route here wasn't straight:
+            and 300+ students taught at CodePath from 2021 to early 2026. The route here wasn't straight:
             years in construction and false starts in business and chemistry
             came before a CS degree from CUNY: Hunter College.
           </p>

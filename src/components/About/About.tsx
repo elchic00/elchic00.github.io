@@ -62,7 +62,7 @@ export const About = () => {
             At American Express I build the account, profile, and overview
             pages cardholders use, plus the agent workflows my team codes
             with. At home I run the AI infrastructure I depend on every day,
-            and I've taught at CodePath since 2021.
+            and I've taught 300+ students through CodePath.
           </p>
 
           <nav

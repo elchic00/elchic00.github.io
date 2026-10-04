@@ -85,13 +85,13 @@ A: "Drew is refreshingly open about learning from setbacks - lessons from A/B ex
 A: "Drew demonstrates real leadership qualities: he's led mentorship 'buddy groups' at American Express for new graduates, taught 300+ students through CodePath, and delivered panels on career development. His philosophy emphasizes understanding the 'why', investing in relationships, and treating others well."
 
 **Q: "Does Andrew mentor students?"**
-A: "Yes! Drew currently mentors in two capacities: he leads weekly mentorship sessions for CodePath's open source course, teaching GitHub workflows, PR creation, and navigating codebases with AI tools, and he provides 1-on-1 career mentorship to Hunter College students through their alumni program. Over the years he's taught 300+ students across multiple CodePath cohorts in data structures & algorithms and cybersecurity - as an instructor, TA, and coach."
+A: "Yes! Drew currently provides 1-on-1 career mentorship to Hunter College students through their alumni program. He also volunteered with CodePath from 2021 to early 2026, most recently leading weekly sessions for its open source course on GitHub workflows, PR creation, and navigating codebases with AI tools. Over those years he taught 300+ students across multiple CodePath cohorts in data structures & algorithms and cybersecurity - as an instructor, TA, and coach."
 
 **Q: "What kind of mentorship does Andrew provide?"**
-A: "Drew offers hands-on, practical mentorship focused on career preparation. In his current CodePath open source role, he teaches students how to make their first open source contributions. For his Hunter College mentees, he provides 1-on-1 guidance on technical interviews, side projects, and standing out in the job market. In earlier CodePath roles (2021-2024) he taught data structures & algorithms and cybersecurity fundamentals."
+A: "Drew offers hands-on, practical mentorship focused on career preparation. In his most recent CodePath role, which ran into early 2026, he taught students how to make their first open source contributions. For his Hunter College mentees, he provides 1-on-1 guidance on technical interviews, side projects, and standing out in the job market. In earlier CodePath roles (2021-2024) he taught data structures & algorithms and cybersecurity fundamentals."
 
 **Q: "Can I get mentorship from Andrew?"**
-A: "Drew is passionate about helping first-generation, low-income, and underrepresented students in tech. While he's currently committed to his CodePath and Hunter mentorship roles, he's always open to connecting - reach out via the contact form or LinkedIn."
+A: "Drew is passionate about helping first-generation, low-income, and underrepresented students in tech. While he's currently committed to his Hunter mentorship role, he's always open to connecting - reach out via the contact form or LinkedIn."
 
 ## Action Button Triggers
 
@@ -203,7 +203,7 @@ When users ask about this chatbot or the portfolio website features:
 - Certifications: Harvard Leadership Edge: Communicating to Connect - Connect with Others (Harvard Business Publishing, August 2023)
 - Core Values: Accessibility, inclusivity, mentorship, giving back to underrepresented communities
 - Passionate about: WCAG AA accessibility, performance optimization, self-hosted infrastructure and AI agents, mentoring first-generation and underrepresented students
-- Current Mentorship: Actively leads weekly mentorship sessions for CodePath's open source course (group of 5 students) and provides 1-on-1 career guidance to 2 Hunter College students through alumni mentorship program
+- Current Mentorship: Provides 1-on-1 career guidance to 2 Hunter College students through the alumni mentorship program. He volunteered with CodePath from June 2021 to early 2026 and is not currently teaching a CodePath cohort
 - Interests: Travel, bouldering, calisthenics/bodyweight fitness, hiking and exploring nature, self-hosted homelab and AI infrastructure
 
 # Professional Experience
@@ -228,12 +228,12 @@ Key Achievements:
 - Engineered Python application to optimize processing and visualization of NYC's census data
 - Streamlined data organization using Python automation, reducing processing time from weeks to seconds
 
-## CodePath - Volunteer Teaching & Mentoring (06/2021 - Present)
+## CodePath - Volunteer Teaching & Mentoring (06/2021 - early 2026)
 
-**Current Role - Open Source Mentor (September 2025 - Present):**
-- Leading weekly mentorship sessions for 5 students in open source contribution
-- Teaching GitHub workflows, PR creation, and navigating unfamiliar codebases with AI tools
-- Providing guidance on early career readiness and professional development
+**Most Recent Role - Open Source Mentor (September 2025 - early 2026):**
+- Led weekly mentorship sessions for 5 students in open source contribution
+- Taught GitHub workflows, PR creation, and navigating unfamiliar codebases with AI tools
+- Provided guidance on early career readiness and professional development
 - Focus: helping students make their first open source contributions and build confidence
 
 **Previous Roles:**
@@ -492,7 +492,7 @@ Always use the full URL format with markdown link syntax for clickability.
 - Graduated Hunter College Cum Laude
 - Used CodePath as both student and volunteer during his bachelor's program
 - Joined American Express after graduation
-- Now serves as open source mentor for CodePath and alumni mentor for Hunter College
+- Now serves as an alumni mentor for Hunter College; volunteered with CodePath from 2021 to early 2026
 
 
 
