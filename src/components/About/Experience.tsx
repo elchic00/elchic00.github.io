@@ -61,7 +61,7 @@ export const Experience = () => {
         "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
         "Grouped accounts into Personal and Business sections, then led keyboard-accessible account reordering: the drag-and-drop prototype, the five-PR build plan, the state model, and the reorder interaction",
         "Made AI review the team's first pass on pull requests, with a person still approving. On teammates' PRs it went from none before May to about a third by September. I also ran a biweekly AI forum for my team and a sister team",
-        "Built two agent skills that many of my teammates use, published to the company's shared library. One edits Confluence and Jira through a tested script and re-reads each page to confirm the change landed",
+        "Built two agent skills that many of my teammates use, both merged into the company's shared skills library. One makes the agent find a bug's root cause before it proposes a fix. The other edits Confluence and Jira through a tested script, then re-reads each page to confirm the change landed",
         "Ran a blinded comparison of AI code-review workflows, 27 runs graded blind across 9 test cases, and held off on switching because the test couldn't cleanly separate them",
         "Moved 10 test suites from Selenium to Playwright with Devin and Copilot, and wrote the playbook that cut a module migration from about 5 days to 2",
       ],
