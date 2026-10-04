@@ -198,23 +198,6 @@ code {
   white-space: pre-wrap;
 }
 
-
-/* Keyboard focus-path overlay (FocusPath.tsx) */
-.focus-path circle {
-  fill: rgb(2 6 23 / 0.92);
-  stroke: rgb(103 232 249 / 0.85);
-  stroke-width: 1.5;
-}
-.focus-path text {
-  fill: #e2e8f0;
-  font-size: 9px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-.focus-path g { transition: opacity 0.2s ease; }
-.focus-path g.is-active circle { fill: rgb(103 232 249); r: 13; }
-.focus-path g.is-active text { fill: #020617; }
-
 /* Chat page spotlight (PageSpotlight.tsx) */
 .page-spotlight-box {
   position: absolute;
