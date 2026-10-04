@@ -107,9 +107,9 @@ export const Experience = () => {
     {
       company: "CUNY: Hunter College",
       role: "Alumni Mentor",
-      period: "2025 - Present",
+      period: "2025 - 2026",
       highlights: [
-        "1-on-1 mentoring for current students: choosing side projects, sharpening resumes, and preparing for technical interviews",
+        "Mentored Hunter students 1-on-1 on choosing side projects, sharpening resumes, and preparing for technical interviews",
       ],
     },
   ];
@@ -125,7 +125,7 @@ export const Experience = () => {
             Experience
           </p>
           <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">
-            Shipping at American Express, mentoring on the side.
+            Shipping at American Express, teaching along the way.
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
             Four years building cardholder-facing features at American Express,
