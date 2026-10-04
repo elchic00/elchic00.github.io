@@ -22,8 +22,8 @@ export const About = () => {
           loading="eager"
           {...({ fetchpriority: "high" } as any)}
         />
-        {/* Dark on the text side, photo shows through on the right */}
-        <div className="absolute inset-0 bg-slate-950/80 lg:bg-transparent lg:bg-gradient-to-r lg:from-slate-950 lg:via-slate-950/85 lg:to-slate-950/20" />
+        {/* Mobile: sky shows above the portrait, text area stays >=75% dark. Desktop: dark on the text side, photo shows through on the right */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-950/30 via-slate-950/75 via-35% to-slate-950/90 lg:bg-gradient-to-r lg:from-slate-950 lg:via-slate-950/85 lg:via-50% lg:to-slate-950/20" />
       </div>
 
       <div className="container relative z-10 mx-auto flex flex-col items-center gap-10 px-5 py-24 sm:px-8 md:px-10 lg:flex-row lg:justify-between lg:gap-16 lg:py-20">
