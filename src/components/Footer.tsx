@@ -1,4 +1,5 @@
-import { ServerIcon } from "@heroicons/react/solid";
+import { Link } from "react-router-dom";
+import { PuzzleIcon } from "@heroicons/react/solid";
 import { SocialLinks } from "./shared/SocialLinks";
 import { MonogramOverlap } from "./shared/MonogramLogo";
 
@@ -8,19 +9,21 @@ export const Footer = () => {
       <div className="max-w-[1600px] mx-auto px-4 lg:px-12 py-7 md:py-8">
         <div className="flex flex-col md:flex-row items-center md:items-stretch justify-between gap-5 md:gap-0">
           
-          {/* LEFT: System Status - md:flex-1 restores the left-pin */}
-          <div className="md:flex-1 flex items-center gap-3 justify-center md:justify-start">
-            <div className="bg-cyan-500/10 p-2 rounded-lg border border-cyan-500/20">
-              <ServerIcon className="w-5 h-5 text-cyan-400" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-[0.15em] text-slate-400 font-bold">
-                System Status
-              </span>
-              <span className="text-xs text-slate-300 whitespace-nowrap">
-                Vite + React • <span className="text-emerald-400/90 font-medium">100/100</span>
-              </span>
-            </div>
+          {/* LEFT: Snake lives here instead of the primary nav - md:flex-1 restores the left-pin */}
+          <div className="md:flex-1 flex items-center justify-center md:justify-start">
+            <Link to="/snake" className="group flex items-center gap-3 rounded-lg">
+              <div className="bg-cyan-500/10 p-2 rounded-lg border border-cyan-500/20">
+                <PuzzleIcon className="w-5 h-5 text-cyan-400" aria-hidden="true" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] uppercase tracking-[0.15em] text-slate-400 font-bold">
+                  Break time
+                </span>
+                <span className="text-xs text-slate-300 whitespace-nowrap group-hover:text-cyan-300 transition-colors">
+                  Play Snake &rarr;
+                </span>
+              </div>
+            </Link>
           </div>
 
           {/* CENTER: Socials - Stays centered always */}

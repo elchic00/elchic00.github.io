@@ -8,7 +8,6 @@ import {
   ChipIcon,
   DocumentTextIcon,
   GlobeAltIcon,
-  PuzzleIcon,
   UserGroupIcon,
   MailIcon,
 } from "@heroicons/react/solid";
@@ -71,13 +70,6 @@ export const NAV_ITEMS: NavItem[] = [
     link: "/travel",
     icon: GlobeAltIcon,
     iconBg: "bg-orange-500/20 text-orange-400",
-    type: "route",
-  },
-  {
-    name: "Snake",
-    link: "/snake",
-    icon: PuzzleIcon,
-    iconBg: "bg-green-500/20 text-green-400",
     type: "route",
   },
   {
