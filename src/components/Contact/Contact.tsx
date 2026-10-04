@@ -84,7 +84,7 @@ export const Contact: React.FC = () => {
 
         <div className="container relative z-10 mx-auto grid gap-10 px-5 pt-8 pb-20 sm:px-8 md:px-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,34rem)] lg:gap-20 sm:pt-12 sm:pb-24">
           <div className="lg:pt-2">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-amber-300">
               Contact
             </p>
             <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">

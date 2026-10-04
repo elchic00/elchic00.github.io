@@ -115,7 +115,7 @@ export const Experience = () => {
           ref={headerRef}
           className={`mb-14 scroll-reveal ${headerVisible ? "visible" : ""}`}
         >
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-amber-300">
             Experience
           </p>
           <h2 className="mb-5 text-3xl font-black tracking-tight text-white sm:text-5xl">

@@ -95,7 +95,7 @@ export const Travel = () => {
             className="mx-auto inline-block w-10 mb-4 text-cyan-400"
             aria-hidden="true"
           />
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-cyan-300">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-amber-300">
             Travel journal
           </p>
           <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">

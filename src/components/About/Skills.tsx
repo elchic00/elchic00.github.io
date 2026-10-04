@@ -12,7 +12,7 @@ export const Skills = () => {
           ref={headerRef}
           className={`mb-10 scroll-reveal ${headerVisible ? "visible" : ""}`}
         >
-          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-cyan-300">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.32em] text-amber-300">
             Skills
           </p>
           <h2 className="text-3xl font-black tracking-tight text-white sm:text-5xl">

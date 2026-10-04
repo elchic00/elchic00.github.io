@@ -49,7 +49,7 @@ export const About = () => {
         </div>
 
         <div className="flex max-w-2xl flex-col items-center text-center lg:flex-grow lg:items-start lg:text-left">
-          <p className="animate-fade-in-delay-2 mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200 sm:text-sm">
+          <p className="animate-fade-in-delay-2 mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-amber-200 sm:text-sm">
             Drew Alagna<span className="hidden sm:inline"> · Software engineer</span> · NYC
           </p>
 
