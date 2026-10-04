@@ -61,8 +61,9 @@ export const Experience = () => {
         "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
         "Grouped accounts into Personal and Business views, and led keyboard-accessible drag-and-drop account reordering from proof of concept to the five-PR build plan",
         "Lead AI-assisted delivery: 127 of the 176 PRs I merged from March to September 2026 were co-authored with Devin or Copilot, scoped and reviewed by me",
-        "Made AI review the team's first pass on pull requests, and ran AI enablement sessions for two teams",
-        "Moved 10 test suites from Selenium to Playwright and wrote the playbook, cutting a module migration from about 5 days to 2. Also modernized CI across the team's 16 repos",
+        "Made AI review the team's first pass on pull requests, ran a recurring AI-adoption forum, and published two agent skills to the company's shared library for web engineers",
+        "Moved 10 test suites from Selenium to Playwright and wrote the playbook, cutting a module migration from about 5 days to 2",
+        "Found analytics tests that only logged missing events and made them fail instead. The first run exposed a real overflow-tile bug, fixed that same week",
       ],
     },
     {
