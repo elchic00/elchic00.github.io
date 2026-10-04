@@ -13,7 +13,7 @@ const config = {
     quality: 85,
     formats: ["webp"],
     processSubdirectories: true,
-    // Phone photos land as HEIC; sharp decodes it natively, no conversion step needed.
+    // Phone photos land as HEIC; processImage converts them through macOS sips first (see below).
     inputExtensions: ["jpg", "jpeg", "png", "heic"],
   },
   projectImages: {
