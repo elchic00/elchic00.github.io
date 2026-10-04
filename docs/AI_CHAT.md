@@ -35,6 +35,7 @@ src/components/AIChatAssistant/
 ├── ChatInput.tsx             # User input field
 ├── SuggestedQuestions.tsx    # Quick question buttons
 ├── LoadingIndicator.tsx      # Typing animation
+├── PageSpotlight.tsx         # Highlights the homepage element a reply points at
 ├── types.ts                  # Shared TypeScript types
 ├── utils.ts                  # Utility functions (markdown, actions)
 └── index.ts                  # Barrel export
@@ -190,6 +191,17 @@ The prompt asks the model to end every reply with `[ACTIONS: view_resume, contac
 - `view_experience` - Scrolls to experience
 - `send_email` - Opens email client
 - `play_snake` - Opens the Snake game
+
+### Page Spotlight
+
+A reply about one homepage item can carry `[SHOW: target]` before its ACTIONS line. The frontend strips the tag, keeps it only if the id is in `SHOW_TARGETS` ([types.ts](../src/components/AIChatAssistant/types.ts)), and renders a "Show me on the page" button. Each id matches a `data-chat-target` attribute on the page.
+
+- On desktop, a model-chosen tag spotlights the element as soon as the reply finishes streaming, if it's on the current page. The chat slides aside until the next click, scroll, touch, or key press.
+- A keyword match on the question (`detectShowFromQuestion`) only offers the button.
+- On mobile, the button closes the chat first, since the chat covers the page.
+- From another route, the button loads `/?show=<target>`; `PageSpotlight` reads and removes the parameter, then spotlights and focuses the element.
+
+To add a target, add the id and caption to `SHOW_TARGETS`, put `data-chat-target` on the element, list it in the Page Spotlight section of `systemPrompt.ts`, and run `npm run sync-context`.
 
 ---
 

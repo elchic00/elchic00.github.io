@@ -1,6 +1,14 @@
 import { useState, useEffect, useCallback, useRef, lazy, Suspense } from "react";
 import { XIcon, ChatIcon } from "@heroicons/react/solid";
-import { parseActionsFromContent, handleAction, detectActionsFromQuestion } from "./utils";
+import {
+  parseActionsFromContent,
+  parseShowFromContent,
+  handleAction,
+  detectActionsFromQuestion,
+  detectShowFromQuestion,
+  showOnPage,
+} from "./utils";
+import { PageSpotlight } from "./PageSpotlight";
 
 // ChatWindow (and its dependency on marked/dompurify for markdown rendering)
 // only loads once the chat is actually opened, instead of shipping on every
@@ -199,7 +207,10 @@ export const AIChatAssistant = () => {
       }
 
       const data = await response.json();
-      const { cleanContent, actions: parsedActions } = parseActionsFromContent(data.response);
+      const { cleanContent: withoutActions, actions: parsedActions } = parseActionsFromContent(data.response);
+      const { cleanContent, show: taggedShow } = parseShowFromContent(withoutActions);
+      // The model's own pick may auto-spotlight; a keyword guess only offers the button
+      const show = taggedShow ?? detectShowFromQuestion(userMessage);
       
       // Use parsed actions from AI, or detect from question as fallback
       const actions = parsedActions.length > 0 
@@ -217,6 +228,7 @@ export const AIChatAssistant = () => {
           role: "assistant",
           content: cleanContent,
           actions,
+          show,
           timestamp: Date.now(),
           isStreaming: true,
         },
@@ -228,6 +240,14 @@ export const AIChatAssistant = () => {
             msg.id === messageId ? { ...msg, isStreaming: false } : msg
           )
         );
+        // Desktop only: on mobile the chat covers the page, so the button does it
+        if (
+          taggedShow &&
+          window.matchMedia("(min-width: 768px)").matches &&
+          document.querySelector(`[data-chat-target="${taggedShow}"]`)
+        ) {
+          showOnPage(taggedShow);
+        }
       }, cleanContent.split(/(\s+)/).length * 20 + 100);
     } catch (error) {
       trackChatError("network_error");
@@ -296,6 +316,19 @@ export const AIChatAssistant = () => {
       handleAction(action, handleClose);
     },
     [messages, handleClose]
+  );
+
+  const handleShow = useCallback(
+    (target: string) => {
+      trackActionTriggered(`show:${target}`);
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        showOnPage(target, true);
+      } else {
+        handleClose();
+        setTimeout(() => showOnPage(target, true), 250);
+      }
+    },
+    [handleClose]
   );
 
   const handleQuickAction = useCallback(
@@ -385,12 +418,14 @@ export const AIChatAssistant = () => {
             onInputChange={setInput}
             onSubmit={handleSubmit}
             onAction={handleActionClick}
+            onShow={handleShow}
             onRetry={handleRetry}
             onSuggestedQuestion={handleSuggestedQuestion}
             onQuickAction={handleQuickAction}
           />
         </Suspense>
       )}
+      <PageSpotlight />
     </>
   );
 };

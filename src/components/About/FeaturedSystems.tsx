@@ -89,6 +89,7 @@ export const FeaturedSystems = () => {
                 key={system.id}
                 to={`/projects/${system.id}`}
                 data-featured-system-card
+                data-chat-target={system.id}
                 className="focus-ring group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-slate-900 transition-colors duration-300 hover:border-cyan-400/40"
               >
                 <img

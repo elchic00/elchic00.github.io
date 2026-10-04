@@ -214,3 +214,50 @@ code {
 .focus-path g { transition: opacity 0.2s ease; }
 .focus-path g.is-active circle { fill: rgb(103 232 249); r: 13; }
 .focus-path g.is-active text { fill: #020617; }
+
+/* Chat page spotlight (PageSpotlight.tsx) */
+.page-spotlight-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  border-radius: 20px;
+  border: 2px solid rgb(252 211 77 / 0.85);
+  box-shadow: 0 0 0 200vmax rgb(2 6 23 / 0.62), 0 0 32px 4px rgb(252 211 77 / 0.25);
+  transition: opacity 0.25s ease;
+}
+.page-spotlight-caption {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  border-radius: 9999px;
+  border: 1px solid rgb(252 211 77 / 0.4);
+  background: rgb(2 6 23 / 0.95);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(253 230 138);
+  transition: opacity 0.3s ease;
+}
+.page-spotlight-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: rgb(252 211 77);
+}
+/* The chat slides aside so the page can be seen; it returns when the spotlight clears */
+[data-chat-window] {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+body.spotlight-active [data-chat-window] {
+  opacity: 0;
+  transform: translateX(2rem);
+}
+@media (prefers-reduced-motion: reduce) {
+  body.spotlight-active [data-chat-window] { transform: none; }
+}

@@ -21,6 +21,7 @@ interface ChatWindowProps {
   onInputChange: (value: string) => void;
   onSubmit: () => void;
   onAction: (action: string) => void;
+  onShow: (target: string) => void;
   onRetry: () => void;
   onSuggestedQuestion: (question: string, index: number, total: number) => void;
   onQuickAction: (action: string) => void;
@@ -37,6 +38,7 @@ export const ChatWindow = ({
   onInputChange,
   onSubmit,
   onAction,
+  onShow,
   onRetry,
   onSuggestedQuestion,
   onQuickAction,
@@ -134,6 +136,7 @@ export const ChatWindow = ({
   return (
     <div
       ref={chatWindowRef}
+      data-chat-window
       role="dialog"
       aria-label="AI chat assistant"
       className="fixed inset-0 z-50 flex flex-col border border-slate-700 bg-slate-800 shadow-2xl animate-slide-up md:inset-auto md:bottom-44 md:right-6 md:h-[min(85vh,680px)] md:w-96 md:max-w-[calc(100vw-3rem)] md:rounded-lg"
@@ -152,6 +155,7 @@ export const ChatWindow = ({
             key={message.id}
             message={message}
             onAction={onAction}
+            onShow={onShow}
             onRetry={message.error ? onRetry : undefined}
           />
         ))}

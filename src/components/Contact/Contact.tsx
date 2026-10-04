@@ -97,6 +97,7 @@ export const Contact: React.FC = () => {
           </div>
 
           <form
+            data-chat-target="contact"
             ref={(el) => {
               (
                 contactForm.formRef as React.MutableRefObject<HTMLFormElement | null>

@@ -6,7 +6,7 @@ export const Skills = () => {
   const { ref: listRef, isVisible: listVisible } = useScrollReveal();
 
   return (
-    <section id="skills" className="relative py-20 sm:py-24 bg-slate-950">
+    <section id="skills" data-chat-target="skills" className="relative py-20 sm:py-24 bg-slate-950">
       <div className="container mx-auto px-5 sm:px-8 md:px-10">
         <div
           ref={headerRef}

@@ -5,6 +5,7 @@ export interface Message {
   content: string;
   error?: boolean;
   actions?: string[];
+  show?: string;
   timestamp?: number;
   isStreaming?: boolean;
 }
@@ -28,11 +29,25 @@ export const ACTION_CONFIGS: Record<string, ActionButton> = {
   play_snake: { label: "Play Snake", action: "play_snake" },
 };
 
+// Homepage elements the chat can spotlight with [SHOW: id]. Each id matches a
+// data-chat-target attribute; the label is the caption shown on the spotlight.
+export const SHOW_TARGETS: Record<string, string> = {
+  hermes: "Hermes",
+  "pi-cloud": "Pi-Cloud",
+  "inference-engine": "Inference Engine",
+  "amex-overview": "Account Overview at American Express",
+  "amex-services": "Account Services at American Express",
+  "screen-reader-demo": "Screen-reader demo",
+  codepath: "Teaching at CodePath",
+  skills: "Skills",
+  contact: "Contact form",
+};
+
 // Suggested questions for the structured-context chat assistant
 export const SUGGESTED_QUESTIONS = [
   "What should I know about Andrew in 30 seconds?",
   "What has he built at American Express?",
-  "Which projects best show his engineering range?",
+  "Show me the most interesting thing he's built",
   "How does he mentor and work with teams?",
 ];
 

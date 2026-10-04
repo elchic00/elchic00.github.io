@@ -3,7 +3,7 @@
  */
 
 import { memo, useState } from "react";
-import { ClipboardCopyIcon, CheckIcon } from "@heroicons/react/outline";
+import { ClipboardCopyIcon, CheckIcon, EyeIcon } from "@heroicons/react/outline";
 import { formatRelativeTime } from "./utils";
 import { renderMarkdown } from "./markdownRenderer";
 import { Message, ACTION_CONFIGS } from "./types";
@@ -12,10 +12,11 @@ import { useStreamingText } from "./useStreamingText";
 interface ChatMessageProps {
   message: Message;
   onAction: (action: string) => void;
+  onShow: (target: string) => void;
   onRetry?: () => void;
 }
 
-export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProps) => {
+export const ChatMessage = memo(({ message, onAction, onShow, onRetry }: ChatMessageProps) => {
   const [copied, setCopied] = useState(false);
   const displayedContent = useStreamingText(message.content, message.isStreaming || false);
   const isStreaming = message.isStreaming || false;
@@ -76,9 +77,18 @@ export const ChatMessage = memo(({ message, onAction, onRetry }: ChatMessageProp
                 }}
               />
             )}
-            {message.actions && message.actions.length > 0 && (
+            {(message.show || (message.actions && message.actions.length > 0)) && (
               <div className="flex flex-wrap gap-2 mt-3">
-                {message.actions.map((action, idx) => {
+                {message.show && (
+                  <button
+                    onClick={() => onShow(message.show!)}
+                    className="inline-flex items-center gap-1.5 rounded border border-amber-300/60 px-3 py-1.5 text-xs font-semibold text-amber-200 transition-colors hover:bg-amber-300/10 focus:outline-none focus:ring-2 focus:ring-amber-300"
+                  >
+                    <EyeIcon className="h-3.5 w-3.5" aria-hidden="true" />
+                    Show me on the page
+                  </button>
+                )}
+                {message.actions?.map((action, idx) => {
                   const config = ACTION_CONFIGS[action];
                   if (!config) return null;
                   return (

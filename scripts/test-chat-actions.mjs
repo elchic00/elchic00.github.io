@@ -13,6 +13,9 @@ const REPLIES = {
   "experience please": "Here is his experience. [ACTIONS: view_experience, contact_form]",
   "links please": "Find him here. [ACTIONS: view_linkedin, view_github, send_email]",
   "a very specific question for drew": "Best asked directly. [ACTIONS: ask_directly]",
+  "how fast is his local model": "About 33 tokens/sec on structured output.\n[SHOW: inference-engine]\n[ACTIONS: view_projects]",
+  "tell me about his mentoring": "He teaches at CodePath. [ACTIONS: contact_form]",
+  "bogus spotlight": "Hello there. [SHOW: not-a-target]\n[ACTIONS: view_projects]",
 };
 
 async function main() {
@@ -171,6 +174,76 @@ async function main() {
       check(prefilled === "a very specific question for drew", `Ask Andrew Directly from ${start} prefills the contact message (got ${JSON.stringify(prefilled)})`);
       await page.evaluate(() => localStorage.clear());
     }
+
+    // --- Page spotlight ([SHOW: target]) ---
+    const shots = process.env.SPOTLIGHT_SHOTS;
+    const spotlight = () =>
+      page.evaluate(() => {
+        const box = document.querySelector(".page-spotlight-box");
+        const target = document.querySelector('[data-chat-target="inference-engine"]');
+        const r = target?.getBoundingClientRect();
+        const win = document.querySelector("[data-chat-window]");
+        return {
+          shown: !!box && getComputedStyle(box).opacity === "1",
+          targetInView: !!r && r.top >= 0 && r.bottom <= innerHeight,
+          chatOpacity: win ? getComputedStyle(win).opacity : null,
+          focused: document.activeElement === target,
+          search: location.search,
+        };
+      });
+
+    await load("/");
+    r = await ask("how fast is his local model");
+    check(!r.text.includes("[SHOW") && r.buttons.includes("Show me on the page"), `SHOW tag is stripped and renders a button (buttons: ${r.buttons})`);
+    await sleep(900);
+    let s = await spotlight();
+    check(s.shown && s.targetInView, `model-tagged SHOW auto-spotlights the card on desktop (${JSON.stringify(s)})`);
+    check(s.chatOpacity === "0", `chat window steps aside during the spotlight (opacity ${s.chatOpacity})`);
+    if (shots) await page.screenshot({ path: `${shots}/spotlight-desktop.png` });
+    await page.mouse.click(5, 300);
+    await sleep(400);
+    check(!(await page.$(".page-spotlight")), "a click anywhere clears the spotlight");
+    await sleep(400);
+    const back = await page.evaluate(() => {
+      const win = document.querySelector("[data-chat-window]");
+      return win ? getComputedStyle(win).opacity : "closed";
+    });
+    check(back === "1", `the click that clears the spotlight brings the chat back instead of closing it (${back})`);
+
+    r = await ask("tell me about his mentoring");
+    await sleep(900);
+    check(r.buttons.includes("Show me on the page") && !(await page.$(".page-spotlight")), "keyword fallback offers the button without auto-spotlighting");
+
+    r = await ask("bogus spotlight");
+    check(!r.text.includes("[SHOW") && !r.buttons.includes("Show me on the page"), `unknown SHOW target is stripped with no button (buttons: ${r.buttons})`);
+    await page.evaluate(() => localStorage.clear());
+
+    await load("/projects");
+    r = await ask("how fast is his local model");
+    await sleep(900);
+    check(!(await page.$(".page-spotlight")), "no auto-spotlight when the target isn't on the current page");
+    await clickAction("Show me on the page");
+    await page.waitForFunction(() => location.pathname === "/" && document.querySelector(".page-spotlight")).catch(() => {});
+    await sleep(1200);
+    s = await spotlight();
+    check(s.shown && s.targetInView && s.focused && s.search === "", `Show from /projects lands on the homepage spotlight with focus and a clean URL (${JSON.stringify(s)})`);
+    await page.evaluate(() => localStorage.clear());
+
+    await page.setViewport({ width: 390, height: 844, isMobile: true, hasTouch: true });
+    await load("/");
+    // The chat button hides over the mobile hero
+    await page.evaluate(() => window.scrollTo(0, 1200));
+    await page.waitForSelector('[aria-label="Open AI chat assistant"]', { visible: true });
+    r = await ask("how fast is his local model");
+    await sleep(900);
+    check(!(await page.$(".page-spotlight")), "no auto-spotlight on mobile, where the chat covers the page");
+    await clickAction("Show me on the page");
+    await sleep(1500);
+    s = await spotlight();
+    const closed = await page.evaluate(() => !document.querySelector('[aria-label="AI chat assistant"]'));
+    check(closed && s.shown && s.targetInView, `mobile Show closes the chat and spotlights the card (${JSON.stringify(s)})`);
+    if (shots) await page.screenshot({ path: `${shots}/spotlight-mobile.png` });
+    await page.evaluate(() => localStorage.clear());
   } finally {
     await browser.close();
     await viteServer?.close();

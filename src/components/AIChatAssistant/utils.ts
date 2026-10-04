@@ -3,7 +3,7 @@
  */
 
 import type { MarkedOptions } from "marked";
-import { ACTION_CONFIGS } from "./types";
+import { ACTION_CONFIGS, SHOW_TARGETS } from "./types";
 
 // Exported directly (not via a getter) so markdownRenderer.ts's import
 // reflects the value loadMarked() assigns below - ES module bindings are
@@ -47,6 +47,49 @@ export const parseActionsFromContent = (
     .replace(/`?\[ACTIONS:[^\]]*$/, "") // unterminated tag from a cut-off reply
     .trim();
   return { cleanContent, actions };
+};
+
+const SHOW_TAG = /`?\[SHOW:\s*([a-z-]+)\s*\]`?/i;
+
+/**
+ * Pulls the optional [SHOW: target] spotlight marker out of a reply
+ */
+export const parseShowFromContent = (
+  content: string
+): { cleanContent: string; show?: string } => {
+  const id = content.match(SHOW_TAG)?.[1].toLowerCase();
+  const cleanContent = content
+    .replace(SHOW_TAG, "")
+    .replace(/`?\[SHOW:[^\]]*$/, "") // unterminated tag from a cut-off reply
+    .trim();
+  return { cleanContent, show: id && id in SHOW_TARGETS ? id : undefined };
+};
+
+// ponytail: first keyword match wins; only offers the button, never auto-scrolls
+const SHOW_KEYWORDS: [RegExp, string][] = [
+  [/inference|llama|tokens?\/s|gpu|local (llm|model)/i, "inference-engine"],
+  [/hermes|eval|agent platform/i, "hermes"],
+  [/pi-?cloud|raspberry|firewall|homelab|self-host/i, "pi-cloud"],
+  [/screen.?reader|accessib|wcag|a11y/i, "screen-reader-demo"],
+  [/american express|amex|overview|personaliz/i, "amex-overview"],
+  [/mentor|codepath|teach/i, "codepath"],
+];
+
+export const detectShowFromQuestion = (question: string) =>
+  SHOW_KEYWORDS.find(([re]) => re.test(question))?.[1];
+
+export const SPOTLIGHT_EVENT = "chat:spotlight";
+
+/**
+ * Spotlights a homepage element, or loads the homepage with ?show= when the
+ * element isn't on the current page
+ */
+export const showOnPage = (target: string, focus = false) => {
+  if (document.querySelector(`[data-chat-target="${target}"]`)) {
+    window.dispatchEvent(new CustomEvent(SPOTLIGHT_EVENT, { detail: { target, focus } }));
+  } else {
+    window.location.href = `/?show=${target}`;
+  }
 };
 
 /**

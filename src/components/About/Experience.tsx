@@ -8,6 +8,8 @@ interface Role {
   summary?: string;
   highlights: string[];
   stats?: string[];
+  // Lets the chat spotlight this entry ([SHOW: ...])
+  chatTarget?: string;
 }
 
 const Stats: React.FC<{ stats?: string[] }> = ({ stats }) =>
@@ -48,6 +50,7 @@ export const Experience = () => {
     {
       company: "American Express",
       role: "Software Engineer — Account Overview",
+      chatTarget: "amex-overview",
       period: "Early 2026 - Present",
       summary:
         "The page cardholders land on after logging in: their accounts, rewards, offers, and spending insights in one place. I work across its frontend modules and the shared libraries behind them.",
@@ -69,6 +72,7 @@ export const Experience = () => {
     {
       company: "American Express",
       role: "Software Engineer — Account Services",
+      chatTarget: "amex-services",
       period: "August 2022 - Early 2026",
       summary:
         "The flows cardholders use to update their name, email, address, and phone: about 5M updates a year.",
@@ -90,6 +94,7 @@ export const Experience = () => {
   const mentorshipExperience: Role[] = [
     {
       company: "CodePath",
+      chatTarget: "codepath",
       role: "Technical Mentor & Teaching Assistant",
       period: "June 2021 - Present",
       stats: ["300+ students taught", "5+ years"],
@@ -151,7 +156,7 @@ export const Experience = () => {
 
           <ol className="ml-1.5 space-y-12 border-l border-white/10 lg:ml-0">
             {workExperience.map((exp, idx) => (
-              <li key={exp.role} className="relative pl-6 md:pl-10">
+              <li key={exp.role} data-chat-target={exp.chatTarget} className="relative pl-6 md:pl-10">
                 <span
                   className={`absolute -left-[7px] top-1.5 h-3.5 w-3.5 rounded-full ring-4 ring-slate-950 ${
                     idx === 0 ? "bg-cyan-400" : "border-2 border-cyan-400/60 bg-slate-950"
@@ -194,6 +199,7 @@ export const Experience = () => {
             {mentorshipExperience.map((exp) => (
               <article
                 key={exp.company}
+                data-chat-target={exp.chatTarget}
                 className="rounded-2xl border border-white/10 bg-slate-900/70 p-6"
               >
                 <h4 className="text-xl font-bold text-white">{exp.role}</h4>
