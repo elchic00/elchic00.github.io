@@ -50,7 +50,7 @@ export const Experience = () => {
       role: "Software Engineer — Account Overview",
       period: "Early 2026 - Present",
       summary:
-        "The page cardholders land on after logging in: their accounts, rewards, offers, and spending insights in one place. I own its frontend architecture.",
+        "The page cardholders land on after logging in: their accounts, rewards, offers, and spending insights in one place. I work across its frontend modules and the shared libraries behind them.",
       stats: [
         "127 of 176 PRs AI-co-authored",
         "10 test suites migrated",
@@ -59,11 +59,11 @@ export const Experience = () => {
       highlights: [
         "Built personalized product recommendations shown beside a cardholder's existing accounts, plus the impression and click analytics that measure them",
         "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
-        "Grouped accounts into Personal and Business views, and led keyboard-accessible drag-and-drop account reordering from proof of concept to the five-PR build plan",
-        "Lead AI-assisted delivery: 127 of the 176 PRs I merged from March to September 2026 were co-authored with Devin or Copilot, scoped and reviewed by me",
-        "Made AI review the team's first pass on pull requests, ran a recurring AI-adoption forum, and published two agent skills to the company's shared library for web engineers",
-        "Moved 10 test suites from Selenium to Playwright and wrote the playbook, cutting a module migration from about 5 days to 2",
-        "Found analytics tests that only logged missing events and made them fail instead. The first run exposed a real overflow-tile bug, fixed that same week",
+        "Grouped accounts into Personal and Business sections, then led keyboard-accessible account reordering: the drag-and-drop prototype, the five-PR build plan, the state model, and the reorder interaction",
+        "Coordinated a move to new account tokens across about 20 PRs in 25 modules, and caught that a published shared-library release was missing the change before teams pinned it",
+        "Checked a proposed identifier fix against the backend response before approving it, which stopped two frontend changes, one of them mine, that would have created the mismatch they were meant to fix",
+        "Moved 10 test suites from Selenium to Playwright and wrote the playbook, cutting a module migration from about 5 days to 2. I also made analytics tests fail when an event goes missing instead of just logging it, and the first run caught an overflow-tile bug",
+        "Scoped and reviewed every AI-co-authored PR I merged (127 of 176 from March to September 2026). Made AI review the team's first pass on pull requests, ran a biweekly AI forum for two teams, and published two agent skills to the company's shared library that many of my teammates now use",
       ],
     },
     {
@@ -95,7 +95,7 @@ export const Experience = () => {
       stats: ["300+ students taught", "5+ years"],
       highlights: [
         "Lead weekly sessions for 5 students making their first open-source contributions: GitHub workflows, and using AI to find their way around unfamiliar codebases",
-        "Taught 300+ students total — as a cybersecurity-fundamentals instructor, a Data Structures & Algorithms TA, and a technical interview-prep coach",
+        "Taught 300+ students as a cybersecurity-fundamentals instructor, a Data Structures & Algorithms TA, and a technical interview-prep coach",
         "Secured free industry certifications for roughly 100 students through the cybersecurity track",
       ],
     },
