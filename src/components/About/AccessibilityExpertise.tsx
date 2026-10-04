@@ -1,6 +1,7 @@
 import { HeartIcon, ExternalLinkIcon } from "@heroicons/react/solid";
 import { useScrollReveal } from "../../hooks";
 import { ScreenReaderDemo } from "./ScreenReaderDemo";
+import { FocusPath } from "./FocusPath";
 
 const MyPalScreen = () => (
   <img
@@ -71,6 +72,7 @@ export const AccessibilityExpertise = () => {
             The same WCAG AA bar at enterprise scale and in a side project for
             kids who can't work around a broken control.
           </p>
+          <FocusPath />
         </div>
 
         <div
