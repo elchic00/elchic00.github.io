@@ -8,12 +8,13 @@ Treat `package.json`, `wrangler.toml`, and `worker/index.js` as the source of tr
 
 - `src/index.tsx` creates the React root and wraps the app in `BrowserRouter`.
 - `src/App.tsx` owns the global layout, route content, navigation, footer, AI chat, toasts, error boundary, analytics, and hash scrolling.
-- `src/routes.tsx` defines `/`, `/projects`, `/travel`, and `/snake`; Travel and Snake are lazy-loaded.
+- `src/routes.tsx` defines `/`, `/projects`, one `/projects/<id>` route per case study, `/travel`, and `/snake`; the case studies, Travel, and Snake are lazy-loaded, and `usePrefetchRoutes` warms their chunks once the browser is idle.
 - `src/constants/app.ts` owns EmailJS environment validation and shared contact/resume constants.
 - `src/index.css` contains Tailwind and global styles.
 
 Major feature areas:
 
+- `src/pages/`: the home and projects pages, and the case studies under `src/pages/case-studies/`.
 - `src/components/About/`: skills, experience, accessibility, and featured systems.
 - `src/components/Portfolio/` and `src/components/Projects/`: project presentation and project-specific modals.
 - `src/components/Travel/`: trip navigation, cards, galleries, lightbox, and layout helpers.
@@ -41,7 +42,7 @@ AI data:
 ## AI Chat Request Flow
 
 1. `src/App.tsx` renders `AIChatAssistant` globally.
-2. `src/components/AIChatAssistant/` owns UI state, suggested questions, sanitized Markdown rendering, and action markers.
+2. `src/components/AIChatAssistant/` owns UI state, suggested questions, sanitized Markdown rendering, and the action and page-spotlight markers (see `docs/AI_CHAT.md`).
 3. The frontend POSTs conversation data to the Worker's `/api/chat` endpoint.
 4. `worker/index.js` handles CORS, validates the method and JSON payload, applies IP-based rate limiting, and constructs the Gemini request.
 5. The Worker injects synchronized portfolio context, recent conversation history, and the complete compact project reference sheet.
@@ -64,9 +65,9 @@ Review the resulting Worker diff whenever a context source changes. Handwritten 
 ## Build and Deployment
 
 - `npm run build` runs TypeScript, Vite, and `scripts/inline-critical-css.js`; Vite emits the static site to `build/`.
-- `npm run deploy` builds through `predeploy` and publishes `build/` through `gh-pages`.
-- `npm run worker:deploy` synchronizes context and deploys with Wrangler.
-- `.github/workflows/deploy.yml` is another deployment surface and must be checked before changing deployment assumptions.
+- Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site and publishes it as a GitHub Pages deployment. That is what serves the live site.
+- `npm run deploy` (with `predeploy`) still publishes `build/` to the `gh-pages` branch, but the live site does not come from that branch. Don't use it.
+- `npm run worker:deploy` synchronizes context and deploys the Worker with Wrangler.
 
 Deployment and publishing require explicit user authorization.
 

@@ -7,7 +7,7 @@ Hey, I’m Drew. I’m a New York software engineer with a BA in computer scienc
 ## What’s here
 
 - A React and TypeScript portfolio focused on accessible, responsive frontend work.
-- Project case studies for Hermes, local AI inference, Pi-Cloud, and the portfolio chat itself.
+- Project case studies for Hermes, local AI inference, Pi-Cloud, Jobfit, and the portfolio chat itself.
 - A travel gallery, contact form, and a small Canvas Snake game.
 - An AI chat assistant backed by a Cloudflare Worker and Gemini. It uses a compact, structured reference for the whole portfolio—no vector database where one is not needed.
 
