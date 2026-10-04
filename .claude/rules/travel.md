@@ -1,5 +1,6 @@
 ---
 paths:
+  - "src/components/Travel.tsx"
   - "src/components/Travel/**"
   - "src/data/structured/trips.json"
   - "public/images/travel/**"

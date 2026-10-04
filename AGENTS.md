@@ -107,12 +107,12 @@ Before finishing:
 
 ## Scoped Rules and References
 
-Detailed per-area rules live in `.claude/rules/`. Claude Code auto-loads a rule when it reads a file the rule's `paths:` frontmatter matches (`documentation.md` has no `paths:`, so it loads every session); other agents should read the relevant file before working in that area:
+Detailed per-area rules live in `.claude/rules/`. Claude Code auto-loads a rule when it reads a file the rule's `paths:` frontmatter matches; other agents should read the relevant file before working in that area:
 
 - `.claude/rules/frontend.md` — `src/**` TypeScript, React, CSS, and structured data
 - `.claude/rules/worker.md` — `worker/**`, `src/data/context/**`, project knowledge, sync script
 - `.claude/rules/travel.md` — travel components, `trips.json`, travel images and tests
-- `.claude/rules/documentation.md` — any `.md` change
+- `.claude/rules/documentation.md` — `docs/**` and any `.md` file
 
 Repository references (read the one that matches the task; treat the code as the final authority if a doc disagrees):
 
