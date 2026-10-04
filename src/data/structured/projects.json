@@ -11,7 +11,7 @@
     {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Three models on one box serve every agent I run at $0 per call, which changes which experiments are worth running. It's a from-source llama.cpp build on an AMD APU the project doesn't officially support, where memory bandwidth alone should cap the dense 27B model at 7.4 tokens/sec. It doesn't. Every call is traced, and nothing sensitive leaves the LAN.",
+    "description": "Three models on one box serve every agent I run at $0 per call, which changes which experiments are worth running. It's a from-source llama.cpp build on a single AMD APU, where memory bandwidth alone should cap the dense 27B model at 7.4 tokens/sec. It doesn't. Every call is traced, and nothing sensitive leaves the LAN.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",

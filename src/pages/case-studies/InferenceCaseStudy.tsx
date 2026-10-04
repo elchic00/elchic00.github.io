@@ -11,7 +11,7 @@ import SpecDecodeDemo from "./SpecDecodeDemo";
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
     title="Inference Engine"
-    subtitle="Three models resident on one box, serving every agent I run at $0 marginal cost per call — a from-source llama.cpp build on GPU hardware the project doesn't officially list as supported."
+    subtitle="Three models resident on one box, serving every agent I run at $0 marginal cost per call — a from-source llama.cpp build on a single AMD APU."
     tech={[
       "llama.cpp",
       "ROCm",
@@ -42,8 +42,8 @@ const InferenceCaseStudy = () => (
         <strong>
           Framework Desktop (Ryzen AI Max+ 395, 128GB unified memory, Radeon
           gfx1151)
-        </strong>{" "}
-        — an APU architecture llama.cpp doesn't officially support. One text
+        </strong>
+        . One text
         model, <strong>Qwen 3.8 27B</strong>, handles all reasoning and tool
         calls, which leaves enough memory for a resident vision model
         (Qwen3-VL). Getting there meant building the serving engine from source
