@@ -12,6 +12,7 @@ export { ResumePage } from "./Resume";
 export { AIChatAssistant } from "./AIChatAssistant";
 export { AccessibilityExpertise } from "./About/AccessibilityExpertise";
 export { FeaturedSystems } from "./About/FeaturedSystems";
+export { NightShift } from "./About/NightShift";
 
 // Utility components
 export { ErrorBoundary } from "./ErrorBoundary";

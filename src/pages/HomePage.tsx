@@ -5,6 +5,7 @@ import {
   Contact,
   Experience,
   FeaturedSystems,
+  NightShift,
   Skills,
 } from "@components";
 
@@ -17,6 +18,7 @@ export const HomePage = () => {
     <>
       <About />
       <FeaturedSystems />
+      <NightShift />
       <Experience />
       <AccessibilityExpertise />
       <Skills />

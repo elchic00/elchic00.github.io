@@ -1,0 +1,65 @@
+{
+  "loopStart": "18:00",
+  "asleep": {
+    "from": "23:30",
+    "to": "07:00",
+    "verified": false
+  },
+  "events": [
+    {
+      "id": "hermes-judge",
+      "time": "01:00",
+      "verified": false,
+      "cadence": "Nightly",
+      "system": "Hermes",
+      "short": "Judge scores traces",
+      "projectId": "hermes",
+      "title": "An LLM judge scores the day's conversations",
+      "detail": "It pulls every trace from Langfuse and scores task completion, tool-call efficiency, and response quality. Against my own labels it scored near chance, so its scores sort what I look at; they don't decide anything."
+    },
+    {
+      "id": "pi-backup",
+      "time": "03:00",
+      "verified": false,
+      "cadence": "Nightly",
+      "system": "Pi cloud",
+      "short": "Backups run",
+      "projectId": "pi-cloud",
+      "title": "Backups snapshot, then sync",
+      "detail": "The SQLite databases get an atomic snapshot instead of a raw file copy, then sync to two separate recovery destinations. Each run reports its own result, so a failed backup shows up the same day."
+    },
+    {
+      "id": "hermes-improve",
+      "time": "04:00",
+      "verified": false,
+      "cadence": "Weekly",
+      "system": "Hermes",
+      "short": "Prompt edits drafted",
+      "projectId": "hermes",
+      "title": "The agent drafts edits to its own prompt",
+      "detail": "It clusters the last 30 days of low-scoring turns and proposes specific prompt edits. They go to Telegram and are never applied automatically."
+    },
+    {
+      "id": "llama-upstream",
+      "time": "05:00",
+      "verified": false,
+      "cadence": "Weekly",
+      "system": "Inference engine",
+      "short": "llama.cpp check",
+      "projectId": "inference-engine",
+      "title": "New llama.cpp commits get read before they land",
+      "detail": "Upstream moves fast enough to break this exact AMD hardware path, so new commits are reviewed before the build moves forward."
+    },
+    {
+      "id": "drew-review",
+      "time": "07:30",
+      "verified": false,
+      "cadence": "When edits are proposed",
+      "system": "Me",
+      "short": "I review the edits",
+      "projectId": null,
+      "title": "I approve or reject each proposed edit",
+      "detail": "Approval is a real command: `apply 1 2` lands specific proposals, `skip improvements` declines the batch. In one real run I approved two of three; the third would have fixed the wrong thing."
+    }
+  ]
+}

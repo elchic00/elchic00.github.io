@@ -49,6 +49,7 @@ Detailed architecture, component ownership, build behavior, and deployment surfa
 - Context sync script: `scripts/sync-portfolio-context.js`
 - Travel data: `src/data/structured/trips.json`
 - UI skills: `src/data/structured/skills.json`
+- Homelab schedule shown on the homepage dial: `src/data/structured/nightShift.json` (each time needs `"verified": true` or the section won't render in production)
 
 The UI and AI project datasets are intentionally separate and are not identical. When project facts change, check both and update each one that should expose the change.
 
@@ -58,7 +59,7 @@ If an AI context source or `public/knowledge/projects.json` changes, run `npm ru
 
 The site is recruiter-facing, and a wrong claim is worse than a missing one. The most common failure is a number or phrase that gets fixed in one place and left stale in the others.
 
-- A project fact usually appears in several places: `src/data/structured/projects.json`, `src/components/About/FeaturedSystems.tsx`, other homepage components under `src/components/About/`, the case study in `src/pages/case-studies/`, the meta tags in `index.html`, the AI context under `src/data/context/`, and `public/knowledge/projects.json`, which is synced to `worker/index.js`. When you change a claim, grep the repo for the old value and fix every copy. If a copy is out of scope, flag it instead of leaving the site contradicting itself.
+- A project fact usually appears in several places: `src/data/structured/projects.json`, `src/components/About/FeaturedSystems.tsx`, other homepage components under `src/components/About/`, `src/data/structured/nightShift.json`, the case study in `src/pages/case-studies/`, the meta tags in `index.html`, the AI context under `src/data/context/`, and `public/knowledge/projects.json`, which is synced to `worker/index.js`. When you change a claim, grep the repo for the old value and fix every copy. If a copy is out of scope, flag it instead of leaving the site contradicting itself.
 - A page's own copy is not the source for a number. Take figures from the owner's canonical project notes or a measurement, and quote the exact value. If you round, say which measurement you rounded.
 - Never use internal employer product names, team names, or acronyms in public copy or chat context. Describe the feature by what it does for users. Keep this rule generic in `systemPrompt.ts`, because listing the banned terms makes the model repeat them.
 - Match the case studies' plain register: say what broke and what was measured, and don't inflate counts, relationships, or scope.
