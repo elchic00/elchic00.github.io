@@ -38,6 +38,28 @@ const INITIAL_MESSAGE: Message = {
   timestamp: Date.now(),
 };
 
+const LABEL_SEEN_KEY = "ai-chat-label-shown";
+const LABEL_DELAY_MS = 10000;
+const LABEL_VISIBLE_MS = 8000;
+const LABEL_FADE_MS = 400; // matches ai-label-fade-out
+
+// sessionStorage throws in some privacy modes; the label then just shows again.
+const hasSeenLabel = () => {
+  try {
+    return sessionStorage.getItem(LABEL_SEEN_KEY) === "true";
+  } catch {
+    return false;
+  }
+};
+
+const markLabelSeen = () => {
+  try {
+    sessionStorage.setItem(LABEL_SEEN_KEY, "true");
+  } catch {
+    // ignore
+  }
+};
+
 export const AIChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useLocalStorage<Message[]>("ai-chat-history", [
@@ -46,7 +68,10 @@ export const AIChatAssistant = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(true);
-  const [showAutoLabel, setShowAutoLabel] = useState(false);
+  const [labelPhase, setLabelPhase] = useState<"idle" | "shown" | "hiding" | "done">(
+    () => (hasSeenLabel() ? "done" : "idle")
+  );
+  const [isEngaged, setIsEngaged] = useState(false);
   const toggleButtonRef = useRef<HTMLButtonElement>(null);
   const sessionStartTimeRef = useRef<number | null>(null);
   const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.userAgent);
@@ -77,20 +102,41 @@ export const AIChatAssistant = () => {
     }
   }, [isOpen]);
 
+  // The once-per-session label waits for engagement (10s on the site or a
+  // half-screen scroll) so it doesn't compete with the hero headline.
   useEffect(() => {
-    const hasSeenLabel = sessionStorage.getItem("ai-chat-label-shown");
-    if (!hasSeenLabel && !isOpen) {
-      const showTimer = setTimeout(() => {
-        setShowAutoLabel(true);
-        sessionStorage.setItem("ai-chat-label-shown", "true");
-      }, 3000);
-      const hideTimer = setTimeout(() => setShowAutoLabel(false), 6500);
-      return () => {
-        clearTimeout(showTimer);
-        clearTimeout(hideTimer);
-      };
+    if (labelPhase !== "idle" || isEngaged) return;
+    const engage = () => setIsEngaged(true);
+    const onScroll = () => {
+      if (window.scrollY > window.innerHeight / 2) engage();
+    };
+    const timer = setTimeout(engage, LABEL_DELAY_MS);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [labelPhase, isEngaged]);
+
+  // Show only once the toggle is actually visible (mobile hides it near the
+  // top), and drop the label as soon as the chat opens.
+  useEffect(() => {
+    if (isOpen && (labelPhase === "shown" || labelPhase === "hiding")) {
+      setLabelPhase("done");
+    } else if (labelPhase === "idle" && isEngaged && !isOpen && !shouldHideMobileToggle) {
+      setLabelPhase("shown");
+      markLabelSeen();
     }
-  }, []);
+  }, [isOpen, labelPhase, isEngaged, shouldHideMobileToggle]);
+
+  useEffect(() => {
+    if (labelPhase !== "shown" && labelPhase !== "hiding") return;
+    const timer = setTimeout(
+      () => setLabelPhase(labelPhase === "shown" ? "hiding" : "done"),
+      labelPhase === "shown" ? LABEL_VISIBLE_MS : LABEL_FADE_MS
+    );
+    return () => clearTimeout(timer);
+  }, [labelPhase]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -353,7 +399,11 @@ export const AIChatAssistant = () => {
       >
         <div
           className={`absolute right-full mr-3 top-1/2 -translate-y-1/2 pointer-events-none select-none ${
-            showAutoLabel ? "ai-label-auto-show" : "opacity-0"
+            labelPhase === "shown"
+              ? "ai-label-auto-show"
+              : labelPhase === "hiding"
+                ? "ai-label-auto-hide"
+                : "opacity-0"
           }`}
           aria-hidden="true"
         >
