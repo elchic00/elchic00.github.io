@@ -64,18 +64,19 @@ const HermesCaseStudy = () => (
 
     <Section title="The eval loop and self-improvement">
       <p>
-        This part is mine, not the harness's. A nightly cron pulls every conversation's execution
-        trace from Langfuse and has an LLM judge score it on three criteria: <code>task_completed</code>{" "}
+        This part is mine, not the harness's. A nightly cron pulls up to 25 of the past day's
+        conversation traces from Langfuse and has an LLM judge score each on three criteria: <code>task_completed</code>{" "}
         (0/1), <code>tool_calls_efficient</code> (1–5), and <code>response_quality</code> (1–5).
         Scores post back to Langfuse, broken out by cron vs. interactive sessions, so a quality
         regression is supposed to show up as part of normal operation instead of getting
         discovered later.
       </p>
       <p>
-        A second, weekly cron closes the loop: it pulls the last 30 days of low-scoring turns,
-        clusters them by theme, and proposes specific edits to the agent's own system prompt —
-        sent to Telegram, never applied automatically. Approval is a real command, not a vague
-        yes: <code>apply 1 2</code> lands specific proposals, <code>apply all</code> takes the
+        A second, weekly cron closes the loop: once the past week has at least five low-scoring
+        turns, it clusters them by theme and proposes specific edits to the agent's own system
+        prompt — sent to Telegram, never applied automatically. Until the judge passes a
+        calibration check, it reports the clusters and holds back the proposals. Approval is a
+        real command, not a vague yes: <code>apply 1 2</code> lands specific proposals, <code>apply all</code> takes the
         whole batch, <code>skip improvements</code> declines it — the same message thread I use
         for everything else this system sends me.
       </p>
