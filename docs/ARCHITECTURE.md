@@ -29,7 +29,7 @@ Visible portfolio data:
 - `src/data/structured/projects.json`: project cards, media, links, IDs, and technologies.
 - `src/data/structured/skills.json`: displayed skill categories.
 - `src/data/structured/trips.json`: trip metadata, photo URLs, alt text, and captions.
-- `src/data/structured/nightShift.json`: scheduled homelab jobs and times for the homepage night-shift dial. Unverified times render only in dev.
+- `src/data/structured/nightShift.json`: scheduled homelab jobs for the homepage night-shift dial, with their times and the machines each one uses. Unverified times render only in dev.
 - `src/data/structured/messageTemplates.json`: contact-form quick-fill templates.
 
 AI data:
