@@ -19,15 +19,21 @@ type ShiftEvent = {
   projectId: string | null;
   title: string;
   detail: string;
+  machines: string[]; // ids from `machines`, in the order the job uses them
+  gpu: boolean; // takes the Framework's single-slot GPU lock
 };
+
+type Machine = { id: string; name: string; role: string };
 
 type NightShiftData = {
   loopStart: string;
   asleep: { from: string; to: string; verified: boolean };
+  machines: Machine[];
   events: ShiftEvent[];
 };
 
 const data = nightShiftData as NightShiftData;
+const machineName = (id: string) => data.machines.find((m) => m.id === id)?.name ?? id;
 
 const DAY = 1440;
 const NIGHT_HOUR_MS = 1600; // real time per dial hour while I'm asleep
@@ -166,9 +172,11 @@ export const NightShift = () => {
             What my homelab does after I log off.
           </h2>
           <p className="max-w-3xl text-lg leading-relaxed text-slate-300">
-            These jobs run on a schedule at home. The one thing the system can't
-            do on its own is change its own prompt: that waits in Telegram until
-            I approve it.
+            These jobs run on a schedule across three machines at home. The Mac
+            Mini schedules them, the Framework's GPU does the model work one
+            heavy job at a time, and the Pi holds the data and the search
+            engine. The one thing the system can't do on its own is change its
+            own prompt: that waits in Telegram until I approve it.
           </p>
           {!allVerified && (
             <p className="mt-4 inline-block rounded-md border border-dashed border-amber-400/60 px-3 py-1.5 font-mono text-xs text-amber-200">
@@ -273,6 +281,30 @@ export const NightShift = () => {
               </text>
             </svg>
 
+            <div aria-hidden="true" className="mt-4 grid grid-cols-3 gap-2">
+              {data.machines.map((m) => {
+                const busy = !!current?.machines.includes(m.id);
+                const locked = busy && m.id === "framework" && current?.gpu;
+                return (
+                  <div
+                    key={m.id}
+                    className={`rounded-xl border px-2 py-2 text-center transition-colors duration-500 ${
+                      busy ? "border-cyan-300/80 bg-cyan-400/[0.14] shadow-[0_0_18px_rgba(34,211,238,0.18)]" : "border-white/10 bg-slate-900/70"
+                    }`}
+                  >
+                    <div className={`text-xs font-semibold ${busy ? "text-white" : "text-slate-400"}`}>{m.name}</div>
+                    <div
+                      className={`mt-0.5 text-[10px] uppercase tracking-[0.15em] ${
+                        locked ? "text-amber-300" : busy ? "text-cyan-300" : "text-slate-500"
+                      }`}
+                    >
+                      {locked ? "GPU locked" : m.role}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
             <div className="mt-4 flex justify-center">
               <button
                 type="button"
@@ -328,6 +360,10 @@ export const NightShift = () => {
                   </div>
                   <h3 className="mb-1.5 text-lg font-bold text-white">{e.title}</h3>
                   <p className="leading-relaxed text-slate-300">{renderDetail(e.detail)}</p>
+                  <p className="mt-3 font-mono text-xs text-slate-400">
+                    Runs on {e.machines.map(machineName).join(" · ")}
+                    {e.gpu && " · holds the GPU lock"}
+                  </p>
                 </li>
               );
             })}

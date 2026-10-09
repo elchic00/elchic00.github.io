@@ -1,65 +1,123 @@
 {
   "loopStart": "18:00",
   "asleep": {
-    "from": "23:30",
-    "to": "07:00",
-    "verified": false
+    "from": "23:00",
+    "to": "06:30",
+    "verified": true
   },
+  "machines": [
+    {
+      "id": "mac",
+      "name": "Mac Mini",
+      "role": "Schedules"
+    },
+    {
+      "id": "framework",
+      "name": "Framework",
+      "role": "GPU"
+    },
+    {
+      "id": "pi",
+      "name": "Pi",
+      "role": "Storage + search"
+    }
+  ],
   "events": [
     {
+      "id": "hermes-improve",
+      "time": "23:00",
+      "verified": true,
+      "cadence": "Weekly · Sun",
+      "system": "Hermes",
+      "short": "Failures clustered",
+      "projectId": "hermes",
+      "title": "The agent looks for patterns in its weak turns",
+      "detail": "Once the past week has at least five low-scoring turns, it clusters them and drafts edits to its own prompt. Nothing lands until I reply on Telegram with a command like `apply 1 2`, and until the judge passes a calibration check it only reports the clusters.",
+      "machines": [
+        "mac",
+        "framework"
+      ],
+      "gpu": true
+    },
+    {
       "id": "hermes-judge",
-      "time": "01:00",
-      "verified": false,
+      "time": "02:00",
+      "verified": true,
       "cadence": "Nightly",
       "system": "Hermes",
       "short": "Judge scores traces",
       "projectId": "hermes",
       "title": "An LLM judge scores the day's conversations",
-      "detail": "It pulls every trace from Langfuse and scores task completion, tool-call efficiency, and response quality. Against my own labels it scored near chance, so its scores sort what I look at; they don't decide anything."
+      "detail": "It pulls up to 25 of the past day's conversation traces from Langfuse and scores each on task completion, tool-call efficiency, and response quality. Checked against a stronger model's labels, it hasn't cleared the bar for trust, so its scores sort what I look at; they don't decide anything.",
+      "machines": [
+        "mac",
+        "framework"
+      ],
+      "gpu": true
     },
     {
       "id": "pi-backup",
       "time": "03:00",
-      "verified": false,
+      "verified": true,
       "cadence": "Nightly",
       "system": "Pi cloud",
       "short": "Backups run",
       "projectId": "pi-cloud",
       "title": "Backups snapshot, then sync",
-      "detail": "The SQLite databases get an atomic snapshot instead of a raw file copy, then sync to two separate recovery destinations. Each run reports its own result, so a failed backup shows up the same day."
+      "detail": "The SQLite databases get an atomic snapshot instead of a raw file copy, then sync to two drives: an SD card for a full rebuild, and a USB drive with the critical data that my Mac can read if the Pi dies. Each run reports its own result, so a failed backup shows up the same day.",
+      "machines": [
+        "pi"
+      ],
+      "gpu": false
     },
     {
-      "id": "hermes-improve",
-      "time": "04:00",
-      "verified": false,
-      "cadence": "Weekly",
+      "id": "pi-config-mirror",
+      "time": "03:27",
+      "verified": true,
+      "cadence": "Nightly",
+      "system": "Pi cloud",
+      "short": "Config mirrored",
+      "projectId": "pi-cloud",
+      "title": "The Pi's config gets copied off the box",
+      "detail": "The Mac pulls the Pi's service definitions into a private Git repo. It copies an explicit list of files instead of excluding the risky ones, so a credential a service drops next to its config never gets swept in.",
+      "machines": [
+        "mac",
+        "pi"
+      ],
+      "gpu": false
+    },
+    {
+      "id": "hermes-briefing",
+      "time": "05:00",
+      "verified": true,
+      "cadence": "Nightly",
       "system": "Hermes",
-      "short": "Prompt edits drafted",
+      "short": "Morning brief sent",
       "projectId": "hermes",
-      "title": "The agent drafts edits to its own prompt",
-      "detail": "It clusters the last 30 days of low-scoring turns and proposes specific prompt edits. They go to Telegram and are never applied automatically."
+      "title": "The agent writes my morning brief",
+      "detail": "A script collects the Pi's health and my calendar first, so those facts come from the systems instead of the model. Then the agent searches the web through a search engine on the Pi and sends one Telegram message: system status, today's schedule, tech news, and things to do in NYC.",
+      "machines": [
+        "mac",
+        "pi",
+        "framework"
+      ],
+      "gpu": false
     },
     {
       "id": "llama-upstream",
-      "time": "05:00",
-      "verified": false,
-      "cadence": "Weekly",
+      "time": "08:00",
+      "verified": true,
+      "cadence": "Weekly · Mon",
       "system": "Inference engine",
       "short": "llama.cpp check",
       "projectId": "inference-engine",
-      "title": "New llama.cpp commits get read before they land",
-      "detail": "Upstream moves fast enough to break this exact AMD hardware path, so new commits are reviewed before the build moves forward."
-    },
-    {
-      "id": "drew-review",
-      "time": "07:30",
-      "verified": false,
-      "cadence": "When edits are proposed",
-      "system": "Me",
-      "short": "I review the edits",
-      "projectId": null,
-      "title": "I approve or reject each proposed edit",
-      "detail": "Approval is a real command: `apply 1 2` lands specific proposals, `skip improvements` declines the batch. In one real run I approved two of three; the third would have fixed the wrong thing."
+      "title": "New llama.cpp commits get flagged before a rebuild",
+      "detail": "A script compares the running build with upstream and lists the new commits that touch this AMD GPU path or the features the model relies on. Upstream moves fast enough to break this hardware, so I read those before deciding to rebuild.",
+      "machines": [
+        "mac",
+        "framework"
+      ],
+      "gpu": false
     }
   ]
 }
