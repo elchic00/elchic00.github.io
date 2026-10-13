@@ -30,6 +30,13 @@ const HermesCaseStudy = () => (
         <a href="https://github.com/NousResearch/hermes-official-plugins/pull/74" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-official-plugins#74</a>
         ): one commit under my name, one co-authored.
       </p>
+      <p>
+        It wasn't the only gap. Interrupting a request never actually cancelled it: every abort in
+        my logs, 26 of 26, shut down zero sockets, so the request kept running and held a
+        llama-server slot. I filed the root cause upstream (
+        <a href="https://github.com/NousResearch/hermes-agent/issues/72975" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-agent#72975</a>
+        ), and a fix was merged the next day.
+      </p>
     </Section>
 
     <Section title="Architecture">
