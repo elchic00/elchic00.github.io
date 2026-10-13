@@ -85,7 +85,10 @@ const InferenceCaseStudy = () => (
         <code>mmap</code> model loading entirely and allocates memory
         contiguously upfront. While this adds a few seconds to service startup,
         it eliminates non-deterministic page-fault jitter under heavy
-        concurrency. Separately, setting <code>GGML_HIP_ROCWMMA_FATTN=OFF</code>{" "}
+        concurrency. Upstream has since made llama.cpp skip <code>mmap</code>{" "}
+        on integrated GPUs by default (
+        <a href="https://github.com/ggml-org/llama.cpp/pull/26081" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#26081</a>
+        ); I added this gfx1151 data to that PR while it was in review. Separately, setting <code>GGML_HIP_ROCWMMA_FATTN=OFF</code>{" "}
         — disabling an optimization (rocWMMA) that helps discrete AMD GPUs but
         regresses on gfx1151 APUs — nearly quintupled prompt prefill processing
         speed.
@@ -227,9 +230,13 @@ const InferenceCaseStudy = () => (
       </p>
       <p>
         Widening the Prometheus scrape interval to 60 seconds with a 30-second
-        timeout eliminated false alarms, though the long-term fix is decoupling
-        availability monitoring via dedicated blackbox probes on{" "}
-        <code>/health</code>.
+        timeout eliminated false alarms, at the cost of slower outage detection.
+        I added these measurements to the upstream issue (
+        <a href="https://github.com/ggml-org/llama.cpp/issues/24866" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#24866</a>
+        ), and llama.cpp fixed the root cause six days later (
+        <a href="https://github.com/ggml-org/llama.cpp/pull/27041" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27041</a>
+        ): <code>/metrics</code> now answers during decode, and the build I run
+        includes it.
       </p>
     </Callout>
 

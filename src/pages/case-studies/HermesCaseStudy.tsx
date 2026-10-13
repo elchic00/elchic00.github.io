@@ -71,8 +71,8 @@ const HermesCaseStudy = () => (
         conversation traces from Langfuse and has an LLM judge score each on three criteria: <code>task_completed</code>{" "}
         (0/1), <code>tool_calls_efficient</code> (1–5), and <code>response_quality</code> (1–5).
         Scores post back to Langfuse, broken out by cron vs. interactive sessions (a trace tag I{" "}
-        <a href="https://github.com/NousResearch/hermes-agent/issues/88502" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">asked for upstream</a>
-        ; the official plugin now ships it), so a quality
+        <a href="https://github.com/NousResearch/hermes-agent/issues/88502" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">proposed upstream</a>
+        ; the official plugin shipped it almost exactly as proposed), so a quality
         regression is supposed to show up as part of normal operation instead of getting
         discovered later.
       </p>
