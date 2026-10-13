@@ -25,8 +25,11 @@ const HermesCaseStudy = () => (
         it upstream (
         <a href="https://github.com/NousResearch/hermes-agent/issues/67544" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-agent#67544</a>
         ) and opened{" "}
-        <a href="https://github.com/NousResearch/hermes-agent/pull/88608" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">the PR</a>{" "}
-        closing the gap.
+        <a href="https://github.com/NousResearch/hermes-agent/pull/88608" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">a PR</a>{" "}
+        closing the gap. When Langfuse moved out of core into Nous's official plugin, maintainers
+        ported the fix there (
+        <a href="https://github.com/NousResearch/hermes-official-plugins/pull/74" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-official-plugins#74</a>
+        ): one commit under my name, one co-authored.
       </p>
     </Section>
 
@@ -67,7 +70,9 @@ const HermesCaseStudy = () => (
         This part is mine, not the harness's. A nightly cron pulls up to 25 of the past day's
         conversation traces from Langfuse and has an LLM judge score each on three criteria: <code>task_completed</code>{" "}
         (0/1), <code>tool_calls_efficient</code> (1–5), and <code>response_quality</code> (1–5).
-        Scores post back to Langfuse, broken out by cron vs. interactive sessions, so a quality
+        Scores post back to Langfuse, broken out by cron vs. interactive sessions (a trace tag I{" "}
+        <a href="https://github.com/NousResearch/hermes-agent/issues/88502" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">asked for upstream</a>
+        ; the official plugin now ships it), so a quality
         regression is supposed to show up as part of normal operation instead of getting
         discovered later.
       </p>
