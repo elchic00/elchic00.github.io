@@ -194,8 +194,12 @@ code {
 }
 
 .assistant-message-content p {
-  margin: 0;
   white-space: pre-wrap;
+}
+
+/* Tailwind's reset zeroes block margins, so marked's paragraphs would run together */
+.assistant-message-content > * + * {
+  margin-top: 0.75em;
 }
 
 /* Chat page spotlight (PageSpotlight.tsx) */
