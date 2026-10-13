@@ -11,7 +11,7 @@ import SpecDecodeDemo from "./SpecDecodeDemo";
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
     title="Inference Engine"
-    subtitle="Three models resident on one box, serving every agent I run at $0 marginal cost per call — a from-source llama.cpp build on a single AMD APU."
+    subtitle="Three models resident on a single AMD APU, served by a from-source llama.cpp build to every agent I run at $0 marginal cost per call."
     tech={[
       "llama.cpp",
       "ROCm",
@@ -30,12 +30,13 @@ const InferenceCaseStudy = () => (
     <Section title="What unmetered inference buys">
       <p>
         Whole workloads exist only because they're free. Every call is traced,
-        and a nightly eval loop grades a sample and clusters low-quality turns —
-        a pattern that would double the bill on any metered API. Voice memos get transcribed with speaker diarization the moment
-        they land; screenshots go to a vision model without me weighing whether
-        this one is worth it. None of it is rented, so none of it can become
-        someone else's outage, deprecation notice, or repricing — and nothing
-        sensitive leaves the LAN.
+        and a nightly eval loop grades a sample and clusters low-quality turns,
+        which would double the bill on any metered API. Voice memos get
+        transcribed with speaker diarization the moment they land, and
+        screenshots go to a vision model without me weighing whether this one
+        is worth it. None of it is rented, so none of it can become someone
+        else's outage, deprecation notice, or repricing, and nothing sensitive
+        leaves the LAN.
       </p>
       <p>
         That runs across three resident models on a{" "}
@@ -51,22 +52,20 @@ const InferenceCaseStudy = () => (
         LiteLLM router that handles failover to cloud fallbacks when required.
       </p>
       <p>
-        The build itself carries no local patches — it's a clean branch off
-        upstream master, plain HIP flags and nothing else. What replaced patch
-        maintenance is a standing weekly check that reads new upstream commits
-        before landing them, because upstream moves fast enough to break this
-        exact hardware path: one catch-up deliberately stayed a day behind HEAD
-        to dodge a commit reverting the HIP flag the vision service's
-        GPU-memory detection depends on; a later one was built clean,
-        benchmarked well, and still held back in production after the live
-        server failed to initialize its speculative-decoding context on every
-        request. Landing on schedule isn't the goal — landing without breaking
-        anything is.
+        The build carries no local patches: it's a clean branch off upstream
+        master with plain HIP flags. In place of patch maintenance, a weekly
+        check reads new upstream commits before landing them, because upstream
+        moves fast enough to break this exact hardware path. One catch-up
+        deliberately stayed a day behind HEAD to dodge a commit reverting the
+        HIP flag the vision service's GPU-memory detection depends on. A later
+        one built clean and benchmarked well, and was still held back from
+        production after the live server failed to initialize its
+        speculative-decoding context on every request.
       </p>
       <Figure
         src="/images/case-studies/inference-grafana.webp"
         alt="Grafana dashboard showing 7-day inference metrics"
-        caption="Live Grafana telemetry across a 7-day window — token generation and prompt-ingestion rates for the Qwen 3.8 27B text slots and the resident vision model, plus per-model queue depth, hourly token volume, and the voice-transcription path."
+        caption="Live Grafana telemetry across a 7-day window: token generation and prompt-ingestion rates for the Qwen 3.8 27B text slots and the resident vision model, plus per-model queue depth, hourly token volume, and the voice-transcription path."
       />
     </Section>
 
@@ -74,8 +73,8 @@ const InferenceCaseStudy = () => (
       <p>
         Early testing on high-parameter models hit a ceiling where offloading
         additional GPU layers caused generation speed to plummet to ~0.01
-        tokens/sec. While this looked like a VRAM limit, the actual issue was
-        memory allocator contention on the APU architecture: the GPU accesses
+        tokens/sec. It looked like a VRAM limit, but the actual issue was
+        memory allocator contention on the APU architecture. The GPU accesses
         system RAM via the Graphics Translation Table (GTT), and ROCm's default
         memory-pinning under <code>mmap</code> caused GTT page-fault thrashing
         once the working set crossed a threshold.
@@ -83,15 +82,15 @@ const InferenceCaseStudy = () => (
       <p>
         The fix was passing <code>--direct-io</code>, which disables{" "}
         <code>mmap</code> model loading entirely and allocates memory
-        contiguously upfront. While this adds a few seconds to service startup,
-        it eliminates non-deterministic page-fault jitter under heavy
+        contiguously upfront. It adds a few seconds to service startup and
+        eliminates non-deterministic page-fault jitter under heavy
         concurrency. Upstream has since made llama.cpp skip <code>mmap</code>{" "}
         on integrated GPUs by default (
         <a href="https://github.com/ggml-org/llama.cpp/pull/26081" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#26081</a>
-        ); I added this gfx1151 data to that PR while it was in review. Separately, setting <code>GGML_HIP_ROCWMMA_FATTN=OFF</code>{" "}
-        — disabling an optimization (rocWMMA) that helps discrete AMD GPUs but
-        regresses on gfx1151 APUs — nearly quintupled prompt prefill processing
-        speed.
+        ); I added this gfx1151 data to that PR while it was in review. Separately, setting <code>GGML_HIP_ROCWMMA_FATTN=OFF</code>,
+        which disables an optimization (rocWMMA) that helps discrete AMD GPUs
+        but regresses on gfx1151 APUs, nearly quintupled prompt prefill
+        processing speed.
       </p>
     </Section>
 
@@ -104,14 +103,14 @@ const InferenceCaseStudy = () => (
         decoding.
       </p>
       <p>
-        Speculative decoding bypasses this bandwidth ceiling by proposing draft
+        Speculative decoding gets around this ceiling by proposing draft
         candidate tokens that the main model verifies in a single forward pass.
         The first working version used Qwen's own Multi-Token Prediction (MTP)
         head, which lifted structured, tool-calling generation off the 7.4 t/s
-        floor to a measured 22.4 t/s. Swapping the draft path to DFlash2 — a
-        block-diffusion drafter that proposes a full 8-token block per step —
+        floor to a measured 22.4 t/s. Swapping the draft path to DFlash2, a
+        block-diffusion drafter that proposes a full 8-token block per step,
         raised that to a measured 33 t/s on structured and reasoning output
-        (+48%), landing 3–5 tokens per block at ~75% acceptance and verified
+        (+48%), landing 3-5 tokens per block at ~75% acceptance, verified
         lossless against greedy decode. Free-form prose is roughly flat between
         the two (~15 t/s): block-diffusion drafting loses on high-entropy text,
         and that's the minority of the agent's workload.
@@ -141,30 +140,30 @@ const InferenceCaseStudy = () => (
         Digging through the 132 commits, I filed a capability-probe
         theory upstream with evidence (
         <a href="https://github.com/ggml-org/llama.cpp/issues/26781" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#26781</a>
-        ) — and a maintainer refuted it within days, reading the code path closer
-        than I had. What actually fit was a different discussion entirely:
-        maintainers describing this exact symptom as a structural consequence of
-        the interleaved-thinking chat template when a client fails to echo{" "}
-        <code>reasoning_content</code> back on a tool-call replay turn. The bug
-        had never really been bisected to a commit at all. The root cause was in
-        my own code — an internal
-        whitelist in <code>run_agent.py</code> that decides which model families
-        need <code>reasoning_content</code> echoed back, and had never been
+        ), and a maintainer refuted it within days, reading the code path more
+        closely than I had. What actually fit was a different discussion
+        entirely: maintainers describing this exact symptom as a structural
+        consequence of the interleaved-thinking chat template when a client
+        fails to echo <code>reasoning_content</code> back on a tool-call replay
+        turn. The bug had never really been bisected to a commit at all. The
+        root cause was in my own code. An internal whitelist in{" "}
+        <code>run_agent.py</code> decides which model families need{" "}
+        <code>reasoning_content</code> echoed back, and it had never been
         updated for Qwen. Every replay call was silently stripping it, so the
         template rendered an empty <code>&lt;think&gt;&lt;/think&gt;</code> block
         on every turn after the first.
       </p>
       <p>
-        The client-side fix was one function, verified two ways — instrumenting
+        The client-side fix was one function, verified two ways: instrumenting
         the live call path to watch <code>reasoning_content</code> grow turn
         over turn, and a forced multi-turn tool-calling test with zero
-        fabrications. It was necessary but not sufficient: a later A/B run
+        fabrications. It was necessary but not sufficient. A later A/B run
         directly against the old pinned binary, on the real captured failing
-        payload, reproduced the fabrication just as deterministically — proving
-        the rebase was never the cause on either build. The underlying failure
-        is a model- and template-layer issue that persists on every build at a
-        residual ~2.5–3.3% rate, mitigated at the prompt layer rather than
-        eliminated.
+        payload, reproduced the fabrication just as deterministically, which
+        proved the rebase was never the cause on either build. The underlying
+        failure is a model- and template-layer issue that persists on every
+        build at a residual ~2.5-3.3% rate, mitigated at the prompt layer
+        rather than eliminated.
       </p>
     </Callout>
 
@@ -176,24 +175,24 @@ const InferenceCaseStudy = () => (
         across slots. Under concurrent eviction, incoming requests could restore
         stale KV states from prior, unrelated conversations. In automated
         testing, 20 out of 20 concurrent requests suffered cross-conversation
-        contamination — all while the API reported <code>cached_tokens: 0</code>
+        contamination, all while the API reported <code>cached_tokens: 0</code>
         .
       </p>
       <p>
-        Traffic logs revealed this race condition triggered about once a day
+        Traffic logs showed this race condition triggering about once a day
         during high-concurrency bursts, causing persistent context pollution
-        across unrelated requests. I filed the root-cause trace upstream, with
+        across unrelated requests. I filed the root-cause trace upstream, with{" "}
         <code>--no-cache-idle-slots --cache-ram 0</code> as the verified mitigation (
         <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#27148</a>
-        ) and deployed across both services, eliminating unprompted cache
-        restoration immediately. The vision service still runs cache-disabled
-        — it's low-traffic enough that the cold-prefill cost never mattered.
-        The 27B re-enabled a larger RAM cache in September, after a fresh
-        90-pair contamination probe against the rebuilt server came back clean:
-        262k-context prefill is the one thing worth re-paying a small
-        correctness risk to avoid, and on that build the probe found none. The
-        issue is still open upstream, and an October reproduction on Apple
-        Silicon shows it isn't fixed everywhere.
+        ), and deployed the mitigation across both services, which stopped
+        unprompted cache restoration immediately. The vision service still runs
+        cache-disabled, since it's low-traffic enough that the cold-prefill cost
+        never mattered. The 27B re-enabled a larger RAM cache in September,
+        after a fresh 90-pair contamination probe against the rebuilt server
+        came back clean. Re-paying 262k-context prefill is the one cost worth
+        taking a small correctness risk to avoid, and on that build the probe
+        found no contamination. The issue is still open upstream, and an
+        October reproduction on Apple Silicon shows it isn't fixed everywhere.
       </p>
     </Callout>
 
@@ -205,28 +204,29 @@ const InferenceCaseStudy = () => (
       </p>
       <p>
         The root cause was a boot-order race condition: the <code>amdgpu</code>
-        /KFD kernel module registers the GPU node *after* systemd initializes
-        services configured with <code>After=network.target</code>. Starting
-        llama.cpp before the GPU device node was present caused it to silently
-        ignore <code>--n-gpu-layers 99</code> and fall back to CPU execution.
+        /KFD kernel module registers the GPU node <em>after</em> systemd
+        initializes services configured with <code>After=network.target</code>.
+        Starting llama.cpp before the GPU device node was present caused it to
+        silently ignore <code>--n-gpu-layers 99</code> and fall back to CPU
+        execution.
       </p>
       <p>
         The fix was an <code>ExecStartPre</code> systemd drop-in script that
         blocks unit startup until the KFD topology node confirms a valid{" "}
-        <code>gpu_id</code>, guaranteeing the hardware is initialized before
-        starting inference daemons.
+        <code>gpu_id</code>, so the hardware is initialized before any inference
+        daemon starts.
       </p>
     </Section>
 
     <Callout title="The Alert That Fired Because Inference Was Working">
       <p>
         Grafana began triggering critical <code>target down</code> alerts during
-        heavy inference loads despite services functioning normally. Prometheus
-        was configured to scrape <code>/metrics</code>, but llama.cpp's metric
-        handler acquires the primary task-queue lock during generation. Under
-        load, <code>/health</code> responded in 3ms while <code>/metrics</code>{" "}
-        timed out after 10 seconds, causing Prometheus to mark the service down
-        simply because it was processing queries.
+        heavy inference loads while the services were working normally.
+        Prometheus was configured to scrape <code>/metrics</code>, but
+        llama.cpp's metric handler acquires the primary task-queue lock during
+        generation. Under load, <code>/health</code> responded in 3ms while{" "}
+        <code>/metrics</code> timed out after 10 seconds, so Prometheus marked
+        the service down because it was busy processing queries.
       </p>
       <p>
         Widening the Prometheus scrape interval to 60 seconds with a 30-second
@@ -245,25 +245,25 @@ const InferenceCaseStudy = () => (
         A 128GB unified memory architecture is flexible, but it defines a
         physical budget, and every model on the box draws from it. When I
         retired the 35B MoE model in August 2026 and made Qwen 3.8 27B the
-        sole primary, the RAM it freed went to the 27B itself — the model's
-        full 262k native context, plus burst headroom, instead of a second,
-        faster MoE sitting alongside it. I first split that into two parallel
-        slots at 262k each, until benchmarking showed speculative decoding and
-        continuous batching don't compose on this build: the moment a second
-        slot goes active, DFlash2 draft acceptance collapses from ~24% to
-        ~1%, so two concurrent requests each decode at roughly a third the
-        speed of one. A single slot means every request runs at full speed
-        and a second one queues behind it — a deliberate trade of concurrency
-        for per-request speed over the two-MoE alternative.
+        sole primary, the RAM it freed went to the 27B itself: the model's full
+        262k native context plus burst headroom, instead of a second, faster
+        MoE alongside it. I first split that into two parallel slots at 262k
+        each, until benchmarking showed speculative decoding and continuous
+        batching don't compose on this build. The moment a second slot goes
+        active, DFlash2 draft acceptance collapses from ~24% to ~1%, so two
+        concurrent requests each decode at roughly a third the speed of one.
+        With a single slot, every request runs at full speed and a second one
+        queues behind it. I chose per-request speed over concurrency, and over
+        the two-MoE alternative.
       </p>
       <p>
         The cost of that trade is the fallback chain. With no second local text
-        model, a 27B outage no longer drops to another local backend — it
-        falls straight to a cloud provider with a finite prepaid balance. That
-        is an accepted regression for now, and the real open work: a second
-        local fallback (or a hot-restart path) that restores a zero-cost
-        safety net, plus the upstream items still unresolved against this stack —
-        the <code>server_prompt_cache</code> race (
+        model, a 27B outage no longer drops to another local backend; it falls
+        straight to a cloud provider with a finite prepaid balance. I've
+        accepted that regression for now. The open work is a second local
+        fallback (or a hot-restart path) that restores a zero-cost safety net,
+        plus the upstream items still unresolved against this stack: the{" "}
+        <code>server_prompt_cache</code> race (
         <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27148</a>
         , which has since drawn an independent fix attempt upstream,{" "}
         <a href="https://github.com/ggml-org/llama.cpp/pull/27624" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27624</a>

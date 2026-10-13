@@ -4,25 +4,24 @@ import HermesArchitectureDiagram from "./HermesArchitectureDiagram";
 const HermesCaseStudy = () => (
   <CaseStudyLayout
     title="Hermes"
-    subtitle="hermes-agent, Nous Research's open-source harness, running self-hosted with a nightly eval loop and a weekly self-improvement cron built around it — nothing changes without my approval."
+    subtitle="hermes-agent, Nous Research's open-source harness, running self-hosted with a nightly eval loop and a weekly self-improvement cron built around it. Nothing changes without my approval."
     tech={["hermes-agent", "Langfuse", "LiteLLM", "Telegram", "HITL", "Evals", "Obsidian", "Cron", "LLM-as-Judge"]}
     repoLink={{ href: "https://github.com/NousResearch/hermes-agent", label: "hermes-agent on GitHub (Nous Research)" }}
   >
     <Section title="Why this exists">
       <p>
-        None of this started as a plan. A Mac Mini bought for a desktop, a Raspberry Pi to stop
-        paying for SaaS, then an inference box to wire it all together — at some point three
-        unrelated purchases became a homelab running my own AI agents.
+        None of this started as a plan. I bought a Mac Mini as a desktop, a Raspberry Pi to stop
+        paying for SaaS, then an inference box to wire it all together, and at some point those
+        three unrelated purchases became a homelab running my own AI agents.
       </p>
       <p>
-        The agent runtime itself, <code>hermes-agent</code>, is Nous Research's open-source harness
-        (MIT-licensed). I didn't write it — I deployed it, and I built the observability and safety
-        layer around it. That distinction matters: running an agent unattended for weeks is a
-        different problem than running one in a notebook while you watch. You need to know whether
-        it's doing a good job, not just whether it's still running. It's not purely one-directional,
-        either — running it unattended surfaces real gaps in the harness itself: traces were
-        shipping full turn inputs and outputs to Langfuse's cloud with no redaction step, so I filed
-        it upstream (
+        The agent runtime, <code>hermes-agent</code>, is Nous Research's open-source harness
+        (MIT-licensed). I didn't write it. I deployed it and built the observability and safety
+        layer around it, because running an agent unattended for weeks is a different problem from
+        running one in a notebook while you watch: you need to know whether it's doing a good job,
+        which a liveness check can't tell you. Running it unattended also surfaces gaps in the
+        harness itself. Traces were shipping full turn inputs and outputs to Langfuse's cloud with
+        no redaction step, so I filed it upstream (
         <a href="https://github.com/NousResearch/hermes-agent/issues/67544" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-agent#67544</a>
         ) and opened{" "}
         <a href="https://github.com/NousResearch/hermes-agent/pull/88608" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">a PR</a>{" "}
@@ -43,25 +42,24 @@ const HermesCaseStudy = () => (
         primary text model, DFlash2 speculative decoding) for the agentic work, <strong>Qwen3-VL-8B</strong>{" "}
         for vision (screenshot analysis powering computer use), and <strong>WhisperX</strong>{" "}
         (whisper-large-v3 + speaker diarization) for the voice-note pipeline. A{" "}
-        <strong>Raspberry Pi</strong> handles monitoring and hosts the agent's own tools:
+        <strong>Raspberry Pi</strong> handles monitoring and hosts the agent's own tools:{" "}
         <strong>SearXNG</strong> for web search and <strong>Crawl4AI</strong> for page extraction, which
-        Hermes calls through its search and crawl skills. A two-hop cloud fallback chain — Kimi,
-        then OpenRouter's free tier as the last resort — is wired in for when local inference is
-        down, and almost never fires in practice. Sensitive data deliberately
-        stays on the LAN and never routes through them; the cloud path is a safety net for a local
-        outage, not the default.
+        Hermes calls through its search and crawl skills. A two-hop cloud fallback chain (Kimi,
+        then OpenRouter's free tier as the last resort) is wired in for when local inference is
+        down, and it almost never fires. Sensitive data deliberately stays on the LAN and never
+        routes through either one; the cloud path exists only for a local outage.
       </p>
       <HermesArchitectureDiagram />
       <p>
         Memory is files-first: an Obsidian vault the agents read directly, with a quick-context
         profile loaded at every session start. I tried a vector-memory layer (mem0-oss +
-        ChromaDB) first and pulled it — recall accuracy came in under the published community
-        benchmarks and memories weren't accumulating the way they were supposed to. Markdown files
-        turned out to be the more honest memory layer for this scale. Vault access runs through
-        Obsidian's own resolved link graph rather than a flat file scan, so agents get real
-        backlinks and headings instead of guesses — though that same patching path is where the
+        ChromaDB) first and pulled it. Recall accuracy came in under the published community
+        benchmarks, and memories weren't accumulating the way they were supposed to. At this
+        scale, Markdown files turned out to be the more honest memory layer. Vault access runs
+        through Obsidian's own resolved link graph rather than a flat file scan, so agents get real
+        backlinks and headings instead of guesses, though that same patching path is where the
         vault came closest to real damage (below). Every call, local or cloud, is traced
-        end-to-end in Langfuse — tool calls, LLM chains, timing, token counts.
+        end-to-end in Langfuse, including tool calls, LLM chains, timing, and token counts.
       </p>
     </Section>
 
@@ -69,7 +67,7 @@ const HermesCaseStudy = () => (
       <p>
         This part is mine, not the harness's. A nightly cron pulls up to 25 of the past day's
         conversation traces from Langfuse and has an LLM judge score each on three criteria: <code>task_completed</code>{" "}
-        (0/1), <code>tool_calls_efficient</code> (1–5), and <code>response_quality</code> (1–5).
+        (0/1), <code>tool_calls_efficient</code> (1-5), and <code>response_quality</code> (1-5).
         Scores post back to Langfuse, broken out by cron vs. interactive sessions (a trace tag I{" "}
         <a href="https://github.com/NousResearch/hermes-agent/issues/88502" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">proposed upstream</a>
         ; the official plugin shipped it almost exactly as proposed), so a quality
@@ -77,44 +75,44 @@ const HermesCaseStudy = () => (
         discovered later.
       </p>
       <p>
-        A second, weekly cron closes the loop: once the past week has at least five low-scoring
+        A second, weekly cron closes the loop. Once the past week has at least five low-scoring
         turns, it clusters them by theme and proposes specific edits to the agent's own system
-        prompt — sent to Telegram, never applied automatically. Until the judge passes a
+        prompt, which go to Telegram and are never applied automatically. Until the judge passes a
         calibration check, it reports the clusters and holds back the proposals. Approval is a
-        real command, not a vague yes: <code>apply 1 2</code> lands specific proposals, <code>apply all</code> takes the
-        whole batch, <code>skip improvements</code> declines it — the same message thread I use
-        for everything else this system sends me.
+        real command: <code>apply 1 2</code> lands specific proposals, <code>apply all</code> takes the
+        whole batch, and <code>skip improvements</code> declines it, all in the same message thread
+        I use for everything else this system sends me.
       </p>
       <p>
         One real run: <strong>11 low-quality turns</strong> clustered into{" "}
         <strong>3 patterns</strong>, producing <strong>3 proposed edits</strong>. Two were approved
-        and landed in the prompt — <em>"lead with the answer"</em> and{" "}
-        <em>"complete every action chain, no preamble-only turns."</em> The third was rejected: every
-        turn in that cluster turned out to be an automated cron delivery, and the proposed fix
-        didn't actually apply to that context. The loop found a real pattern and recommended the
-        wrong fix for it. Catching that before it landed is the actual point of keeping a human in
-        the loop — the system proposes, it doesn't decide.
+        and landed in the prompt: <em>"lead with the answer"</em> and{" "}
+        <em>"complete every action chain, no preamble-only turns."</em> I rejected the third. Every
+        turn in that cluster turned out to be an automated cron delivery, so the proposed fix
+        didn't apply to that context: the loop found a real pattern and recommended the wrong fix
+        for it. Catching that before it lands is why a human stays in the loop. The system
+        proposes, and I decide.
       </p>
       <p>
         The honest postscript is that I can't show those two edits made the agent better. KPI
         scores declined over the following 16 days, and the sample is too small and too
-        confounded — model swaps, judge changes — to attribute the drop to the patches or clear
-        them of it. "The human caught the bad one" is the claim I can defend; "the good ones
-        worked" isn't. Some of that confounding turned out to be real rather than just caution:
-        a later audit found the benchmark's own replay traffic leaking into the same production
-        metrics this trend is built from — trace-level filtering alone had missed it, and it only
-        surfaced once the score-level numbers got checked too.
+        confounded (model swaps, judge changes) to attribute the drop to the patches or clear
+        them of it. I can defend "the human caught the bad one." I can't defend "the good ones
+        worked." Some of that confounding was real: a later audit found the benchmark's own replay
+        traffic leaking into the same production metrics this trend is built from. Trace-level
+        filtering alone had missed it, and it only surfaced once the score-level numbers got
+        checked too.
       </p>
     </Section>
 
     <Callout title="What Broke: The Loop Reported Healthy While Frozen">
       <p>
         An audit of the self-improvement loop found it had applied patches{" "}
-        <strong>exactly once as of that audit</strong> — 2026-07-02 — and that{" "}
+        <strong>exactly once as of that audit</strong>, on 2026-07-02, and that{" "}
         <code>improvement_checkpoint.json</code> had sat at <code>saved_at: 2026-07-05</code>,
         untouched, for <strong>13 days</strong>. The weekly cron reported{" "}
         <code>last_status: ok</code> the entire time. The loop I built to catch quality
-        regressions had quietly stopped running, and the monitoring around it said fine.
+        regressions had stopped running, and the monitoring around it said everything was fine.
       </p>
       <p>
         The mechanism was worse than a crash would have been. Hermes had reported{" "}
@@ -127,29 +125,28 @@ const HermesCaseStudy = () => (
         itself.
       </p>
       <p>
-        The fix is structural, not a better prompt. <code>selfimprove01</code> is now a{" "}
-        <code>no_agent</code> script job — the scheduler derives success from the child
-        process's exit code before any agent machinery loads. The failure mode isn't discouraged
-        now, it's unreachable: the wrapper can't install a missing module and then declare
-        victory, because it doesn't get to decide what victory means.
+        I fixed it in the scheduler instead of the prompt. <code>selfimprove01</code> is now a{" "}
+        <code>no_agent</code> script job, and the scheduler derives success from the child
+        process's exit code before any agent machinery loads. The wrapper can't install a missing
+        module and then declare victory, because it no longer gets to decide what victory means.
       </p>
       <p>
-        A month later, the identical shape of failure reappeared one step downstream. The apply
-        path had never gotten the same fix: asked to prune <code>SOUL.md</code> and apply two
-        pending proposals, Hermes reported success against the correct trusted hash — and the
-        edits had never actually been written. The discrepancy only surfaced because I checked
-        the file against the claim; challenged with the evidence, Hermes re-verified, confirmed
-        its own report was wrong, then stalled retrying the same read until its own
-        repeated-failure guardrail cut it off. Finishing the edit meant breaking a rule this
-        homelab otherwise holds — a separate account stepping in to write the fix directly,
-        a one-time exception rather than trusting the stuck loop to recover itself.
+        A month later, the same failure reappeared one step downstream, in the apply path, which
+        had never gotten the fix. Asked to prune <code>SOUL.md</code> and apply two pending
+        proposals, Hermes reported success against the correct trusted hash, and the edits had
+        never been written. The discrepancy only surfaced because I checked the file against the
+        claim. Challenged with the evidence, Hermes re-verified, confirmed its own report was
+        wrong, then stalled retrying the same read until its repeated-failure guardrail cut it
+        off. Finishing the edit meant breaking a rule this homelab otherwise holds: a separate
+        account stepped in and wrote the fix directly, as a one-time exception, instead of
+        trusting the stuck loop to recover.
       </p>
     </Callout>
 
     <Figure
       src="/images/case-studies/hermes-langfuse-traces.webp"
       alt="Langfuse tracing table showing spans for Hermes turns: LiteLLM requests, LLM calls, and tool calls with latencies and a cost column reading $0.00 on every row"
-      caption="The trace table behind the eval loop: every turn decomposes into gateway, LLM, and tool spans — and the cost column reads $0.00 all the way down, because every call runs on local hardware."
+      caption="The trace table behind the eval loop. Every turn decomposes into gateway, LLM, and tool spans, and the cost column reads $0.00 all the way down because every call runs on local hardware."
     />
 
     <Callout title="What Broke: Two Ways to Lose a Document With One API Call">
@@ -158,15 +155,15 @@ const HermesCaseStudy = () => (
         loss before I caught the pattern.
       </p>
       <p>
-        First: patching a heading with <code>operation: "replace"</code> doesn't touch just the
-        next paragraph — it wipes everything nested under that heading, and for an H1 that's the
-        entire document. Second: patching <code>frontmatter</code> with{" "}
-        <code>createTargetIfMissing: true</code> on a file whose frontmatter was already empty
-        (<code>{"{}"}</code>) wiped the whole body, not just the frontmatter block.
+        First, patching a heading with <code>operation: "replace"</code> wipes everything nested
+        under that heading, and for an H1 that's the entire document. Second, patching{" "}
+        <code>frontmatter</code> with <code>createTargetIfMissing: true</code> on a file whose
+        frontmatter was already empty (<code>{"{}"}</code>) wiped the whole body along with the
+        frontmatter block.
       </p>
       <p>
-        The fix is procedural, not a config flag: <code>append</code>/<code>prepend</code> instead
-        of <code>replace</code> whenever the target is a heading, read the full file before any
+        The fix is a procedure. Use <code>append</code>/<code>prepend</code> instead of{" "}
+        <code>replace</code> whenever the target is a heading, read the full file before any
         frontmatter patch instead of trusting <code>createTargetIfMissing</code>, and verify every
         patch against <code>vault_get_document_map</code>'s heading count before trusting a bare
         "OK" response.
@@ -175,21 +172,21 @@ const HermesCaseStudy = () => (
 
     <Callout title="What Broke: A Cron Job Believed Its Own Fabricated Instructions">
       <p>
-        Interactive sessions can receive a "steer" — a live instruction injected mid-turn, marked
+        Interactive sessions can receive a "steer": a live instruction injected mid-turn, marked
         with a trusted marker the model is taught to treat as coming from me. Cron sessions run the
         same agent code, but the scheduler never registers a cron run in the lookup table every{" "}
-        <code>steer()</code> call site depends on — so a cron job can structurally never receive a
-        real one. On 2026-08-09, two separate cron runs found the gap the hard way: each one
-        self-emitted the trusted marker mid-task and obeyed its own fabrication — a self-inflicted
-        version of the exact injection the marker exists to prevent.
+        <code>steer()</code> call site depends on, so a cron job can never receive a real one. On
+        2026-08-09, two separate cron runs found the gap the hard way. Each one self-emitted the
+        trusted marker mid-task and obeyed its own fabrication, a self-inflicted version of the
+        exact injection the marker exists to prevent.
       </p>
       <p>
-        Same shape as the frozen self-improvement loop above: don't let the thing that might be
-        wrong grade itself. Cron sessions are now explicitly excluded from ever processing a steer
-        marker, covered by a dedicated regression test before it shipped. Not fork-specific — filed
-        upstream (
+        It's the same shape as the frozen self-improvement loop above: don't let the thing that
+        might be wrong grade itself. Cron sessions are now explicitly excluded from ever processing
+        a steer marker, covered by a dedicated regression test before the change shipped. The bug
+        isn't fork-specific, so I filed it upstream (
         <a href="https://github.com/NousResearch/hermes-agent/issues/82877" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">NousResearch/hermes-agent#82877</a>
-        ), root cause and fix included.
+        ) with the root cause and fix.
       </p>
     </Callout>
 
@@ -197,21 +194,22 @@ const HermesCaseStudy = () => (
       <ul>
         <li>
           <strong>The judge scores aren't trustworthy yet, and I measured that instead of
-          assuming it.</strong> Opus 5 labeled 63 prepared traces blind — teacher labels, not
-          human ground truth — and against them neither local judge clears the bar: the 35B
+          assuming it.</strong> Opus 5 labeled 63 prepared traces blind (teacher labels, not
+          human ground truth), and against them neither local judge clears the bar. The 35B
           judge lands at Cohen's kappa <strong>0.0469</strong> with failure precision/recall of{" "}
-          <strong>0.11 / 0.40</strong>, the 27B at <strong>0.0919</strong>, both with bootstrap
-          intervals crossing zero. That's near chance at the one thing that matters most, catching
-          failures. The nightly loop is still worth running as trace clustering and triage, but
-          any claim that it measures quality is on hold until calibration improves. I'm now
-          labeling by hand the traces where Opus and a prior independent reference disagree, to
-          work out whether the gap is the rubric or my own preference.
+          <strong>0.11 / 0.40</strong>, and the 27B at <strong>0.0919</strong>, both with bootstrap
+          intervals crossing zero. That's near chance at catching failures, the thing that matters
+          most. The nightly loop is still worth running as trace clustering and triage, but any
+          claim that it measures quality is on hold until calibration improves. I'm now labeling by
+          hand the traces where Opus and a prior independent reference disagree, to work out
+          whether the gap comes from the rubric or from my own preference.
         </li>
         <li>
-          The 27B model is bandwidth-bound — plain decode floors at 7.4 tokens/sec. Speculative
-          decoding (DFlash2, detailed on the Inference Engine page) recovers most of that gap —
-          roughly 33 tokens/sec on structured output, though free-form prose stays near 15; a smaller
-          quant would trade quality for more speed beyond that, and I haven't made that trade.
+          The 27B model is bandwidth-bound: plain decode floors at 7.4 tokens/sec. Speculative
+          decoding (DFlash2, detailed on the Inference Engine page) recovers most of that gap,
+          reaching roughly 33 tokens/sec on structured output, though free-form prose stays near
+          15. A smaller quant would trade quality for more speed beyond that, and I haven't made
+          that trade.
         </li>
       </ul>
     </Section>
