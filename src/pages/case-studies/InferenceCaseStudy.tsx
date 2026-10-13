@@ -179,17 +179,18 @@ const InferenceCaseStudy = () => (
       <p>
         Traffic logs revealed this race condition triggered about once a day
         during high-concurrency bursts, causing persistent context pollution
-        across unrelated requests. The fix (
-        <code>--no-cache-idle-slots --cache-ram 0</code>) was submitted upstream (
+        across unrelated requests. I filed the root-cause trace upstream, with
+        <code>--no-cache-idle-slots --cache-ram 0</code> as the verified mitigation (
         <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#27148</a>
         ) and deployed across both services, eliminating unprompted cache
         restoration immediately. The vision service still runs cache-disabled
         — it's low-traffic enough that the cold-prefill cost never mattered.
-        The 27B re-enabled a larger RAM cache in September, once upstream
-        fixes had landed and a fresh 90-pair contamination probe against the
-        rebuilt server came back clean: 262k-context prefill is the one thing
-        worth re-paying a small correctness risk to avoid, and the probe said
-        the risk was gone.
+        The 27B re-enabled a larger RAM cache in September, after a fresh
+        90-pair contamination probe against the rebuilt server came back clean:
+        262k-context prefill is the one thing worth re-paying a small
+        correctness risk to avoid, and on that build the probe found none. The
+        issue is still open upstream, and an October reproduction on Apple
+        Silicon shows it isn't fixed everywhere.
       </p>
     </Callout>
 
@@ -254,7 +255,7 @@ const InferenceCaseStudy = () => (
         falls straight to a cloud provider with a finite prepaid balance. That
         is an accepted regression for now, and the real open work: a second
         local fallback (or a hot-restart path) that restores a zero-cost
-        safety net, plus the upstream items still open against this stack —
+        safety net, plus the upstream items still unresolved against this stack —
         the <code>server_prompt_cache</code> race (
         <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27148</a>
         , which has since drawn an independent fix attempt upstream,{" "}
@@ -264,7 +265,7 @@ const InferenceCaseStudy = () => (
         slot that silently stops dispatching mid-session with no log line to
         explain why (
         <a href="https://github.com/ggml-org/llama.cpp/issues/27185" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">#27185</a>
-        ).
+        , auto-closed as stale upstream with no fix).
       </p>
     </Section>
   </CaseStudyLayout>
