@@ -10,7 +10,7 @@ Runs `scripts/optimize-images.js`, which processes three folders. The script's `
 | --- | --- | --- | --- | --- |
 | `public/images/travel/` and its trip subfolders | jpg, jpeg, png, heic | `.webp` next to each source | 1920 px | Full-size gallery photos |
 | `public/images/projects/` | jpg, jpeg, png | `.webp` into `public/images/projects/optimized/` | 800 px | Card thumbnails |
-| `public/images/case-studies/` | png only | `.webp` and `.jpg` next to each source | 1600 px | Text-heavy screenshots. The jpg exists because LinkedIn's link previews don't reliably render a WebP `og:image`. |
+| `public/images/case-studies/` | png only | `.webp` and `.jpg` next to each source | 1600 px | Text-heavy screenshots. The jpg is a fallback copy; link previews use `public/images/social/` instead (see below). |
 
 For every image the script:
 
@@ -20,6 +20,12 @@ For every image the script:
 - leaves the original in place. Delete or keep the source yourself before committing.
 
 HEIC photos are converted to a temporary PNG with macOS's `sips` first, because sharp's bundled HEIF support can't decode HEVC, which is how iPhones encode them. That step only works on macOS.
+
+## `npm run generate-social-images`
+
+Runs `scripts/generate-social-images.js`, which renders each case study's card SVG (`image` in `src/data/structured/projects.json`) into `public/images/social/<project id>.jpg` at 1200×630. `scripts/inline-critical-css.js` uses that file as the `og:image` and `twitter:image` in the project's static `build/projects/<id>/index.html`, so Discord, LinkedIn, X and Slack show the project's own graphic when the page is shared. Those crawlers don't render SVG, which is why the JPEG is needed. A case study with no file there falls back to the site-wide profile image.
+
+Re-run it after editing a project SVG and commit the JPEGs. Text renders with the machine's fonts for the SVG's `system-ui` and monospace stacks.
 
 ## Adding travel photos
 

@@ -16,16 +16,14 @@ const ROUTES = ['projects', 'travel', 'snake'];
 // Internal case-study pages (excludes external links like myPal's GitHub repo)
 const CASE_STUDIES = projects.filter((p) => p.link.startsWith('/projects/'));
 
-// Per-project social preview image, for the case studies that have a real
-// screenshot. Anything not listed here keeps the site-wide default
-// (profile.webp) rather than a broken/missing image.
-// Uses .jpg specifically (not the on-page .webp) because LinkedIn's
-// link-preview crawler doesn't reliably render WebP og:image previews.
-const SOCIAL_IMAGES = {
-  hermes: { file: 'hermes-langfuse-traces.jpg', width: 1600, height: 818 },
-  'inference-engine': { file: 'inference-grafana.jpg', width: 1598, height: 902 },
-  'pi-cloud': { file: 'pi-cloud-homepage.jpg', width: 1600, height: 586 },
-};
+// Per-project social preview image: public/images/social/<project id>.jpg,
+// generated from the project's card SVG by `npm run generate-social-images`.
+// A case study without a file there keeps the site-wide default (profile.webp)
+// rather than a broken/missing image.
+// JPEG, not the on-page SVG/WebP: Discord, LinkedIn, X and Slack don't render
+// SVG, and LinkedIn doesn't reliably render WebP, as a link-preview image.
+const SOCIAL_IMAGE_DIR = path.join(__dirname, '../public/images/social');
+const SOCIAL_IMAGE_SIZE = { width: 1200, height: 630 };
 
 // Critical CSS for above-the-fold content (navbar, hero section)
 const CRITICAL_CSS = `
@@ -198,14 +196,13 @@ function createCaseStudyRouteDirectories(html) {
         project.description
       );
 
-      const socialImage = SOCIAL_IMAGES[project.id];
-      if (socialImage) {
-        const imageUrl = `https://elchic00.github.io/images/case-studies/${socialImage.file}`;
+      if (fs.existsSync(path.join(SOCIAL_IMAGE_DIR, `${project.id}.jpg`))) {
+        const imageUrl = `https://elchic00.github.io/images/social/${project.id}.jpg`;
         const imageAlt = `${project.title} — ${project.subtitle}`;
         routeHtml = replaceMetaContent(routeHtml, /(property="og:image" content=")[^"]*(")/, imageUrl);
         routeHtml = replaceMetaContent(routeHtml, /(property="og:image:type" content=")[^"]*(")/, 'image/jpeg');
-        routeHtml = replaceMetaContent(routeHtml, /(property="og:image:width" content=")[^"]*(")/, String(socialImage.width));
-        routeHtml = replaceMetaContent(routeHtml, /(property="og:image:height" content=")[^"]*(")/, String(socialImage.height));
+        routeHtml = replaceMetaContent(routeHtml, /(property="og:image:width" content=")[^"]*(")/, String(SOCIAL_IMAGE_SIZE.width));
+        routeHtml = replaceMetaContent(routeHtml, /(property="og:image:height" content=")[^"]*(")/, String(SOCIAL_IMAGE_SIZE.height));
         routeHtml = replaceMetaContent(routeHtml, /(property="og:image:alt"[\s\S]*?content=")[^"]*(")/, imageAlt);
         routeHtml = replaceMetaContent(routeHtml, /(name="twitter:image" content=")[^"]*(")/, imageUrl);
         routeHtml = replaceMetaContent(routeHtml, /(name="twitter:image:alt"[\s\S]*?content=")[^"]*(")/, imageAlt);

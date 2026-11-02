@@ -30,9 +30,8 @@ const config = {
     // near-native width so text stays legible, unlike the 800px thumbnail tier.
     maxWidth: 1600,
     quality: 85,
-    // jpeg alongside webp: LinkedIn's link-preview crawler doesn't reliably
-    // render WebP og:image previews, so social meta tags use the jpeg while
-    // the on-page <Figure> keeps using the smaller webp.
+    // jpeg alongside webp as a fallback copy. Link previews no longer use
+    // these; they use public/images/social/ (npm run generate-social-images).
     formats: ["webp", "jpeg"],
     // Source screenshots are always png; without this, a prior run's
     // generated .jpg gets treated as a fresh input on the next run (see note
