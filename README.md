@@ -68,4 +68,4 @@ This is a personal portfolio, not a starter template, but you’re welcome to lo
 
 ## Say hello
 
-The best way to reach me is through the [contact form](https://elchic00.github.io/#contact), [LinkedIn](https://www.linkedin.com/in/andrew-a-10b88215b/), or the live site above.
+The best way to reach me is through the [contact form](https://elchic00.github.io/#contact) or [LinkedIn](https://www.linkedin.com/in/andrew-a-10b88215b/).
