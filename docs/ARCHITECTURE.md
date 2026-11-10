@@ -18,7 +18,7 @@ Major feature areas:
 - `src/components/About/`: skills, experience, accessibility, and featured systems.
 - `src/components/Portfolio/` and `src/components/Projects/`: project presentation and project-specific modals.
 - `src/components/Travel/`: trip navigation, cards, galleries, lightbox, and layout helpers.
-- `src/components/Contact/` and `src/hooks/useContactForm.ts`: EmailJS submission, validation, draft persistence, templates, and mailto fallback.
+- `src/components/Contact/` and `src/hooks/useContactForm.ts`: EmailJS submission, validation, draft persistence, and mailto fallback.
 - `src/components/Snake.tsx` and `src/hooks/useSnakeGame.ts`: canvas Snake game.
 - `src/components/shared/`: reusable modal, dialog, toast, button, media, logo, image, and social primitives.
 
@@ -30,7 +30,6 @@ Visible portfolio data:
 - `src/data/structured/skills.json`: displayed skill categories.
 - `src/data/structured/trips.json`: trip metadata, photo URLs, alt text, and captions.
 - `src/data/structured/nightShift.json`: scheduled homelab jobs for the homepage night-shift dial, with their times and the machines each one uses. Unverified times render only in dev.
-- `src/data/structured/messageTemplates.json`: contact-form quick-fill templates.
 
 AI data:
 

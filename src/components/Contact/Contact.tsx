@@ -6,14 +6,13 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import emailjs from "@emailjs/browser";
-import { LightningBoltIcon, TrashIcon } from "@heroicons/react/solid";
+import { TrashIcon } from "@heroicons/react/solid";
 import { Button } from "../shared/Button";
 import { useAlert } from "../shared/Alert";
 import { useContactForm, useScrollReveal } from "../../hooks";
 import { APP_CONFIG } from "../../constants";
 import { ContactSuccessModal } from "./ContactSuccessModal";
 import { ConfirmDialog } from "../shared/ConfirmDialog";
-import messageTemplates from "../../data/structured/messageTemplates.json";
 
 export const Contact: React.FC = () => {
   const location = useLocation();
@@ -23,7 +22,6 @@ export const Contact: React.FC = () => {
   // race with ScrollToHash's smooth scroll landing in the -100px rootMargin dead zone)
   const formVisible = location.hash === "#contact" || contactVisible;
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showTemplates, setShowTemplates] = useState(false);
   const [showClearDraftDialog, setShowClearDraftDialog] = useState(false);
 
   useEffect(() => {
@@ -66,11 +64,6 @@ export const Contact: React.FC = () => {
     // applyTemplate only calls a state setter, so the first render's copy is safe to keep
   }, []);
 
-  const handleTemplateSelect = (template: string) => {
-    contactForm.applyTemplate(template);
-    setShowTemplates(false);
-  };
-
   return (
     <>
       {AlertComponent}
@@ -107,7 +100,7 @@ export const Contact: React.FC = () => {
             onSubmit={contactForm.handleSubmit}
             className={`flex w-full flex-col rounded-2xl border border-white/10 bg-slate-900 p-6 sm:p-8 scroll-reveal-scale ${formVisible ? "visible" : ""}`}
           >
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center justify-between mb-5">
               <h3 className="text-white text-xl sm:text-2xl font-bold tracking-tight">
                 Send a message
               </h3>
@@ -121,44 +114,6 @@ export const Contact: React.FC = () => {
                   <TrashIcon className="w-4 h-4" aria-hidden="true" />
                   Clear Draft
                 </button>
-              )}
-            </div>
-
-            {contactForm.hasDraft && (
-              <div className="mb-4 p-3 bg-cyan-500/10 border border-cyan-500/30 rounded-lg">
-                <p className="text-sm text-cyan-300">
-                  💾 Draft restored from your last visit
-                </p>
-              </div>
-            )}
-
-            {/* Message Templates */}
-            <div className="mb-5">
-              <button
-                type="button"
-                onClick={() => setShowTemplates(!showTemplates)}
-                className="text-sm font-medium text-cyan-300 hover:text-cyan-200 flex items-center gap-1 transition-colors"
-              >
-                <LightningBoltIcon className="w-4 h-4" aria-hidden="true" />
-                {showTemplates ? "Hide" : "Use"} Quick Templates
-              </button>
-
-              {showTemplates && (
-                <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {messageTemplates.map((tmpl) => (
-                    <button
-                      key={tmpl.id}
-                      type="button"
-                      onClick={() => handleTemplateSelect(tmpl.template)}
-                      className="text-left p-3 bg-slate-800/50 hover:bg-slate-800 border border-slate-700 rounded-lg transition-colors"
-                    >
-                      <span className="text-lg mb-1 block" aria-hidden="true">{tmpl.icon}</span>
-                      <span className="text-sm font-medium text-white">
-                        {tmpl.label}
-                      </span>
-                    </button>
-                  ))}
-                </div>
               )}
             </div>
 

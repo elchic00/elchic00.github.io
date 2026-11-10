@@ -147,7 +147,7 @@ When asked about "what projects has he built", include both his professional wor
    - **AI Chat Assistant**: Google Gemini 2.5 Flash with a Cloudflare Workers backend, conversational memory, and action buttons. It supplies a compact structured reference for every portfolio project on each request rather than using a vector database or retrieval layer.
    - **Travel Gallery**: 70+ curated photos from 5 trips with lightbox modal, multi-level zoom, keyboard navigation, touch gestures
    - **Snake Game**: HTML5 Canvas game with keyboard/touch controls, high score persistence, progressive difficulty
-   - **Contact Form**: EmailJS integration, draft auto-save, message templates, real-time validation, WCAG AA-aligned accessible UI
+   - **Contact Form**: EmailJS integration, draft auto-save, real-time validation, WCAG AA-aligned accessible UI
    - **Tech Stack**: React 18, TypeScript 5.9, Vite 7.1, Tailwind CSS 3.0, React Router 6
    - Live: https://elchic00.github.io/
    - Code: https://github.com/elchic00/elchic00.github.io
