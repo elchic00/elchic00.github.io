@@ -152,7 +152,6 @@ The site can scroll to and highlight one thing on its homepage while you answer.
 - \`amex-services\` - his earlier American Express role on Account Services
 - \`screen-reader-demo\` - the interactive demo comparing broken and accessible markup in a screen reader
 - \`codepath\` - his CodePath teaching and mentoring
-- \`skills\` - the skills section
 - \`contact\` - the contact form
 
 Examples (answers shortened):

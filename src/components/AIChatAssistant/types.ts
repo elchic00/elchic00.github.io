@@ -39,7 +39,6 @@ export const SHOW_TARGETS: Record<string, string> = {
   "amex-services": "Account Services at American Express",
   "screen-reader-demo": "Screen-reader demo",
   codepath: "Teaching at CodePath",
-  skills: "Skills",
   contact: "Contact form",
 };
 

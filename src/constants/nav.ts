@@ -38,6 +38,13 @@ export interface NavItem {
 // Single source of truth for all navigation items
 export const NAV_ITEMS: NavItem[] = [
   {
+    name: "Systems",
+    link: "/#featured-systems",
+    icon: ChipIcon,
+    iconBg: "bg-yellow-500/20 text-yellow-400",
+    type: "scroll",
+  },
+  {
     name: "Experience",
     link: "/#experience",
     icon: BriefcaseIcon,
@@ -49,13 +56,6 @@ export const NAV_ITEMS: NavItem[] = [
     link: "/#accessibility-expertise",
     icon: UserGroupIcon,
     iconBg: "bg-cyan-500/20 text-cyan-400",
-    type: "scroll",
-  },
-  {
-    name: "Skills",
-    link: "/#skills",
-    icon: ChipIcon,
-    iconBg: "bg-yellow-500/20 text-yellow-400",
     type: "scroll",
   },
   {

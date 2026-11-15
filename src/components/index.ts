@@ -1,5 +1,5 @@
 // Main sections - organized by feature
-export { About, Experience, Skills } from "./About";
+export { About, Experience } from "./About";
 export { Contact, ContactSuccessModal } from "./Contact";
 export { Projects } from "./Portfolio";
 

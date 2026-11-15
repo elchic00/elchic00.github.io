@@ -6,7 +6,6 @@ import {
   Experience,
   FeaturedSystems,
   NightShift,
-  Skills,
 } from "@components";
 
 export const HomePage = () => {
@@ -21,7 +20,6 @@ export const HomePage = () => {
       <NightShift />
       <Experience />
       <AccessibilityExpertise />
-      <Skills />
       <Contact />
     </>
   );

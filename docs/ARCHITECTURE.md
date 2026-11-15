@@ -15,7 +15,7 @@ Treat `package.json`, `wrangler.toml`, and `worker/index.js` as the source of tr
 Major feature areas:
 
 - `src/pages/`: the home and projects pages, and the case studies under `src/pages/case-studies/`.
-- `src/components/About/`: skills, experience, accessibility, and featured systems.
+- `src/components/About/`: hero, featured systems, night shift, experience, and accessibility.
 - `src/components/Portfolio/` and `src/components/Projects/`: project presentation and project-specific modals.
 - `src/components/Travel/`: trip navigation, cards, galleries, lightbox, and layout helpers.
 - `src/components/Contact/` and `src/hooks/useContactForm.ts`: EmailJS submission, validation, draft persistence, and mailto fallback.
@@ -27,7 +27,6 @@ Major feature areas:
 Visible portfolio data:
 
 - `src/data/structured/projects.json`: project cards, media, links, IDs, and technologies.
-- `src/data/structured/skills.json`: displayed skill categories.
 - `src/data/structured/trips.json`: trip metadata, photo URLs, alt text, and captions.
 - `src/data/structured/nightShift.json`: scheduled homelab jobs for the homepage night-shift dial, with their times and the machines each one uses. Unverified times render only in dev.
 
