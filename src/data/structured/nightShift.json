@@ -64,9 +64,10 @@
       "short": "Backups run",
       "projectId": "pi-cloud",
       "title": "Backups snapshot, then sync",
-      "detail": "The SQLite databases get an atomic snapshot instead of a raw file copy, then sync to two drives: an SD card for a full rebuild, and a USB drive with the critical data that my Mac can read if the Pi dies. Each run reports its own result, so a failed backup shows up the same day.",
+      "detail": "The SQLite databases get an atomic snapshot instead of a raw file copy, then sync to two drives: an SD card for a full rebuild, and a USB drive with the critical data that my Mac can read if the Pi dies. It also pushes an encrypted snapshot to the Framework, where the Pi can add snapshots but never delete them, so a compromised Pi can't wipe its own history. Each run reports its own result, so a failed backup shows up the same day.",
       "machines": [
-        "pi"
+        "pi",
+        "framework"
       ],
       "gpu": false
     },
@@ -95,11 +96,26 @@
       "short": "Morning brief sent",
       "projectId": "hermes",
       "title": "The agent writes my morning brief",
-      "detail": "A script collects the Pi's health and my calendar first, so those facts come from the systems instead of the model. Then the agent searches the web through a search engine on the Pi and sends one Telegram message: system status, today's schedule, tech news, and things to do in NYC.",
+      "detail": "A script collects the Pi's health first, so those facts come from the systems instead of the model. Then the agent searches the web through a search engine on the Pi and sends one Telegram message: system status, tech news, and things to do in NYC.",
       "machines": [
         "mac",
         "pi",
         "framework"
+      ],
+      "gpu": false
+    },
+    {
+      "id": "hermes-watchdogs",
+      "time": "07:00",
+      "verified": true,
+      "cadence": "Daily",
+      "system": "Hermes",
+      "short": "Watchdogs check jobs",
+      "projectId": "hermes",
+      "title": "Watchdogs check that the other jobs actually ran",
+      "detail": "Two scripts, no model involved. One flags any scheduled job that stopped advancing or got stuck mid-run, the symptom of a scheduler restart that once silently skipped my morning brief. The other checks that the eval loop still produces scores: a fresh row in the score log, a judge model that still exists, and the same score name on both the writing and reading side. It exists because nightly scoring once kept \"succeeding\" for nine days while writing zero scores. Both stay silent unless something is wrong.",
+      "machines": [
+        "mac"
       ],
       "gpu": false
     },
@@ -115,6 +131,21 @@
       "detail": "A script compares the running build with upstream and lists the new commits that touch this AMD GPU path or the features the model relies on. Upstream moves fast enough to break this hardware, so I read those before deciding to rebuild.",
       "machines": [
         "mac",
+        "framework"
+      ],
+      "gpu": false
+    },
+    {
+      "id": "restore-proof",
+      "time": "08:00",
+      "verified": true,
+      "cadence": "Weekly · Sun",
+      "system": "Pi cloud",
+      "short": "Restore tested",
+      "projectId": "pi-cloud",
+      "title": "The latest backup gets restored, not just trusted",
+      "detail": "The Framework restores the latest Pi backup from its own copy and checks it: the database dumps have to decompress cleanly and the SQLite databases have to pass an integrity check. A backup only counts once it has been restored, and a failed proof shows up in my uptime monitor.",
+      "machines": [
         "framework"
       ],
       "gpu": false
