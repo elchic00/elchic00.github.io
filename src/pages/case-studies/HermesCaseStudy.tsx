@@ -42,7 +42,7 @@ const HermesCaseStudy = () => (
     <Section title="Architecture">
       <p>
         Three machines, three jobs. A <strong>Mac Mini (16GB)</strong> runs the orchestrator: the
-        agent backend I talk to through the Hermes desktop and iPhone apps, plus the cron scheduler,
+        agent backend I talk to through the Hermes app, plus the cron scheduler,
         whose results arrive over Telegram. It doesn't have the RAM to host a capable model
         itself, so every reasoning call routes over the LAN through <strong>LiteLLM</strong> to
         the <strong>Framework Desktop</strong>, whose unified-memory GPU serves the models:{" "}

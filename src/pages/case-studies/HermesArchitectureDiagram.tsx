@@ -25,7 +25,7 @@ const HermesArchitectureDiagram = () => (
       <title id="hermes-diagram-title">Hermes architecture</title>
       <desc id="hermes-diagram-desc">
         Three machines share one wired LAN through an ethernet switch: a Mac Mini, a Framework Desktop, and a
-        Raspberry Pi. Chat from the Hermes apps and scheduled cron jobs go to the Hermes agent on the Mac Mini, which reads an
+        Raspberry Pi. Chat from the Hermes app and scheduled cron jobs go to the Hermes agent on the Mac Mini, which reads an
         Obsidian vault for memory and sends every model call through LiteLLM across the LAN to the Framework
         Desktop, which serves Qwen3.8-Flash-Next (text and vision) and WhisperX. Hermes's search and crawl skills call SearXNG
         and Crawl4AI on the Pi. A cloud fallback of Kimi then OpenRouter exists but rarely fires. LiteLLM traces
