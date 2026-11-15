@@ -7,6 +7,7 @@ import {
   Figure,
 } from "./CaseStudyLayout";
 import SpecDecodeDemo from "./SpecDecodeDemo";
+import MoEDecodeDemo from "./MoEDecodeDemo";
 
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
@@ -133,8 +134,11 @@ const InferenceCaseStudy = () => (
     <Section title="Replacing the 27B: a blind A/B, and the check it failed">
       <p>
         A mixture-of-experts model sidesteps most of that wall, because each
-        token only reads the experts it routes to. In November 2026 I ran
-        Qwen3.8-Flash-Next against the 27B on Hermes's real agent loop, under a
+        token only reads the experts it routes to.
+      </p>
+      <MoEDecodeDemo />
+      <p>
+        In November 2026 I ran Qwen3.8-Flash-Next against the 27B on Hermes's real agent loop, under a
         decision rule I wrote down before the run (and amended twice during it,
         both times in writing). Three blind LLM judges compared the two models'
         answers on 26 replayed Hermes tasks. Flash-Next came out ahead by +11,

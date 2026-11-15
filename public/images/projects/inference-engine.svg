@@ -1,24 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 400" role="img" aria-labelledby="ie-t ie-d">
-  <title id="ie-t">Inference Engine — 33.2 tokens/sec through a 7.4 tokens/sec bandwidth ceiling</title>
-  <desc id="ie-d">A throughput bar for the dense 27B model on structured output. Memory bandwidth caps plain decode at 7.4 tokens per second, drawn as a hatched wall. With speculative decoding the measured bar runs straight through it to 33.2 tokens per second, about 4.5 times the ceiling.</desc>
+  <title id="ie-t">Inference Engine — Flash-Next vs the dense 27B: +11 / +11 / +20 in a blind A/B</title>
+  <desc id="ie-d">Blind A/B on 26 replayed Hermes agent tasks: three blind LLM judges compared Qwen3.8-Flash-Next with the dense Qwen 3.8 27B it took over from. Wins minus losses were +11, +11 and +20, drawn as bars past a dashed pre-registered bar at +7 (the 27B's run-to-run noise of 2, plus 5); the noise band of plus or minus 2 is shaded around zero.</desc>
   <defs>
     <linearGradient id="ieBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#050a15"/><stop offset="1" stop-color="#08141f"/></linearGradient>
-    <pattern id="ieHatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="#f87171" stroke-width="3"/></pattern>
   </defs>
   <rect width="700" height="400" fill="url(#ieBg)"/>
-  <text x="40" y="52" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="20" letter-spacing="2" fill="#5f8ea4">DENSE 27B DECODE · STRUCTURED OUTPUT</text>
+  <text x="40" y="52" font-family="ui-monospace,Menlo,Consolas,monospace" font-size="20" letter-spacing="2" fill="#5f8ea4">BLIND A/B · FLASH-NEXT vs DENSE 27B</text>
   <g font-family="system-ui,-apple-system,'Segoe UI',Roboto,sans-serif">
-    <text x="36" y="172" font-size="112" font-weight="800" letter-spacing="-4" fill="#67e8f9">33.2<tspan dx="14" font-size="38" font-weight="700" letter-spacing="0" fill="#7f9bb2">tokens/sec</tspan></text>
-    <text x="40" y="214" font-size="23" fill="#8fdcea">4.5× past the memory-bandwidth ceiling</text>
+    <text x="36" y="138" font-size="84" font-weight="800" letter-spacing="-3" fill="#67e8f9">+11 · +11 · +20</text>
+    <text x="40" y="180" font-size="22" fill="#8fdcea">wins minus losses · 26 Hermes tasks · 3 blind LLM judges</text>
 
-    <rect x="40" y="252" width="620" height="54" rx="8" fill="#0c2530"/>
-    <rect x="40" y="252" width="515" height="54" rx="8" fill="#22d3ee"/>
-    <rect x="149" y="236" width="14" height="86" fill="url(#ieHatch)" opacity=".75"/>
-    <rect x="149" y="236" width="14" height="86" fill="none" stroke="#f87171" stroke-width="2"/>
-    <path d="M163 266l26-7M163 279l30 2M163 292l24 10" stroke="#0c2530" stroke-width="3" fill="none"/>
+    <!-- scale: 0 at x=150, 22 px per point -->
+    <rect x="106" y="214" width="88" height="128" fill="#5d7489" opacity=".18"/>
+    <rect x="150" y="226" width="242" height="24" rx="5" fill="#22d3ee"/>
+    <rect x="150" y="260" width="242" height="24" rx="5" fill="#22d3ee"/>
+    <rect x="150" y="294" width="440" height="24" rx="5" fill="#22d3ee"/>
+    <line x1="150" y1="214" x2="150" y2="342" stroke="#5d7489" stroke-width="2"/>
+    <line x1="304" y1="210" x2="304" y2="346" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="6 5"/>
 
-    <text x="40" y="352" font-size="20" fill="#5d7489">0</text>
-    <text x="156" y="352" font-size="21" fill="#f59a9a" text-anchor="middle">7.4 ceiling</text>
-    <text x="660" y="352" font-size="20" fill="#5d7489" text-anchor="end">40</text>
+    <text x="40" y="244" font-size="18" fill="#7f9bb2">Judge 1</text>
+    <text x="40" y="278" font-size="18" fill="#7f9bb2">Judge 2</text>
+    <text x="40" y="312" font-size="18" fill="#7f9bb2">Judge 3</text>
+    <text x="400" y="244" font-size="18" font-weight="700" fill="#cffafe">+11</text>
+    <text x="400" y="278" font-size="18" font-weight="700" fill="#cffafe">+11</text>
+    <text x="598" y="312" font-size="18" font-weight="700" fill="#cffafe">+20</text>
+
+    <text x="150" y="370" font-size="18" fill="#8ea2b5" text-anchor="middle">noise ±2</text>
+    <text x="304" y="370" font-size="18" fill="#fbbf24" text-anchor="middle">bar +7</text>
   </g>
 </svg>

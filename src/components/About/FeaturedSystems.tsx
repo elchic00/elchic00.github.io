@@ -34,7 +34,7 @@ const featuredSystems: FeaturedSystem[] = [
     kind: "Local LLM serving",
     summary:
       "Text, vision, and speech models on a single AMD APU, with the text-and-vision model on a from-source llama.cpp build. Every agent here runs on it, with every call traced.",
-    alt: "Decode throughput of the dense 27B model: 33.2 tokens/sec against a 7.4 tokens/sec memory-bandwidth ceiling",
+    alt: "Blind A/B: three LLM judges scored Flash-Next over the dense 27B by +11, +11 and +20, past a +7 bar",
   },
 ];
 
