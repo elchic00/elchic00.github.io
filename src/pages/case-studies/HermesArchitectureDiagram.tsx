@@ -25,12 +25,12 @@ const HermesArchitectureDiagram = () => (
       <title id="hermes-diagram-title">Hermes architecture</title>
       <desc id="hermes-diagram-desc">
         Three machines share one wired LAN through an ethernet switch: a Mac Mini, a Framework Desktop, and a
-        Raspberry Pi. Requests from Telegram and cron go to the Hermes agent on the Mac Mini, which reads an
+        Raspberry Pi. Chat from the Hermes apps and scheduled cron jobs go to the Hermes agent on the Mac Mini, which reads an
         Obsidian vault for memory and sends every model call through LiteLLM across the LAN to the Framework
         Desktop, which serves Qwen 27B, Qwen3-VL-8B and WhisperX. Hermes's search and crawl skills call SearXNG
         and Crawl4AI on the Pi. A cloud fallback of Kimi then OpenRouter exists but rarely fires. LiteLLM traces
         every call to Langfuse; a nightly LLM judge scores the traces, a weekly job proposes prompt edits, and
-        the proposals return to Telegram for approval.
+        the proposals go to Telegram, where cron results are delivered, for approval.
       </desc>
       <defs>
         <marker id="hermes-arrow" viewBox="0 0 8 8" refX={7} refY={4} markerWidth={7} markerHeight={7} orient="auto">
@@ -77,8 +77,8 @@ const HermesArchitectureDiagram = () => (
       <Pulse filterId="hermes-glow" d={EVAL_PATH} color="stroke-purple-400" dash={3} duration={8} />
       <Pulse filterId="hermes-glow" d={TOOL_PATH} color="stroke-amber-400" dash={7} duration={4} delay={0.8} />
 
-      <Node x={140} y={12} w={140} title="Telegram" sub="you" />
-      <Node x={36} y={116} w={170} title="Hermes agent" sub="cron · Telegram bot" />
+      <Node x={140} y={12} w={140} title="You" sub="Hermes app · Telegram" />
+      <Node x={36} y={116} w={170} title="Hermes agent" sub="cron · app · Telegram" />
       <Node x={222} y={116} w={162} title="Obsidian vault" sub="files-first memory" />
       <Node x={36} y={184} w={348} title="LiteLLM gateway" sub="routing · fallback · tracing" />
       <Node x={36} y={312} w={196} h={30} title="Qwen 27B · agentic text" />

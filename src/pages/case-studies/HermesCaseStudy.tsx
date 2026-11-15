@@ -42,7 +42,8 @@ const HermesCaseStudy = () => (
     <Section title="Architecture">
       <p>
         Three machines, three jobs. A <strong>Mac Mini (16GB)</strong> runs the orchestrator: the
-        cron scheduler and the Telegram bot. It doesn't have the RAM to host a capable model
+        agent backend I talk to through the Hermes desktop and iPhone apps, plus the cron scheduler,
+        whose results arrive over Telegram. It doesn't have the RAM to host a capable model
         itself, so every reasoning call routes over the LAN through <strong>LiteLLM</strong> to
         the <strong>Framework Desktop</strong>, whose unified-memory GPU serves three resident
         models over a from-source llama.cpp build: a <strong>27B dense Qwen</strong> (sole
