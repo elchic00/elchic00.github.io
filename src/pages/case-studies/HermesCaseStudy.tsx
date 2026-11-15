@@ -45,11 +45,12 @@ const HermesCaseStudy = () => (
         agent backend I talk to through the Hermes desktop and iPhone apps, plus the cron scheduler,
         whose results arrive over Telegram. It doesn't have the RAM to host a capable model
         itself, so every reasoning call routes over the LAN through <strong>LiteLLM</strong> to
-        the <strong>Framework Desktop</strong>, whose unified-memory GPU serves three resident
-        models over a from-source llama.cpp build: a <strong>27B dense Qwen</strong> (sole
-        primary text model, DFlash2 speculative decoding) for the agentic work, <strong>Qwen3-VL-8B</strong>{" "}
-        for vision (screenshot analysis powering computer use), and <strong>WhisperX</strong>{" "}
-        (whisper-large-v3 + speaker diarization) for the voice-note pipeline. A{" "}
+        the <strong>Framework Desktop</strong>, whose unified-memory GPU serves the models:{" "}
+        <strong>Qwen3.8-Flash-Next</strong>, a mixture-of-experts model on a from-source llama.cpp
+        build that has handled both the agentic text work and vision since November 15, 2026, and{" "}
+        <strong>WhisperX</strong> (whisper-large-v3 + speaker diarization) for the voice-note
+        pipeline. Flash-Next took over from a dense 27B Qwen and a separate Qwen3-VL-8B vision
+        model as a one-week trial that started that day (details on the Inference Engine page). A{" "}
         <strong>Raspberry Pi</strong> handles monitoring and hosts the agent's own tools:{" "}
         <strong>SearXNG</strong> for web search and <strong>Crawl4AI</strong> for page extraction, which
         Hermes calls through its search and crawl skills. A two-hop cloud fallback chain (Kimi,
@@ -207,17 +208,20 @@ const HermesCaseStudy = () => (
           judge lands at Cohen's kappa <strong>0.0469</strong> with failure precision/recall of{" "}
           <strong>0.11 / 0.40</strong>, and the 27B at <strong>0.0919</strong>, both with bootstrap
           intervals crossing zero. That's near chance at catching failures, the thing that matters
-          most. The nightly loop is still worth running as trace clustering and triage, but any
+          most. Since November 15 the nightly judge has run on Flash-Next, which hasn't been
+          checked against these labels. The nightly loop is still worth running as trace clustering and triage, but any
           claim that it measures quality is on hold until calibration improves. I'm now labeling by
           hand the traces where Opus and a prior independent reference disagree, to work out
           whether the gap comes from the rubric or from my own preference.
         </li>
         <li>
-          The 27B model is bandwidth-bound: plain decode floors at 7.4 tokens/sec. Speculative
-          decoding (DFlash2, detailed on the Inference Engine page) recovers most of that gap,
-          reaching roughly 33 tokens/sec on structured output, though free-form prose stays near
-          15. A smaller quant would trade quality for more speed beyond that, and I haven't made
-          that trade.
+          Before the November 15 switch, the main model was a dense 27B, bandwidth-bound at 7.4 tokens/sec of
+          plain decode. Speculative decoding (DFlash2, detailed on the Inference Engine page) took
+          structured output to roughly 33 tokens/sec, though free-form prose stayed near 15. Flash-Next,
+          which took over that day, reads only about 6B parameters per token, which moves that wall,
+          but it failed a check the 27B passed: given a request with a missing detail, it acted on
+          invented arguments instead of asking. Whether that shows up in real use is one of the
+          things the trial is watching.
         </li>
       </ul>
     </Section>

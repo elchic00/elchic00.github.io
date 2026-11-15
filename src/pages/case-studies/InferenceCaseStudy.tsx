@@ -11,7 +11,7 @@ import SpecDecodeDemo from "./SpecDecodeDemo";
 const InferenceCaseStudy = () => (
   <CaseStudyLayout
     title="Inference Engine"
-    subtitle="Three models resident on a single AMD APU, served by a from-source llama.cpp build to every agent I run at $0 marginal cost per call."
+    subtitle="Local text, vision, and speech models on a single AMD APU, served to every agent I run at $0 marginal cost per call, with the main model on a from-source llama.cpp build."
     tech={[
       "llama.cpp",
       "ROCm",
@@ -22,8 +22,8 @@ const InferenceCaseStudy = () => (
       "Unified Memory",
       "LiteLLM",
       "Systemd",
+      "Qwen3.8-Flash-Next",
       "Qwen 3.8 27B",
-      "Qwen3-VL",
       "Langfuse",
     ]}
   >
@@ -39,15 +39,19 @@ const InferenceCaseStudy = () => (
         leaves the LAN.
       </p>
       <p>
-        That runs across three resident models on a{" "}
+        That runs on a{" "}
         <strong>
           Framework Desktop (Ryzen AI Max+ 395, 128GB unified memory, Radeon
           gfx1151)
         </strong>
-        . One text
-        model, <strong>Qwen 3.8 27B</strong>, handles all reasoning and tool
-        calls, which leaves enough memory for a resident vision model
-        (Qwen3-VL) and a WhisperX speech-to-text server. Getting there meant building the serving engine from source
+        . Since November 15, 2026, one model,{" "}
+        <strong>Qwen3.8-Flash-Next</strong>, has handled all reasoning, tool
+        calls, and vision, next to a WhisperX speech-to-text server. It's a
+        125B mixture-of-experts model that activates about 6B parameters per
+        token. It took over from two models, a dense{" "}
+        <strong>Qwen 3.8 27B</strong> for text and Qwen3-VL for vision, as a
+        one-week trial that started that day, with both kept on disk for
+        rollback (below). Getting there meant building the serving engine from source
         (<code>GGML_HIP=ON</code>, <code>AMDGPU_TARGETS=gfx1151</code>) behind a
         LiteLLM router that handles failover to cloud fallbacks when required.
       </p>
@@ -65,7 +69,7 @@ const InferenceCaseStudy = () => (
       <Figure
         src="/images/case-studies/inference-grafana.webp"
         alt="Grafana dashboard showing 7-day inference metrics"
-        caption="Live Grafana telemetry across a 7-day window: token generation and prompt-ingestion rates for the Qwen 3.8 27B text slots and the resident vision model, plus per-model queue depth, hourly token volume, and the voice-transcription path."
+        caption="Grafana telemetry across a 7-day window before the November 2026 model switch: token generation and prompt-ingestion rates for the Qwen 3.8 27B text slots and the separate vision model, plus per-model queue depth, hourly token volume, and the voice-transcription path."
       />
     </Section>
 
@@ -96,8 +100,9 @@ const InferenceCaseStudy = () => (
 
     <Section title="Speculative decoding: beating a bandwidth wall">
       <p>
-        Because Qwen 3.8 27B is a dense model where every parameter executes on
-        every token, inference is strictly bandwidth-bound during generation. At
+        Qwen 3.8 27B, the main text model before the November 2026 switch, is a dense
+        model where every parameter executes on every token, so inference is
+        strictly bandwidth-bound during generation. At
         Q8 quantization (~28GB working set), the host's ~200GB/s LPDDR5X memory
         bandwidth imposes a physical floor of ~7.4 t/s for plain autoregressive
         decoding.
@@ -120,10 +125,46 @@ const InferenceCaseStudy = () => (
 
     <StatRow>
       <Stat value="33 t/s" label="Qwen 3.8 27B gen w/ DFlash2 (structured)" />
-      <Stat value="369 t/s" label="Prefill, uncached @3k" />
-      <Stat value="7.4 t/s" label="Dense Q8 LPDDR5X baseline" />
+      <Stat value="369 t/s" label="27B prefill, uncached @3k" />
+      <Stat value="7.4 t/s" label="Dense 27B Q8 baseline" />
       <Stat value="~5x" label="Prefill gain, rocWMMA disabled" />
     </StatRow>
+
+    <Section title="Replacing the 27B: a blind A/B, and the check it failed">
+      <p>
+        A mixture-of-experts model sidesteps most of that wall, because each
+        token only reads the experts it routes to. In November 2026 I ran
+        Qwen3.8-Flash-Next against the 27B on Hermes's real agent loop, under a
+        decision rule I wrote down before the run (and amended twice during it,
+        both times in writing). Three blind LLM judges compared the two models'
+        answers on 26 replayed Hermes tasks. Flash-Next came out ahead by +11,
+        +11, and +20 (wins minus losses), against a bar of +7: the 27B's own
+        run-to-run noise of 2, plus a margin of 5. It finished 37 of 38 replays
+        to the 27B's 36 of 39, with one timeout to the 27B's three, and passed
+        all four simple image probes on three runs each, the same as the old
+        vision model, so one model could take over both jobs.
+      </p>
+      <p>
+        It wasn't a clean sweep. On the 16 tasks that don't depend on live
+        system state, it stayed ahead but fell under the bar. It also failed one
+        pre-registered check outright: asked to save notes without being told
+        where, it called a tool with invented arguments instead of asking,
+        where the 27B asked all three times. Under my own rule, a failed check
+        means keeping the incumbent. I switched anyway, on the quality margin
+        plus interactive use, and made it a one-week trial with the 27B kept on
+        disk for rollback. It's about 1.26x faster end-to-end on long agentic
+        tasks while making roughly twice as many tool calls, and in live use it
+        decodes around 40-50 tokens/sec, though neither number comes from a
+        controlled benchmark.
+      </p>
+      <p>
+        Two settings came from measurement rather than defaults. Perplexity on
+        recent text the model hadn't seen picked the 4-bit IQ4_XS quant over a
+        larger Q4_K_XL, which scored worse and didn't fit in memory anyway. And
+        the model's own Multi-Token Prediction head does its speculative
+        decoding, proposing up to three tokens per step.
+      </p>
+    </Section>
 
     <Callout title="The Regression That Wasn't What It Looked Like">
       <p>
@@ -185,9 +226,9 @@ const InferenceCaseStudy = () => (
         <code>--no-cache-idle-slots --cache-ram 0</code> as the verified mitigation (
         <a href="https://github.com/ggml-org/llama.cpp/issues/27148" target="_blank" rel="noreferrer" className="text-cyan-300 underline underline-offset-2 hover:text-cyan-200 transition-colors">ggml-org/llama.cpp#27148</a>
         ), and deployed the mitigation across both services, which stopped
-        unprompted cache restoration immediately. The vision service still runs
-        cache-disabled, since it's low-traffic enough that the cold-prefill cost
-        never mattered. The 27B re-enabled a larger RAM cache in September,
+        unprompted cache restoration immediately. The separate vision service
+        ran cache-disabled until vision moved onto the main model, since it was
+        low-traffic enough that the cold-prefill cost never mattered. The 27B re-enabled a larger RAM cache in September,
         after a fresh 90-pair contamination probe against the rebuilt server
         came back clean. Re-paying 262k-context prefill is the one cost worth
         taking a small correctness risk to avoid, and on that build the probe
@@ -257,8 +298,14 @@ const InferenceCaseStudy = () => (
         the two-MoE alternative.
       </p>
       <p>
+        Flash-Next made the budget tighter. With the old vision model still
+        loaded beside it, free memory fell to 9.4 GiB against my 8 GiB safety
+        floor. With the vision service stopped, about 21 GiB stayed free, which
+        is part of why one model took over both jobs.
+      </p>
+      <p>
         The cost of that trade is the fallback chain. With no second local text
-        model, a 27B outage no longer drops to another local backend; it falls
+        model running, an outage of the main model doesn't drop to another local backend; it falls
         straight to a cloud provider with a finite prepaid balance. I've
         accepted that regression for now. The open work is a second local
         fallback (or a hot-restart path) that restores a zero-cost safety net,

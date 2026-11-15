@@ -33,8 +33,8 @@ const featuredSystems: FeaturedSystem[] = [
     id: "inference-engine",
     kind: "Local LLM serving",
     summary:
-      "Text, vision, and speech models on a single AMD APU, with text and vision on a from-source llama.cpp build. Every agent here runs on it, with every call traced.",
-    alt: "Decode throughput of 33.2 tokens/sec against a 7.4 tokens/sec memory-bandwidth ceiling",
+      "Text, vision, and speech models on a single AMD APU, with the text-and-vision model on a from-source llama.cpp build. Every agent here runs on it, with every call traced.",
+    alt: "Decode throughput of the dense 27B model: 33.2 tokens/sec against a 7.4 tokens/sec memory-bandwidth ceiling",
   },
 ];
 

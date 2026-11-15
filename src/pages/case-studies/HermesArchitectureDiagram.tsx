@@ -27,7 +27,7 @@ const HermesArchitectureDiagram = () => (
         Three machines share one wired LAN through an ethernet switch: a Mac Mini, a Framework Desktop, and a
         Raspberry Pi. Chat from the Hermes apps and scheduled cron jobs go to the Hermes agent on the Mac Mini, which reads an
         Obsidian vault for memory and sends every model call through LiteLLM across the LAN to the Framework
-        Desktop, which serves Qwen 27B, Qwen3-VL-8B and WhisperX. Hermes's search and crawl skills call SearXNG
+        Desktop, which serves Qwen3.8-Flash-Next (text and vision) and WhisperX. Hermes's search and crawl skills call SearXNG
         and Crawl4AI on the Pi. A cloud fallback of Kimi then OpenRouter exists but rarely fires. LiteLLM traces
         every call to Langfuse; a nightly LLM judge scores the traces, a weekly job proposes prompt edits, and
         the proposals go to Telegram, where cron results are delivered, for approval.
@@ -81,8 +81,7 @@ const HermesArchitectureDiagram = () => (
       <Node x={36} y={116} w={170} title="Hermes agent" sub="cron · app · Telegram" />
       <Node x={222} y={116} w={162} title="Obsidian vault" sub="files-first memory" />
       <Node x={36} y={184} w={348} title="LiteLLM gateway" sub="routing · fallback · tracing" />
-      <Node x={36} y={312} w={196} h={30} title="Qwen 27B · agentic text" />
-      <Node x={36} y={352} w={196} h={30} title="Qwen3-VL-8B · vision" />
+      <Node x={36} y={312} w={196} h={70} title="Qwen3.8-Flash-Next" sub="agentic text + vision" />
       <Node x={36} y={392} w={196} h={30} title="WhisperX · voice notes" />
       <Node x={272} y={312} w={104} h={26} title="SearXNG" />
       <Node x={272} y={344} w={104} h={26} title="Crawl4AI" />

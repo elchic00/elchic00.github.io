@@ -11,11 +11,11 @@
     {
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Three models on one box serve every agent I run at $0 per call, which changes which experiments are worth running. It's a from-source llama.cpp build on a single AMD APU, where memory bandwidth alone should cap the dense 27B model at 7.4 tokens/sec. It doesn't. Every call is traced, and nothing sensitive leaves the LAN.",
+    "description": "Local models on one box serve every agent I run at $0 per call, which changes which experiments are worth running. It's a from-source llama.cpp build on a single AMD APU, where memory bandwidth alone should have capped the dense 27B model at 7.4 tokens/sec. It didn't, and in November a mixture-of-experts model that also handles vision beat it on quality in a blind A/B and took over as a one-week trial on November 15. Every call is traced, and nothing sensitive leaves the LAN.",
     "image": "/images/projects/inference-engine.svg",
     "link": "/projects/inference-engine",
     "id": "inference-engine",
-    "technologies": ["llama.cpp", "ROCm", "HIP", "GGML", "Speculative Decoding", "AMD Radeon", "Unified Memory", "LiteLLM", "Systemd", "Debugging", "Qwen3-VL", "WhisperX", "Langfuse"]
+    "technologies": ["llama.cpp", "ROCm", "HIP", "GGML", "Speculative Decoding", "AMD Radeon", "Unified Memory", "LiteLLM", "Systemd", "Debugging", "Qwen3.8-Flash-Next", "WhisperX", "Langfuse"]
   },
   {
     "title": "Pi-Cloud",

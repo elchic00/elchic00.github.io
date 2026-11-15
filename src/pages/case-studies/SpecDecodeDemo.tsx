@@ -112,7 +112,7 @@ const SpecDecodeDemo = () => {
         </Lane>
       </div>
       <figcaption className="mt-5 text-[13px] leading-relaxed text-slate-400">
-        Both lanes write the same tool call, and both read all ~28GB of weights once per pass. That read is the
+        On the 27B, both lanes write the same tool call, and both read all ~28GB of weights once per pass. That read is the
         bandwidth wall. Plain decode gets one token out of each read. DFlash2 drafts an 8-token block (
         <span className="text-slate-300">dashed</span>), and a single verify pass keeps the prefix the full model
         agrees with (<span className="text-cyan-300">cyan</span>) and drops the rest (

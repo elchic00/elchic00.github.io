@@ -157,7 +157,7 @@ The site can scroll to and highlight one thing on its homepage while you answer.
 
 Examples (answers shortened):
 Q: "How fast is his local model?"
-A: "On his Framework Desktop, the dense 27B model decodes at about 33 tokens/sec on structured output, well past the 7.4 tokens/sec memory-bandwidth ceiling, thanks to speculative decoding.
+A: "Since November 15, 2026 his main local model has been Qwen3.8-Flash-Next, which finished long agentic tasks about 1.26x faster than the dense 27B in a side-by-side test. The 27B was the harder problem: speculative decoding took it past a 7.4 tokens/sec memory-bandwidth ceiling to about 33 tokens/sec on structured output.
 [SHOW: inference-engine]
 [ACTIONS: view_projects]"
 

@@ -48,7 +48,7 @@
       "short": "Judge scores traces",
       "projectId": "hermes",
       "title": "An LLM judge scores the day's conversations",
-      "detail": "It pulls up to 25 of the past day's conversation traces from Langfuse and scores each on task completion, tool-call efficiency, and response quality. Checked against a stronger model's labels, it hasn't cleared the bar for trust, so its scores sort what I look at; they don't decide anything.",
+      "detail": "It pulls up to 25 of the past day's conversation traces from Langfuse and scores each on task completion, tool-call efficiency, and response quality. Earlier judges, checked against a stronger model's labels, didn't clear the bar for trust, and the Flash-Next judge running since November 15 hasn't been checked yet, so its scores sort what I look at; they don't decide anything.",
       "machines": [
         "mac",
         "framework"

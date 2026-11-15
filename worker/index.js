@@ -154,7 +154,7 @@ The site can scroll to and highlight one thing on its homepage while you answer.
 
 Examples (answers shortened):
 Q: "How fast is his local model?"
-A: "On his Framework Desktop, the dense 27B model decodes at about 33 tokens/sec on structured output, well past the 7.4 tokens/sec memory-bandwidth ceiling, thanks to speculative decoding.
+A: "Since November 15, 2026 his main local model has been Qwen3.8-Flash-Next, which finished long agentic tasks about 1.26x faster than the dense 27B in a side-by-side test. The 27B was the harder problem: speculative decoding took it past a 7.4 tokens/sec memory-bandwidth ceiling to about 33 tokens/sec on structured output.
 [SHOW: inference-engine]
 [ACTIONS: view_projects]"
 
@@ -309,9 +309,10 @@ When asked about "what projects has he built", include both his professional wor
    - Not a public GitHub repo - it's a physical private server
 
 3. **Inference Engine** (llama.cpp, ROCm, from-source local model serving)
-   - A from-source llama.cpp build serving the local dense text primary (plus its speculative-decoding draft model) and vision model on a Framework Desktop's AMD APU, with speech-to-text on a WhisperX server on the same box
+   - A from-source llama.cpp build serving one local model for both text and vision on a Framework Desktop's AMD APU, with speech-to-text on a WhisperX server on the same box. Since 2026-11-15 that model has been Qwen3.8-Flash-Next (a mixture-of-experts model, about 6B active parameters per token, with Multi-Token Prediction speculative decoding). It took over from a dense Qwen 3.8 27B (text) and Qwen3-VL-8B (vision) as a one-week trial that started that day, with both kept on disk for rollback
+   - How the switch was decided: a blind A/B on 26 replayed Hermes tasks, three blind LLM judges, where Flash-Next came out ahead of the 27B by +11, +11 and +20 against a bar of +7; it completed 37 of 38 replays vs 36 of 39 and matched the old vision model on four simple image probes (all passed on three runs each). It failed one pre-registered check (it acted on a request with a missing argument instead of asking), so he made the switch his own call as a one-week trial rather than claiming the test picked it. About 1.26x faster end-to-end on long agentic tasks; live decode around 40-50 tok/s, not a controlled benchmark
    - On his own build (local configuration work, not an upstream contribution): fixed a GPU memory-allocator problem that was capping GPU offload, and found a 5x prefill speedup by disabling a kernel path (rocWMMA) that's a regression on this specific chip
-   - Real generation speeds on this hardware: roughly 33 tok/s on structured and reasoning output from the 27B dense model with DFlash2 speculative decoding (up from ~22 tok/s on the earlier Multi-Token Prediction draft path, against a 7.4 tok/s plain-decode floor); free-form prose is roughly flat at ~15 tok/s, and uncached prefill runs ~369 tok/s
+   - Speeds measured on the previous dense 27B, before the switch: roughly 33 tok/s on structured and reasoning output from the 27B dense model with DFlash2 speculative decoding (up from ~22 tok/s on the earlier Multi-Token Prediction draft path, against a 7.4 tok/s plain-decode floor); free-form prose is roughly flat at ~15 tok/s, and uncached prefill runs ~369 tok/s
    - Traced a tool-calling regression through a wrong first diagnosis to a one-line bug in the agent's own code, not the dependency everyone initially assumed was at fault
    - This is the inference layer Hermes actually runs on - no public repo yet, this is a private homelab build
    - Upstream llama.cpp involvement, as reports and field data rather than code he wrote (never call these his fixes): he filed a root-caused report of the RAM prompt cache restoring another conversation's state under concurrent load (ggml-org/llama.cpp#27148, still open, since reproduced independently on Apple Silicon). He added his AMD APU measurements to the PR that made llama.cpp skip mmap on integrated GPUs by default (#26081, merged) and to the issue where /metrics blocked during generation, which upstream fixed six days later (#27041). One theory he filed (#26781) a maintainer refuted, and he says so openly. Neither upstream fix credits him, so never say his reports were instrumental in, led to, or caused a fix. Say he added data and upstream later fixed it. The allocator problem and the 5x prefill finding were not reported upstream
@@ -696,7 +697,7 @@ const PROJECTS_CONTEXT_DATA = `[
     "id": "inference-engine",
     "title": "Inference Engine",
     "subtitle": "llama.cpp + ROCm + Local Agentic Workflows",
-    "description": "Three models resident on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a from-source llama.cpp build on a single AMD APU, where the sole primary is a dense Qwen 3.8 27B whose 7.4 tokens/sec plain-decode floor becomes roughly 33 tokens/sec on structured output once DFlash2 speculative decoding kicks in on a full 99-layer GPU offload - it started on Qwen's own Multi-Token Prediction head at ~22 tokens/sec, then moved to a faster block-diffusion drafter. Reachable from his phone through the Hermes app, every call traced, and nothing sensitive leaves the LAN. Not a public repo - this write-up is the first public artifact.",
+    "description": "Local models on one box, serving every agent he runs at $0 marginal cost per call - which changes which experiments are worth running at all: overnight agent loops, fifty-run prompt variance checks, a nightly pass that regrades a month of its own traces. It's a from-source llama.cpp build on a single AMD APU. Since 2026-11-15 the main model, for both text and vision, has been Qwen3.8-Flash-Next (a 125B mixture-of-experts model with about 6B active parameters per token, 4-bit IQ4_XS quant, Multi-Token Prediction speculative decoding). It started that day as a one-week trial, with the dense Qwen 3.8 27B and Qwen3-VL-8B kept on disk for rollback; don't claim the trial has ended or the old models are gone. In a blind A/B on 26 replayed Hermes tasks, three blind LLM judges preferred it over the previous dense Qwen 3.8 27B by +11, +11 and +20 (wins minus losses, against a bar of +7); it completed 37 of 38 replays vs the 27B's 36 of 39, matched the old Qwen3-VL-8B vision model on four simple image probes (all passed on three runs each), and ran about 1.26x faster end-to-end on long agentic tasks. It failed one pre-registered check (given a request with a missing argument, it acted on invented arguments instead of asking), so by his own rule the switch was his call, not the test's. Live decode is around 40-50 tokens/sec, but that is not a controlled benchmark - don't compare it directly with the 27B's 33 tokens/sec figure. The earlier story still holds as history: the dense 27B's 7.4 tokens/sec plain-decode floor became roughly 33 tokens/sec on structured output once DFlash2 speculative decoding kicked in - it started on Qwen's own Multi-Token Prediction head at ~22 tokens/sec, then moved to a faster block-diffusion drafter. Reachable from his phone through the Hermes app, every call traced, and nothing sensitive leaves the LAN. Not a public repo - this write-up is the first public artifact.",
     "technologies": [
       "llama.cpp",
       "ROCm",
@@ -708,7 +709,7 @@ const PROJECTS_CONTEXT_DATA = `[
       "LiteLLM",
       "Systemd",
       "Debugging",
-      "Qwen3-VL",
+      "Qwen3.8-Flash-Next",
       "WhisperX",
       "Langfuse"
     ],
@@ -726,7 +727,7 @@ const PROJECTS_CONTEXT_DATA = `[
       "LiteLLM",
       "Systemd",
       "Debugging",
-      "Qwen3-VL",
+      "Qwen3.8-Flash-Next",
       "WhisperX",
       "Langfuse",
       "llama",
