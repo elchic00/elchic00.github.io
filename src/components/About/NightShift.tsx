@@ -108,6 +108,7 @@ export const NightShift = () => {
     () => window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false
   );
   const [playing, setPlaying] = useState(!reduceMotion);
+  const [showDetails, setShowDetails] = useState(false);
   const [inView, setInView] = useState(false);
   const [elapsed, setElapsed] = useState(reduceMotion ? STATIC_ELAPSED : 0);
 
@@ -316,58 +317,72 @@ export const NightShift = () => {
             </div>
           </div>
 
-          <ol className="space-y-4">
-            {events.map((e) => {
-              const status = statusOf(e, elapsed);
-              return (
-                <li
-                  key={e.id}
-                  className={`relative rounded-2xl border p-5 pl-12 transition-colors duration-500 ${
-                    status === "active" ? "border-cyan-400/50 bg-cyan-400/[0.06]" : "border-white/10 bg-slate-900/70"
-                  }`}
-                >
-                  <span
-                    aria-hidden="true"
-                    className={`absolute left-5 top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 transition-colors duration-500 ${
-                      status === "upcoming" ? "border-slate-500" : "border-cyan-300 bg-cyan-300"
+          <div>
+            <ol id="night-shift-jobs" className="space-y-4">
+              {events.map((e) => {
+                const status = statusOf(e, elapsed);
+                return (
+                  <li
+                    key={e.id}
+                    className={`relative rounded-2xl border p-5 pl-12 transition-colors duration-500 ${
+                      status === "active" ? "border-cyan-400/50 bg-cyan-400/[0.06]" : "border-white/10 bg-slate-900/70"
                     }`}
-                  />
-                  <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                    <time dateTime={e.time} className="font-mono text-sm font-semibold text-cyan-300">
-                      {e.time}
-                    </time>
-                    {!e.verified && (
-                      <span className="rounded border border-dashed border-amber-400/60 px-1.5 font-mono text-[10px] uppercase text-amber-200">
-                        placeholder
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`absolute left-5 top-[1.6rem] h-2.5 w-2.5 rounded-full border-2 transition-colors duration-500 ${
+                        status === "upcoming" ? "border-slate-500" : "border-cyan-300 bg-cyan-300"
+                      }`}
+                    />
+                    <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <time dateTime={e.time} className="font-mono text-sm font-semibold text-cyan-300">
+                        {e.time}
+                      </time>
+                      {!e.verified && (
+                        <span className="rounded border border-dashed border-amber-400/60 px-1.5 font-mono text-[10px] uppercase text-amber-200">
+                          placeholder
+                        </span>
+                      )}
+                      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
+                        {e.cadence}
                       </span>
-                    )}
-                    <span className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                      {e.cadence}
-                    </span>
-                    <span aria-hidden="true" className="text-slate-600">·</span>
-                    {e.projectId ? (
-                      <Link
-                        to={`/projects/${e.projectId}`}
-                        className="focus-ring rounded text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 underline-offset-4 hover:text-cyan-200 hover:underline"
-                      >
-                        {e.system}
-                      </Link>
-                    ) : (
-                      <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-200">
-                        {e.system}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="mb-1.5 text-lg font-bold text-white">{e.title}</h3>
-                  <p className="leading-relaxed text-slate-300">{renderDetail(e.detail)}</p>
-                  <p className="mt-3 font-mono text-xs text-slate-400">
-                    Runs on {e.machines.map(machineName).join(" · ")}
-                    {e.gpu && " · holds the GPU lock"}
-                  </p>
-                </li>
-              );
-            })}
-          </ol>
+                      <span aria-hidden="true" className="text-slate-600">·</span>
+                      {e.projectId ? (
+                        <Link
+                          to={`/projects/${e.projectId}`}
+                          className="focus-ring rounded text-xs font-semibold uppercase tracking-[0.2em] text-slate-300 underline-offset-4 hover:text-cyan-200 hover:underline"
+                        >
+                          {e.system}
+                        </Link>
+                      ) : (
+                        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-200">
+                          {e.system}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="mb-1.5 text-lg font-bold text-white">{e.title}</h3>
+                    <p className={`${showDetails ? "" : "hidden"} leading-relaxed text-slate-300 sm:block`}>
+                      {renderDetail(e.detail)}
+                    </p>
+                    <p className={`${showDetails ? "" : "hidden"} mt-3 font-mono text-xs text-slate-400 sm:block`}>
+                      Runs on {e.machines.map(machineName).join(" · ")}
+                      {e.gpu && " · holds the GPU lock"}
+                    </p>
+                  </li>
+                );
+              })}
+            </ol>
+            {/* Phones get the schedule at a glance; the write-ups are one tap away */}
+            <button
+              type="button"
+              onClick={() => setShowDetails((s) => !s)}
+              aria-expanded={showDetails}
+              aria-controls="night-shift-jobs"
+              className="focus-ring mt-4 rounded text-sm font-semibold text-cyan-300 hover:text-cyan-200 sm:hidden"
+            >
+              {showDetails ? "Hide the details" : "Show how each job works"}
+            </button>
+          </div>
         </div>
       </div>
     </section>

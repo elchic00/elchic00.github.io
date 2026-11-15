@@ -1,3 +1,4 @@
+import { useId, useState } from "react";
 import { BriefcaseIcon, AcademicCapIcon } from "@heroicons/react/solid";
 import { useScrollReveal } from "../../hooks";
 
@@ -26,19 +27,41 @@ const Stats: React.FC<{ stats?: string[] }> = ({ stats }) =>
     </ul>
   ) : null;
 
-const Highlights: React.FC<{ items: string[] }> = ({ items }) => (
-  <ul className="space-y-3">
-    {items.map((item) => (
-      <li key={item} className="flex items-start gap-3">
-        <span
-          className="mt-[0.6rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400/70"
-          aria-hidden="true"
-        />
-        <span className="leading-relaxed text-slate-300">{item}</span>
-      </li>
-    ))}
-  </ul>
-);
+// With a limit, the rest of the list sits behind a "Show N more" toggle so
+// the homepage stays skimmable without dropping any of the detail.
+const Highlights: React.FC<{ items: string[]; limit?: number }> = ({ items, limit }) => {
+  const [expanded, setExpanded] = useState(false);
+  const listId = useId();
+  const hiddenCount = limit === undefined ? 0 : Math.max(items.length - limit, 0);
+  const visible = hiddenCount > 0 && !expanded ? items.slice(0, limit) : items;
+
+  return (
+    <>
+      <ul id={listId} className="space-y-3">
+        {visible.map((item) => (
+          <li key={item} className="flex items-start gap-3">
+            <span
+              className="mt-[0.6rem] h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-400/70"
+              aria-hidden="true"
+            />
+            <span className="leading-relaxed text-slate-300">{item}</span>
+          </li>
+        ))}
+      </ul>
+      {hiddenCount > 0 && (
+        <button
+          type="button"
+          onClick={() => setExpanded((e) => !e)}
+          aria-expanded={expanded}
+          aria-controls={listId}
+          className="focus-ring mt-4 rounded text-sm font-semibold text-cyan-300 hover:text-cyan-200"
+        >
+          {expanded ? "Show fewer" : `Show ${hiddenCount} more`}
+        </button>
+      )}
+    </>
+  );
+};
 
 export const Experience = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
@@ -178,7 +201,7 @@ export const Experience = () => {
                   <p className="mb-4 max-w-2xl leading-relaxed text-slate-400">{exp.summary}</p>
                 )}
                 <Stats stats={exp.stats} />
-                <Highlights items={exp.highlights} />
+                <Highlights items={exp.highlights} limit={4} />
               </li>
             ))}
           </ol>
