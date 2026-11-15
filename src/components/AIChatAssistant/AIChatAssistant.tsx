@@ -412,7 +412,7 @@ export const AIChatAssistant = () => {
               className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0"
               style={{ animation: "ai-glow-pulse 2s ease-in-out infinite" }}
             />
-            Ask me anything about Drew
+            Ask me anything about Andrew
           </div>
           <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full border-4 border-transparent border-l-slate-700/60" />
         </div>
@@ -439,7 +439,7 @@ export const AIChatAssistant = () => {
             >
               <div className="flex items-center gap-2 bg-slate-900/95 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full border border-slate-700/60 shadow-lg shadow-black/30 whitespace-nowrap">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
-                Ask me anything about Drew
+                Ask me anything about Andrew
                 <kbd className="ml-1 px-1.5 py-0.5 bg-slate-700 rounded font-mono text-slate-300 text-[10px]">
                   {shortcutKey}
                 </kbd>

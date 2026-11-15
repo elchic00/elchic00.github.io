@@ -50,7 +50,7 @@ export const About = () => {
 
         <div className="flex max-w-2xl flex-col items-center text-center lg:flex-grow lg:items-start lg:text-left">
           <p className="animate-fade-in-delay-2 mb-5 text-xs font-semibold uppercase tracking-[0.24em] text-amber-200 sm:text-sm">
-            Drew Alagna<span className="hidden sm:inline"> · Software engineer</span> · NYC
+            Andrew &ldquo;Drew&rdquo; Alagna<span className="hidden sm:inline"> · Software engineer</span> · NYC
           </p>
 
           <h1 className="animate-fade-in-delay-3 mb-6 text-balance text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
