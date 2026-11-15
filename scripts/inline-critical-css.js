@@ -18,7 +18,7 @@ const CASE_STUDIES = projects.filter((p) => p.link.startsWith('/projects/'));
 
 // Per-project social preview image: public/images/social/<project id>.jpg,
 // generated from the project's card SVG by `npm run generate-social-images`.
-// A case study without a file there keeps the site-wide default (profile.webp)
+// A case study without a file there keeps the site-wide default (social/home.jpg)
 // rather than a broken/missing image.
 // JPEG, not the on-page SVG/WebP: Discord, LinkedIn, X and Slack don't render
 // SVG, and LinkedIn doesn't reliably render WebP, as a link-preview image.

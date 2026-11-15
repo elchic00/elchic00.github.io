@@ -23,9 +23,13 @@ HEIC photos are converted to a temporary PNG with macOS's `sips` first, because 
 
 ## `npm run generate-social-images`
 
-Runs `scripts/generate-social-images.js`, which renders each case study's card SVG (`image` in `src/data/structured/projects.json`) into `public/images/social/<project id>.jpg` at 1200×630. `scripts/inline-critical-css.js` uses that file as the `og:image` and `twitter:image` in the project's static `build/projects/<id>/index.html`, so Discord, LinkedIn, X and Slack show the project's own graphic when the page is shared. Those crawlers don't render SVG, which is why the JPEG is needed. A case study with no file there falls back to the site-wide profile image.
+Runs `scripts/generate-social-images.js`, which renders each case study's card SVG (`image` in `src/data/structured/projects.json`) into `public/images/social/<project id>.jpg` at 1200×630. `scripts/inline-critical-css.js` uses that file as the `og:image` and `twitter:image` in the project's static `build/projects/<id>/index.html`, so Discord, LinkedIn, X and Slack show the project's own graphic when the page is shared. Those crawlers don't render SVG, which is why the JPEG is needed. A case study with no file there falls back to the site-wide card below.
 
 Re-run it after editing a project SVG and commit the JPEGs. Text renders with the machine's fonts for the SVG's `system-ui` and monospace stacks.
+
+## `npm run generate-home-social-image`
+
+Runs `scripts/generate-home-social-image.js`, which renders `public/images/social/home.jpg` (1200×630: name, hero line, and headshot) with Puppeteer. `index.html` uses it as the default `og:image` and `twitter:image`, so it is the preview for the homepage, `/projects`, `/travel`, and any case study without its own card. Re-run it after changing the hero copy or the profile photo, and commit the JPEG.
 
 ## Adding travel photos
 
