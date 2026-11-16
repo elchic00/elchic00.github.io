@@ -84,12 +84,13 @@ export const Experience = () => {
       ],
       highlights: [
         "Built personalized product recommendations shown beside a cardholder's existing accounts, plus the impression and click analytics that measure them",
-        "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
-        "Grouped accounts into Personal and Business sections, then led keyboard-accessible account reordering: the drag-and-drop prototype, the five-PR build plan, the state model, and the reorder interaction",
+        "Grouped accounts into Personal and Business sections, then built the Web side of keyboard-accessible account reordering, which launched in October: the drag-and-drop prototype, the five-PR build plan, the state model, the reorder interaction, its regression tests, and the release handoff",
+        "Investigated a week-long production slowdown on the dashboard with a teammate, traced the leading cause to an untimed request the page waited on, and downgraded my own conclusion to an unproven lead when the measured delay explained seconds, not the reported minute",
         "Made AI review the team's first pass on pull requests, with a person still approving. On teammates' PRs it went from none before May to about a third by September. I also ran a biweekly AI forum for my team and a sister team",
-        "Built two agent skills that many of my teammates use, both merged into the company's shared skills library. One makes the agent find a bug's root cause before it proposes a fix. The other edits Confluence and Jira through a tested script, then re-reads each page to confirm the change landed",
-        "Ran a blinded comparison of AI code-review workflows, 27 runs graded blind across 9 test cases, and held off on switching because the test couldn't cleanly separate them",
-        "Moved 10 test suites from Selenium to Playwright with Devin and Copilot, and wrote the playbook that cut a module migration from about 5 days to 2",
+        "Checked fixes against the backend contract before approving them: verified an account identifier against the real response and stopped two frontend changes, one of them mine, that would have created the mismatch they were meant to fix",
+        "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
+        "Published agent skills to the shared libraries for Amex's web engineers: one makes the agent find a bug's root cause before it proposes a fix, one edits Confluence and Jira through a tested script and re-reads each page to confirm the change landed, and one walks QA through retesting a reported defect on the live site",
+        "Moved 10 test suites from Selenium to Playwright with Devin and Copilot, and wrote the playbook that cut a module migration from about 5 days to 2. I also turned analytics checks that only logged into real assertions, which exposed a 'View More' tracking bug that I then fixed",
       ],
     },
     {
