@@ -84,13 +84,13 @@ export const Experience = () => {
       ],
       highlights: [
         "Built the Web side of account reordering, launched in October, which lets cardholders drag their accounts into any order or move them with the keyboard. I took it from the first prototype through the build plan, core logic, tests and release handoff, on top of the Personal and Business grouping I built earlier",
-        "Built the personalized product recommendations that appear next to a cardholder's existing accounts, and the tracking that records each view and click on them",
+        "Built the personalized recommendations for Amex savings and checking accounts that appear next to a cardholder's existing accounts, launched in June, plus the tracking that records each view and click",
         "Used AI code review as the first check on 58 of my 60 pull requests from August to late September, with a person still approving each one. The team adopted it too, going from none of teammates' PRs before May to about a third by September, and I run a biweekly AI forum for my team and a sister team",
-        "With a teammate, investigated a week-long slowdown on the cardholder dashboard. We traced the most likely cause to a request the page waited on with no time limit, and I downgraded our conclusion to a lead rather than the answer, because the delay we measured explained seconds, not the minute that was reported",
-        "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
         "Caught a fix aimed at the wrong layer: our test data named one product type differently from the real backend, and two frontend patches, one of them mine, would have changed the UI to match the test data. I checked the real backend response, closed mine, challenged the other, approved a fix to the test data instead, and added a test that fails if the mock IDs drift again",
+        "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
+        "With a teammate, investigated a week-long slowdown on the cardholder dashboard. We traced the most likely cause to a request the page waited on with no time limit, and I downgraded our conclusion to a lead rather than the answer, because the delay we measured explained seconds, not the minute that was reported",
         "Published AI agent skills to the org-wide skills library and improved other engineers' skills. Mine make an agent find a bug's root cause before proposing a fix, edit Confluence and Jira pages through a tested script and re-check each change, and help QA retest a reported bug on the live site",
-        "Moved 10 automated test suites from Selenium to Playwright with Devin and Copilot, and wrote the playbook that cut a module's migration from about 5 days to 2. I also made our analytics tests fail when tracking breaks instead of just logging it, which surfaced a real tracking bug that I then fixed",
+        "Moved 10 automated test suites from Selenium to Playwright with Devin and Copilot, and wrote the playbook that cut a module's migration from about 5 days to 2. I also made our analytics tests fail when tracking breaks instead of just logging it, which surfaced a tracking bug in the 'View More' links that I then fixed",
       ],
     },
     {
