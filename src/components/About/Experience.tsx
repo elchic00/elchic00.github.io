@@ -89,7 +89,7 @@ export const Experience = () => {
         "Used AI review as the first pass on 58 of my 60 pull requests from August, with a person still approving, as the team adopted it too: on teammates' PRs it went from none before May to about a third by September. I also run a biweekly AI forum for my team and a sister team",
         "Checked fixes against the backend contract before approving them: verified an account identifier against the real response and stopped two frontend changes, one of them mine, that would have created the mismatch they were meant to fix",
         "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
-        "Published agent skills to the shared libraries for Amex's web engineers: one makes the agent find a bug's root cause before it proposes a fix, one edits Confluence and Jira through a tested script and re-reads each page to confirm the change landed, and one walks QA through retesting a reported defect on the live site",
+        "Published agent skills to the org-wide skills library and improved other engineers' skills: one of mine makes the agent find a bug's root cause before it proposes a fix, another edits Confluence and Jira through a tested script and re-reads each page to confirm the change landed, and a third walks QA through retesting a reported defect on the live site",
         "Moved 10 test suites from Selenium to Playwright with Devin and Copilot, and wrote the playbook that cut a module migration from about 5 days to 2. I also turned analytics checks that only logged into real assertions, which exposed a 'View More' tracking bug that I then fixed",
       ],
     },
