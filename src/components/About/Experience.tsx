@@ -85,7 +85,7 @@ export const Experience = () => {
       highlights: [
         "Built the Web side of account reordering, launched in October, which lets cardholders drag their accounts into any order or move them with the keyboard. I took it from the first prototype through the build plan, core logic, tests and release handoff, on top of the Personal and Business grouping I built earlier",
         "Built the personalized recommendations for Amex savings and checking accounts that appear next to a cardholder's existing accounts, launched in June, plus the tracking that records each view and click",
-        "Used AI code review as the first check on 58 of my 60 pull requests from August to late September, with a person still approving each one. The team adopted it too, going from none of teammates' PRs before May to about a third by September, and I run a biweekly AI forum for my team and a sister team",
+        "Delivered most of my work with AI agents under my own review: 127 of the 176 PRs I merged from March to September were co-authored with Devin or Copilot, and 58 of 60 from August on got an AI review before a person approved. The team adopted AI review too, going from none of teammates' PRs before May to about a third by September, and I run a biweekly AI forum for my team and a sister team",
         "Caught a fix aimed at the wrong layer: our test data named one product type differently from the real backend, and two frontend patches, one of them mine, would have changed the UI to match the test data. I checked the real backend response, closed mine, challenged the other, approved a fix to the test data instead, and added a test that fails if the mock IDs drift again",
         "Built the offer flow that shows which of a cardholder's cards qualify for an offer, then takes them straight to enrollment on the card they pick",
         "With a teammate, investigated a week-long slowdown on the cardholder dashboard. We traced the most likely cause to a request the page waited on with no time limit, and I downgraded our conclusion to a lead rather than the answer, because the delay we measured explained seconds, not the minute that was reported",
@@ -110,7 +110,7 @@ export const Experience = () => {
         "Led the accessibility audit that brought the profile flows to 100% WCAG AA for screen reader and keyboard users, most of them to AAA, later rolled out to 10 international markets",
         "Rebuilt the profile flows for supplementary cards (extra cards on someone's account) so the card a cardholder picks stays selected through every update. Completion rose 18%, starts rose 16%, and support calls fell by about 650K a year",
         "Built my team's first production backend-for-frontend service, in Kotlin, which lets cardholders update the phone and email they use for two-factor sign-in, with routing and eligibility patterns designed for reuse",
-        "Built 'View All' screens that show every card and bank account tied to a name, address, phone, or email, and gave Profile its own tab so cardholders with several products can find it",
+        "Ran experimentation for the profile flows: 6 controlled-rollout configurations to ramp a customer-data migration, customer-level profile A/B tests (one showed an all-in-one view overwhelmed users, which led to a simpler follow-up experiment), and a setup for A/B testing two modules on one page that other teams were stuck on, which I documented for them",
       ],
     },
   ];
