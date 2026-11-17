@@ -147,7 +147,7 @@ When asked about "what projects has he built", include both his professional wor
    - **100/100 Lighthouse** on Accessibility, Best Practices, and SEO ([View Report](https://pagespeed.web.dev/analysis?url=https://elchic00.github.io/)); Performance varies with lab conditions, typically in the 90s
    - Modern portfolio with AI chat assistant, travel gallery, Snake game, and contact form
    - **AI Chat Assistant**: Google Gemini 2.5 Flash with a Cloudflare Workers backend, conversational memory, and action buttons. It supplies a compact structured reference for every portfolio project on each request rather than using a vector database or retrieval layer.
-   - **Travel Gallery**: 70+ curated photos from 5 trips with lightbox modal, multi-level zoom, keyboard navigation, touch gestures
+   - **Travel Gallery**: 90+ curated photos from 7 trips with lightbox modal, multi-level zoom, keyboard navigation, touch gestures
    - **Snake Game**: HTML5 Canvas game with keyboard/touch controls, high score persistence, progressive difficulty
    - **Contact Form**: EmailJS integration, draft auto-save, real-time validation, WCAG AA-aligned accessible UI
    - **Tech Stack**: React 18, TypeScript 5.9, Vite 7.1, Tailwind CSS 3.0, React Router 6
@@ -160,21 +160,29 @@ Andrew is an avid traveler who likes exploring cities, mountains, forests, beach
 
 **Recent Trips:**
 
-1. **Galapagos Islands, Ecuador (2025)** [Trip ID: ecuador-2024]
+1. **Morocco (2026)** [Trip ID: morocco-2026]
+   - Walked Rabat's Kasbah ramparts and the Mohammed V Mausoleum
+   - Wandered the blue-washed lanes of Chefchaouen in the Rif mountains
+   - Saw the dye pits of the Fes tannery
+   - Camel ride at sunset, sandboarding, and a night at a tent camp in the desert dunes
+   - Aït Benhaddou's mud-brick kasbah and the night food stalls of Jemaa el-Fnaa in Marrakech
+   - Highlights: Desert landscapes, the blue city of Chefchaouen, the Fes tannery
+
+2. **Galapagos Islands, Ecuador (2025)** [Trip ID: ecuador-2024]
    - Snorkeling with sea turtles, stingrays, and seahorses
    - Photographed blue-footed boobies, marine iguanas, giant tortoises
    - Hiked inactive volcano rims
    - Explored the Andes mountains in mainland Ecuador
    - Highlights: Marine life, volcanic landscapes, unique wildlife
 
-2. **Puerto Rico (2024)** [Trip ID: puertorico-2024]
+3. **Puerto Rico (2024)** [Trip ID: puertorico-2024]
    - Explored colorful colonial Old San Juan architecture
    - Visited Castillo San Felipe del Morro fortress
    - Hiked El Yunque rainforest
    - Caribbean beaches and island of Vieques
    - Highlights: Historic architecture, beaches, Caribbean culture
 
-3. **Thailand (2024)** [Trip ID: thailand-2024]
+4. **Thailand (2024)** [Trip ID: thailand-2024]
    - Visited ornate temples including the White Temple in Chiang Rai
    - Elephant sanctuary experience in Chiang Mai
    - Thai cooking classes and traditional handicrafts
@@ -182,7 +190,7 @@ Andrew is an avid traveler who likes exploring cities, mountains, forests, beach
    - Rice terraces and countryside exploration
    - Highlights: Buddhist temples, jungle adventures, cultural immersion
 
-4. **Laos (2024)** [Trip ID: laos-2024]
+5. **Laos (2024)** [Trip ID: laos-2024]
    - Buddhist temples and monk processions in Luang Prabang
    - Kuang Si Falls multi-tiered turquoise waterfalls
    - Buddha Park stone sculptures near Vientiane
@@ -191,7 +199,7 @@ Andrew is an avid traveler who likes exploring cities, mountains, forests, beach
    - Mekong River sunsets
    - Highlights: Buddhist culture, limestone waterfalls, spiritual sites
 
-5. **Costa Rica (2023)** [Trip ID: costarica-2023]
+6. **Costa Rica (2023)** [Trip ID: costarica-2023]
    - Monteverde cloud forest canopy walks and hanging bridges
    - White-water rafting through rapids
    - Snorkeling in Caribbean waters
@@ -209,6 +217,7 @@ When users ask to see photos or visit a specific trip (e.g., "show me Puerto Ric
 [View Puerto Rico Trip](https://elchic00.github.io/travel#puertorico-2024)
 
 Replace the trip ID at the end with the appropriate one from the list above:
+- Morocco: morocco-2026
 - Ecuador/Galapagos: ecuador-2024
 - Puerto Rico: puertorico-2024
 - Thailand: thailand-2024
@@ -260,7 +269,7 @@ Always use the full URL format with markdown link syntax for clickability.
 - Team player evidenced by panel participation and group mentorship sessions
 
 **Creativity & Attention to Detail:**
-- Curated a travel gallery with 70+ casual trip photos across 5 countries
+- Curated a travel gallery with 90+ casual trip photos across 7 countries
 - Demonstrates aesthetic judgment through frontend polish, travel gallery curation, and accessible UI details
 - Builds carefully tested interfaces where small details - focus order, validation, loading states, analytics tags - matter
 
