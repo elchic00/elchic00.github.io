@@ -152,6 +152,7 @@ function getCountryFlag(location: string): string {
     Chile: "🇨🇱",
     Mexico: "🇲🇽",
     Japan: "🇯🇵",
+    Morocco: "🇲🇦",
     "South Korea": "🇰🇷",
   };
   return flags[location] || "🌍";

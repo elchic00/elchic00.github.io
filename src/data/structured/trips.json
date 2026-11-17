@@ -1,5 +1,140 @@
 [
   {
+    "id": "morocco-2026",
+    "title": "Morocco Journey",
+    "location": "Morocco",
+    "date": "2026",
+    "description": "Rabat's Atlantic ramparts, the blue-washed lanes of Chefchaouen, the tanneries of Fes, a night in the desert dunes, and the lantern-lit chaos of Marrakech's main square.",
+    "photos": [
+      {
+        "url": "/images/travel/morocco/andrew-alagna-camel-caravan-sunset.webp",
+        "width": 1920,
+        "height": 1280,
+        "alt": "Andrew Alagna camel caravan crossing red sand dune ridge sunset Morocco",
+        "caption": "Camel caravan crossing a glowing red ridge at golden hour"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-kasbah-coast.webp",
+        "width": 1920,
+        "height": 1440,
+        "alt": "Andrew Alagna Kasbah of the Udayas ramparts Atlantic coast river mouth Rabat Morocco",
+        "caption": "Where the Atlantic meets the river mouth below the Kasbah walls in Rabat"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-mausoleum.webp",
+        "width": 1920,
+        "height": 1440,
+        "alt": "Andrew Alagna Mohammed V Mausoleum carved arches white marble Rabat Morocco",
+        "caption": "Carved arches and white marble at the Mohammed V Mausoleum"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-rabat-ramparts.webp",
+        "width": 1920,
+        "height": 2560,
+        "alt": "Andrew Alagna sitting in stone rampart crenel overlooking water Rabat Morocco",
+        "caption": "Claiming a front-row seat in the ramparts above the water"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-blue-alley.webp",
+        "width": 1500,
+        "height": 2000,
+        "alt": "Andrew Alagna blue-washed alley passage Chefchaouen Morocco",
+        "caption": "Walking deeper into a blue-washed alley in Chefchaouen"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-chefchaouen-overview.webp",
+        "width": 1920,
+        "height": 1280,
+        "alt": "Andrew Alagna Chefchaouen blue city Rif mountains clouds Morocco",
+        "caption": "Chefchaouen spilling down the Rif mountainside under a big sky"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-riad-terrace-sunset.webp",
+        "width": 1200,
+        "height": 1600,
+        "alt": "Andrew Alagna riad rooftop terrace arches sunset sky mountains Chefchaouen Morocco",
+        "caption": "Sunset setting the sky on fire above a rooftop terrace"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-hilltop-dusk.webp",
+        "width": 1706,
+        "height": 2560,
+        "alt": "Andrew Alagna blue-lit hilltop landmark dusk Chefchaouen Morocco",
+        "caption": "Neon-blue light on a hilltop landmark as dusk settles in"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-chefchaouen-night.webp",
+        "width": 1920,
+        "height": 1440,
+        "alt": "Andrew Alagna Chefchaouen blue town lights at night Morocco",
+        "caption": "Chefchaouen after dark, the blue town lit up for the night"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-fes-tannery.webp",
+        "width": 1920,
+        "height": 1280,
+        "alt": "Andrew Alagna Fes tannery dye pits from above Morocco",
+        "caption": "Fes tannery from above, dye and soak pits laid out like a honeycomb"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-camel-portrait.webp",
+        "width": 1920,
+        "height": 2560,
+        "alt": "Andrew Alagna camel close-up blue sky Morocco",
+        "caption": "A camel with plenty of attitude and an excellent profile"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-sandboarding.webp",
+        "width": 1920,
+        "height": 2560,
+        "alt": "Andrew Alagna sandboarding carrying board up Moroccan desert dune",
+        "caption": "Hauling a sandboard back up the dune for one more run"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-dune-sunset.webp",
+        "width": 1717,
+        "height": 2576,
+        "alt": "Andrew Alagna sunset over rippled sand dunes Moroccan desert",
+        "caption": "The sun sinking behind the horizon over rippled dunes"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-caravan-silhouette.webp",
+        "width": 1920,
+        "height": 2560,
+        "alt": "Andrew Alagna camel caravan silhouette dusk Moroccan desert",
+        "caption": "A caravan traced in silhouette against the last light of the day"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-desert-camp-night.webp",
+        "width": 1512,
+        "height": 2016,
+        "alt": "Andrew Alagna desert tent camp lit up at night below dunes Morocco",
+        "caption": "Tent camp glowing in the dark below the dunes"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-dune-turban.webp",
+        "width": 1920,
+        "height": 1280,
+        "alt": "Andrew Alagna wrapped in turban on sand dune at dusk Moroccan desert",
+        "caption": "Wrapped up against the sand as the desert turns pink at dusk"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-ait-benhaddou.webp",
+        "width": 1024,
+        "height": 682,
+        "alt": "Andrew Alagna Ait Benhaddou mud-brick kasbah towers Morocco",
+        "caption": "Mud-brick towers of Aït Benhaddou catching the late light"
+      },
+      {
+        "url": "/images/travel/morocco/andrew-alagna-jemaa-el-fnaa.webp",
+        "width": 1920,
+        "height": 918,
+        "alt": "Andrew Alagna Jemaa el-Fnaa square food stalls at night Marrakech Morocco",
+        "caption": "Jemaa el-Fnaa after dark, stalls and lanterns stretching across the square"
+      }
+    ]
+  },
+  {
     "id": "japan-2025",
     "title": "Japan Highlights",
     "location": "Japan",
